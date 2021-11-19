@@ -1,0 +1,50 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22bbbc05240e553418ce27a7274788bd, type: 3}
+  m_Name: PersuadeTavernkeeper
+  m_EditorClassIdentifier: 
+  description: We are to persuade a tavernkeeper to sell our client's ale.
+  ID: 104
+  contractType: 10
+  difficulty: 0
+  stages:
+  - type: 2
+    subType: City
+    difficulty: 0
+    description: 
+    preferredMethod: 0
+    bonusMethod: 0
+  - type: 4
+    subType: Tavernkeeper
+    difficulty: 0
+    description: 
+    preferredMethod: 0
+    bonusMethod: 0
+  goldReward: 250
+  businessReward:
+    benefit: 0
+    description: 
+    number: 0
+    duration: 0
+  moveReward: {fileID: 11400000, guid: 5c8ccf3703212994285497630b0f6cf8, type: 2}
+  executionDate:
+    day: 1
+    month: 1
+    year: 1000
+    dayOfWeek: 0
+  dayCost: 4
+  minHeroes: 1
+  maxHeroes: 1
+  attributeReq: negotiating
+  attributeReqAmount: 2
+  attributeReq2: None
+  attributeReqAmount2: 0

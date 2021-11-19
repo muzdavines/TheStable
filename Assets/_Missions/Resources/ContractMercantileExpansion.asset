@@ -1,0 +1,52 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22bbbc05240e553418ce27a7274788bd, type: 3}
+  m_Name: ContractMercantileExpansion
+  m_EditorClassIdentifier: 
+  description: Expand our business interests by establishing a presence in the city
+    through storefronts or stalls in the market.
+  ID: 101
+  contractType: 3
+  difficulty: 0
+  stages:
+  - type: 2
+    subType: 
+    difficulty: 0
+    description: Travel to the city where we will expand.
+    preferredMethod: 0
+    bonusMethod: 0
+  - type: 3
+    subType: 
+    difficulty: 0
+    description: Make contact with the local power brokers to being negotiating expansion.
+    preferredMethod: 0
+    bonusMethod: 0
+  - type: 4
+    subType: Business
+    difficulty: 0
+    description: Negotiate the purchase price of a stall in the local market.
+    preferredMethod: 0
+    bonusMethod: 0
+  goldReward: 0
+  businessReward:
+    benefit: 1
+    description: Ongoing trade in the city's marketplace.
+    number: 300
+    duration: 52
+  executionDate:
+    day: 1
+    month: 1
+    year: 1000
+    dayOfWeek: 0
+  dayCost: 0
+  minHeroes: 1
+  maxHeroes: 4
