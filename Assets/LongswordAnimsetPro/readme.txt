@@ -1,0 +1,1 @@
+Textures configured for "Linear" color space. Switch the color space to "Linear" in Edit\ProjectSettings\Player tab.
