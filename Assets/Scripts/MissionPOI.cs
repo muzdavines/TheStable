@@ -77,7 +77,7 @@ public class MissionPOI : MonoBehaviour
             Helper.PlayOneShot(onSuccessSound);
             control.RemovePOI(this);
         } else {
-            print("Fail.");
+            print("Fail. Step Required: " + step.required);
             GetComponent<OnStepFail>().OnFail();
             if (step.required) {
                 control.MissionFailed();

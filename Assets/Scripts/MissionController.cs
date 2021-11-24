@@ -106,7 +106,9 @@ public class MissionController : MonoBehaviour
     }
     public void MissionFailed() {
         missionFailed = true;
+        FindObjectOfType<MissionFinalDetails>().successful = false;
         stageNum = 1000000;
+        SceneManager.LoadScene("PostMission");
     }
     IEnumerator DelaySpawnChars()
     {
@@ -178,7 +180,7 @@ public class MissionController : MonoBehaviour
         poiCombat = _poiCombat;
     }
 
-    public void EndCombat() {
+    public void EndCombat(bool success = true) {
         print("Combat Complete");
         SetAllHeroesToCombat(false);
         foreach (Character c in heroes) {
@@ -188,7 +190,7 @@ public class MissionController : MonoBehaviour
                 Helper.Cam().SetTarget(c.currentObject.transform);
             }
         }
-        poiCombat.Resolve(true);
+        poiCombat.Resolve(success);
 
 
     }

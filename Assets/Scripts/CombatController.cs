@@ -30,9 +30,9 @@ public class CombatController : MonoBehaviour
 
         
     }
-    public void EndCombat() {
+    public void EndCombat(bool success) {
         combatActive = false;
-        GetComponent<MissionController>().EndCombat();
+        GetComponent<MissionController>().EndCombat(success);
     }
     void Update()
     {
@@ -41,9 +41,9 @@ public class CombatController : MonoBehaviour
             CheckEndCombat();
         }
     }
-
+    bool combatEnded = false;
     void CheckEndCombat() {
-        
+        if (combatEnded) { return; }
         foreach (Character c in heroes) {
             c.health = (int)c.currentObject.GetComponent<CharacterHealth>().Health;
             if (c.health <= 0) {
@@ -57,8 +57,12 @@ public class CombatController : MonoBehaviour
                 enemies.Remove(cc);
             }
         }
-        if (heroes.Count == 0 || enemies.Count == 0) {
-            EndCombat();
+        if (heroes.Count == 0) {
+            combatEnded = true;
+            EndCombat(false);
+        } else if (enemies.Count == 0) {
+            combatEnded = true;
+            EndCombat(true);
         }
 
     }

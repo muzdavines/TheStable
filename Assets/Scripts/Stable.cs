@@ -57,7 +57,9 @@ public class Stable
 
     bool IsDead(Character c) {
         if (c.health <= 0) {
-            Debug.Log("Dead: " + c.name);
+            Debug.Log("Dead: " + c.name + " But ignoring permadeath.");
+            c.health = 4;
+            return false;
             return true;
         } else { return false; }
     }
