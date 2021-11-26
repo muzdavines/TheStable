@@ -454,6 +454,7 @@ namespace CoverShooter
 
         protected IGunListener[] Listeners { get { return _listeners; } }
         public int gunMoveAnimIndex = 0;
+        public float nextFire;
         protected virtual void Frame() {
             _hasJustFired = false;
 
@@ -493,7 +494,7 @@ namespace CoverShooter
 
             // Check if the trigger is pressed.
             print(transform.root.name + " is trying to Fire; IsFiringNextUpdate: " + _isFiringOnNextUpdate + "// Is Allowed: " + _isAllowed);
-            if (_isFiringOnNextUpdate && _isAllowed) {
+            if (_isFiringOnNextUpdate && _isAllowed && Time.time >= nextFire) {
                 // Time in seconds between bullets.
                 var fireDelay = 1.0f / Rate;
 
@@ -507,8 +508,10 @@ namespace CoverShooter
                         if (LoadedBulletsLeft <= 0)
                             break;
 
-                        if (fire(delay, !ConsumeSingleBulletPerShot))
+                        if (fire(delay, !ConsumeSingleBulletPerShot)) {
+                            nextFire = Time.time + currentMove.cooldown;
                             hasFired = true;
+                        }
                     }
 
                     if (hasFired && ConsumeSingleBulletPerShot)
