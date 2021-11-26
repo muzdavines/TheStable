@@ -102,6 +102,7 @@ public class MissionCharacter : MonoBehaviour, MissionCharacterStateOwner
         AIFire fire = GetComponent<AIFire>();
         Weapon weaponBlueprint = character.weapon;
         GameObject weaponPrefab = Resources.Load<GameObject>(weaponBlueprint.prefabName);
+        GameObject defaultFists = Resources.Load<GameObject>("Fists");
         GameObject rHandWeapon = Instantiate<GameObject>(weaponPrefab, rHand);
         rHandWeapon.transform.localPosition = Vector3.zero;
         rHandWeapon.transform.localRotation = Quaternion.identity;
@@ -114,32 +115,28 @@ public class MissionCharacter : MonoBehaviour, MissionCharacterStateOwner
         inv.Weapons[0] = new WeaponDescription() { IsDualWielding = weaponBlueprint.dualWield, IsHeavy = weaponBlueprint.isHeavy, RightItem = rHandWeapon };
         print("Need assault settings here.");
         fire.AutoFindType = rHandWeapon.GetComponent<BaseWeapon>().Type;
-        if (weaponBlueprint.dualWield) {
-            GameObject lHandWeapon = Instantiate<GameObject>(weaponPrefab, lHand);
-            lHandWeapon.transform.localPosition = Vector3.zero;
-            lHandWeapon.transform.localRotation = Quaternion.identity;
-            motor.Weapon.LeftItem = lHandWeapon;
-            inv.Weapons[0].LeftItem = lHandWeapon;
-            lHandWeapon.GetComponent<BaseWeapon>().Damage = weaponBlueprint.damage;
-        }
-        if (weaponBlueprint.usesLegs) {
-            GameObject legWeaponPrefab = Resources.Load<GameObject>(weaponBlueprint.prefabNameLegs);
-            GameObject lLegWeapon= Instantiate<GameObject>(legWeaponPrefab, lLeg);
-            lLegWeapon.transform.localPosition = Vector3.zero;
-            lLegWeapon.transform.localRotation = Quaternion.identity;
-            motor.Weapon.LeftLegItem = lLegWeapon;
-            inv.Weapons[0].LeftItem = lLegWeapon;
-            lLegWeapon.GetComponent<BaseWeapon>().Damage = weaponBlueprint.damage;
+        GameObject leftHandPrefab = weaponBlueprint.dualWield ? weaponPrefab : defaultFists;
+        GameObject lHandWeapon = Instantiate<GameObject>(leftHandPrefab, lHand);
+        lHandWeapon.transform.localPosition = Vector3.zero;
+        lHandWeapon.transform.localRotation = Quaternion.identity;
+        motor.Weapon.LeftItem = lHandWeapon;
+        inv.Weapons[0].LeftItem = lHandWeapon;
+        lHandWeapon.GetComponent<BaseWeapon>().Damage = weaponBlueprint.dualWield ? weaponBlueprint.damage : 5;
 
-            GameObject rLegWeapon = Instantiate<GameObject>(legWeaponPrefab, rLeg);
-            rLegWeapon.transform.localPosition = Vector3.zero;
-            rLegWeapon.transform.localRotation = Quaternion.identity;
-            motor.Weapon.RightLegItem = rLegWeapon;
-            inv.Weapons[0].RightItem = rLegWeapon;
-            rLegWeapon.GetComponent<BaseWeapon>().Damage = weaponBlueprint.damage;
+        GameObject legWeaponPrefab = weaponBlueprint.usesLegs ? Resources.Load<GameObject>(weaponBlueprint.prefabNameLegs) : defaultFists;
+        GameObject lLegWeapon = Instantiate<GameObject>(legWeaponPrefab, lLeg);
+        lLegWeapon.transform.localPosition = Vector3.zero;
+        lLegWeapon.transform.localRotation = Quaternion.identity;
+        motor.Weapon.LeftLegItem = lLegWeapon;
+        inv.Weapons[0].LeftItem = lLegWeapon;
+        lLegWeapon.GetComponent<BaseWeapon>().Damage = weaponBlueprint.damage;
 
-        }
-
+        GameObject rLegWeapon = Instantiate<GameObject>(legWeaponPrefab, rLeg);
+        rLegWeapon.transform.localPosition = Vector3.zero;
+        rLegWeapon.transform.localRotation = Quaternion.identity;
+        motor.Weapon.RightLegItem = rLegWeapon;
+        inv.Weapons[0].RightItem = rLegWeapon;
+        rLegWeapon.GetComponent<BaseWeapon>().Damage = weaponBlueprint.damage;
     }
     public void InitHealthBarAndVisuals() {
         if (healthBarInitialized) {

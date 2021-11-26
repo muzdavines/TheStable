@@ -10,6 +10,7 @@ public class NewGameCreationController : MonoBehaviour
     public List<Character> heroes = new List<Character>();
     public int startingGold = 400;
     public List<MoveModifier> mods;
+    public List<Training> trainingAdds;
     public string myText;
 
     public void Start()
@@ -51,6 +52,9 @@ public class NewGameCreationController : MonoBehaviour
         }
         Game.instance.playerStable.finance.AddRevenue(startingGold);
         Game.instance.playerStable.availableTrainings.Add(new Training() {type = Training.Type.Attribute, training = "negotiating", duration = 2, cost = 50 });
+        foreach (var training in trainingAdds) {
+            Game.instance.playerStable.availableTrainings.Add(training);
+        }
         Game.instance.missionContractList = Instantiate<MissionList>(Resources.Load<MissionList>("1000"));
         //Game.instance.playerStable.finance.businesses.Add(new Finance.Business() { benefit = Finance.Business.Benefit.Gold, description = "Market Stall in Genoa", duration = 12, number = 125 });
         SceneManager.LoadScene("StableManagement");

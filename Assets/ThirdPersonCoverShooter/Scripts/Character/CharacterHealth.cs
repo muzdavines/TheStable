@@ -149,6 +149,7 @@ namespace CoverShooter
         /// </summary>
         public void OnTakenHit(Hit hit)
         {
+            print(transform.name + " Taken Hit");
             Deal(hit);
         }
 
@@ -184,9 +185,10 @@ namespace CoverShooter
         }
 
         public void Deal(Hit hit) {
+            print(transform.name + " Deal");
             if (Health <= 0 || !IsTakingDamage)
                 return;
-            print(hit.move.name);
+            print("Deal: "+hit.move.name);
             hit.move.HitEffect(this, hit.Attacker.GetComponent<MissionCharacter>().character);
             
             check();

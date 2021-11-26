@@ -1460,7 +1460,7 @@ namespace CoverShooter
         private bool _isGrounded = true;
         private bool _wasGrounded;
         private bool _isFalling;
-
+        public bool _isInRangedAnim;
         private float _verticalRecoil;
         private float _horizontalRecoil;
 
@@ -1828,6 +1828,7 @@ namespace CoverShooter
 
             if (!gotHit)
             {
+                print("Successful Block");
                 _animator.SetTrigger("SuccessfulBlock");
                 SendMessage("OnBlock", hit, SendMessageOptions.DontRequireReceiver);
                 return;
@@ -1910,7 +1911,7 @@ namespace CoverShooter
                 _animator.ResetTrigger("CancelGetHit");
                 _animator.SetTrigger("GetHit");
             }
-
+            print("On Taken Hit: " + hit.IsMelee + "  " + hit.move.staminaDamage);
             SendMessage("OnTakenHit", hit);
 
             if (hit.Attacker != null)
@@ -2843,6 +2844,7 @@ namespace CoverShooter
                     case Limb.RightHand:
                         if (right != null) {
                             right.currentMove = curMove;
+                            print("Right Hand Weapon: " + right.name + " Type: " + right.moveWeaponType + " Move req: " + curMove.moveWeaponType);
                             right.EndScan();
                             right.BeginScan(curMove);
                         }
@@ -2850,6 +2852,7 @@ namespace CoverShooter
                     case Limb.LeftHand:
                         if (left != null) {
                             left.currentMove = curMove;
+                            print("Left Hand Weapon: " + right.name + " Type: " + right.moveWeaponType + " Move req: " + curMove.moveWeaponType);
                             left.EndScan();
                             left.BeginScan(curMove);
                         }
@@ -2857,6 +2860,7 @@ namespace CoverShooter
                     case Limb.RightLeg:
                         if (rightLeg != null) {
                             rightLeg.currentMove = curMove;
+                            print("Right Leg Weapon: " + right.name + " Type: " + right.moveWeaponType + " Move req: " + curMove.moveWeaponType);
                             rightLeg.EndScan();
                             rightLeg.BeginScan(curMove);
                         }
@@ -2864,6 +2868,7 @@ namespace CoverShooter
                     case Limb.LeftLeg:
                         if (leftLeg != null) {
                             leftLeg.currentMove = curMove;
+                            print("Left Leg Weapon: " + right.name + " Type: " + right.moveWeaponType + " Move req: " + curMove.moveWeaponType);
                             leftLeg.EndScan();
                             leftLeg.BeginScan(curMove);
                         }
@@ -3068,6 +3073,12 @@ namespace CoverShooter
             _wantsToFire = true;
             _hasFireCondition = false;
             InputAim();
+        }
+        public void RangedAnimationFired() {
+            EquippedWeapon.RightItem.GetComponent<BaseGun>().AnimFireTrigger();
+        }
+        public void RangedAnimationFinished() {
+            EquippedWeapon.RightItem.GetComponent<BaseGun>().AnimEndTrigger();
         }
 
         /// <summary>
@@ -5081,7 +5092,7 @@ namespace CoverShooter
 
                 gun.AddErrorThisFrame(MovementError);
                 gun.SetBaseErrorMultiplierThisFrame(IsZooming ? ZoomErrorMultiplier : 1);
-                gun.Allow(IsGunReady && !_isFalling && (!_cover.In || _coverAim.Step == AimStep.Aiming) && Vector3.Dot(vector, transform.forward) > 0.5f && _ik.IsAimingArms);
+                gun.Allow(IsGunReady && !_isInRangedAnim && !_isFalling && (!_cover.In || _coverAim.Step == AimStep.Aiming) && Vector3.Dot(vector, transform.forward) > 0.5f && _ik.IsAimingArms);
             }
 
             var melee = _equippedWeapon.RightMelee;

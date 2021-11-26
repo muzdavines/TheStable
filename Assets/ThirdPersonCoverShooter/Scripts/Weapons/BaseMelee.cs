@@ -19,7 +19,7 @@ namespace CoverShooter
         /// </summary>
         [HideInInspector]
         public CharacterMotor Character;
-
+        public MoveWeaponType moveWeaponType = MoveWeaponType.Fists;
         /// <summary>
         /// Return true if an attack can be started.
         /// </summary>

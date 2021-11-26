@@ -11,8 +11,7 @@ namespace CoverShooter
     /// The intended position of the left hand might differ in some animations, to handle that there are left hand marker overwrites you can use to set up IK for the left hand for some specific situations. Empty values are not used as overwrites.
     /// Currently there are two kinds of weapons, pistols and rifles. The type defines character animations when using the weapon.
     /// </summary>
-    public abstract class BaseGun : BaseWeapon
-    {
+    public abstract class BaseGun : BaseWeapon {
         #region Properties
 
         /// <summary>
@@ -28,56 +27,49 @@ namespace CoverShooter
         /// <summary>
         /// Whether the gun can be used to perform a melee hit right now.
         /// </summary>
-        public bool CanHit
-        {
+        public bool CanHit {
             get { return _hitWait <= 0; }
         }
 
         /// <summary>
         /// Returns true if the gun fired during the last update.
         /// </summary>
-        public bool HasJustFired
-        {
+        public bool HasJustFired {
             get { return _hasJustFired; }
         }
 
         /// <summary>
         /// Returns true if the gun is allowed to fire.
         /// </summary>
-        public bool IsAllowed
-        {
+        public bool IsAllowed {
             get { return _isAllowed; }
         }
 
         /// <summary>
         /// Renderer attached to the object.
         /// </summary>
-        public Renderer Renderer
-        {
+        public Renderer Renderer {
             get { return _renderer; }
         }
 
         /// <summary>
         /// Origin to cast bullets from.
         /// </summary>
-        public Vector3 RaycastOrigin
-        {
+        public Vector3 RaycastOrigin {
             get { return _isUsingCustomRaycast ? _customRaycastOrigin : Origin; }
         }
 
         /// <summary>
         /// Target position at which bullets are fired at.
         /// </summary>
-        public Vector3 RaycastTarget
-        {
+        public Vector3 RaycastTarget {
             get { return _isUsingCustomRaycast ? _customRaycastTarget : (Origin + Direction * Distance); }
         }
 
         /// <summary>
         /// Are raycast settings setup manually by some other component.
         /// </summary>
-        public bool HasRaycastSetup
-        {
+        public bool HasRaycastSetup {
             get { return _isUsingCustomRaycast; }
         }
 
@@ -149,7 +141,7 @@ namespace CoverShooter
         [Tooltip("Maximum distance of a bullet hit. Objects further than this value are ignored.")]
         public float Distance = 50;
 
-       
+
         /// <summary>
         /// Maximum degrees of error the gun can make when firing.
         /// </summary>
@@ -318,7 +310,7 @@ namespace CoverShooter
         /// Event executed after a series of bullet fires as started.
         /// </summary>
         public Action FireStarted;
-                
+
         /// <summary>
         /// Event executed after a series of bullet fires has stopped.
         /// </summary>
@@ -372,8 +364,7 @@ namespace CoverShooter
         /// <summary>
         /// Command to use the weapon.
         /// </summary>
-        public void ToUse()
-        {
+        public void ToUse() {
             print(transform.root.name + " TO USE");
             TryFireNow();
         }
@@ -385,8 +376,7 @@ namespace CoverShooter
         /// <summary>
         /// Notified of a magazine load start by the CharacterMotor.
         /// </summary>
-        public virtual void OnMagazineLoadStart()
-        {
+        public virtual void OnMagazineLoadStart() {
             if (MagazineLoadStarted != null)
                 MagazineLoadStarted();
         }
@@ -394,8 +384,7 @@ namespace CoverShooter
         /// <summary>
         /// Notified of a magazine load start by the CharacterMotor.
         /// </summary>
-        public virtual void OnBulletLoadStart()
-        {
+        public virtual void OnBulletLoadStart() {
             if (BulletLoadStarted != null)
                 BulletLoadStarted();
         }
@@ -403,8 +392,7 @@ namespace CoverShooter
         /// <summary>
         /// Notified of a magazine load start by the CharacterMotor.
         /// </summary>
-        public virtual void OnPumpStart()
-        {
+        public virtual void OnPumpStart() {
             if (PumpStarted != null)
                 PumpStarted();
         }
@@ -412,8 +400,7 @@ namespace CoverShooter
         /// <summary>
         /// Notified of a magazine load start by the CharacterMotor.
         /// </summary>
-        public virtual void OnPumped()
-        {
+        public virtual void OnPumped() {
             if (Pumped != null)
                 Pumped();
         }
@@ -425,8 +412,7 @@ namespace CoverShooter
         /// <summary>
         /// Get the LineRenderer if there is one.
         /// </summary>
-        protected virtual void Start()
-        {
+        protected virtual void Start() {
             _laser = LaserOverwrite;
 
             if (_laser == null)
@@ -435,8 +421,7 @@ namespace CoverShooter
             if (_laser == null)
                 _laser = GetComponentInChildren<Laser>();
 
-            if (_laser == null && transform.parent != null)
-            {
+            if (_laser == null && transform.parent != null) {
                 _laser = transform.parent.GetComponentInChildren<Laser>();
 
                 if (_laser != null && _laser.GetComponent<BaseGun>() != null)
@@ -444,38 +429,32 @@ namespace CoverShooter
             }
         }
 
-        private void OnValidate()
-        {
+        private void OnValidate() {
             Distance = Mathf.Max(0, Distance);
         }
 
         /// <summary>
         /// Finds the renderer.
         /// </summary>
-        protected virtual void Awake()
-        {
+        protected virtual void Awake() {
             _renderer = GetComponent<Renderer>();
             _listeners = Util.GetInterfaces<IGunListener>(gameObject);
         }
 
-        private void LateUpdate()
-        {
-            if (!_hasManuallyUpdated)
-            {
+        private void LateUpdate() {
+            if (!_hasManuallyUpdated) {
                 _hasUpdatedThisFrame = true;
                 Frame();
             }
-            else
-            {
+            else {
                 _hasUpdatedThisFrame = false;
                 _hasManuallyUpdated = false;
             }
         }
 
         protected IGunListener[] Listeners { get { return _listeners; } }
-
-        protected virtual void Frame()
-        {
+        public int gunMoveAnimIndex = 0;
+        protected virtual void Frame() {
             _hasJustFired = false;
 
             if (_isGoingToFire)
@@ -484,8 +463,7 @@ namespace CoverShooter
             if (_hitWait >= 0)
                 _hitWait -= Time.deltaTime;
 
-            if (DebugAim)
-            {
+            if (DebugAim) {
                 Debug.DrawLine(Origin, Origin + (RaycastTarget - Origin).normalized * Distance, Color.red);
 
                 if (_isUsingCustomRaycast)
@@ -496,16 +474,13 @@ namespace CoverShooter
             {
                 var isAllowedAndFiring = _isGoingToFire && _isAllowed;
 
-                if (Character != null)
-                {
-                    if (isAllowedAndFiring && !_wasAllowedAndFiring)
-                    {
+                if (Character != null) {
+                    if (isAllowedAndFiring && !_wasAllowedAndFiring) {
                         Character.NotifyStartGunFire();
                         if (FireStarted != null) FireStarted.Invoke();
                     }
 
-                    if (!isAllowedAndFiring && _wasAllowedAndFiring)
-                    {
+                    if (!isAllowedAndFiring && _wasAllowedAndFiring) {
                         Character.NotifyStopGunFire();
                         if (FireStopped != null) FireStopped.Invoke();
                     }
@@ -518,20 +493,17 @@ namespace CoverShooter
 
             // Check if the trigger is pressed.
             print(transform.root.name + " is trying to Fire; IsFiringNextUpdate: " + _isFiringOnNextUpdate + "// Is Allowed: " + _isAllowed);
-            if (_isFiringOnNextUpdate && _isAllowed)
-            {
+            if (_isFiringOnNextUpdate && _isAllowed) {
                 // Time in seconds between bullets.
                 var fireDelay = 1.0f / Rate;
 
                 var delay = 0f;
 
                 // Fire all bullets in this frame.
-                while (_fireWait < 0)
-                {
+                while (_fireWait < 0) {
                     var hasFired = false;
 
-                    for (int i = 0; i < BulletsPerShot; i++)
-                    {
+                    for (int i = 0; i < BulletsPerShot; i++) {
                         if (LoadedBulletsLeft <= 0)
                             break;
 
@@ -542,15 +514,13 @@ namespace CoverShooter
                     if (hasFired && ConsumeSingleBulletPerShot)
                         Consume();
 
-                    if (hasFired)
-                    {
+                    if (hasFired) {
                         for (int i = 0; i < _listeners.Length; i++)
                             _listeners[i].OnFire(delay);
 
                         if (Fired != null) Fired.Invoke();
 
-                        if (Character != null)
-                        {
+                        if (Character != null) {
                             if (PumpAfterFire)
                                 Character.InputPump(0.1f);
 
@@ -558,8 +528,7 @@ namespace CoverShooter
                             ThirdPersonCamera.Shake(Character, Recoil.ShakeIntensity, Recoil.ShakeTime);
                         }
                     }
-                    else
-                    {
+                    else {
                         for (int i = 0; i < _listeners.Length; i++)
                             _listeners[i].OnEmptyFire();
 
@@ -591,42 +560,36 @@ namespace CoverShooter
 
         #region Notify methods
 
-        public void NotifyRechamber()
-        {
+        public void NotifyRechamber() {
             for (int i = 0; i < _listeners.Length; i++)
                 _listeners[i].OnRechamber();
         }
 
-        public void NotifyEject()
-        {
+        public void NotifyEject() {
             for (int i = 0; i < _listeners.Length; i++)
                 _listeners[i].OnEject();
         }
 
-        public void NotifyPumpStart()
-        {
+        public void NotifyPumpStart() {
             OnPumpStart();
 
             for (int i = 0; i < _listeners.Length; i++)
                 _listeners[i].OnPumpStart();
         }
 
-        public void NotifyPump()
-        {
+        public void NotifyPump() {
             for (int i = 0; i < _listeners.Length; i++)
                 _listeners[i].OnPump();
         }
 
-        public void NotifyMagazineLoadStart()
-        {
+        public void NotifyMagazineLoadStart() {
             OnMagazineLoadStart();
 
             for (int i = 0; i < _listeners.Length; i++)
                 _listeners[i].OnMagazineLoadStart();
         }
 
-        public void NotifyBulletLoadStart()
-        {
+        public void NotifyBulletLoadStart() {
             OnBulletLoadStart();
 
             for (int i = 0; i < _listeners.Length; i++)
@@ -640,16 +603,14 @@ namespace CoverShooter
         /// <summary>
         /// Sets the gun to ignore hitting it's owner.
         /// </summary>
-        public void IgnoreSelf(bool value = true)
-        {
+        public void IgnoreSelf(bool value = true) {
             _isIgnoringSelf = value;
         }
 
         /// <summary>
         /// Sets the gun to not fire if aiming at a friend.
         /// </summary>
-        public void SetFireCondition(int side)
-        {
+        public void SetFireCondition(int side) {
             _hasFireCondition = true;
             _fireConditionSide = side;
         }
@@ -657,16 +618,14 @@ namespace CoverShooter
         /// <summary>
         /// Sets the gun to fire in any condition.
         /// </summary>
-        public void CancelFireCondition()
-        {
+        public void CancelFireCondition() {
             _hasFireCondition = false;
         }
 
         /// <summary>
         /// Returns a game object the gun is currently aiming at.
         /// </summary>
-        public GameObject FindCurrentAimedTarget()
-        {
+        public GameObject FindCurrentAimedTarget() {
             var hit = Raycast();
 
             if (hit.collider != null)
@@ -678,8 +637,7 @@ namespace CoverShooter
         /// <summary>
         /// Returns a game object with CharacterHealth the gun is currently aiming at.
         /// </summary>
-        public GameObject FindCurrentAimedHealthTarget()
-        {
+        public GameObject FindCurrentAimedHealthTarget() {
             return getHealthTarget(FindCurrentAimedTarget());
         }
 
@@ -696,8 +654,7 @@ namespace CoverShooter
         /// <summary>
         /// Finds an object and a hit position a bullet would hit if fired.
         /// </summary>
-        public RaycastHit Raycast()
-        {
+        public RaycastHit Raycast() {
             bool isFriend;
             return Raycast(RaycastOrigin, (RaycastTarget - RaycastOrigin).normalized, out isFriend, false);
         }
@@ -705,8 +662,7 @@ namespace CoverShooter
         /// <summary>
         /// Finds an object and a hit position a bullet would hit if fired. Checks if it is a friend.
         /// </summary>
-        public RaycastHit Raycast(Vector3 origin, Vector3 direction, out bool isFriend, bool friendCheck)
-        {
+        public RaycastHit Raycast(Vector3 origin, Vector3 direction, out bool isFriend, bool friendCheck) {
             RaycastHit closestHit = new RaycastHit();
             float closestDistance = Distance * 10;
 
@@ -721,30 +677,24 @@ namespace CoverShooter
             isFriend = false;
             var count = Physics.RaycastNonAlloc(origin, direction, _hits, Distance);
 
-            for (int i = 0; i < count; i++)
-            {
+            for (int i = 0; i < count; i++) {
                 var hit = _hits[i];
 
                 if (Character != null && Util.InHiearchyOf(hit.collider.gameObject, Character.gameObject))
                     continue;
 
-                if (hit.distance < closestDistance && hit.distance > minDistance)
-                {
+                if (hit.distance < closestDistance && hit.distance > minDistance) {
                     var isOk = true;
                     var isShield = false;
 
-                    if (hit.collider.isTrigger)
-                    {
+                    if (hit.collider.isTrigger) {
                         if (BodyPartHealth.Contains(hit.collider.gameObject))
                             isOk = true;
-                        else
-                        {
+                        else {
                             var shield = BulletShield.Get(hit.collider.gameObject);
 
-                            if (shield != null)
-                            {
-                                if (Vector3.Dot(shield.transform.forward, hit.normal) >= -0.2f)
-                                {
+                            if (shield != null) {
+                                if (Vector3.Dot(shield.transform.forward, hit.normal) >= -0.2f) {
                                     isOk = true;
                                     isShield = true;
                                 }
@@ -755,26 +705,21 @@ namespace CoverShooter
                                 isOk = false;
                         }
                     }
-                    else
-                    {
+                    else {
                         var health = CharacterHealth.Get(hit.collider.gameObject);
 
                         if (health != null)
                             isOk = health.IsRegisteringHits;
                     }
 
-                    if (isOk)
-                    {
-                        if (!isShield && (_isIgnoringSelf || _hasFireCondition) && friendCheck)
-                        {
+                    if (isOk) {
+                        if (!isShield && (_isIgnoringSelf || _hasFireCondition) && friendCheck) {
                             var root = getHealthTarget(hit.collider.gameObject);
 
-                            if (root != null)
-                            {
+                            if (root != null) {
                                 if (_isIgnoringSelf && Character != null && root == Character.gameObject)
                                     isFriend = true;
-                                else if (_hasFireCondition)
-                                {
+                                else if (_hasFireCondition) {
                                     var actor = Actors.Get(root);
 
                                     if (actor != null)
@@ -802,8 +747,7 @@ namespace CoverShooter
         /// Sets the gun to try firing during the next update.
         /// Gun fires only when both fire mode is on and the gun is allowed to fire.
         /// </summary>
-        public void TryFireNow()
-        {
+        public void TryFireNow() {
             print("Inside TryFireNow");
             _isFiringOnNextUpdate = true;
         }
@@ -812,8 +756,7 @@ namespace CoverShooter
         /// Sets the fire mode on. It stays on until CancelFire() is called or the gun has fired.
         /// Gun fires only when both fire mode is on and the gun is allowed to fire.
         /// </summary>
-        public void FireWhenReady()
-        {
+        public void FireWhenReady() {
             print("Fire When Ready: " + transform.root.name);
             _isGoingToFire = true;
         }
@@ -821,8 +764,7 @@ namespace CoverShooter
         /// <summary>
         /// Sets the fire mode off.
         /// </summary>
-        public void CancelFire()
-        {
+        public void CancelFire() {
             _isGoingToFire = false;
         }
 
@@ -830,8 +772,7 @@ namespace CoverShooter
         /// Sets whether the gun is allowed to fire. Manipulated when changing weapons or a reload animation is playing.
         /// </summary>
         /// <param name="value"></param>
-        public void Allow(bool value)
-        {
+        public void Allow(bool value) {
             //print("Allow: " + value);
             _isAllowed = value;
         }
@@ -839,8 +780,7 @@ namespace CoverShooter
         /// <summary>
         /// Sets the position from which bullets are spawned. The game usually sets it as the camera position.
         /// </summary>
-        public void SetupRaycastThisFrame(Vector3 origin, Vector3 target)
-        {
+        public void SetupRaycastThisFrame(Vector3 origin, Vector3 target) {
             _isUsingCustomRaycast = true;
             _customRaycastOrigin = origin;
             _customRaycastTarget = target;
@@ -849,24 +789,21 @@ namespace CoverShooter
         /// <summary>
         /// Sets the aim error in degrees for the next frame. Errors are stacked.
         /// </summary>
-        public void AddErrorThisFrame(float degrees)
-        {
+        public void AddErrorThisFrame(float degrees) {
             _additionalError += degrees;
         }
 
         /// <summary>
         /// Sets the base error (Error property) multiplier for this frame.
         /// </summary>
-        public void SetBaseErrorMultiplierThisFrame(float multiplier)
-        {
+        public void SetBaseErrorMultiplierThisFrame(float multiplier) {
             _errorMultiplier = multiplier;
         }
 
         /// <summary>
         /// Call the update method manually. Performed by the CharacterMotor, in order to fire the weapon after the weapon has performed it's IK.
         /// </summary>
-        public void UpdateManually()
-        {
+        public void UpdateManually() {
             _hasManuallyUpdated = true;
 
             if (!_hasUpdatedThisFrame)
@@ -882,11 +819,9 @@ namespace CoverShooter
         /// </summary>
         protected abstract void Consume();
 
-        private void adjustLaser()
-        {
+        private void adjustLaser() {
             // Adjust the laser.
-            if (_laser != null)
-            {
+            if (_laser != null) {
                 var origin = Origin;
                 var direction = Direction;
 
@@ -903,14 +838,11 @@ namespace CoverShooter
         /// <summary>
         /// Finds best CharacterHealth gameobject.
         /// </summary>
-        private GameObject getHealthTarget(GameObject target)
-        {
-            while (target != null)
-            {
+        private GameObject getHealthTarget(GameObject target) {
+            while (target != null) {
                 var health = CharacterHealth.Get(target);
 
-                if (health != null)
-                {
+                if (health != null) {
                     if (health.Health <= float.Epsilon)
                         target = null;
 
@@ -931,8 +863,7 @@ namespace CoverShooter
         /// <summary>
         /// Calculates direction to target from origin.
         /// </summary>
-        private Vector3 calculateRaycastDirection()
-        {
+        private Vector3 calculateRaycastDirection() {
             var direction = (RaycastTarget - RaycastOrigin).normalized;
 
             var error = (_additionalError + Error * _errorMultiplier) * 0.5f;
@@ -945,8 +876,7 @@ namespace CoverShooter
 
             var right = Vector3.Cross(up, direction);
 
-            if (error > 0.1f && x * x + y * y >= error * error)
-            {
+            if (error > 0.1f && x * x + y * y >= error * error) {
                 var magnitude = Mathf.Sqrt(x * x + y * y) * error;
                 x /= magnitude;
                 y /= magnitude;
@@ -961,20 +891,27 @@ namespace CoverShooter
         /// <summary>
         /// Cast a single bullet using raycasting.
         /// </summary>
-        private bool fire(float delay, bool consume)
-        {
+        private bool fire(float delay, bool consume) {
+
+            Allow(false);
+            
+            Character.GetComponent<Animator>().SetTrigger("FireShot");
+            return true;
+        }
+
+        public void AnimFireTrigger() {
+
             bool isFriend;
             var direction = calculateRaycastDirection();
             var hit = Raycast(RaycastOrigin, direction, out isFriend, true);
-
+            Debug.DrawRay(RaycastOrigin, direction, Color.red);
             if (Character != null)
                 Character.KeepAiming();
 
-            if (!isFriend)
-            {
+            if (!isFriend) {
                 var end = hit.point;
 
-                if (consume)
+                
                     Consume();
 
                 if (hit.collider == null)
@@ -984,8 +921,7 @@ namespace CoverShooter
 
                 HitType type;
 
-                switch (Type)
-                {
+                switch (Type) {
                     case WeaponType.Pistol: type = HitType.Pistol; break;
                     case WeaponType.Rifle: type = HitType.Rifle; break;
                     case WeaponType.Shotgun: type = HitType.Shotgun; break;
@@ -999,8 +935,7 @@ namespace CoverShooter
 
                 var hitStruct = new Hit(hit.point, -direction, damage, Character.gameObject, hit.collider == null ? null : hit.collider.gameObject, type, DamageResponseWaitTime);
 
-                if (Bullet != null)
-                {
+                if (Bullet != null) {
                     var bullet = GameObject.Instantiate(Bullet);
                     bullet.transform.position = Origin;
                     bullet.transform.LookAt(end);
@@ -1014,13 +949,11 @@ namespace CoverShooter
                     if (trail != null)
                         trail.Clear();
 
-                    if (projectile != null)
-                    {
+                    if (projectile != null) {
                         projectile.Distance = vector.magnitude;
                         projectile.Direction = vector.normalized;
 
-                        if (hit.collider != null)
-                        {
+                        if (hit.collider != null) {
                             projectile.Target = hit.collider.gameObject;
                             projectile.Hit = hitStruct;
                         }
@@ -1031,19 +964,35 @@ namespace CoverShooter
 
                     bullet.SetActive(true);
                 }
-                else if (hit.collider != null)
-                    hit.collider.SendMessage("OnHit", hitStruct, SendMessageOptions.DontRequireReceiver);
+                else if (hit.collider != null) {
+                    print("Hit: " + hit.collider.transform.name);
+                    var hitHealth = hit.collider.GetComponentInChildren<CharacterHealth>();
+                    if (hitHealth == null) {
+                        print("Ranged Hit has no Character Health Component: " + hit.collider.transform.name);
+                    } else {
+                        currentMove = Character.GetComponent<MissionCharacter>().activeMoves[gunMoveAnimIndex];
+                        var normal = (Character.transform.position - hit.transform.position).normalized;
+                        var thisHitStruct = new Hit(hit.collider.ClosestPointOnBounds(transform.position), normal, Damage, Character.gameObject, hit.transform.gameObject, type, DamageResponseWaitTime, currentMove);
+                        print("Ranged Hit success! " + currentMove.staminaDamage);
+                        hitHealth.GetComponent<CharacterMotor>().OnHit(thisHitStruct);
+                        //hitHealth.SendMessage("OnHit", thisHitStruct, SendMessageOptions.DontRequireReceiver);
+                    }
+
+                }
+
 
                 _hasJustFired = true;
-                return true;
+                return;
             }
-            else
-            {
+            else {
                 _hasJustFired = true;
-                return false;
+                return;
             }
         }
-
+        public void AnimEndTrigger() {
+            Allow(true);
+        }
+    
         #endregion
     }
 }
