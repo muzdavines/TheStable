@@ -170,7 +170,7 @@ public class MissionController : MonoBehaviour
         print("Combat Begin");
         currentEnemies = new List<Character>();
         foreach (Character e in enemies) {
-            currentEnemies.Add(Instantiate<Character>(e));
+            currentEnemies.Add(e);
         }
         foreach (Character h in heroes) {
             h.currentObject.GetComponent<Actor>().Side = 1;

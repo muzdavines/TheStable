@@ -75,7 +75,7 @@ public class MoveModifier : ScriptableObject
                     continue;
                 }
                 if (Vector3.Distance(otherHealth.transform.position, attackerPos) > 50) {
-                    Debug.Log(otherHealth.transform.name + " is too far for " + attacker.name + "s' AOE: " + modName);
+                    Debug.Log(otherHealth.transform.name + " is too far for " + attacker.myName + "s' AOE: " + modName);
                     continue;
                 }
                 GameObject aoeDamageEffect = Instantiate<GameObject>(Resources.Load<GameObject>(modName + "ModEffectDamage"), otherHealth.transform.position + new Vector3(0, 1, 0), otherHealth.transform.rotation);

@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 public class NewGameCreationController : MonoBehaviour
 {
 
-    public List<Character> heroes = new List<Character>();
+    public List<CharacterSO> heroes = new List<CharacterSO>();
     public int startingGold = 400;
     public List<MoveModifier> mods;
     public List<Training> trainingAdds;
@@ -17,7 +17,7 @@ public class NewGameCreationController : MonoBehaviour
     {
         if (heroes == null || heroes.Count == 0)
         {
-            heroes.Add(new Character() { name = Names.Warrior[Random.Range(0, Names.Warrior.Length)], age = 18, modelName = "CharWarrior2" });
+            heroes.Add(new CharacterSO() { myName = Names.Warrior[Random.Range(0, Names.Warrior.Length)], age = 18, modelName = "CharWarrior2" });
         }
         
         
@@ -46,11 +46,13 @@ public class NewGameCreationController : MonoBehaviour
                 break;
         }
        
-        foreach (Character h in heroes)
+        foreach (CharacterSO h in heroes)
         {
-            Character thisHero = Instantiate<Character>(h);
-            
+            Character thisHero = h.GetCharacter();
+            testChar = thisHero;
+            print("Creator: " + thisHero.myName);
             player.heroes.Add(thisHero);
+            player.heroes.Add(new Character(new CharacterSO()));
         }
         Game.instance.playerStable.finance.AddRevenue(startingGold);
         Game.instance.playerStable.availableTrainings.Add(new Training() {type = Training.Type.Attribute, training = "negotiating", duration = 2, cost = 50 });
@@ -60,8 +62,9 @@ public class NewGameCreationController : MonoBehaviour
         Game.instance.missionContractList = Instantiate<MissionList>(Resources.Load<MissionList>("1000"));
         //Game.instance.playerStable.finance.businesses.Add(new Finance.Business() { benefit = Finance.Business.Benefit.Gold, description = "Market Stall in Genoa", duration = 12, number = 125 });
         Game.instance.Init();
-        Destroy(gameObject);
+        //Destroy(gameObject);
         
     }
-
+    [SerializeField]
+    public Character testChar;
 }

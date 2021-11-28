@@ -80,7 +80,7 @@ public class Game : MonoBehaviour
     }
     public void Update() {
         if (Input.GetKeyDown(KeyCode.P)){
-            MissionContractTest();
+            print(playerStable.heroes[0].myName);
         }
     }
 

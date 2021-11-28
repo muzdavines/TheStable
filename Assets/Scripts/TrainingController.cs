@@ -19,7 +19,7 @@ public class TrainingController : MonoBehaviour, UIElement
             activeTrainingText = activeTraining.training.Title();
         }
         if (activeChar != null) {
-            active.text = activeChar.name;
+            active.text = activeChar.myName;
         }
         if (activeChar != null && activeTraining != null) {
 
@@ -74,7 +74,7 @@ public class TrainingController : MonoBehaviour, UIElement
             print("Character is already training");
             return;
         }
-        f.AddExpense(cost, LedgerAccount.Personnel, "Training: " + activeTraining.training + ", " + activeChar.name, "Training");
+        f.AddExpense(cost, LedgerAccount.Personnel, "Training: " + activeTraining.training + ", " + activeChar.myName, "Training");
         activeChar.StartTraining(Instantiate<Training>(activeTraining));
         activeChar = null;
         activeTraining = null;

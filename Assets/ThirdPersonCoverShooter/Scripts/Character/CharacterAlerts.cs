@@ -5,7 +5,7 @@ namespace CoverShooter
     /// <summary>
     /// Generates alerts for the AI to pick up on various character events.
     /// </summary>
-    public class Characterlerts : MonoBehaviour, ICharacterPhysicsListener, ICharacterHealthListener
+    public class CharacterAlerts : MonoBehaviour, ICharacterPhysicsListener, ICharacterHealthListener
     {
         /// <summary>
         /// Distance at which step can be heard. Alert is not generated if value is zero or negative.

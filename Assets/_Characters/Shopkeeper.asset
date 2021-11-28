@@ -9,10 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5c751179885a4504bbe84727081f1f0c, type: 3}
+  m_Script: {fileID: 11500000, guid: c8e107b6aa166aa42b45b1549f1536b0, type: 3}
   m_Name: Shopkeeper
   m_EditorClassIdentifier: 
-  name: Bandit
+  name: Shopkeeper
   maxHP: 0
   HP: 0
   age: 0
@@ -31,7 +31,7 @@ MonoBehaviour:
   motivation: 5
   strategist: 5
   economics: 5
-  negotiating: 15
+  negotiating: 5
   insight: 5
   deception: 5
   intimidation: 5
@@ -39,14 +39,14 @@ MonoBehaviour:
   pickpocketing: 5
   trapSetting: 5
   trapDisarming: 5
-  pugilism: 1
+  pugilism: 5
   martialarts: 2
-  melee: 5
+  melee: 10
   parry: 5
-  shieldDefense: 5
-  survivalist: 5
-  landNavigation: 5
-  hunting: 5
+  shieldDefense: 0
+  survivalist: 10
+  landNavigation: 10
+  hunting: 15
   foraging: 0
   herbLore: 0
   camping: 0
@@ -55,25 +55,25 @@ MonoBehaviour:
   supportMagic: 0
   condition: 0
   sharpness: 0
-  health: 10
-  maxStamina: 10
-  maxBalance: 10
-  maxMind: 10
-  maxHealth: 4
+  health: 0
+  maxStamina: 0
+  maxBalance: 0
+  maxMind: 0
+  maxHealth: 0
   knownMoves:
-  - {fileID: 11400000, guid: 9718ff2f87bcd694099066b587a15546, type: 2}
+  - {fileID: 11400000, guid: 5f509c17b3179c049b823d59a0601bf6, type: 2}
   activeMoves:
-  - {fileID: 11400000, guid: 9718ff2f87bcd694099066b587a15546, type: 2}
+  - {fileID: 11400000, guid: 5f509c17b3179c049b823d59a0601bf6, type: 2}
   startingArmor: 
-  startingWeapon: FistsSO
+  startingWeapon: 
   armor: {fileID: 0}
   weapon: {fileID: 0}
-  mat: {fileID: 2100000, guid: 2016fbaa1e945cb4f807abf0a56b602e, type: 2}
+  mat: {fileID: 0}
   contract:
     weeksLeft: 10
     weeklySalary: 100
     signingBonus: 500
-  currentTraining: {fileID: 11400000, guid: 2450e6aabcbabf148b938377b4bc1f9b, type: 2}
+  currentTraining: {fileID: 0}
   returnDate:
     day: 1
     month: 1

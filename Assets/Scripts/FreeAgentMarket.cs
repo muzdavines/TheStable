@@ -28,12 +28,12 @@ public class FreeAgentMarket
     public void UpdateMarket() {
         market = new List<Character>();
         for (int i = 0; i < 6; i++) {
-            market.Add(new Character() { swordsmanship = 20, health = 5,  modelName = "CharWarrior2", name = Names.Warrior[Random.Range(0, Names.Warrior.Length)], contract = new EmploymentContract() { signingBonus = Random.Range(500, 2000), weeklySalary = Random.Range(50, 150), weeksLeft = 48 }, weapon = new Weapon() {damage = 20 }, armor = new Armor() { health = 2, condition = 100 } });
+            market.Add(new Character(new CharacterSO()) { swordsmanship = 20, health = 5,  modelName = "CharWarrior2", myName = Names.Warrior[Random.Range(0, Names.Warrior.Length)], contract = new EmploymentContract() { signingBonus = Random.Range(500, 2000), weeklySalary = Random.Range(50, 150), weeksLeft = 48 }, weapon = new Weapon() {damage = 20 }, armor = new Armor() { health = 2, condition = 100 } });
         }
     }
 
     public void TestMarket() {
-        market.Add(new Character() { name = "Joe", contract = new EmploymentContract() { signingBonus = 1000, weeklySalary = 100, weeksLeft = 10 } });
+        market.Add(new Character(new CharacterSO()) { myName = "Joe", contract = new EmploymentContract() { signingBonus = 1000, weeklySalary = 100, weeksLeft = 10 } });
         PurchaseHero(0, Game.instance.playerStable);
     }
 }

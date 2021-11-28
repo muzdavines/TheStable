@@ -14,7 +14,7 @@ public class CombatTestUIController : MonoBehaviour
         team = 0;
         for (int i = 0; i < 4; i++) {
             
-            characterName[i].text = combatData.teams[team][character].character.name;
+            characterName[i].text = combatData.teams[team][character].character.myName;
             
             
             

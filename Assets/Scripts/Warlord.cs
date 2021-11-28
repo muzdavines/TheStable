@@ -4,6 +4,9 @@ using UnityEngine;
 [System.Serializable]
 public class Warlord : Character
 {
+    public Warlord() : base (new CharacterSO()) {
+
+    }
     public int warlordReputation;
 
     public void InitWarlord(CharClass c){

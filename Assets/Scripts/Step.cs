@@ -52,11 +52,11 @@ public class Step {
             
         }
         Debug.Log(property);
-        Character returnChar = new Character() { name = "ReturnChar" };
+        Character returnChar = new Character(new CharacterSO()) { myName = "ReturnChar" };
         typeof(Character).GetField(property).SetValue(returnChar, -1);
         for (int i = 0; i < heroes.Count; i++) {
             if (heroes[i].incapacitated) { continue; }
-            Debug.Log(heroes[i].name+ " Prop: " + typeof(Character).GetField(property).GetValue(returnChar) + "  " + typeof(Character).GetField(property).GetValue(heroes[i]));
+            Debug.Log(heroes[i].myName+ " Prop: " + typeof(Character).GetField(property).GetValue(returnChar) + "  " + typeof(Character).GetField(property).GetValue(heroes[i]));
             if ((int)typeof(Character).GetField(property).GetValue(returnChar) < (int)typeof(Character).GetField(property).GetValue(heroes[i])) { 
                 returnChar = heroes[i];
             }

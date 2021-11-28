@@ -31,7 +31,7 @@ public class CombatTestController : MonoBehaviour
             float strengthNumber = (character.strength * intentMod);
             float roll = Random.Range(0f, 5f);
             float weaponDamage = character.weapon.damage;
-            print(character.name + " damage roll; Str: " + strengthNumber + " Weapon: " + weaponDamage + " Roll: " + roll);
+            print(character.myName + " damage roll; Str: " + strengthNumber + " Weapon: " + weaponDamage + " Roll: " + roll);
             return strengthNumber + roll + weaponDamage;
 
             //still needed: Buff, Debuff, State, Stamina
@@ -39,7 +39,7 @@ public class CombatTestController : MonoBehaviour
 
         public float GetDefenseToDamageRoll() {
             float roll = Random.Range(0f, 5f);
-            print(character.name + " defend damage roll; Tough: " + character.toughness + " Armor: " + character.armor.defenseValue + " Roll: " + roll);
+            print(character.myName + " defend damage roll; Tough: " + character.toughness + " Armor: " + character.armor.defenseValue + " Roll: " + roll);
             return character.toughness + character.armor.defenseValue + roll;
             //still needed: Buff, Debuff, State, Stamina
         }
@@ -141,7 +141,7 @@ public class CombatTestController : MonoBehaviour
                 thisTeam[x].modifier = (Combat.Modifier)Random.Range(1, 4);
                 thisTeam[x].charTargetIndex = GetAttackTargetIndex(myTeamIndex);
                 thisTeam[x].charTarget = teams[myTeamIndex.Other()][thisTeam[x].charTargetIndex].character;
-                print(thisTeam[x].character.name + "  " + thisTeam[x].intent + " " + thisTeam[x].modifier);
+                print(thisTeam[x].character.myName + "  " + thisTeam[x].intent + " " + thisTeam[x].modifier);
             }
         }
     }
@@ -274,7 +274,7 @@ public class CombatTestController : MonoBehaviour
                 t.modifier = Combat.Modifier.Parry;
                 t.parriesLeft -= 1;
                 bEntry.didAttemptParry = true;
-                print(t.character.name + " trying to parry with: " + t.character.parry);
+                print(t.character.myName + " trying to parry with: " + t.character.parry);
             }
         }
         float defAbility= t.modifier == Combat.Modifier.Parry ? t.character.parry : t.character.dodging;
@@ -307,13 +307,13 @@ public class CombatTestController : MonoBehaviour
             int dotDamage = GetDotDamage(damageIndex);
             t.character.health -= dotDamage;
             
-            print(c.character.name +" Damage: " + aRoll + " vs " + dRoll + " Does "+ dotDamage + " dots.");
+            print(c.character.myName +" Damage: " + aRoll + " vs " + dRoll + " Does "+ dotDamage + " dots.");
             bEntry.healthDamage = dotDamage;
             print(t.character.health + " dots left.");
             if (t.character.health<= 0) {
                 bEntry.didLandKillingBlow = true;
                 t.state = Combat.State.Dead;
-                FindObjectOfType<MissionFinalDetails>().narrative.Add(c.character.name + " killed a " + t.character.name);
+                FindObjectOfType<MissionFinalDetails>().narrative.Add(c.character.myName + " killed a " + t.character.myName);
             }
             //END DAMAGE SECTION
 
@@ -338,7 +338,7 @@ public class CombatTestController : MonoBehaviour
         battle.Add(bEntry);
         
         t.modifier = originalDefenderMod;
-        print(c.character.name + " Atk: " + attacker + "  "+t.character.name+" Def: " + defender);
+        print(c.character.myName + " Atk: " + attacker + "  "+t.character.myName+" Def: " + defender);
 
         //eventually, group the attacks by turn and see whether any combos can be had for cool animations (2 or 3 parries,
         //or 2 attackers hitting the same guy for a double attack, etc)

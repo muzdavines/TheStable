@@ -36,10 +36,10 @@ public class Stable
 
     public bool PurchaseHero(Character hero) {
         if (hero.contract.signingBonus > finance.gold) {
-            Debug.Log("Player does not have enough money to sign " + hero.name);
+            Debug.Log("Player does not have enough money to sign " + hero.myName);
             return false;
         }
-        finance.AddExpense(hero.contract.signingBonus, LedgerAccount.Personnel, "Signing Bonus for " + hero.name);
+        finance.AddExpense(hero.contract.signingBonus, LedgerAccount.Personnel, "Signing Bonus for " + hero.myName);
         heroes.Add(hero);
         return true;
     }
@@ -62,7 +62,7 @@ public class Stable
 
     bool IsDead(Character c) {
         if (c.health <= 0) {
-            Debug.Log("Dead: " + c.name + " But ignoring permadeath.");
+            Debug.Log("Dead: " + c.myName + " But ignoring permadeath.");
             c.health = 4;
             return false;
             return true;

@@ -9,7 +9,7 @@ public class HeroInfoPanelController : MonoBehaviour, PopupElement
     public void OnHover(Character c)
     {
         panel.SetActive(true);
-        heroName.text = c.name;
+        heroName.text = c.myName;
         heroAge.text = "Age: "+c.age;
         heroContract.text = "Contract\nSigning Bonus: " + c.contract.signingBonus +"\nWeekly Salary: " + c.contract.weeklySalary + "\nWeeks Remaining: " + c.contract.weeksLeft;
 

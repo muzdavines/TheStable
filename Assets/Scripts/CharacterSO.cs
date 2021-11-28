@@ -1,12 +1,13 @@
-﻿using System.Collections;
+using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Reflection;
 using UnityEngine;
 
-public enum CharClass { Warrior, Wizard, Rogue};
 
+[CreateAssetMenu]
 [System.Serializable]
-public class Character : Living 
-{
+public class CharacterSO : LivingSO {
     //Physical Attributes
     public int strength = 5;
     public int agility = 5;
@@ -16,9 +17,9 @@ public class Character : Living
     public int dualwielding = 5;
     public int dodging = 5;
     public int archery = 5;
-   
+
     public int toughness = 10;
-    
+
     //Mental Attributes
     public int speech = 5;
     public int intelligence = 5;
@@ -42,7 +43,7 @@ public class Character : Living
     public int melee = 10;
     public int parry = 5;
     public int shieldDefense;
-    
+
     //Survival Attributes
     public int survivalist = 10;
     public int landNavigation = 10;
@@ -77,7 +78,7 @@ public class Character : Living
     public List<Move> knownMoves = new List<Move>();
     [SerializeField]
     public List<Move> activeMoves = new List<Move>();
-    public bool HasMove (string m) {
+    public bool HasMove(string m) {
         Debug.Log("HasMove called on Character. Need to Change This");
         foreach (Move move in knownMoves) {
             if (move.name == m) { return true; }
@@ -103,7 +104,7 @@ public class Character : Living
     public EmploymentContract contract = new EmploymentContract();
 
     [SerializeField]
-    public Training currentTraining = new Training();
+    public Training currentTraining;
     [SerializeField]
     public Game.GameDate returnDate = new Game.GameDate();
 
@@ -118,12 +119,12 @@ public class Character : Living
     public void Awake() {
         Armor startingArmorSO = Resources.Load<Armor>(startingArmor);
         Weapon startingWeaponSO = Resources.Load<Weapon>(startingWeapon);
-        if (startingArmorSO == null) { armor = new Armor(); } else { armor = MonoBehaviour.Instantiate(startingArmorSO); }
-        if (startingWeaponSO == null) { Debug.Log("Character new weapon " + myName); weapon = new Weapon(); } else { Debug.Log("Char inst weapon " + myName); weapon = MonoBehaviour.Instantiate(startingWeaponSO); }
+        if (startingArmorSO == null) { armor = new Armor(); } else { armor = Instantiate(startingArmorSO); }
+        if (startingWeaponSO == null) { Debug.Log("Character new weapon " + myName); weapon = new Weapon(); } else { Debug.Log("Char inst weapon " + myName); weapon = Instantiate(startingWeaponSO); }
         if (currentTraining == null) { currentTraining = new Training(); }
     }
 
-    public void StartTraining (Training t) {
+    public void StartTraining(Training t) {
         currentTraining = t;
         currentTraining.dateToTrain = Helper.Today().Add(currentTraining.duration);
         returnDate = currentTraining.dateToTrain;
@@ -135,7 +136,7 @@ public class Character : Living
                     Debug.Log("Raise Attribute " + currentTraining.training);
                     int currentValue = (int)typeof(Character).GetField(currentTraining.training).GetValue(this);
                     typeof(Character).GetField(currentTraining.training).SetValue(this, currentValue + 1);
-                    MonoBehaviour.FindObjectOfType<DailyPopup>().Popup(myName + " completed training: " + currentTraining.training.Title());
+                    FindObjectOfType<DailyPopup>().Popup(myName + " completed training: " + currentTraining.training.Title());
                     //raise the attribute
                     //add the skill
                     return true; //return true to remove this training as it is complete        
@@ -143,7 +144,7 @@ public class Character : Living
                 case Training.Type.Skill:
                     Debug.Log("Add Skill " + currentTraining.moveToTrain.name);
                     knownMoves.Add(currentTraining.moveToTrain);
-                    MonoBehaviour.FindObjectOfType<DailyPopup>().Popup(myName + " completed training: " + currentTraining.moveToTrain.name.Title());
+                    FindObjectOfType<DailyPopup>().Popup(myName + " completed training: " + currentTraining.moveToTrain.name.Title());
                     return true;
                     break;
             }
@@ -153,18 +154,14 @@ public class Character : Living
 
         return false;
     }
-    public Character (CharacterSO charSO) {
-        this.strength = charSO.strength;
-        this.myName = charSO.myName;
-        this.activeMoves = charSO.activeMoves;
-        this.knownMoves = charSO.knownMoves;
-        this.startingWeapon = charSO.startingWeapon;
-        this.maxStamina= charSO.maxStamina; 
-        this.maxBalance= charSO.maxBalance; 
-        this.maxMind = charSO.maxMind; 
-        this.maxHealth = charSO.maxHealth;
-        this.modelName = charSO.modelName;
-        this.armor = charSO.armor;
+    
+    public Character GetCharacter() {
+        Character thisChar = new Character(Instantiate(this));
+
+        
+        Debug.Log(thisChar.myName+ " -----"+this.myName);
+        return thisChar;
+
     }
 }
 

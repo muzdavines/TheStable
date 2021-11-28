@@ -22,6 +22,7 @@ public class MissionCharacter : MonoBehaviour, MissionCharacterStateOwner
     public Transform shoulderCam;
     public Transform rHand, lHand, rHandHolster, lHandHolster, rLeg, lLeg;
     public Move[] activeMoves = new Move[3];
+    public int currentMoveIndex = 0;
     /// <summary>
     /// Interface Reqs
     /// </summary>
@@ -34,7 +35,7 @@ public class MissionCharacter : MonoBehaviour, MissionCharacterStateOwner
     void Start()
     {
         if (generateRandom) {
-            Init(new Character() { toughness = 10, melee = Random.Range(0, 15), landNavigation = -100, strength = 10, parry = 20, health = 3, name = Names.Warrior[Random.Range(0, 10)] });
+            Init(new Character(new CharacterSO()) { toughness = 10, melee = Random.Range(0, 15), landNavigation = -100, strength = 10, parry = 20, health = 3, myName = Names.Warrior[Random.Range(0, 10)] });
         }
         for (int i=0; i < 3; i++) {
             if (character.activeMoves[i] == null) { character.activeMoves[i] = new Move() { moveType = MoveType.None }; } 
@@ -76,9 +77,10 @@ public class MissionCharacter : MonoBehaviour, MissionCharacterStateOwner
         this.state = initState;
         initState.EnterFrom(null);
         InitHealth();
-        InitHealthBarAndVisuals();
         InitWeaponsAndArmor();
-        transform.name = c.name;
+        InitHealthBarAndVisuals();
+        
+        transform.name = c.myName;
         c.currentMissionCharacter = this;
         
     }
@@ -93,7 +95,7 @@ public class MissionCharacter : MonoBehaviour, MissionCharacterStateOwner
         
     }
     public void InitWeaponsAndArmor() {
-        print("Initializing Weapons and Armor for " + character.name);
+        print("Initializing Weapons and Armor for " + character.myName);
         if (weaponsInited) { return; }
         weaponsInited = true;
         CharacterMotor motor = GetComponent<CharacterMotor>();
@@ -143,7 +145,7 @@ public class MissionCharacter : MonoBehaviour, MissionCharacterStateOwner
             return;
         }
         print("Changing Mat if available");
-        print(character.name + " " + character.mat);
+        print(character.myName + " " + character.mat);
         if (character.mat != null) {
             int numChildren = transform.childCount;
             print("ChildCount: " + numChildren);
@@ -159,7 +161,7 @@ public class MissionCharacter : MonoBehaviour, MissionCharacterStateOwner
         
         healthBarInitialized = true;
         GameObject bar = Instantiate(Resources.Load<GameObject>("HealthBar"), Helper.GetMainCanvas().transform);
-        bar.name = character.name + " Health";
+        bar.name = character.myName + " Health";
         healthBar = bar.GetComponent<HealthBar>();
         healthBar.gameObject.GetComponent<EnergyBarFollowObject>().followObject = gameObject;
         UpdateHealthBar();
@@ -192,7 +194,7 @@ public class MissionCharacter : MonoBehaviour, MissionCharacterStateOwner
         state.TransitionTo(new MissionCharacterStateIdleDontAct());
     }
     public void Walk(Transform target) {
-        if (character.incapacitated) { Debug.Log("Can't Walk, Dead " + character.name); return; }
+        if (character.incapacitated) { Debug.Log("Can't Walk, Dead " + character.myName); return; }
         state.TransitionTo(new MissionCharacterStateWalkTo() { target = target });
     }
     public void DoCombatAnimation (CombatTestController.BattleEntry battleEntry, bool attacker) {

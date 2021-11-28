@@ -10,18 +10,18 @@ public class MissionHeroCellView : EnhancedScrollerCellView {
     public LaunchMissionController missionController;
     public void SetData(Character data) {
         thisChar = data;
-        heroNameText.text = data.name;
+        heroNameText.text = data.myName;
         missionController = FindObjectOfType<LaunchMissionController>();
     }
 
     public void OnHoverEnter() {
-        print("MouseEnter " + thisChar.name);
+        print("MouseEnter " + thisChar.myName);
         GameObject.FindObjectOfType<HeroInfoPanelController>().OnHover(thisChar);
 
 
     }
     public void OnHoverExit() {
-        print("MouseExit" + thisChar.name);
+        print("MouseExit" + thisChar.myName);
         GameObject.FindObjectOfType<HeroInfoPanelController>().OnHoverExit();
     }
     public void OnClick() {
