@@ -453,7 +453,7 @@ namespace CoverShooter
         }
 
         protected IGunListener[] Listeners { get { return _listeners; } }
-        public int gunMoveAnimIndex = 0;
+        public int currentMoveIndex { get { return currentMoveIndex; } set { currentMoveIndex = value;  myCharacter.currentMoveIndex = value; } }
         public float nextFire;
         protected virtual void Frame() {
             _hasJustFired = false;
@@ -973,7 +973,7 @@ namespace CoverShooter
                     if (hitHealth == null) {
                         print("Ranged Hit has no Character Health Component: " + hit.collider.transform.name);
                     } else {
-                        currentMove = Character.GetComponent<MissionCharacter>().activeMoves[gunMoveAnimIndex];
+                        currentMove = Character.GetComponent<MissionCharacter>().activeMoves[currentMoveIndex];
                         var normal = (Character.transform.position - hit.transform.position).normalized;
                         var thisHitStruct = new Hit(hit.collider.ClosestPointOnBounds(transform.position), normal, Damage, Character.gameObject, hit.transform.gameObject, type, DamageResponseWaitTime, currentMove);
                         print("Ranged Hit success! " + currentMove.staminaDamage);
@@ -994,8 +994,21 @@ namespace CoverShooter
         }
         public void AnimEndTrigger() {
             Allow(true);
+            currentMove = GetNextMove();
+            myCharacter.currentMoveIndex = currentMoveIndex;
+            print("Changing Move to: " + currentMove.moveType.ToString());
         }
-    
+        public Move GetNextMove() {
+            currentMoveIndex++;
+            if (currentMoveIndex >= myCharacter.activeMoves.Length) {
+                currentMoveIndex = 0;
+                return myCharacter.activeMoves[currentMoveIndex];
+            }
+            if (myCharacter.activeMoves[currentMoveIndex] == null) {
+                return GetNextMove();
+            }
+            return myCharacter.activeMoves[currentMoveIndex];
+        }
         #endregion
     }
 }

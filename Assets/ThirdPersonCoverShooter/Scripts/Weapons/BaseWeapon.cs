@@ -16,9 +16,10 @@ namespace CoverShooter {
         public float Damage = 20;
 
         public virtual void InitWeapon(MissionCharacter c) {
-
+            myCharacter = c;
         }
 
         public Move currentMove;
+        public MissionCharacter myCharacter;
     }
 }
