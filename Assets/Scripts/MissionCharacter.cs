@@ -22,6 +22,7 @@ public class MissionCharacter : MonoBehaviour, MissionCharacterStateOwner
     public Transform shoulderCam;
     public Transform rHand, lHand, rHandHolster, lHandHolster, rLeg, lLeg;
     public Move[] activeMoves = new Move[3];
+    public int currentMoveIndex = 0;
     /// <summary>
     /// Interface Reqs
     /// </summary>
