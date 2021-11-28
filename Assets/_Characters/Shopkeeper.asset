@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8e107b6aa166aa42b45b1549f1536b0, type: 3}
   m_Name: Shopkeeper
   m_EditorClassIdentifier: 
-  name: Shopkeeper
+  myName: Shopkeeper
   maxHP: 0
   HP: 0
   age: 0
@@ -56,19 +56,19 @@ MonoBehaviour:
   condition: 0
   sharpness: 0
   health: 0
-  maxStamina: 0
-  maxBalance: 0
-  maxMind: 0
-  maxHealth: 0
+  maxStamina: 10
+  maxBalance: 10
+  maxMind: 10
+  maxHealth: 4
   knownMoves:
   - {fileID: 11400000, guid: 5f509c17b3179c049b823d59a0601bf6, type: 2}
   activeMoves:
   - {fileID: 11400000, guid: 5f509c17b3179c049b823d59a0601bf6, type: 2}
   startingArmor: 
-  startingWeapon: 
+  startingWeapon: FistsSO
   armor: {fileID: 0}
   weapon: {fileID: 0}
-  mat: {fileID: 0}
+  mat: {fileID: 2100000, guid: 2016fbaa1e945cb4f807abf0a56b602e, type: 2}
   contract:
     weeksLeft: 10
     weeklySalary: 100

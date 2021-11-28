@@ -453,7 +453,8 @@ namespace CoverShooter
         }
 
         protected IGunListener[] Listeners { get { return _listeners; } }
-        public int currentMoveIndex { get { return currentMoveIndex; } set { currentMoveIndex = value;  myCharacter.currentMoveIndex = value; } }
+        private int _currentMoveIndex;
+        public int currentMoveIndex { get { return _currentMoveIndex; } set { _currentMoveIndex = value;  myCharacter.currentMoveIndex = value; } }
         public float nextFire;
         protected virtual void Frame() {
             _hasJustFired = false;

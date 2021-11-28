@@ -1448,7 +1448,7 @@ Animator:
   m_GameObject: {fileID: 5188770822661121283}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: e2958561779b1a748a4246b9d0c0b309, type: 3}
-  m_Controller: {fileID: 9100000, guid: 7fd60b2301b1b9741ac93257cbc7abd1, type: 2}
+  m_Controller: {fileID: 9100000, guid: 4fc4bbf2d8cbfa14db78c8a790e274ac, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
@@ -1522,11 +1522,151 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   anim: {fileID: 0}
-  character: {fileID: 0}
+  character:
+    myName: 
+    maxHP: 0
+    HP: 0
+    age: 0
+    strength: 0
+    agility: 0
+    reaction: 0
+    running: 0
+    swordsmanship: 0
+    dualwielding: 0
+    dodging: 0
+    archery: 0
+    toughness: 0
+    speech: 0
+    intelligence: 0
+    education: 0
+    motivation: 0
+    strategist: 0
+    economics: 0
+    negotiating: 0
+    insight: 0
+    deception: 0
+    intimidation: 0
+    lockpicking: 0
+    pickpocketing: 0
+    trapSetting: 0
+    trapDisarming: 0
+    pugilism: 0
+    martialarts: 0
+    melee: 0
+    parry: 0
+    shieldDefense: 0
+    survivalist: 0
+    landNavigation: 0
+    hunting: 0
+    foraging: 0
+    herbLore: 0
+    camping: 0
+    attackMagic: 0
+    defenseMagic: 0
+    supportMagic: 0
+    condition: 0
+    sharpness: 0
+    health: 0
+    maxStamina: 0
+    maxBalance: 0
+    maxMind: 0
+    maxHealth: 0
+    knownMoves: []
+    activeMoves: []
+    startingArmor: 
+    startingWeapon: 
+    armor: {fileID: 0}
+    weapon: {fileID: 0}
+    mat: {fileID: 0}
+    contract:
+      weeksLeft: 10
+      weeklySalary: 100
+      signingBonus: 500
+    currentTraining: {fileID: 0}
+    returnDate:
+      day: 1
+      month: 1
+      year: 1000
+      dayOfWeek: 0
+    activeForNextMission: 0
+    incapacitated: 0
+    modelName: 
+    currentObject: {fileID: 0}
+    currentMissionCharacter: {fileID: 0}
   healthBar: {fileID: 0}
   combatChar:
     go: {fileID: 0}
-    character: {fileID: 0}
+    character:
+      myName: 
+      maxHP: 0
+      HP: 0
+      age: 0
+      strength: 0
+      agility: 0
+      reaction: 0
+      running: 0
+      swordsmanship: 0
+      dualwielding: 0
+      dodging: 0
+      archery: 0
+      toughness: 0
+      speech: 0
+      intelligence: 0
+      education: 0
+      motivation: 0
+      strategist: 0
+      economics: 0
+      negotiating: 0
+      insight: 0
+      deception: 0
+      intimidation: 0
+      lockpicking: 0
+      pickpocketing: 0
+      trapSetting: 0
+      trapDisarming: 0
+      pugilism: 0
+      martialarts: 0
+      melee: 0
+      parry: 0
+      shieldDefense: 0
+      survivalist: 0
+      landNavigation: 0
+      hunting: 0
+      foraging: 0
+      herbLore: 0
+      camping: 0
+      attackMagic: 0
+      defenseMagic: 0
+      supportMagic: 0
+      condition: 0
+      sharpness: 0
+      health: 0
+      maxStamina: 0
+      maxBalance: 0
+      maxMind: 0
+      maxHealth: 0
+      knownMoves: []
+      activeMoves: []
+      startingArmor: 
+      startingWeapon: 
+      armor: {fileID: 0}
+      weapon: {fileID: 0}
+      mat: {fileID: 0}
+      contract:
+        weeksLeft: 10
+        weeklySalary: 100
+        signingBonus: 500
+      currentTraining: {fileID: 0}
+      returnDate:
+        day: 1
+        month: 1
+        year: 1000
+        dayOfWeek: 0
+      activeForNextMission: 0
+      incapacitated: 0
+      modelName: 
+      currentObject: {fileID: 0}
+      currentMissionCharacter: {fileID: 0}
     intent: 0
     modifier: 0
     state: 0
@@ -1537,7 +1677,77 @@ MonoBehaviour:
     stamina: 0
     parriesLeft: 0
     charTargetIndex: 0
-    charTarget: {fileID: 0}
+    charTarget:
+      myName: 
+      maxHP: 0
+      HP: 0
+      age: 0
+      strength: 0
+      agility: 0
+      reaction: 0
+      running: 0
+      swordsmanship: 0
+      dualwielding: 0
+      dodging: 0
+      archery: 0
+      toughness: 0
+      speech: 0
+      intelligence: 0
+      education: 0
+      motivation: 0
+      strategist: 0
+      economics: 0
+      negotiating: 0
+      insight: 0
+      deception: 0
+      intimidation: 0
+      lockpicking: 0
+      pickpocketing: 0
+      trapSetting: 0
+      trapDisarming: 0
+      pugilism: 0
+      martialarts: 0
+      melee: 0
+      parry: 0
+      shieldDefense: 0
+      survivalist: 0
+      landNavigation: 0
+      hunting: 0
+      foraging: 0
+      herbLore: 0
+      camping: 0
+      attackMagic: 0
+      defenseMagic: 0
+      supportMagic: 0
+      condition: 0
+      sharpness: 0
+      health: 0
+      maxStamina: 0
+      maxBalance: 0
+      maxMind: 0
+      maxHealth: 0
+      knownMoves: []
+      activeMoves: []
+      startingArmor: 
+      startingWeapon: 
+      armor: {fileID: 0}
+      weapon: {fileID: 0}
+      mat: {fileID: 0}
+      contract:
+        weeksLeft: 10
+        weeklySalary: 100
+        signingBonus: 500
+      currentTraining: {fileID: 0}
+      returnDate:
+        day: 1
+        month: 1
+        year: 1000
+        dayOfWeek: 0
+      activeForNextMission: 0
+      incapacitated: 0
+      modelName: 
+      currentObject: {fileID: 0}
+      currentMissionCharacter: {fileID: 0}
     priority: 0
     team: 0
   shoulderCam: {fileID: 0}
@@ -1547,6 +1757,11 @@ MonoBehaviour:
   lHandHolster: {fileID: 0}
   rLeg: {fileID: 5188770822661431435}
   lLeg: {fileID: 5188770822661355201}
+  activeMoves:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  currentMoveIndex: 0
   generateRandom: 0
 --- !u!114 &2046810744907461717
 MonoBehaviour:
@@ -1718,6 +1933,7 @@ MonoBehaviour:
   HitResponseSettings:
     Wait: 0.5
     Strength: 20
+  _isInRangedAnim: 0
 --- !u!114 &3167069470452217150
 MonoBehaviour:
   m_ObjectHideFlags: 0

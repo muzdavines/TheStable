@@ -166,11 +166,11 @@ public class MissionController : MonoBehaviour
         }
     }
     MissionPOICombat poiCombat;
-    public void BeginCombat(List<Character> enemies, List<Transform> enemySpawnLoc, MissionPOICombat _poiCombat) {
+    public void BeginCombat(List<CharacterSO> enemies, List<Transform> enemySpawnLoc, MissionPOICombat _poiCombat) {
         print("Combat Begin");
         currentEnemies = new List<Character>();
-        foreach (Character e in enemies) {
-            currentEnemies.Add(e);
+        foreach (CharacterSO e in enemies) {
+            currentEnemies.Add(Instantiate(e).GetCharacter());
         }
         foreach (Character h in heroes) {
             h.currentObject.GetComponent<Actor>().Side = 1;

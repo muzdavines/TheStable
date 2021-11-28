@@ -165,6 +165,10 @@ public class Character : Living
         this.maxHealth = charSO.maxHealth;
         this.modelName = charSO.modelName;
         this.armor = charSO.armor;
+        this.weapon = charSO.weapon;
+        this.startingArmor = charSO.startingArmor;
+        this.startingWeapon = charSO.startingWeapon;
+        this.mat = charSO.mat;
     }
 }
 
