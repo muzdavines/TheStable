@@ -453,7 +453,8 @@ namespace CoverShooter
         }
 
         protected IGunListener[] Listeners { get { return _listeners; } }
-        public int currentMoveIndex { get { return currentMoveIndex; } set { currentMoveIndex = value;  myCharacter.currentMoveIndex = value; } }
+        private int _currentMoveIndex;
+        public int currentMoveIndex { get { return _currentMoveIndex; } set { _currentMoveIndex = value;  myCharacter.currentMoveIndex = value; } }
         public float nextFire;
         protected virtual void Frame() {
             _hasJustFired = false;
@@ -494,6 +495,7 @@ namespace CoverShooter
 
             // Check if the trigger is pressed.
             print(transform.root.name + " is trying to Fire; IsFiringNextUpdate: " + _isFiringOnNextUpdate + "// Is Allowed: " + _isAllowed);
+            if (currentMove == null) { currentMove = myCharacter.activeMoves[currentMoveIndex]; }
             if (_isFiringOnNextUpdate && _isAllowed && Time.time >= nextFire) {
                 // Time in seconds between bullets.
                 var fireDelay = 1.0f / Rate;
