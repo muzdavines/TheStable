@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
 [CreateAssetMenu]
+[System.Serializable]
 public class MissionContract : ScriptableObject
 {
     public string description;
@@ -21,7 +23,9 @@ public class MissionContract : ScriptableObject
     /// </summary>
     /// 
     public Finance.Business businessReward;
+    [SerializeField]
     public Move moveReward;
+    [SerializeField]
     public Game.GameDate executionDate;
     public int dayCost; //number of days heroes will be out of commission
     //need to add more robust rewards here, perhaps a subclass for things like establishing a recruitment station

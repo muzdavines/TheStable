@@ -73,8 +73,9 @@ public class Character : Living
     public int maxBalance;
     public int maxMind;
     public int maxHealth; //health defined above
-
+    [SerializeField]
     public List<Move> knownMoves = new List<Move>();
+    [SerializeField]
     public List<Move> activeMoves = new List<Move>();
     public bool HasMove (string m) {
         Debug.Log("HasMove called on Character. Need to Change This");
@@ -86,7 +87,9 @@ public class Character : Living
     //Inventory
     public string startingArmor;
     public string startingWeapon;
+    [SerializeField]
     public Armor armor;
+    [SerializeField]
     public Weapon weapon;
 
     //Visuals
@@ -101,7 +104,7 @@ public class Character : Living
 
     [SerializeField]
     public Training currentTraining;
-
+    [SerializeField]
     public Game.GameDate returnDate = new Game.GameDate();
 
     public bool activeForNextMission;
@@ -109,6 +112,7 @@ public class Character : Living
     public string modelName;
 
     public GameObject currentObject;
+    [SerializeField]
     public MissionCharacter currentMissionCharacter;
 
     public void Awake() {

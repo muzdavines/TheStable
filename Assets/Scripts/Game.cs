@@ -11,8 +11,8 @@ using System.Text.RegularExpressions;
 public class Game : MonoBehaviour
 {
     private static Game _instance;
-    public static Game instance { get { if (_instance == null) { _instance = GameObject.FindObjectOfType<Game>(); } if (_instance == null) { _instance = (new GameObject().AddComponent<Game>()); } return _instance; } }
-
+    //public static Game instance { get { if (_instance == null) { _instance = GameObject.FindObjectOfType<Game>(); } if (_instance == null) { _instance = (new GameObject().AddComponent<Game>()); } return _instance; } }
+    public static Game instance { get { if (_instance == null) { _instance = GameObject.FindObjectOfType<Game>(); } if (_instance == null) { _instance = Instantiate<GameObject>(Resources.Load<GameObject>("Game")).GetComponent<Game>(); } return _instance; } }
     public Stable playerStable;
     public List<Stable> otherStables = new List<Stable>();
     [System.Serializable]
@@ -53,15 +53,35 @@ public class Game : MonoBehaviour
     public FreeAgentMarket freeAgentMarket = new FreeAgentMarket();
     [SerializeField]
     public List<MissionContract> contractMarket = new List<MissionContract>();
+    [SerializeField]
     public MissionList missionContractList;
     public List<MoveModifier> modifierList;
     public void Start()
     {
         transform.name = "Game";
         DontDestroyOnLoad(gameObject);
+        
+        LoadModifiers();
+    }
+    public void Init() {
         freeAgentMarket.UpdateMarket();
         UpdateContractMarket();
-        LoadModifiers();
+        MissionContractTest();
+    }
+    [SerializeField]
+    public List<MissionContractTest> mkt;
+    void MissionContractTest() {
+        mkt = new List<MissionContractTest>();
+        var thismkt = new MissionContractTest();
+        thismkt.name = "This";
+        for (int i = 0; i < 3; i++) {
+            mkt.Add(new MissionContractTest());
+        }
+    }
+    public void Update() {
+        if (Input.GetKeyDown(KeyCode.P)){
+            MissionContractTest();
+        }
     }
 
     public void LoadModifiers() {
@@ -111,14 +131,15 @@ public class Game : MonoBehaviour
     }
 
     public void UpdateContractMarket() {
+        print("UpdatingContractMarket");
         if (missionContractList != null) {
             foreach (MissionContract m in missionContractList.GetContracts()) {
                 if (contractMarket.Any(i=>i.ID == m.ID))
                     { print("contract contained");  continue; }
                 bool contractAvailable = true;
                 print(m.attributeReq);
-                if (m.attributeReq == "None" || playerStable.heroes.Any(i => i.GetCharacterAttributeValue(m.attributeReq) >= m.attributeReqAmount)) { print("Attribute Req 1 met. "+m.attributeReq + "  "+m.attributeReqAmount); } else { contractAvailable = false; }
-                if (m.attributeReq2 == "None" || playerStable.heroes.Any(i => i.GetCharacterAttributeValue(m.attributeReq2) >= m.attributeReqAmount2)) { print("Attribute Req 2 met"); } else { contractAvailable = false; }
+                if (m.attributeReq == "None" || playerStable.heroes.Any(i => i.GetCharacterttributeValue(m.attributeReq) >= m.attributeReqAmount)) { print("Attribute Req 1 met. "+m.attributeReq + "  "+m.attributeReqAmount); } else { contractAvailable = false; }
+                if (m.attributeReq2 == "None" || playerStable.heroes.Any(i => i.GetCharacterttributeValue(m.attributeReq2) >= m.attributeReqAmount2)) { print("Attribute Req 2 met"); } else { contractAvailable = false; }
                 if (!contractAvailable) { continue; }
                 m.executionDate = Helper.Today().Add(10);
                 contractMarket.Add(m);
@@ -214,7 +235,7 @@ public static class Helper {
         return Game.instance.gameDate;
     }
 
-    public static int GetCharacterAttributeValue (this Character c, string _attribute) {
+    public static int GetCharacterttributeValue (this Character c, string _attribute) {
         _attribute = _attribute.ToLower();
         if (_attribute == null || _attribute == "none") {
             return 0;

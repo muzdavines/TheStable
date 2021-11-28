@@ -5,6 +5,7 @@ using UnityEngine.UI;
 [System.Serializable]
 public class FreeAgentMarket
 {
+    [SerializeField]
     public List<Character> market = new List<Character>();
     
     public bool PurchaseHero(int index, Stable stable) {

@@ -25,8 +25,8 @@ public class MoveModifier : ScriptableObject
 
         primaryAttribute = "attackMagic";
         secondaryAttribute = "";
-        int primaryNumber = attacker.GetCharacterAttributeValue(primaryAttribute);
-        int secondaryNumber = secondaryAttribute == "" ? 0 : attacker.GetCharacterAttributeValue(secondaryAttribute);
+        int primaryNumber = attacker.GetCharacterttributeValue(primaryAttribute);
+        int secondaryNumber = secondaryAttribute == "" ? 0 : attacker.GetCharacterttributeValue(secondaryAttribute);
 
         float attributeModifier = ((primaryNumber * .5f) + (secondaryNumber * .25f));
 

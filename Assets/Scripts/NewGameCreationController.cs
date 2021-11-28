@@ -28,6 +28,8 @@ public class NewGameCreationController : MonoBehaviour
     }
     public void CreateNewGame(string warlord)
     {
+        DontDestroyOnLoad(gameObject);
+        SceneManager.LoadScene("StableManagement");
         Game game = Game.instance;
         Stable player = game.playerStable = new Stable();
 
@@ -57,7 +59,9 @@ public class NewGameCreationController : MonoBehaviour
         }
         Game.instance.missionContractList = Instantiate<MissionList>(Resources.Load<MissionList>("1000"));
         //Game.instance.playerStable.finance.businesses.Add(new Finance.Business() { benefit = Finance.Business.Benefit.Gold, description = "Market Stall in Genoa", duration = 12, number = 125 });
-        SceneManager.LoadScene("StableManagement");
+        Game.instance.Init();
+        Destroy(gameObject);
+        
     }
 
 }

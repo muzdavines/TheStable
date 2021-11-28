@@ -46,7 +46,7 @@ public class MissionCharacter : MonoBehaviour, MissionCharacterStateOwner
         Vector3 vec = new Vector3();
         vec = transform.position;
         Animator _animator = GetComponent<Animator>();
-        RuntimeAnimatorController animControl = on ? Resources.Load<RuntimeAnimatorController>("CharacterAnimatorStable") : Resources.Load<RuntimeAnimatorController>("Character");
+        RuntimeAnimatorController animControl = on ? Resources.Load<RuntimeAnimatorController>("CharacternimatorStable") : Resources.Load<RuntimeAnimatorController>("Character");
         if (healthBar != null) {
             healthBar.Hide(!on);
         }

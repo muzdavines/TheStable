@@ -15,12 +15,14 @@ public class StableManagementController : MonoBehaviour, UIElement
     public Text headerDate;
     public GameObject activePanel;
     public List<GameObject> lastPanels = new List<GameObject>();
+    
     //---------------------------------
 
 
     void Start()
     {
-        if (!GameObject.FindObjectOfType<Game>()) { SceneManager.LoadScene("NewGameCreation"); return; }
+        //if (!GameObject.FindObjectOfType<Game>()) { SceneManager.LoadScene("NewGameCreation"); return; }
+        //if (!GameObject.FindObjectOfType<Game>()) { ES3AutoSaveMgr.Current.Load(); return; }
         GameObject.Find("HomeButton").GetComponent<Button>().onClick.Invoke();
        
     }
@@ -85,4 +87,5 @@ public class StableManagementController : MonoBehaviour, UIElement
     public void UpdateOnAdvance() {
         UpdateHeader();
     }
+    
 }

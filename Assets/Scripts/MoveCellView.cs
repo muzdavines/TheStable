@@ -17,7 +17,7 @@ public class MoveCellView : EnhancedScrollerCellView {
     }
     public string GetStats() {
        if (control == null || control.activeCharacter == null) { return ""; }
-        return "STAM: " + thisMove.staminaDamage + " BAL: " + thisMove.balanceDamage + " MIND: " + thisMove.mindDamage + " HLTH: " + thisMove.healthDamage + "\nPhysical: " + thisMove.keyPhysicalAttribute + " (" +control.activeCharacter.GetCharacterAttributeValue(thisMove.keyPhysicalAttribute)+")\n" + "Technical: " + thisMove.keyTechnicalAttribute+" ("+control.activeCharacter.GetCharacterAttributeValue(thisMove.keyTechnicalAttribute)+")";
+        return "STAM: " + thisMove.staminaDamage + " BAL: " + thisMove.balanceDamage + " MIND: " + thisMove.mindDamage + " HLTH: " + thisMove.healthDamage + "\nPhysical: " + thisMove.keyPhysicalAttribute + " (" +control.activeCharacter.GetCharacterttributeValue(thisMove.keyPhysicalAttribute)+")\n" + "Technical: " + thisMove.keyTechnicalAttribute+" ("+control.activeCharacter.GetCharacterttributeValue(thisMove.keyTechnicalAttribute)+")";
     }
     public void OnHoverEnter() {
         

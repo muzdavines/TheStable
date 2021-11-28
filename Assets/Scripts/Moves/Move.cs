@@ -2,7 +2,9 @@ using CoverShooter;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
 [CreateAssetMenu]
+[System.Serializable]
 public class Move : ScriptableObject
 {
     public int cooldown;

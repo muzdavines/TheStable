@@ -31,8 +31,8 @@ public class TrainingController : MonoBehaviour, UIElement
             }
             else {
                 active.text += "\nSkill to Train: " + activeTrainingText;
-                active.text += "\nCurrent " + activeTrainingText + " Ability: " + activeChar.GetCharacterAttributeValue(activeTraining.training);
-                active.text += "\nTotal Cost: " + (activeChar.GetCharacterAttributeValue(activeTraining.training) + 1) * activeTraining.cost;
+                active.text += "\nCurrent " + activeTrainingText + " Ability: " + activeChar.GetCharacterttributeValue(activeTraining.training);
+                active.text += "\nTotal Cost: " + (activeChar.GetCharacterttributeValue(activeTraining.training) + 1) * activeTraining.cost;
             }
         }
         if (activeChar != null && activeChar.currentTraining.training != "None") {
@@ -61,7 +61,7 @@ public class TrainingController : MonoBehaviour, UIElement
                 return;
             }
         } else {
-            cost = activeChar.GetCharacterAttributeValue(activeTraining.training) + 1;
+            cost = activeChar.GetCharacterttributeValue(activeTraining.training) + 1;
             cost *= activeTraining.cost;
         }
         
