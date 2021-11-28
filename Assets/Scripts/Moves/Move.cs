@@ -27,5 +27,5 @@ public class Move : ScriptableObject
 
 }
 
-public enum MoveType { None = 0, RightJab = 1, LeftJab = 2, RoundhouseKick = 3, JumpFrontKick = 4, KidneyPunch = 5, Backhand = 6, SideKick = 7, HeartPunch = 8, Uppercut = 9, ElbowCruch = 10, DoubleFistPunch = 11, SwordThrust = 12, SwordHack = 13 }
+public enum MoveType { None = 0, RightJab = 1, LeftJab = 2, RoundhouseKick = 3, JumpFrontKick = 4, KidneyPunch = 5, Backhand = 6, SideKick = 7, HeartPunch = 8, Uppercut = 9, ElbowCruch = 10, DoubleFistPunch = 11, SwordThrust = 12, SwordHack = 13, BowShot = 1000, KnockdownBowShot = 1001 }
 public enum MoveWeaponType { Fists = 0, Sword = 1, Axe = 2, Bow = 3 }
