@@ -1547,6 +1547,11 @@ MonoBehaviour:
   lHandHolster: {fileID: 0}
   rLeg: {fileID: 5188770822661431435}
   lLeg: {fileID: 5188770822661355201}
+  activeMoves:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  currentMoveIndex: 0
   generateRandom: 0
 --- !u!114 &2046810744907461717
 MonoBehaviour:
@@ -1718,6 +1723,7 @@ MonoBehaviour:
   HitResponseSettings:
     Wait: 0.5
     Strength: 20
+  _isInRangedAnim: 0
 --- !u!114 &3167069470452217150
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1797,6 +1803,21 @@ MonoBehaviour:
     PreventClimbing: 0
     PreventArmLowering: 0
     Aiming: 0
+  - RightItem: {fileID: 914396666709829100, guid: ecc71f89306336c448f0fe142507b845,
+      type: 3}
+    LeftItem: {fileID: 0}
+    RightLegItem: {fileID: 0}
+    LeftLegItem: {fileID: 0}
+    RightHolster: {fileID: 0}
+    LeftHolster: {fileID: 0}
+    Shield: {fileID: 0}
+    PreferSwapping: 0
+    IsDualWielding: 0
+    IsHeavy: 0
+    PreventCovers: 0
+    PreventClimbing: 0
+    PreventArmLowering: 0
+    Aiming: 0
 --- !u!114 &1030344280106791174
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1863,7 +1884,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4142d1fe4299fe429944fbaf93ce49a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  NonMeleeDistance: 8
+  NonMeleeDistance: 15
   MaxMeleeDistance: 1.5
   MinMeleeDistance: 1
   MeleeHits: 3
@@ -1924,7 +1945,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b64b9fb81c458b44c80544b0e7374659, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Distance: 100
+  Distance: 200
   ObstacleIgnoreDistance: 1
   FieldOfView: 360
   UpdateDelay: 0.1

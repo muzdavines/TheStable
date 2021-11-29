@@ -101,7 +101,8 @@ public class MissionCharacter : MonoBehaviour, MissionCharacterStateOwner
         AIAssault assault = GetComponent<AIAssault>();
         CharacterInventory inv = GetComponent<CharacterInventory>();
         AIFire fire = GetComponent<AIFire>();
-        if (character.weapon == null) {
+
+        if (character.weapon == null || character.weapon.name == "") {
             Weapon startingWeaponSO = Resources.Load<Weapon>(character.startingWeapon);
             character.weapon = Instantiate(startingWeaponSO);
         }

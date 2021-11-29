@@ -105,7 +105,7 @@ public class League {
         }
         tempTable.Sort((a, b) => a.points.CompareTo(b.points));
         tempTable.Reverse();
-        thisTable.Add($"{"Stable Name____________________",8}" + $"{"Wins",10}" +$"{"Losses",10}"+ $"{"Draws",10}" + $"{"Points",10}" + $"{"Goals",10}" + $"{"GAllowed",10}");
+        thisTable.Add($"{"<b>Stable Name____________________",8}" + $"{"Wins",10}" +$"{"Losses",10}"+ $"{"Draws",10}" + $"{"Points",10}" + $"{"Goals",10}" + $"{"GA</b>",13}");
         foreach (Team y in tempTable) {
             thisTable.Add(y.GetTableInfo());
         }
