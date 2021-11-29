@@ -101,6 +101,10 @@ public class MissionCharacter : MonoBehaviour, MissionCharacterStateOwner
         AIAssault assault = GetComponent<AIAssault>();
         CharacterInventory inv = GetComponent<CharacterInventory>();
         AIFire fire = GetComponent<AIFire>();
+        if (character.weapon == null) {
+            Weapon startingWeaponSO = Resources.Load<Weapon>(character.startingWeapon);
+            character.weapon = Instantiate(startingWeaponSO);
+        }
         Weapon weaponBlueprint = character.weapon;
         GameObject weaponPrefab = Resources.Load<GameObject>(weaponBlueprint.prefabName);
         GameObject defaultFists = Resources.Load<GameObject>("Fists");
@@ -183,6 +187,7 @@ public class MissionCharacter : MonoBehaviour, MissionCharacterStateOwner
     }
     public void UpdateHealthBar() {
         healthBar.SetDots(character.health);
+        if (character.armor == null) { character.armor = new Armor(); }
         healthBar.SetArmor(character.armor.condition * .01f);
         healthBar.SetMeters(GetComponent<CharacterHealth>());
     }

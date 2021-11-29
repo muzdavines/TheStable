@@ -7,11 +7,11 @@ using System.Globalization;
 using System.IO;
 using Newtonsoft.Json;
 using System.Text.RegularExpressions;
-
+[System.Serializable]
 public class Game : MonoBehaviour
 {
     private static Game _instance;
-    public static Game instance { get { if (_instance == null) { _instance = GameObject.FindObjectOfType<Game>(); } if (_instance == null) { _instance = (new GameObject().AddComponent<Game>()); } return _instance; } }
+    public static Game instance { get { if (_instance == null) { _instance = GameObject.FindObjectOfType<Game>(); } if (_instance == null) { _instance = Instantiate(Resources.Load<GameObject>("Game")).GetComponent<Game>(); } return _instance; } }
 
     public Stable playerStable;
     public List<Stable> otherStables = new List<Stable>();
@@ -53,15 +53,25 @@ public class Game : MonoBehaviour
     public FreeAgentMarket freeAgentMarket = new FreeAgentMarket();
     [SerializeField]
     public List<MissionContract> contractMarket = new List<MissionContract>();
+    public List<MissionContractSave> contractMarketSave = new List<MissionContractSave>();
     public MissionList missionContractList;
     public List<MoveModifier> modifierList;
     public void Start()
     {
         transform.name = "Game";
         DontDestroyOnLoad(gameObject);
+        
+        LoadModifiers();
+    }
+    public void OnLoad() {
+        freeAgentMarket.OnLoad();
+        LoadMarketContracts();
+        playerStable.OnLoad();
+    }
+
+    public void Init() {
         freeAgentMarket.UpdateMarket();
         UpdateContractMarket();
-        LoadModifiers();
     }
 
     public void LoadModifiers() {
@@ -137,6 +147,19 @@ public class Game : MonoBehaviour
         MarketContractScrollerController scsc = GameObject.FindObjectOfType<MarketContractScrollerController>();
         
     }
+    public void PrepContractMarketForSave() {
+        var saveList = new List<MissionContractSave>();
+        for (int i = 0; i < contractMarket.Count; i++) {
+            saveList.Add(new MissionContractSave().CopyValues(contractMarket[i]));
+        }
+        contractMarketSave = saveList;
+    }
+    public void LoadMarketContracts() {
+        if (contractMarketSave!=null && contractMarketSave.Count > 0) {
+            contractMarket = contractMarketSave.LoadMissionContracts();
+        }
+        contractMarketSave = new List<MissionContractSave>();
+    }
     public void ProcessTraining() {
         foreach (Character c in playerStable.heroes) {
             if (c.currentTraining == null) {
@@ -146,6 +169,13 @@ public class Game : MonoBehaviour
                 c.currentTraining = new Training();
             }
         }
+    }
+   
+
+    public void PrepForSave() {
+        freeAgentMarket.PrepForSave();
+        PrepContractMarketForSave();
+        playerStable.PrepForSave();
     }
 
 }
@@ -261,6 +291,148 @@ public static class JsonHelper {
         wrapper.Items = array;
         return JsonUtility.ToJson(wrapper, prettyPrint);
     }
+    public static List<Character> LoadCharacters(this List<CharacterSave> source) {
+        var returnList = new List<Character>();
+        foreach (var character in source) {
+            returnList.Add(character.LoadCharacter());
+        }
+        return returnList;
+    }
+    public static Character LoadCharacter(this CharacterSave source) {
+        var thisChar = new Character();
+        thisChar.strength = source.strength;
+        thisChar.agility = source.agility;
+        thisChar.reaction = source.reaction;
+        thisChar.running = source.running;
+        thisChar.swordsmanship = source.swordsmanship;
+        thisChar.dualwielding = source.dualwielding;
+        thisChar.dodging = source.dodging;
+        thisChar.archery = source.archery;
+        thisChar.toughness = source.toughness;
+        thisChar.toughness = source.toughness;
+        thisChar.intelligence = source.intelligence;
+        thisChar.education = source.education;
+        thisChar.motivation = source.motivation;
+        thisChar.strategist = source.strategist;
+        thisChar.economics = source.economics;
+        thisChar.negotiating = source.negotiating;
+        thisChar.insight = source.insight;
+        thisChar.deception = source.deception;
+        thisChar.intimidation = source.intimidation;
+        thisChar.lockpicking = source.lockpicking;
+        thisChar.pickpocketing = source.pickpocketing;
+        thisChar.trapSetting = source.trapSetting;
+        thisChar.trapDisarming = source.trapDisarming;
+        thisChar.pugilism = source.pugilism;
+        thisChar.martialarts = source.martialarts;
+        thisChar.melee = source.melee;
+        thisChar.parry = source.parry;
+        thisChar.shieldDefense = source.shieldDefense;
+        thisChar.survivalist = source.survivalist;
+        thisChar.landNavigation = source.landNavigation;
+        thisChar.hunting = source.hunting;
+        thisChar.foraging = source.foraging;
+        thisChar.herbLore = source.herbLore;
+        thisChar.camping = source.camping;
+        thisChar.attackMagic = source.attackMagic;
+        thisChar.condition = source.condition;
+        thisChar.sharpness = source.sharpness;
+        thisChar.health = source.health;
+        thisChar.maxStamina = source.maxStamina;
+        thisChar.maxBalance = source.maxBalance;
+        thisChar.maxMind = source.maxMind;
+        thisChar.maxHealth = source.maxHealth;
+        thisChar.knownMoves = source.knownMovesSave.LoadMoves();
+        thisChar.activeMoves = source.activeMovesSave.LoadMoves();
+        thisChar.startingArmor = source.startingArmor;
+        thisChar.startingWeapon = source.startingWeapon;
+        thisChar.armor = source.armor;
+        thisChar.weapon = source.weapon;
+        thisChar.mat = source.mat;
+        thisChar.contract = source.contract;
+        thisChar.currentTraining = source.currentTraining;
+        thisChar.returnDate = source.returnDate;
+        thisChar.activeForNextMission = source.activeForNextMission;
+        thisChar.incapacitated = source.incapacitated;
+        thisChar.modelName = source.modelName;
+        thisChar.currentObject = source.currentObject;
+        thisChar.currentMissionCharacter = source.currentMissionCharacter;
+        thisChar.defenseMagic = source.defenseMagic;
+        thisChar.supportMagic = source.supportMagic;
+        thisChar.name = source.name;
+        return thisChar;
+    }
+    public static List<MissionContract> LoadMissionContracts(this List<MissionContractSave> source) {
+        var returnList = new List<MissionContract>();
+        foreach (var contract in source) {
+            returnList.Add(contract.LoadMissionContract());
+        }
+        return returnList;
+    }
+    public static MissionContract LoadMissionContract(this MissionContractSave source) {
+        var thisContract = new MissionContract();
+        thisContract.description = source.description;
+        thisContract.ID = source.ID;
+        thisContract.contractType = source.contractType;
+        thisContract.difficulty = source.difficulty;
+        thisContract.stages = source.stages;
+        thisContract.goldReward = source.goldReward;
+        thisContract.businessReward = source.businessReward;
+        thisContract.moveReward = source.moveReward;
+        thisContract.executionDate = source.executionDate;
+        thisContract.dayCost = source.dayCost;
+        thisContract.minHeroes = source.minHeroes;
+        thisContract.maxHeroes = source.maxHeroes;
+        thisContract.attributeReq = source.attributeReq;
+        thisContract.attributeReqAmount = source.attributeReqAmount;
+        thisContract.attributeReq2 = source.attributeReq2;
+        thisContract.attributeReqAmount2 = source.attributeReqAmount2;
+        return thisContract;
+    }
+
+    public static List<Training> LoadTrainings(this List<TrainingSave> source) {
+        var returnList = new List<Training>();
+        foreach (var training in source) {
+            returnList.Add(training.LoadTraining());
+        }
+        return returnList;
+    }
+    public static Training LoadTraining(this TrainingSave source) {
+        var thisTraining = new Training();
+        thisTraining.type = source.type;
+        thisTraining.training = source.training;
+        thisTraining.duration = source.duration;
+        thisTraining.cost = source.cost;
+        thisTraining.dateToTrain = source.dateToTrain;
+        thisTraining.moveToTrain = source.moveToTrain;
+        return thisTraining;
+    }
+
+    public static List<Move> LoadMoves(this List<MoveSave> source) {
+        var returnList = new List<Move>();
+        foreach (var move in source) {
+            returnList.Add(move.LoadMove());
+        }
+        return returnList;
+    }
+    public static Move LoadMove(this MoveSave source) {
+        var thisMove = new Move();
+        thisMove.description = source.description;
+        thisMove.cooldown = source.cooldown;
+        thisMove.accuracy = source.accuracy;
+        thisMove.staminaDamage = source.staminaDamage;
+        thisMove.balanceDamage = source.balanceDamage;
+        thisMove.mindDamage = source.mindDamage;
+        thisMove.healthDamage = source.healthDamage;
+        thisMove.keyPhysicalAttribute = source.keyPhysicalAttribute;
+        thisMove.keyTechnicalAttribute = source.keyTechnicalAttribute;
+        thisMove.limb = source.limb;
+        thisMove.moveType = source.moveType;
+        thisMove.moveWeaponType = source.moveWeaponType;
+        thisMove.modifiers = source.modifiers;
+        return thisMove;
+    }
+
 
     [System.Serializable]
     private class Wrapper<T> {

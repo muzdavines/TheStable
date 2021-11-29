@@ -1,0 +1,113 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &691998312177361763
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9160575848407161696}
+  - component: {fileID: 810439944612815340}
+  - component: {fileID: 6174815602039560835}
+  - component: {fileID: 3148386000595091703}
+  m_Layer: 0
+  m_Name: Game
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9160575848407161696
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 691998312177361763}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &810439944612815340
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 691998312177361763}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db256d5281af0e64c8d3e4cfbfe7c535, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerStable:
+    reputation: 0
+    alignment: 0
+    favor: 
+    warlord: {fileID: 0}
+    heroes: []
+    coaches: []
+    buildings: []
+    contracts: []
+    availableTrainings: []
+    finance:
+      ledger: []
+      businesses: []
+    activeContract: {fileID: 0}
+  otherStables: []
+  gameDate:
+    day: 1
+    month: 1
+    year: 1000
+    dayOfWeek: 0
+  freeAgentMarket:
+    market: []
+  contractMarket: []
+  missionContractList: {fileID: 0}
+  modifierList: []
+--- !u!114 &6174815602039560835
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 691998312177361763}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: baff8732cd3074ef88b34f9cc487846d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prefabId: 7110744368294023737
+  localRefs:
+    _Keys:
+    - {fileID: 691998312177361763}
+    - {fileID: 9160575848407161696}
+    - {fileID: 810439944612815340}
+    - {fileID: 11500000, guid: db256d5281af0e64c8d3e4cfbfe7c535, type: 3}
+    - {fileID: 6174815602039560835}
+    _Values: 501131e0a569ae597748ac3234e38d6b4969f3632f1f506d975534f02a163a02c9d6e4b939227708
+--- !u!114 &3148386000595091703
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 691998312177361763}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9cfcc9ceea0bf419cb3bcaf548c2600d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  saveLayer: 0
+  saveTag: 0
+  saveName: 0
+  saveHideFlags: 0
+  saveActive: 0
+  saveChildren: 0
+  componentsToSave:
+  - {fileID: 810439944612815340}

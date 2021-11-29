@@ -12,7 +12,7 @@ public class MoveCellView : EnhancedScrollerCellView {
     public void SetData(Move data) {
         control = FindObjectOfType<HeroEditController>();
         thisMove = data;
-        moveNameText.text = "<b><size=30>"+data.name.Space() + "</size></b>\n" + GetStats();
+        moveNameText.text = "<b><size=30>"+data.description.Space() + "</size></b>\n" + GetStats();
         
     }
     public string GetStats() {

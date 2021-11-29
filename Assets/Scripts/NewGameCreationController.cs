@@ -28,14 +28,16 @@ public class NewGameCreationController : MonoBehaviour
     }
     public void CreateNewGame(string warlord)
     {
+        
+        DontDestroyOnLoad(gameObject);
+        SceneManager.LoadScene("StableManagement");
         Game game = Game.instance;
         Stable player = game.playerStable = new Stable();
 
-        switch (warlord)
-        {
+        switch (warlord) {
             case "Warrior":
                 player.warlord.InitWarlord(CharClass.Warrior);
-                    break;
+                break;
             case "Wizard":
                 player.warlord.InitWarlord(CharClass.Wizard);
                 break;
@@ -43,20 +45,24 @@ public class NewGameCreationController : MonoBehaviour
                 player.warlord.InitWarlord(CharClass.Rogue);
                 break;
         }
-       
-        foreach (Character h in heroes)
-        {
+
+        foreach (Character h in heroes) {
             Character thisHero = Instantiate<Character>(h);
-            
+
             player.heroes.Add(thisHero);
         }
         Game.instance.playerStable.finance.AddRevenue(startingGold);
-        Game.instance.playerStable.availableTrainings.Add(new Training() {type = Training.Type.Attribute, training = "negotiating", duration = 2, cost = 50 });
+        //Game.instance.playerStable.availableTrainings.Add(new Training() { type = Training.Type.Attribute, training = "negotiating", duration = 2, cost = 50 });
         foreach (var training in trainingAdds) {
             Game.instance.playerStable.availableTrainings.Add(training);
         }
         Game.instance.missionContractList = Instantiate<MissionList>(Resources.Load<MissionList>("1000"));
         //Game.instance.playerStable.finance.businesses.Add(new Finance.Business() { benefit = Finance.Business.Benefit.Gold, description = "Market Stall in Genoa", duration = 12, number = 125 });
+        Game.instance.Init();
+        Destroy(gameObject);
+    }
+
+    public void LoadGame() {
         SceneManager.LoadScene("StableManagement");
     }
 

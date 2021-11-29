@@ -20,7 +20,7 @@ public class StableManagementController : MonoBehaviour, UIElement
 
     void Start()
     {
-        if (!GameObject.FindObjectOfType<Game>()) { SceneManager.LoadScene("NewGameCreation"); return; }
+        //if (!GameObject.FindObjectOfType<Game>()) { SceneManager.LoadScene("NewGameCreation"); return; }
         GameObject.Find("HomeButton").GetComponent<Button>().onClick.Invoke();
        
     }
@@ -81,7 +81,9 @@ public class StableManagementController : MonoBehaviour, UIElement
         }
 
     }
-
+    public void PrepForSave() {
+        Game.instance.PrepForSave();
+    }
     public void UpdateOnAdvance() {
         UpdateHeader();
     }
