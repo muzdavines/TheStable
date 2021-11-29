@@ -4,7 +4,7 @@ using UnityEngine;
 namespace ES3Types
 {
 	[UnityEngine.Scripting.Preserve]
-	[ES3PropertiesAttribute("reputation", "alignment", "favor", "warlord", "heroes", "heroesSave", "coaches", "buildings", "contracts", "availableTrainings", "availableTrainingsSave", "finance", "activeContract")]
+	[ES3PropertiesAttribute("stableName", "reputation", "alignment", "favor", "warlord", "heroes", "heroesSave", "coaches", "buildings", "contracts", "availableTrainings", "availableTrainingsSave", "finance", "activeContract", "leagueLevel")]
 	public class ES3UserType_Stable : ES3ObjectType
 	{
 		public static ES3Type Instance = null;
@@ -16,6 +16,7 @@ namespace ES3Types
 		{
 			var instance = (Stable)obj;
 			
+			writer.WriteProperty("stableName", instance.stableName, ES3Type_string.Instance);
 			writer.WriteProperty("reputation", instance.reputation, ES3Type_int.Instance);
 			writer.WriteProperty("alignment", instance.alignment, ES3Type_float.Instance);
 			writer.WriteProperty("favor", instance.favor, ES3Type_intArray.Instance);
@@ -29,6 +30,7 @@ namespace ES3Types
 			writer.WriteProperty("availableTrainingsSave", instance.availableTrainingsSave, ES3Internal.ES3TypeMgr.GetES3Type(typeof(System.Collections.Generic.List<TrainingSave>)));
 			writer.WriteProperty("finance", instance.finance, ES3Internal.ES3TypeMgr.GetES3Type(typeof(Finance)));
 			writer.WritePropertyByRef("activeContract", instance.activeContract);
+			writer.WriteProperty("leagueLevel", instance.leagueLevel, ES3Type_int.Instance);
 		}
 
 		protected override void ReadObject<T>(ES3Reader reader, object obj)
@@ -39,6 +41,9 @@ namespace ES3Types
 				switch(propertyName)
 				{
 					
+					case "stableName":
+						instance.stableName = reader.Read<System.String>(ES3Type_string.Instance);
+						break;
 					case "reputation":
 						instance.reputation = reader.Read<System.Int32>(ES3Type_int.Instance);
 						break;
@@ -77,6 +82,9 @@ namespace ES3Types
 						break;
 					case "activeContract":
 						instance.activeContract = reader.Read<MissionContract>();
+						break;
+					case "leagueLevel":
+						instance.leagueLevel = reader.Read<System.Int32>(ES3Type_int.Instance);
 						break;
 					default:
 						reader.Skip();

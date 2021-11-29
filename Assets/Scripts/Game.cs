@@ -15,6 +15,8 @@ public class Game : MonoBehaviour
 
     public Stable playerStable;
     public List<Stable> otherStables = new List<Stable>();
+    [SerializeField]
+    public List<League> leagues = new List<League>();
     [System.Serializable]
     public class GameDate
     {
@@ -56,6 +58,7 @@ public class Game : MonoBehaviour
     public List<MissionContractSave> contractMarketSave = new List<MissionContractSave>();
     public MissionList missionContractList;
     public List<MoveModifier> modifierList;
+    public League.Match activeMatch;
     public void Start()
     {
         transform.name = "Game";
@@ -71,7 +74,23 @@ public class Game : MonoBehaviour
 
     public void Init() {
         freeAgentMarket.UpdateMarket();
+        InitOtherStables();
         UpdateContractMarket();
+        leagues = new List<League>();
+        leagues.Add(new League() { leagueLevel = 0, leagueName = "Premiere League" });
+        playerStable.stableName = "Player's Stable";
+        leagues[0].InitLeague();
+        
+        
+    }
+
+    public void InitOtherStables() {
+        otherStables = new List<Stable>();
+        for (int i = 0; i < 5; i++) {
+            var thisStable = new Stable() { stableName = Stable.stableNameList[i] };
+            //fill in thisStable
+            otherStables.Add(thisStable);
+        }
     }
 
     public void LoadModifiers() {
@@ -205,8 +224,21 @@ public static class Helper {
             if (thisDate.day >= otherDate.day) { return true; } else { return false; }
         } else { if (thisDate.day > otherDate.day) { return true; } else { return false; } }
     }
+    public static bool IsOn(this Game.GameDate thisDate, Game.GameDate otherDate) {
+        return (thisDate.day == otherDate.day && thisDate.month == otherDate.month && thisDate.year == otherDate.year);
+    }
+    public static bool IsToday(this Game.GameDate thisDate) {
+        return thisDate.IsOn(Helper.Today());
+    }
+    public static int DaysBetween(this Game.GameDate thisDate, Game.GameDate otherDate) {
+        int i = 0;
+        //int monthMod = thisDate.day < otherDate.day ? -1 : 0;
+        i += (thisDate.month - otherDate.month) * 30;
+        i += thisDate.day - otherDate.day;
+        return Mathf.Abs(i);
+    }
 
-    public static bool IsExpired(MissionContract c) {
+        public static bool IsExpired(MissionContract c) {
         return Game.instance.gameDate.IsOnOrAfter(c.executionDate, false);
     }
 
@@ -223,7 +255,7 @@ public static class Helper {
         }
         return null;
     }
-
+    
     public static Color GetCellViewColor() {
         return new Color(1, 1, 1, .396f);
     }
@@ -447,3 +479,4 @@ public interface UIElement {
 public interface PopupElement {
     void Close();
 }
+

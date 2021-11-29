@@ -4,7 +4,7 @@ using UnityEngine;
 namespace ES3Types
 {
 	[UnityEngine.Scripting.Preserve]
-	[ES3PropertiesAttribute("playerStable", "otherStables", "gameDate", "freeAgentMarket", "contractMarket", "contractMarketSave", "missionContractList", "modifierList")]
+	[ES3PropertiesAttribute("playerStable", "otherStables", "leagues", "gameDate", "freeAgentMarket", "contractMarket", "contractMarketSave", "missionContractList", "modifierList")]
 	public class ES3UserType_Game : ES3ComponentType
 	{
 		public static ES3Type Instance = null;
@@ -16,8 +16,9 @@ namespace ES3Types
 		{
 			var instance = (Game)obj;
 			
-			writer.WriteProperty("playerStable", instance.playerStable, ES3Internal.ES3TypeMgr.GetES3Type(typeof(Stable)));
+			writer.WriteProperty("playerStable", instance.playerStable, ES3UserType_Stable.Instance);
 			writer.WriteProperty("otherStables", instance.otherStables, ES3Internal.ES3TypeMgr.GetES3Type(typeof(System.Collections.Generic.List<Stable>)));
+			writer.WriteProperty("leagues", instance.leagues, ES3Internal.ES3TypeMgr.GetES3Type(typeof(System.Collections.Generic.List<League>)));
 			writer.WriteProperty("gameDate", instance.gameDate, ES3Internal.ES3TypeMgr.GetES3Type(typeof(Game.GameDate)));
 			writer.WriteProperty("freeAgentMarket", instance.freeAgentMarket, ES3UserType_FreeAgentMarket.Instance);
 			writer.WriteProperty("contractMarket", instance.contractMarket, ES3Internal.ES3TypeMgr.GetES3Type(typeof(System.Collections.Generic.List<MissionContract>)));
@@ -35,10 +36,13 @@ namespace ES3Types
 				{
 					
 					case "playerStable":
-						instance.playerStable = reader.Read<Stable>();
+						instance.playerStable = reader.Read<Stable>(ES3UserType_Stable.Instance);
 						break;
 					case "otherStables":
 						instance.otherStables = reader.Read<System.Collections.Generic.List<Stable>>();
+						break;
+					case "leagues":
+						instance.leagues = reader.Read<System.Collections.Generic.List<League>>();
 						break;
 					case "gameDate":
 						instance.gameDate = reader.Read<Game.GameDate>();

@@ -7,11 +7,18 @@ public class Stable
 {
     //Everything for the player
 
-   
+
     //NEEDED: List of all Buildings
+    public static string[] stableNameList = {"The Calm Plate Pub",
+"The Clumsy Dragon Tavern",
+"The Full Piano Inn",
+"The Royal Hyena Pub",
+"The Cheap Dragonfruit Tavern",
+    "The Mixing Ducks Pub",
+"The Hot Elephant Pub",
+"The Chunky Hog Pub" };
 
-
-
+    public string stableName;
    //Needed: List of all accolades
     public int reputation; //Quality of the Stable
     public float alignment; //Good, Neutral, Evil (1,0,-1)
@@ -29,7 +36,7 @@ public class Stable
     public Finance finance = new Finance();
 
     public MissionContract activeContract;
-
+    public int leagueLevel = 0;
     public bool PurchaseHero(Character hero) {
         if (hero.contract.signingBonus > finance.gold) {
             Debug.Log("Player does not have enough money to sign " + hero.name);
