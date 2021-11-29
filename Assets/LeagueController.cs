@@ -34,8 +34,9 @@ public class LeagueController : MonoBehaviour, UIElement
     }
     public void UpdateLeague() {
         CheckIfMatchDay();
-        UpdateLeagueTable();
         SimOtherGames();
+        UpdateLeagueTable();
+        
     }
     public void UpdateLeagueTable() {
         leagueTable.text = "                 League Table\n";
@@ -45,7 +46,7 @@ public class LeagueController : MonoBehaviour, UIElement
     }
     public void SimOtherGames() {
         foreach (League.Match match in Game.instance.leagues[0].schedule) {
-            if (match.final || match.IsPlayerMatch() || match.date.IsOnOrAfter(Helper.Today())) {
+            if (match.final || match.date.IsOnOrAfter(Helper.Today())) {
                 continue;
             }
             var homeGoals = Random.Range(0, 8);
