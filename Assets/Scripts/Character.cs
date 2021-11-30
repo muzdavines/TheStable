@@ -53,7 +53,7 @@ public class Character : Living
 
 
     //Magical Attributes
-    public int attackMagic, defenseMagic, supportMagic;
+    public int attackmagic, defensemagic, supportmagic;
 
     //Coaching Attributes
 
@@ -90,7 +90,10 @@ public class Character : Living
     public string startingWeapon;
     public Armor armor;
     public Weapon weapon;
-
+    //public List<Item> inventory;
+    public Weapon GetDefaultWeapon() {
+        return Instantiate(Resources.Load<Weapon>(startingWeapon));
+    }
     //Visuals
     /// <summary>
     /// If blank, default mat
@@ -186,7 +189,7 @@ public class Character : Living
         this.foraging = source.foraging;
         this.herbLore = source.herbLore;
         this.camping = source.camping;
-        this.attackMagic = source.attackMagic;
+        this.attackmagic = source.attackmagic;
         this.condition = source.condition;
         this.sharpness = source.sharpness;
         this.health = source.health;
@@ -209,8 +212,8 @@ public class Character : Living
         this.modelName = source.modelName;
         this.currentObject = source.currentObject;
         this.currentMissionCharacter = source.currentMissionCharacter;
-        this.defenseMagic = source.defenseMagic;
-        this.supportMagic = source.supportMagic;
+        this.defensemagic = source.defensemagic;
+        this.supportmagic = source.supportmagic;
         this.name = source.name;
     }
 }
@@ -362,7 +365,7 @@ public class CharacterSave {
         this.foraging = source.foraging;
         this.herbLore = source.herbLore;
         this.camping = source.camping;
-        this.attackMagic = source.attackMagic;
+        this.attackMagic = source.attackmagic;
         this.condition = source.condition;
         this.sharpness = source.sharpness;
         this.health = source.health;
@@ -385,8 +388,8 @@ public class CharacterSave {
         this.modelName = source.modelName;
         this.currentObject = source.currentObject;
         this.currentMissionCharacter = source.currentMissionCharacter;
-        this.defenseMagic = source.defenseMagic;
-        this.supportMagic = source.supportMagic;
+        this.defenseMagic = source.defensemagic;
+        this.supportMagic = source.supportmagic;
         this.name = source.name;
         return this;
     }

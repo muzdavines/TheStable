@@ -19,6 +19,10 @@ public class HeroEditController : MonoBehaviour
             print("Max Moves");
             return;
         }
+        if (!move.moveWeaponType.HasFlag(c.weapon.weaponType)) {
+            print("Wrong Weapon Type");
+            return;
+        }
         Move newMove = Instantiate(move);
         newMove.name = move.name;
         c.activeMoves.Add(newMove);
@@ -29,6 +33,17 @@ public class HeroEditController : MonoBehaviour
         print("Active List : " + move);
         Character c = activeCharacter;
         c.activeMoves.Remove(move);
+        Helper.UpdateAllUI();
+    }
+    public void ListWeaponClicked(Weapon weapon) {
+        activeCharacter.weapon.isOwned = false;
+        activeCharacter.weapon = weapon;
+        weapon.isOwned = true;
+        Helper.UpdateAllUI();
+    }
+    public void ActiveWeaponClicked() {
+        activeCharacter.weapon.isOwned = false;
+        activeCharacter.weapon = activeCharacter.GetDefaultWeapon();
         Helper.UpdateAllUI();
     }
 }

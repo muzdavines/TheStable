@@ -4,7 +4,7 @@ using UnityEngine;
 namespace ES3Types
 {
 	[UnityEngine.Scripting.Preserve]
-	[ES3PropertiesAttribute("playerStable", "otherStables", "leagues", "gameDate", "freeAgentMarket", "contractMarket", "contractMarketSave", "missionContractList", "modifierList")]
+	[ES3PropertiesAttribute("playerStable", "otherStables", "leagues", "gameDate", "freeAgentMarket", "contractMarket", "contractMarketSave", "missionContractList", "modifierList", "activeMatch")]
 	public class ES3UserType_Game : ES3ComponentType
 	{
 		public static ES3Type Instance = null;
@@ -25,6 +25,7 @@ namespace ES3Types
 			writer.WriteProperty("contractMarketSave", instance.contractMarketSave, ES3Internal.ES3TypeMgr.GetES3Type(typeof(System.Collections.Generic.List<MissionContractSave>)));
 			writer.WritePropertyByRef("missionContractList", instance.missionContractList);
 			writer.WriteProperty("modifierList", instance.modifierList, ES3Internal.ES3TypeMgr.GetES3Type(typeof(System.Collections.Generic.List<MoveModifier>)));
+			writer.WriteProperty("activeMatch", instance.activeMatch, ES3Internal.ES3TypeMgr.GetES3Type(typeof(League.Match)));
 		}
 
 		protected override void ReadComponent<T>(ES3Reader reader, object obj)
@@ -61,6 +62,9 @@ namespace ES3Types
 						break;
 					case "modifierList":
 						instance.modifierList = reader.Read<System.Collections.Generic.List<MoveModifier>>();
+						break;
+					case "activeMatch":
+						instance.activeMatch = reader.Read<League.Match>();
 						break;
 					default:
 						reader.Skip();

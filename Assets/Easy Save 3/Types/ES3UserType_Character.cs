@@ -50,9 +50,9 @@ namespace ES3Types
 			writer.WriteProperty("foraging", instance.foraging, ES3Type_int.Instance);
 			writer.WriteProperty("herbLore", instance.herbLore, ES3Type_int.Instance);
 			writer.WriteProperty("camping", instance.camping, ES3Type_int.Instance);
-			writer.WriteProperty("attackMagic", instance.attackMagic, ES3Type_int.Instance);
-			writer.WriteProperty("defenseMagic", instance.defenseMagic, ES3Type_int.Instance);
-			writer.WriteProperty("supportMagic", instance.supportMagic, ES3Type_int.Instance);
+			writer.WriteProperty("attackMagic", instance.attackmagic, ES3Type_int.Instance);
+			writer.WriteProperty("defenseMagic", instance.defensemagic, ES3Type_int.Instance);
+			writer.WriteProperty("supportMagic", instance.supportmagic, ES3Type_int.Instance);
 			writer.WriteProperty("condition", instance.condition, ES3Type_int.Instance);
 			writer.WriteProperty("sharpness", instance.sharpness, ES3Type_int.Instance);
 			writer.WriteProperty("health", instance.health, ES3Type_int.Instance);
@@ -194,13 +194,13 @@ namespace ES3Types
 						instance.camping = reader.Read<System.Int32>(ES3Type_int.Instance);
 						break;
 					case "attackMagic":
-						instance.attackMagic = reader.Read<System.Int32>(ES3Type_int.Instance);
+						instance.attackmagic = reader.Read<System.Int32>(ES3Type_int.Instance);
 						break;
 					case "defenseMagic":
-						instance.defenseMagic = reader.Read<System.Int32>(ES3Type_int.Instance);
+						instance.defensemagic = reader.Read<System.Int32>(ES3Type_int.Instance);
 						break;
 					case "supportMagic":
-						instance.supportMagic = reader.Read<System.Int32>(ES3Type_int.Instance);
+						instance.supportmagic = reader.Read<System.Int32>(ES3Type_int.Instance);
 						break;
 					case "condition":
 						instance.condition = reader.Read<System.Int32>(ES3Type_int.Instance);

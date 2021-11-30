@@ -9,14 +9,7 @@ public class Stable
 
 
     //NEEDED: List of all Buildings
-    public static string[] stableNameList = {"The Calm Plate Pub",
-"The Clumsy Dragon Tavern",
-"The Full Piano Inn",
-"The Royal Hyena Pub",
-"The Cheap Dragonfruit Tavern",
-    "The Mixing Ducks Pub",
-"The Hot Elephant Pub",
-"The Chunky Hog Pub" };
+    public static string[] stableNameList = {"The Calm Plate Pub","The Clumsy Dragon Tavern","The Full Piano Inn","The Royal Hyena Pub","The Cheap Dragonfruit Tavern","The Mixing Ducks Pub","The Hot Elephant Pub","The Chunky Hog Pub" };
 
     public string stableName;
    //Needed: List of all accolades
@@ -34,7 +27,7 @@ public class Stable
     public List<TrainingSave> availableTrainingsSave = new List<TrainingSave>();
     [SerializeField]
     public Finance finance = new Finance();
-
+    public List<Item> inventory;
     public MissionContract activeContract;
     public int leagueLevel = 0;
     public bool PurchaseHero(Character hero) {

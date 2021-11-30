@@ -15,7 +15,7 @@ public class Warlord : Character
                 strength = 10;
                 break;
             case CharClass.Wizard:
-                attackMagic = defenseMagic = supportMagic = 10;
+                attackmagic = defensemagic = supportmagic = 10;
                 break;
             case CharClass.Rogue:
                 lockpicking = pickpocketing = 10;

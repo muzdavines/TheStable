@@ -7,4 +7,5 @@ public class Item : ScriptableObject
     public string itemName;
     [Range(0,100)]
     public float condition; //0-100
+    public bool isOwned;
 }

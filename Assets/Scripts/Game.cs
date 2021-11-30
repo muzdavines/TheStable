@@ -80,6 +80,10 @@ public class Game : MonoBehaviour
         leagues.Add(new League() { leagueLevel = 0, leagueName = "Premiere League" });
         playerStable.stableName = "Player's Stable";
         leagues[0].InitLeague();
+        playerStable.inventory = new List<Item>();
+        for (int i=0; i < 4; i++) {
+            playerStable.inventory.Add(Instantiate(Resources.Load<Item>("LongswordSO")));
+        }
         
         
     }
@@ -366,7 +370,7 @@ public static class JsonHelper {
         thisChar.foraging = source.foraging;
         thisChar.herbLore = source.herbLore;
         thisChar.camping = source.camping;
-        thisChar.attackMagic = source.attackMagic;
+        thisChar.attackmagic = source.attackMagic;
         thisChar.condition = source.condition;
         thisChar.sharpness = source.sharpness;
         thisChar.health = source.health;
@@ -389,8 +393,8 @@ public static class JsonHelper {
         thisChar.modelName = source.modelName;
         thisChar.currentObject = source.currentObject;
         thisChar.currentMissionCharacter = source.currentMissionCharacter;
-        thisChar.defenseMagic = source.defenseMagic;
-        thisChar.supportMagic = source.supportMagic;
+        thisChar.defensemagic = source.defenseMagic;
+        thisChar.supportmagic = source.supportMagic;
         thisChar.name = source.name;
         return thisChar;
     }

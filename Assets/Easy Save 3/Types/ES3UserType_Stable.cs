@@ -4,7 +4,7 @@ using UnityEngine;
 namespace ES3Types
 {
 	[UnityEngine.Scripting.Preserve]
-	[ES3PropertiesAttribute("stableName", "reputation", "alignment", "favor", "warlord", "heroes", "heroesSave", "coaches", "buildings", "contracts", "availableTrainings", "availableTrainingsSave", "finance", "activeContract", "leagueLevel")]
+	[ES3PropertiesAttribute("stableNameList", "stableName", "reputation", "alignment", "favor", "warlord", "heroes", "heroesSave", "coaches", "buildings", "contracts", "availableTrainings", "availableTrainingsSave", "finance", "inventory", "activeContract", "leagueLevel")]
 	public class ES3UserType_Stable : ES3ObjectType
 	{
 		public static ES3Type Instance = null;
@@ -16,6 +16,7 @@ namespace ES3Types
 		{
 			var instance = (Stable)obj;
 			
+			writer.WriteProperty("stableNameList", Stable.stableNameList, ES3Type_StringArray.Instance);
 			writer.WriteProperty("stableName", instance.stableName, ES3Type_string.Instance);
 			writer.WriteProperty("reputation", instance.reputation, ES3Type_int.Instance);
 			writer.WriteProperty("alignment", instance.alignment, ES3Type_float.Instance);
@@ -29,6 +30,7 @@ namespace ES3Types
 			writer.WriteProperty("availableTrainings", instance.availableTrainings, ES3Internal.ES3TypeMgr.GetES3Type(typeof(System.Collections.Generic.List<Training>)));
 			writer.WriteProperty("availableTrainingsSave", instance.availableTrainingsSave, ES3Internal.ES3TypeMgr.GetES3Type(typeof(System.Collections.Generic.List<TrainingSave>)));
 			writer.WriteProperty("finance", instance.finance, ES3Internal.ES3TypeMgr.GetES3Type(typeof(Finance)));
+			writer.WriteProperty("inventory", instance.inventory, ES3Internal.ES3TypeMgr.GetES3Type(typeof(System.Collections.Generic.List<Item>)));
 			writer.WritePropertyByRef("activeContract", instance.activeContract);
 			writer.WriteProperty("leagueLevel", instance.leagueLevel, ES3Type_int.Instance);
 		}
@@ -41,6 +43,9 @@ namespace ES3Types
 				switch(propertyName)
 				{
 					
+					case "stableNameList":
+						Stable.stableNameList = reader.Read<System.String[]>(ES3Type_StringArray.Instance);
+						break;
 					case "stableName":
 						instance.stableName = reader.Read<System.String>(ES3Type_string.Instance);
 						break;
@@ -79,6 +84,9 @@ namespace ES3Types
 						break;
 					case "finance":
 						instance.finance = reader.Read<Finance>();
+						break;
+					case "inventory":
+						instance.inventory = reader.Read<System.Collections.Generic.List<Item>>();
 						break;
 					case "activeContract":
 						instance.activeContract = reader.Read<MissionContract>();

@@ -13,5 +13,6 @@ public class Weapon : Item
     /// The prefab name that holds the settings to be copied
     /// </summary>
     public string settingsPrefab;
+    public MoveWeaponType weaponType;
     
 }
