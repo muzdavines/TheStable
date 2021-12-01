@@ -140,9 +140,9 @@ public class MissionCharacterStateGamble : MissionCharacterState {
             float playerRoll = playerDiceRoll * (1.1f + step.mod);
             float NPCRoll = Random.Range(1, NPCAbil+1);
             
-            playerScore.Add(new Roll() { total = playerRoll, mod = 1.1f + step.mod, diceRoll = playerDiceRoll, max = playerAbil > NPCAbil ? playerAbil * 2 : NPCAbil * 2 });
-            otherScore.Add(new Roll() { total = NPCRoll, max = playerAbil > NPCAbil ? playerAbil * 2 : NPCAbil * 2 });
-            Helper.UIUpdate("Players: " + playerRoll.ToString("F2") + " NPC: "+NPCRoll.ToString("F2"));
+            playerScore.Add(new Roll() { total = playerRoll, mod = 1.1f + step.mod, diceRoll = playerDiceRoll, max = playerAbil > NPCAbil ? playerAbil * 2 : NPCAbil * 2, threshold = NPCRoll});
+            otherScore.Add(new Roll() { total = NPCRoll, max = playerAbil > NPCAbil ? playerAbil * 2 : NPCAbil * 2, threshold = NPCRoll });
+            //Helper.UIUpdate("Players: " + playerRoll.ToString("F2") + " NPC: "+NPCRoll.ToString("F2"));
             if (playerRoll >= NPCRoll) {
                 //player wins round
                 playerRounds++;

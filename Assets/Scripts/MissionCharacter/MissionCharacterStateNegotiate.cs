@@ -84,16 +84,17 @@ public class MissionCharacterStateNegotiate : MissionCharacterState {
     int attitudeIndex = 0;
     
     void NextDialogue() {
-        if (attitudeIndex >= attitudes.Count) {
+        if (speechIndex >= dialogue.Count) {
             NegotiateEnd();
             nextNumCheck = Mathf.Infinity;
             return;
         }
-        Helper.Speech(thisChar.transform, dialogue[speechIndex++], 4f);
+        Helper.Speech(thisChar.transform, dialogue[speechIndex++], 5f);
         Helper.Speech(negotiateTarget, dialogue[speechIndex++], 8f);
         ProcessBuzz();
-        Helper.UIUpdate("Current Attitude: " + attitudes[attitudeIndex++]);
+        //Helper.UIUpdate("Current Attitude: " + attitudes[attitudeIndex++]);
         nextNumCheck = Time. time + 12f;
+        
     }
 
     public override void WillExit() {
@@ -139,7 +140,7 @@ public class MissionCharacterStateNegotiate : MissionCharacterState {
             //need a list of NPC statements and another list of Player negotiating statements
             npcTalking = !npcTalking;
             float comp = GetPlayerScore(thisChar.character.negotiating);
-            Helper.UIUpdate("Roll: " + comp + " Needed: " + threshold);
+            //Helper.UIUpdate("Roll: " + comp + " Needed: " + threshold);
             
             if (comp >= threshold) {
                 dialogue.Add(playerPositive[x]);

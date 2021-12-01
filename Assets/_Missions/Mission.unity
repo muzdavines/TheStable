@@ -4655,6 +4655,7 @@ MonoBehaviour:
     critRoll: 0
     total: 0
     max: 0
+    threshold: 0
   otherRol:
     diceRoll: 0
     mod: 0
@@ -4662,6 +4663,7 @@ MonoBehaviour:
     critRoll: 0
     total: 0
     max: 0
+    threshold: 0
   speed: 1
 --- !u!1 &18684667
 GameObject:
@@ -5198,6 +5200,7 @@ MonoBehaviour:
     critRoll: 0
     total: 0
     max: 0
+    threshold: 0
   otherRol:
     diceRoll: 0
     mod: 0
@@ -5205,6 +5208,7 @@ MonoBehaviour:
     critRoll: 0
     total: 0
     max: 0
+    threshold: 0
   speed: 1
 --- !u!1 &151725981
 GameObject:
@@ -5654,6 +5658,7 @@ MonoBehaviour:
     critRoll: 0
     total: 0
     max: 0
+    threshold: 0
   otherRol:
     diceRoll: 0
     mod: 0
@@ -5661,6 +5666,7 @@ MonoBehaviour:
     critRoll: 0
     total: 0
     max: 0
+    threshold: 0
   speed: 1
 --- !u!1 &210121469
 GameObject:
@@ -8752,6 +8758,7 @@ MonoBehaviour:
     critRoll: 0
     total: 0
     max: 0
+    threshold: 0
   otherRol:
     diceRoll: 0
     mod: 0
@@ -8759,6 +8766,7 @@ MonoBehaviour:
     critRoll: 0
     total: 0
     max: 0
+    threshold: 0
   speed: 1
 --- !u!1 &685043442
 GameObject:
@@ -8790,7 +8798,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   contract: {fileID: 11400000, guid: e674562d0ecb9d742af997bcbbb10f41, type: 2}
-  active: 1
+  active: 0
   timeScale: 1
   heroes:
   - {fileID: 11400000, guid: a765ee6f66ad5574ea59e47a6414d726, type: 2}
@@ -8870,6 +8878,7 @@ MonoBehaviour:
     critRoll: 0
     total: 0
     max: 0
+    threshold: 0
   otherRol:
     diceRoll: 0
     mod: 0
@@ -8877,6 +8886,7 @@ MonoBehaviour:
     critRoll: 0
     total: 0
     max: 0
+    threshold: 0
   speed: 1
 --- !u!1 &734228324
 GameObject:
@@ -9107,6 +9117,7 @@ MonoBehaviour:
     critRoll: 0
     total: 0
     max: 0
+    threshold: 0
   otherRol:
     diceRoll: 0
     mod: 0
@@ -9114,6 +9125,7 @@ MonoBehaviour:
     critRoll: 0
     total: 0
     max: 0
+    threshold: 0
   speed: 1
 --- !u!1 &764665837
 GameObject:
@@ -11797,6 +11809,7 @@ GameObject:
   - component: {fileID: 1127278675}
   - component: {fileID: 1127278677}
   - component: {fileID: 1127278676}
+  - component: {fileID: 1127278678}
   m_Layer: 5
   m_Name: Panel
   m_TagString: Untagged
@@ -11837,7 +11850,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -11862,6 +11875,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1127278674}
   m_CullTransparentMesh: 0
+--- !u!225 &1127278678
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1127278674}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1147851584 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1958080089994576450, guid: fe81f473e3dfe1f47aa538269e7f800f,
@@ -12943,10 +12968,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1583769204, guid: 40c817e754fb2384c85305c1906a5156, type: 3}
-      propertyPath: step.level
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5363783496477022528, guid: 40c817e754fb2384c85305c1906a5156,
         type: 3}
       propertyPath: m_Name
@@ -14000,6 +14021,7 @@ MonoBehaviour:
     critRoll: 0
     total: 0
     max: 0
+    threshold: 0
   otherRol:
     diceRoll: 0
     mod: 0
@@ -14007,6 +14029,7 @@ MonoBehaviour:
     critRoll: 0
     total: 0
     max: 0
+    threshold: 0
   speed: 1
 --- !u!1 &1407393291
 GameObject:
@@ -16152,6 +16175,7 @@ MonoBehaviour:
     critRoll: 0
     total: 0
     max: 0
+    threshold: 0
   otherRol:
     diceRoll: 0
     mod: 0
@@ -16159,6 +16183,7 @@ MonoBehaviour:
     critRoll: 0
     total: 0
     max: 0
+    threshold: 0
   speed: 1
 --- !u!1 &1697093452
 GameObject:

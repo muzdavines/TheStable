@@ -9,5 +9,6 @@ public class Roll {
     public int critRoll;
     public float total;
     public float max;
+    public float threshold;
 
 }

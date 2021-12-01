@@ -13,6 +13,9 @@ public class BuzzPanelController : MonoBehaviour {
         }
     }
     public void Display(Roll player, Roll other, int index) {
+        if (other.threshold <= 1) {
+            return;
+        }
         StartCoroutine(FadeIn());
         if (index>= stages.Count) { print("Not enough stages, Buzz");return; }
         stages[index].gameObject.SetActive(true);

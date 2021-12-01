@@ -1,5 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Reflection;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 public class HeroEditController : MonoBehaviour
@@ -7,10 +10,34 @@ public class HeroEditController : MonoBehaviour
     public GameObject panel;
     public Character activeCharacter;
     public StableManagementController controller;
+    public TextMeshProUGUI[] heroStats;
     public void OpenPanel(Character _active) {
         activeCharacter = _active;
         controller.OnClick(panel);
+        
         panel.SetActive(true);
+        SetHeroStats();
+    }
+    public void SetHeroStats() {
+        int index = 0;
+        int count = 0;
+        string n = "\n";
+        heroStats[0].text = activeCharacter.name+n + "<b><u><b>Hero Stats: </b></u>" + n;
+        
+        FieldInfo[] properties = typeof(Character).GetFields();
+        Debug.Log(properties + " props");
+        foreach (FieldInfo property in properties) {
+            Type thisType;
+            try { thisType = property.GetValue(activeCharacter).GetType(); }catch { thisType = null; }
+            if (property!=null && thisType !=null && thisType == typeof(int)){
+                heroStats[index].text += property.Name + ": " + property.GetValue(activeCharacter) + n;
+                count++;
+                if (count >= 15) {
+                    count = 0;
+                    index++;
+                }
+            }
+        }
     }
 
     public void ListMoveClicked(Move move) {

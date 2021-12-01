@@ -12,6 +12,10 @@ public class SaveManager : MonoBehaviour
     }
 
     public void Save() {
+        gameObject.SendMessage("PrepForSave");
+    }
+    public void PreppedSave() {
+        print("PreppedSave");
         ES3.Save("Game", GameObject.Find("Game"));
     }
 }

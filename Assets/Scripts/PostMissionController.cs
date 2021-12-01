@@ -18,6 +18,7 @@ public class PostMissionController : MonoBehaviour
             Game game = Game.instance;
             Stable player = game.playerStable;
             goldRewardAmount = (int)(d.goldReward * d.finalMod);
+            
             if (d.businessReward != null && d.businessReward.benefit != Finance.Business.Benefit.None) {
                 Game.instance.playerStable.finance.AddBusiness(d.businessReward);
             }
@@ -54,7 +55,7 @@ public class PostMissionController : MonoBehaviour
             d.itemRewards = null;
         }
         narrative.text = s;
-        goldReward.text = "Gold Revenue: " + goldRewardAmount;
+        goldReward.text = "Gold Revenue: " + (int)(d.goldReward * d.finalMod);
         if (d.moveReward != null) { goldReward.text += "\nMove Learned: "+d.moveReward.name; }
         successDescription.text = d.successful ? "Mission Successful" : "Mission Failed";
         modReward.text = "Mod: " + d.finalMod;

@@ -82,9 +82,9 @@ public class Game : MonoBehaviour
         leagues[0].InitLeague();
         playerStable.inventory = new List<Item>();
         for (int i=0; i < 4; i++) {
-            playerStable.inventory.Add(Instantiate(Resources.Load<Item>("LongswordSO")));
+           // playerStable.inventory.Add(Instantiate(Resources.Load<Item>("LongswordSO")));
         }
-        playerStable.inventory.Add(Instantiate(Resources.Load<Item>("BowSO")));
+        //playerStable.inventory.Add(Instantiate(Resources.Load<Item>("BowSO")));
         
         
     }

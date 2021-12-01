@@ -43,11 +43,13 @@ public class MissionCharacterStateLockpick : MissionCharacterState {
 
     public bool DidPickLock() {
         float comp = GetPlayerScore(thisChar.character.lockpicking);
-        GameObject.FindObjectOfType<MissionController>().update.text = "Roll: " + comp + " Needed: " + threshold;
+        //GameObject.FindObjectOfType<MissionController>().update.text = "Roll: " + comp + " Needed: " + threshold;
+        scoreIndex = 0;
+        ProcessBuzz();
         if (comp >= threshold) {
             return true;
         } else { return false; }
-
+       
 
     }
 }

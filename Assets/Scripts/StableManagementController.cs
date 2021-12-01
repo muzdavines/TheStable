@@ -83,6 +83,7 @@ public class StableManagementController : MonoBehaviour, UIElement
     }
     public void PrepForSave() {
         Game.instance.PrepForSave();
+        gameObject.SendMessage("PreppedSave");
     }
     public void UpdateOnAdvance() {
         UpdateHeader();
