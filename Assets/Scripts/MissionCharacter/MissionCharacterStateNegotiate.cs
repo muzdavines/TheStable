@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class MissionCharacterStateNegotiate : MissionCharacterState {
     float nextNumCheck = Mathf.Infinity;
-    public MissionPOI poi;
+    
     public Step step;
     bool success;
     float fireActionTime;
@@ -20,8 +20,7 @@ public class MissionCharacterStateNegotiate : MissionCharacterState {
     public List<string> dialogue = new List<string>(); // always start with the NPC
     public List<int> attitudes = new List<int>();
     public int maxRounds = 4; //set max rounds based on difficulty, default should be 6
-    public List<Roll> playerScore = new List<Roll>();
-    public List<Roll> otherScore = new List<Roll>();
+    
     public override void EnterFrom(MissionCharacterState state) {
         base.EnterFrom(state);
         nextNumCheck = Mathf.Infinity;
@@ -83,25 +82,18 @@ public class MissionCharacterStateNegotiate : MissionCharacterState {
     }
     int speechIndex = 0;
     int attitudeIndex = 0;
-    int scoreIndex = -1;
+    
     void NextDialogue() {
         if (attitudeIndex >= attitudes.Count) {
             NegotiateEnd();
             nextNumCheck = Mathf.Infinity;
             return;
         }
-        Helper.Speech(thisChar.transform, dialogue[speechIndex++], 0f);
-        Helper.Speech(negotiateTarget, dialogue[speechIndex++], 4f);
-        if (scoreIndex < 0) {
-            scoreIndex++;
-        }
-        else {
-            if (scoreIndex < playerScore.Count) {
-                poi.control.buzz.Display(playerScore[scoreIndex], otherScore[scoreIndex], scoreIndex++);
-            }
-        }
+        Helper.Speech(thisChar.transform, dialogue[speechIndex++], 4f);
+        Helper.Speech(negotiateTarget, dialogue[speechIndex++], 8f);
+        ProcessBuzz();
         Helper.UIUpdate("Current Attitude: " + attitudes[attitudeIndex++]);
-        nextNumCheck = Time. time + 8f;
+        nextNumCheck = Time. time + 12f;
     }
 
     public override void WillExit() {

@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class MissionCharacterStateGamble : MissionCharacterState {
     float nextNumCheck = Mathf.Infinity;
-    public MissionPOI poi;
+    
     public Step step;
     bool success;
     float fireActionTime;
@@ -85,10 +85,11 @@ public class MissionCharacterStateGamble : MissionCharacterState {
             nextNumCheck = Mathf.Infinity;
             return;
         }
-        Helper.Speech(thisChar.transform, dialogue[speechIndex++], 0f);
-        Helper.Speech(gambleTarget, dialogue[speechIndex++], 4f);
+        ProcessBuzz();
+        Helper.Speech(thisChar.transform, dialogue[speechIndex++], 4f);
+        Helper.Speech(gambleTarget, dialogue[speechIndex++], 8f);
         //Helper.UIUpdate("Current Attitude: " + attitudes[attitudeIndex++]);
-        nextNumCheck = Time.time + 8f;
+        nextNumCheck = Time.time + 12f;
     }
 
     public override void WillExit() {
@@ -135,8 +136,11 @@ public class MissionCharacterStateGamble : MissionCharacterState {
         dialogue.Add(NPCIntro);
 
         for (int round = 0; round < 7; round++) {
-            float playerRoll = Random.Range(0, playerAbil * (1.1f + step.mod));
-            float NPCRoll = Random.Range(0, NPCAbil);
+            float playerDiceRoll = Random.Range(1, playerAbil + 1);
+            float playerRoll = playerDiceRoll * (1.1f + step.mod);
+            float NPCRoll = Random.Range(1, NPCAbil+1);
+            playerScore.Add(new Roll() { total = playerRoll, mod = 1.1f + step.mod, diceRoll = playerDiceRoll, max = playerAbil > NPCAbil ? playerAbil * 2 : NPCAbil * 2 });
+            otherScore.Add(new Roll() { total = NPCRoll, max = playerAbil > NPCAbil ? playerAbil * 2 : NPCAbil * 2 });
             Helper.UIUpdate("Players: " + playerRoll.ToString("F2") + " NPC: "+NPCRoll.ToString("F2"));
             if (playerRoll >= NPCRoll) {
                 //player wins round

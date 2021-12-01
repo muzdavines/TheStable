@@ -10,6 +10,10 @@ public class MissionCharacterState
     public Animator anim;
     public MissionCharacter thisChar;
     public NavMeshAgent agent;
+    public List<Roll> playerScore = new List<Roll>();
+    public List<Roll> otherScore = new List<Roll>();
+    public MissionPOI poi;
+    public int scoreIndex = -1;
     public string name {
         get {
             return this.GetType().ToString();
@@ -41,6 +45,16 @@ public class MissionCharacterState
                 Debug.Log ("#StateChange# EnterFrom null" + "  " + this.name);
             }
 
+        }
+    }
+    public virtual void ProcessBuzz() {
+        if (scoreIndex < 0) {
+            scoreIndex++;
+        }
+        else {
+            if (scoreIndex < playerScore.Count) {
+                poi.control.buzz.Display(playerScore[scoreIndex], otherScore[scoreIndex], scoreIndex++);
+            }
         }
     }
 
