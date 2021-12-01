@@ -45,7 +45,7 @@ public class MissionCharacterState
     }
 
     public virtual void WillExit() {
-
+        Helper.Cam().SetTarget(thisChar.shoulderCam.transform);
     }
     public virtual void StartAnim() {
 

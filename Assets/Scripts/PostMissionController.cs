@@ -10,6 +10,7 @@ public class PostMissionController : MonoBehaviour
     public Text goldReward;
     public Text businessReward;
     public Text modReward;
+    public Text itemReward;
     MissionFinalDetails d;
     int goldRewardAmount;
     public void Continue() {
@@ -23,6 +24,11 @@ public class PostMissionController : MonoBehaviour
             Game.instance.playerStable.finance.AddRevenue(goldRewardAmount, "Mission Reward", "Mission");
             if (d.moveReward != null) {
                 Game.instance.playerStable.availableTrainings.Add(new Training() { cost = 300, duration = 10, moveToTrain = d.moveReward, type = Training.Type.Skill });
+            }
+            if (d.itemRewards != null) {
+                foreach (Item i in d.itemRewards) {
+                    Game.instance.playerStable.inventory.Add(Instantiate(i));
+                }
             }
         }
 
@@ -53,6 +59,12 @@ public class PostMissionController : MonoBehaviour
         modReward.text = "Mod: " + d.finalMod;
         if (d.businessReward != null && d.businessReward.benefit != Finance.Business.Benefit.None) {
             businessReward.text = "Other:\n" + d.businessReward.GetInfo();
+        }
+        itemReward.text = "Item Rewards\n";
+        if (d.itemRewards != null) {
+            foreach (var item in d.itemRewards) {
+                itemReward.text += item.itemName + "\n";
+            }
         }
     }
 }

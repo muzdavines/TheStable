@@ -17,6 +17,8 @@ public class MissionPOI : MonoBehaviour
     public bool isFinalForMission;
     public Vector3 cameraAngle = Vector3.zero;
     public AudioClip backgroundMusic;
+    public string attributePrereq;
+    public int attributePrereqAmount;
     void Start()
     {
         control = GameObject.FindObjectOfType<MissionController>();
@@ -62,7 +64,13 @@ public class MissionPOI : MonoBehaviour
         }
         print(characterToAttempt.name);
         control.currentActiveStepChar = characterToAttempt.character;
-        characterToAttempt.ActivateStep(this);
+        if (attributePrereq != "" && characterToAttempt.character.GetCharacterAttributeValue(attributePrereq) < attributePrereqAmount) {
+            print("Does not meet minimum Req");
+            Avoid(true);
+        }
+        else {
+            characterToAttempt.ActivateStep(this);
+        }
         
         MissionHelper help = GetComponent<MissionHelper>();
         if (help != null) { help.Activate(); }
@@ -70,6 +78,7 @@ public class MissionPOI : MonoBehaviour
     }
 
     public virtual void Resolve(bool success) {
+        control.buzz.Reset();
         print("Resolve " + step.type + "  " + success);
         if (success) {
             print ("Sucess!");
@@ -87,8 +96,16 @@ public class MissionPOI : MonoBehaviour
     }
 
     public virtual void Resolve(int quality) {
+        control.buzz.Reset();
         print("Sucess!");
         GetComponent<OnStepSuccess>().OnSuccess(quality);
+        Helper.PlayOneShot(onSuccessSound);
+        control.RemovePOI(this);
+    }
+    public virtual void Avoid(bool minReqNotMet = true) {
+        control.buzz.Reset();
+        print("Avoiding");
+        GetComponent<OnStepAvoided>().OnAvoided(minReqNotMet);
         Helper.PlayOneShot(onSuccessSound);
         control.RemovePOI(this);
     }

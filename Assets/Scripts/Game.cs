@@ -84,6 +84,7 @@ public class Game : MonoBehaviour
         for (int i=0; i < 4; i++) {
             playerStable.inventory.Add(Instantiate(Resources.Load<Item>("LongswordSO")));
         }
+        playerStable.inventory.Add(Instantiate(Resources.Load<Item>("BowSO")));
         
         
     }

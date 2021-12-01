@@ -39,6 +39,7 @@ public class MissionCharacterStateLockpick : MissionCharacterState {
 
     public override void WillExit() {
         base.WillExit();
+        thisChar.ControlCam(false, 5f);
     }
 
     public bool DidPickLock() {

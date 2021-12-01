@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-public enum StepType { Combat, Lockpick, Assassinate, Sneak, Demolish, Distract, DetectTrap, DisarmTrap, Intimidate, Persuade, Pickpocket, Entertain, Exit, Hunt, Forage, Fish, Camp, NavigateLand, Connection, NegotiateBusiness, Inspire, Portal}
+public enum StepType { Combat, Lockpick, Assassinate, Sneak, Demolish, Distract, DetectTrap, DisarmTrap, Intimidate, Persuade, Pickpocket, Entertain, Exit, Hunt, Forage, Fish, Camp, NavigateLand, Connection, NegotiateBusiness, Inspire, Portal, Gamble}
 [System.Serializable]
 public class Step {
 
@@ -48,6 +48,12 @@ public class Step {
                 break;
             case StepType.Portal:
                 property = "strength";
+                break;
+            case StepType.Gamble:
+                property = "gambling";
+                break;
+            case StepType.Lockpick:
+                property = "lockpicking";
                 break;
             
         }

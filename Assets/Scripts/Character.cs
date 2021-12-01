@@ -12,11 +12,7 @@ public class Character : Living
     public int agility = 5;
     public int reaction = 5;
     public int running = 5;
-    public int swordsmanship = 5;
-    public int dualwielding = 5;
     public int dodging = 5;
-    public int archery = 5;
-   
     public int toughness = 10;
     
     //Mental Attributes
@@ -30,7 +26,9 @@ public class Character : Living
     public int insight = 5; //tell if people are lying
     public int deception = 5;
     public int intimidation = 5;
-
+    public int persuasion = 5;
+    public int gambling = 5;
+    public int confidence = 5;
 
     //Technical Attributes
     public int lockpicking = 5;
@@ -42,7 +40,12 @@ public class Character : Living
     public int melee = 10;
     public int parry = 5;
     public int shieldDefense;
-    
+    public int musician;
+    public int medicine;
+    public int swordsmanship = 5;
+    public int dualwielding = 5;
+    public int archery = 5;
+
     //Survival Attributes
     public int survivalist = 10;
     public int landNavigation = 10;

@@ -1,0 +1,47 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22bbbc05240e553418ce27a7274788bd, type: 3}
+  m_Name: NegotiatePiratePassage
+  m_EditorClassIdentifier: 
+  description: Our client needs passage on a ship, but must avoid the authorities.
+    We must head to Freebooter Cove and negotiate safe passage on a pirate ship.
+  ID: 105
+  contractType: 10
+  difficulty: 0
+  stages:
+  - type: 4
+    subType: PiratePassage
+    difficulty: 0
+    description: 
+    preferredMethod: 0
+    bonusMethod: 0
+  goldReward: 1000
+  businessReward:
+    benefit: 0
+    description: 
+    number: 0
+    duration: 0
+  moveReward: {fileID: 0}
+  itemRewards:
+  - {fileID: 11400000, guid: d04ad53dd3b249743ac7a9b784d65b1f, type: 2}
+  executionDate:
+    day: 1
+    month: 1
+    year: 1000
+    dayOfWeek: 0
+  dayCost: 0
+  minHeroes: 1
+  maxHeroes: 4
+  attributeReq: None
+  attributeReqAmount: 0
+  attributeReq2: None
+  attributeReqAmount2: 0

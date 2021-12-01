@@ -180,6 +180,7 @@ public class MissionCharacter : MonoBehaviour, MissionCharacterStateOwner
     }
 
     public void ControlCam(bool myControl = true, float time = 0) {
+        print("Control Cam Called " + myControl);
         Camera.main.GetComponent<CameraController>().SetControl(!myControl, time);
         if (myControl) {
             Camera.main.transform.position = shoulderCam.position;
@@ -290,6 +291,9 @@ public class MissionCharacter : MonoBehaviour, MissionCharacterStateOwner
                 break;
             case StepType.Portal:
                 poi.Resolve(true);
+                break;
+            case StepType.Gamble:
+                state.TransitionTo(new MissionCharacterStateGamble() { poi = poi, gambleTarget = poi.allPurposeTransforms[1] });
                 break;
         }
     }

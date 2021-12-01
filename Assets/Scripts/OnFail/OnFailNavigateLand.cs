@@ -11,6 +11,9 @@ public class OnFailNavigateLand : OnStepFail {
         StartCoroutine(BroadcastNextStep());
         campPOI.step.mod += -.1f; //10% penalty
         Helper.Speech(FindObjectOfType<MissionController>().currentActiveStepChar.currentObject.transform, "Oh, no. This isn't the right way...");
+        foreach (var p in affectedPOI) {
+            p.step.mod += affecttedPOIMod;
+        }
     }
     IEnumerator BroadcastNextStep() {
         yield return new WaitForSeconds(4.0f);

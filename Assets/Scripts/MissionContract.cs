@@ -22,6 +22,7 @@ public class MissionContract : ScriptableObject
     /// 
     public Finance.Business businessReward;
     public Move moveReward;
+    public List<Item> itemRewards;
     public Game.GameDate executionDate;
     public int dayCost; //number of days heroes will be out of commission
     //need to add more robust rewards here, perhaps a subclass for things like establishing a recruitment station
@@ -88,7 +89,7 @@ public class MissionContract : ScriptableObject
         
     }
 }
-public enum ContractType { Assassinate, Heist, Recruitment, MercantileExpansion, Intimidate, Interrogate, Defend, Protect, MercenaryBattle, Collection, Persuade}
+public enum ContractType { Assassinate, Heist, Recruitment, MercantileExpansion, Intimidate, Interrogate, Defend, Protect, MercenaryBattle, Collection, Persuade, Passage}
 [System.Serializable]
 public class MissionContractSave {
     public string description;
@@ -109,6 +110,7 @@ public class MissionContractSave {
     /// 
     public Finance.Business businessReward;
     public Move moveReward;
+    public List<Item> itemsRewards;
     public Game.GameDate executionDate;
     public int dayCost; //number of days heroes will be out of commission
     //need to add more robust rewards here, perhaps a subclass for things like establishing a recruitment station
@@ -136,6 +138,7 @@ public class MissionContractSave {
         this.attributeReqAmount = source.attributeReqAmount;
         this.attributeReq2 = source.attributeReq2;
         this.attributeReqAmount2 = source.attributeReqAmount2;
+        this.itemsRewards = source.itemRewards;
         return this;
     }
 }

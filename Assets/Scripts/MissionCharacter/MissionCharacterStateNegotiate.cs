@@ -20,7 +20,8 @@ public class MissionCharacterStateNegotiate : MissionCharacterState {
     public List<string> dialogue = new List<string>(); // always start with the NPC
     public List<int> attitudes = new List<int>();
     public int maxRounds = 4; //set max rounds based on difficulty, default should be 6
-
+    public List<Roll> playerScore = new List<Roll>();
+    public List<Roll> otherScore = new List<Roll>();
     public override void EnterFrom(MissionCharacterState state) {
         base.EnterFrom(state);
         nextNumCheck = Mathf.Infinity;
@@ -82,6 +83,7 @@ public class MissionCharacterStateNegotiate : MissionCharacterState {
     }
     int speechIndex = 0;
     int attitudeIndex = 0;
+    int scoreIndex = -1;
     void NextDialogue() {
         if (attitudeIndex >= attitudes.Count) {
             NegotiateEnd();
@@ -90,6 +92,14 @@ public class MissionCharacterStateNegotiate : MissionCharacterState {
         }
         Helper.Speech(thisChar.transform, dialogue[speechIndex++], 0f);
         Helper.Speech(negotiateTarget, dialogue[speechIndex++], 4f);
+        if (scoreIndex < 0) {
+            scoreIndex++;
+        }
+        else {
+            if (scoreIndex < playerScore.Count) {
+                poi.control.buzz.Display(playerScore[scoreIndex], otherScore[scoreIndex], scoreIndex++);
+            }
+        }
         Helper.UIUpdate("Current Attitude: " + attitudes[attitudeIndex++]);
         nextNumCheck = Time. time + 8f;
     }
@@ -137,9 +147,16 @@ public class MissionCharacterStateNegotiate : MissionCharacterState {
             //need a list of NPC statements and another list of Player negotiating statements
             npcTalking = !npcTalking;
             float threshold = step.level * 10;
-            float diceRoll = Random.Range(1, 21) * poi.step.mod;
+            float diceRoll = Random.Range(1, 21) * (1+poi.step.mod);
             int skill = thisChar.character.negotiating;
-            float comp = diceRoll + skill;
+            int critRoll = Random.Range(1, 21);
+            if (critRoll == 1) { skill = 0; }
+            if (critRoll == 20) { skill *= 2; };
+            float comp = (diceRoll * (1 + poi.step.mod))+ skill;
+            float tempThreshold = threshold == 0 ? 1 : threshold;
+            playerScore.Add(new Roll() { diceRoll = diceRoll, critRoll = critRoll, mod = 1 + poi.step.mod, skill = skill, total = comp, max = tempThreshold * 2 });
+            otherScore.Add(new Roll() { total = tempThreshold, max = tempThreshold * 2 });
+            Debug.Log(comp + "  " + diceRoll + "  " + skill + "  " + critRoll);
             Helper.UIUpdate("Roll: " + comp + " Needed: " + threshold);
             
             if (comp >= threshold) {

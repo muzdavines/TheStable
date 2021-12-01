@@ -25,6 +25,7 @@ public class MissionController : MonoBehaviour
     public bool missionFailed = false;
     public MissionFinalDetails details;
     public AudioSource audioSource;
+    public BuzzPanelController buzz;
     // Start is called before the first frame update
     void Start()
     {
@@ -54,6 +55,7 @@ public class MissionController : MonoBehaviour
         details.goldReward = contract.goldReward;
         details.businessReward = contract.businessReward;
         details.moveReward = contract.moveReward;
+        details.itemRewards = contract.itemRewards;
         details.finalMod = 1;
         audioSource = gameObject.AddComponent<AudioSource>();
         audioSource.spatialBlend = 0;
@@ -71,6 +73,7 @@ public class MissionController : MonoBehaviour
 
     public void CreateNextStage() {
         stageNum++;
+        buzz.Reset();
         if (stageNum >= contract.stages.Count)
         {
             MissionComplete();

@@ -9,6 +9,7 @@ public class MissionFinalDetails : MonoBehaviour
     public int goldReward;
     public Finance.Business businessReward;
     public Move moveReward;
+    public List<Item> itemRewards;
     public float finalMod;
     void Start()
     {

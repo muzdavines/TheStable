@@ -14,7 +14,10 @@ public class OnSuccessOpenChest : OnStepSuccess {
         if (leftDoor == null) {
             leftDoorOpen = true;
         }
-        
+        foreach (var p in affectedPOI) {
+            p.step.mod += affecttedPOIMod;
+        }
+
     }
     public void Update() {
         if (rotateDoors) {
