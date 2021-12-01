@@ -13,6 +13,7 @@ public class Step {
     public Reward reward;
     [SerializeField]
     public List<Step> saves;
+    [Tooltip("Enter the score that the player should match or exceed. Think of it like Armor Class.")]
     public int level;
     public float mod = 1;
     public void Blueprint() {

@@ -10,7 +10,9 @@ public class BuzzStageDisplay : MonoBehaviour
     [SerializeField]
     public Roll playerRol, otherRol;
     public float speed = 5;
+    
     public void Display(Roll player, Roll other) {
+        gameObject.SetActive(true);
         playerRol = player;
         otherRol = other;
         print("Display called " + player.total + "  "+player.max + "  "+player.total/player.max);
@@ -29,12 +31,13 @@ public class BuzzStageDisplay : MonoBehaviour
         thisText.text = thisScore.ToString("F0");
     }
     public void Start() {
-        Reset();
+        
     }
     public void Reset() {
         playerImage.fillAmount = 0;
         otherImage.fillAmount = 0;
         playerText.text = "";
         otherText.text = "";
+        
     }
 }

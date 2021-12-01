@@ -51,6 +51,7 @@ public class PostMissionController : MonoBehaviour
             d.goldReward = 0;
             d.businessReward = null;
             d.moveReward = null;
+            d.itemRewards = null;
         }
         narrative.text = s;
         goldReward.text = "Gold Revenue: " + goldRewardAmount;

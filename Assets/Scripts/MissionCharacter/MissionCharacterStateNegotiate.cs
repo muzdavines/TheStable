@@ -138,17 +138,7 @@ public class MissionCharacterStateNegotiate : MissionCharacterState {
         for (int x = 0; x < maxRounds; x++) {
             //need a list of NPC statements and another list of Player negotiating statements
             npcTalking = !npcTalking;
-            float threshold = step.level * 10;
-            float diceRoll = Random.Range(1, 21) * (1+poi.step.mod);
-            int skill = thisChar.character.negotiating;
-            int critRoll = Random.Range(1, 21);
-            if (critRoll == 1) { skill = 0; }
-            if (critRoll == 20) { skill *= 2; };
-            float comp = (diceRoll * (1 + poi.step.mod))+ skill;
-            float tempThreshold = threshold == 0 ? 1 : threshold;
-            playerScore.Add(new Roll() { diceRoll = diceRoll, critRoll = critRoll, mod = 1 + poi.step.mod, skill = skill, total = comp, max = tempThreshold * 2 });
-            otherScore.Add(new Roll() { total = tempThreshold, max = tempThreshold * 2 });
-            Debug.Log(comp + "  " + diceRoll + "  " + skill + "  " + critRoll);
+            float comp = GetPlayerScore(thisChar.character.negotiating);
             Helper.UIUpdate("Roll: " + comp + " Needed: " + threshold);
             
             if (comp >= threshold) {

@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class MissionCharacterStateLockpick : MissionCharacterState {
     float nextNumCheck = Mathf.Infinity;
-    public MissionPOI poi;
     public Step step;
     bool success;
     
@@ -43,10 +42,7 @@ public class MissionCharacterStateLockpick : MissionCharacterState {
     }
 
     public bool DidPickLock() {
-        float threshold = step.level * 10;
-        float diceRoll = Random.Range(1, 21);
-        int skill = thisChar.character.lockpicking;
-        float comp = diceRoll + skill;
+        float comp = GetPlayerScore(thisChar.character.lockpicking);
         GameObject.FindObjectOfType<MissionController>().update.text = "Roll: " + comp + " Needed: " + threshold;
         if (comp >= threshold) {
             return true;

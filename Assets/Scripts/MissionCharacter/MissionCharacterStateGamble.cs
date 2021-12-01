@@ -123,7 +123,7 @@ public class MissionCharacterStateGamble : MissionCharacterState {
         }
         poi.Resolve(success);
     }
-    
+   
     public void GambleResult() {
         //Brimley
         int playerRounds = 0;
@@ -139,6 +139,7 @@ public class MissionCharacterStateGamble : MissionCharacterState {
             float playerDiceRoll = Random.Range(1, playerAbil + 1);
             float playerRoll = playerDiceRoll * (1.1f + step.mod);
             float NPCRoll = Random.Range(1, NPCAbil+1);
+            
             playerScore.Add(new Roll() { total = playerRoll, mod = 1.1f + step.mod, diceRoll = playerDiceRoll, max = playerAbil > NPCAbil ? playerAbil * 2 : NPCAbil * 2 });
             otherScore.Add(new Roll() { total = NPCRoll, max = playerAbil > NPCAbil ? playerAbil * 2 : NPCAbil * 2 });
             Helper.UIUpdate("Players: " + playerRoll.ToString("F2") + " NPC: "+NPCRoll.ToString("F2"));
@@ -163,38 +164,7 @@ public class MissionCharacterStateGamble : MissionCharacterState {
             }
         }
     }
-    public void NegotiationResult() {
-        dialogue = new List<string>();
-        bool npcTalking = true;
-        int attitude = 0; //made modifications if there is an initital bonus;
-        maxRounds = playerPositive.Length;
-        dialogue.Add(playerIntro);
-        dialogue.Add(NPCIntro);
-        attitudes.Add(attitude);
-        for (int x = 0; x < maxRounds; x++) {
-            //need a list of NPC statements and another list of Player negotiating statements
-            npcTalking = !npcTalking;
-            float threshold = step.level * 10;
-            float diceRoll = Random.Range(1, 21) * poi.step.mod;
-            int skill = thisChar.character.negotiating;
-            float comp = diceRoll + skill;
-            Helper.UIUpdate("Roll: " + comp + " Needed: " + threshold);
-
-            if (comp >= threshold) {
-                dialogue.Add(playerPositive[x]);
-                dialogue.Add(npcPositive[x]);
-                attitude += 25;
-            }
-            else {
-                attitude -= 25;
-                dialogue.Add(playerNegative[x]);
-                dialogue.Add(npcNegative[x]);
-            }
-            attitudes.Add(attitude);
-        }
-        finalAttitude = attitude;
-        success = (attitude > 0);
-    }
+    
     public string[] npcPositive = { "I'm listening.", "Without respecting authority, we have nothing but chaos.", "Profits are good. I think we can work something out.", "I don't see why not! Let's drink to this new endeavor!" };
     public string[] npcNegative = { "No1.", "No2.", "No3.", "No4." };
     public string[] playerPositive = { "You seem like a man who knows how to conduct business.", "My stablemaster knows how important it is to ensure that...authority...is properly acknowledged.", "If your eminence would see fit to approve our proposal, I know we would have a...profitable...relationship.", "In light of our friendship, I'm sure my stablemaster would appreciate waiver of the market tariff." };

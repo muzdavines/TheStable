@@ -45,7 +45,7 @@ namespace CoverShooter
         {
 
             if (currentMove == null) {
-                print("#MeleeCollision# Current Move Null " + transform.root.name);
+                //print("#MeleeCollision# Current Move Null " + transform.root.name);
                 return;
             }
             if (!_isAttacking || !_isScanning) {
