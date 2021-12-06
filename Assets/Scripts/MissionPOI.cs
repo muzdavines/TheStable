@@ -23,7 +23,7 @@ public class MissionPOI : MonoBehaviour
     {
         control = GameObject.FindObjectOfType<MissionController>();
         col = GetComponent<Collider>();
-        step.mod = 1;
+        
     }
 
     // Update is called once per frame

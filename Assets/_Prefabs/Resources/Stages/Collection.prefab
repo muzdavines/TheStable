@@ -159,6 +159,8 @@ MonoBehaviour:
   isFinalForMission: 0
   cameraAngle: {x: 5, y: 9, z: 5}
   backgroundMusic: {fileID: 8300000, guid: c083a287ddc514fbd8f23a2080d4ba50, type: 3}
+  attributePrereq: 
+  attributePrereqAmount: 0
   currentCharacterToAttempt: {fileID: 0}
 --- !u!65 &1583769203
 BoxCollider:
@@ -185,6 +187,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a415c98107f90c498157e19f255fc3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  affectedPOI: []
+  affecttedPOIMod: 0
   goToDestroy: {fileID: 8734235451211555389}
 --- !u!1 &2100205574
 GameObject:
@@ -620,7 +624,7 @@ MonoBehaviour:
   m_OverrideTileSize: 0
   m_TileSize: 256
   m_OverrideVoxelSize: 0
-  m_VoxelSize: 0.16666667
+  m_VoxelSize: 0.06666667
   m_BuildHeightMesh: 0
   m_NavMeshData: {fileID: 0}
 --- !u!114 &2457737030196842648
@@ -768,6 +772,7 @@ GameObject:
   - component: {fileID: 4985212757106813532}
   - component: {fileID: 4144879201592415589}
   - component: {fileID: 7099025074228068791}
+  - component: {fileID: 3943387991198234272}
   m_Layer: 0
   m_Name: Combat
   m_TagString: Untagged
@@ -839,6 +844,8 @@ MonoBehaviour:
   isFinalForMission: 1
   cameraAngle: {x: 5, y: 5, z: 5}
   backgroundMusic: {fileID: 8300000, guid: 467a8d5751f6c40f3955c0ce19c23073, type: 3}
+  attributePrereq: 
+  attributePrereqAmount: 0
   currentCharacterToAttempt: {fileID: 0}
   enemies:
   - {fileID: 11400000, guid: 3482a195e93479b4386a5d9926e1ae29, type: 2}
@@ -863,6 +870,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3571a688bf079194492671a7aa2ebf6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  affectedPOI: []
+  affecttedPOIMod: 0
+--- !u!114 &3943387991198234272
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7177609073610142986}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9cbf3db3c9987664a8fc284c3c8dc0cf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  affectedPOI: []
+  affecttedPOIMod: 0
+  speaker: {fileID: 0}
 --- !u!1 &7740630874883703798
 GameObject:
   m_ObjectHideFlags: 0

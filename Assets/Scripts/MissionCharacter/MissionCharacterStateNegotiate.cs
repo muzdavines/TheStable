@@ -93,7 +93,7 @@ public class MissionCharacterStateNegotiate : MissionCharacterState {
         Helper.Speech(negotiateTarget, dialogue[speechIndex++], 8f);
         ProcessBuzz();
         //Helper.UIUpdate("Current Attitude: " + attitudes[attitudeIndex++]);
-        nextNumCheck = Time. time + 12f;
+        nextNumCheck = Time. time + 10f;
         
     }
 

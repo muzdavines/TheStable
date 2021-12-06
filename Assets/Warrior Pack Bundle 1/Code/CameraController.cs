@@ -9,12 +9,14 @@ public class CameraController : MonoBehaviour{
 	public float offsetHeight;
 	public float smoothing;
 	public Vector3 offset;
+    public Vector3 startOffset;
 	bool following = true;
 	Vector3 lastPosition;
     public bool myControl = true;
-
+    float zoom = 0;
 	void Start(){
         StartCoroutine(DelayStart());
+        startOffset = new Vector3(offset.x, offset.y, offset.z);
         if (cameraTarget == null) { return; }
 		lastPosition = new Vector3(cameraTarget.transform.position.x, cameraTarget.transform.position.y + offsetHeight, cameraTarget.transform.position.z - offsetDistance);
 		//offset = new Vector3(cameraTarget.transform.position.x, cameraTarget.transform.position.y + offsetHeight, cameraTarget.transform.position.z - offsetDistance);
@@ -49,14 +51,21 @@ public class CameraController : MonoBehaviour{
 			}
 		} 
 		if(Input.GetKey(KeyCode.Q)){
-			rotate = -1;
+			rotate = -2;
 		} 
 		else if(Input.GetKey(KeyCode.E)){
-			rotate = 1;
+			rotate = 2;
 		} 
 		else{
 			rotate = 0;
 		}
+        float mouseScroll = Input.GetAxis("Mouse ScrollWheel");
+        if (mouseScroll != 0) {
+            mouseScroll *= -1;
+
+            offset = new Vector3(Mathf.Clamp(offset.x + mouseScroll, 0, 300), Mathf.Clamp(offset.y + mouseScroll, 4, 100), offset.z);
+        }
+        
 		if(following){
             if (cameraTarget == null) { return; }
 			offset = Quaternion.AngleAxis(rotate * rotateSpeed, Vector3.up) * offset;

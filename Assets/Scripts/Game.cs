@@ -7,9 +7,11 @@ using System.Globalization;
 using System.IO;
 using Newtonsoft.Json;
 using System.Text.RegularExpressions;
+using HardCodeLab.TutorialMaster;
+using UnityEngine.SceneManagement;
+
 [System.Serializable]
-public class Game : MonoBehaviour
-{
+public class Game : MonoBehaviour {
     private static Game _instance;
     public static Game instance { get { if (_instance == null) { _instance = GameObject.FindObjectOfType<Game>(); } if (_instance == null) { _instance = Instantiate(Resources.Load<GameObject>("Game")).GetComponent<Game>(); } return _instance; } }
 
@@ -18,33 +20,28 @@ public class Game : MonoBehaviour
     [SerializeField]
     public List<League> leagues = new List<League>();
     [System.Serializable]
-    public class GameDate
-    {
+    public class GameDate {
         public int day = 1;
         public int month = 1;
         public int year = 1000;
         public int dayOfWeek = 0;
-        public void Advance()
-        {
+        public void Advance() {
             day++;
-            if (day > 28)
-            {
+            if (day > 28) {
                 day = 1;
                 month++;
             }
-            if (month > 12)
-            {
+            if (month > 12) {
                 month = 1;
                 year++;
             }
             dayOfWeek++;
-            if (dayOfWeek > 6)
-            {
+            if (dayOfWeek > 6) {
                 dayOfWeek = 0;
             }
-            
+
         }
-        
+
         public string GetDateString() {
             return year + "." + month + "." + day;
         }
@@ -59,8 +56,7 @@ public class Game : MonoBehaviour
     public MissionList missionContractList;
     public List<MoveModifier> modifierList;
     public League.Match activeMatch;
-    public void Start()
-    {
+    public void Start() {
         transform.name = "Game";
         DontDestroyOnLoad(gameObject);
         
@@ -71,6 +67,17 @@ public class Game : MonoBehaviour
         LoadMarketContracts();
         playerStable.OnLoad();
     }
+    public void TutorialComplete(Tutorial thisTutorial) {
+        tutorialsComplete.Add(thisTutorial.Name);
+    }
+    public void CheckIfTutorialComplete(Tutorial thisTutorial) {
+        if (tutorialsComplete.Contains(thisTutorial.Name)) {
+            thisTutorial.Stop();
+        }
+    }
+
+    public List<string> tutorialsComplete;
+
 
     public void Init() {
         freeAgentMarket.UpdateMarket();

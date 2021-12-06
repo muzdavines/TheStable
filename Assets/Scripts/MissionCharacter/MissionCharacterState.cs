@@ -75,6 +75,7 @@ public class MissionCharacterState
         float comp = (diceRoll * (1 + poi.step.mod)) + (skill * critMod);
         float tempThreshold = threshold == 0 ? 1 : threshold;
         float playerMax = (skill * 2) + 20;
+        Debug.Log("Dice Roll: " + diceRoll + "  CritRoll: " + critRoll + "  Mod: " + (1 + poi.step.mod) + "  Skill: " + skill + "  Total: " + comp);
         playerScore.Add(new Roll() { diceRoll = diceRoll, critRoll = critRoll, mod = 1 + poi.step.mod, skill = skill, total = comp, max = playerMax > threshold ? playerMax * 2 : threshold * 2, threshold = threshold });
         otherScore.Add(new Roll() { total = tempThreshold, max = playerMax > threshold ? playerMax * 2 : threshold * 2, threshold = threshold });
         return comp;

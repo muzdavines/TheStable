@@ -15,7 +15,7 @@ public class Step {
     public List<Step> saves;
     [Tooltip("Enter the score that the player should match or exceed. Think of it like Armor Class.")]
     public int level;
-    public float mod = 1;
+    public float mod = 0;
     public void Blueprint() {
         type = blueprint.type;
         required = blueprint.required;
