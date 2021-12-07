@@ -496,21 +496,22 @@ namespace CoverShooter
             // Check if the trigger is pressed.
             print(transform.root.name + " is trying to Fire; IsFiringNextUpdate: " + _isFiringOnNextUpdate + "// Is Allowed: " + _isAllowed);
             if (currentMove == null) { currentMove = myCharacter.activeMoves[currentMoveIndex]; }
+            print("Time: " + Time.time + "   Next Fire: " + nextFire);
             if (_isFiringOnNextUpdate && _isAllowed && Time.time >= nextFire) {
                 // Time in seconds between bullets.
                 var fireDelay = 1.0f / Rate;
-
-                var delay = 0f;
-
+                
+                
+                print("Time :" + Time.time + " Fire Wait: " + _fireWait);
                 // Fire all bullets in this frame.
-                while (_fireWait < 0) {
+                
                     var hasFired = false;
 
                     for (int i = 0; i < BulletsPerShot; i++) {
                         if (LoadedBulletsLeft <= 0)
                             break;
 
-                        if (fire(delay, !ConsumeSingleBulletPerShot)) {
+                        if (fire(!ConsumeSingleBulletPerShot)) {
                             nextFire = Time.time + currentMove.cooldown;
                             hasFired = true;
                         }
@@ -521,7 +522,7 @@ namespace CoverShooter
 
                     if (hasFired) {
                         for (int i = 0; i < _listeners.Length; i++)
-                            _listeners[i].OnFire(delay);
+                            _listeners[i].OnFire(0);
 
                         if (Fired != null) Fired.Invoke();
 
@@ -540,10 +541,10 @@ namespace CoverShooter
                         if (EmptyFire != null) EmptyFire.Invoke();
                     }
 
-                    delay += fireDelay;
+                
                     _fireWait += fireDelay;
                     _isGoingToFire = false;
-                }
+                
             }
 
             _isFiringOnNextUpdate = false;
@@ -896,20 +897,23 @@ namespace CoverShooter
         /// <summary>
         /// Cast a single bullet using raycasting.
         /// </summary>
-        private bool fire(float delay, bool consume) {
+        private bool fire(bool consume) {
 
             Allow(false);
             
             Character.GetComponent<Animator>().SetTrigger("FireShot");
             return true;
         }
-
+        DebugRayHelper debugRayHelper;
         public void AnimFireTrigger() {
 
             bool isFriend;
             var direction = calculateRaycastDirection();
             var hit = Raycast(RaycastOrigin, direction, out isFriend, true);
-            Debug.DrawRay(RaycastOrigin, direction, Color.red);
+            if (debugRayHelper == null) {
+                debugRayHelper = gameObject.AddComponent<DebugRayHelper>();
+            }
+            debugRayHelper.SetRay(RaycastOrigin, direction);
             if (Character != null)
                 Character.KeepAiming();
 

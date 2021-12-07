@@ -45,6 +45,7 @@ public class Character : Living
     public int swordsmanship = 5;
     public int dualwielding = 5;
     public int archery = 5;
+    public int pistols = 5;
 
     //Survival Attributes
     public int survivalist = 10;

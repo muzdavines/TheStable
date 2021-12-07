@@ -87,7 +87,9 @@ public class Game : MonoBehaviour {
         leagues.Add(new League() { leagueLevel = 0, leagueName = "Premiere League" });
         playerStable.stableName = "Player's Stable";
         leagues[0].InitLeague();
-        playerStable.inventory = new List<Item>();
+        if (playerStable == null) {
+            playerStable.inventory = new List<Item>();
+        }
         for (int i=0; i < 4; i++) {
            // playerStable.inventory.Add(Instantiate(Resources.Load<Item>("LongswordSO")));
         }

@@ -18,7 +18,6 @@ public class MissionCharacter : MonoBehaviour, MissionCharacterStateOwner
     public Animator anim;
     public Character character;
     public HealthBar healthBar;
-    public CombatTestController.CombatCharacter combatChar;
     public Transform shoulderCam;
     public Transform rHand, lHand, rHandHolster, lHandHolster, rLeg, lLeg;
     public Move[] activeMoves = new Move[3];

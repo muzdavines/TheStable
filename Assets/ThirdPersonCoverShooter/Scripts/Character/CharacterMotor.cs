@@ -5209,7 +5209,7 @@ namespace CoverShooter
                 {
                     var canFire = !_isWeaponBlocked && !_isPumping && _postPumpDelay < float.Epsilon;
                     var gun = EquippedWeapon.Gun;
-
+                    if (!canFire) { print(_isWeaponBlocked + ":isWeaponBlocked"); }
                     if (gun == null || gun.LoadedBulletsLeft == 0)
                         canFire = false;
                     print(transform.root.name + " Can Fire: " + canFire + " // Wants to Fire: " + _wantsToFire);

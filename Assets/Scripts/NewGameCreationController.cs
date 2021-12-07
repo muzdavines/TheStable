@@ -11,6 +11,7 @@ public class NewGameCreationController : MonoBehaviour
     public int startingGold = 400;
     public List<MoveModifier> mods;
     public List<Training> trainingAdds;
+    public List<Item> startingItems;
     public string myText;
 
     public void Start()
@@ -26,9 +27,8 @@ public class NewGameCreationController : MonoBehaviour
     {
         CreateNewGame(warlord);
     }
-    public void CreateNewGame(string warlord)
-    {
-        
+    public void CreateNewGame(string warlord) {
+
         DontDestroyOnLoad(gameObject);
         SceneManager.LoadScene("StableManagement");
         Game game = Game.instance;
@@ -55,6 +55,10 @@ public class NewGameCreationController : MonoBehaviour
         //Game.instance.playerStable.availableTrainings.Add(new Training() { type = Training.Type.Attribute, training = "negotiating", duration = 2, cost = 50 });
         foreach (var training in trainingAdds) {
             Game.instance.playerStable.availableTrainings.Add(training);
+        }
+        Game.instance.playerStable.inventory = new List<Item>();
+        foreach (var item in startingItems) {
+            Game.instance.playerStable.inventory.Add(Instantiate(item));
         }
         Game.instance.missionContractList = Instantiate<MissionList>(Resources.Load<MissionList>("1000"));
         //Game.instance.playerStable.finance.businesses.Add(new Finance.Business() { benefit = Finance.Business.Benefit.Gold, description = "Market Stall in Genoa", duration = 12, number = 125 });
