@@ -69,7 +69,7 @@ namespace CoverShooter
         public Action<float> Changed;
 
         private CharacterMotor _motor;
-
+        private ICharacterHealthListener[] _healthListeners;
         private bool _isDead;
         private float _previousHealth;
 
@@ -92,6 +92,7 @@ namespace CoverShooter
         {
             _previousHealth = Health;
             _motor = GetComponent<CharacterMotor>();
+            _healthListeners = Util.GetInterfaces<ICharacterHealthListener>(gameObject);
         }
 
         private void OnEnable()
@@ -180,8 +181,9 @@ namespace CoverShooter
             Health = Mathf.Clamp(Health - amount, 0, MaxHealth);
             check();
 
-            if (Health <= 0 && _motor != null)
-                _motor.Die();
+            if (Health <= 0) {
+                Die();
+            }
         }
 
         public void Deal(Hit hit) {
@@ -193,8 +195,8 @@ namespace CoverShooter
             
             check();
             myMissionCharacter.healthBar.SetMeters(this);
-            if (Health <= 0 && _motor != null)
-                _motor.Die();
+            if (Health <= 0)
+                Die();
         }
 
         public void Deal(StableDamage damage) {
@@ -210,8 +212,25 @@ namespace CoverShooter
             
             check();
             myMissionCharacter.healthBar.SetMeters(this);
-            if (Health <= 0 && _motor != null)
-                _motor.Die();
+            if (Health <= 0) {
+                print("DEAD!!!!");
+                Die();
+            }
+        }
+        bool IsAlive = true;
+        public void Die() {
+            if (!IsAlive)
+                return;
+            myMissionCharacter.Die();
+            
+            IsAlive = false;
+            RFX4_Decal[] decals = GetComponentsInChildren<RFX4_Decal>();
+            for (int z = 0; z < decals.Length; z++) {
+                Destroy(decals[z].gameObject);
+            }
+            for (int i = 0; i < _healthListeners.Length; i++) {
+                _healthListeners[i].OnDead();
+            }
         }
 
         private void check()

@@ -926,8 +926,6 @@ namespace CoverShooter
                 if (hit.collider == null)
                     end = RaycastOrigin + Distance * direction;
 
-                var damage = Damage * (Character != null ? Character.DamageMultiplier : 1);
-
                 HitType type;
 
                 switch (Type) {
@@ -942,7 +940,7 @@ namespace CoverShooter
                         break;
                 }
 
-                var hitStruct = new Hit(hit.point, -direction, damage, Character.gameObject, hit.collider == null ? null : hit.collider.gameObject, type, DamageResponseWaitTime);
+                var hitStruct = new Hit(hit.point, -direction, 0, Character.gameObject, hit.collider == null ? null : hit.collider.gameObject, type, DamageResponseWaitTime);
 
                 if (Bullet != null) {
                     var bullet = GameObject.Instantiate(Bullet);
@@ -981,7 +979,7 @@ namespace CoverShooter
                     } else {
                         currentMove = Character.GetComponent<MissionCharacter>().activeMoves[currentMoveIndex];
                         var normal = (Character.transform.position - hit.transform.position).normalized;
-                        var thisHitStruct = new Hit(hit.collider.ClosestPointOnBounds(transform.position), normal, Damage, Character.gameObject, hit.transform.gameObject, type, DamageResponseWaitTime, currentMove);
+                        var thisHitStruct = new Hit(hit.collider.ClosestPointOnBounds(transform.position), normal, 0, Character.gameObject, hit.transform.gameObject, type, DamageResponseWaitTime, currentMove);
                         print("Ranged Hit success! " + currentMove.staminaDamage);
                         hitHealth.GetComponent<CharacterMotor>().OnHit(thisHitStruct);
                         //hitHealth.SendMessage("OnHit", thisHitStruct, SendMessageOptions.DontRequireReceiver);

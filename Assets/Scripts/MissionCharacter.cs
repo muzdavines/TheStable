@@ -2,6 +2,7 @@
 using EnergyBarToolkit;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -9,19 +10,26 @@ using UnityEngine.AI;
 [RequireComponent(typeof(NavMeshAgent))]
 [RequireComponent(typeof(CapsuleCollider))]
 [RequireComponent(typeof(Animator))]
+public class MissionCharacter : MonoBehaviour, MissionCharacterStateOwner {
 
-
-public class MissionCharacter : MonoBehaviour, MissionCharacterStateOwner
-{
-    
-    NavMeshAgent agent;
+    public NavMeshAgent agent;
     public Animator anim;
     public Character character;
     public HealthBar healthBar;
     public Transform shoulderCam;
     public Transform rHand, lHand, rHandHolster, lHandHolster, rLeg, lLeg;
+    public Transform target;
     public Move[] activeMoves = new Move[3];
     public int currentMoveIndex = 0;
+    public Posture posture;
+    public int team;
+    public MissionController missionController;
+    public float detectRange = 100;
+    public float minAttackRange = 0;
+    public float maxAttackRange = 50;
+
+    //weapons
+    public GameObject leftHandWeapon, rightHandWeapon, leftLegWeapon, rightLegWeapon;
     /// <summary>
     /// Interface Reqs
     /// </summary>
@@ -31,13 +39,12 @@ public class MissionCharacter : MonoBehaviour, MissionCharacterStateOwner
     public MissionCharacter controller { get; set; }
     public bool generateRandom = false; //use this for an ad hoc instance that you create manually in a scene
     // Start is called before the first frame update
-    void Start()
-    {
+    void Start() {
         if (generateRandom) {
             Init(new Character() { toughness = 10, melee = Random.Range(0, 15), landNavigation = -100, strength = 10, parry = 20, health = 3, name = Names.Warrior[Random.Range(0, 10)] });
         }
-        for (int i=0; i < 3; i++) {
-            if (character.activeMoves[i] == null) { character.activeMoves[i] = new Move() { moveType = MoveType.None }; } 
+        for (int i = 0; i < 3; i++) {
+            if (character.activeMoves[i] == null) { character.activeMoves[i] = new Move() { moveType = MoveType.None }; }
             activeMoves[i] = character.activeMoves[i];
         }
     }
@@ -46,41 +53,44 @@ public class MissionCharacter : MonoBehaviour, MissionCharacterStateOwner
         Vector3 vec = new Vector3();
         vec = transform.position;
         Animator _animator = GetComponent<Animator>();
-        RuntimeAnimatorController animControl = on ? Resources.Load<RuntimeAnimatorController>("CharacterAnimatorStable") : Resources.Load<RuntimeAnimatorController>("Character");
+        RuntimeAnimatorController animControl = on ? Resources.Load<RuntimeAnimatorController>("CharacterAnimatorStable2") : Resources.Load<RuntimeAnimatorController>("Character");
         if (healthBar != null) {
             healthBar.Hide(!on);
         }
         _animator.runtimeAnimatorController = animControl;
         _animator.Rebind();
-        
-        GetComponent<NavMeshAgent>().enabled = !on;
-        GetComponent<FighterBrain>().enabled = on;
-        GetComponent<AIMovement>().enabled = on;
-        if (GetComponent<AIAssault>()) {
-            GetComponent<AIAssault>().enabled = on;
-        }
-        GetComponent<CharacterMotor>().enabled = on;
-        GetComponent<Rigidbody>().isKinematic = !on;
         transform.position = vec;
+        _animator.SetFloat("BodyValue0", 1);
+        _animator.SetFloat("CrouchToStand", 1);
     }
 
-    public void Init(Character c) {
+    public void Init(Character c, MissionCharacterState initialState = null) {
         Debug.Log("Initializing " + name);
         SetCombatComponents(false);
         controller = this;
         anim = GetComponent<Animator>();
+        agent = GetComponent<NavMeshAgent>();
+        anim.SetBool("IsDead", false);
         shoulderCam = transform.Find("ShoulderCam");
         character = c;
-        MissionCharacterState initState = new MissionCharacterStateIdle();
+        MissionCharacterState initState;
+        if (initialState == null) {
+            initState = new MissionCharacterStateIdle();
+        } else {
+            initState = initialState;
+        }
         initState.owner = this;
         this.state = initState;
+        initState.thisChar = this;
         initState.EnterFrom(null);
         InitHealth();
         InitHealthBarAndVisuals();
         InitWeaponsAndArmor();
         transform.name = c.name;
         c.currentMissionCharacter = this;
-        
+        missionController = FindObjectOfType<MissionController>();
+        anim.SetFloat("BodyValue0", 1);
+        anim.SetFloat("CrouchToStand", 1);
     }
     bool healthBarInitialized = false;
     bool weaponsInited = false;
@@ -90,16 +100,12 @@ public class MissionCharacter : MonoBehaviour, MissionCharacterStateOwner
         health.balance = health.maxBalance = character.maxBalance;
         health.mind = health.maxMind = character.maxMind;
         health.Health = health.MaxHealth = character.maxHealth;
-        
+
     }
     public void InitWeaponsAndArmor() {
         print("Initializing Weapons and Armor for " + character.name);
         if (weaponsInited) { return; }
         weaponsInited = true;
-        CharacterMotor motor = GetComponent<CharacterMotor>();
-        AIAssault assault = GetComponent<AIAssault>();
-        CharacterInventory inv = GetComponent<CharacterInventory>();
-        AIFire fire = GetComponent<AIFire>();
 
         if (character.weapon == null || character.weapon.name == "") {
             Weapon startingWeaponSO = Resources.Load<Weapon>(character.startingWeapon);
@@ -108,40 +114,27 @@ public class MissionCharacter : MonoBehaviour, MissionCharacterStateOwner
         Weapon weaponBlueprint = character.weapon;
         GameObject weaponPrefab = Resources.Load<GameObject>(weaponBlueprint.prefabName);
         GameObject defaultFists = Resources.Load<GameObject>("Fists");
-        GameObject rHandWeapon = Instantiate<GameObject>(weaponPrefab, rHand);
-        rHandWeapon.transform.localPosition = Vector3.zero;
-        rHandWeapon.transform.localRotation = Quaternion.identity;
-        rHandWeapon.GetComponent<BaseWeapon>().Damage = weaponBlueprint.damage;
-        rHandWeapon.GetComponent<BaseWeapon>().InitWeapon(this);
-        motor.Weapon.RightItem = rHandWeapon;
-        motor.Weapon.IsDualWielding = weaponBlueprint.dualWield;
-        motor.Weapon.IsHeavy = weaponBlueprint.isHeavy;
-        inv.Weapons = new WeaponDescription[1];
-        inv.Weapons[0] = new WeaponDescription() { IsDualWielding = weaponBlueprint.dualWield, IsHeavy = weaponBlueprint.isHeavy, RightItem = rHandWeapon };
-        print("Need assault settings here.");
-        fire.AutoFindType = rHandWeapon.GetComponent<BaseWeapon>().Type;
+        rightHandWeapon = Instantiate<GameObject>(weaponPrefab, rHand);
+        rightHandWeapon.transform.localPosition = Vector3.zero;
+        rightHandWeapon.transform.localRotation = Quaternion.identity;
+        rightHandWeapon.GetComponent<BaseWeapon>().InitWeapon(this, weaponBlueprint);
+
         GameObject leftHandPrefab = weaponBlueprint.dualWield ? weaponPrefab : defaultFists;
-        GameObject lHandWeapon = Instantiate<GameObject>(leftHandPrefab, lHand);
-        lHandWeapon.transform.localPosition = Vector3.zero;
-        lHandWeapon.transform.localRotation = Quaternion.identity;
-        motor.Weapon.LeftItem = lHandWeapon;
-        inv.Weapons[0].LeftItem = lHandWeapon;
-        lHandWeapon.GetComponent<BaseWeapon>().Damage = weaponBlueprint.dualWield ? weaponBlueprint.damage : 5;
+        leftHandWeapon = Instantiate<GameObject>(leftHandPrefab, lHand);
+        leftHandWeapon.transform.localPosition = Vector3.zero;
+        leftHandWeapon.transform.localRotation = Quaternion.identity;
+        leftHandWeapon.GetComponent<BaseWeapon>().InitWeapon(this, weaponBlueprint);
 
         GameObject legWeaponPrefab = weaponBlueprint.usesLegs ? Resources.Load<GameObject>(weaponBlueprint.prefabNameLegs) : defaultFists;
-        GameObject lLegWeapon = Instantiate<GameObject>(legWeaponPrefab, lLeg);
-        lLegWeapon.transform.localPosition = Vector3.zero;
-        lLegWeapon.transform.localRotation = Quaternion.identity;
-        motor.Weapon.LeftLegItem = lLegWeapon;
-        inv.Weapons[0].LeftItem = lLegWeapon;
-        lLegWeapon.GetComponent<BaseWeapon>().Damage = weaponBlueprint.damage;
+        leftLegWeapon = Instantiate<GameObject>(legWeaponPrefab, lLeg);
+        leftLegWeapon.transform.localPosition = Vector3.zero;
+        leftLegWeapon.transform.localRotation = Quaternion.identity;
+        leftLegWeapon.GetComponent<BaseWeapon>().InitWeapon(this, weaponBlueprint);
 
-        GameObject rLegWeapon = Instantiate<GameObject>(legWeaponPrefab, rLeg);
-        rLegWeapon.transform.localPosition = Vector3.zero;
-        rLegWeapon.transform.localRotation = Quaternion.identity;
-        motor.Weapon.RightLegItem = rLegWeapon;
-        inv.Weapons[0].RightItem = rLegWeapon;
-        rLegWeapon.GetComponent<BaseWeapon>().Damage = weaponBlueprint.damage;
+        rightLegWeapon = Instantiate<GameObject>(legWeaponPrefab, lLeg);
+        rightLegWeapon.transform.localPosition = Vector3.zero;
+        rightLegWeapon.transform.localRotation = Quaternion.identity;
+        rightLegWeapon.GetComponent<BaseWeapon>().InitWeapon(this, weaponBlueprint);
     }
     public void InitHealthBarAndVisuals() {
         if (healthBarInitialized) {
@@ -153,15 +146,15 @@ public class MissionCharacter : MonoBehaviour, MissionCharacterStateOwner
             int numChildren = transform.childCount;
             print("ChildCount: " + numChildren);
             for (int i = 0; i < numChildren; i++) {
-               
+
                 print(transform.GetChild(i).name);
                 SkinnedMeshRenderer smr = transform.GetChild(i).GetComponent<SkinnedMeshRenderer>();
-                    if (smr != null) { smr.material = character.mat; }
+                if (smr != null) { smr.material = character.mat; }
             }
         }
 
         print("Faking Health, TODO: Change");
-        
+
         healthBarInitialized = true;
         GameObject bar = Instantiate(Resources.Load<GameObject>("HealthBar"), Helper.GetMainCanvas().transform);
         bar.name = character.name + " Health";
@@ -170,12 +163,18 @@ public class MissionCharacter : MonoBehaviour, MissionCharacterStateOwner
         UpdateHealthBar();
         healthBar.Hide(true);
     }
-    // Update is called once per frame
-    void Update()
-    {
-     if (state != null) {
+    public bool debugState;
+    void Update() {
+        if (state != null) {
             state.Update();
-        }   
+        }
+        anim.SetFloat("BodyValue0", 1);
+        anim.SetFloat("CrouchToStand", 1);
+    }
+    void OnDrawGizmos() {
+        if (debugState) {
+            Handles.Label(transform.position, state.GetType().ToString());
+        }
     }
 
     public void ControlCam(bool myControl = true, float time = 0) {
@@ -202,52 +201,16 @@ public class MissionCharacter : MonoBehaviour, MissionCharacterStateOwner
         if (character.incapacitated) { Debug.Log("Can't Walk, Dead " + character.name); return; }
         state.TransitionTo(new MissionCharacterStateWalkTo() { target = target });
     }
-    public void DoCombatAnimation (CombatTestController.BattleEntry battleEntry, bool attacker) {
-        print("#DoCombatAnimation# " + name + "  " + battleEntry.result.ToString() + "  " + attacker);
-        if (!attacker && battleEntry.didLandKillingBlow) {
-            CombatDeath();
-            return;
-        }
-        switch (battleEntry.result) {
-            case CombatTestController.BattleEntry.Result.MeleeHit:
-                if (attacker) {
-                    MeleeAttack(battleEntry.defender.go.transform, battleEntry.healthDamage);
-                } else { DefendMeleeAttack(); }
-                break;
-            case CombatTestController.BattleEntry.Result.MeleeParry:
-                if (attacker) {
-                    MeleeAttack(battleEntry.defender.go.transform, battleEntry.healthDamage);
-                }
-                else { DefendMeleeAttack(1); }
-                break;
-            case CombatTestController.BattleEntry.Result.MeleeMiss:
-                if (attacker) {
-                    MeleeAttack(battleEntry.defender.go.transform, battleEntry.healthDamage);
-                }
-                else { DefendMeleeAttack(2); }
-                break;
-            default:
-                if (attacker) {
-                    MeleeAttack(battleEntry.defender.go.transform);
-                }
-                else { DefendMeleeAttack(battleEntry.result == CombatTestController.BattleEntry.Result.MeleeParry ? 1 : 0); }
-                break;
-        }
+
+    public void ChangePostureAttack() {
+        print("Changeing Posture to Attack with Target: " + target.name);
+        state.TransitionTo(new MissionCharacterStatePostureAttack());
+    }
+    public void StopAndFaceTarget() {
+        agent.isStopped = true;
+        transform.LookAt(target);
     }
 
-
-
-
-
-    public void CombatDeath() {
-        state.TransitionTo(new MissionCharacterStateDeath());
-    }
-    public void MeleeAttack(Transform target, int dotDamage = 0) {
-        state.TransitionTo(new MissionCharacterStateMeleeAttack() { attackTarget = target, dotDamage = dotDamage });
-    }
-    public void DefendMeleeAttack(float defenseType = 0) {
-        state.TransitionTo(new MissionCharacterStateDefendMeleeAttack() { defenseType = defenseType });
-    }
     public void FindNextStep() {
         if (FindObjectOfType<MissionController>() == null) { return; }
         Transform nextStep = FindObjectOfType<MissionController>().GetNextPOI();
@@ -263,6 +226,15 @@ public class MissionCharacter : MonoBehaviour, MissionCharacterStateOwner
     public void BroadcastWalkTo(Transform walkTo, bool includeActiveChar = false) {
         if (FindObjectOfType<MissionController>() == null) { return; }
         FindObjectOfType<MissionController>().SetAllHeroesWalkTo(walkTo, includeActiveChar, this);
+    }
+    public float DistanceToTarget() {
+        if (target == null) { Debug.Log("target null");  return 0; }
+        return Vector3.Distance(transform.position, target.position);
+    }
+    public void RunAtTarget() {
+        print("RunAtTarget");
+        agent.SetDestination(target.position);
+        agent.isStopped = false;
     }
 
     
@@ -297,6 +269,10 @@ public class MissionCharacter : MonoBehaviour, MissionCharacterStateOwner
         }
     }
 
+    public void Die() {
+        anim.SetBool("IsDead", true);
+    }
+
     public void AnimEvent(string message) {
         print("Anim " + message);
         state.AnimEventReceiver(message);
@@ -308,3 +284,6 @@ public class MissionCharacter : MonoBehaviour, MissionCharacterStateOwner
     }
 
 }
+
+
+public enum Posture { Idle, Attack, Retreat, PursueBall, PursueBallCarrier, RunToGoal, DefendLocation, FollowLeader }

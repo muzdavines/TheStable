@@ -9,6 +9,7 @@ public class MissionCharacterState
     public MissionCharacterStateOwner owner;
     public Animator anim;
     public MissionCharacter thisChar;
+    public Transform target { get { return thisChar?.target; } set { if (thisChar != null) { thisChar.target = value; } else { Debug.Log("Trying to Set Target on NullChar"); } } }
     public NavMeshAgent agent;
     public List<Roll> playerScore = new List<Roll>();
     public List<Roll> otherScore = new List<Roll>();
@@ -24,6 +25,7 @@ public class MissionCharacterState
     public void TransitionTo(MissionCharacterState state) {
         owner.state = state;
         state.owner = owner;
+        thisChar = owner.controller;
         this.WillExit();
         state.EnterFrom(this);
         if (Application.isEditor) {
@@ -60,7 +62,7 @@ public class MissionCharacterState
     }
 
     public virtual void WillExit() {
-        Helper.Cam().SetTarget(thisChar.shoulderCam.transform);
+        //Helper.Cam().SetTarget(thisChar.shoulderCam.transform);
     }
     public virtual void StartAnim() {
 

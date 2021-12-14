@@ -53,35 +53,44 @@ namespace CoverShooter
         public Move thisMove;
         public string nextComboMove;
         public int thisComboNum;
-        
-        public override void OnStateEnter(Animator animator, AnimatorStateInfo animatorStateInfo, int layerIndex)
-        {
+        public MissionCharacter thisChar;
+
+        public override void OnStateEnter(Animator animator, AnimatorStateInfo animatorStateInfo, int layerIndex) {
             animator.ResetTrigger("ComboHit");
             animator.ResetTrigger("Hit");
             animator.ResetTrigger("EndMelee");
-            
+
             thisComboNum = animator.GetInteger("ComboNum");
-            
+            thisChar = animator.GetComponent<MissionCharacter>();
             Debug.Log("Entering, ComboNUM: " + thisComboNum);
             var motor = CharacterMotor.animatorToMotorMap[animator];
+            var character = motor.GetComponent<MissionCharacter>();
             thisMove = motor.GetComponent<MissionCharacter>().activeMoves[thisComboNum];
-            animator.SetFloat("Combo", (float)motor.GetComponent<MissionCharacter>().character.activeMoves[thisComboNum].moveType);  
+            animator.SetFloat("Combo", (float)motor.GetComponent<MissionCharacter>().character.activeMoves[thisComboNum].moveType);
             Limb = thisMove.limb;
-            
+            animator.SetTrigger("ComboHit");
             //EnableCombo = motor.GetComponent<MissionCharacter>().character.HasMove(nextComboMove);
             EnableCombo = true;
             if (!EnableCombo) {
                 End = .9f;
             }
-            if (!motor.IsPerformingMelee)
+            if (!motor.IsPerformingMelee) {
                 motor.InputMeleeAttackStart(animatorStateInfo.fullPathHash);
-            else
+            
+            ((MissionCharacterStateAttack)character.state).AttackStart(animatorStateInfo.fullPathHash, Limb);
+            }
+            else {
                 motor.InputMeleeComboStart(animatorStateInfo.fullPathHash);
+                //((MissionCharacterStateAttack)character.state).ComboStart(animatorStateInfo.fullPathHash);
+
+            }
         }
 
         public override void OnStateExit(Animator animator, AnimatorStateInfo animatorStateInfo, int layerIndex)
         {
             var motor = CharacterMotor.animatorToMotorMap[animator];
+            MissionCharacter character = motor.GetComponent<MissionCharacter>();
+
 
             if (!motor.IsPerformingMelee)
                 motor.StopMeleeRootMotion();
@@ -117,17 +126,19 @@ namespace CoverShooter
             else
             {
                 if (animatorStateInfo.normalizedTime >= Moment)
-                    motor.InputMeleeMoment(animatorStateInfo.fullPathHash, Limb);
+                    //motor.InputMeleeMoment(animatorStateInfo.fullPathHash, Limb);
 
                 if (EnableCombo && animatorStateInfo.normalizedTime >= ComboCheck)
-                    motor.InputMeleeComboCheck();
+                    //motor.InputMeleeComboCheck();
 
                 if (animatorStateInfo.normalizedTime >= ScanEnd) {
-                    motor.InputEndMeleeScan(animatorStateInfo.fullPathHash, Limb);
+                    //motor.InputEndMeleeScan(animatorStateInfo.fullPathHash, Limb);
+                    ((MissionCharacterStateAttack)thisChar.state).InputEndMeleeScan(animatorStateInfo.fullPathHash, Limb);
                 }
                 else if (animatorStateInfo.normalizedTime >= ScanStart) {
                     Debug.Log("Scanning; " + thisMove);
-                    motor.InputBeginMeleeScan(animatorStateInfo.fullPathHash, Limb, thisMove);
+                    //motor.InputBeginMeleeScan(animatorStateInfo.fullPathHash, Limb, thisMove);
+                    ((MissionCharacterStateAttack)thisChar.state).InputBeginMeleeScan(animatorStateInfo.fullPathHash, Limb, thisMove);
                 }
             }
             if (!EnableCombo) {

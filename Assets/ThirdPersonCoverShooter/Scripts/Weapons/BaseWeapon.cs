@@ -12,14 +12,15 @@ namespace CoverShooter {
         /// <summary>
         /// Damage done by a melee attack.
         /// </summary>
-        [Tooltip("Damage done by an attack.")]
-        public float Damage = 20;
 
-        public virtual void InitWeapon(MissionCharacter c) {
+        public virtual void InitWeapon(MissionCharacter c, Weapon w) {
             myCharacter = c;
+            myWeapon = w;
+
         }
 
         public Move currentMove;
         public MissionCharacter myCharacter;
+        public Weapon myWeapon;
     }
 }

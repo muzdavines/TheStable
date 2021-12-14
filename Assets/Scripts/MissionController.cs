@@ -16,6 +16,7 @@ public class MissionController : MonoBehaviour
     public MissionContract contract;
     public List<Character> heroes;
     public List<Character> currentEnemies;
+    public List<MissionCharacter> allChars;
     public GameObject currentStage;
     public bool initialized;
     public CombatController combatController;
@@ -123,17 +124,17 @@ public class MissionController : MonoBehaviour
        
     }
 
-    public void SpawnChars(List<Character> chars, List<Transform> spawns) {
-        BaseSpawnChars(chars, spawns);
+    public List<Character> SpawnChars(List<Character> chars, List<Transform> spawns, MissionCharacterState initialState = null) {
+        return BaseSpawnChars(chars, spawns, initialState);
     }
 
-   void BaseSpawnChars(List<Character> chars, List<Transform> spawns) {
+   List<Character> BaseSpawnChars(List<Character> chars, List<Transform> spawns, MissionCharacterState initialState = null) {
         print("Spawn Base Chars");
         for (int i = 0; i < chars.Count; i++) {
             if (chars[i].incapacitated) { continue; }
             GameObject co = Instantiate<GameObject>(Resources.Load<GameObject>(chars[i].modelName), spawns[i].transform.position, Quaternion.identity);
             MissionCharacter m = co.GetComponent<MissionCharacter>();
-            m.Init(chars[i]);
+            m.Init(chars[i], initialState);
             chars[i].currentMissionCharacter = m;
             co.GetComponent<NavMeshAgent>().enabled = false;
             co.transform.position = spawns[i].transform.position;
@@ -142,18 +143,10 @@ public class MissionController : MonoBehaviour
             
         }
         CameraController cam = Camera.main.GetComponent<CameraController>();
-        
-        cam.cameraTarget = heroes[0].currentObject;
-        
-        
-        return;
-        //yield return new WaitForSeconds(1.0f);
-        for (int x = 0; x < chars.Count; x++) {
-            print(x);
-            chars[x].currentObject.transform.position = spawns[0].transform.position;
-            chars[x].currentObject.GetComponent<NavMeshAgent>().enabled = true;
-        }
-        Camera.main.GetComponent<CameraController>().cameraTarget = heroes[0].currentObject;
+        UpdateChars();
+        return chars;
+        //cam.cameraTarget = heroes[0].currentObject;
+
     }
 
     // Update is called once per frame
@@ -261,6 +254,14 @@ public class MissionController : MonoBehaviour
         }
         if (pois.Count != 0) {
             pois[0].gameObject.SetActive(true);
+        }
+    }
+
+    public void UpdateChars() {
+        var _chars = FindObjectsOfType<MissionCharacter>();
+        allChars = new List<MissionCharacter>();
+        foreach (var _c in _chars) {
+            allChars.Add(_c);
         }
     }
    /*TODO: Hierarchy system of required steps so if things go sideways,

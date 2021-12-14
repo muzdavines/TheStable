@@ -21,7 +21,7 @@ namespace CoverShooter
         public float DamageResponseWaitTime = 0;
 
         private bool _isAttacking;
-        private bool _isScanning;
+        public bool _isScanning;
         private float _cooldown;
 
         private List<GameObject> _receptors = new List<GameObject>();
@@ -34,11 +34,10 @@ namespace CoverShooter
             _collider = GetComponent<Collider>();
             _listeners = Util.GetInterfaces<IMeleeListener>(gameObject);
         }
-        public override void InitWeapon(MissionCharacter c) {
-            base.InitWeapon(c);
+        public override void InitWeapon(MissionCharacter c, Weapon w) {
+            base.InitWeapon(c, w);
             print("This is where the weapon gets modified with the character's attributes. Need to specifiy which ones");
-            Damage = Damage * (1 + c.character.pugilism);
-            Cooldown = Cooldown * (1 - (c.character.pugilism/20));
+            //Cooldown = Cooldown * (1 - (c.character.pugilism/20));
         }
 
         private void OnTriggerEnter(Collider other)
@@ -92,7 +91,7 @@ namespace CoverShooter
 
             print("#MeleeCollision#" + transform.parent.name + " Melee collision " + other.transform.name);
 
-            var normal = (Character.transform.position - obj.transform.position).normalized;
+            var normal = (transform.position - obj.transform.position).normalized;
 
             HitType type;
 
@@ -111,7 +110,7 @@ namespace CoverShooter
                     break;
             }
             print("Melee.cs, currentMove: " + currentMove.name);
-            var hit = new Hit(other.ClosestPointOnBounds(transform.position), normal, Damage, Character.gameObject, other.gameObject, type, DamageResponseWaitTime, currentMove);
+            var hit = new Hit(other.ClosestPointOnBounds(transform.position), normal, 0, myCharacter.gameObject, other.gameObject, type, DamageResponseWaitTime, currentMove);
             other.SendMessage("OnHit", hit, SendMessageOptions.DontRequireReceiver);
 
             for (int i = 0; i < _listeners.Length; i++)
@@ -150,9 +149,10 @@ namespace CoverShooter
         /// </summary>
         public override void BeginScan()
         {
+            print("MElee Begin Scan");
             if (_isScanning)
                 return;
-
+            print("Melee Cols on");
             _isScanning = true;
             _collider.enabled = true;
             _receptors.Clear();
@@ -161,10 +161,12 @@ namespace CoverShooter
                 _listeners[i].OnMeleeAttack();
         }
         public override void BeginScan(Move _move) {
+            print("BEginScan");
             if (_move == null) { print("trying a null move"); }
             else {
                 currentMove = _move;
             }
+            print("Override BeginScan");
             BeginScan();
         }
         /// <summary>
@@ -172,6 +174,7 @@ namespace CoverShooter
         /// </summary>
         public override void EndScan()
         {
+            print("Melee EndScan");
             if (_isScanning)
             {
                 _collider.enabled = false;
