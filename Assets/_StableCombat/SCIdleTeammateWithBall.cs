@@ -2,25 +2,27 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SCGetTackled : StableCombatCharState {
+public class SCIdleTeammateWithBall : SCTeammateBallCarrierState
+{
     public override void EnterFrom(StableCombatCharState state) {
         base.EnterFrom(state);
-        canGrabBall = false;
-        checkForIdle = true;
+        thisChar.anim.ResetAllTriggers();
         thisChar.agent.isStopped = true;
-        thisChar.agent.velocity = Vector3.zero;
-        thisChar.agent.destination = thisChar.transform.position;
-        thisChar.anim.SetTrigger("Knockdown");
-        ball.GetDropped();
     }
     public override void Update() {
         base.Update();
-        thisChar.agent.isStopped = true;
+        if (thisChar.ball.holder == null || thisChar.ball.holder.team != thisChar.team) {
+            thisChar.Idle();
+        }
     }
 
     public override void AnimEventReceiver(string message) {
         base.AnimEventReceiver(message);
-        CheckIdle(message);
+    }
+    public override SCResolution ReceiveMessage(StableCombatChar sender, string message) {
+
+        Debug.Log("#Message#SCIdleTeammatewithBall " + message);
+            return base.ReceiveMessage(sender, message);
     }
 
     public override void WillExit() {

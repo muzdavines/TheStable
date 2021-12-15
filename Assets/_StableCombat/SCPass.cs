@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class SCPass : StableCombatCharState
 {
-    StableCombatChar passTarget;
+    public StableCombatChar passTarget;
     public override void EnterFrom(StableCombatCharState state) {
         base.EnterFrom(state);
-        passTarget = thisChar.GetNearestTeammate();
         if (passTarget == null) { thisChar.RunToGoalWithBall(); return; }
         thisChar.anim.SetTrigger("PassBall");
         thisChar.agent.isStopped = true;
+        canGrabBall = false;
     }
     public override void Update() {
         base.Update();
@@ -22,6 +22,7 @@ public class SCPass : StableCombatCharState
         if (message == "PassBall") {
             ball.PassTo(passTarget);
         }
+        CheckIdle(message);
     }
 
     public override void WillExit() {

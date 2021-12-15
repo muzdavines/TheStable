@@ -10,11 +10,35 @@ public class SCIdle : StableCombatCharState
     }
     public override void Update() {
         base.Update();
-        if (ball.holder == thisChar) { thisChar.IdleWithBall(); return; }
-        if (thisChar.ShouldPursueBall()) { thisChar.PursueBall(); return; }
-        if (thisChar.ShouldPursueBallCarrier()) { thisChar.PursueBallCarrier(); return; }
+        if (ball.holder == null) {
+            if (thisChar.ShouldPursueBall()) {
+                thisChar.PursueBall();
+                return;
+            } else {
+                //nobody has the ball, but I shouldn't get it
+                //go to zone on the field
+                //or maybe look for someone to fight
 
-
+                return;
+            }
+        }
+          
+        if (ball.holder == thisChar) {
+            thisChar.IdleWithBall();
+            return;
+        }
+        if (ball.holder.team == thisChar.team) {
+            thisChar.IdleTeammateWithBall();
+        } else {
+            //enemy must have ball at this point
+            if (thisChar.ShouldPursueBallCarrier()) {
+                thisChar.PursueBallCarrier();
+                return;
+            } else {
+                //enemy has ball but I shouldn't pursue
+                //should I defend my zone or beat someone up
+            }
+        }
         thisChar.agent.isStopped = true;
 
     }

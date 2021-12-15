@@ -2,20 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SCGetTackled : StableCombatCharState {
+public class SCDodgeTackle : StableCombatCharState
+{
+
     public override void EnterFrom(StableCombatCharState state) {
         base.EnterFrom(state);
+        thisChar.anim.SetTrigger("DodgeTackle");
+        thisChar.agent.isStopped = true;
+        thisChar.anim.applyRootMotion = true;
         canGrabBall = false;
         checkForIdle = true;
-        thisChar.agent.isStopped = true;
-        thisChar.agent.velocity = Vector3.zero;
-        thisChar.agent.destination = thisChar.transform.position;
-        thisChar.anim.SetTrigger("Knockdown");
-        ball.GetDropped();
     }
     public override void Update() {
         base.Update();
         thisChar.agent.isStopped = true;
+        thisChar.anim.applyRootMotion = true;
     }
 
     public override void AnimEventReceiver(string message) {
@@ -24,6 +25,7 @@ public class SCGetTackled : StableCombatCharState {
     }
 
     public override void WillExit() {
+        thisChar.anim.applyRootMotion = false;
         base.WillExit();
     }
 }

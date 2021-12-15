@@ -2,20 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SCGetTackled : StableCombatCharState {
+public class SCMissTackle : StableCombatCharState {
+
     public override void EnterFrom(StableCombatCharState state) {
         base.EnterFrom(state);
-        canGrabBall = false;
-        checkForIdle = true;
+        thisChar.anim.SetTrigger("MissTackle");
         thisChar.agent.isStopped = true;
-        thisChar.agent.velocity = Vector3.zero;
-        thisChar.agent.destination = thisChar.transform.position;
-        thisChar.anim.SetTrigger("Knockdown");
-        ball.GetDropped();
+        thisChar.anim.applyRootMotion = true;
     }
     public override void Update() {
         base.Update();
         thisChar.agent.isStopped = true;
+        thisChar.anim.applyRootMotion = true;
     }
 
     public override void AnimEventReceiver(string message) {
@@ -24,6 +22,7 @@ public class SCGetTackled : StableCombatCharState {
     }
 
     public override void WillExit() {
+        thisChar.anim.applyRootMotion = false;
         base.WillExit();
     }
 }

@@ -2,9 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SCShoot : StableCombatCharState
+public class SCShoot : SCBallCarrierState
 {
-
     public override void EnterFrom(StableCombatCharState state) {
         base.EnterFrom(state);
         thisChar.anim.SetTrigger("ShootBall");
@@ -21,6 +20,7 @@ public class SCShoot : StableCombatCharState
             thisChar.transform.LookAt(thisChar.enemyGoal.transform.position);
             thisChar.ball.Shoot(thisChar.enemyGoal);
         }
+        CheckIdle(message);
     }
 
     public override void WillExit() {

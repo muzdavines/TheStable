@@ -14,8 +14,7 @@ public class MovementAnimationController : MonoBehaviour
     }
 
     private void Update() {
-        
-        Debug.Log("Agent Speed: " + agent.speed);
+       // Debug.Log("Agent Speed: " + agent.speed);
         anim.SetFloat("MovementSpeed", agent.velocity.magnitude/agent.speed);
     }
 }

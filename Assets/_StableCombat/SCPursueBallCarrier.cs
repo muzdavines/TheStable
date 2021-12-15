@@ -17,14 +17,13 @@ public class SCPursueBallCarrier : StableCombatCharState
         Vector3 myPos = thisChar.transform.position;
         Vector3 holderPos = thisChar.ball.holder.transform.position;
         if (Vector3.Distance(thisChar.transform.position, thisChar.ball.holder.transform.position)<=1) {
-            thisChar.Tackle();
-            thisChar.ball.holder.GetTackled();
+            var resolution = thisChar.state.SendMessage(thisChar.ball.holder, "TryTackle");
+            bool didTackle = (resolution != null && resolution.success);
+            if (didTackle) { thisChar.Tackle(); return; } else { thisChar.MissTackle(); return; }
         }
         thisChar.agent.SetDestination(holderPos);
         thisChar.agent.isStopped = false;
-        
         ///if in range, try tackle. Might need messaging here, or just fire it. for now just do 50/50, pass tackle, fail animate a fall and stop the tackler for a bit
-
     }
 
     public override void AnimEventReceiver(string message) {

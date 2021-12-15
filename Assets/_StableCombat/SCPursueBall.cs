@@ -7,6 +7,7 @@ public class SCPursueBall : StableCombatCharState
     public override void EnterFrom(StableCombatCharState state) {
         base.EnterFrom(state);
         thisChar.agent.isStopped = false;
+        canGrabBall = true;
     }
     public override void Update() {
         base.Update();

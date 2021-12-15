@@ -17,9 +17,7 @@ public class SCKnockdown : StableCombatCharState
 
     public override void AnimEventReceiver(string message) {
         base.AnimEventReceiver(message);
-        if (message == "IdleStart") {
-            thisChar.Idle();
-        }
+        CheckIdle(message);
     }
 
     public override void WillExit() {

@@ -11,6 +11,7 @@ public class SCPickupBall : StableCombatCharState
             thisChar.agent.isStopped = true;
             thisChar.IdleWithBall();
         }
+        canGrabBall = false;
         
     }
     public override void Update() {
@@ -19,6 +20,7 @@ public class SCPickupBall : StableCombatCharState
 
     public override void AnimEventReceiver(string message) {
         base.AnimEventReceiver(message);
+        CheckIdle(message);
     }
 
     public override void WillExit() {

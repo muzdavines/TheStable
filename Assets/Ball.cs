@@ -28,7 +28,7 @@ public class Ball : MonoBehaviour
         isHeld = true;
         col.enabled = !isHeld;
         body.isKinematic = isHeld;
-        transform.parent = holder.transform;
+        transform.parent = holder._rightHand;
         transform.localPosition = new Vector3(0, 1, 0);
         return true;
     }
@@ -56,6 +56,10 @@ public class Ball : MonoBehaviour
         body.isKinematic = false;
         transform.parent = null;
         holder = null;
+    }
+    public void OnCollisionEnter(Collision collision) {
+        Debug.Log("#BallCollision#" + collision.transform.name);
+        collision.transform.GetComponent<StableCombatChar>()?.state.BallCollision(collision);
     }
 }
 

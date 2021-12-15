@@ -12,6 +12,7 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
     public NavMeshAgent agent;
     public Animator anim;
     public Transform _t;
+    public Transform _rightHand;
     public bool debugState;
     public int team;
     public Ball ball;
@@ -20,12 +21,21 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
     public float distToShoot;
     public float distToTrackBallCarrier;
     public Goal myGoal, enemyGoal;
+
+    public Vector3 position { get { return _t.position; } }
+
+    public int tackling = 10;
+    public int dodging = 10;
+
+    public Coach coach;
+    
     void Start()
     {
         controller = this;
         agent = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();
         ball = FindObjectOfType<Ball>();
+
         Goal[] tempGoals = FindObjectsOfType<Goal>();
         foreach (var tg in tempGoals) {
             if (tg.team == team) {
@@ -38,24 +48,34 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
         this.state = initState;
         initState.thisChar = this;
         initState.EnterFrom(null);
+        tackling = Random.Range(8, 18);
+        dodging = Random.Range(8, 18);
+        var tempChars = FindObjectsOfType<StableCombatChar>();
+        int teammateCount = 0;
+        int enemycount = 0;
+        foreach (var tc in tempChars) {
+            if (tc == this) { continue; }
+            if (tc.team == team) { teammateCount++; } else { enemycount++; }
+        }
+        foreach (var thisCoach in FindObjectsOfType<Coach>()) {
+            if (thisCoach.team == team) {
+                coach = thisCoach;
+                break;
+            }
+        }
     }
 
    void Update()
     {
         state.Update();
     }
-    public void SendMessageToPlayer(string s) {
-
-    }
-
-    public void ReceiveMessageFromPlayer(StableCombatChar sender, string s) {
-
-    }
-
+    
     public bool ShouldPursueBall() {
         if (ball == null) { return false; }
         if (ball.isHeld) { return false; }
-        if (ball.Distance(transform.position) <= distToTrackBall) { return true; }
+        if (ball.Distance(transform.position) <= distToTrackBall) {
+            return coach.AddBallPursuer(this);
+        }
         return false;
     }
     public bool ShouldPursueEnemy() {
@@ -82,12 +102,58 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
             var checkChar = hitCollider.GetComponent<StableCombatChar>();
             if (checkChar != null) {
                 if (checkChar.team != team) {
-                    //enemy in range
                     return true;
                 }
             }
         }
+        foreach (var teammate in coach.players) {
+            if (enemyGoal.Distance(this) > enemyGoal.Distance(teammate)) {
+                return true;
+            }
+        }
         return false;
+    }
+    public StableCombatChar GetPassTarget() {
+        int passTargetScore = 0;
+        StableCombatChar currentTarget = null;
+        foreach (var teammate in coach.players) {
+            Debug.Log("#PassTargetEval#" + teammate.name + " current state is " + teammate.state.GetType().ToString());
+            if (Vector3.Distance(teammate.transform.position, position) < 3) {
+                Debug.Log("#PassTargetEval#" + teammate.name + " is too close");
+                continue;
+            }
+            if (teammate.state.GetType() == typeof(SCKnockdown)) {
+                Debug.Log("#PassTargetEval#" + teammate.name + " is too knocked down.");
+                continue;
+            }
+            RaycastHit hit;
+            if (Physics.Raycast(position, (teammate.position - position), out hit)){
+                if (hit.transform.GetComponent<StableCombatChar>() != teammate) {
+                    continue;
+                }
+            }
+            //Debug.Log("#PassTargetEval# My Dist to Goal: " + enemyGoal.Distance(this) + "  Teammate Dist to Goal: " + enemyGoal.Distance(teammate));
+            if (enemyGoal.Distance(this) > enemyGoal.Distance(teammate)) {
+                if (passTargetScore <= 5) {
+                    passTargetScore = 5;
+                    currentTarget = teammate;
+                    Debug.Log("#PassTargetEval#" + teammate.name + " is closer to the goal than me, marking for pass.");
+                }
+            }
+            else { Debug.Log("#PassTargetEval#" + teammate.name + " is further from the goal than me."); continue; }
+            if (teammate.state.GetType() == typeof(SCRunToGoalWithoutBall)) {
+                if (passTargetScore <= 10) {
+                    passTargetScore = 10;
+                    currentTarget = teammate;
+                    Debug.Log("#PassTargetEval#" + teammate.name + " is on a run. Marking.");
+                }
+            }
+        }
+        if (currentTarget == null) { Debug.Log("#PassTargetEvalReturn# return is null."); }
+        else {
+            Debug.Log("#PassTargetEvalReturn#" + currentTarget.name + " is my pass target.");
+        }
+        return currentTarget;
     }
     public bool ShouldSignalTeammateToRun() {
 
@@ -99,6 +165,9 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
     }
     public void IdleWithBall() {
         state.TransitionTo(new SCIdleWithBall());
+    }
+    public void IdleTeammateWithBall() {
+        state.TransitionTo(new SCIdleTeammateWithBall());
     }
     public void PursueBall() {
         state.TransitionTo(new SCPursueBall());
@@ -116,14 +185,34 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
     public void RunToGoalWithBall() {
         state.TransitionTo(new SCRunToGoalWithBall());
     }
+    public void RunToGoalWithoutBall() {
+        Debug.Log("#ThisChar#RunToGoalWithoutball" + state.GetType());
+        if (state.GetType() != typeof(SCRunToGoalWithoutBall)) {
+            state.TransitionTo(new SCRunToGoalWithoutBall());
+        }
+    }
     public void Tackle() {
         state.TransitionTo(new SCTackle());
     }
     public void GetTackled() {
         state.TransitionTo(new SCGetTackled());
     }
-    public void Pass() {
-        state.TransitionTo(new SCPass());
+    public void DodgeTackle() {
+        state.TransitionTo(new SCDodgeTackle());
+    }
+    public void MissTackle() {
+        state.TransitionTo(new SCMissTackle());
+    }
+    public void Pass(StableCombatChar passTarget) {
+        state.TransitionTo(new SCPass() { passTarget = passTarget });
+    }
+    float lastRunCalled;
+    public void SendTeammateOnRun() {
+       if (lastRunCalled + 3 < Time.time) {
+            lastRunCalled = Time.time;
+            int teammateToSend = Random.Range(0, coach.players.Length);
+            state.SendMessage(coach.players[teammateToSend], "RunToOpposingGoal");
+       }
     }
     public StableCombatChar GetNearestTeammate() {
         StableCombatChar[] allChars =FindObjectsOfType<StableCombatChar>();
@@ -141,7 +230,18 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
 
     void OnDrawGizmos() {
         if (debugState && state!=null) {
-            Handles.Label(transform.position, state.GetType().ToString());
+            Handles.Label(transform.position+new Vector3(0,1,0), state.GetType().ToString() + "\nTackling: " + tackling + "\nDodging: " + dodging);
+        }
+    }
+}
+
+public static class StableCombatCharHelper {
+    public static void ResetAllTriggers(this Animator anim) {
+
+        foreach (var trigger in anim.parameters) {
+            if (trigger.type == AnimatorControllerParameterType.Trigger) {
+                anim.ResetTrigger(trigger.name);
+            }
         }
     }
 }
