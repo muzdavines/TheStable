@@ -108,6 +108,7 @@ public class Game : MonoBehaviour {
     }
 
     public void LoadModifiers() {
+        return;
         string path = "Assets/Scripts/Moves/Resources/Mod/modJSON.json";
         //Read the text from directly from the test.txt file
         StreamReader reader = new StreamReader(path);

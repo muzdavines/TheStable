@@ -15,10 +15,10 @@ public class BaseAttackMove : Move
         hitDamage.mind = mindDamage;
         hitDamage.health = healthDamage;
         health.Deal(hitDamage);
-        foreach (string mod in modifiers) {
+        /*foreach (string mod in modifiers) {
             MoveModifier m = Game.instance.modifierList.GetModifier(mod);
             Debug.Log(m.directDamage + " for " + m.modName);
             m.ApplyEffect(health, attacker);
-        }
+        }*/
     }
 }
