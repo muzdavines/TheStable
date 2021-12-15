@@ -19,7 +19,7 @@ public class SCRunToGoalWithoutBall : SCTeammateBallCarrierState
         if (enemyGoal.Distance(thisChar) < 4) {
             thisChar.Idle();
         }
-        if (!thisChar.ball.isHeld) {
+        if (!thisChar.ball.isHeld || (thisChar.ball.TeamHolding() != thisChar.team)) {
             thisChar.Idle();
         }
     }

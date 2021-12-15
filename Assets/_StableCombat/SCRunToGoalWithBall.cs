@@ -4,13 +4,15 @@ using UnityEngine;
 
 public class SCRunToGoalWithBall : SCBallCarrierState
 {
-
+    float enterTime;
     public override void EnterFrom(StableCombatCharState state) {
         base.EnterFrom(state);
+        enterTime = Time.time;
         thisChar.agent.isStopped = false;
         thisChar.agent.speed = 4.2f;
         thisChar.agent.SetDestination(thisChar.enemyGoal.transform.position);
         canGrabBall = false;
+        Debug.Log("Check for one timer here");
     }
     public override void Update() {
         base.Update();
@@ -24,6 +26,7 @@ public class SCRunToGoalWithBall : SCBallCarrierState
             return;
         }
         thisChar.SendTeammateOnRun();
+        if (Time.time < enterTime + 3) { return; }
         if (thisChar.ShouldPass()) {
             var passTarget = thisChar.GetPassTarget();
             if (passTarget != null) {

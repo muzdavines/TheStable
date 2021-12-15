@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SCDodgeTackle : StableCombatCharState
+public class SCDodgeTackle : SCBallCarrierState
 {
 
     public override void EnterFrom(StableCombatCharState state) {

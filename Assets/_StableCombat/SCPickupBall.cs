@@ -6,21 +6,21 @@ public class SCPickupBall : StableCombatCharState
 {
     public override void EnterFrom(StableCombatCharState state) {
         base.EnterFrom(state);
-        Debug.Log("CHANGE TO PICKUP ANIMATION");
         if (ball.PickupBall(thisChar)) {
+            thisChar.anim.SetTrigger("Catch");
             thisChar.agent.isStopped = true;
             thisChar.IdleWithBall();
         }
         canGrabBall = false;
-        
+        checkForIdle = true;
     }
     public override void Update() {
         base.Update();
+        thisChar.agent.isStopped = true;
     }
 
     public override void AnimEventReceiver(string message) {
         base.AnimEventReceiver(message);
-        CheckIdle(message);
     }
 
     public override void WillExit() {

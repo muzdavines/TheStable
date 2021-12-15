@@ -118,7 +118,7 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
         StableCombatChar currentTarget = null;
         foreach (var teammate in coach.players) {
             Debug.Log("#PassTargetEval#" + teammate.name + " current state is " + teammate.state.GetType().ToString());
-            if (Vector3.Distance(teammate.transform.position, position) < 3) {
+            if (Vector3.Distance(teammate.transform.position, position) < 7) {
                 Debug.Log("#PassTargetEval#" + teammate.name + " is too close");
                 continue;
             }
