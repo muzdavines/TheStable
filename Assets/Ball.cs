@@ -6,13 +6,21 @@ public class Ball : MonoBehaviour
 {
     public StableCombatChar holder;
     public bool isHeld;
-    Rigidbody body;
+    public Rigidbody body;
     SphereCollider col;
 
     private void Start() {
         body = GetComponent<Rigidbody>();
         col = GetComponent<SphereCollider>();
         body.AddForce(new Vector3(Random.Range(-10, 10), 0, 0));
+    }
+    public void Update() {
+        if (Time.frameCount % 60 == 0) {
+            if (transform.position.y <= -1) {
+                body.velocity = Vector3.zero;
+                transform.position = new Vector3(transform.position.x, 10, transform.position.z);
+            }
+        }
     }
     public int TeamHolding() {
         if (holder != null) {

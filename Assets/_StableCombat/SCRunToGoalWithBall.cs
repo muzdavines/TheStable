@@ -26,7 +26,7 @@ public class SCRunToGoalWithBall : SCBallCarrierState
             return;
         }
         thisChar.SendTeammateOnRun();
-        if (Time.time < enterTime + 3) { return; }
+        if (Time.time < enterTime + 1.5f) { return; }
         if (thisChar.ShouldPass()) {
             var passTarget = thisChar.GetPassTarget();
             if (passTarget != null) {

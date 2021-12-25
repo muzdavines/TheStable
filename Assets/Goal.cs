@@ -5,6 +5,11 @@ using UnityEngine;
 public class Goal : MonoBehaviour
 {
     public int team;
+    public void OnCollisionEnter(Collision collision) {
+        if (collision.transform.GetComponent<Ball>()) {
+            FindObjectOfType<MatchController>().ScoreGoal(team == 0 ? 1 : 0);
+        }
+    }
 }
 
 public static class GoalHelper {

@@ -7,9 +7,12 @@ public class SCIdle : StableCombatCharState
 
     public override void EnterFrom(StableCombatCharState state) {
         base.EnterFrom(state);
+        thisChar.anim.ResetAllTriggers();
+        thisChar.anim.SetTrigger("OverrideToIdle");
     }
     public override void Update() {
         base.Update();
+        thisChar.agent.isStopped = true;
         if (ball.holder == null) {
             if (thisChar.ShouldPursueBall()) {
                 thisChar.PursueBall();

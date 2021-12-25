@@ -33,4 +33,21 @@ public class SCPursueBallCarrier : StableCombatCharState
     public override void WillExit() {
         base.WillExit();
     }
+    public override SCResolution ReceiveMessage(StableCombatChar sender, string message) {
+        base.ReceiveMessage(sender, message);
+        if (message == "TryBlock") {
+            return TryBlock(sender);
+        }
+        else return null;
+    }
+
+    SCResolution TryBlock(StableCombatChar blocker) {
+        var res = new SCResolution();
+        int tackling = blocker.blocking;
+        int dodging = thisChar.dodging;
+        float roll = Random.Range(0, dodging + 1) - Random.Range(0, tackling + 1);
+        Debug.Log("#DiceRoll#Dodge Roll: " + roll);
+        if (roll >= 0) { res.success = false; thisChar.DodgeTackle(); } else { res.success = true; thisChar.GetTackled(); }
+        return res;
+    }
 }

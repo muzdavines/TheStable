@@ -11,9 +11,7 @@ public class SCIdleTeammateWithBall : SCTeammateBallCarrierState
     }
     public override void Update() {
         base.Update();
-        if (thisChar.ball.holder == null || thisChar.ball.holder.team != thisChar.team) {
-            thisChar.Idle();
-        }
+        thisChar.Block();
     }
 
     public override void AnimEventReceiver(string message) {

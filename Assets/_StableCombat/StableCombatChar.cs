@@ -26,6 +26,7 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
 
     public int tackling = 10;
     public int dodging = 10;
+    public int blocking = 10;
 
     public Coach coach;
     
@@ -50,6 +51,7 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
         initState.EnterFrom(null);
         tackling = Random.Range(8, 18);
         dodging = Random.Range(8, 18);
+        blocking = Random.Range(8, 18);
         var tempChars = FindObjectsOfType<StableCombatChar>();
         int teammateCount = 0;
         int enemycount = 0;
@@ -206,6 +208,9 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
     public void Pass(StableCombatChar passTarget) {
         state.TransitionTo(new SCPass() { passTarget = passTarget });
     }
+    public void Block() {
+        state.TransitionTo(new SCBlockForTeammate());
+    }
     float lastRunCalled;
     public void SendTeammateOnRun() {
        if (lastRunCalled + 3 < Time.time) {
@@ -243,5 +248,8 @@ public static class StableCombatCharHelper {
                 anim.ResetTrigger(trigger.name);
             }
         }
+    }
+    public static float Distance(this StableCombatChar thisChar, StableCombatChar otherChar) {
+        return Vector3.Distance(thisChar.position, otherChar.position);
     }
 }
