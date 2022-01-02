@@ -9,7 +9,15 @@ public class Coach : MonoBehaviour
     public StableCombatChar[] otherTeam;
     public List<StableCombatChar> pursuingBall;
     Ball ball;
+    [System.Serializable]
+    public class Positions {
+        public Transform DL, DC, DR, RW, LW, ST;
+    }
+    [SerializeField] public Positions positions;
     private void Start() {
+        
+    }
+    public void Init() {
         var tempChars = FindObjectsOfType<StableCombatChar>();
         int teammateCount = 0;
         int enemycount = 0;
@@ -26,6 +34,8 @@ public class Coach : MonoBehaviour
             if (tempChars[i].team == team) { players[teammateCount++] = tempChars[i]; } else { otherTeam[enemycount++] = tempChars[i]; }
         }
     }
+
+
 
     public bool AddBallPursuer(StableCombatChar newPursuer) {
         for (int i = 0; i<players.Length; i++) {

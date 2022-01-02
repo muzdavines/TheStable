@@ -44,15 +44,8 @@ public class StableCombatCharState {
     }
     public virtual void AnimEventReceiver(string message) {
         Debug.Log("#Anim# Anim Event Received by " + name + " " + message);
-        if (checkForIdle) {
-            CheckIdle(message);
-        }
     }
-    public void CheckIdle(string message) {
-        if (message == "IdleStart") {
-            thisChar.Idle();
-        }
-    }
+   
     public void TryGrabBall() {
         if (ball.Distance(thisChar) < .6f) {
             thisChar.PickupBall();

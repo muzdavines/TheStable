@@ -10,7 +10,8 @@ public class SCGetTackled : StableCombatCharState {
         thisChar.agent.isStopped = true;
         thisChar.agent.velocity = Vector3.zero;
         thisChar.agent.destination = thisChar.transform.position;
-        thisChar.anim.SetTrigger("Knockdown");
+        //thisChar.anim.SetTrigger("Knockdown");
+        thisChar.anima.Knockdown();
         ball.GetDropped();
     }
     public override void Update() {
@@ -20,7 +21,6 @@ public class SCGetTackled : StableCombatCharState {
 
     public override void AnimEventReceiver(string message) {
         base.AnimEventReceiver(message);
-        CheckIdle(message);
     }
 
     public override void WillExit() {

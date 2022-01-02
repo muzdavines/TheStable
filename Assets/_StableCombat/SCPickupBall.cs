@@ -7,12 +7,12 @@ public class SCPickupBall : StableCombatCharState
     public override void EnterFrom(StableCombatCharState state) {
         base.EnterFrom(state);
         if (ball.PickupBall(thisChar)) {
-            thisChar.anim.SetTrigger("Catch");
+            //thisChar.anim.SetTrigger("Catch");
+            thisChar.anima.CatchBall();
             thisChar.agent.isStopped = true;
-            thisChar.IdleWithBall();
+            //thisChar.IdleWithBall();
+            canGrabBall = false;
         }
-        canGrabBall = false;
-        checkForIdle = true;
     }
     public override void Update() {
         base.Update();

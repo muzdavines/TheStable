@@ -6,7 +6,8 @@ public class SCShoot : SCBallCarrierState
 {
     public override void EnterFrom(StableCombatCharState state) {
         base.EnterFrom(state);
-        thisChar.anim.SetTrigger("ShootBall");
+        //thisChar.anim.SetTrigger("ShootBall");
+        thisChar.anima.ShootBall();
         thisChar.agent.isStopped = true;
     }
     public override void Update() {
@@ -20,7 +21,6 @@ public class SCShoot : SCBallCarrierState
             thisChar.transform.LookAt(thisChar.enemyGoal.transform.position);
             thisChar.ball.Shoot(thisChar.enemyGoal);
         }
-        CheckIdle(message);
     }
 
     public override void WillExit() {

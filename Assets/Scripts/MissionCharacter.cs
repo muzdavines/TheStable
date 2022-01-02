@@ -171,12 +171,13 @@ public class MissionCharacter : MonoBehaviour, MissionCharacterStateOwner {
         anim.SetFloat("BodyValue0", 1);
         anim.SetFloat("CrouchToStand", 1);
     }
+#if UNITY_EDITOR
     void OnDrawGizmos() {
         if (debugState) {
             Handles.Label(transform.position, state.GetType().ToString());
         }
     }
-
+#endif
     public void ControlCam(bool myControl = true, float time = 0) {
         print("Control Cam Called " + myControl);
         Camera.main.GetComponent<CameraController>().SetControl(!myControl, time);

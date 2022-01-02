@@ -7,7 +7,8 @@ public class SCTackle : StableCombatCharState
 
     public override void EnterFrom(StableCombatCharState state) {
         base.EnterFrom(state);
-        thisChar.anim.SetTrigger("Tackle");
+        //thisChar.anim.SetTrigger("Tackle");
+        thisChar.anima.Tackle();
         thisChar.agent.isStopped = true;
         thisChar.anim.applyRootMotion = true;
         canGrabBall = false;
@@ -20,7 +21,6 @@ public class SCTackle : StableCombatCharState
 
     public override void AnimEventReceiver(string message) {
         base.AnimEventReceiver(message);
-        CheckIdle(message);
     }
 
     public override void WillExit() {

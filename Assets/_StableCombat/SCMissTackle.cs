@@ -6,7 +6,8 @@ public class SCMissTackle : StableCombatCharState {
 
     public override void EnterFrom(StableCombatCharState state) {
         base.EnterFrom(state);
-        thisChar.anim.SetTrigger("MissTackle");
+        //thisChar.anim.SetTrigger("MissTackle");
+        thisChar.anima.MissTackle();
         thisChar.agent.isStopped = true;
         thisChar.anim.applyRootMotion = true;
     }
@@ -18,7 +19,6 @@ public class SCMissTackle : StableCombatCharState {
 
     public override void AnimEventReceiver(string message) {
         base.AnimEventReceiver(message);
-        CheckIdle(message);
     }
 
     public override void WillExit() {

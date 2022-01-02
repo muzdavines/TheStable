@@ -7,7 +7,8 @@ public class SCDodgeTackle : SCBallCarrierState
 
     public override void EnterFrom(StableCombatCharState state) {
         base.EnterFrom(state);
-        thisChar.anim.SetTrigger("DodgeTackle");
+        //thisChar.anim.SetTrigger("DodgeTackle");
+        thisChar.anima.DodgeTackle();
         thisChar.agent.isStopped = true;
         thisChar.anim.applyRootMotion = true;
         canGrabBall = false;
@@ -21,7 +22,6 @@ public class SCDodgeTackle : SCBallCarrierState
 
     public override void AnimEventReceiver(string message) {
         base.AnimEventReceiver(message);
-        CheckIdle(message);
     }
 
     public override void WillExit() {

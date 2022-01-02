@@ -7,8 +7,9 @@ public class SCIdle : StableCombatCharState
 
     public override void EnterFrom(StableCombatCharState state) {
         base.EnterFrom(state);
-        thisChar.anim.ResetAllTriggers();
-        thisChar.anim.SetTrigger("OverrideToIdle");
+        //thisChar.anim.ResetAllTriggers();
+        //thisChar.anim.SetTrigger("OverrideToIdle");
+        thisChar.anima.Idle();
     }
     public override void Update() {
         base.Update();
@@ -18,6 +19,11 @@ public class SCIdle : StableCombatCharState
                 thisChar.PursueBall();
                 return;
             } else {
+                
+                thisChar.GoToPosition();
+               //if (Findsomeonetofight) => GoFightState
+               //else (Go to my zone based on position and side)
+                
                 //nobody has the ball, but I shouldn't get it
                 //go to zone on the field
                 //or maybe look for someone to fight

@@ -1,16 +1,17 @@
+using Animancer;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
-
 public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
 {
     public StableCombatCharState state { get; set; }
     public StableCombatChar controller { get; set; }
-
+    
     public NavMeshAgent agent;
     public Animator anim;
+    public AnimancerController anima;
     public Transform _t;
     public Transform _rightHand;
     public bool debugState;
@@ -21,7 +22,9 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
     public float distToShoot;
     public float distToTrackBallCarrier;
     public Goal myGoal, enemyGoal;
-
+    
+    public Position fieldPosition;
+    
     public Vector3 position { get { return _t.position; } }
 
     public int tackling = 10;
@@ -33,6 +36,7 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
     void Start()
     {
         controller = this;
+        anima = GetComponent<AnimancerController>();
         agent = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();
         ball = FindObjectOfType<Ball>();
@@ -174,6 +178,9 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
     public void PursueBall() {
         state.TransitionTo(new SCPursueBall());
     }
+    public void GoToPosition() {
+        state.TransitionTo(new SCGoToPosition());
+    }
 
     public void PickupBall() {
         state.TransitionTo(new SCPickupBall());
@@ -228,17 +235,45 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
         }
         return null;
     }
+    public Transform GetFieldPosition() {
+        switch (fieldPosition) {
+            case Position.ST:
+                return coach.positions.ST;
+                break;
+            case Position.LW:
+                return coach.positions.LW;
+                break;
+            case Position.RW:
+                return coach.positions.RW;
+                break;
+            case Position.DC:
+                return coach.positions.DC;
+                break;
+            case Position.DL:
+                return coach.positions.DL;
+                break;
+            case Position.DR:
+                return coach.positions.DR;
+                break;
+        }
+        return null;
+    }
 
     public void AnimEventReceiver(string message) {
         state.AnimEventReceiver(message);
     }
 
     void OnDrawGizmos() {
+#if UNITY_EDITOR
         if (debugState && state!=null) {
             Handles.Label(transform.position+new Vector3(0,1,0), state.GetType().ToString() + "\nTackling: " + tackling + "\nDodging: " + dodging);
         }
+#endif
     }
+
 }
+
+public enum Position { LW, ST, RW, DR, DC, DL }
 
 public static class StableCombatCharHelper {
     public static void ResetAllTriggers(this Animator anim) {

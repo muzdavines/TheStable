@@ -6,7 +6,8 @@ public class SCIdleTeammateWithBall : SCTeammateBallCarrierState
 {
     public override void EnterFrom(StableCombatCharState state) {
         base.EnterFrom(state);
-        thisChar.anim.ResetAllTriggers();
+        //thisChar.anim.ResetAllTriggers();
+        thisChar.anima.Idle();
         thisChar.agent.isStopped = true;
     }
     public override void Update() {

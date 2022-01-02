@@ -7,7 +7,7 @@ using TMPro;
 public class MatchController : MonoBehaviour
 {
     public League.Match match;
-    public Text matchResults;
+    public TextMeshProUGUI matchResults;
     public TextMeshProUGUI scoreboard;
     public int homeScore, awayScore;
     public Transform[] homeSpawns;
@@ -17,10 +17,28 @@ public class MatchController : MonoBehaviour
     public Coach awayCoach;
     public Ball ball;
     int lastTeamToScore = -1;
+    public bool debug;
+    public GameObject debugPlayers;
     public void Start() {
         //match = Game.instance.activeMatch;
         ball.transform.position = Vector3.zero;
+        
+    }
+
+    public void Init() {
+        if (debug) {
+            debugPlayers.SetActive(true);
+            StartCoroutine(DelayStart());
+        } else {
+            SpawnPlayers();
+        }
+        awayCoach.Init();
+        homeCoach.Init();
         StartCoroutine(DelayStart());
+    }
+    public void SpawnPlayers() {
+        Game thisGame = Game.instance;
+       
     }
     IEnumerator DelayStart() {
         yield return new WaitForSeconds(1.0f);
@@ -57,6 +75,15 @@ public class MatchController : MonoBehaviour
     void UpdateScoreboard() {
         scoreboard.text = "Red: " + homeScore + "  Green: " + awayScore;
     }
+    bool gameOver;
+    private void Update() {
+        if (gameOver) { return; }
+        if (homeScore >= 7 || awayScore >= 7) {
+            gameOver = true;
+            FinalizeResult(homeScore, awayScore);
+            DisplayResults();
+        }
+    }
 
     //Call this with results
     public void FinalizeResult(int homeGoals, int awayGoals) {
@@ -64,10 +91,16 @@ public class MatchController : MonoBehaviour
         match.homeGoals = homeGoals;
         match.final = true;
         match.ProcessResult();
+        Destroy(ball.gameObject);
+        var players = FindObjectsOfType<StableCombatChar>();
+        for (int i = 0; i < players.Length; i++) {
+            Destroy(players[i].gameObject);
+        }
     }
 
     public void DisplayResults() {
         matchResults.text = match.home.stable.stableName + ": " + match.homeGoals + "    " + match.away.stable.stableName + ": " + match.awayGoals;
+        matchResults.transform.parent.gameObject.SetActive(true);
     }
 
     public void ExitMatch() {
