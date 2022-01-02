@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Util_Trajectory : MonoBehaviour {
     [Header("Continious Path")]
@@ -268,7 +269,8 @@ public class Util_Trajectory : MonoBehaviour {
             Debug.Log(thisDist);
             float hangtime = Mathf.Clamp(thisDist / 25f, .5f, 4f);
             Debug.Log(hangtime);
-            projectile.AddForce(GetLaunchVelocity(hangtime, projectile.position, target.position), ForceMode.VelocityChange);
+            Vector3 futurePositionOfTarget = target.GetComponent<NavMeshAgent>().velocity * hangtime;
+            projectile.AddForce(GetLaunchVelocity(hangtime, projectile.position, target.position + futurePositionOfTarget), ForceMode.VelocityChange);
         }
     }
     private Vector3 GetLaunchVelocity(float flightTime, Vector3 startingPoint, Vector3 endPoint) {
