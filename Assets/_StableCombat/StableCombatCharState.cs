@@ -53,7 +53,7 @@ public class StableCombatCharState {
         }
     }
 
-    public void BallCollision(Collision collision) {
+    public virtual void BallCollision(Collision collision) {
         if (canGrabBall) {
             thisChar.PickupBall();
         }

@@ -102,7 +102,16 @@ public class Game : MonoBehaviour {
         otherStables = new List<Stable>();
         for (int i = 0; i < 5; i++) {
             var thisStable = new Stable() { stableName = Stable.stableNameList[i] };
-            //fill in thisStable
+            thisStable.heroes = new List<Character>();
+            for (int x = 0; x < 8; x++) {
+                Character thisHero = new Character();
+                thisHero.name = "Player " + x.ToString();
+                thisHero.tackling = Random.Range(8, 18);
+                thisHero.dodging = Random.Range(8, 18);
+                thisHero.blocking = Random.Range(8, 18);
+                thisHero.modelName = "SCQueen";
+                thisStable.heroes.Add(thisHero);
+            }
             otherStables.Add(thisStable);
         }
     }

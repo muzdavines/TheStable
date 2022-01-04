@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Ball : MonoBehaviour
 {
@@ -8,11 +9,11 @@ public class Ball : MonoBehaviour
     public bool isHeld;
     public Rigidbody body;
     SphereCollider col;
-
+    public Vector3 passTargetPosition;
     private void Start() {
         body = GetComponent<Rigidbody>();
         col = GetComponent<SphereCollider>();
-        body.AddForce(new Vector3(Random.Range(-10, 10), 0, 0));
+        //body.AddForce(new Vector3(Random.Range(0, 10), 0, 0));
     }
     public void Update() {
         if (Time.frameCount % 60 == 0) {
@@ -21,6 +22,9 @@ public class Ball : MonoBehaviour
                 transform.position = new Vector3(transform.position.x, 10, transform.position.z);
             }
         }
+    }
+    public void StopBall() {
+        body.velocity = Vector3.zero;
     }
     public int TeamHolding() {
         if (holder != null) {
@@ -51,33 +55,30 @@ public class Ball : MonoBehaviour
         Release();
         transform.LookAt(passTarget.transform);
         transform.position += transform.forward * 1;
-        body.AddForce(GetFireAngle(passTarget.transform) * body.mass, ForceMode.Impulse);
+        LaunchBall(passTarget.transform, true);
     }
 
-    public Vector3 GetFireAngle(Transform fireTarget) {
-        Vector3 p = fireTarget.position;
+    private Vector3 GetLaunchVelocity(float flightTime, Vector3 startingPoint, Vector3 endPoint) {
+        Vector3 gravityNormal = Physics.gravity.normalized;
+        Vector3 dx = Vector3.ProjectOnPlane(endPoint, gravityNormal) - Vector3.ProjectOnPlane(startingPoint, gravityNormal);
+        Vector3 initialVelocityX = dx / flightTime;
 
-        float gravity = Physics.gravity.magnitude;
-        // Selected angle in radians
-        float angle = 0 * Mathf.Deg2Rad;
+        Vector3 dy = Vector3.Project(endPoint, gravityNormal) - Vector3.Project(startingPoint, gravityNormal);
+        Vector3 g = 0.5f * Physics.gravity * (flightTime * flightTime);
+        Vector3 initialVelocityY = (dy - g) / flightTime;
+        return initialVelocityX + initialVelocityY;
+    }
 
-        // Positions of this object and the target on the same plane
-        Vector3 planarTarget = new Vector3(p.x, 0, p.z);
-        Vector3 planarPostion = new Vector3(transform.position.x, 0, transform.position.z);
-
-        // Planar distance between objects
-        float distance = Vector3.Distance(planarTarget, planarPostion);
-        // Distance along the y axis between objects
-        float yOffset = transform.position.y - p.y;
-
-        float initialVelocity = (1 / Mathf.Cos(angle)) * Mathf.Sqrt((0.5f * gravity * Mathf.Pow(distance, 2)) / (distance * Mathf.Tan(angle) + yOffset));
-
-        Vector3 velocity = new Vector3(0, initialVelocity * Mathf.Sin(angle), initialVelocity * Mathf.Cos(angle));
-
-        // Rotate our velocity to match the direction between the two objects
-        float angleBetweenObjects = Vector3.Angle(Vector3.forward, planarTarget - planarPostion) * (p.x > transform.position.x ? 1 : -1);
-        Vector3 finalVelocity = Quaternion.AngleAxis(angleBetweenObjects, Vector3.up) * velocity;
-        return finalVelocity;
+    private void LaunchBall(Transform target, bool leadTarget = false) {
+        Rigidbody projectile = body;
+        projectile.velocity = Vector3.zero;
+        float thisDist = Vector3.Distance(projectile.transform.position, target.position);
+        Debug.Log(thisDist);
+        float hangtime = Mathf.Clamp(thisDist / 15f, 1f, 7f);
+        Debug.Log(hangtime);
+        Vector3 futurePositionOfTarget = leadTarget ? target.GetComponent<NavMeshAgent>().velocity * hangtime : Vector3.zero;
+        passTargetPosition = target.position + futurePositionOfTarget;
+        projectile.AddForce(GetLaunchVelocity(hangtime, projectile.position, target.position + futurePositionOfTarget), ForceMode.VelocityChange);
     }
 
     public void GetDropped() {
@@ -93,6 +94,7 @@ public class Ball : MonoBehaviour
     }
     public void OnCollisionEnter(Collision collision) {
         Debug.Log("#BallCollision#" + collision.transform.name);
+        passTargetPosition = Vector3.zero;
         collision.transform.GetComponent<StableCombatChar>()?.state.BallCollision(collision);
     }
 }

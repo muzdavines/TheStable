@@ -22,6 +22,7 @@ public class SCPass : StableCombatCharState
         base.AnimEventReceiver(message);
         if (message == "PassBall") {
             ball.PassTo(passTarget);
+            passTarget.TryCatchPass();
         }
         
     }

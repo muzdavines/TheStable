@@ -23,7 +23,7 @@ public class LeagueController : MonoBehaviour, UIElement
 
     public void PlayMatch() {
         Game.instance.activeMatch = activeMatch;
-        SceneManager.LoadScene("Match");
+        SceneManager.LoadScene("MissionCombatTester");
     }
     public void UpdateOnAdvance() {
         UpdateLeague();

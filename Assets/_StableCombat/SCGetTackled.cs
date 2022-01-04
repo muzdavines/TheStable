@@ -12,7 +12,9 @@ public class SCGetTackled : StableCombatCharState {
         thisChar.agent.destination = thisChar.transform.position;
         //thisChar.anim.SetTrigger("Knockdown");
         thisChar.anima.Knockdown();
-        ball.GetDropped();
+        if (ball.holder != null && ball.holder == thisChar) {
+            ball.GetDropped();
+        }
     }
     public override void Update() {
         base.Update();

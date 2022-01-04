@@ -48,7 +48,15 @@ public class NewGameCreationController : MonoBehaviour
 
         foreach (Character h in heroes) {
             Character thisHero = Instantiate<Character>(h);
-
+            player.heroes.Add(thisHero);
+        }
+        for (int i = 0; i < 6; i++) {
+            Character thisHero = new Character();
+            thisHero.name = "Player " + i.ToString();
+            thisHero.tackling = Random.Range(8, 18);
+            thisHero.dodging = Random.Range(8, 18);
+            thisHero.blocking = Random.Range(8, 18);
+            thisHero.modelName = "SCRogue";
             player.heroes.Add(thisHero);
         }
         Game.instance.playerStable.finance.AddRevenue(startingGold);

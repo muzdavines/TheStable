@@ -53,9 +53,7 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
         this.state = initState;
         initState.thisChar = this;
         initState.EnterFrom(null);
-        tackling = Random.Range(8, 18);
-        dodging = Random.Range(8, 18);
-        blocking = Random.Range(8, 18);
+        
         var tempChars = FindObjectsOfType<StableCombatChar>();
         int teammateCount = 0;
         int enemycount = 0;
@@ -181,7 +179,9 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
     public void GoToPosition() {
         state.TransitionTo(new SCGoToPosition());
     }
-
+    public void TryCatchPass() {
+        state.TransitionTo(new SCTryCatchPass());
+    }
     public void PickupBall() {
         state.TransitionTo(new SCPickupBall());
     }
