@@ -16,6 +16,7 @@ public class Character : Living
     public int toughness = 10;
     public int tackling = 5;
     public int blocking = 5;
+    public int runSpeed = 5;
     //Mental Attributes
     public int speech = 5;
     public int intelligence = 5;

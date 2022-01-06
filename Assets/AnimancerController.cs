@@ -17,7 +17,9 @@ public class AnimancerController : MonoBehaviour
     public ClipTransition passBall;
     public ClipTransition catchBall;
     public ClipTransition missTackle;
-    public ClipTransition dodgeTackle;
+    public ClipTransition[] dodgeTackle;
+    public ClipTransition oneTimer;
+    public ClipTransition goalScored;
     
     NavMeshAgent agent;
     StableCombatChar thisChar;
@@ -61,9 +63,18 @@ public class AnimancerController : MonoBehaviour
         anim.Play(shootBall, .25f, FadeMode.FromStart).Events.OnEnd = () => thisChar.Idle();
     }
 
-    public void DodgeTackle() {
-        anim.Play(dodgeTackle, .25f, FadeMode.FromStart).Events.OnEnd = () => thisChar.Idle();
-        dodgeTackle.State.Root.Component.Animator.applyRootMotion = true;
+    public void OneTimer() {
+        anim.Play(oneTimer, .25f, FadeMode.FromStart).Events.OnEnd = () => thisChar.Idle();
+    }
+
+    public void GoalScored() {
+        anim.Play(goalScored, .25f, FadeMode.FromStart);
+    }
+
+    public void DodgeTackle(string dodgeType = "Front") {
+        int thisClip = dodgeType == "Front" ? 0 : 1;
+        anim.Play(dodgeTackle[thisClip], .25f, FadeMode.FromStart).Events.OnEnd = () => thisChar.Idle();
+        dodgeTackle[thisClip].State.Root.Component.Animator.applyRootMotion = true;
     }
 
     public void CatchBall() {

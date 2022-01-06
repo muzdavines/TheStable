@@ -9,18 +9,18 @@ public class SCRunToGoalWithoutBall : SCTeammateBallCarrierState
         base.EnterFrom(state);
         thisChar.agent.isStopped = false;
         canGrabBall = true;
-        thisChar.agent.speed = 5f;
         enemyGoal = thisChar.enemyGoal;
         thisChar.agent.SetDestination(thisChar.enemyGoal.transform.position);
     }
     public override void Update() {
         base.Update();
-        thisChar.agent.SetDestination(thisChar.enemyGoal.transform.position);
+        thisChar.agent.isStopped = false;
+        thisChar.agent.SetDestination(thisChar.enemyGoal.transform.position+ thisChar.enemyGoal.transform.forward*3);
         if (enemyGoal.Distance(thisChar) < 4) {
             thisChar.Idle();
         }
         if (!thisChar.ball.isHeld || (thisChar.ball.TeamHolding() != thisChar.team)) {
-            thisChar.Idle();
+           // thisChar.Idle();
         }
     }
 

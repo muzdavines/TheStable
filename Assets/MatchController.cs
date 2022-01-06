@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
+using MoreMountains.Feedbacks;
+
 public class MatchController : MonoBehaviour
 {
     public League.Match match;
@@ -19,6 +21,7 @@ public class MatchController : MonoBehaviour
     int lastTeamToScore = -1;
     public bool debug;
     public GameObject debugPlayers;
+    public MMCameraShaker goal;
     public void Start() {
         //match = Game.instance.activeMatch;
         ball.transform.position = new Vector3(0,1,0);
@@ -52,27 +55,26 @@ public class MatchController : MonoBehaviour
         SpawnPlayers();
         awayCoach.Init();
         homeCoach.Init();
+        UpdateScoreboard();
         StartCoroutine(DelayStart());
     }
     public void SpawnPlayers() {
         Game thisGame = Game.instance;
-        for (int i = 0; i < 5; i++) {
-            GameObject co = Instantiate<GameObject>(Resources.Load<GameObject>(thisGame.activeMatch.home.stable.heroes[i].modelName), homeSpawns[0].position, Quaternion.identity);
-            StableCombatChar thisChar = co.GetComponent<StableCombatChar>();
-            thisChar.team = 0;
-            thisChar.blocking = thisGame.activeMatch.home.stable.heroes[i].blocking;
-            thisChar.dodging = thisGame.activeMatch.home.stable.heroes[i].dodging;
-            thisChar.tackling = thisGame.activeMatch.home.stable.heroes[i].tackling;
-            thisChar.fieldPosition = (Position)i;
-        }
-        for (int x = 0; x < 5; x++) {
-            GameObject co = Instantiate<GameObject>(Resources.Load<GameObject>(thisGame.activeMatch.away.stable.heroes[x].modelName), homeSpawns[0].position, Quaternion.identity);
-            StableCombatChar thisChar = co.GetComponent<StableCombatChar>();
-            thisChar.team = 1;
-            thisChar.blocking = thisGame.activeMatch.away.stable.heroes[x].blocking;
-            thisChar.dodging = thisGame.activeMatch.away.stable.heroes[x].dodging;
-            thisChar.tackling = thisGame.activeMatch.away.stable.heroes[x].tackling;
-            thisChar.fieldPosition = (Position)x;
+        List<Character>[] bothTeams = new List<Character>[2];
+        bothTeams[0] = thisGame.activeMatch.home.stable.heroes;
+        bothTeams[1] = thisGame.activeMatch.away.stable.heroes;
+        for (int thisTeam = 0; thisTeam<2; thisTeam++) {
+            for (int i = 0; i < 5; i++) {
+                Character thisBaseChar = bothTeams[thisTeam][i];
+                GameObject co = Instantiate<GameObject>(Resources.Load<GameObject>(thisBaseChar.modelName), homeSpawns[0].position, Quaternion.identity);
+                StableCombatChar thisChar = co.GetComponent<StableCombatChar>();
+                thisChar.team = thisTeam;
+                thisChar.blocking = thisBaseChar.blocking;
+                thisChar.dodging = thisBaseChar.dodging;
+                thisChar.tackling = thisBaseChar.tackling;
+                thisChar.runSpeed = thisBaseChar.runSpeed;
+                thisChar.fieldPosition = (Position)i;
+            }
         }
     }
     IEnumerator DelayStart() {
@@ -90,6 +92,9 @@ public class MatchController : MonoBehaviour
         if (lastTeamToScore == -1) {
             lastTeamToScore = Random.Range(0, 2);
         }
+        foreach (var g in FindObjectsOfType<Goal>()) {
+            g.canScore = true;
+        }
         ball.StopBall();
         ball.transform.position = lastTeamToScore == 0 ? ballSpawns[1].position : ballSpawns[0].position;
         ball.body.AddForce(new Vector3(Random.Range(-2, 2), 0, 0));
@@ -105,20 +110,35 @@ public class MatchController : MonoBehaviour
     public void ScoreGoal(int team) {
         if (team == 0) { homeScore++; } else { awayScore++; }
         lastTeamToScore = team;
+        goal.ShakeCamera(2, .5f, 5, 1, 1, 1, false);
+        
         UpdateScoreboard();
-        Kickoff();
+        foreach (StableCombatChar awayPlayer in awayCoach.players) {
+            awayPlayer.GoalScored();
+        }
+        foreach (StableCombatChar homePlayer in homeCoach.players) {
+            homePlayer.GoalScored();
+        }
+        if (homeScore >= 3 || awayScore >= 3) {
+            gameOver = true;
+            StartCoroutine(DelayGameOver());
+            
+        } else { StartCoroutine(DelayStart()); }
     }
     void UpdateScoreboard() {
-        scoreboard.text = "Red: " + homeScore + "  Green: " + awayScore;
+        scoreboard.text = match.home.stable.stableName+": " + homeScore + "  "+ match.away.stable.stableName + ": " + awayScore;
     }
     bool gameOver;
     private void Update() {
         if (gameOver) { return; }
-        if (homeScore >= 3 || awayScore >= 3) {
-            gameOver = true;
-            FinalizeResult(homeScore, awayScore);
-            DisplayResults();
-        }
+        
+        
+        
+    }
+    IEnumerator DelayGameOver() {
+        yield return new WaitForSeconds(3.0f);
+        FinalizeResult(homeScore, awayScore);
+        DisplayResults();
     }
 
     //Call this with results

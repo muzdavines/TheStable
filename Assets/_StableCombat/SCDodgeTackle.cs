@@ -4,11 +4,21 @@ using UnityEngine;
 
 public class SCDodgeTackle : SCBallCarrierState
 {
-
+    public StableCombatChar tackler;
     public override void EnterFrom(StableCombatCharState state) {
         base.EnterFrom(state);
         //thisChar.anim.SetTrigger("DodgeTackle");
-        thisChar.anima.DodgeTackle();
+        float angle = Vector3.Angle(tackler.transform.position, thisChar.transform.position - tackler.transform.position);
+        if (ball.holder == thisChar) {
+            Debug.Log("#Dodge#Angle: " + angle + "  " + Mathf.Abs(angle));
+        }
+        if (Mathf.Abs(angle) < 70) {
+            thisChar.anima.DodgeTackle("Front");
+        } else {
+            thisChar.anima.DodgeTackle("Back");
+        }
+
+        
         thisChar.agent.isStopped = true;
         thisChar.anim.applyRootMotion = true;
         canGrabBall = false;

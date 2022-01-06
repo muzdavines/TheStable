@@ -15,6 +15,12 @@ public class SCTryCatchPass : StableCombatCharState
         base.Update();
         targetPos = ball.passTargetPosition;
         thisChar.agent.SetDestination(targetPos);
+        if (thisChar.enemyGoal.Distance(thisChar) < 20) {
+            if (ball.Distance(thisChar) < 4) {
+                thisChar.OneTimerToGoal();
+                return;
+            }
+        }
         //check distance to goal for onetimer
         //if close then check distance of ball
         //if ball is close go to one-Time state

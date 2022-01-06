@@ -1,4 +1,5 @@
 using Animancer;
+using MoreMountains.Feedbacks;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
@@ -24,13 +25,16 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
     public Goal myGoal, enemyGoal;
     
     public Position fieldPosition;
-    
+
+    //Feedbacks
+    public MMFeedbacks goOnRun;
+    public MMFeedbacks sendOnRun;
     public Vector3 position { get { return _t.position; } }
 
     public int tackling = 10;
     public int dodging = 10;
     public int blocking = 10;
-
+    public int runSpeed = 10;
     public Coach coach;
     
     void Start()
@@ -198,16 +202,21 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
         Debug.Log("#ThisChar#RunToGoalWithoutball" + state.GetType());
         if (state.GetType() != typeof(SCRunToGoalWithoutBall)) {
             state.TransitionTo(new SCRunToGoalWithoutBall());
+            goOnRun.PlayFeedbacks();
         }
+
+    }
+    public void OneTimerToGoal() {
+        state.TransitionTo(new SCOneTimerToGoal());
     }
     public void Tackle() {
         state.TransitionTo(new SCTackle());
     }
-    public void GetTackled() {
+    public void GetTackled(StableCombatChar tackler) {
         state.TransitionTo(new SCGetTackled());
     }
-    public void DodgeTackle() {
-        state.TransitionTo(new SCDodgeTackle());
+    public void DodgeTackle(StableCombatChar tackler) {
+        state.TransitionTo(new SCDodgeTackle() { tackler = tackler });
     }
     public void MissTackle() {
         state.TransitionTo(new SCMissTackle());
@@ -218,12 +227,17 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
     public void Block() {
         state.TransitionTo(new SCBlockForTeammate());
     }
+
+    public void GoalScored() {
+        state.TransitionTo(new SCGoalScored());
+    }
     float lastRunCalled;
     public void SendTeammateOnRun() {
        if (lastRunCalled + 3 < Time.time) {
             lastRunCalled = Time.time;
             int teammateToSend = Random.Range(0, coach.players.Length);
             state.SendMessage(coach.players[teammateToSend], "RunToOpposingGoal");
+            sendOnRun.PlayFeedbacks();
        }
     }
     public StableCombatChar GetNearestTeammate() {

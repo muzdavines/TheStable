@@ -48,6 +48,7 @@ public class Ball : MonoBehaviour
         Release();
         transform.LookAt(goalTarget.transform);
         transform.position += transform.forward * 1;
+        body.velocity = Vector3.zero;
         body.AddForce((goalTarget.transform.position- transform.position).normalized * 1000);
     }
 
