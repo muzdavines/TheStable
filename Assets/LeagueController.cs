@@ -58,6 +58,7 @@ public class LeagueController : MonoBehaviour, UIElement
         }
     }
     public void CheckIfMatchDay() {
+        
         foreach (League.Match match in Game.instance.leagues[0].schedule) {
             Debug.Log(match.IsPlayerMatch() + " " + match.away.stable.stableName + "  " + match.home.stable.stableName);
             if (!match.IsPlayerMatch()) {

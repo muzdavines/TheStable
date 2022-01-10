@@ -94,8 +94,6 @@ public class Game : MonoBehaviour {
            // playerStable.inventory.Add(Instantiate(Resources.Load<Item>("LongswordSO")));
         }
         //playerStable.inventory.Add(Instantiate(Resources.Load<Item>("BowSO")));
-        
-        
     }
 
     public void InitOtherStables() {
@@ -105,11 +103,11 @@ public class Game : MonoBehaviour {
             thisStable.heroes = new List<Character>();
             for (int x = 0; x < 8; x++) {
                 Character thisHero = new Character();
-                thisHero.name = "Player " + x.ToString();
-                thisHero.tackling = Random.Range(8, 18);
-                thisHero.dodging = Random.Range(8, 18);
-                thisHero.blocking = Random.Range(8, 18);
-                thisHero.modelName = "SCQueen";
+                if (x < 5) {
+                    thisHero.activeInLineup = true;
+                }
+                thisHero.name = Names.Warrior[Random.Range(0, Names.Warrior.Length)];
+                thisHero.GenerateCharacter((Character.Archetype)(Random.Range(0, 4)), 1);
                 thisStable.heroes.Add(thisHero);
             }
             otherStables.Add(thisStable);
@@ -126,13 +124,14 @@ public class Game : MonoBehaviour {
     }
 
     public void Advance() {
+        if (IsPlayerMatchDay()) {
+            FindObjectOfType<DailyPopup>().Popup("Cannot Advance. Player Match Day. See League.");
+            return;
+        }
         gameDate.Advance();
-       
-
         playerStable.ExpireContracts();
         ExpireMarketContracts();
         ProcessTraining();
-
         if (gameDate.dayOfWeek == 0) {
             //money stuff
             Finance f = playerStable.finance;
@@ -144,7 +143,6 @@ public class Game : MonoBehaviour {
                 f.AddExpense(c.contract.weeklySalary, LedgerAccount.Personnel);
                 c.contract.weeksLeft--;
             }
-
         }
 
         //Process Relationship stuff
@@ -211,6 +209,33 @@ public class Game : MonoBehaviour {
                 c.currentTraining = new Training();
             }
         }
+    }
+
+    public bool IsPlayerMatchDay() {
+        bool isMatchDay = false;
+        foreach (League.Match match in Game.instance.leagues[0].schedule) {
+            
+            if (!match.IsPlayerMatch()) {
+                continue;
+            }
+            if (match.date.IsToday()) {
+                if (match.final) {
+                    
+                }
+                else {
+                    
+                    isMatchDay = true;
+                    
+                    
+                }
+                
+                break;
+            }
+            else {
+                
+            }
+        }
+        return isMatchDay;
     }
    
 

@@ -64,16 +64,16 @@ public class MatchController : MonoBehaviour
         bothTeams[0] = thisGame.activeMatch.home.stable.heroes;
         bothTeams[1] = thisGame.activeMatch.away.stable.heroes;
         for (int thisTeam = 0; thisTeam<2; thisTeam++) {
-            for (int i = 0; i < 5; i++) {
+            for (int i = 0; i < bothTeams[thisTeam].Count; i++) {
                 Character thisBaseChar = bothTeams[thisTeam][i];
+                if (!thisBaseChar.activeInLineup) { continue; }
                 GameObject co = Instantiate<GameObject>(Resources.Load<GameObject>(thisBaseChar.modelName), homeSpawns[0].position, Quaternion.identity);
                 StableCombatChar thisChar = co.GetComponent<StableCombatChar>();
                 thisChar.team = thisTeam;
-                thisChar.blocking = thisBaseChar.blocking;
-                thisChar.dodging = thisBaseChar.dodging;
-                thisChar.tackling = thisBaseChar.tackling;
-                thisChar.runSpeed = thisBaseChar.runSpeed;
+                thisChar.myCharacter = thisBaseChar;
                 thisChar.fieldPosition = (Position)i;
+                thisChar.GetComponent<SCModelSelector>().Init(thisBaseChar.modelNum, thisTeam);
+                thisChar.Init();
             }
         }
     }
@@ -131,9 +131,6 @@ public class MatchController : MonoBehaviour
     bool gameOver;
     private void Update() {
         if (gameOver) { return; }
-        
-        
-        
     }
     IEnumerator DelayGameOver() {
         yield return new WaitForSeconds(3.0f);

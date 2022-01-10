@@ -43,8 +43,8 @@ public class SCPursueBallCarrier : StableCombatCharState
 
     SCResolution TryBlock(StableCombatChar blocker) {
         var res = new SCResolution();
-        int tackling = blocker.blocking;
-        int dodging = thisChar.dodging;
+        int tackling = blocker.myCharacter.blocking;
+        int dodging = thisChar.myCharacter.dodging;
         float roll = Random.Range(0, dodging + 1) - Random.Range(0, tackling + 1);
         Debug.Log("#DiceRoll#Dodge Roll: " + roll);
         if (roll >= 0) { res.success = false; thisChar.DodgeTackle(blocker); } else { res.success = true; thisChar.GetTackled(blocker); }

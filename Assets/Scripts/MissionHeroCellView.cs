@@ -8,10 +8,13 @@ public class MissionHeroCellView : EnhancedScrollerCellView {
     public Text heroNameText;
     public Character thisChar;
     public LaunchMissionController missionController;
+    public TeamTacticsController tacticsController;
+    public bool tactics;
     public void SetData(Character data) {
         thisChar = data;
-        heroNameText.text = data.name;
+        heroNameText.text = data.name + (tactics ? "  ("+data.archetype.ToString()+")" : "");
         missionController = FindObjectOfType<LaunchMissionController>();
+        tacticsController = FindObjectOfType<TeamTacticsController>();
     }
 
     public void OnHoverEnter() {
@@ -25,13 +28,24 @@ public class MissionHeroCellView : EnhancedScrollerCellView {
         GameObject.FindObjectOfType<HeroInfoPanelController>().OnHoverExit();
     }
     public void OnClick() {
-        if (!thisChar.activeForNextMission) {
-            if (Game.instance.playerStable.NumberActiveHeroes() >= missionController.thisContract.maxHeroes || !thisChar.IsAvailable()) {
-                print("Max Heroes Reached or Hero Not Available");
-                return;
+        if (tactics) {
+            if (!thisChar.activeInLineup) {
+                if (Game.instance.playerStable.NumberHeroesInLineup() >= 5 || !thisChar.IsAvailable()) {
+                    print("Max Heroes Reached or Hero Not Available");
+                    return;
+                }
             }
+            thisChar.activeInLineup = !thisChar.activeInLineup;
         }
-        thisChar.activeForNextMission = !thisChar.activeForNextMission;
+        else {
+            if (!thisChar.activeForNextMission) {
+                if (Game.instance.playerStable.NumberActiveHeroes() >= missionController.thisContract.maxHeroes || !thisChar.IsAvailable()) {
+                    print("Max Heroes Reached or Hero Not Available");
+                    return;
+                }
+            }
+            thisChar.activeForNextMission = !thisChar.activeForNextMission;
+        }
 
         foreach (MissionHeroesScrollerController mhsc in FindObjectsOfType<MissionHeroesScrollerController>()) {
             mhsc.OnEnable();

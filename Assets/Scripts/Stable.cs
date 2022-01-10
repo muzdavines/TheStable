@@ -76,6 +76,14 @@ public class Stable
         }
         return count;
     }
+
+    public int NumberHeroesInLineup() {
+        int count = 0;
+        foreach (Character c in heroes) {
+            if (c.activeInLineup) { count++; }
+        }
+        return count;
+    }
     public void PrepForSave() {
         PrepAvailableTrainingForSave();
         PrepHeroesForSave();

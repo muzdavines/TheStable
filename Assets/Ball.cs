@@ -41,7 +41,7 @@ public class Ball : MonoBehaviour
         col.enabled = !isHeld;
         body.isKinematic = isHeld;
         transform.parent = holder._rightHand;
-        transform.localPosition = new Vector3(0, 1, 0);
+        transform.localPosition = new Vector3(0, 0, 0);
         return true;
     }
     public void Shoot(Goal goalTarget) {

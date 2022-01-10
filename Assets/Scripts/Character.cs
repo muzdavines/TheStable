@@ -116,11 +116,96 @@ public class Character : Living
     public Game.GameDate returnDate = new Game.GameDate();
 
     public bool activeForNextMission;
+    public bool activeInLineup;
+    public Position currentPosition;
     public bool incapacitated;
     public string modelName;
+    public int modelNum;
 
     public GameObject currentObject;
     public MissionCharacter currentMissionCharacter;
+
+
+    public int RandDist(float min, float max) {
+        int roll = Random.Range(0, 100);
+        float interval = (max - min) / 6;
+        int[] breaks = { 5, 27, 18, 18, 27, 5 };
+        float[] array = new float[100];
+        int count = 0;
+        for (int x = 0; x < 6; x++) {
+            for (int z = 0; z < breaks[x]; z++) {
+                Debug.Log(count);
+                array[count++] = Mathf.Round(min + (x * interval));
+            }
+        }
+        return (int)array[roll];
+    }
+    public void GenerateCharacter(Archetype thisArchetype, int level = 1) {
+        int[] dodgeRange = new int[2];
+        int[] tackleRange = new int[2]; 
+        int[] blockingRange = new int[2]; 
+        int[] runSpeedRange = new int[2];
+        switch (thisArchetype) {
+            case Archetype.Striker:
+                dodgeRange[0] = 12;
+                dodgeRange[1] = 18;
+                tackleRange[0] = 2;
+                tackleRange[1] = 8;
+                blockingRange[0] = 2;
+                blockingRange[1] = 8;
+                runSpeedRange[0] = 9;
+                runSpeedRange[1] = 15;
+                modelNum = 0;
+                modelName = "SCUnit";
+                break;
+            case Archetype.Winger:
+                dodgeRange[0] = 7;
+                dodgeRange[1] = 13;
+                tackleRange[0] = 4;
+                tackleRange[1] = 10;
+                blockingRange[0] = 7;
+                blockingRange[1] = 13;
+                runSpeedRange[0] = 9;
+                runSpeedRange[1] = 12;
+                modelNum = 1;
+                modelName = "SCUnit";
+                break;
+            case Archetype.Midfielder:
+                dodgeRange[0] = 4;
+                dodgeRange[1] = 10;
+                tackleRange[0] = 6;
+                tackleRange[1] = 12;
+                blockingRange[0] = 12;
+                blockingRange[1] = 18;
+                runSpeedRange[0] = 9;
+                runSpeedRange[1] = 11;
+                modelNum = 2;
+                modelName = "SCUnit";
+                break;
+            case Archetype.Defender:
+                dodgeRange[0] = 2;
+                dodgeRange[1] = 8;
+                tackleRange[0] = 15;
+                tackleRange[1] = 30;
+                blockingRange[0] = 9;
+                blockingRange[1] = 15;
+                runSpeedRange[0] = 9;
+                runSpeedRange[1] = 10;
+                modelNum = 0;
+                modelName = "SCUnit2";
+                break;
+        }
+        dodging = RandDist(dodgeRange[0], dodgeRange[1]);
+        tackling = RandDist(tackleRange[0], tackleRange[1]);
+        blocking = RandDist(blockingRange[0], blockingRange[1]);
+        runSpeed = RandDist(runSpeedRange[0], runSpeedRange[1]);
+        archetype = thisArchetype;
+        
+    }
+
+   
+    public enum Archetype { Striker, Winger, Midfielder, Defender}
+    public Archetype archetype;
 
     public void Awake() {
         Armor startingArmorSO = Resources.Load<Armor>(startingArmor);
@@ -139,7 +224,7 @@ public class Character : Living
         if (Helper.Today().IsOnOrAfter(currentTraining.dateToTrain, true)) {
             switch (currentTraining.type) {
                 case Training.Type.Attribute:
-                    Debug.Log("Raise Attribute " + currentTraining.training);
+                    Debug.Log("Rase Attribute " + currentTraining.training);
                     int currentValue = (int)typeof(Character).GetField(currentTraining.training).GetValue(this);
                     typeof(Character).GetField(currentTraining.training).SetValue(this, currentValue + 1);
                     FindObjectOfType<DailyPopup>().Popup(name + " completed training: " + currentTraining.training.Title());

@@ -10,7 +10,7 @@ public class CameraController : MonoBehaviour{
 	public float smoothing;
 	public Vector3 offset;
     public Vector3 startOffset;
-	bool following = true;
+	public bool following = true;
 	Vector3 lastPosition;
     public bool myControl = true;
     float zoom = 0;
@@ -37,6 +37,7 @@ public class CameraController : MonoBehaviour{
     }
 
 	void Update(){
+        
         if (Time.time >= nextControlChange) {
             myControl = nextControl;
             nextControlChange = Mathf.Infinity;
@@ -61,7 +62,7 @@ public class CameraController : MonoBehaviour{
 		}
         float mouseScroll = Input.GetAxis("Mouse ScrollWheel");
         if (mouseScroll != 0) {
-            mouseScroll *= -1;
+            mouseScroll *= -4;
 
             offset = new Vector3(Mathf.Clamp(offset.x + mouseScroll, 0, 300), Mathf.Clamp(offset.y + mouseScroll, 4, 100), offset.z);
         }
@@ -69,7 +70,7 @@ public class CameraController : MonoBehaviour{
 		if(following){
             if (cameraTarget == null) { return; }
 			offset = Quaternion.AngleAxis(rotate * rotateSpeed, Vector3.up) * offset;
-			transform.position = cameraTarget.transform.position + offset; 
+			//transform.position = cameraTarget.transform.position + offset; 
 			transform.position = new Vector3(Mathf.Lerp(lastPosition.x, cameraTarget.transform.position.x + offset.x, smoothing * Time.deltaTime), 
 				Mathf.Lerp(lastPosition.y, cameraTarget.transform.position.y + offset.y, smoothing * Time.deltaTime), 
 				Mathf.Lerp(lastPosition.z, cameraTarget.transform.position.z + offset.z, smoothing * Time.deltaTime));
@@ -77,7 +78,11 @@ public class CameraController : MonoBehaviour{
 		else{
 			transform.position = lastPosition; 
 		}
-		transform.LookAt(cameraTarget.transform.position);
+        Vector3 relativePos = cameraTarget.transform.position - transform.position;
+        Quaternion toRotation = Quaternion.LookRotation(relativePos);
+        transform.rotation = Quaternion.Lerp(transform.rotation, toRotation, smoothing * Time.deltaTime);
+
+        //transform.LookAt(cameraTarget.transform.position);
 	}
 
 	void LateUpdate(){

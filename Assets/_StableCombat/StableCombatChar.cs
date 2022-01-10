@@ -23,28 +23,23 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
     public float distToShoot;
     public float distToTrackBallCarrier;
     public Goal myGoal, enemyGoal;
-    
+    public Character myCharacter;
     public Position fieldPosition;
 
     //Feedbacks
     public MMFeedbacks goOnRun;
     public MMFeedbacks sendOnRun;
     public Vector3 position { get { return _t.position; } }
-
-    public int tackling = 10;
-    public int dodging = 10;
-    public int blocking = 10;
-    public int runSpeed = 10;
     public Coach coach;
     
-    void Start()
+    public void Init()
     {
         controller = this;
         anima = GetComponent<AnimancerController>();
         agent = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();
         ball = FindObjectOfType<Ball>();
-
+        agent.speed = myCharacter.runSpeed * .4f;
         Goal[] tempGoals = FindObjectsOfType<Goal>();
         foreach (var tg in tempGoals) {
             if (tg.team == team) {
@@ -280,7 +275,7 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
     void OnDrawGizmos() {
 #if UNITY_EDITOR
         if (debugState && state!=null) {
-            Handles.Label(transform.position+new Vector3(0,1,0), state.GetType().ToString() + "\nTackling: " + tackling + "\nDodging: " + dodging);
+            Handles.Label(transform.position+new Vector3(0,2,0), state.GetType().ToString() + "\nTackling: " + myCharacter.tackling + "\nDodging: " + myCharacter.dodging + "\nType: "+myCharacter.archetype);
         }
 #endif
     }

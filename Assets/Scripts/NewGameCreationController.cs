@@ -12,15 +12,16 @@ public class NewGameCreationController : MonoBehaviour
     public List<MoveModifier> mods;
     public List<Training> trainingAdds;
     public List<Item> startingItems;
+    public List<Finance.Business> startingBusinesses;
     public string myText;
-
+    
+   
     public void Start()
     {
         if (heroes == null || heroes.Count == 0)
         {
             heroes.Add(new Character() { name = Names.Warrior[Random.Range(0, Names.Warrior.Length)], age = 18, modelName = "CharWarrior2" });
         }
-        
         
     }
     public void OnClick (string warlord)
@@ -50,13 +51,14 @@ public class NewGameCreationController : MonoBehaviour
             Character thisHero = Instantiate<Character>(h);
             player.heroes.Add(thisHero);
         }
+        foreach (Finance.Business business in startingBusinesses) {
+            player.finance.AddBusiness(business);
+        }
         for (int i = 0; i < 6; i++) {
             Character thisHero = new Character();
-            thisHero.name = "Player " + i.ToString();
-            thisHero.tackling = Random.Range(8, 18);
-            thisHero.dodging = Random.Range(8, 18);
-            thisHero.blocking = Random.Range(8, 18);
-            thisHero.modelName = "SCRogue";
+            thisHero.name = Names.Warrior[Random.Range(0, Names.Warrior.Length)];
+            thisHero.GenerateCharacter((Character.Archetype)(Random.Range(0,4)), 1);
+            thisHero.activeInLineup = true;
             player.heroes.Add(thisHero);
         }
         Game.instance.playerStable.finance.AddRevenue(startingGold);
