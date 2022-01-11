@@ -70,7 +70,7 @@ public class StableCombatCharState {
         if (Time.frameCount % 10 == 0) {
 
         }
-        if (canGrabBall) {
+        if (thisChar !=null && thisChar.fieldSport && canGrabBall) {
             TryGrabBall();
         }
     }

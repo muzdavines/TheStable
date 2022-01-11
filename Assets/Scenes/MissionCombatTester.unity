@@ -197,8 +197,8 @@ MonoBehaviour:
   activeMoves: []
   startingArmor: 
   startingWeapon: 
-  armor: {fileID: 465507813}
-  weapon: {fileID: 1288741693}
+  armor: {fileID: 2067498440}
+  weapon: {fileID: 1231428650}
   mat: {fileID: 0}
   contract:
     weeksLeft: 10
@@ -211,29 +211,15 @@ MonoBehaviour:
     year: 1000
     dayOfWeek: 0
   activeForNextMission: 0
+  activeInLineup: 0
+  currentPosition: 0
   incapacitated: 0
   modelName: 
+  modelNum: 0
   currentObject: {fileID: 0}
   currentMissionCharacter: {fileID: 0}
   archetype: 0
   warlordReputation: 0
---- !u!114 &24659087
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 623d911d423dd7740bd2b9c76fa1c164, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemName: 
-  condition: 0
-  isOwned: 0
-  defense: 0
-  health: 0
 --- !u!1 &26921140
 GameObject:
   m_ObjectHideFlags: 0
@@ -520,6 +506,7 @@ GameObject:
   m_Component:
   - component: {fileID: 257404701}
   - component: {fileID: 257404700}
+  - component: {fileID: 257404702}
   m_Layer: 0
   m_Name: Match
   m_TagString: Untagged
@@ -534,7 +521,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 257404699}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 18960f4795646144ab39d208d10bf362, type: 3}
   m_Name: 
@@ -641,6 +628,26 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &257404702
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 257404699}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 495cdb6140f9c4c40bf399e847a3b21b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  heroes:
+  - {fileID: 11400000, guid: a765ee6f66ad5574ea59e47a6414d726, type: 2}
+  enemies:
+  - {fileID: 11400000, guid: e88026dca0634344988ea53a6bf16835, type: 2}
+  heroSpawn:
+  - {fileID: 1742132818}
+  enemySpawn:
+  - {fileID: 2059576173}
 --- !u!1 &262269012
 GameObject:
   m_ObjectHideFlags: 0
@@ -1023,6 +1030,29 @@ Transform:
   m_Father: {fileID: 1647026083}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &429130980
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47a74438d916a9e429ebbf10dd88341c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemName: 
+  condition: 0
+  isOwned: 0
+  damage: 0
+  prefabName: 
+  dualWield: 0
+  isHeavy: 0
+  usesLegs: 0
+  prefabNameLegs: 
+  settingsPrefab: 
+  weaponType: 0
 --- !u!1 &453902442
 GameObject:
   m_ObjectHideFlags: 0
@@ -1164,23 +1194,6 @@ Transform:
   m_Father: {fileID: 69818052}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
---- !u!114 &465507813
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 623d911d423dd7740bd2b9c76fa1c164, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemName: 
-  condition: 0
-  isOwned: 0
-  defense: 0
-  health: 0
 --- !u!1 &505295767
 GameObject:
   m_ObjectHideFlags: 0
@@ -1201,7 +1214,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!54 &505295768
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -6540,6 +6553,29 @@ MonoBehaviour:
     RW: {fileID: 111706928}
     LW: {fileID: 166692697}
     ST: {fileID: 1424792801}
+--- !u!114 &1231428650
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47a74438d916a9e429ebbf10dd88341c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemName: 
+  condition: 0
+  isOwned: 0
+  damage: 0
+  prefabName: 
+  dualWield: 0
+  isHeavy: 0
+  usesLegs: 0
+  prefabNameLegs: 
+  settingsPrefab: 
+  weaponType: 0
 --- !u!1 &1275737024
 GameObject:
   m_ObjectHideFlags: 0
@@ -6903,29 +6939,6 @@ Transform:
   m_Father: {fileID: 139374020}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1288741693
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 47a74438d916a9e429ebbf10dd88341c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemName: 
-  condition: 0
-  isOwned: 0
-  damage: 0
-  prefabName: 
-  dualWield: 0
-  isHeavy: 0
-  usesLegs: 0
-  prefabNameLegs: 
-  settingsPrefab: 
-  weaponType: 0
 --- !u!1 &1360558388
 GameObject:
   m_ObjectHideFlags: 0
@@ -8407,29 +8420,6 @@ Transform:
   m_Father: {fileID: 1492631497}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1729093837
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 47a74438d916a9e429ebbf10dd88341c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemName: 
-  condition: 0
-  isOwned: 0
-  damage: 0
-  prefabName: 
-  dualWield: 0
-  isHeavy: 0
-  usesLegs: 0
-  prefabNameLegs: 
-  settingsPrefab: 
-  weaponType: 0
 --- !u!1 &1742132817
 GameObject:
   m_ObjectHideFlags: 0
@@ -8882,8 +8872,8 @@ MonoBehaviour:
   activeMoves: []
   startingArmor: 
   startingWeapon: 
-  armor: {fileID: 24659087}
-  weapon: {fileID: 1729093837}
+  armor: {fileID: 1965243419}
+  weapon: {fileID: 429130980}
   mat: {fileID: 0}
   contract:
     weeksLeft: 10
@@ -8896,8 +8886,11 @@ MonoBehaviour:
     year: 1000
     dayOfWeek: 0
   activeForNextMission: 0
+  activeInLineup: 0
+  currentPosition: 0
   incapacitated: 0
   modelName: 
+  modelNum: 0
   currentObject: {fileID: 0}
   currentMissionCharacter: {fileID: 0}
   archetype: 0
@@ -9059,6 +9052,23 @@ Transform:
   m_Father: {fileID: 636702514}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1965243419
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 623d911d423dd7740bd2b9c76fa1c164, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemName: 
+  condition: 0
+  isOwned: 0
+  defense: 0
+  health: 0
 --- !u!1 &1991179723
 GameObject:
   m_ObjectHideFlags: 0
@@ -9322,6 +9332,23 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2067498440
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 623d911d423dd7740bd2b9c76fa1c164, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemName: 
+  condition: 0
+  isOwned: 0
+  defense: 0
+  health: 0
 --- !u!1 &2071681203
 GameObject:
   m_ObjectHideFlags: 0

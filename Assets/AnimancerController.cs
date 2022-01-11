@@ -20,7 +20,8 @@ public class AnimancerController : MonoBehaviour
     public ClipTransition[] dodgeTackle;
     public ClipTransition oneTimer;
     public ClipTransition goalScored;
-    
+    public ClipTransition takeDamage;
+    public List<Move> baseAttackMoves;
     NavMeshAgent agent;
     StableCombatChar thisChar;
     private void Awake() {
@@ -32,6 +33,7 @@ public class AnimancerController : MonoBehaviour
         thisChar = GetComponent<StableCombatChar>();
         anim = GetComponent<AnimancerComponent>();
         agent = GetComponent<NavMeshAgent>();
+        baseAttackMoves = thisChar.baseAttackMoves;
         
     }
 
@@ -80,6 +82,36 @@ public class AnimancerController : MonoBehaviour
     public void CatchBall() {
         Debug.Log("#TODO# Add Mask for Catching");
         anim.Play(catchBall, .25f, FadeMode.FromStart).Events.OnEnd = () => thisChar.Idle();
+    }
+    public int currentMoveIndex;
+    public Move currentMove;
+    
+    public void FireBaseAttackMoves() {
+        if (currentMoveIndex > 0) { return; }
+        currentMoveIndex = 0;
+        FireNextBaseAttackMove();
+    }
+
+    public void FireNextBaseAttackMove() {
+        if (currentMoveIndex < 0) { return; }
+        if (currentMoveIndex >= baseAttackMoves.Count) { anim.Stop();  currentMoveIndex = 0; thisChar.CombatIdle(); }
+        currentMove = baseAttackMoves[currentMoveIndex++];
+        anim.Play(currentMove.animation, .6f, FadeMode.FromStart).Events.OnEnd = () => ProcessBaseAttackCombo();
+        currentMove.animation.State.Root.Component.Animator.applyRootMotion = true;
+    }
+    public void ProcessBaseAttackCombo() {
+        if (currentMoveIndex < 0) { return; }
+        if (currentMoveIndex >= baseAttackMoves.Count) {
+            currentMoveIndex = 0;
+            thisChar.CombatIdle();
+        } else {
+            FireNextBaseAttackMove();
+        }
+    }
+
+    public void TakeDamage() {
+        currentMoveIndex = -1;
+        anim.Play(takeDamage).Events.OnEnd = () => thisChar.CombatIdle();
     }
 
     void Update()

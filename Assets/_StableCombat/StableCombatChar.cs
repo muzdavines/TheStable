@@ -24,48 +24,113 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
     public float distToTrackBallCarrier;
     public Goal myGoal, enemyGoal;
     public Character myCharacter;
+    
     public Position fieldPosition;
-
+    public bool fieldSport = false;
+    
     //Feedbacks
     public MMFeedbacks goOnRun;
     public MMFeedbacks sendOnRun;
+    public MMFeedbacks takeDamage;
     public Vector3 position { get { return _t.position; } }
     public Coach coach;
     
+    //Combat
+    public StableCombatChar myAttackTarget;
+    public CombatFocus combatFocus;
+    public float aggroRadius = 100f;
+    public float attackRange = 5f;
+    public float lastAttack = 0f;
+    public List<Move> baseAttackMoves;
+    public Transform RH, LH, LL, RL;
+    public SCWeapon RHWeapon, LHWeapon, RLWeapon, LLWeapon;
+
+    //Combat Attributes
+    public float health, stamina, balance, mind, maxHealth, maxStamina, maxBalance, maxMind;
+
     public void Init()
     {
         controller = this;
+        _t = transform;
         anima = GetComponent<AnimancerController>();
         agent = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();
-        ball = FindObjectOfType<Ball>();
+        baseAttackMoves = myCharacter.activeMoves;
         agent.speed = myCharacter.runSpeed * .4f;
-        Goal[] tempGoals = FindObjectsOfType<Goal>();
-        foreach (var tg in tempGoals) {
-            if (tg.team == team) {
-                myGoal = tg;
-            } else { enemyGoal = tg; }
-        }
-        _t = transform;
-        StableCombatCharState initState = new SCIdle();
-        initState.owner = this;
-        this.state = initState;
-        initState.thisChar = this;
-        initState.EnterFrom(null);
-        
-        var tempChars = FindObjectsOfType<StableCombatChar>();
-        int teammateCount = 0;
-        int enemycount = 0;
-        foreach (var tc in tempChars) {
-            if (tc == this) { continue; }
-            if (tc.team == team) { teammateCount++; } else { enemycount++; }
-        }
-        foreach (var thisCoach in FindObjectsOfType<Coach>()) {
-            if (thisCoach.team == team) {
-                coach = thisCoach;
-                break;
+        if (fieldSport) {
+            int teammateCount = 0;
+            int enemycount = 0;
+            ball = FindObjectOfType<Ball>();
+            Goal[] tempGoals = FindObjectsOfType<Goal>();
+            foreach (var tg in tempGoals) {
+                if (tg.team == team) {
+                    myGoal = tg;
+                }
+                else { enemyGoal = tg; }
             }
+            var tempChars = FindObjectsOfType<StableCombatChar>();
+            foreach (var tc in tempChars) {
+                if (tc == this) { continue; }
+                if (tc.team == team) { teammateCount++; } else { enemycount++; }
+            }
+            foreach (var thisCoach in FindObjectsOfType<Coach>()) {
+                if (thisCoach.team == team) {
+                    coach = thisCoach;
+                    break;
+                }
+            }
+            StableCombatCharState initState = new SCIdle();
+            initState.owner = this;
+            this.state = initState;
+            initState.thisChar = this;
+            initState.EnterFrom(null);
+        } else {
+            SCCombatStanceState initState = new SCCombatIdle();
+            initState.owner = this;
+            this.state = initState;
+            initState.thisChar = this;
+            initState.EnterFrom(null);
         }
+        maxHealth = health = myCharacter.maxHealth;
+        maxStamina = stamina = myCharacter.maxStamina;
+        maxBalance = balance = myCharacter.maxBalance;
+        maxMind = mind = myCharacter.maxMind;
+        WeaponSetup();
+    }
+    bool weaponsInited;
+    void WeaponSetup() {
+        
+        if (weaponsInited) { return; }
+        weaponsInited = true;
+        Character character = myCharacter;
+        if (character.weapon == null || character.weapon.name == "") {
+            Weapon startingWeaponSO = Resources.Load<Weapon>(character.startingWeapon);
+            character.weapon = Instantiate(startingWeaponSO);
+        }
+        Weapon weaponBlueprint = character.weapon;
+        SCWeapon weaponPrefab = Resources.Load<GameObject>(weaponBlueprint.prefabName).GetComponent<SCWeapon>();
+        SCWeapon defaultFists = Resources.Load<GameObject>("Fists").GetComponent<SCWeapon>();
+        RHWeapon = Instantiate<SCWeapon>(weaponPrefab, RH);
+        RHWeapon.transform.localPosition = Vector3.zero;
+        RHWeapon.transform.localRotation = Quaternion.identity;
+        RHWeapon.GetComponent<SCWeapon>().Init(this, weaponBlueprint);
+
+        SCWeapon leftHandPrefab = weaponBlueprint.dualWield ? weaponPrefab : defaultFists;
+        LHWeapon = Instantiate<SCWeapon>(leftHandPrefab, LH);
+        LHWeapon.transform.localPosition = Vector3.zero;
+        LHWeapon.transform.localRotation = Quaternion.identity;
+        LHWeapon.GetComponent<SCWeapon>().Init(this, weaponBlueprint);
+
+        SCWeapon legWeaponPrefab = weaponBlueprint.usesLegs ? Resources.Load<GameObject>(weaponBlueprint.prefabNameLegs).GetComponent<SCWeapon>() : defaultFists;
+        LLWeapon = Instantiate<SCWeapon>(legWeaponPrefab, LL);
+        LLWeapon.transform.localPosition = Vector3.zero;
+        LLWeapon.transform.localRotation = Quaternion.identity;
+        LLWeapon.GetComponent<SCWeapon>().Init(this, weaponBlueprint);
+
+        RLWeapon = Instantiate<SCWeapon>(legWeaponPrefab, RL);
+        RLWeapon.transform.localPosition = Vector3.zero;
+        RLWeapon.transform.localRotation = Quaternion.identity;
+        RLWeapon.GetComponent<SCWeapon>().Init(this, weaponBlueprint);
     }
 
    void Update()
@@ -193,13 +258,13 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
     public void RunToGoalWithBall() {
         state.TransitionTo(new SCRunToGoalWithBall());
     }
+    
     public void RunToGoalWithoutBall() {
         Debug.Log("#ThisChar#RunToGoalWithoutball" + state.GetType());
         if (state.GetType() != typeof(SCRunToGoalWithoutBall)) {
             state.TransitionTo(new SCRunToGoalWithoutBall());
             goOnRun.PlayFeedbacks();
         }
-
     }
     public void OneTimerToGoal() {
         state.TransitionTo(new SCOneTimerToGoal());
@@ -226,6 +291,52 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
     public void GoalScored() {
         state.TransitionTo(new SCGoalScored());
     }
+    public void CombatIdle() {
+        state.TransitionTo(new SCCombatIdle());
+    }
+    public void CombatAttack() {
+        state.TransitionTo(new SCCombatAttack());
+    }
+    public void CombatPursueTarget() {
+        state.TransitionTo(new SCCombatPursueTarget());
+    }
+
+    public void MeleeScanDamage(string message) {
+        switch (message) {
+            case "BeginScanLH":
+                LHWeapon.Scan();
+                break;
+            case "BeginScanRH":
+                RHWeapon.Scan();
+                break;
+            case "BeginScanLL":
+                LLWeapon.Scan();
+                break;
+            case "BeginScanRL":
+                RLWeapon.Scan();
+                break;
+            case "EndScanRH":
+                RHWeapon.EndScan();
+                break;
+            case "EndScanLH":
+                LHWeapon.EndScan();
+                break;
+            case "EndScanRL":
+                RLWeapon.EndScan();
+                break;
+            case "EndScanLL":
+                LLWeapon.EndScan();
+                break;
+            case "EndAll":
+                RHWeapon?.EndScan();
+                LHWeapon?.EndScan();
+                RLWeapon?.EndScan();
+                LLWeapon?.EndScan();
+                break;
+        }
+    }
+
+
     float lastRunCalled;
     public void SendTeammateOnRun() {
        if (lastRunCalled + 3 < Time.time) {
@@ -243,6 +354,21 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
             }
         }
         return null;
+    }
+
+    public bool MyTargetIsInAttackRange() {
+        if (myAttackTarget == null) { Debug.LogError("myAttackTarget is null"); }
+        return (Vector3.Distance(_t.position, myAttackTarget.transform.position) < attackRange);
+    }
+    public float TotalCooldown() {
+        float f = 0;
+        foreach (Move m in baseAttackMoves) {
+            f += m.cooldown;
+        }
+        return f;
+    }
+    public bool IsCoolingDown() {
+        return (Time.time < lastAttack + TotalCooldown());
     }
     public Transform GetFieldPosition() {
         switch (fieldPosition) {
@@ -268,6 +394,25 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
         return null;
     }
 
+    public void TakeDamage(StableDamage damage) {
+        if (health <= 0)
+            return;
+        takeDamage.PlayFeedbacks();
+        state.TransitionTo(new SCTakeDamage());
+        if (stamina <= 0 || balance <= 0 || mind <= 0) {
+            health -= damage.health;
+            Debug.Log("TODO: more health damage adjustments needed");
+        }
+        stamina -= damage.stamina;
+        balance -= damage.balance;
+        mind -= damage.mind;
+   
+        if (health <= 0) {
+            print("DEAD!!!!");
+            //Die();
+        }
+    }
+
     public void AnimEventReceiver(string message) {
         state.AnimEventReceiver(message);
     }
@@ -283,7 +428,7 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
 }
 
 public enum Position { LW, ST, RW, DR, DC, DL }
-
+public enum CombatFocus { Melee, Ranged }
 public static class StableCombatCharHelper {
     public static void ResetAllTriggers(this Animator anim) {
 

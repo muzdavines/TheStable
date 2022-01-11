@@ -1,5 +1,129 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1852507370
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1852507371}
+  - component: {fileID: 1852507373}
+  - component: {fileID: 1852507372}
+  m_Layer: 10
+  m_Name: TakeDamage
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1852507371
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1852507370}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.39, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 9095509152374044676}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1852507373
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1852507370}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 841b72de2996c5c40bfb394f3d0e0a98, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Feedbacks:
+  - {fileID: 1852507372}
+  InitializationMode: 2
+  SafeMode: 3
+  Direction: 0
+  AutoChangeDirectionOnEnd: 0
+  AutoPlayOnStart: 0
+  AutoPlayOnEnable: 0
+  DurationMultiplier: 1
+  DisplayFullDurationDetails: 0
+  CooldownDuration: 0
+  InitialDelay: 0
+  CanPlayWhileAlreadyPlaying: 1
+  FeedbacksIntensity: 1
+  Events:
+    TriggerMMFeedbacksEvents: 0
+    TriggerUnityEvents: 1
+    OnPlay:
+      m_PersistentCalls:
+        m_Calls: []
+    OnPause:
+      m_PersistentCalls:
+        m_Calls: []
+    OnResume:
+      m_PersistentCalls:
+        m_Calls: []
+    OnRevert:
+      m_PersistentCalls:
+        m_Calls: []
+    OnComplete:
+      m_PersistentCalls:
+        m_Calls: []
+  DebugActive: 0
+--- !u!114 &1852507372
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1852507370}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cdfe4b9b079619143a9748eeee75e698, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Active: 1
+  Label: Particles Instantiation
+  Chance: 100
+  Timing:
+    TimescaleMode: 0
+    InitialDelay: 0
+    CooldownDuration: 0
+    ExcludeFromHoldingPauses: 0
+    InterruptsOnStop: 1
+    NumberOfRepeats: 0
+    RepeatForever: 0
+    DelayBetweenRepeats: 1
+    MMFeedbacksDirectionCondition: 0
+    PlayDirection: 0
+    ConstantIntensity: 0
+    UseIntensityInterval: 0
+    IntensityIntervalMin: 0
+    IntensityIntervalMax: 0
+    Sequence: {fileID: 0}
+    TrackID: 0
+    Quantized: 0
+    TargetBPM: 120
+  DebugActive: 0
+  Mode: 0
+  CachedRecycle: 1
+  ParticlesPrefab: {fileID: 198915169806088938, guid: 29ef05aa5a977ce4ea1d10408047bedf,
+    type: 3}
+  RandomParticlePrefabs: []
+  PositionMode: 0
+  InstantiateParticlesPosition: {fileID: 0}
+  TargetWorldPosition: {x: 0, y: 0, z: 0}
+  Offset: {x: 0, y: 0, z: 0}
+  NestParticles: 1
+  ApplyRotation: 0
+  ApplyScale: 0
 --- !u!1 &5642450090500931816
 GameObject:
   m_ObjectHideFlags: 0
@@ -2388,7 +2512,7 @@ NavMeshAgent:
   m_Speed: 5
   m_Acceleration: 8
   avoidancePriority: 50
-  m_AngularSpeed: 120
+  m_AngularSpeed: 200
   m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
@@ -2449,15 +2573,35 @@ MonoBehaviour:
   distToTrackBallCarrier: 90
   myGoal: {fileID: 0}
   enemyGoal: {fileID: 0}
+  myCharacter: {fileID: 0}
   fieldPosition: 2
+  fieldSport: 0
   goOnRun: {fileID: 9175605144743150480}
   sendOnRun: {fileID: 3875370517469726426}
-  tackling: 10
-  dodging: 10
-  blocking: 10
-  runSpeed: 10
-  archetype: 0
+  takeDamage: {fileID: 1852507373}
   coach: {fileID: 0}
+  myAttackTarget: {fileID: 0}
+  combatFocus: 0
+  aggroRadius: 100
+  attackRange: 5
+  lastAttack: 0
+  baseAttackMoves: []
+  RH: {fileID: 8654310594624659538}
+  LH: {fileID: 8654310594624651482}
+  LL: {fileID: 8654310594624698978}
+  RL: {fileID: 8654310594624660288}
+  RHWeapon: {fileID: 0}
+  LHWeapon: {fileID: 0}
+  RLWeapon: {fileID: 0}
+  LLWeapon: {fileID: 0}
+  health: 0
+  stamina: 0
+  balance: 0
+  mind: 0
+  maxHealth: 0
+  maxStamina: 0
+  maxBalance: 0
+  maxMind: 0
 --- !u!114 &3465658658279899419
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2605,6 +2749,9 @@ MonoBehaviour:
     _Clip: {fileID: 0}
     _Speed: 1
     _NormalizedStartTime: 0
+  baseAttackMoves: []
+  currentMoveIndex: 0
+  currentMove: {fileID: 0}
 --- !u!114 &3465658658279899418
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4538,12 +4685,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 64353379e444d4f4a846e9168a826469, type: 3}
---- !u!4 &9095509152374044676 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4072717734138767525, guid: 64353379e444d4f4a846e9168a826469,
-    type: 3}
-  m_PrefabInstance: {fileID: 5097105357815664801}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &3875370517469726426 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8319444435483612795, guid: 64353379e444d4f4a846e9168a826469,
@@ -4568,3 +4709,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 841b72de2996c5c40bfb394f3d0e0a98, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!4 &9095509152374044676 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4072717734138767525, guid: 64353379e444d4f4a846e9168a826469,
+    type: 3}
+  m_PrefabInstance: {fileID: 5097105357815664801}
+  m_PrefabAsset: {fileID: 0}
