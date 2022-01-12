@@ -6,7 +6,17 @@ public class SCCombatAttack : SCCombatStanceState
 {
     public override void EnterFrom(StableCombatCharState state) {
         base.EnterFrom(state);
-        thisChar.anima.FireBaseAttackMoves();
+        switch (thisChar.combatFocus) {
+            case CombatFocus.Melee:
+                thisChar.anima.FireBaseMeleeAttackMoves();
+                thisChar.MeleeWeaponsOn();
+                break;
+            case CombatFocus.Ranged:
+                thisChar.anima.FireBaseRangedAttackMoves();
+                thisChar.RangedWeaponsOn();
+                break;
+        }
+       
         thisChar.agent.isStopped = true;
         thisChar._t.LookAt(thisChar.myAttackTarget.position);
     }
@@ -21,17 +31,25 @@ public class SCCombatAttack : SCCombatStanceState
         if (message == "EndAttack") {
             //thisChar.anima.FireNextBaseAttackMove();
         }
-        if (message == "RangedShot") {
-
+        if (message == "FireWeaponRH" || message == "FireWeaponLH") {
+            Debug.Log("#SCAttack#FireWeapon");
+            FireProjectile(message);
         }
         if (message == "FaceTarget") {
             thisChar._t.LookAt(thisChar.myAttackTarget.position);
         }
     }
 
+    public void FireProjectile(string message) {
+        if (message == "FireWeaponRH") {
+            thisChar.RHRWeapon.FireProjectile(thisChar.anima.currentRangedMove);
+        } else {
+            thisChar.LHRWeapon.FireProjectile(thisChar.anima.currentRangedMove);
+        }
+    }
+
     public override void WillExit() {
         base.WillExit();
-        thisChar.lastAttack = Time.time;
         thisChar.MeleeScanDamage("EndAll");
     }
 }

@@ -14,8 +14,8 @@ public class ActiveWeaponController : MonoBehaviour, IEnhancedScrollerDelegate, 
     public virtual void Start() {
         _data = new List<Weapon>();
         Character c = GetComponentInParent<HeroEditController>().activeCharacter;
-        Weapon thisWeapon = c.weapon;
-        if (thisWeapon == null) { c.weapon = thisWeapon = c.GetDefaultWeapon(); }
+        Weapon thisWeapon = c.meleeWeapon;
+        if (thisWeapon == null) { c.meleeWeapon = thisWeapon = c.GetDefaultMeleeWeapon(); }
         
         _data.Add(thisWeapon);
         

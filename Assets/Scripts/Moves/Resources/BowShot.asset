@@ -13,15 +13,29 @@ MonoBehaviour:
   m_Name: BowShot
   m_EditorClassIdentifier: 
   description: Bow Shot
-  cooldown: 4
+  cooldown: 2
+  maxRange: 100
+  minRange: 20
   accuracy: 100
+  movePointCost: 0
   staminaDamage: 2
   balanceDamage: 0
   mindDamage: 0
   healthDamage: 1
   keyPhysicalAttribute: strength
   keyTechnicalAttribute: pugilism
+  animation:
+    _FadeDuration: 0.25
+    _Events:
+      _NormalizedTimes: []
+      _Callbacks: []
+      _Names: []
+    _Clip: {fileID: 7400056, guid: da381b880dd6f4cb8af7c512e2cc5f38, type: 3}
+    _Speed: 1
+    _NormalizedStartTime: 0
   limb: 0
-  moveType: 1000
+  moveType: 1
   moveWeaponType: 8
+  projectile: {fileID: 4042357894835373830, guid: 5a56baa1bc6105043b4250f62d47a8e1,
+    type: 3}
   modifiers: []

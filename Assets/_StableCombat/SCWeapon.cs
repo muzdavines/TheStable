@@ -8,6 +8,7 @@ public class SCWeapon : MonoBehaviour
     public AnimancerController anim;
     public StableCombatChar me;
     public Weapon weaponBlueprint;
+    public Transform projectileSpawnPoint;
     void Start()
     {
         if (col == null) { col = GetComponent<Collider>(); }
@@ -30,7 +31,7 @@ public class SCWeapon : MonoBehaviour
         Debug.Log("#SCWeapon#Collision: " + other.name);
         StableCombatChar target = other.GetComponent<StableCombatChar>();
         if (target == null || target == me) { return; }
-        target.TakeDamage(anim.currentMove.damage);
+        target.TakeDamage(anim.currentMeleeMove.damage);
     }
 
     public void Scan() {
@@ -41,6 +42,14 @@ public class SCWeapon : MonoBehaviour
     public void EndScan() {
         col.enabled = false;
         Debug.Log("#SCWeapon#EndScan");
+    }
+
+    public void FireProjectile(Move thisMove) {
+        if (thisMove == null) { Debug.Log("No projectile"); return; }
+        SCProjectile projectile = Instantiate<SCProjectile>(thisMove.projectile);
+        projectile.transform.position = projectileSpawnPoint.position;
+        projectile.transform.localRotation = projectileSpawnPoint.rotation;
+        projectile.Fire(me.myAttackTarget._t, thisMove.damage);
     }
 
 

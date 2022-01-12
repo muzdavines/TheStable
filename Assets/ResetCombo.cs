@@ -7,7 +7,7 @@ public class ResetCombo : StateMachineBehaviour
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
         animator.SetInteger("ComboNum", 0);
-        animator.SetFloat("Combo", (float)animator.GetComponent<MissionCharacter>().character.activeMoves[0].moveType);
+        animator.SetFloat("Combo", (float)animator.GetComponent<MissionCharacter>().character.activeMeleeMoves[0].moveType);
         animator.ResetTrigger("ComboHit");
         animator.ResetTrigger("EndMelee");
     }

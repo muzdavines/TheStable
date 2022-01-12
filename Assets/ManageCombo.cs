@@ -9,7 +9,7 @@ public class ManageCombo : StateMachineBehaviour
         comboNum++;
         animator.SetInteger("ComboNum", comboNum);
         Move nextMove = null;
-        try { nextMove = animator.GetComponent<MissionCharacter>().character.activeMoves[comboNum]; } catch { Debug.Log(animator.transform.name + " ERROR: Combo Num " + comboNum); }
+        try { nextMove = animator.GetComponent<MissionCharacter>().character.activeMeleeMoves[comboNum]; } catch { Debug.Log(animator.transform.name + " ERROR: Combo Num " + comboNum); }
 
 
         if (nextMove !=null && comboNum < 3 && nextMove.moveType > 0) {
@@ -21,7 +21,7 @@ public class ManageCombo : StateMachineBehaviour
     // OnStateEnter is called when a transition starts and the state machine starts to evaluate this state
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
         int comboNum = animator.GetInteger("ComboNum");
-        Move nextMove = animator.GetComponent<MissionCharacter>().character.activeMoves[comboNum];
+        Move nextMove = animator.GetComponent<MissionCharacter>().character.activeMeleeMoves[comboNum];
 
         if (nextMove != null && comboNum < 3 && nextMove.moveType > 0) {
             Debug.Log(animator.transform.name + " Setting Trigger");

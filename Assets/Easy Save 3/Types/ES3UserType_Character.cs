@@ -62,12 +62,12 @@ namespace ES3Types
 			writer.WriteProperty("maxHealth", instance.maxHealth, ES3Type_int.Instance);
 			writer.WriteProperty("knownMoves", instance.knownMoves, ES3Internal.ES3TypeMgr.GetES3Type(typeof(System.Collections.Generic.List<Move>)));
 			writer.WriteProperty("knownMovesSave", instance.knownMovesSave, ES3Internal.ES3TypeMgr.GetES3Type(typeof(System.Collections.Generic.List<MoveSave>)));
-			writer.WriteProperty("activeMoves", instance.activeMoves, ES3Internal.ES3TypeMgr.GetES3Type(typeof(System.Collections.Generic.List<Move>)));
+			writer.WriteProperty("activeMoves", instance.activeMeleeMoves, ES3Internal.ES3TypeMgr.GetES3Type(typeof(System.Collections.Generic.List<Move>)));
 			writer.WriteProperty("activeMovesSave", instance.activeMovesSave, ES3Internal.ES3TypeMgr.GetES3Type(typeof(System.Collections.Generic.List<MoveSave>)));
 			writer.WriteProperty("startingArmor", instance.startingArmor, ES3Type_string.Instance);
-			writer.WriteProperty("startingWeapon", instance.startingWeapon, ES3Type_string.Instance);
+			writer.WriteProperty("startingWeapon", instance.startingMeleeWeapon, ES3Type_string.Instance);
 			writer.WritePropertyByRef("armor", instance.armor);
-			writer.WritePropertyByRef("weapon", instance.weapon);
+			writer.WritePropertyByRef("weapon", instance.meleeWeapon);
 			writer.WritePropertyByRef("mat", instance.mat);
 			writer.WriteProperty("contract", instance.contract, ES3Internal.ES3TypeMgr.GetES3Type(typeof(EmploymentContract)));
 			writer.WritePropertyByRef("currentTraining", instance.currentTraining);
@@ -230,7 +230,7 @@ namespace ES3Types
 						instance.knownMovesSave = reader.Read<System.Collections.Generic.List<MoveSave>>();
 						break;
 					case "activeMoves":
-						instance.activeMoves = reader.Read<System.Collections.Generic.List<Move>>();
+						instance.activeMeleeMoves = reader.Read<System.Collections.Generic.List<Move>>();
 						break;
 					case "activeMovesSave":
 						instance.activeMovesSave = reader.Read<System.Collections.Generic.List<MoveSave>>();
@@ -239,13 +239,13 @@ namespace ES3Types
 						instance.startingArmor = reader.Read<System.String>(ES3Type_string.Instance);
 						break;
 					case "startingWeapon":
-						instance.startingWeapon = reader.Read<System.String>(ES3Type_string.Instance);
+						instance.startingMeleeWeapon = reader.Read<System.String>(ES3Type_string.Instance);
 						break;
 					case "armor":
 						instance.armor = reader.Read<Armor>();
 						break;
 					case "weapon":
-						instance.weapon = reader.Read<Weapon>();
+						instance.meleeWeapon = reader.Read<Weapon>();
 						break;
 					case "mat":
 						instance.mat = reader.Read<UnityEngine.Material>(ES3Type_Material.Instance);

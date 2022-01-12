@@ -42,35 +42,35 @@ public class HeroEditController : MonoBehaviour
 
     public void ListMoveClicked(Move move) {
         Character c = activeCharacter;
-        if (c.activeMoves.Count >= 3) {
+        if (c.activeMeleeMoves.Count >= 3) {
             print("Max Moves");
             return;
         }
-        if (!move.moveWeaponType.HasFlag(c.weapon.weaponType)) {
+        if (!move.moveWeaponType.HasFlag(c.meleeWeapon.weaponType)) {
             print("Wrong Weapon Type");
             return;
         }
         Move newMove = Instantiate(move);
         newMove.name = move.name;
-        c.activeMoves.Add(newMove);
+        c.activeMeleeMoves.Add(newMove);
         Helper.UpdateAllUI();
     }
 
     public void ActiveMoveClicked(Move move) {
         print("Active List : " + move);
         Character c = activeCharacter;
-        c.activeMoves.Remove(move);
+        c.activeMeleeMoves.Remove(move);
         Helper.UpdateAllUI();
     }
     public void ListWeaponClicked(Weapon weapon) {
-        activeCharacter.weapon.isOwned = false;
-        activeCharacter.weapon = weapon;
+        activeCharacter.meleeWeapon.isOwned = false;
+        activeCharacter.meleeWeapon = weapon;
         weapon.isOwned = true;
         Helper.UpdateAllUI();
     }
     public void ActiveWeaponClicked() {
-        activeCharacter.weapon.isOwned = false;
-        activeCharacter.weapon = activeCharacter.GetDefaultWeapon();
+        activeCharacter.meleeWeapon.isOwned = false;
+        activeCharacter.meleeWeapon = activeCharacter.GetDefaultMeleeWeapon();
         Helper.UpdateAllUI();
     }
 }

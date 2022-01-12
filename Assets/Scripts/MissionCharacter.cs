@@ -44,8 +44,8 @@ public class MissionCharacter : MonoBehaviour, MissionCharacterStateOwner {
             Init(new Character() { toughness = 10, melee = Random.Range(0, 15), landNavigation = -100, strength = 10, parry = 20, health = 3, name = Names.Warrior[Random.Range(0, 10)] });
         }
         for (int i = 0; i < 3; i++) {
-            if (character.activeMoves[i] == null) { character.activeMoves[i] = new Move() { moveType = MoveType.None }; }
-            activeMoves[i] = character.activeMoves[i];
+            if (character.activeMeleeMoves[i] == null) { character.activeMeleeMoves[i] = new Move() { moveType = MoveType.Melee }; }
+            activeMoves[i] = character.activeMeleeMoves[i];
         }
     }
 
@@ -107,11 +107,11 @@ public class MissionCharacter : MonoBehaviour, MissionCharacterStateOwner {
         if (weaponsInited) { return; }
         weaponsInited = true;
 
-        if (character.weapon == null || character.weapon.name == "") {
-            Weapon startingWeaponSO = Resources.Load<Weapon>(character.startingWeapon);
-            character.weapon = Instantiate(startingWeaponSO);
+        if (character.meleeWeapon == null || character.meleeWeapon.name == "") {
+            Weapon startingWeaponSO = Resources.Load<Weapon>(character.startingMeleeWeapon);
+            character.meleeWeapon = Instantiate(startingWeaponSO);
         }
-        Weapon weaponBlueprint = character.weapon;
+        Weapon weaponBlueprint = character.meleeWeapon;
         GameObject weaponPrefab = Resources.Load<GameObject>(weaponBlueprint.prefabName);
         GameObject defaultFists = Resources.Load<GameObject>("Fists");
         rightHandWeapon = Instantiate<GameObject>(weaponPrefab, rHand);

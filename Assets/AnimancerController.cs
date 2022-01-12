@@ -21,7 +21,10 @@ public class AnimancerController : MonoBehaviour
     public ClipTransition oneTimer;
     public ClipTransition goalScored;
     public ClipTransition takeDamage;
-    public List<Move> baseAttackMoves;
+    public ClipTransition takeOutBow;
+    public ClipTransition takeOutSword;
+    public List<Move> baseMeleeAttackMoves;
+    public List<Move> baseRangedAttackMoves;
     NavMeshAgent agent;
     StableCombatChar thisChar;
     private void Awake() {
@@ -33,8 +36,8 @@ public class AnimancerController : MonoBehaviour
         thisChar = GetComponent<StableCombatChar>();
         anim = GetComponent<AnimancerComponent>();
         agent = GetComponent<NavMeshAgent>();
-        baseAttackMoves = thisChar.baseAttackMoves;
-        
+        baseMeleeAttackMoves = thisChar.meleeAttackMoves;
+        baseRangedAttackMoves = thisChar.rangedAttackMoves;
     }
 
     public void Idle() {
@@ -83,34 +86,78 @@ public class AnimancerController : MonoBehaviour
         Debug.Log("#TODO# Add Mask for Catching");
         anim.Play(catchBall, .25f, FadeMode.FromStart).Events.OnEnd = () => thisChar.Idle();
     }
-    public int currentMoveIndex;
-    public Move currentMove;
-    
-    public void FireBaseAttackMoves() {
-        if (currentMoveIndex > 0) { return; }
-        currentMoveIndex = 0;
-        FireNextBaseAttackMove();
+
+    public void TakeOutSword() {
+        anim.Play(takeOutSword, .25f, FadeMode.FromStart).Events.OnEnd = () => Idle();
     }
 
-    public void FireNextBaseAttackMove() {
-        if (currentMoveIndex < 0) { return; }
-        if (currentMoveIndex >= baseAttackMoves.Count) { anim.Stop();  currentMoveIndex = 0; thisChar.CombatIdle(); }
-        currentMove = baseAttackMoves[currentMoveIndex++];
-        anim.Play(currentMove.animation, .6f, FadeMode.FromStart).Events.OnEnd = () => ProcessBaseAttackCombo();
-        currentMove.animation.State.Root.Component.Animator.applyRootMotion = true;
+    public int currentMeleeAttackIndex;
+    public Move currentMeleeMove;
+    public int currentRangedAttackIndex;
+    public Move currentRangedMove;
+    
+    public void FireBaseMeleeAttackMoves() {
+        if (currentMeleeAttackIndex > 0) { return; }
+        currentMeleeAttackIndex = 0;
+        currentRangedAttackIndex = -1;
+        thisChar.accumulatedCooldown = 0;
+        FireNextBaseMeleeAttackMove();
     }
-    public void ProcessBaseAttackCombo() {
-        if (currentMoveIndex < 0) { return; }
-        if (currentMoveIndex >= baseAttackMoves.Count) {
-            currentMoveIndex = 0;
+
+    public void FireNextBaseMeleeAttackMove() {
+        if (currentMeleeAttackIndex < 0) { return; }
+        if (currentMeleeAttackIndex >= baseMeleeAttackMoves.Count) { anim.Stop();  currentMeleeAttackIndex = 0; thisChar.CombatIdle(); }
+        currentMeleeMove = baseMeleeAttackMoves[currentMeleeAttackIndex++];
+        anim.Play(currentMeleeMove.animation, .6f, FadeMode.FromStart).Events.OnEnd = () => ProcessBaseMeleeAttackCombo();
+        thisChar.lastAttack = Time.time;
+        thisChar.accumulatedCooldown += currentMeleeMove.cooldown;
+        currentMeleeMove.animation.State.Root.Component.Animator.applyRootMotion = true;
+    }
+    public void ProcessBaseMeleeAttackCombo() {
+        if (currentMeleeAttackIndex < 0) { return; }
+        if (currentMeleeAttackIndex >= baseMeleeAttackMoves.Count) {
+            currentMeleeAttackIndex = 0;
             thisChar.CombatIdle();
         } else {
-            FireNextBaseAttackMove();
+            FireNextBaseMeleeAttackMove();
         }
     }
 
+    public void FireBaseRangedAttackMoves() {
+        if (currentRangedAttackIndex > 0) { return; }
+        currentRangedAttackIndex = 0;
+        currentMeleeAttackIndex = -1;
+        thisChar.accumulatedCooldown = 0;
+        FireNextBaseRangedAttackMove();
+    }
+
+    public void FireNextBaseRangedAttackMove() {
+        if (currentRangedAttackIndex < 0) { return; }
+        if (currentRangedAttackIndex >= baseRangedAttackMoves.Count) { anim.Stop(); currentRangedAttackIndex = 0; thisChar.CombatIdle(); }
+        currentRangedMove = baseRangedAttackMoves[currentRangedAttackIndex++];
+        anim.Play(currentRangedMove.animation, .6f, FadeMode.FromStart).Events.OnEnd = () => ProcessBaseRangedAttackCombo();
+        thisChar.lastAttack = Time.time;
+        thisChar.accumulatedCooldown += currentRangedMove.cooldown;
+        currentRangedMove.animation.State.Root.Component.Animator.applyRootMotion = true;
+    }
+    public void ProcessBaseRangedAttackCombo() {
+        if (currentRangedAttackIndex < 0) { return; }
+        if (currentRangedAttackIndex >= baseRangedAttackMoves.Count) {
+            currentRangedAttackIndex = 0;
+            thisChar.CombatIdle();
+        }
+        else {
+            FireNextBaseRangedAttackMove();
+        }
+    }
+
+
+
+
+
     public void TakeDamage() {
-        currentMoveIndex = -1;
+        currentMeleeAttackIndex = -1;
+        currentRangedAttackIndex = -1;
         anim.Play(takeDamage).Events.OnEnd = () => thisChar.CombatIdle();
     }
 

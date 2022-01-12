@@ -27,7 +27,7 @@ public class StageTester : MonoBehaviour
                 Character c = new Character() { name = Names.Warrior[Random.Range(0, Names.Warrior.Length)], age = 18, health = 3, modelName = "CharRogue", activeForNextMission = true };
                 Weapon w = new Weapon() { condition = 100, damage = 10, itemName = "Long Sword" };
                 Armor a = new Armor() { condition = 100, defense = 10, health = 0, itemName = "Chain Mail" };
-                c.weapon = w;
+                c.meleeWeapon = w;
                 c.armor = a;
                 player.heroes.Add(c);
             }
@@ -36,7 +36,7 @@ public class StageTester : MonoBehaviour
                 Character thisChar = Instantiate<Character>(c);
                 thisChar.activeForNextMission = true;
                 thisChar.armor = Instantiate(thisChar.armor);
-                thisChar.weapon = Instantiate(thisChar.weapon);
+                thisChar.meleeWeapon = Instantiate(thisChar.meleeWeapon);
                 player.heroes.Add(thisChar);
             }
         }

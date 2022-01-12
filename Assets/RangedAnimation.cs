@@ -14,7 +14,7 @@ public class RangedAnimation : StateMachineBehaviour {
         var motor = CharacterMotor.animatorToMotorMap[animator];
         motor._isInRangedAnim = true;
         thisMove = motor.GetComponent<MissionCharacter>().activeMoves[thisComboNum];
-        animator.SetFloat("Combo", (float)motor.GetComponent<MissionCharacter>().character.activeMoves[thisComboNum].moveType);
+        animator.SetFloat("Combo", (float)motor.GetComponent<MissionCharacter>().character.activeMeleeMoves[thisComboNum].moveType);
         End = .9f;
     }
 

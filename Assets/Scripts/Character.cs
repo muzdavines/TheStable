@@ -82,7 +82,8 @@ public class Character : Living
 
     public List<Move> knownMoves = new List<Move>();
     public List<MoveSave> knownMovesSave = new List<MoveSave>();
-    public List<Move> activeMoves = new List<Move>();
+    public List<Move> activeMeleeMoves = new List<Move>();
+    public List<Move> activeRangedMoves = new List<Move>();
     public List<MoveSave> activeMovesSave = new List<MoveSave>();
     public bool HasMove (string m) {
         Debug.Log("HasMove called on Character. Need to Change This");
@@ -93,12 +94,17 @@ public class Character : Living
     }
     //Inventory
     public string startingArmor;
-    public string startingWeapon;
+    public string startingMeleeWeapon;
+    public string startingRangedWeapon;
     public Armor armor;
-    public Weapon weapon;
+    public Weapon meleeWeapon;
+    public Weapon rangedWeapon;
     //public List<Item> inventory;
-    public Weapon GetDefaultWeapon() {
-        return Instantiate(Resources.Load<Weapon>(startingWeapon));
+    public Weapon GetDefaultMeleeWeapon() {
+        return Instantiate(Resources.Load<Weapon>(startingMeleeWeapon));
+    }
+    public Weapon GetDefaultRangedWeapon() {
+        return Instantiate(Resources.Load<Weapon>(startingRangedWeapon));
     }
     //Visuals
     /// <summary>
@@ -209,9 +215,9 @@ public class Character : Living
 
     public void Awake() {
         Armor startingArmorSO = Resources.Load<Armor>(startingArmor);
-        Weapon startingWeaponSO = Resources.Load<Weapon>(startingWeapon);
+        Weapon startingWeaponSO = Resources.Load<Weapon>(startingMeleeWeapon);
         if (startingArmorSO == null) { armor = new Armor(); } else { armor = Instantiate(startingArmorSO); }
-        if (startingWeaponSO == null) { Debug.Log("Character new weapon " + name); weapon = new Weapon(); } else { Debug.Log("Char inst weapon " + name); weapon = Instantiate(startingWeaponSO); }
+        if (startingWeaponSO == null) { Debug.Log("Character new weapon " + name); meleeWeapon = new Weapon(); } else { Debug.Log("Char inst weapon " + name); meleeWeapon = Instantiate(startingWeaponSO); }
         if (currentTraining == null) { currentTraining = new Training(); }
     }
 
@@ -289,11 +295,11 @@ public class Character : Living
         this.maxMind = source.maxMind;
         this.maxHealth = source.maxHealth;
         this.knownMoves = source.knownMoves;
-        this.activeMoves = source.activeMoves;
+        this.activeMeleeMoves = source.activeMeleeMoves;
         this.startingArmor = source.startingArmor;
-        this.startingWeapon = source.startingWeapon;
+        this.startingMeleeWeapon = source.startingMeleeWeapon;
         this.armor = source.armor;
-        this.weapon = source.weapon;
+        this.meleeWeapon = source.meleeWeapon;
         this.mat = source.mat;
         this.contract = source.contract;
         this.currentTraining = source.currentTraining;
@@ -414,8 +420,8 @@ public class CharacterSave {
     public CharacterSave CopyValues(Character source) {
         var activeMoveSaveList = new List<MoveSave>();
         var knownMoveSaveList = new List<MoveSave>();
-        for (int i = 0; i < source.activeMoves.Count; i++) {
-            activeMoveSaveList.Add(new MoveSave().CopyValues(source.activeMoves[i]));
+        for (int i = 0; i < source.activeMeleeMoves.Count; i++) {
+            activeMoveSaveList.Add(new MoveSave().CopyValues(source.activeMeleeMoves[i]));
         }
         this.activeMovesSave = activeMoveSaveList;
         for (int i = 0; i < source.knownMoves.Count; i++) {
@@ -465,11 +471,11 @@ public class CharacterSave {
         this.maxMind = source.maxMind;
         this.maxHealth = source.maxHealth;
         this.knownMoves = source.knownMoves;
-        this.activeMoves = source.activeMoves;
+        this.activeMoves = source.activeMeleeMoves;
         this.startingArmor = source.startingArmor;
-        this.startingWeapon = source.startingWeapon;
+        this.startingWeapon = source.startingMeleeWeapon;
         this.armor = source.armor;
-        this.weapon = source.weapon;
+        this.weapon = source.meleeWeapon;
         this.mat = source.mat;
         this.contract = source.contract;
         this.currentTraining = source.currentTraining;

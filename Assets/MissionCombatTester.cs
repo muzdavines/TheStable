@@ -18,7 +18,9 @@ public class MissionCombatTester : MonoBehaviour
             thisChar.team = 0;
             thisChar.myCharacter = thisBaseChar;
             thisChar.GetComponent<SCModelSelector>().Init(thisBaseChar.modelNum, 0);
+            thisChar.combatFocus = CombatFocus.Ranged;
             thisChar.Init();
+            
         }
         foreach (Character e in enemies) {
             Character thisBaseChar = e;

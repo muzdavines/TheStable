@@ -40,15 +40,15 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 916950358832855168}
-  - component: {fileID: 945987001537567078}
-  - component: {fileID: 946103505651918392}
+  - component: {fileID: -197381967742371233}
+  - component: {fileID: 8503351458005827138}
   m_Layer: 0
   m_Name: Bow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &916950358832855168
 Transform:
   m_ObjectHideFlags: 0
@@ -67,10 +67,11 @@ Transform:
   - {fileID: 916648832360623724}
   - {fileID: 916847612759593272}
   - {fileID: 4939274416406433955}
+  - {fileID: 909798115638816043}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &945987001537567078
+--- !u!114 &-197381967742371233
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -79,78 +80,27 @@ MonoBehaviour:
   m_GameObject: {fileID: 914396666709829100}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6ab10cfd4cc2aad4291d14b1498d3902, type: 3}
+  m_Script: {fileID: 11500000, guid: c3e1efe357ed11f478df5eca40a03225, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Type: 1
-  Damage: 20
-  currentMove: {fileID: 0}
-  myCharacter: {fileID: 0}
-  Name: Rifle
-  Zoom: 30
-  Scope: {fileID: 0}
-  Rate: 30
-  BulletsPerShot: 1
-  ConsumeSingleBulletPerShot: 1
-  Distance: 100
-  Error: 0
-  AutoReload: 0
-  ReloadWithMagazines: 1
-  CanInterruptBulletLoad: 1
-  PumpAfterFinalLoad: 0
-  PumpAfterBulletLoad: 0
-  PumpAfterFire: 0
-  FireOnMobileAim: 1
-  LaserOnlyOnZoom: 1
-  DebugAim: 0
-  Aim: {fileID: 914539713017908914}
-  Bullet: {fileID: 0}
-  LeftHandDefault: {fileID: 0}
-  DamageResponseWaitTime: 1
-  UseCustomCrosshair: 0
-  CustomCrosshair:
-    Sprites: []
-    Scale: 1
-    LowAngle: 1.5
-    HighAngle: 10
-    Adaptation: 2
-    ShakeMultiplier: 2
-    RecoilMultiplier: 1
-  Recoil:
-    Vertical: 1.5
-    Horizontal: 0.25
-    RecoveryRate: 1
-    ShakeIntensity: 1
-    ShakeTime: 0.25
-  LeftHandOverwrite:
-    Aim: {fileID: 0}
-    Crouch: {fileID: 0}
-    LowCover: {fileID: 0}
-    TallCover: {fileID: 0}
-  LaserOverwrite: {fileID: 0}
-  Character: {fileID: 0}
-  nextFire: 0
-  MagazineSize: 1
-  LoadedBullets: 1000
-  BulletInventory: 10000
---- !u!114 &946103505651918392
-MonoBehaviour:
+  col: {fileID: 0}
+  anim: {fileID: 0}
+  me: {fileID: 0}
+  weaponBlueprint: {fileID: 0}
+  projectileSpawnPoint: {fileID: 909798115638816043}
+--- !u!65 &8503351458005827138
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 914396666709829100}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 29727157b52709643ada8238cc640bbd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Eject: {fileID: 0}
-  Rechamber: {fileID: 0}
-  Fire: {fileID: 0}
-  Pump: {fileID: 0}
-  EmptyFire: {fileID: 0}
-  Shell: {fileID: 0}
+  serializedVersion: 2
+  m_Size: {x: 5.1, y: 1, z: 27.57}
+  m_Center: {x: 16.87, y: 0, z: 42.85}
 --- !u!1 &914539713017908914
 GameObject:
   m_ObjectHideFlags: 0
@@ -304,6 +254,36 @@ Transform:
   m_Father: {fileID: 916950358832855168}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2894152084010665804
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 909798115638816043}
+  m_Layer: 0
+  m_Name: SpawnPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &909798115638816043
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2894152084010665804}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 916950358832855168}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!1 &5468586449343657336
 GameObject:
   m_ObjectHideFlags: 0

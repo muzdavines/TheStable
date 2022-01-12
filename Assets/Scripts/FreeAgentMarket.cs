@@ -29,7 +29,7 @@ public class FreeAgentMarket
     public void UpdateMarket() {
         market = new List<Character>();
         for (int i = 0; i < 6; i++) {
-            market.Add(new Character() { maxHealth = 4, maxStamina = 10, maxBalance = 10, maxMind = 10, swordsmanship = 20, health = 5,  modelName = "CharAristocrat", name = Names.Warrior[Random.Range(0, Names.Warrior.Length)], contract = new EmploymentContract() { signingBonus = Random.Range(500, 2000), weeklySalary = Random.Range(50, 150), weeksLeft = 48 }, startingWeapon = "FistsSO", activeMoves = new List<Move>() { Resources.Load<Move>("LeftJab") }, knownMoves = new List<Move>() { Resources.Load<Move>("LeftJab") } });
+            market.Add(new Character() { maxHealth = 4, maxStamina = 10, maxBalance = 10, maxMind = 10, swordsmanship = 20, health = 5,  modelName = "CharAristocrat", name = Names.Warrior[Random.Range(0, Names.Warrior.Length)], contract = new EmploymentContract() { signingBonus = Random.Range(500, 2000), weeklySalary = Random.Range(50, 150), weeksLeft = 48 }, startingMeleeWeapon = "FistsSO", activeMeleeMoves = new List<Move>() { Resources.Load<Move>("LeftJab") }, knownMoves = new List<Move>() { Resources.Load<Move>("LeftJab") } });
         }
     }
 

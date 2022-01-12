@@ -13,8 +13,7 @@ GameObject:
   - component: {fileID: 1606735544500640442}
   - component: {fileID: 1606735544489326522}
   - component: {fileID: 1606735544498733791}
-  - component: {fileID: 1606735544498733790}
-  - component: {fileID: 1606735544498733789}
+  - component: {fileID: 3619559399530350976}
   m_Layer: 0
   m_Name: Longsword
   m_TagString: Untagged
@@ -118,7 +117,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 25.945946, y: 9.41925, z: 190.20444}
   m_Center: {x: 10.238542, y: 1, z: -63.866283}
---- !u!114 &1606735544498733790
+--- !u!114 &3619559399530350976
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -127,32 +126,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1606735544498701434}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c4b6837506abbf8419afe6efe4efb472, type: 3}
+  m_Script: {fileID: 11500000, guid: c3e1efe357ed11f478df5eca40a03225, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Type: 5
-  Damage: 1
-  currentMove: {fileID: 0}
-  Character: {fileID: 0}
-  moveWeaponType: 1
-  Cooldown: 0.25
-  DamageResponseWaitTime: 0
---- !u!114 &1606735544498733789
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1606735544498701434}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d96ede7eaf8e45b47a611e722e2cc8e2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Attack:
-  - {fileID: 8300000, guid: 5de097d1ff25b4242b0723a818356e91, type: 3}
-  Hit: []
-  Moment: []
+  col: {fileID: 0}
+  anim: {fileID: 0}
+  me: {fileID: 0}
+  weaponBlueprint: {fileID: 0}
 --- !u!1001 &1606735545847435460
 PrefabInstance:
   m_ObjectHideFlags: 0

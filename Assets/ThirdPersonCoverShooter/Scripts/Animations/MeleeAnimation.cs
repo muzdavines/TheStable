@@ -66,7 +66,7 @@ namespace CoverShooter
             var motor = CharacterMotor.animatorToMotorMap[animator];
             var character = motor.GetComponent<MissionCharacter>();
             thisMove = motor.GetComponent<MissionCharacter>().activeMoves[thisComboNum];
-            animator.SetFloat("Combo", (float)motor.GetComponent<MissionCharacter>().character.activeMoves[thisComboNum].moveType);
+            animator.SetFloat("Combo", (float)motor.GetComponent<MissionCharacter>().character.activeMeleeMoves[thisComboNum].moveType);
             Limb = thisMove.limb;
             animator.SetTrigger("ComboHit");
             //EnableCombo = motor.GetComponent<MissionCharacter>().character.HasMove(nextComboMove);

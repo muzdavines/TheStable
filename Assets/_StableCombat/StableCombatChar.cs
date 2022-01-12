@@ -41,9 +41,11 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
     public float aggroRadius = 100f;
     public float attackRange = 5f;
     public float lastAttack = 0f;
-    public List<Move> baseAttackMoves;
+    public List<Move> meleeAttackMoves;
+    public List<Move> rangedAttackMoves;
     public Transform RH, LH, LL, RL;
-    public SCWeapon RHWeapon, LHWeapon, RLWeapon, LLWeapon;
+    public SCWeapon RHMWeapon, LHMWeapon, RLWeapon, LLWeapon;
+    public SCWeapon RHRWeapon, LHRWeapon;
 
     //Combat Attributes
     public float health, stamina, balance, mind, maxHealth, maxStamina, maxBalance, maxMind;
@@ -55,8 +57,11 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
         anima = GetComponent<AnimancerController>();
         agent = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();
-        baseAttackMoves = myCharacter.activeMoves;
+        meleeAttackMoves = myCharacter.activeMeleeMoves;
+        rangedAttackMoves = myCharacter.activeRangedMoves;
         agent.speed = myCharacter.runSpeed * .4f;
+        accumulatedCooldown = 4f;
+        WeaponSetup();
         if (fieldSport) {
             int teammateCount = 0;
             int enemycount = 0;
@@ -95,7 +100,7 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
         maxStamina = stamina = myCharacter.maxStamina;
         maxBalance = balance = myCharacter.maxBalance;
         maxMind = mind = myCharacter.maxMind;
-        WeaponSetup();
+       
     }
     bool weaponsInited;
     void WeaponSetup() {
@@ -103,23 +108,23 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
         if (weaponsInited) { return; }
         weaponsInited = true;
         Character character = myCharacter;
-        if (character.weapon == null || character.weapon.name == "") {
-            Weapon startingWeaponSO = Resources.Load<Weapon>(character.startingWeapon);
-            character.weapon = Instantiate(startingWeaponSO);
+        if (character.meleeWeapon == null || character.meleeWeapon.name == "") {
+            Weapon startingWeaponSO = Resources.Load<Weapon>(character.startingMeleeWeapon);
+            character.meleeWeapon = Instantiate(startingWeaponSO);
         }
-        Weapon weaponBlueprint = character.weapon;
+        Weapon weaponBlueprint = character.meleeWeapon;
         SCWeapon weaponPrefab = Resources.Load<GameObject>(weaponBlueprint.prefabName).GetComponent<SCWeapon>();
         SCWeapon defaultFists = Resources.Load<GameObject>("Fists").GetComponent<SCWeapon>();
-        RHWeapon = Instantiate<SCWeapon>(weaponPrefab, RH);
-        RHWeapon.transform.localPosition = Vector3.zero;
-        RHWeapon.transform.localRotation = Quaternion.identity;
-        RHWeapon.GetComponent<SCWeapon>().Init(this, weaponBlueprint);
+        RHMWeapon = Instantiate<SCWeapon>(weaponPrefab, RH);
+        RHMWeapon.transform.localPosition = Vector3.zero;
+        RHMWeapon.transform.localRotation = Quaternion.identity;
+        RHMWeapon.GetComponent<SCWeapon>().Init(this, weaponBlueprint);
 
         SCWeapon leftHandPrefab = weaponBlueprint.dualWield ? weaponPrefab : defaultFists;
-        LHWeapon = Instantiate<SCWeapon>(leftHandPrefab, LH);
-        LHWeapon.transform.localPosition = Vector3.zero;
-        LHWeapon.transform.localRotation = Quaternion.identity;
-        LHWeapon.GetComponent<SCWeapon>().Init(this, weaponBlueprint);
+        LHMWeapon = Instantiate<SCWeapon>(leftHandPrefab, LH);
+        LHMWeapon.transform.localPosition = Vector3.zero;
+        LHMWeapon.transform.localRotation = Quaternion.identity;
+        LHMWeapon.GetComponent<SCWeapon>().Init(this, weaponBlueprint);
 
         SCWeapon legWeaponPrefab = weaponBlueprint.usesLegs ? Resources.Load<GameObject>(weaponBlueprint.prefabNameLegs).GetComponent<SCWeapon>() : defaultFists;
         LLWeapon = Instantiate<SCWeapon>(legWeaponPrefab, LL);
@@ -131,6 +136,30 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
         RLWeapon.transform.localPosition = Vector3.zero;
         RLWeapon.transform.localRotation = Quaternion.identity;
         RLWeapon.GetComponent<SCWeapon>().Init(this, weaponBlueprint);
+
+        //Ranged Weapon Setup
+        if (character.rangedWeapon == null || character.rangedWeapon.name == "") {
+            Weapon startingRangedWeaponSO = Resources.Load<Weapon>(character.startingRangedWeapon);
+            character.rangedWeapon = Instantiate(startingRangedWeaponSO);
+        }
+        Weapon rangedWeaponBlueprint = character.rangedWeapon;
+        SCWeapon rangedWeaponPrefab = Resources.Load<GameObject>(rangedWeaponBlueprint.prefabName).GetComponent<SCWeapon>();
+        RHRWeapon = Instantiate<SCWeapon>(rangedWeaponPrefab, RH);
+        RHRWeapon.transform.localPosition = Vector3.zero;
+        RHRWeapon.transform.localRotation = Quaternion.identity;
+        RHRWeapon.GetComponent<SCWeapon>().Init(this, rangedWeaponBlueprint);
+        RHRWeapon.gameObject.SetActive(false);
+        if (rangedWeaponBlueprint.dualWield) {
+            LHRWeapon = Instantiate<SCWeapon>(rangedWeaponPrefab, LH);
+            LHRWeapon.transform.localPosition = Vector3.zero;
+            LHRWeapon.transform.localRotation = Quaternion.identity;
+            LHRWeapon.GetComponent<SCWeapon>().Init(this, rangedWeaponBlueprint);
+            LHRWeapon.gameObject.SetActive(false);
+        }
+        RHMWeapon.gameObject.SetActive(false);
+        LHMWeapon.gameObject.SetActive(false);
+        LLWeapon.gameObject.SetActive(false);
+        RLWeapon.gameObject.SetActive(false);
     }
 
    void Update()
@@ -304,10 +333,10 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
     public void MeleeScanDamage(string message) {
         switch (message) {
             case "BeginScanLH":
-                LHWeapon.Scan();
+                LHMWeapon.Scan();
                 break;
             case "BeginScanRH":
-                RHWeapon.Scan();
+                RHMWeapon.Scan();
                 break;
             case "BeginScanLL":
                 LLWeapon.Scan();
@@ -316,10 +345,10 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
                 RLWeapon.Scan();
                 break;
             case "EndScanRH":
-                RHWeapon.EndScan();
+                RHMWeapon.EndScan();
                 break;
             case "EndScanLH":
-                LHWeapon.EndScan();
+                LHMWeapon.EndScan();
                 break;
             case "EndScanRL":
                 RLWeapon.EndScan();
@@ -328,8 +357,8 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
                 LLWeapon.EndScan();
                 break;
             case "EndAll":
-                RHWeapon?.EndScan();
-                LHWeapon?.EndScan();
+                RHMWeapon?.EndScan();
+                LHMWeapon?.EndScan();
                 RLWeapon?.EndScan();
                 LLWeapon?.EndScan();
                 break;
@@ -362,13 +391,14 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
     }
     public float TotalCooldown() {
         float f = 0;
-        foreach (Move m in baseAttackMoves) {
+        foreach (Move m in meleeAttackMoves) {
             f += m.cooldown;
         }
         return f;
     }
+    public float accumulatedCooldown;
     public bool IsCoolingDown() {
-        return (Time.time < lastAttack + TotalCooldown());
+        return (Time.time < lastAttack + accumulatedCooldown);
     }
     public Transform GetFieldPosition() {
         switch (fieldPosition) {
@@ -411,6 +441,28 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
             print("DEAD!!!!");
             //Die();
         }
+    }
+
+    public void MeleeWeaponsOn() {
+        if (RHMWeapon.gameObject.activeInHierarchy) { return; }
+        RHMWeapon.gameObject.SetActive(true);
+        LHMWeapon.gameObject.SetActive(true);
+        LLWeapon.gameObject.SetActive(true);
+        RLWeapon.gameObject.SetActive(true);
+        RHRWeapon.gameObject.SetActive(false);
+        LHRWeapon?.gameObject.SetActive(false);
+        anima.TakeOutSword();
+    }
+
+    public void RangedWeaponsOn() {
+        if (RHRWeapon.gameObject.activeInHierarchy) { return; }
+        RHMWeapon.gameObject.SetActive(false);
+        LHMWeapon.gameObject.SetActive(false);
+        LLWeapon.gameObject.SetActive(false);
+        RLWeapon.gameObject.SetActive(false);
+        RHRWeapon.gameObject.SetActive(true);
+        LHRWeapon?.gameObject.SetActive(true);
+        anima.TakeOutSword();
     }
 
     public void AnimEventReceiver(string message) {

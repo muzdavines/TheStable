@@ -17,6 +17,7 @@ public class AnimancerAnimSet : ScriptableObject
     public AnimationClip oneTimer;
     public AnimationClip goalScored;
     public AnimationClip takeDamage;
+    public AnimationClip takeOutSword;
     public void Init(AnimancerController anim) {
         Debug.Log("Initialize Animset");
         anim.shootBall.Clip = shootBall;
@@ -33,5 +34,6 @@ public class AnimancerAnimSet : ScriptableObject
         anim.oneTimer.Clip = oneTimer;
         anim.goalScored.Clip = goalScored;
         anim.takeDamage.Clip = takeDamage;
+        anim.takeOutSword.Clip = takeOutSword;
     }
 }

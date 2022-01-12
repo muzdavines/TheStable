@@ -11,9 +11,11 @@ public class SCCombatIdle : SCCombatStanceState {
         switch (thisChar.combatFocus) {
             case CombatFocus.Melee:
                 thisChar.attackRange = 1.2f;
+                thisChar.MeleeWeaponsOn();
                 break;
             case CombatFocus.Ranged:
                 thisChar.attackRange = 50f;
+                thisChar.RangedWeaponsOn();
                 break;
         }
     }
@@ -31,8 +33,8 @@ public class SCCombatIdle : SCCombatStanceState {
             if (thisChar.IsCoolingDown()) {
                 //is cooling down and target not null
                 if (thisChar.MyTargetIsInAttackRange()) {
-                    if (thisChar.Distance(thisChar.myAttackTarget)<.8f) {
-                        thisChar.agent.SetDestination(thisChar.position + thisChar._t.forward * -1.5f);
+                    if (thisChar.Distance(thisChar.myAttackTarget)<(thisChar.combatFocus == CombatFocus.Melee ? .8f : 5f)) {
+                        thisChar.agent.SetDestination(thisChar.position + thisChar._t.forward * (thisChar.combatFocus == CombatFocus.Melee ? -1.5f : -20f));
                         thisChar.agent.isStopped = false;
                     }
                 }

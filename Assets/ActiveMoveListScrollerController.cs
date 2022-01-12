@@ -13,7 +13,7 @@ public class ActiveMoveListScrollerController : MonoBehaviour, IEnhancedScroller
 
     public virtual void Start() {
         _data = new List<Move>();
-        foreach (Move move in GetComponentInParent<HeroEditController>().activeCharacter.activeMoves) {
+        foreach (Move move in GetComponentInParent<HeroEditController>().activeCharacter.activeMeleeMoves) {
 
             _data.Add(move);
         }

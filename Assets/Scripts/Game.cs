@@ -423,11 +423,11 @@ public static class JsonHelper {
         thisChar.maxMind = source.maxMind;
         thisChar.maxHealth = source.maxHealth;
         thisChar.knownMoves = source.knownMovesSave.LoadMoves();
-        thisChar.activeMoves = source.activeMovesSave.LoadMoves();
+        thisChar.activeMeleeMoves = source.activeMovesSave.LoadMoves();
         thisChar.startingArmor = source.startingArmor;
-        thisChar.startingWeapon = source.startingWeapon;
+        thisChar.startingMeleeWeapon = source.startingWeapon;
         thisChar.armor = source.armor;
-        thisChar.weapon = source.weapon;
+        thisChar.meleeWeapon = source.weapon;
         thisChar.mat = source.mat;
         thisChar.contract = source.contract;
         thisChar.currentTraining = source.currentTraining;
