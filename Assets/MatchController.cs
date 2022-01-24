@@ -38,7 +38,7 @@ public class MatchController : MonoBehaviour
             Character thisHero = new Character();
             thisHero.name = "Player " + i.ToString();
             thisHero.tackling = Random.Range(8, 18);
-            thisHero.dodging = Random.Range(8, 18);
+            thisHero.carrying = Random.Range(8, 18);
             thisHero.blocking = Random.Range(8, 18);
             thisHero.modelName = "SCRogue";
             player.heroes.Add(thisHero);
@@ -70,6 +70,7 @@ public class MatchController : MonoBehaviour
                 GameObject co = Instantiate<GameObject>(Resources.Load<GameObject>(thisBaseChar.modelName), homeSpawns[0].position, Quaternion.identity);
                 StableCombatChar thisChar = co.GetComponent<StableCombatChar>();
                 thisChar.team = thisTeam;
+                thisChar.fieldSport = true;
                 thisChar.myCharacter = thisBaseChar;
                 thisChar.fieldPosition = (Position)i;
                 thisChar.GetComponent<SCModelSelector>().Init(thisBaseChar.modelNum, thisTeam);
@@ -86,8 +87,8 @@ public class MatchController : MonoBehaviour
         for (int i = 0; i<homeCoach.players.Length; i++) {
             homeCoach.players[i].transform.position = homeSpawns[i].position;
             awayCoach.players[i].transform.position = awaySpawns[i].position;
-            homeCoach.players[i].Idle();
-            awayCoach.players[i].Idle();
+            homeCoach.players[i].Reset();
+            awayCoach.players[i].Reset();
         }
         if (lastTeamToScore == -1) {
             lastTeamToScore = Random.Range(0, 2);

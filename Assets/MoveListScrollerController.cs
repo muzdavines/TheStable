@@ -7,14 +7,27 @@ public class MoveListScrollerController : MonoBehaviour, IEnhancedScrollerDelega
     public List<Move> _data;
     public EnhancedScroller myScroller;
     public MoveCellView MoveCellViewPrefab;
+    public Character activeChar;
+    public MoveType moveType;
     public void OnEnable() {
-        Start();
+        //Start();
     }
 
     public virtual void Start() {
+        return;
         _data = new List<Move>();
         foreach (Move move in GetComponentInParent<HeroEditController>().activeCharacter.knownMoves) {
 
+            _data.Add(move);
+        }
+        myScroller.Delegate = this;
+        myScroller.ReloadData();
+    }
+    public virtual void Init(Character _activeChar) {
+        activeChar = _activeChar;
+        _data = new List<Move>();
+        foreach (Move move in activeChar.knownMoves) {
+            if (move.moveType != moveType) { continue; }
             _data.Add(move);
         }
         myScroller.Delegate = this;

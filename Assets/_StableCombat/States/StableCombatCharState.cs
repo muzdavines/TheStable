@@ -12,7 +12,7 @@ public class StableCombatCharState {
         get { return this.GetType().ToString(); }
     }
     public static string AppStateChangedNotification = "StableCombatCharStateChangedNotification";
-    public void TransitionTo(StableCombatCharState state) {
+    public virtual void TransitionTo(StableCombatCharState state) {
         owner.state = state;
         state.owner = owner;
         thisChar = owner.controller;
@@ -81,4 +81,9 @@ public class StableCombatCharState {
 public interface StableCombatCharStateOwner {
     StableCombatCharState state { get; set; }
     StableCombatChar controller { get; set; }
+}
+
+public interface SCReviveUnit {
+
+
 }

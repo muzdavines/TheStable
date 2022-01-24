@@ -47,7 +47,7 @@ public class AnimancerController : MonoBehaviour
     // _Animancer.Play(_Action, 0.25f, FadeMode.FromStart)
                 //.Events.OnEnd = () => _Animancer.Play(_Idle, 0.25f);
     public void Knockdown() {
-        anim.Play(knockdown, .25f, FadeMode.FromStart).Events.OnEnd = () => anim.Play(downOnGround, .25f).Events.OnEnd = () => anim.Play(stayOnGround, 4f).Events.OnEnd =() => thisChar.Idle();     
+        anim.Play(knockdown, .25f, FadeMode.FromStart).Events.OnEnd = () => anim.Play(downOnGround, .25f).Events.OnEnd = () => anim.Play(stayOnGround, .25f).Events.OnEnd =() => thisChar.Idle();     
     }
 
     public void MissTackle() {
@@ -89,6 +89,10 @@ public class AnimancerController : MonoBehaviour
 
     public void TakeOutSword() {
         anim.Play(takeOutSword, .25f, FadeMode.FromStart).Events.OnEnd = () => Idle();
+    }
+
+    public void GetDowned() {
+        anim.Play(knockdown, .25f, FadeMode.FromStart).Events.OnEnd = () => anim.Play(downOnGround, .25f);
     }
 
     public int currentMeleeAttackIndex;

@@ -7,11 +7,14 @@ public class ActiveMoveListScrollerController : MonoBehaviour, IEnhancedScroller
     public List<Move> _data;
     public EnhancedScroller myScroller;
     public ActiveMoveCellView ActiveMoveCellViewPrefab;
+    public Character activeChar;
+    public MoveType moveType;
     public void OnEnable() {
-        Start();
+        //Start();
     }
 
     public virtual void Start() {
+        return;
         _data = new List<Move>();
         foreach (Move move in GetComponentInParent<HeroEditController>().activeCharacter.activeMeleeMoves) {
 
@@ -19,6 +22,25 @@ public class ActiveMoveListScrollerController : MonoBehaviour, IEnhancedScroller
         }
         myScroller.Delegate = this;
         myScroller.ReloadData();
+    }
+    public virtual void Init(Character _activeChar) {
+        activeChar = _activeChar;
+        _data = new List<Move>();
+        
+        foreach (Move move in activeChar.activeMeleeMoves) {
+            if (move.moveType != moveType) { continue; }
+            _data.Add(move);
+           
+        }
+        foreach (Move move in activeChar.activeRangedMoves) {
+            if (move.moveType != moveType) { continue; }
+            _data.Add(move);
+
+        }
+
+        myScroller.Delegate = this;
+            myScroller.ReloadData();
+        
     }
     public int GetNumberOfCells(EnhancedScroller scroller) {
         return _data.Count;
@@ -35,6 +57,6 @@ public class ActiveMoveListScrollerController : MonoBehaviour, IEnhancedScroller
     }
 
     public void UpdateOnAdvance() {
-        Start();
+        Init(activeChar);
     }
 }

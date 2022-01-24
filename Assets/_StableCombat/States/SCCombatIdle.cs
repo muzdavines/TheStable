@@ -6,8 +6,17 @@ public class SCCombatIdle : SCCombatStanceState {
 
     public override void EnterFrom(StableCombatCharState state) {
         base.EnterFrom(state);
+        Debug.Log("#SCCombatStance#Combat Idle Enter");
         thisChar.anima.Idle();
         thisChar.agent.isStopped = true;
+        if (thisChar == ball.holder) {
+            thisChar.RunToGoalWithBall();
+            return;
+        }
+        if (thisChar.myAttackTarget?.state.GetType() == typeof(SCCombatDowned)) {
+            thisChar.myAttackTarget = null;
+            thisChar.Idle();
+        }
         switch (thisChar.combatFocus) {
             case CombatFocus.Melee:
                 thisChar.attackRange = 1.2f;
@@ -28,6 +37,10 @@ public class SCCombatIdle : SCCombatStanceState {
         } else { thisTarget = thisChar.myAttackTarget; }
 
         if (thisTarget != null) {
+            if (thisChar.myAttackTarget?.state.GetType() == typeof(SCCombatDowned)) {
+                thisChar.myAttackTarget = null;
+                thisChar.Idle();
+            }
             thisChar.myAttackTarget = thisTarget;
             thisChar._t.LookAt(thisTarget.position);
             if (thisChar.IsCoolingDown()) {

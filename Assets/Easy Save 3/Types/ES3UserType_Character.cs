@@ -19,10 +19,10 @@ namespace ES3Types
 			writer.WriteProperty("strength", instance.strength, ES3Type_int.Instance);
 			writer.WriteProperty("agility", instance.agility, ES3Type_int.Instance);
 			writer.WriteProperty("reaction", instance.reaction, ES3Type_int.Instance);
-			writer.WriteProperty("running", instance.running, ES3Type_int.Instance);
+			
 			writer.WriteProperty("swordsmanship", instance.swordsmanship, ES3Type_int.Instance);
 			writer.WriteProperty("dualwielding", instance.dualwielding, ES3Type_int.Instance);
-			writer.WriteProperty("dodging", instance.dodging, ES3Type_int.Instance);
+			writer.WriteProperty("dodging", instance.carrying, ES3Type_int.Instance);
 			writer.WriteProperty("archery", instance.archery, ES3Type_int.Instance);
 			writer.WriteProperty("toughness", instance.toughness, ES3Type_int.Instance);
 			writer.WriteProperty("speech", instance.speech, ES3Type_int.Instance);
@@ -100,9 +100,6 @@ namespace ES3Types
 					case "reaction":
 						instance.reaction = reader.Read<System.Int32>(ES3Type_int.Instance);
 						break;
-					case "running":
-						instance.running = reader.Read<System.Int32>(ES3Type_int.Instance);
-						break;
 					case "swordsmanship":
 						instance.swordsmanship = reader.Read<System.Int32>(ES3Type_int.Instance);
 						break;
@@ -110,7 +107,7 @@ namespace ES3Types
 						instance.dualwielding = reader.Read<System.Int32>(ES3Type_int.Instance);
 						break;
 					case "dodging":
-						instance.dodging = reader.Read<System.Int32>(ES3Type_int.Instance);
+						instance.carrying = reader.Read<System.Int32>(ES3Type_int.Instance);
 						break;
 					case "archery":
 						instance.archery = reader.Read<System.Int32>(ES3Type_int.Instance);

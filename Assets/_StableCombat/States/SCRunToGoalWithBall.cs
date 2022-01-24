@@ -9,7 +9,7 @@ public class SCRunToGoalWithBall : SCBallCarrierState
         base.EnterFrom(state);
         enterTime = Time.time;
         thisChar.agent.isStopped = false;
-        thisChar.agent.speed = thisChar.myCharacter.runSpeed * .33f;
+        thisChar.agent.speed = thisChar.myCharacter.runspeed * .33f;
         thisChar.agent.SetDestination(thisChar.enemyGoal.transform.position);
         canGrabBall = false;
         Debug.Log("Check for one timer here");
@@ -42,7 +42,7 @@ public class SCRunToGoalWithBall : SCBallCarrierState
     }
     
     public override void WillExit() {
-        thisChar.agent.speed = thisChar.myCharacter.runSpeed * .4f;
+        thisChar.agent.speed = thisChar.myCharacter.runspeed * .4f;
         base.WillExit();
     }
 }

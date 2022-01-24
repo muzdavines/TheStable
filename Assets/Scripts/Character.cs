@@ -11,12 +11,15 @@ public class Character : Living
     public int strength = 5;
     public int agility = 5;
     public int reaction = 5;
-    public int running = 5;
-    public int dodging = 5;
+    public int dexterity = 5;
+    
+    public int carrying = 5;
     public int toughness = 10;
     public int tackling = 5;
     public int blocking = 5;
-    public int runSpeed = 5;
+    public int runspeed = 5;
+    public int shooting = 5;
+    public int passing = 5;
     //Mental Attributes
     public int speech = 5;
     public int intelligence = 5;
@@ -40,6 +43,8 @@ public class Character : Living
     public int pugilism = 5;
     public int martialarts = 2;
     public int melee = 10;
+    public int ranged = 10;
+    public int magic = 10;
     public int parry = 5;
     public int shieldDefense;
     public int musician;
@@ -84,7 +89,10 @@ public class Character : Living
     public List<MoveSave> knownMovesSave = new List<MoveSave>();
     public List<Move> activeMeleeMoves = new List<Move>();
     public List<Move> activeRangedMoves = new List<Move>();
+    public List<Move> activeSpecialMoves = new List<Move>();
     public List<MoveSave> activeMovesSave = new List<MoveSave>();
+    public SportStats seasonStats = new SportStats();
+    public SportStats careerStats = new SportStats();
     public bool HasMove (string m) {
         Debug.Log("HasMove called on Character. Need to Change This");
         foreach (Move move in knownMoves) {
@@ -201,12 +209,26 @@ public class Character : Living
                 modelName = "SCUnit2";
                 break;
         }
-        dodging = RandDist(dodgeRange[0], dodgeRange[1]);
+        carrying = RandDist(dodgeRange[0], dodgeRange[1]);
         tackling = RandDist(tackleRange[0], tackleRange[1]);
         blocking = RandDist(blockingRange[0], blockingRange[1]);
-        runSpeed = RandDist(runSpeedRange[0], runSpeedRange[1]);
+        runspeed = RandDist(runSpeedRange[0], runSpeedRange[1]);
+        maxHealth = 5;
+        maxMind = 5;
+        maxStamina = 5;
+        maxBalance = 5;
+        startingMeleeWeapon = "FistsSO";
+        startingRangedWeapon = "BowSO";
         archetype = thisArchetype;
-        
+        var leftjab = Resources.Load<Move>("LeftJab");
+        var rightjab = Resources.Load<Move>("RightJab");
+        knownMoves.Add(Instantiate(leftjab)); 
+        knownMoves.Add(Instantiate(rightjab));
+        activeMeleeMoves.Add(Instantiate(leftjab));
+        activeMeleeMoves.Add(Instantiate(leftjab));
+        activeMeleeMoves.Add(Instantiate(rightjab));
+        seasonStats = new SportStats();
+        careerStats = new SportStats();
     }
 
    
@@ -215,9 +237,11 @@ public class Character : Living
 
     public void Awake() {
         Armor startingArmorSO = Resources.Load<Armor>(startingArmor);
-        Weapon startingWeaponSO = Resources.Load<Weapon>(startingMeleeWeapon);
+        Weapon startingMeleeWeaponSO = Resources.Load<Weapon>(startingMeleeWeapon);
+        Weapon startingRangedWeaponSO = Resources.Load<Weapon>(startingRangedWeapon);
         if (startingArmorSO == null) { armor = new Armor(); } else { armor = Instantiate(startingArmorSO); }
-        if (startingWeaponSO == null) { Debug.Log("Character new weapon " + name); meleeWeapon = new Weapon(); } else { Debug.Log("Char inst weapon " + name); meleeWeapon = Instantiate(startingWeaponSO); }
+        if (startingMeleeWeaponSO == null) { Debug.Log("Character new melee weapon " + name); meleeWeapon = new Weapon(); } else { Debug.Log("Char inst weapon " + name); meleeWeapon = Instantiate(startingMeleeWeaponSO); }
+        if (startingRangedWeaponSO == null) { Debug.Log("Character new ranged weapon " + name); rangedWeapon = new Weapon(); } else { Debug.Log("Char inst ranged weapon " + name); rangedWeapon = Instantiate(startingRangedWeaponSO); }
         if (currentTraining == null) { currentTraining = new Training(); }
     }
 
@@ -255,10 +279,10 @@ public class Character : Living
         this.strength = source.strength;
         this.agility = source.agility;
         this.reaction = source.reaction;
-        this.running = source.running;
+        
         this.swordsmanship = source.swordsmanship;
         this.dualwielding = source.dualwielding;
-        this.dodging = source.dodging;
+        this.carrying = source.carrying;
         this.archery = source.archery;
         this.toughness = source.toughness;
         this.toughness = source.toughness;
@@ -431,10 +455,10 @@ public class CharacterSave {
         this.strength = source.strength;
         this.agility = source.agility;
         this.reaction = source.reaction;
-        this.running = source.running;
+        
         this.swordsmanship = source.swordsmanship;
         this.dualwielding = source.dualwielding;
-        this.dodging = source.dodging;
+        this.dodging = source.carrying;
         this.archery = source.archery;
         this.toughness = source.toughness;
         this.toughness = source.toughness;
@@ -490,7 +514,12 @@ public class CharacterSave {
         this.name = source.name;
         return this;
     }
-    
-    
 }
 
+public class SportStats {
+    public int games = 0;
+    public int goals = 0;
+    public int assists = 0;
+    public int tackles = 0;
+    public int kos = 0;
+}

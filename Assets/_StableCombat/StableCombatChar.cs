@@ -59,7 +59,7 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
         anim = GetComponent<Animator>();
         meleeAttackMoves = myCharacter.activeMeleeMoves;
         rangedAttackMoves = myCharacter.activeRangedMoves;
-        agent.speed = myCharacter.runSpeed * .4f;
+        agent.speed = myCharacter.runspeed * .4f;
         accumulatedCooldown = 4f;
         WeaponSetup();
         if (fieldSport) {
@@ -256,7 +256,9 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
 
         return false;
     }
-
+    public void Reset() {
+        state.TransitionTo(new SCReset());
+    }
     public void Idle() {
         state.TransitionTo(new SCIdle());
     }
@@ -328,6 +330,13 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
     }
     public void CombatPursueTarget() {
         state.TransitionTo(new SCCombatPursueTarget());
+    }
+    public void GetDowned() {
+        state.TransitionTo(new SCCombatDowned());
+    }
+
+    public void GetRevived() {
+        state.TransitionTo(new SCCombatRevive());
     }
 
     public void MeleeScanDamage(string message) {
@@ -438,8 +447,7 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
         mind -= damage.mind;
    
         if (health <= 0) {
-            print("DEAD!!!!");
-            //Die();
+            GetDowned();
         }
     }
 
@@ -472,7 +480,7 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
     void OnDrawGizmos() {
 #if UNITY_EDITOR
         if (debugState && state!=null) {
-            Handles.Label(transform.position+new Vector3(0,2,0), state.GetType().ToString() + "\nTackling: " + myCharacter.tackling + "\nDodging: " + myCharacter.dodging + "\nType: "+myCharacter.archetype);
+            Handles.Label(transform.position+new Vector3(0,2,0), state.GetType().ToString() + "\nTackling: " + myCharacter.tackling + "\nDodging: " + myCharacter.carrying + "\nType: "+myCharacter.archetype);
         }
 #endif
     }

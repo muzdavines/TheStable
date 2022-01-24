@@ -19,12 +19,14 @@ MonoBehaviour:
   strength: 8
   agility: 5
   reaction: 5
-  running: 5
-  dodging: 14
+  dexterity: 5
+  carrying: 5
   toughness: 10
   tackling: 18
   blocking: 5
-  runSpeed: 15
+  runspeed: 12
+  shooting: 5
+  passing: 5
   speech: 8
   intelligence: 8
   education: 0
@@ -45,6 +47,8 @@ MonoBehaviour:
   pugilism: 8
   martialarts: 2
   melee: 5
+  ranged: 10
+  magic: 10
   parry: 5
   shieldDefense: 0
   musician: 0
@@ -72,17 +76,19 @@ MonoBehaviour:
   knownMoves:
   - {fileID: 11400000, guid: 5f509c17b3179c049b823d59a0601bf6, type: 2}
   - {fileID: 11400000, guid: 9718ff2f87bcd694099066b587a15546, type: 2}
+  - {fileID: 11400000, guid: 95bc946b47da59d418ae1a9f96f725c7, type: 2}
   activeMeleeMoves:
   - {fileID: 11400000, guid: 5f509c17b3179c049b823d59a0601bf6, type: 2}
   - {fileID: 11400000, guid: 9718ff2f87bcd694099066b587a15546, type: 2}
   - {fileID: 11400000, guid: 9718ff2f87bcd694099066b587a15546, type: 2}
   activeRangedMoves:
-  - {fileID: 11400000, guid: b45865c40648bf04890706618af467c5, type: 2}
-  - {fileID: 11400000, guid: b45865c40648bf04890706618af467c5, type: 2}
-  - {fileID: 11400000, guid: b45865c40648bf04890706618af467c5, type: 2}
+  - {fileID: 11400000, guid: 95bc946b47da59d418ae1a9f96f725c7, type: 2}
+  - {fileID: 11400000, guid: 95bc946b47da59d418ae1a9f96f725c7, type: 2}
+  - {fileID: 11400000, guid: 95bc946b47da59d418ae1a9f96f725c7, type: 2}
+  activeSpecialMoves: []
   startingArmor: 
   startingMeleeWeapon: FistsSO
-  startingRangedWeapon: BowSO
+  startingRangedWeapon: MageGlovesSO
   armor: {fileID: 0}
   meleeWeapon: {fileID: 0}
   rangedWeapon: {fileID: 0}

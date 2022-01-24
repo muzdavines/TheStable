@@ -14,5 +14,6 @@ public class Weapon : Item
     /// </summary>
     public string settingsPrefab;
     public MoveWeaponType weaponType;
+    public MoveType moveType;
     
 }

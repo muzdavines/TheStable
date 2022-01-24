@@ -84,7 +84,7 @@ public class Ball : MonoBehaviour
 
     public void GetDropped() {
         Release();
-        body.AddForce(new Vector3(Random.Range(-2, 2), Random.Range(-2, 2), Random.Range(-2, 2)) * 300);
+        body.AddForce(new Vector3(Random.Range(-2, 2), Random.Range(-2, 2), Random.Range(-2, 2)) * 100);
     }
     void Release() {
         isHeld = false;

@@ -36,7 +36,7 @@ public class Move : ScriptableObject
 
 public enum MoveType { Melee, Ranged, Support }
 [System.Flags]
-public enum MoveWeaponType { None = 0, Fists = 1, Sword = 2, Axe = 4, Bow = 8, Pistol = 16 }
+public enum MoveWeaponType { None = 0, Fists = 1, Sword = 2, Axe = 4, Bow = 8, Pistol = 16, MageGloves = 32 }
 
 public class MoveSave {
 

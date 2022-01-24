@@ -30,6 +30,6 @@ public class HeroCellView : EnhancedScrollerCellView
     }
     public virtual void OnClick()
     {
-        FindObjectOfType<HeroEditController>().OpenPanel(thisChar);
+        FindObjectOfType<HeroMainController>().OpenPanel(thisChar);
     }
 }

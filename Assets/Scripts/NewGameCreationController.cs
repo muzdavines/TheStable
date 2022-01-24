@@ -46,10 +46,12 @@ public class NewGameCreationController : MonoBehaviour
                 player.warlord.InitWarlord(CharClass.Rogue);
                 break;
         }
-
+        int activeInLineup = 0;
         foreach (Character h in heroes) {
             Character thisHero = Instantiate<Character>(h);
             player.heroes.Add(thisHero);
+            thisHero.activeInLineup = true;
+            activeInLineup++;
         }
         foreach (Finance.Business business in startingBusinesses) {
             player.finance.AddBusiness(business);
@@ -58,7 +60,10 @@ public class NewGameCreationController : MonoBehaviour
             Character thisHero = new Character();
             thisHero.name = Names.Warrior[Random.Range(0, Names.Warrior.Length)];
             thisHero.GenerateCharacter((Character.Archetype)(Random.Range(0,4)), 1);
-            thisHero.activeInLineup = true;
+            if (activeInLineup < 5) {
+                thisHero.activeInLineup = true;
+                activeInLineup++;
+            }
             player.heroes.Add(thisHero);
         }
         Game.instance.playerStable.finance.AddRevenue(startingGold);

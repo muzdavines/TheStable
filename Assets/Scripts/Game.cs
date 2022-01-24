@@ -383,10 +383,10 @@ public static class JsonHelper {
         thisChar.strength = source.strength;
         thisChar.agility = source.agility;
         thisChar.reaction = source.reaction;
-        thisChar.running = source.running;
+       
         thisChar.swordsmanship = source.swordsmanship;
         thisChar.dualwielding = source.dualwielding;
-        thisChar.dodging = source.dodging;
+        thisChar.carrying = source.dodging;
         thisChar.archery = source.archery;
         thisChar.toughness = source.toughness;
         thisChar.toughness = source.toughness;

@@ -49,7 +49,7 @@ public class SCWeapon : MonoBehaviour
         SCProjectile projectile = Instantiate<SCProjectile>(thisMove.projectile);
         projectile.transform.position = projectileSpawnPoint.position;
         projectile.transform.localRotation = projectileSpawnPoint.rotation;
-        projectile.Fire(me.myAttackTarget._t, thisMove.damage);
+        projectile.Fire(me.myAttackTarget._t, thisMove.damage, me);
     }
 
 

@@ -2585,15 +2585,18 @@ MonoBehaviour:
   aggroRadius: 100
   attackRange: 5
   lastAttack: 0
-  baseAttackMoves: []
+  meleeAttackMoves: []
+  rangedAttackMoves: []
   RH: {fileID: 8654310594624659538}
   LH: {fileID: 8654310594624651482}
   LL: {fileID: 8654310594624698978}
   RL: {fileID: 8654310594624660288}
-  RHWeapon: {fileID: 0}
-  LHWeapon: {fileID: 0}
+  RHMWeapon: {fileID: 0}
+  LHMWeapon: {fileID: 0}
   RLWeapon: {fileID: 0}
   LLWeapon: {fileID: 0}
+  RHRWeapon: {fileID: 0}
+  LHRWeapon: {fileID: 0}
   health: 0
   stamina: 0
   balance: 0
@@ -2602,6 +2605,7 @@ MonoBehaviour:
   maxStamina: 0
   maxBalance: 0
   maxMind: 0
+  accumulatedCooldown: 0
 --- !u!114 &3465658658279899419
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2749,9 +2753,39 @@ MonoBehaviour:
     _Clip: {fileID: 0}
     _Speed: 1
     _NormalizedStartTime: 0
-  baseAttackMoves: []
-  currentMoveIndex: 0
-  currentMove: {fileID: 0}
+  takeDamage:
+    _FadeDuration: 0.25
+    _Events:
+      _NormalizedTimes: []
+      _Callbacks: []
+      _Names: []
+    _Clip: {fileID: 0}
+    _Speed: 1
+    _NormalizedStartTime: 0
+  takeOutBow:
+    _FadeDuration: 0.25
+    _Events:
+      _NormalizedTimes: []
+      _Callbacks: []
+      _Names: []
+    _Clip: {fileID: 0}
+    _Speed: 1
+    _NormalizedStartTime: 0
+  takeOutSword:
+    _FadeDuration: 0.25
+    _Events:
+      _NormalizedTimes: []
+      _Callbacks: []
+      _Names: []
+    _Clip: {fileID: 0}
+    _Speed: 1
+    _NormalizedStartTime: 0
+  baseMeleeAttackMoves: []
+  baseRangedAttackMoves: []
+  currentMeleeAttackIndex: 0
+  currentMeleeMove: {fileID: 0}
+  currentRangedAttackIndex: 0
+  currentRangedMove: {fileID: 0}
 --- !u!114 &3465658658279899418
 MonoBehaviour:
   m_ObjectHideFlags: 0

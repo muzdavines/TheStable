@@ -5,6 +5,7 @@ using UnityEngine;
 [RequireComponent (typeof(Rigidbody))]
 public class SCProjectile : MonoBehaviour
 {
+    public GameObject collisionEffect;
     public Transform myTarget;
     public Transform myPositionTarget;
     public StableDamage myDamage;
@@ -15,6 +16,7 @@ public class SCProjectile : MonoBehaviour
     public bool isKinematic;
     public float speed = 1f;
     public bool fired = false;
+    StableCombatChar launcherChar;
     Transform _t;
     private void Start() {
         _t = transform;
@@ -30,19 +32,26 @@ public class SCProjectile : MonoBehaviour
     }
 
     public void OnTriggerEnter(Collider other) {
+        StableCombatChar otherChar = other.GetComponent<StableCombatChar>();
+        if (otherChar == launcherChar) {
+            return;
+        }
         fired = false;
         col.enabled = false;
-        StableCombatChar otherChar = other.GetComponent<StableCombatChar>();
         if (otherChar != null) {
             otherChar.TakeDamage(myDamage);
+        }
+        if (collisionEffect != null) {
+            Destroy(Instantiate<GameObject>(collisionEffect, transform.position, transform.rotation), 5.0f);
         }
         Destroy(gameObject, .05f);
     }
 
-    public void Fire(Transform target, StableDamage damage) {
+    public void Fire(Transform target, StableDamage damage, StableCombatChar _launcher) {
         fired = true;
         myTarget = target;
         myDamage = damage;
+        launcherChar = _launcher;
     }
     public void Fire(Vector3 target, StableDamage damage) {
 
