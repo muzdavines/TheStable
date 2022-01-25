@@ -12,6 +12,7 @@ public class HeroMainController : MonoBehaviour
     public GameObject movePanelMelee, movePanelRanged, weaponPanel, trainingPanel;
     public MoveListScrollerController moveListMelee, moveListRanged;
     public ActiveMoveListScrollerController activeMoveListMelee, activeMoveListRanged;
+    public TrainingController training;
     public void Start() {
         panel.SetActive(false);
         movePanelMelee.SetActive(false);
@@ -56,6 +57,13 @@ public class HeroMainController : MonoBehaviour
         movePanelRanged.SetActive(true);
         activeMoveListRanged.Init(activeChar);
         moveListRanged.Init(activeChar);
+    }
+
+    public void OpenTraining() {
+        controller.OnClick(training.gameObject);
+        training.gameObject.SetActive(true);
+        training.Init(activeChar);
+
     }
 
     public void ListMoveClicked(Move move) {

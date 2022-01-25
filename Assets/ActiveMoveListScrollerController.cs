@@ -39,7 +39,7 @@ public class ActiveMoveListScrollerController : MonoBehaviour, IEnhancedScroller
         }
 
         myScroller.Delegate = this;
-            myScroller.ReloadData();
+        myScroller.ReloadData();
         
     }
     public int GetNumberOfCells(EnhancedScroller scroller) {

@@ -7,6 +7,7 @@ public class StableTrainingScrollerController : MonoBehaviour, IEnhancedScroller
     public List<Training> _data;
     public EnhancedScroller myScroller;
     public TrainingCellView trainingCellView;
+    public Character activeChar;
     public void OnEnable() {
         Start();
     }
@@ -18,6 +19,7 @@ public class StableTrainingScrollerController : MonoBehaviour, IEnhancedScroller
         myScroller.Delegate = this;
         myScroller.ReloadData();
     }
+    
     public int GetNumberOfCells(EnhancedScroller scroller) {
         return _data.Count;
     }
