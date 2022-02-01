@@ -411,7 +411,7 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
     }
     public Transform GetFieldPosition() {
         switch (fieldPosition) {
-            case Position.ST:
+            case Position.STC:
                 return coach.positions.ST;
                 break;
             case Position.LW:
@@ -487,7 +487,7 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
 
 }
 
-public enum Position { LW, ST, RW, DR, DC, DL }
+public enum Position { NA, LW, STR, STL, STC, RW, LM, LCM, MC, RCM, RM, DL, LDC, DC, RDC, DR }
 public enum CombatFocus { Melee, Ranged }
 public static class StableCombatCharHelper {
     public static void ResetAllTriggers(this Animator anim) {

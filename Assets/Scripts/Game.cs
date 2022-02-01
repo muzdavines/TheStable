@@ -103,8 +103,10 @@ public class Game : MonoBehaviour {
             thisStable.heroes = new List<Character>();
             for (int x = 0; x < 8; x++) {
                 Character thisHero = new Character();
+                thisHero.currentPosition = Position.NA;
                 if (x < 5) {
                     thisHero.activeInLineup = true;
+                    thisHero.currentPosition = (Position)(x + 1);
                 }
                 thisHero.name = Names.Warrior[Random.Range(0, Names.Warrior.Length)];
                 thisHero.GenerateCharacter((Character.Archetype)(Random.Range(0, 4)), 1);

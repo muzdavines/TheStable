@@ -4,17 +4,21 @@ using UnityEngine;
 using EnhancedUI.EnhancedScroller;
 using EnhancedScrollerDemos.CellEvents;
 using UnityEngine.UI;
+using TMPro;
 public class MissionHeroCellView : EnhancedScrollerCellView {
     public Text heroNameText;
     public Character thisChar;
     public LaunchMissionController missionController;
     public TeamTacticsController tacticsController;
     public bool tactics;
+    public TMP_Dropdown myDropdown;
     public void SetData(Character data) {
         thisChar = data;
         heroNameText.text = data.name + (tactics ? "  ("+data.archetype.ToString()+")" : "");
         missionController = FindObjectOfType<LaunchMissionController>();
         tacticsController = FindObjectOfType<TeamTacticsController>();
+        myDropdown.value = (int)thisChar.currentPosition;
+        if (!thisChar.activeInLineup) { myDropdown.gameObject.SetActive(false); }
     }
 
     public void OnHoverEnter() {
@@ -46,11 +50,15 @@ public class MissionHeroCellView : EnhancedScrollerCellView {
             }
             thisChar.activeForNextMission = !thisChar.activeForNextMission;
         }
-
+        if (!thisChar.activeForNextMission) { thisChar.currentPosition = Position.NA; }
         foreach (MissionHeroesScrollerController mhsc in FindObjectsOfType<MissionHeroesScrollerController>()) {
             mhsc.OnEnable();
+            tacticsController.OnEnable();
         }
         OnHoverExit();
 
+    }
+    public void ChangePosition(int newPos) {
+        tacticsController.ChangePosition((Position)(newPos), thisChar);
     }
 }
