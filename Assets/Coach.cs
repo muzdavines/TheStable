@@ -9,11 +9,8 @@ public class Coach : MonoBehaviour
     public StableCombatChar[] otherTeam;
     public List<StableCombatChar> pursuingBall;
     Ball ball;
-    [System.Serializable]
-    public class Positions {
-        public Transform DL, DC, DR, RW, LW, ST;
-    }
-    [SerializeField] public Positions positions;
+    
+    public Transform[] positions;
     private void Start() {
         
     }

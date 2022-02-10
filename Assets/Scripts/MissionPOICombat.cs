@@ -7,10 +7,10 @@ public class MissionPOICombat : MissionPOI
     public List<Character> enemies;
     public List<Transform> spawnLoc;
     public List<GameObject> objectsToDestroy;
-    public override void StepActivated(MissionCharacter activeChar) {
-        List<Character> heroes = control.heroes;
-        foreach (Character c in heroes) {
-            c.currentMissionCharacter.IdleDontAct();
+    public override void StepActivated(StableCombatChar activeChar) {
+        List<StableCombatChar> heroes = control.allChars;
+        foreach (StableCombatChar c in heroes) {
+            c.MissionIdleDontAct();
         }
         control.BeginCombat(enemies, spawnLoc, this);
         foreach (GameObject g in objectsToDestroy) {

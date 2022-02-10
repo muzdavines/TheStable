@@ -5,13 +5,13 @@ using UnityEngine;
 public class MissionCharacterCombatState : MissionCharacterState
 {
     public Transform FindEnemy() {
-        List<MissionCharacter> theseChars = thisChar.missionController.allChars;
+        /*List<MissionCharacter> theseChars = thisChar.missionController.allChars;
         foreach (var c in theseChars) {
             if (c.team == thisChar.team) { continue; }
             if (Vector3.Distance (c.transform.position, thisChar.transform.position) < thisChar.detectRange) {
                 return c.transform;
             }
-        }
+        }*/
 
         return null;
     }

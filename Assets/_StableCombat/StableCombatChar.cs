@@ -32,6 +32,7 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
     public MMFeedbacks goOnRun;
     public MMFeedbacks sendOnRun;
     public MMFeedbacks takeDamage;
+    public MMFeedbacks playerHasBall;
     public Vector3 position { get { return _t.position; } }
     public Coach coach;
     
@@ -90,12 +91,13 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
             initState.thisChar = this;
             initState.EnterFrom(null);
         } else {
-            SCCombatStanceState initState = new SCCombatIdle();
+            StableCombatCharState initState = new SCMissionIdle() { act = true } ;
             initState.owner = this;
             this.state = initState;
             initState.thisChar = this;
             initState.EnterFrom(null);
         }
+        combatFocus = myCharacter.combatFocus;
         maxHealth = health = myCharacter.maxHealth;
         maxStamina = stamina = myCharacter.maxStamina;
         maxBalance = balance = myCharacter.maxBalance;
@@ -214,7 +216,9 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
         int passTargetScore = 0;
         StableCombatChar currentTarget = null;
         foreach (var teammate in coach.players) {
+#if UNITY_EDITOR
             Debug.Log("#PassTargetEval#" + teammate.name + " current state is " + teammate.state.GetType().ToString());
+#endif
             if (Vector3.Distance(teammate.transform.position, position) < 7) {
                 Debug.Log("#PassTargetEval#" + teammate.name + " is too close");
                 continue;
@@ -234,21 +238,36 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
                 if (passTargetScore <= 5) {
                     passTargetScore = 5;
                     currentTarget = teammate;
+#if UNITY_EDITOR
                     Debug.Log("#PassTargetEval#" + teammate.name + " is closer to the goal than me, marking for pass.");
+#endif
                 }
             }
-            else { Debug.Log("#PassTargetEval#" + teammate.name + " is further from the goal than me."); continue; }
+            else {
+#if UNITY_EDITOR
+                Debug.Log("#PassTargetEval#" + teammate.name + " is further from the goal than me.");
+#endif
+                continue; }
             if (teammate.state.GetType() == typeof(SCRunToGoalWithoutBall)) {
                 if (passTargetScore <= 10) {
                     passTargetScore = 10;
                     currentTarget = teammate;
+#if UNITY_EDITOR
                     Debug.Log("#PassTargetEval#" + teammate.name + " is on a run. Marking.");
+#endif
                 }
             }
         }
-        if (currentTarget == null) { Debug.Log("#PassTargetEvalReturn# return is null."); }
+        if (currentTarget == null) {
+#if UNITY_EDITOR
+            Debug.Log("#PassTargetEvalReturn# return is null.");
+#endif
+
+        }
         else {
+#if UNITY_EDITOR
             Debug.Log("#PassTargetEvalReturn#" + currentTarget.name + " is my pass target.");
+#endif
         }
         return currentTarget;
     }
@@ -268,6 +287,13 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
     public void IdleTeammateWithBall() {
         state.TransitionTo(new SCIdleTeammateWithBall());
     }
+    public void MissionIdle() {
+        Debug.Log("#Mission# Mission Idle");
+        state.TransitionTo(new SCMissionIdle() { act = true });
+    }
+    public void MissionIdleDontAct() {
+        state.TransitionTo(new SCMissionIdle() { act = false });
+    }
     public void PursueBall() {
         state.TransitionTo(new SCPursueBall());
     }
@@ -278,6 +304,8 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
         state.TransitionTo(new SCTryCatchPass());
     }
     public void PickupBall() {
+        playerHasBall.GetComponent<MMFeedbackFloatingText>().Value = myCharacter.name;
+        playerHasBall.PlayFeedbacks();
         state.TransitionTo(new SCPickupBall());
     }
     public void Shoot() {
@@ -381,7 +409,7 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
             lastRunCalled = Time.time;
             int teammateToSend = Random.Range(0, coach.players.Length);
             state.SendMessage(coach.players[teammateToSend], "RunToOpposingGoal");
-            sendOnRun.PlayFeedbacks();
+            //sendOnRun.PlayFeedbacks();
        }
     }
     public StableCombatChar GetNearestTeammate() {
@@ -410,27 +438,7 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
         return (Time.time < lastAttack + accumulatedCooldown);
     }
     public Transform GetFieldPosition() {
-        switch (fieldPosition) {
-            case Position.STC:
-                return coach.positions.ST;
-                break;
-            case Position.LW:
-                return coach.positions.LW;
-                break;
-            case Position.RW:
-                return coach.positions.RW;
-                break;
-            case Position.DC:
-                return coach.positions.DC;
-                break;
-            case Position.DL:
-                return coach.positions.DL;
-                break;
-            case Position.DR:
-                return coach.positions.DR;
-                break;
-        }
-        return null;
+        return coach.positions[(int)fieldPosition];
     }
 
     public void TakeDamage(StableDamage damage) {
@@ -477,6 +485,62 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
         state.AnimEventReceiver(message);
     }
 
+    //Mission Methods
+
+    public void BroadcastNextStep() {
+        Debug.Log("#Mission#"+transform.name + " Broadcasting Next Step");
+        if (FindObjectOfType<MissionController>() == null) { return; }
+        FindObjectOfType<MissionController>().SetAllHeroesToNextPOI();
+    }
+
+    public void FindNextStep() {
+        if (FindObjectOfType<MissionController>() == null) { return; }
+        Transform nextStep = FindObjectOfType<MissionController>().GetNextPOI();
+        if (nextStep != null) {
+            MissionMoveTo(nextStep);
+        }
+    }
+
+    public void MissionMoveTo(Transform target) {
+        Debug.Log("#Mission#Move to " + target.name + " by " + myCharacter.name);
+        if (myCharacter.incapacitated) { Debug.Log("Can't Walk, Dead " + myCharacter.name); return; }
+        state.TransitionTo(new SCMissionMoveTo() { target = target });
+    }
+
+    public void ActivateStep(MissionPOI poi) {
+        print("#Mission#Activate " + poi.step.type.ToString());
+         switch (poi.step.type) {
+            case StepType.Lockpick:
+               // state.TransitionTo(new MissionCharacterStateLockpick() { poi = poi });
+                break;
+            case StepType.Assassinate:
+                //state.TransitionTo(new MissionCharacterStateAssassinate() { poi = poi, killTarget = poi.allPurposeTransforms[0] });
+                break;
+            case StepType.Hunt:
+                //state.TransitionTo(new MissionCharacterStateHunt() { poi = poi });
+                break;
+            case StepType.Camp:
+               // state.TransitionTo(new MissionCharacterStateCamp() { poi = poi });
+                break;
+            case StepType.NavigateLand:
+               // state.TransitionTo(new MissionCharacterStateNavigateLand() { poi = poi, badLocation = poi.allPurposeTransforms[0] });
+                break;
+            case StepType.Connection:
+            case StepType.NegotiateBusiness:
+            case StepType.Inspire:
+                state.TransitionTo(new SCNegotiateState() { poi = poi, negotiateTarget = poi.allPurposeTransforms[1] });
+                break;
+            case StepType.Portal:
+                poi.Resolve(true);
+                break;
+            case StepType.Gamble:
+                //state.TransitionTo(new MissionCharacterStateGamble() { poi = poi, gambleTarget = poi.allPurposeTransforms[1] });
+                break;
+        }
+        
+    }
+
+    
     void OnDrawGizmos() {
 #if UNITY_EDITOR
         if (debugState && state!=null) {
@@ -484,6 +548,7 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
         }
 #endif
     }
+    
 
 }
 

@@ -76,7 +76,6 @@ namespace ES3Types
 			writer.WriteProperty("incapacitated", instance.incapacitated, ES3Type_bool.Instance);
 			writer.WriteProperty("modelName", instance.modelName, ES3Type_string.Instance);
 			writer.WritePropertyByRef("currentObject", instance.currentObject);
-			writer.WritePropertyByRef("currentMissionCharacter", instance.currentMissionCharacter);
 			writer.WriteProperty("name", instance.name, ES3Type_string.Instance);
 			writer.WriteProperty("maxHP", instance.maxHP, ES3Type_int.Instance);
 			writer.WriteProperty("HP", instance.HP, ES3Type_int.Instance);
@@ -267,9 +266,6 @@ namespace ES3Types
 						break;
 					case "currentObject":
 						instance.currentObject = reader.Read<UnityEngine.GameObject>(ES3Type_GameObject.Instance);
-						break;
-					case "currentMissionCharacter":
-						instance.currentMissionCharacter = reader.Read<MissionCharacter>();
 						break;
 					case "name":
 						instance.name = reader.Read<System.String>(ES3Type_string.Instance);

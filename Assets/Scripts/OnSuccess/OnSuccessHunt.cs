@@ -8,7 +8,7 @@ public class OnSuccessHunt : OnStepSuccess
         MissionHelperHunt helper = GetComponent<MissionHelperHunt>();
         MissionController control = FindObjectOfType<MissionController>();
         control.update.text += "\n" + GetComponent<MissionHelperHunt>().animalToLoad+ " Killed!";
-        Helper.Speech(control.heroes[Random.Range(0, control.heroes.Count)].currentMissionCharacter.gameObject.transform, "We eat well tonight!", 3f);
+        Helper.Speech(control.allChars[Random.Range(0, control.heroes.Count)].gameObject.transform, "We eat well tonight!", 3f);
         
     }
 }

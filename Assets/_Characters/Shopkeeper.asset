@@ -12,19 +12,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5c751179885a4504bbe84727081f1f0c, type: 3}
   m_Name: Shopkeeper
   m_EditorClassIdentifier: 
-  name: Bandit
+  name: Shopkeeper
   maxHP: 0
   HP: 0
   age: 0
   strength: 5
   agility: 5
   reaction: 5
-  running: 5
-  swordsmanship: 5
-  dualwielding: 5
-  dodging: 5
-  archery: 5
+  dexterity: 5
+  carrying: 5
   toughness: 10
+  tackling: 5
+  blocking: 5
+  runspeed: 5
+  shooting: 5
+  passing: 5
   speech: 5
   intelligence: 5
   education: 5
@@ -35,6 +37,9 @@ MonoBehaviour:
   insight: 5
   deception: 5
   intimidation: 5
+  persuasion: 5
+  gambling: 5
+  confidence: 5
   lockpicking: 5
   pickpocketing: 5
   trapSetting: 5
@@ -42,17 +47,25 @@ MonoBehaviour:
   pugilism: 1
   martialarts: 2
   melee: 5
+  ranged: 10
+  magic: 10
   parry: 5
   shieldDefense: 5
+  musician: 0
+  medicine: 0
+  swordsmanship: 5
+  dualwielding: 5
+  archery: 5
+  pistols: 5
   survivalist: 5
   landNavigation: 5
   hunting: 5
   foraging: 0
   herbLore: 0
   camping: 0
-  attackMagic: 0
-  defenseMagic: 0
-  supportMagic: 0
+  attackmagic: 0
+  defensemagic: 0
+  supportmagic: 0
   condition: 0
   sharpness: 0
   health: 10
@@ -62,12 +75,16 @@ MonoBehaviour:
   maxHealth: 4
   knownMoves:
   - {fileID: 11400000, guid: 9718ff2f87bcd694099066b587a15546, type: 2}
-  activeMoves:
+  activeMeleeMoves:
   - {fileID: 11400000, guid: 9718ff2f87bcd694099066b587a15546, type: 2}
+  activeRangedMoves: []
+  activeSpecialMoves: []
   startingArmor: 
-  startingWeapon: FistsSO
+  startingMeleeWeapon: FistsSO
+  startingRangedWeapon: BowSO
   armor: {fileID: 0}
-  weapon: {fileID: 0}
+  meleeWeapon: {fileID: 0}
+  rangedWeapon: {fileID: 0}
   mat: {fileID: 2100000, guid: 2016fbaa1e945cb4f807abf0a56b602e, type: 2}
   contract:
     weeksLeft: 10
@@ -80,7 +97,10 @@ MonoBehaviour:
     year: 1000
     dayOfWeek: 0
   activeForNextMission: 0
+  activeInLineup: 0
+  currentPosition: 0
   incapacitated: 0
-  modelName: CharAristocrat
+  modelName: SCUnit
+  modelNum: 4
   currentObject: {fileID: 0}
-  currentMissionCharacter: {fileID: 0}
+  archetype: 0

@@ -14,12 +14,14 @@ public class SCCombatDowned : SCCombatStanceState {
     public override void EnterFrom(StableCombatCharState state) {
         base.EnterFrom(state);
         thisChar.anima.GetDowned();
-        ball.GetDropped();
-        getUpTime = Time.time + 10;
+        if (thisChar.fieldSport) {
+            ball.GetDropped();
+            getUpTime = Time.time + 10;
+        } else { getUpTime = Mathf.Infinity; }
     }
     public override void Update() {
         base.Update();
-        if (Time.time < getUpTime) { Debug.Log("Downed. GetUp: " + getUpTime + "  Time: " + Time.time); return; }
+        if (Time.time < getUpTime) { return; }
         getUpTime = Mathf.Infinity;
         thisChar.health = thisChar.maxHealth;
         thisChar.stamina = thisChar.maxStamina;

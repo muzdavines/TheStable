@@ -6,10 +6,11 @@ public class SCCombatIdle : SCCombatStanceState {
 
     public override void EnterFrom(StableCombatCharState state) {
         base.EnterFrom(state);
-        Debug.Log("#SCCombatStance#Combat Idle Enter");
+        Debug.Log("#SCCombatStance#Combat Idle Enter "+thisChar.myCharacter.name);
         thisChar.anima.Idle();
         thisChar.agent.isStopped = true;
-        if (thisChar == ball.holder) {
+
+        if (thisChar.fieldSport && thisChar == ball.holder) {
             thisChar.RunToGoalWithBall();
             return;
         }

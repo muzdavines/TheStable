@@ -14,6 +14,10 @@ public class SCIdle : StableCombatCharState
     public override void Update() {
         base.Update();
         thisChar.agent.isStopped = true;
+        if (!thisChar.fieldSport) {
+            thisChar.MissionIdle();
+            return;
+        }
         if (ball.holder == null) {
             if (thisChar.ShouldPursueBall()) {
                 thisChar.PursueBall();

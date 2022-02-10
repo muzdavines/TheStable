@@ -43,20 +43,81 @@ public class LeagueController : MonoBehaviour, UIElement
         foreach (string s in Game.instance.leagues[0].GetTable()) {
             leagueTable.text += s + "\n";
         }
+        int topScorer = 0;
+        Character topScorerChar = null;
+        string topScorerStable = "";
+        foreach (Character c in Game.instance.playerStable.heroes) {
+            if (c.seasonStats.goals > topScorer) {
+                topScorer = c.seasonStats.goals;
+                topScorerChar = c;
+                topScorerStable = Game.instance.playerStable.stableName;
+            }
+        }
+        foreach (Stable s in Game.instance.otherStables) {
+            foreach (Character c in s.heroes) {
+                if (c.seasonStats.goals > topScorer) {
+                    topScorer = c.seasonStats.goals;
+                    topScorerChar = c;
+                    topScorerStable = s.stableName;
+                }
+            }
+        }
+        if (topScorerChar != null) {
+            leagueTable.text += "Top Scorer: " + topScorerChar.name + "  Goals: " + topScorer + ", " + topScorerStable;
+        }
     }
     public void SimOtherGames() {
         foreach (League.Match match in Game.instance.leagues[0].schedule) {
             if (match.final || match.date.IsOnOrAfter(Helper.Today())) {
                 continue;
             }
-            var homeGoals = Random.Range(0, 8);
-            var awayGoals = Random.Range(0, 8);
-            match.awayGoals = awayGoals;
-            match.homeGoals = homeGoals;
-            match.final = true;
-            match.ProcessResult();
+            SimMatch(match);
         }
     }
+
+    public void SimMatch(League.Match thisMatch) {
+        bool homeAggressor = true;
+        int homeGoals = 0;
+        int awayGoals = 0;
+        for (int i = 0; i<10000; i++) {
+            Character homeChar = thisMatch.home.stable.heroes[Random.Range(0, thisMatch.home.stable.heroes.Count)];
+            Character awayChar = thisMatch.away.stable.heroes[Random.Range(0, thisMatch.away.stable.heroes.Count)];
+            float homeRoll = 0;
+            float awayRoll = 0;
+            if (homeAggressor) {
+                homeRoll = Random.Range(1f, homeChar.carrying + homeChar.runspeed);
+                awayRoll = Random.Range(1f, awayChar.tackling + awayChar.runspeed);
+                float thisRoll = homeRoll / awayRoll;
+                Debug.Log("#MatchResult#Home Roll:" + thisRoll);
+                if (thisRoll > 1.2f) {
+                    homeGoals++;
+                    homeChar.seasonStats.goals++;
+                }
+            }
+            else {
+                awayRoll = Random.Range(1f, awayChar.carrying + awayChar.runspeed);
+                homeRoll = Random.Range(1f, homeChar.tackling + homeChar.runspeed);
+                float thisRoll = awayRoll / homeRoll;
+                Debug.Log("#MatchResult#Home Roll:" + thisRoll);
+                if (thisRoll > 1.2f) {
+                    awayGoals++;
+                    awayChar.seasonStats.goals++;
+                }
+            }
+            homeAggressor = !homeAggressor;
+            if (awayGoals >= 3 || homeGoals >= 3) {
+                break;
+            }
+        }
+        if (awayGoals < 3 && homeGoals < 3) {
+            homeGoals = 3;
+        }
+        thisMatch.awayGoals = awayGoals;
+        thisMatch.homeGoals = homeGoals;
+        thisMatch.final = true;
+        thisMatch.ProcessResult();
+    }
+
     public void CheckIfMatchDay() {
         
         foreach (League.Match match in Game.instance.leagues[0].schedule) {

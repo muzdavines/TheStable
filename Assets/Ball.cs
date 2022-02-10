@@ -10,6 +10,7 @@ public class Ball : MonoBehaviour
     public Rigidbody body;
     SphereCollider col;
     public Vector3 passTargetPosition;
+    public StableCombatChar lastHolder;
     private void Start() {
         body = GetComponent<Rigidbody>();
         col = GetComponent<SphereCollider>();
@@ -37,6 +38,7 @@ public class Ball : MonoBehaviour
     public bool PickupBall(StableCombatChar picker) {
         if (isHeld) { Debug.Log("Cannot pickup, already held."); return false; }
         holder = picker;
+        lastHolder = holder;
         isHeld = true;
         col.enabled = !isHeld;
         body.isKinematic = isHeld;

@@ -25,7 +25,7 @@ public class MissionActivateTrigger : MonoBehaviour
         if (other.CompareTag("Character")) {
             print("MissionActivated");
             col.enabled = false;
-            mission.StepActivated(other.GetComponent<MissionCharacter>());
+            mission.StepActivated(other.GetComponent<StableCombatChar>());
         }
     }
 }

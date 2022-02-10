@@ -72,7 +72,7 @@ public class MatchController : MonoBehaviour
                 thisChar.team = thisTeam;
                 thisChar.fieldSport = true;
                 thisChar.myCharacter = thisBaseChar;
-                thisChar.fieldPosition = (Position)i;
+                thisChar.fieldPosition = thisBaseChar.currentPosition;
                 thisChar.GetComponent<SCModelSelector>().Init(thisBaseChar.modelNum, thisTeam);
                 thisChar.Init();
             }
@@ -85,10 +85,12 @@ public class MatchController : MonoBehaviour
     public void Kickoff() {
         print("Kickoff");
         for (int i = 0; i<homeCoach.players.Length; i++) {
-            homeCoach.players[i].transform.position = homeSpawns[i].position;
-            awayCoach.players[i].transform.position = awaySpawns[i].position;
-            homeCoach.players[i].Reset();
-            awayCoach.players[i].Reset();
+            var homePlayer = homeCoach.players[i];
+            var awayPlayer = awayCoach.players[i];
+            homePlayer.transform.position = homeSpawns[(int)homePlayer.fieldPosition].position;
+            awayPlayer.transform.position = awaySpawns[(int)awayPlayer.fieldPosition].position;
+            homePlayer.Reset();
+            awayPlayer.Reset();
         }
         if (lastTeamToScore == -1) {
             lastTeamToScore = Random.Range(0, 2);
@@ -112,7 +114,10 @@ public class MatchController : MonoBehaviour
         if (team == 0) { homeScore++; } else { awayScore++; }
         lastTeamToScore = team;
         goal.ShakeCamera(2, .5f, 5, 1, 1, 1, false);
-        
+        if (team == ball.lastHolder.team) {
+            ball.lastHolder.myCharacter.seasonStats.goals++;
+            ball.lastHolder = null;
+        }
         UpdateScoreboard();
         foreach (StableCombatChar awayPlayer in awayCoach.players) {
             awayPlayer.GoalScored();
@@ -145,6 +150,12 @@ public class MatchController : MonoBehaviour
         Game.instance.activeMatch.homeGoals = homeGoals;
         Game.instance.activeMatch.final = true;
         Game.instance.activeMatch.ProcessResult();
+        foreach (StableCombatChar homePlayer in homeCoach.players) {
+            homePlayer.myCharacter.seasonStats.games++;
+        }
+        foreach (StableCombatChar awayPlayer in awayCoach.players) {
+            awayPlayer.myCharacter.seasonStats.games++;
+        }
         Destroy(ball.gameObject);
         var players = FindObjectsOfType<StableCombatChar>();
         for (int i = 0; i < players.Length; i++) {

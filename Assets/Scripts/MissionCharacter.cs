@@ -87,7 +87,7 @@ public class MissionCharacter : MonoBehaviour, MissionCharacterStateOwner {
         InitHealthBarAndVisuals();
         InitWeaponsAndArmor();
         transform.name = c.name;
-        c.currentMissionCharacter = this;
+        
         missionController = FindObjectOfType<MissionController>();
         anim.SetFloat("BodyValue0", 1);
         anim.SetFloat("CrouchToStand", 1);
@@ -226,7 +226,7 @@ public class MissionCharacter : MonoBehaviour, MissionCharacterStateOwner {
     }
     public void BroadcastWalkTo(Transform walkTo, bool includeActiveChar = false) {
         if (FindObjectOfType<MissionController>() == null) { return; }
-        FindObjectOfType<MissionController>().SetAllHeroesWalkTo(walkTo, includeActiveChar, this);
+        //FindObjectOfType<MissionController>().SetAllHeroesWalkTo(walkTo, includeActiveChar, this);
     }
     public float DistanceToTarget() {
         if (target == null) { Debug.Log("target null");  return 0; }

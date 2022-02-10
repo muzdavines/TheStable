@@ -19,6 +19,7 @@ public class SCOneTimerToGoal : StableCombatCharState {
         base.AnimEventReceiver(message);
     }
     public override void BallCollision(Collision collision) {
+        ball.lastHolder = thisChar;
         ball.Shoot(thisChar.enemyGoal);
     }
 

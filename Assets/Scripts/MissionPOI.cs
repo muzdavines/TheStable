@@ -48,23 +48,23 @@ public class MissionPOI : MonoBehaviour
     /// teammates before starting the task
     /// </summary>
    
-    public MissionCharacter currentCharacterToAttempt;
-    public virtual void StepActivated(MissionCharacter activeChar) {
+    public StableCombatChar currentCharacterToAttempt;
+    public virtual void StepActivated(StableCombatChar activeChar) {
         //POI activated, start task and broadcast to teammates to move here
         //Start task - call step type on Character, let the state machine handle it
         //call teammates, check whether they are engaged
 
         //Calculate the best character to use
 
-        List<Character> heroes = control.heroes;
-        MissionCharacter characterToAttempt = step.CharacterToAttempt(heroes).currentMissionCharacter;
+        List<StableCombatChar> heroes = control.allChars;
+        StableCombatChar characterToAttempt = step.CharacterToAttempt(heroes);
         currentCharacterToAttempt = characterToAttempt;
-        foreach (Character c in heroes) {
-            if (c.currentMissionCharacter != characterToAttempt) { c.currentMissionCharacter.IdleDontAct(); }
+        foreach (StableCombatChar c in heroes) {
+            if (c != characterToAttempt) { c.MissionIdleDontAct(); }
         }
         print(characterToAttempt.name);
-        control.currentActiveStepChar = characterToAttempt.character;
-        if (attributePrereq != "" && characterToAttempt.character.GetCharacterAttributeValue(attributePrereq) < attributePrereqAmount) {
+        control.currentActiveStepChar = characterToAttempt;
+        if (attributePrereq != "" && characterToAttempt.myCharacter.GetCharacterAttributeValue(attributePrereq) < attributePrereqAmount) {
             print("Does not meet minimum Req");
             Avoid(true);
         }

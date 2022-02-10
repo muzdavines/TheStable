@@ -77,7 +77,7 @@ public class Character : Living
     public int health; //dots - 0 = death
 
     //need some enums for armor type so we can have bonuses and penalties - dodge penalty for plate, etc.
-
+    public CombatFocus combatFocus;
 
     //new combat system
     public int maxStamina;
@@ -137,9 +137,7 @@ public class Character : Living
     public int modelNum;
 
     public GameObject currentObject;
-    public MissionCharacter currentMissionCharacter;
-
-
+    
     public int RandDist(float min, float max) {
         int roll = Random.Range(0, 100);
         float interval = (max - min) / 6;
@@ -332,7 +330,7 @@ public class Character : Living
         this.incapacitated = source.incapacitated;
         this.modelName = source.modelName;
         this.currentObject = source.currentObject;
-        this.currentMissionCharacter = source.currentMissionCharacter;
+        
         this.defensemagic = source.defensemagic;
         this.supportmagic = source.supportmagic;
         this.name = source.name;
@@ -508,7 +506,7 @@ public class CharacterSave {
         this.incapacitated = source.incapacitated;
         this.modelName = source.modelName;
         this.currentObject = source.currentObject;
-        this.currentMissionCharacter = source.currentMissionCharacter;
+        
         this.defenseMagic = source.defensemagic;
         this.supportMagic = source.supportmagic;
         this.name = source.name;

@@ -10,22 +10,22 @@ using CoverShooter;
 public class CombatController : MonoBehaviour
 {
     public bool combatActive;
-    public List<Character> heroes;
-    public List<Character> enemies;
-    public void Init(List<Character> _heroes, List<Character> _enemies) {
+    public List<StableCombatChar> heroes;
+    public List<StableCombatChar> enemies;
+    public void Init(List<StableCombatChar> _heroes, List<StableCombatChar> _enemies) {
         combatActive = true;
         heroes = _heroes;
         enemies = _enemies;
         print("Set Teams in CombatController");
         print("Set Health Bars in CombatController");
         
-        foreach (Character c in heroes) {
+        foreach (StableCombatChar c in heroes) {
             
-            c.currentMissionCharacter.SetCombatComponents(true);
+           // c.SetCombatComponents(true);
             
         }
-        foreach (Character d in enemies) {
-            d.currentMissionCharacter.SetCombatComponents(true);
+        foreach (StableCombatChar d in enemies) {
+            //d.SetCombatComponents(true);
         }
 
         
@@ -44,19 +44,14 @@ public class CombatController : MonoBehaviour
     bool combatEnded = false;
     void CheckEndCombat() {
         if (combatEnded) { return; }
-        foreach (Character c in heroes) {
-            c.health = (int)c.currentObject.GetComponent<CharacterHealth>().Health;
+        foreach (StableCombatChar c in heroes) {
             if (c.health <= 0) {
                 heroes.Remove(c);
             }
         }
-        foreach (Character cc in enemies) {
-            
-            cc.health = (int)cc.currentObject.GetComponent<CharacterHealth>().Health;
-            if (cc.health <= 0) {
-                enemies.Remove(cc);
-            }
-        }
+        heroes.RemoveAll((x) => x.health <= 0);
+        enemies.RemoveAll((x) => x.health <= 0);
+
         if (heroes.Count == 0) {
             combatEnded = true;
             EndCombat(false);

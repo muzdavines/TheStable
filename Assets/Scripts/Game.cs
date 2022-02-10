@@ -438,7 +438,6 @@ public static class JsonHelper {
         thisChar.incapacitated = source.incapacitated;
         thisChar.modelName = source.modelName;
         thisChar.currentObject = source.currentObject;
-        thisChar.currentMissionCharacter = source.currentMissionCharacter;
         thisChar.defensemagic = source.defenseMagic;
         thisChar.supportmagic = source.supportMagic;
         thisChar.name = source.name;

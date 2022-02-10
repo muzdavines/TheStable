@@ -17,8 +17,11 @@ public class MissionHeroCellView : EnhancedScrollerCellView {
         heroNameText.text = data.name + (tactics ? "  ("+data.archetype.ToString()+")" : "");
         missionController = FindObjectOfType<LaunchMissionController>();
         tacticsController = FindObjectOfType<TeamTacticsController>();
-        myDropdown.value = (int)thisChar.currentPosition;
-        if (!thisChar.activeInLineup) { myDropdown.gameObject.SetActive(false); }
+        if (myDropdown != null) {
+            myDropdown.value = (int)thisChar.currentPosition;
+            if (!thisChar.activeInLineup) { myDropdown.gameObject.SetActive(false); }
+        }
+        
     }
 
     public void OnHoverEnter() {
@@ -53,7 +56,9 @@ public class MissionHeroCellView : EnhancedScrollerCellView {
         if (!thisChar.activeForNextMission) { thisChar.currentPosition = Position.NA; }
         foreach (MissionHeroesScrollerController mhsc in FindObjectsOfType<MissionHeroesScrollerController>()) {
             mhsc.OnEnable();
-            tacticsController.OnEnable();
+            if (tacticsController != null) {
+                tacticsController.OnEnable();
+            }
         }
         OnHoverExit();
 

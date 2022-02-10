@@ -16,11 +16,11 @@ public class MissionController : MonoBehaviour
     public MissionContract contract;
     public List<Character> heroes;
     public List<Character> currentEnemies;
-    public List<MissionCharacter> allChars;
+    public List<StableCombatChar> allChars;
     public GameObject currentStage;
     public bool initialized;
     public CombatController combatController;
-    public Character currentActiveStepChar;
+    public StableCombatChar currentActiveStepChar;
     public bool stageCompleteFired;
     public bool missionActive;
     public bool missionFailed = false;
@@ -95,7 +95,17 @@ public class MissionController : MonoBehaviour
         cam.transform.position = spawns.spawnLocs[0].transform.position + new Vector3(5,15,5);
         cam.transform.LookAt(spawns.spawnLocs[0].position);
         stageCompleteFired = false;
-        if (stageNum <= 0) { StartCoroutine(DelaySpawnChars()); } else { foreach (Character c in heroes) { if (c.incapacitated) { continue; } c.currentMissionCharacter.GetComponent<NavMeshAgent>().enabled = false; c.currentMissionCharacter.transform.position = currentStage.GetComponentInChildren<SpawnLocController>().spawnLocs[Random.Range(0, 4)].position; c.currentMissionCharacter.GetComponent<NavMeshAgent>().enabled = true; } }
+        if (stageNum <= 0) {
+            StartCoroutine(DelaySpawnChars());
+        }
+        else {
+            foreach (StableCombatChar c in allChars) {
+                if (c.myCharacter.incapacitated) { continue; }
+                c.GetComponent<NavMeshAgent>().enabled = false;
+                c.transform.position = currentStage.GetComponentInChildren<SpawnLocController>().spawnLocs[Random.Range(0, 4)].position;
+                c.GetComponent<NavMeshAgent>().enabled = true;
+            }
+        }
         Helper.UIUpdate(null);
         
         //move heroes to spawn locations
@@ -124,29 +134,32 @@ public class MissionController : MonoBehaviour
        
     }
 
-    public List<Character> SpawnChars(List<Character> chars, List<Transform> spawns, MissionCharacterState initialState = null) {
-        return BaseSpawnChars(chars, spawns, initialState);
+    public List<StableCombatChar> SpawnChars(List<Character> chars, List<Transform> spawns, int team = 0) {
+        return BaseSpawnChars(chars, spawns, team);
     }
 
-   List<Character> BaseSpawnChars(List<Character> chars, List<Transform> spawns, MissionCharacterState initialState = null) {
+   List<StableCombatChar> BaseSpawnChars(List<Character> chars, List<Transform> spawns, int team = 0) {
         print("Spawn Base Chars");
+        List<StableCombatChar> theseChars = new List<StableCombatChar>();
         for (int i = 0; i < chars.Count; i++) {
             if (chars[i].incapacitated) { continue; }
-            GameObject co = Instantiate<GameObject>(Resources.Load<GameObject>(chars[i].modelName), spawns[i].transform.position, Quaternion.identity);
-            MissionCharacter m = co.GetComponent<MissionCharacter>();
-            m.Init(chars[i], initialState);
-            chars[i].currentMissionCharacter = m;
+            Character thisBaseChar = chars[i];
+            GameObject co = Instantiate<GameObject>(Resources.Load<GameObject>(thisBaseChar.modelName), spawns[i].transform.position, Quaternion.identity);
+            StableCombatChar thisChar = co.GetComponent<StableCombatChar>();
+            thisChar.fieldSport = false;
+            thisChar.myCharacter = thisBaseChar;
+            thisChar.team = team;
+            thisChar.GetComponent<SCModelSelector>().Init(thisBaseChar.modelNum, team);
+            thisChar.Init();
             co.GetComponent<NavMeshAgent>().enabled = false;
             co.transform.position = spawns[i].transform.position;
-            chars[i].currentObject = co;
             co.GetComponent<NavMeshAgent>().enabled = true;
-            
+            theseChars.Add(thisChar);
         }
         CameraController cam = Camera.main.GetComponent<CameraController>();
         UpdateChars();
-        return chars;
+        return theseChars;
         //cam.cameraTarget = heroes[0].currentObject;
-
     }
 
     // Update is called once per frame
@@ -168,22 +181,29 @@ public class MissionController : MonoBehaviour
         foreach (Character e in enemies) {
             currentEnemies.Add(Instantiate<Character>(e));
         }
-        foreach (Character h in heroes) {
-            h.currentObject.GetComponent<Actor>().Side = 1;
+        var theseEnemies = SpawnChars(currentEnemies, enemySpawnLoc, 1);
+        foreach (StableCombatChar t in theseEnemies) {
+            t.team = 1;
+            t.CombatIdle();
         }
-        SpawnChars(currentEnemies, enemySpawnLoc);
-        combatController.Init(heroes, currentEnemies);
+        foreach (StableCombatChar s in allChars) {
+            s.team = 0;
+            s.CombatIdle();
+        }
+        Debug.Log("#TODO#INIT Combat Controller");
+        combatController.Init(allChars, theseEnemies);
         poiCombat = _poiCombat;
     }
 
     public void EndCombat(bool success = true) {
         print("Combat Complete");
         SetAllHeroesToCombat(false);
-        foreach (Character c in heroes) {
-            c.currentMissionCharacter.healthBar.Hide(true);
+        foreach (StableCombatChar c in allChars) {
+            Debug.Log("#TODO#Hide Health Bar");
+            //c.healthBar.Hide(true);
             if (c.health > 0) {
-                c.currentMissionCharacter.Idle();
-                Helper.Cam().SetTarget(c.currentObject.transform);
+                c.MissionIdle();
+                Helper.Cam().SetTarget(c.transform);
             }
         }
         poiCombat.Resolve(success);
@@ -194,27 +214,28 @@ public class MissionController : MonoBehaviour
         //make character walk to target of POI
         //need to control which stage of the mission step we are at
         missionActive = true;
-        MissionCharacter thisChar = character.GetComponent<MissionCharacter>();
-        thisChar.Walk(poi.targetPos);
+        StableCombatChar thisChar = character.GetComponent<StableCombatChar>();
+        thisChar.MissionMoveTo(poi.targetPos);
     }
 
-    public void SetAllHeroesWalkTo(Transform walkTo, bool includeActiveChar, MissionCharacter activeChar) {
-        foreach (Character c in heroes) {
-            if (!includeActiveChar) { if (c.currentMissionCharacter == activeChar) continue; }
-            c.currentMissionCharacter.Walk(walkTo);
+    public void SetAllHeroesWalkTo(Transform walkTo, bool includeActiveChar, StableCombatChar activeChar) {
+        foreach (StableCombatChar c in allChars) {
+            if (!includeActiveChar) { if (c == activeChar) continue; }
+            c.MissionMoveTo(walkTo);
         }
     }
     public void SetAllHeroesToCombat(bool shouldCombat) {
-        foreach (Character c in heroes) {
-            c.currentMissionCharacter.SetCombatComponents(shouldCombat);
+        foreach (StableCombatChar c in allChars) {
+            Debug.Log("#TODO#SetCombatComponents");
+            //c.SetCombatComponents(shouldCombat);
         }
     }
 
-    public void SetAllHeroesDontAct(MissionCharacter exception = null) {
+    public void SetAllHeroesDontAct(StableCombatChar exception = null) {
         print("SetAllHeroesDontAct "+exception.name);
-        foreach (Character m in heroes) {
-            if (exception !=null && m.currentMissionCharacter != exception) {
-                m.currentMissionCharacter.IdleDontAct();
+        foreach (StableCombatChar m in allChars) {
+            if (exception !=null && m != exception) {
+                m.MissionIdleDontAct();
             }
         }
     }
@@ -225,8 +246,8 @@ public class MissionController : MonoBehaviour
             return;
         }
         if (combatController.combatActive) { return; }
-        foreach (Character c in heroes) {
-            c.currentMissionCharacter.FindNextStep();
+        foreach (StableCombatChar c in allChars) {
+            c.FindNextStep();
         }
     }
     public Transform GetNextPOI() {
@@ -258,10 +279,12 @@ public class MissionController : MonoBehaviour
     }
 
     public void UpdateChars() {
-        var _chars = FindObjectsOfType<MissionCharacter>();
-        allChars = new List<MissionCharacter>();
+        var _chars = FindObjectsOfType<StableCombatChar>();
+        allChars = new List<StableCombatChar>();
         foreach (var _c in _chars) {
-            allChars.Add(_c);
+            if (_c.team == 0) {
+                allChars.Add(_c);
+            }
         }
     }
    /*TODO: Hierarchy system of required steps so if things go sideways,

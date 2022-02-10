@@ -19,12 +19,14 @@ MonoBehaviour:
   strength: 10
   agility: 5
   reaction: 5
-  running: 5
-  swordsmanship: 2
-  dualwielding: 5
-  dodging: 5
-  archery: 5
+  dexterity: 5
+  carrying: 5
   toughness: 10
+  tackling: 5
+  blocking: 5
+  runspeed: 5
+  shooting: 5
+  passing: 5
   speech: 5
   intelligence: 5
   education: 5
@@ -35,6 +37,9 @@ MonoBehaviour:
   insight: 5
   deception: 5
   intimidation: 5
+  persuasion: 5
+  gambling: 5
+  confidence: 5
   lockpicking: 5
   pickpocketing: 5
   trapSetting: 5
@@ -42,17 +47,25 @@ MonoBehaviour:
   pugilism: 5
   martialarts: 2
   melee: 2
+  ranged: 10
+  magic: 10
   parry: 5
   shieldDefense: 0
+  musician: 0
+  medicine: 0
+  swordsmanship: 2
+  dualwielding: 5
+  archery: 5
+  pistols: 5
   survivalist: 2
   landNavigation: 2
   hunting: 2
   foraging: 0
   herbLore: 0
   camping: 2
-  attackMagic: 0
-  defenseMagic: 0
-  supportMagic: 0
+  attackmagic: 0
+  defensemagic: 0
+  supportmagic: 0
   condition: 0
   sharpness: 0
   health: 3
@@ -61,12 +74,15 @@ MonoBehaviour:
   maxMind: 0
   maxHealth: 0
   knownMoves: []
-  activeMoves: []
+  activeMeleeMoves: []
+  activeRangedMoves: []
+  activeSpecialMoves: []
   startingArmor: 
-  startingWeapon: 
+  startingMeleeWeapon: 
+  startingRangedWeapon: 
   armor: {fileID: 0}
-  weapon: {fileID: 0}
-  inventory: []
+  meleeWeapon: {fileID: 0}
+  rangedWeapon: {fileID: 0}
   mat: {fileID: 0}
   contract:
     weeksLeft: 10
@@ -79,7 +95,10 @@ MonoBehaviour:
     year: 1000
     dayOfWeek: 0
   activeForNextMission: 0
+  activeInLineup: 0
+  currentPosition: 0
   incapacitated: 0
   modelName: CharRogue4
+  modelNum: 0
   currentObject: {fileID: 0}
-  currentMissionCharacter: {fileID: 0}
+  archetype: 0

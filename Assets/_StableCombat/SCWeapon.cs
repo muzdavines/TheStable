@@ -30,7 +30,7 @@ public class SCWeapon : MonoBehaviour
     public void OnTriggerEnter(Collider other) {
         Debug.Log("#SCWeapon#Collision: " + other.name);
         StableCombatChar target = other.GetComponent<StableCombatChar>();
-        if (target == null || target == me) { return; }
+        if (target == null || target == me || target.team == me.team) { return; }
         target.TakeDamage(anim.currentMeleeMove.damage);
     }
 

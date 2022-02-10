@@ -29,7 +29,7 @@ public class Step {
         }
     }
 
-    public Character CharacterToAttempt(List<Character> heroes) {
+    public StableCombatChar CharacterToAttempt(List<StableCombatChar> heroes) {
 
         string property = "";
         switch (type) {
@@ -59,12 +59,13 @@ public class Step {
             
         }
         Debug.Log(property);
-        Character returnChar = new Character() { name = "ReturnChar" };
-        typeof(Character).GetField(property).SetValue(returnChar, -1);
+        StableCombatChar returnChar = new StableCombatChar();
+        returnChar.myCharacter = new Character() { name = "ReturnChar" };
+        typeof(Character).GetField(property).SetValue(returnChar.myCharacter, -1);
         for (int i = 0; i < heroes.Count; i++) {
-            if (heroes[i].incapacitated) { continue; }
-            Debug.Log(heroes[i].name+ " Prop: " + typeof(Character).GetField(property).GetValue(returnChar) + "  " + typeof(Character).GetField(property).GetValue(heroes[i]));
-            if ((int)typeof(Character).GetField(property).GetValue(returnChar) < (int)typeof(Character).GetField(property).GetValue(heroes[i])) { 
+            if (heroes[i].myCharacter.incapacitated) { continue; }
+            Debug.Log(heroes[i].myCharacter.name + " Prop: " + typeof(Character).GetField(property).GetValue(returnChar.myCharacter) + "  " + typeof(Character).GetField(property).GetValue(heroes[i].myCharacter));
+            if ((int)typeof(Character).GetField(property).GetValue(returnChar.myCharacter) < (int)typeof(Character).GetField(property).GetValue(heroes[i].myCharacter)) { 
                 returnChar = heroes[i];
             }
         }

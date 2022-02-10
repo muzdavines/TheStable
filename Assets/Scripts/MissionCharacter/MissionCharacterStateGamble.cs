@@ -33,7 +33,7 @@ public class MissionCharacterStateGamble : MissionCharacterState {
         playerIntro = "I've been known to win a game of Brimley or two.";
         NPCIntro = "Oi, guv'nor, how about we play?";
         
-        GameObject.FindObjectOfType<MissionController>().SetAllHeroesDontAct(thisChar);
+        //GameObject.FindObjectOfType<MissionController>().SetAllHeroesDontAct(thisChar);
         agent.SetDestination(walkTarget.position + new Vector3(0, 0, 0));
         didFireAction = false;
         GambleResult();
