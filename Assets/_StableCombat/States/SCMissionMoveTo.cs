@@ -6,9 +6,11 @@ public class SCMissionMoveTo : StableCombatCharState
 {
     float nextNumCheck = Mathf.Infinity;
     public Transform target;
+    public float timeOut;
     public override void EnterFrom(StableCombatCharState state) {
         base.EnterFrom(state);
         nextNumCheck = Time.time + 1.0f;
+        timeOut = Time.time + 30;
         try {
             thisChar.agent.SetDestination(target.position);
         }
@@ -21,6 +23,17 @@ public class SCMissionMoveTo : StableCombatCharState
         if (Time.time < nextNumCheck) {
             return;
         }
+        if (Time.time >= timeOut) {
+            timeOut = Time.time + 60;
+            thisChar.transform.position = target.position;
+            return;
+        }
+        Debug.Log("#Mission#Move to Target: " + target.name);
+        try {
+            thisChar.agent.SetDestination(target.position);
+            thisChar.agent.isStopped = false;
+        }
+        catch { Debug.Log("Error with agent for " + thisChar.agent.name); }
         if (Vector3.Distance(thisChar.transform.position, target.position) < 4f) {
             Debug.Log("Target Met");
             thisChar.Idle();

@@ -23,10 +23,14 @@ public class AnimancerController : MonoBehaviour
     public ClipTransition takeDamage;
     public ClipTransition takeOutBow;
     public ClipTransition takeOutSword;
+    public ClipTransition[] skills;
     public List<Move> baseMeleeAttackMoves;
     public List<Move> baseRangedAttackMoves;
     NavMeshAgent agent;
     StableCombatChar thisChar;
+
+    public enum SkillAnims { Hunt = 0, NavigateLand = 0 };
+
     private void Awake() {
         Debug.Log("Init AnimSet");
         animSet.Init(this);
@@ -95,6 +99,17 @@ public class AnimancerController : MonoBehaviour
         anim.Play(knockdown, .25f, FadeMode.FromStart).Events.OnEnd = () => anim.Play(downOnGround, .25f);
     }
 
+    public void SkillHunt() {
+        anim.Play(skills[(int)SkillAnims.Hunt], .25f, FadeMode.FromStart).Events.OnEnd = () => Idle();
+    }
+
+    public void SkillNavigateLand() {
+        anim.Play(skills[(int)SkillAnims.NavigateLand], .25f, FadeMode.FromStart).Events.OnEnd = () => Idle();
+    }
+    public void SkillGeneric() {
+        Debug.Log("#TODO#Generic Skill Fired in Animancer Controller");
+        anim.Play(skills[(int)SkillAnims.Hunt], .25f, FadeMode.FromStart).Events.OnEnd = () => Idle();
+    }
     public int currentMeleeAttackIndex;
     public Move currentMeleeMove;
     public int currentRangedAttackIndex;

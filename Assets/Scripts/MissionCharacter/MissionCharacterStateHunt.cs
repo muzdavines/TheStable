@@ -49,7 +49,7 @@ public class MissionCharacterStateHunt : MissionCharacterState {
         arrow.animal = animal;
         arrow.speed = 22;
         arrow.success = success;
-        arrow.charHunt = this;
+        //arrow.charHunt = this;
     }
 
     public override void AnimEventReceiver(string message) {

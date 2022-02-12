@@ -149,6 +149,7 @@ public class MissionController : MonoBehaviour
             thisChar.fieldSport = false;
             thisChar.myCharacter = thisBaseChar;
             thisChar.team = team;
+            thisChar.combatFocus = thisBaseChar.combatFocus;
             thisChar.GetComponent<SCModelSelector>().Init(thisBaseChar.modelNum, team);
             thisChar.Init();
             co.GetComponent<NavMeshAgent>().enabled = false;
@@ -156,10 +157,11 @@ public class MissionController : MonoBehaviour
             co.GetComponent<NavMeshAgent>().enabled = true;
             theseChars.Add(thisChar);
         }
-        CameraController cam = Camera.main.GetComponent<CameraController>();
         UpdateChars();
+        CameraController cam = Camera.main.GetComponent<CameraController>();
+        cam.SetTarget(allChars[0].transform);
         return theseChars;
-        //cam.cameraTarget = heroes[0].currentObject;
+        
     }
 
     // Update is called once per frame

@@ -8,7 +8,7 @@ public class HuntArrow : MonoBehaviour
     public float speed = 1;
     public bool success;
     public HuntedAnimal animal;
-    public MissionCharacterStateHunt charHunt;
+    public SCHuntState charHunt;
     private void Update() {
         if (target == null) { return; }
         transform.LookAt(target.position + new Vector3(0, 1, 0));

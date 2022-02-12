@@ -517,13 +517,13 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
                 //state.TransitionTo(new MissionCharacterStateAssassinate() { poi = poi, killTarget = poi.allPurposeTransforms[0] });
                 break;
             case StepType.Hunt:
-                //state.TransitionTo(new MissionCharacterStateHunt() { poi = poi });
+                state.TransitionTo(new SCHuntState() { poi = poi });
                 break;
             case StepType.Camp:
-               // state.TransitionTo(new MissionCharacterStateCamp() { poi = poi });
+               state.TransitionTo(new SCCampState() { poi = poi });
                 break;
             case StepType.NavigateLand:
-               // state.TransitionTo(new MissionCharacterStateNavigateLand() { poi = poi, badLocation = poi.allPurposeTransforms[0] });
+                state.TransitionTo(new SCNavigateLand() { poi = poi, badLocation = poi.allPurposeTransforms[0] });
                 break;
             case StepType.Connection:
             case StepType.NegotiateBusiness:

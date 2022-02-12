@@ -9,6 +9,8 @@ public class SCSkillState : StableCombatCharState
     public float threshold;
     public List<Roll> playerScore = new List<Roll>();
     public List<Roll> otherScore = new List<Roll>();
+  
+    
     public virtual void ProcessBuzz() {
         if (scoreIndex < 0) {
             scoreIndex++;
@@ -18,6 +20,13 @@ public class SCSkillState : StableCombatCharState
                 poi.control.buzz.Display(playerScore[scoreIndex], otherScore[scoreIndex], scoreIndex++);
             }
         }
+    }
+    public void StopWalking() {
+        thisChar.anima.Idle();
+        if (poi != null) {
+            thisChar.agent.transform.rotation = poi.targetPos.rotation;
+        }
+        thisChar.agent.isStopped = true;
     }
     public virtual float GetPlayerScore(int skill) {
         float diceRoll = Random.Range(1, 21);
