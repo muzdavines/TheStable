@@ -4,12 +4,12 @@ using System.Collections;
 public class RFX4_EffectEvent : MonoBehaviour
 {
     public GameObject CharacterEffect;
-    public Transform CharacterAttachPoint;
+    public Transform CharacterttachPoint;
     public float CharacterEffect_DestroyTime = 10;
     [Space]
 
     public GameObject CharacterEffect2;
-    public Transform CharacterAttachPoint2;
+    public Transform CharacterttachPoint2;
     public float CharacterEffect2_DestroyTime = 10;
     [Space]
 
@@ -50,7 +50,7 @@ public class RFX4_EffectEvent : MonoBehaviour
     public void ActivateCharacterEffect()
     {
         if (CharacterEffect == null) return;
-        var instance = Instantiate(CharacterEffect, CharacterAttachPoint.transform.position, CharacterAttachPoint.transform.rotation, CharacterAttachPoint.transform);
+        var instance = Instantiate(CharacterEffect, CharacterttachPoint.transform.position, CharacterttachPoint.transform.rotation, CharacterttachPoint.transform);
         UpdateEffectForMobileIsNeed(instance);
         if (CharacterEffect_DestroyTime > 0.01f) Destroy(instance, CharacterEffect_DestroyTime);
     }
@@ -58,7 +58,7 @@ public class RFX4_EffectEvent : MonoBehaviour
     public void ActivateCharacterEffect2()
     {
         if (CharacterEffect2 == null) return;
-        var instance = Instantiate(CharacterEffect2, CharacterAttachPoint2.transform.position, CharacterAttachPoint2.transform.rotation, CharacterAttachPoint2);
+        var instance = Instantiate(CharacterEffect2, CharacterttachPoint2.transform.position, CharacterttachPoint2.transform.rotation, CharacterttachPoint2);
         UpdateEffectForMobileIsNeed(instance);
         if (CharacterEffect2_DestroyTime > 0.01f) Destroy(instance, CharacterEffect2_DestroyTime);
     }

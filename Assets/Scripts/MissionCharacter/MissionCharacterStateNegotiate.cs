@@ -115,7 +115,7 @@ public class MissionCharacterStateNegotiate : MissionCharacterState {
             if (finalAttitude >= 75) { tempMod = 1.25f; }
             if (finalAttitude >= 100) { tempMod = 1.50f; }
             if (tempMod > 1) {
-                details.narrative.Add(thisChar.character.name + " obtained a "+ (int)((tempMod-1)*100) +"% bonus ");
+                details.narrative.Add(thisChar.character.myName + " obtained a "+ (int)((tempMod-1)*100) +"% bonus ");
             }
             MissionFinalDetails finalDetails = GameObject.FindObjectOfType<MissionFinalDetails>();
             finalDetails.finalMod = tempMod;

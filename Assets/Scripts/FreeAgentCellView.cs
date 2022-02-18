@@ -9,17 +9,17 @@ public class FreeAgentCellView : EnhancedScrollerCellView {
     public Character thisChar;
     public void SetData(Character data) {
         thisChar = data;
-        heroNameText.text = data.name;
+        heroNameText.text = data.myName;
     }
 
     public void OnHoverEnter() {
-        print("MouseEnter " + thisChar.name);
+        print("MouseEnter " + thisChar.myName);
         GameObject.FindObjectOfType<HeroInfoPanelController>().OnHover(thisChar);
 
 
     }
     public void OnHoverExit() {
-        print("MouseExit" + thisChar.name);
+        print("MouseExit" + thisChar.myName);
         GameObject.FindObjectOfType<HeroInfoPanelController>().OnHoverExit();
     }
     public void OnClick() {

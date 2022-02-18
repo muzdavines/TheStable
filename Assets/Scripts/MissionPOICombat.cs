@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MissionPOICombat : MissionPOI
 {
-    public List<Character> enemies;
+    public List<CharacterSO> enemies;
     public List<Transform> spawnLoc;
     public List<GameObject> objectsToDestroy;
     public override void StepActivated(StableCombatChar activeChar) {

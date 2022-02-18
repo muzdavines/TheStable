@@ -25,8 +25,8 @@ public class MoveModifier : ScriptableObject
 
         primaryAttribute = "attackMagic";
         secondaryAttribute = "";
-        int primaryNumber = attacker.GetCharacterAttributeValue(primaryAttribute);
-        int secondaryNumber = secondaryAttribute == "" ? 0 : attacker.GetCharacterAttributeValue(secondaryAttribute);
+        int primaryNumber = attacker.GetCharacterttributeValue(primaryAttribute);
+        int secondaryNumber = secondaryAttribute == "" ? 0 : attacker.GetCharacterttributeValue(secondaryAttribute);
 
         float attributeModifier = ((primaryNumber * .5f) + (secondaryNumber * .25f));
 
@@ -75,7 +75,7 @@ public class MoveModifier : ScriptableObject
                     continue;
                 }
                 if (Vector3.Distance(otherHealth.transform.position, attackerPos) > 50) {
-                    Debug.Log(otherHealth.transform.name + " is too far for " + attacker.name + "s' AOE: " + modName);
+                    Debug.Log(otherHealth.transform.name + " is too far for " + attacker.myName + "s' AOE: " + modName);
                     continue;
                 }
                 GameObject aoeDamageEffect = Instantiate<GameObject>(Resources.Load<GameObject>(modName + "ModEffectDamage"), otherHealth.transform.position + new Vector3(0, 1, 0), otherHealth.transform.rotation);

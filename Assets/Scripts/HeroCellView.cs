@@ -12,20 +12,20 @@ public class HeroCellView : EnhancedScrollerCellView
     public void SetData(Character data)
     {
         thisChar = data;
-        heroNameText.text = data.name;
+        heroNameText.text = data.myName;
         GetComponent<Image>().color = Helper.GetCellViewColor();
     }
 
     public void OnHoverEnter()
     {
-        print("MouseEnter "+thisChar.name);
+        print("MouseEnter "+thisChar.myName);
         GameObject.FindObjectOfType<HeroInfoPanelController>().OnHover(thisChar);
         
 
     }
     public void OnHoverExit()
     {
-        print("MouseExit"+thisChar.name);
+        print("MouseExit"+thisChar.myName);
         GameObject.FindObjectOfType<HeroInfoPanelController>().OnHoverExit();
     }
     public virtual void OnClick()
