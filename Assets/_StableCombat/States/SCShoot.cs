@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class SCShoot : SCBallCarrierState
 {
+    float shotAdjustmentMod = 3f;
     public override void EnterFrom(StableCombatCharState state) {
         base.EnterFrom(state);
         //thisChar.anim.SetTrigger("ShootBall");
@@ -19,8 +20,17 @@ public class SCShoot : SCBallCarrierState
         base.AnimEventReceiver(message);
         if (message == "Throw") {
             thisChar.transform.LookAt(thisChar.enemyGoal.transform.position);
+            RaycastHit frontRay;
+            Vector3 adjustment = Vector3.zero;
+
+            if  (Physics.Raycast(thisChar.position, thisChar.transform.forward, out frontRay)) {
+                if(frontRay.collider.GetComponent<StableCombatChar>() != null) {
+                    adjustment = thisChar.enemyGoal.transform.right * Mathf.Sign(Random.value - .5f) * shotAdjustmentMod;
+                }
+            }
+
             float error = 1 - thisChar.myCharacter.shooting * .01f;
-            thisChar.ball.Shoot(thisChar.enemyGoal, error, 1);
+            thisChar.ball.Shoot(thisChar.enemyGoal.transform.position + adjustment , error, 1);
         }
     }
 

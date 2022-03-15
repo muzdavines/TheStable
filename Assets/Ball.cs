@@ -46,12 +46,12 @@ public class Ball : MonoBehaviour
         transform.localPosition = new Vector3(0, 0, 0);
         return true;
     }
-    public void Shoot(Goal goalTarget, float error, float shotPower) {
+    public void Shoot(Vector3 goalTarget, float error, float shotPower) {
         Release();
-        transform.LookAt(goalTarget.transform);
+        transform.LookAt(goalTarget);
         transform.position += transform.forward * 1;
         body.velocity = Vector3.zero;
-        Vector3 targetPos = goalTarget.transform.position;
+        Vector3 targetPos = goalTarget;
         Vector3 errorAdjustment = Random.insideUnitSphere * error * 2.5f;
         targetPos -= errorAdjustment;
         body.AddForce((targetPos- transform.position).normalized * 1000);
