@@ -20,7 +20,7 @@ public class SCOneTimerToGoal : StableCombatCharState {
     }
     public override void BallCollision(Collision collision) {
         ball.lastHolder = thisChar;
-        ball.Shoot(thisChar.enemyGoal);
+        ball.Shoot(thisChar.enemyGoal, 0, 1);
     }
 
     public override void WillExit() {

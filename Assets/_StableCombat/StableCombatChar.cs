@@ -195,6 +195,29 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
         return false;
     }
 
+    public GuardNetPosition ShouldGuardNet() {
+        bool centerTaken = false;
+        bool leftTaken = false;
+        bool rightTaken = false;
+        
+        foreach (StableCombatChar teammate in coach.players) {
+            if (teammate.state.GetType() != typeof(SCGuardNet)) { continue; }
+            GuardNetPosition currentPos = ((SCGuardNet)teammate.state).guardPosition;
+            if (currentPos == GuardNetPosition.Center) {
+                centerTaken = true;
+            }
+            if (currentPos == GuardNetPosition.Left) {
+                leftTaken = true;
+            }
+            if (currentPos == GuardNetPosition.Right) {
+                rightTaken = true;
+            }
+        }
+       if (!centerTaken) { return GuardNetPosition.Center; }
+       if (!leftTaken) { return GuardNetPosition.Left; }
+       if (!rightTaken) { return GuardNetPosition.Right; }
+       return GuardNetPosition.None;
+    }
     public bool ShouldPass() {
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, 10f);
         foreach (var hitCollider in hitColliders) {
@@ -365,6 +388,10 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
 
     public void GetRevived() {
         state.TransitionTo(new SCCombatRevive());
+    }
+
+    public void GuardNet(GuardNetPosition myPos) {
+        state.TransitionTo(new SCGuardNet() { guardPosition = myPos });
     }
 
     public void MeleeScanDamage(string message) {

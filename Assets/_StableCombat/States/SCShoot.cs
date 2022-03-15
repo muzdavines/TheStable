@@ -19,7 +19,8 @@ public class SCShoot : SCBallCarrierState
         base.AnimEventReceiver(message);
         if (message == "Throw") {
             thisChar.transform.LookAt(thisChar.enemyGoal.transform.position);
-            thisChar.ball.Shoot(thisChar.enemyGoal);
+            float error = 1 - thisChar.myCharacter.shooting * .01f;
+            thisChar.ball.Shoot(thisChar.enemyGoal, error, 1);
         }
     }
 
