@@ -11,9 +11,14 @@ public class SCGuardNet : StableCombatCharState
         base.EnterFrom(state);
         playerWithBall = ball.holder.transform;
         myNet = thisChar.myGoal.transform;
+        thisChar.anima.shouldBackpedal = true;
     }
     public override void Update() {
         base.Update();
+        if (thisChar.anima.shouldBackpedal) {
+            thisChar.transform.LookAt(ball.transform);
+        }
+        thisChar.transform.rotation = Quaternion.Euler(new Vector3(0, thisChar.transform.rotation.eulerAngles.y, 0));
         if (Time.frameCount % 15 != 0) { return; }
         if (ball.holder == null || ball.holder.team == thisChar.team) { thisChar.Idle(); }
         Vector3 targetPos = (playerWithBall.position + myNet.position) / 2;
@@ -28,6 +33,11 @@ public class SCGuardNet : StableCombatCharState
         }
         thisChar.agent.isStopped = false;
         thisChar.agent.SetDestination(targetPos);
+        if (Time.frameCount % 60 != 0) {
+            if (Vector3.Distance(ball.transform.position, thisChar.myGoal.transform.position) > (Vector3.Distance(thisChar.position, thisChar.myGoal.transform.position))){
+                thisChar.anima.shouldBackpedal = true;
+            } else { thisChar.anima.shouldBackpedal = false; }
+        }
         Debug.Log("#TODO# Check if should be backwards running");
 
     }
@@ -41,7 +51,7 @@ public class SCGuardNet : StableCombatCharState
 
     public override void WillExit() {
         base.WillExit();
-       
+        thisChar.anima.shouldBackpedal = false;
     }
 
 }

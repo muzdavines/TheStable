@@ -28,7 +28,7 @@ public class AnimancerController : MonoBehaviour
     public List<Move> baseRangedAttackMoves;
     NavMeshAgent agent;
     StableCombatChar thisChar;
-
+    public bool shouldBackpedal;
     public enum SkillAnims { Hunt = 0, NavigateLand = 0 };
 
     private void Awake() {
@@ -182,6 +182,6 @@ public class AnimancerController : MonoBehaviour
 
     void Update()
     {
-        movement.State.Parameter = GetComponent<NavMeshAgent>().velocity.magnitude;
+        movement.State.Parameter = GetComponent<NavMeshAgent>().velocity.magnitude * (shouldBackpedal ? -1 : 1);
     }
 }

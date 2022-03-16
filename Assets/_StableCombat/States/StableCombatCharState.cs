@@ -26,6 +26,7 @@ public class StableCombatCharState {
     public virtual void EnterFrom(StableCombatCharState state) {
         thisChar = owner.controller;
         ball = thisChar.ball;
+        thisChar.anima.shouldBackpedal = false;
         if (state != null) {
             if (Application.isEditor) {
                 Debug.Log("#StateChange# EnterFrom: " + state.name + "  " + this.name);
