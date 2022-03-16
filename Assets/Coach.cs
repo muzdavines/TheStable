@@ -36,6 +36,7 @@ public class Coach : MonoBehaviour
 
     public bool AddBallPursuer(StableCombatChar newPursuer) {
         for (int i = 0; i<players.Length; i++) {
+            if (players[i].isKnockedDown) { continue; }
             if (ball.Distance(players[i]) < ball.Distance(newPursuer)) { return false; }
         }
         return true;

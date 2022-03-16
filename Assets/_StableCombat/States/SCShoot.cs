@@ -29,7 +29,7 @@ public class SCShoot : SCBallCarrierState
                 }
             }
 
-            float error = 1 - thisChar.myCharacter.shooting * .01f;
+            float error = 2 - thisChar.myCharacter.shooting * .01f;
             thisChar.ball.Shoot(thisChar.enemyGoal.transform.position + adjustment , error, 1);
         }
     }

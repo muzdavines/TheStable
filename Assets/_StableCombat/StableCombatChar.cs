@@ -51,6 +51,10 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
     //Combat Attributes
     public float health, stamina, balance, mind, maxHealth, maxStamina, maxBalance, maxMind;
 
+
+    //Status
+
+    public bool isKnockedDown { get { return state.GetType() == typeof(SCGetTackled) || state.GetType() == typeof(SCKnockdown); } }
     public void Init()
     {
         controller = this;
