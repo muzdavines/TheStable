@@ -33,6 +33,7 @@ public class SCProjectile : MonoBehaviour
 
     public void OnTriggerEnter(Collider other) {
         StableCombatChar otherChar = other.GetComponent<StableCombatChar>();
+        if (otherChar == null) { return; }
         if (otherChar == launcherChar || otherChar.team == launcherChar.team) {
             return;
         }
