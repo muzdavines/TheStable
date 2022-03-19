@@ -398,6 +398,26 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
         state.TransitionTo(new SCGuardNet() { guardPosition = myPos });
     }
 
+
+    public void GKDiveForBall() {
+
+    }
+    public void GKPursueBall() {
+        state.TransitionTo(new SCPursueBall());
+    }
+    public void GKDefendNet() {
+        state.TransitionTo(new SCGKDefendNet());
+    }
+    public void GKIdle() {
+        state.TransitionTo(new SCGKIdle());
+    }
+    public void GKIdleWithBall() {
+        state.TransitionTo(new SCGKIdleWithBall());
+    }
+    public void GKClearBall() {
+        state.TransitionTo(new SCGKClearBall());
+    }
+
     public void MeleeScanDamage(string message) {
         switch (message) {
             case "BeginScanLH":
@@ -583,7 +603,7 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
 
 }
 
-public enum Position { NA, LW, STR, STL, STC, RW, LM, LCM, MC, RCM, RM, DL, LDC, DC, RDC, DR }
+public enum Position { NA, LW, STR, STL, STC, RW, LM, LCM, MC, RCM, RM, DL, LDC, DC, RDC, DR, GK }
 public enum CombatFocus { Melee, Ranged }
 public static class StableCombatCharHelper {
     public static void ResetAllTriggers(this Animator anim) {

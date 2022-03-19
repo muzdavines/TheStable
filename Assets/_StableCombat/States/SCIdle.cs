@@ -18,6 +18,10 @@ public class SCIdle : StableCombatCharState
             thisChar.MissionIdle();
             return;
         }
+        if (thisChar.fieldPosition == Position.GK) {
+            thisChar.GKIdle();
+            return;
+        }
         if (ball.holder == null) {
             if (thisChar.ShouldPursueBall()) {
                 thisChar.PursueBall();

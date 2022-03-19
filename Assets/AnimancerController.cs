@@ -4,8 +4,7 @@ using UnityEngine;
 using Animancer;
 using UnityEngine.AI;
 
-public class AnimancerController : MonoBehaviour
-{
+public class AnimancerController : MonoBehaviour {
     public LinearMixerTransitionAsset.UnShared movement;
     public AnimancerComponent anim;
     public AnimancerAnimSet animSet;
@@ -35,8 +34,7 @@ public class AnimancerController : MonoBehaviour
         Debug.Log("Init AnimSet");
         animSet.Init(this);
     }
-    void Start()
-    {
+    void Start() {
         thisChar = GetComponent<StableCombatChar>();
         anim = GetComponent<AnimancerComponent>();
         agent = GetComponent<NavMeshAgent>();
@@ -49,9 +47,9 @@ public class AnimancerController : MonoBehaviour
         movement.State.Root.Component.Animator.applyRootMotion = false;
     }
     // _Animancer.Play(_Action, 0.25f, FadeMode.FromStart)
-                //.Events.OnEnd = () => _Animancer.Play(_Idle, 0.25f);
+    //.Events.OnEnd = () => _Animancer.Play(_Idle, 0.25f);
     public void Knockdown() {
-        anim.Play(knockdown, .25f, FadeMode.FromStart).Events.OnEnd = () => anim.Play(downOnGround, .25f).Events.OnEnd = () => anim.Play(stayOnGround, .25f).Events.OnEnd =() => thisChar.Idle();     
+        anim.Play(knockdown, .25f, FadeMode.FromStart).Events.OnEnd = () => anim.Play(downOnGround, .25f).Events.OnEnd = () => anim.Play(stayOnGround, .25f).Events.OnEnd = () => thisChar.Idle();
     }
 
     public void MissTackle() {
@@ -109,6 +107,9 @@ public class AnimancerController : MonoBehaviour
     public void SkillGeneric() {
         Debug.Log("#TODO#Generic Skill Fired in Animancer Controller");
         anim.Play(skills[(int)SkillAnims.Hunt], .25f, FadeMode.FromStart).Events.OnEnd = () => Idle();
+    }
+    public void GKBored() {
+
     }
     public int currentMeleeAttackIndex;
     public Move currentMeleeMove;

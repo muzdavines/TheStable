@@ -8,6 +8,7 @@ public class TeamTacticsController : MonoBehaviour
     public TacticsFieldPositionController[] positions;
 
     public void ChangePosition(Position pos, Character character) {
+        if (pos == Position.GK && character.archetype != Character.Archetype.Goalkeeper) { return; }
         if (character.currentPosition != Position.NA) {
             positions[((int)character.currentPosition) - 1].GetComponentInChildren<TextMeshProUGUI>().text = "";
         }

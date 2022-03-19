@@ -112,6 +112,12 @@ public class Game : MonoBehaviour {
                 thisHero.GenerateCharacter((Character.Archetype)(Random.Range(0, 4)), 1);
                 thisStable.heroes.Add(thisHero);
             }
+            var GKHero = new Character();
+            GKHero.name = Names.Warrior[Random.Range(0, Names.Warrior.Length)];
+            GKHero.GenerateCharacter(Character.Archetype.Goalkeeper);
+            GKHero.currentPosition = Position.GK;
+            GKHero.activeInLineup = true;
+            thisStable.heroes.Add(GKHero);
             otherStables.Add(thisStable);
         }
     }

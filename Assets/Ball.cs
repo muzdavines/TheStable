@@ -11,6 +11,7 @@ public class Ball : MonoBehaviour
     SphereCollider col;
     public Vector3 passTargetPosition;
     public StableCombatChar lastHolder;
+    public float velocity { get { return body.velocity.magnitude; } }
     private void Start() {
         body = GetComponent<Rigidbody>();
         col = GetComponent<SphereCollider>();

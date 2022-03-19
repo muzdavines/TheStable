@@ -69,6 +69,12 @@ public class NewGameCreationController : MonoBehaviour
             }
             player.heroes.Add(thisHero);
         }
+        var GKHero = new Character();
+        GKHero.name = Names.Warrior[Random.Range(0, Names.Warrior.Length)];
+        GKHero.GenerateCharacter(Character.Archetype.Goalkeeper);
+        GKHero.currentPosition = Position.GK;
+        GKHero.activeInLineup = true;
+        player.heroes.Add(GKHero);
         Game.instance.playerStable.finance.AddRevenue(startingGold);
         //Game.instance.playerStable.availableTrainings.Add(new Training() { type = Training.Type.Attribute, training = "negotiating", duration = 2, cost = 50 });
         foreach (var training in trainingAdds) {

@@ -206,6 +206,18 @@ public class Character : Living
                 modelNum = 0;
                 modelName = "SCUnit2";
                 break;
+            case Archetype.Goalkeeper:
+                dodgeRange[0] = 4;
+                dodgeRange[1] = 10;
+                tackleRange[0] = 6;
+                tackleRange[1] = 12;
+                blockingRange[0] = 12;
+                blockingRange[1] = 18;
+                runSpeedRange[0] = 9;
+                runSpeedRange[1] = 11;
+                modelNum = 2;
+                modelName = "SCUnit";
+                break;
         }
         carrying = RandDist(dodgeRange[0], dodgeRange[1]);
         tackling = RandDist(tackleRange[0], tackleRange[1]);
@@ -230,7 +242,7 @@ public class Character : Living
     }
 
    
-    public enum Archetype { Striker, Winger, Midfielder, Defender}
+    public enum Archetype { Striker, Winger, Midfielder, Defender, Goalkeeper}
     public Archetype archetype;
 
     public void Awake() {

@@ -9,7 +9,7 @@ public class SCCombatIdle : SCCombatStanceState {
         Debug.Log("#SCCombatStance#Combat Idle Enter "+thisChar.myCharacter.name);
         thisChar.anima.Idle();
         thisChar.agent.isStopped = true;
-
+        if (thisChar.fieldPosition == Position.GK) { thisChar.GKIdle(); return; }
         if (thisChar.fieldSport && thisChar == ball.holder) {
             thisChar.RunToGoalWithBall();
             return;
