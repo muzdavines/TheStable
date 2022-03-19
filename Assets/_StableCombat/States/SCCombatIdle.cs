@@ -14,9 +14,14 @@ public class SCCombatIdle : SCCombatStanceState {
             thisChar.RunToGoalWithBall();
             return;
         }
-        if (thisChar.myAttackTarget?.state.GetType() == typeof(SCCombatDowned)) {
+        if (thisChar.myAttackTarget.isKnockedDown) {
             thisChar.myAttackTarget = null;
             thisChar.Idle();
+            return;
+        }
+        if (ball.Distance(thisChar) < 5) {
+            thisChar.Idle();
+            return;
         }
         switch (thisChar.combatFocus) {
             case CombatFocus.Melee:

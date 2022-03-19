@@ -466,11 +466,28 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
     public StableCombatChar GetNearestTeammate() {
         StableCombatChar[] allChars =FindObjectsOfType<StableCombatChar>();
         foreach (var c in allChars) {
+            if (c == this) { continue; }
+            if (c.isKnockedDown) { continue; }
             if (c.team == team) {
                 return c;
             }
         }
         return null;
+    }
+
+    public StableCombatChar GetFarthestTeammateNearGoal() {
+        float maxDist = 0;
+        StableCombatChar returnChar = null;
+        foreach (StableCombatChar c in coach.players) {
+            if (c == this) { continue; }
+            if (c.isKnockedDown) { continue; }
+            if (enemyGoal.Distance(c) < 20 && c.Distance(this) >= maxDist) {
+                maxDist = c.Distance(this);
+                returnChar = c;
+            }
+        }
+        if (maxDist < 3) { returnChar = null; }
+        return returnChar;
     }
 
     public bool MyTargetIsInAttackRange() {

@@ -22,7 +22,7 @@ public class SCGKDefendNet : SCGKState
         thisChar.agent.SetDestination(targetPos);
         //thisChar.transform.LookAt(b);
        // thisChar.transform.rotation = Quaternion.Euler(0, thisChar.transform.rotation.y, 0);
-        return;
+        
         if (ball.holder == null || ball.holder.team == thisChar.team) {
             thisChar.Idle();
             return;

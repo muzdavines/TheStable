@@ -21,4 +21,5 @@ public class SCBallCarrierState : StableCombatCharState
         if (roll >= 0) { res.success = false; thisChar.DodgeTackle(tackler); } else { res.success = true; thisChar.GetTackled(tackler); }
         return res;
     }
+
 }
