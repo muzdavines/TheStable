@@ -264,9 +264,9 @@ public class Character : Living
         if (Helper.Today().IsOnOrAfter(currentTraining.dateToTrain, true)) {
             switch (currentTraining.type) {
                 case Training.Type.Attribute:
-                    Debug.Log("Rase Attribute " + currentTraining.training);
+                    Debug.Log("Raise Attribute " + currentTraining.training);
                     int currentValue = (int)typeof(Character).GetField(currentTraining.training).GetValue(this);
-                    typeof(Character).GetField(currentTraining.training).SetValue(this, currentValue + 1);
+                    typeof(Character).GetField(currentTraining.training).SetValue(this, currentValue + currentTraining.amount);
                     FindObjectOfType<DailyPopup>().Popup(name + " completed training: " + currentTraining.training.Title());
                     //raise the attribute
                     //add the skill

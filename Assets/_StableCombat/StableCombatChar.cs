@@ -54,7 +54,7 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
 
     //Status
 
-    public bool isKnockedDown { get { return state.GetType() == typeof(SCGetTackled) || state.GetType() == typeof(SCKnockdown); } }
+    public bool isKnockedDown { get { return state.GetType() == typeof(SCGetTackled) || state.GetType() == typeof(SCKnockdown) || state.GetType() == typeof(SCCombatDowned); } }
     public void Init()
     {
         controller = this;

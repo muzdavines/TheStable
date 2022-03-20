@@ -50,8 +50,14 @@ public class SCGuardNet : StableCombatCharState
         base.AnimEventReceiver(message);
         
     }
+    public override SCResolution ReceiveMessage(StableCombatChar sender, string message) {
+        base.ReceiveMessage(sender, message);
+        if (message == "TryBlock") {
+            return TryBlock(sender);
+        }
+        else return null;
+    }
 
-    
 
     public override void WillExit() {
         base.WillExit();

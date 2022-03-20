@@ -10,7 +10,7 @@ public class SCRunToGoalWithBall : SCBallCarrierState
         enterTime = Time.time;
         thisChar.agent.isStopped = false;
         thisChar.agent.speed = thisChar.myCharacter.runspeed * .33f;
-        thisChar.agent.SetDestination(thisChar.enemyGoal.transform.position);
+        thisChar.agent.SetDestination(thisChar.enemyGoal.transform.position + thisChar.enemyGoal.transform.forward * 5);
         canGrabBall = false;
         Debug.Log("Check for one timer here");
     }

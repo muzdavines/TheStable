@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SCShoot : SCBallCarrierState
 {
-    float shotAdjustmentMod = 3f;
+    float shotAdjustmentMod = 2.5f;
     Vector3 adjustment;
     float error;
     public override void EnterFrom(StableCombatCharState state) {
@@ -13,9 +13,24 @@ public class SCShoot : SCBallCarrierState
         thisChar.transform.LookAt(thisChar.enemyGoal.transform.position);
         RaycastHit frontRay;
         adjustment = Vector3.zero;
+        Vector3 netForward = thisChar.enemyGoal.transform.TransformDirection(Vector3.forward);
+        Vector3 toShooter = (thisChar.position - thisChar.enemyGoal.transform.position).normalized;
+        float shootDot = Vector3.Dot(netForward, toShooter);
+        Debug.Log("#ShootDot#" + shootDot);
+        StableCombatChar passTarget = thisChar.GetFarthestTeammateNearGoal();
+        if (shootDot < .65f) {
+            if (passTarget == null) {
+                thisChar.RunToGoalWithBall();
+                Debug.Log("#TODO# Change Run to goal with ball so that the player runs to a spot ahead ofthe goal");
+                return;
+            } else {
+                thisChar.Pass(passTarget);
+                return;
+            }
+        }
         if (Physics.Raycast(thisChar.position, thisChar.transform.forward, out frontRay)) {
             if (frontRay.collider.GetComponent<StableCombatChar>() != null) {
-                StableCombatChar passTarget = thisChar.GetFarthestTeammateNearGoal();  //view blocked, look for someone to pass to
+                //view blocked, look for someone to pass to
                 if (passTarget != null) {
                     thisChar.Pass(passTarget);  //found a pass target - pass it to them
                     return;
