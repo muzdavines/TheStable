@@ -10,6 +10,7 @@ public class SCGKIdle : SCGKState
         //thisChar.anim.ResetAllTriggers();
         //thisChar.anim.SetTrigger("OverrideToIdle");
         thisChar.anima.Idle();
+        thisChar.agent.SetDestination(thisChar.GetFieldPosition().position);
     }
     public override void Update() {
         base.Update();
@@ -43,7 +44,8 @@ public class SCGKIdle : SCGKState
         }
         //our team has the ball
         thisChar.anima.GKBored();
-        thisChar.agent.isStopped = true;
+        thisChar.agent.SetDestination(thisChar.GetFieldPosition().position);
+        thisChar.agent.isStopped = false;
 
     }
 

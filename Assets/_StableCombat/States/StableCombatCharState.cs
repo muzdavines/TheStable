@@ -58,9 +58,11 @@ public class StableCombatCharState {
         var res = new SCResolution();
         int tackling = blocker.myCharacter.blocking;
         int dodging = thisChar.myCharacter.carrying;
-        float roll = Random.Range(0, dodging + 1) - Random.Range(0, tackling + 1);
-        Debug.Log("#DiceRoll#Dodge Roll: " + roll);
-        if (roll >= 0) { res.success = false; thisChar.DodgeTackle(blocker); } else { res.success = true; thisChar.GetTackled(blocker); }
+        //float roll = Random.Range(0, dodging + 1) - Random.Range(0, tackling + 1);
+        //Debug.Log("#DiceRoll#Dodge Roll: " + roll);
+        //if (roll >= 0) { res.success = false; thisChar.DodgeTackle(blocker); } else { res.success = true; thisChar.GetTackled(blocker); }
+        if (dodging>=tackling) { res.success = false; thisChar.DodgeTackle(blocker); } else { res.success = true; thisChar.GetTackled(blocker); }
+
         return res;
     }
 
