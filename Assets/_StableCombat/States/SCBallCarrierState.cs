@@ -14,6 +14,15 @@ public class SCBallCarrierState : StableCombatCharState
 
     SCResolution TryTackle(StableCombatChar tackler) {
         var res = new SCResolution();
+        TackleType tackleType = tackler.myCharacter.strength >= tackler.myCharacter.dexterity ? TackleType.Tackle : TackleType.Strip;
+        switch (tackleType) {
+            case TackleType.Strip:
+
+                break;
+            case TackleType.Tackle:
+
+                break;
+        }
         int tackling = tackler.myCharacter.tackling;
         int dodging = thisChar.myCharacter.carrying;
         //float roll = Random.Range(0, dodging + 1) - Random.Range(0, tackling + 1);

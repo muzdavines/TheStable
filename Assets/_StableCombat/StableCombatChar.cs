@@ -621,6 +621,7 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
 }
 
 public enum Position { NA, LW, STR, STL, STC, RW, LM, LCM, MC, RCM, RM, DL, LDC, DC, RDC, DR, GK }
+public enum TackleType { Tackle, Strip }
 public enum CombatFocus { Melee, Ranged }
 public static class StableCombatCharHelper {
     public static void ResetAllTriggers(this Animator anim) {
