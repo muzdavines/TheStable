@@ -15,7 +15,7 @@ public class SCCombatIdle : SCCombatStanceState {
                 thisChar.RunToGoalWithBall();
                 return;
             }
-            if (ball.Distance(thisChar) < 5) {
+            if (ball.Distance(thisChar) < 20) {
                 thisChar.Idle();
                 return;
             }

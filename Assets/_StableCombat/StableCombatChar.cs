@@ -246,14 +246,19 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
 #if UNITY_EDITOR
             Debug.Log("#PassTargetEval#" + teammate.name + " current state is " + teammate.state.GetType().ToString());
 #endif
+            if (teammate.isKnockedDown) {
+                Debug.Log("#PassTargetEval#" + teammate.name + " is too knocked down.");
+                continue;
+            }
             if (Vector3.Distance(teammate.transform.position, position) < 7) {
                 Debug.Log("#PassTargetEval#" + teammate.name + " is too close");
                 continue;
             }
-            if (teammate.state.GetType() == typeof(SCKnockdown)) {
-                Debug.Log("#PassTargetEval#" + teammate.name + " is too knocked down.");
+            if (Vector3.Distance(teammate.transform.position, position) > 25) {
+                Debug.Log("#PassTargetEval#" + teammate.name + " is too far");
                 continue;
             }
+
             RaycastHit hit;
             if (Physics.Raycast(position, (teammate.position - position), out hit)){
                 if (hit.transform.GetComponent<StableCombatChar>() != teammate) {
