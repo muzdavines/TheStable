@@ -17,6 +17,10 @@ public class AnimancerController : MonoBehaviour {
     public ClipTransition catchBall;
     public ClipTransition missTackle;
     public ClipTransition[] dodgeTackle;
+    public ClipTransition avoidStrip;
+    public ClipTransition failStrip;
+    public ClipTransition getStripped;
+    public ClipTransition successStrip;
     public ClipTransition oneTimer;
     public ClipTransition goalScored;
     public ClipTransition takeDamage;
@@ -40,6 +44,7 @@ public class AnimancerController : MonoBehaviour {
         agent = GetComponent<NavMeshAgent>();
         baseMeleeAttackMoves = thisChar.meleeAttackMoves;
         baseRangedAttackMoves = thisChar.rangedAttackMoves;
+        anim.Play(failStrip);
     }
 
     public void Idle() {
@@ -83,7 +88,25 @@ public class AnimancerController : MonoBehaviour {
         anim.Play(dodgeTackle[thisClip], .25f, FadeMode.FromStart).Events.OnEnd = () => thisChar.Idle();
         dodgeTackle[thisClip].State.Root.Component.Animator.applyRootMotion = true;
     }
+    public void AvoidStrip() {
+        anim.Play(avoidStrip, .25f, FadeMode.FromStart).Events.OnEnd = () => thisChar.Idle();
+        avoidStrip.State.Root.Component.Animator.applyRootMotion = true;
+    }
+    public void GetStripped() {
+        anim.Play(getStripped, .25f, FadeMode.FromStart).Events.OnEnd = () => thisChar.Idle();
+        getStripped.State.Root.Component.Animator.applyRootMotion = true;
+    }
 
+    public void SuccessStrip() {
+        anim.Play(successStrip, .25f, FadeMode.FromStart).Events.OnEnd = () => thisChar.Idle();
+        successStrip.State.Root.Component.Animator.applyRootMotion = true;
+    }
+
+    public void FailStrip() {
+        anim.Play(successStrip, .25f, FadeMode.FromStart).Events.OnEnd = () => anim.Play(failStrip, .25f, FadeMode.FromStart).Events.OnEnd = () => thisChar.Idle();
+        successStrip.State.Root.Component.Animator.applyRootMotion = true;
+        failStrip.State.Root.Component.Animator.applyRootMotion = true;
+    }
     public void CatchBall() {
         Debug.Log("#TODO# Add Mask for Catching");
         anim.Play(catchBall, .25f, FadeMode.FromStart).Events.OnEnd = () => thisChar.Idle();

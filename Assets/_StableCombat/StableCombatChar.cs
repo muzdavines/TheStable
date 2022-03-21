@@ -364,6 +364,22 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
     public void DodgeTackle(StableCombatChar tackler) {
         state.TransitionTo(new SCDodgeTackle() { tackler = tackler });
     }
+    public void BreakTackle(StableCombatChar tackler) {
+        state.TransitionTo(new SCBreakTackle { tackler = tackler });
+    }
+
+    public void GetStripped(StableCombatChar tackler) {
+        state.TransitionTo(new SCGetStripped() { tackler = tackler });
+    }
+    public void AvoidStrip(StableCombatChar tackler) {
+        state.TransitionTo(new SCAvoidStrip() { tackler = tackler });
+    }
+    public void SuccessStrip() {
+        state.TransitionTo(new SCSuccessStrip());
+    }
+    public void FailStrip() {
+        state.TransitionTo(new SCFailStrip());
+    }
     public void MissTackle() {
         state.TransitionTo(new SCMissTackle());
     }

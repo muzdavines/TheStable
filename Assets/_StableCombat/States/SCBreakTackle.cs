@@ -2,14 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SCDodgeTackle : SCSucceedAgainstTackle
-{
-   
+public class SCBreakTackle : SCSucceedAgainstTackle {
     public override void EnterFrom(StableCombatCharState state) {
         base.EnterFrom(state);
     }
     public override void Update() {
         base.Update();
+        thisChar.agent.isStopped = true;
+        thisChar.anim.applyRootMotion = true;
     }
 
     public override void AnimEventReceiver(string message) {
@@ -17,6 +17,7 @@ public class SCDodgeTackle : SCSucceedAgainstTackle
     }
 
     public override void WillExit() {
+        thisChar.anim.applyRootMotion = false;
         base.WillExit();
     }
     public override void FireAnimation() {
@@ -31,3 +32,4 @@ public class SCDodgeTackle : SCSucceedAgainstTackle
         }
     }
 }
+    

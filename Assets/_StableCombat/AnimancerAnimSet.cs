@@ -13,12 +13,17 @@ public class AnimancerAnimSet : ScriptableObject
     public AnimationClip passBall;
     public AnimationClip catchBall;
     public AnimationClip missTackle;
+    public AnimationClip avoidStrip;
+    public AnimationClip getStripped;
+    public AnimationClip successStrip;
+    public AnimationClip failStrip;
     public AnimationClip[] dodgeTackle;
     public AnimationClip oneTimer;
     public AnimationClip goalScored;
     public AnimationClip takeDamage;
     public AnimationClip takeOutSword;
     public AnimationClip[] skills;
+
     public void Init(AnimancerController anim) {
         Debug.Log("Initialize Animset");
         anim.shootBall.Clip = shootBall;
@@ -29,6 +34,10 @@ public class AnimancerAnimSet : ScriptableObject
         anim.passBall.Clip = passBall;
         anim.catchBall.Clip = catchBall;
         anim.missTackle.Clip = missTackle;
+        anim.avoidStrip.Clip = avoidStrip;
+        anim.getStripped.Clip = getStripped;
+        anim.failStrip.Clip = failStrip;
+        anim.successStrip.Clip = successStrip;
         for (int i = 0; i < dodgeTackle.Length; i++) {
             anim.dodgeTackle[i].Clip = dodgeTackle[i];
         }

@@ -18,8 +18,28 @@ public class SCPursueBallCarrier : StableCombatCharState
         Vector3 holderPos = thisChar.ball.holder.transform.position;
         if (Vector3.Distance(thisChar.transform.position, thisChar.ball.holder.transform.position)<=1) {
             var resolution = thisChar.state.SendMessage(thisChar.ball.holder, "TryTackle");
-            bool didTackle = (resolution != null && resolution.success);
-            if (didTackle) { thisChar.Tackle(); return; } else { thisChar.MissTackle(); return; }
+            if (resolution == null) {
+                Debug.Log("#Tackle# Resolution Null");
+                thisChar.MissTackle();
+            } else {
+                switch (resolution.tackleType) {
+                    case TackleType.Strip:
+                        if (resolution.success) {
+                            thisChar.SuccessStrip();
+                        } else {
+                            thisChar.FailStrip();
+                        }
+                        break;
+                    case TackleType.Tackle:
+                        if (resolution.success) {
+                            thisChar.Tackle();
+                        }
+                        else {
+                            thisChar.MissTackle();
+                        }
+                        break;
+                }
+            }
         }
         thisChar.agent.SetDestination(holderPos);
         thisChar.agent.isStopped = false;

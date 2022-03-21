@@ -2,16 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SCPass : SCBallCarrierState
-{
-    public StableCombatChar passTarget;
+public abstract class SCFailAgainstTackle : SCBallCarrierState {
+
+    public StableCombatChar tackler;
+    public float angle;
+    public abstract void FireAnimation();
     public override void EnterFrom(StableCombatCharState state) {
         base.EnterFrom(state);
-        if (passTarget == null) { thisChar.RunToGoalWithBall(); return; }
-        //thisChar.anim.SetTrigger("PassBall");
-        thisChar.anima.PassBall();
-        thisChar.agent.isStopped = true;
         canGrabBall = false;
+        checkForIdle = true;
+        thisChar.agent.isStopped = true;
+        thisChar.agent.velocity = Vector3.zero;
+        thisChar.agent.destination = thisChar.transform.position;
+        
+        if (ball.holder != null && ball.holder == thisChar) {
+            ball.GetDropped();
+        }
+        FireAnimation();
     }
     public override void Update() {
         base.Update();
@@ -20,11 +27,6 @@ public class SCPass : SCBallCarrierState
 
     public override void AnimEventReceiver(string message) {
         base.AnimEventReceiver(message);
-        if (message == "PassBall") {
-            ball.PassTo(passTarget);
-            passTarget.TryCatchPass();
-        }
-        
     }
 
     public override void WillExit() {

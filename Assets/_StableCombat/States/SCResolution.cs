@@ -5,4 +5,5 @@ using UnityEngine;
 public class SCResolution 
 {
     public bool success;
+    public TackleType tackleType;
 }
