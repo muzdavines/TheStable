@@ -146,7 +146,6 @@ public class Character : Living
         int count = 0;
         for (int x = 0; x < 6; x++) {
             for (int z = 0; z < breaks[x]; z++) {
-                Debug.Log(count);
                 array[count++] = Mathf.Round(min + (x * interval));
             }
         }

@@ -28,13 +28,17 @@ public class SCShoot : SCBallCarrierState
                 return;
             }
         }
-        if (Physics.Raycast(thisChar.position, thisChar.transform.forward, out frontRay)) {
+        LayerMask layerMask = LayerMask.GetMask("Character");
+        if (Physics.SphereCast(ball.transform.position, 1f, thisChar.transform.forward, out frontRay, Mathf.Infinity, layerMask)) {
+            int randID = Random.Range(0, 100000);
+            Debug.Log("#ShootRay#"+randID + " "+ frontRay.collider.transform.name);
             if (frontRay.collider.GetComponent<StableCombatChar>() != null) {
                 //view blocked, look for someone to pass to
                 if (passTarget != null) {
                     thisChar.Pass(passTarget);  //found a pass target - pass it to them
                     return;
                 }
+                Debug.Log("#ShootRay#" + randID + " Adjust Shot");
                 //Didn't find a pass target - shoot for a corner
                 adjustment = thisChar.enemyGoal.transform.right * Mathf.Sign(Random.value - .5f) * shotAdjustmentMod;
             }
