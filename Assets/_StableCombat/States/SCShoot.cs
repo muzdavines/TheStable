@@ -29,7 +29,7 @@ public class SCShoot : SCBallCarrierState
             }
         }
         LayerMask layerMask = LayerMask.GetMask("Character");
-        if (Physics.SphereCast(ball.transform.position, 1f, thisChar.transform.forward, out frontRay, Mathf.Infinity, layerMask)) {
+        if (ball.Distance(thisChar.enemyGoal.transform) > 3 && Physics.SphereCast(ball.transform.position, 1f, thisChar.transform.forward, out frontRay, Mathf.Infinity, layerMask)) {
             int randID = Random.Range(0, 100000);
             Debug.Log("#ShootRay#"+randID + " "+ frontRay.collider.transform.name);
             if (frontRay.collider.GetComponent<StableCombatChar>() != null) {
@@ -46,7 +46,6 @@ public class SCShoot : SCBallCarrierState
 
         error = 2 - thisChar.myCharacter.shooting * .01f;
         thisChar.anima.ShootBall();
-        thisChar.agent.isStopped = true;
     }
     public override void Update() {
         base.Update();

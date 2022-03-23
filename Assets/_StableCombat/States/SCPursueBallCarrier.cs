@@ -7,6 +7,10 @@ public class SCPursueBallCarrier : StableCombatCharState
 
     public override void EnterFrom(StableCombatCharState state) {
         base.EnterFrom(state);
+        if (Time.time < thisChar.tackleCooldown) {
+            thisChar.BackOffCarrier(false);
+            return;
+        }
     }
     public override void Update() {
         base.Update();

@@ -48,12 +48,16 @@ public class Ball : MonoBehaviour
         return true;
     }
     public void Shoot(Vector3 goalTarget, float error, float shotPower) {
+        Vector3 errorAdjustment = Random.insideUnitCircle * error * 2.5f;
+        if (holder != null) {
+            holder.DisplayShotAccuracy(errorAdjustment.magnitude);
+        }
         Release();
         transform.LookAt(goalTarget);
         transform.position += transform.forward * 1;
         body.velocity = Vector3.zero;
         Vector3 targetPos = goalTarget;
-        Vector3 errorAdjustment = Random.insideUnitSphere * error * 2.5f;
+        
         targetPos -= errorAdjustment;
         body.AddForce((targetPos- transform.position).normalized * 1000);
     }

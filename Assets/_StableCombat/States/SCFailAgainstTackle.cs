@@ -19,6 +19,7 @@ public abstract class SCFailAgainstTackle : SCBallCarrierState {
             ball.GetDropped();
         }
         FireAnimation();
+        thisChar.SetTackleCooldown();
     }
     public override void Update() {
         base.Update();

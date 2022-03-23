@@ -33,6 +33,7 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
     public MMFeedbacks sendOnRun;
     public MMFeedbacks takeDamage;
     public MMFeedbacks playerHasBall;
+    public MMFeedbacks shotAccuracy;
     public Vector3 position { get { return _t.position; } }
     public Coach coach;
     
@@ -55,6 +56,10 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
     //Status
 
     public bool isKnockedDown { get { return state.GetType() == typeof(SCGetTackled) || state.GetType() == typeof(SCKnockdown) || state.GetType() == typeof(SCCombatDowned); } }
+
+    //Sport
+    public float tackleCooldown; //Time after which the player can tackle again
+
     public void Init()
     {
         controller = this;
@@ -343,6 +348,10 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
     public void Shoot() {
         state.TransitionTo(new SCShoot());
     }
+    public void DisplayShotAccuracy(float accuracy) {
+        shotAccuracy.GetComponent<MMFeedbackFloatingText>().Value = (accuracy.ToString("F1"));
+        shotAccuracy.PlayFeedbacks();
+    }
     public void PursueBallCarrier() {
         state.TransitionTo(new SCPursueBallCarrier());
     }
@@ -394,7 +403,10 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
     public void Block() {
         state.TransitionTo(new SCBlockForTeammate());
     }
-
+    public void BackOffCarrier(bool resetCooldowns = false) {
+        if (resetCooldowns) { SetTackleCooldown(); }
+        state.TransitionTo(new SCBackOffCarrier());
+    }
     public void GoalScored() {
         state.TransitionTo(new SCGoalScored());
     }
@@ -437,6 +449,10 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
     }
     public void GKClearBall() {
         state.TransitionTo(new SCGKClearBall());
+    }
+
+    public void SetTackleCooldown() {
+        tackleCooldown = Time.time + (4 - (myCharacter.tackling * .2f));
     }
 
     public void MeleeScanDamage(string message) {
