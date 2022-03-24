@@ -5,11 +5,13 @@ using UnityEngine;
 public class SCTryCatchPass : StableCombatCharState
 {
     Vector3 targetPos;
+    float entryTime;
     public override void EnterFrom(StableCombatCharState state) {
         base.EnterFrom(state);
         thisChar.agent.isStopped = false;
         canGrabBall = true;
         targetPos = ball.passTargetPosition;
+        entryTime = Time.time;
     }
     public override void Update() {
         base.Update();
@@ -26,7 +28,7 @@ public class SCTryCatchPass : StableCombatCharState
         //if ball is close go to one-Time state
 
         //create one-timer state with BallCollision override to launch into net
-        if (ball.isHeld || Vector3.Distance(thisChar.transform.position, targetPos) < .25f) {
+        if (Time.time >= entryTime + .5f && (ball.isHeld || Vector3.Distance(thisChar.transform.position, targetPos) < .25f)) {
             thisChar.Idle();
         }
     }

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class SCTeammateBallCarrierState : StableCombatCharState
 {
+    float looseBallTimer;
     public override SCResolution ReceiveMessage(StableCombatChar sender, string message) {
         base.ReceiveMessage(sender, message);
         SCResolution res = new SCResolution();
@@ -14,7 +15,12 @@ public class SCTeammateBallCarrierState : StableCombatCharState
     }
     public override void Update() {
         base.Update();
-        if (thisChar.ball.holder == null || thisChar.ball.holder.team != thisChar.team) {
+        if (!ball.isHeld) {
+            looseBallTimer += Time.deltaTime;
+        } else {
+            looseBallTimer = 0;
+        }
+        if (looseBallTimer >= 4f || thisChar.ball.holder?.team != thisChar.team) {
             thisChar.Idle();
         }
     }
