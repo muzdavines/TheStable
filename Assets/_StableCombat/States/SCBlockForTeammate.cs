@@ -12,7 +12,7 @@ public class SCBlockForTeammate : SCTeammateBallCarrierState {
     }
     public override void Update() {
         base.Update();
-        if (blockTarget == null || blockTarget.state.GetType() == typeof(SCKnockdown) || blockTarget.state.GetType() == typeof(SCMissTackle)) {
+        if (blockTarget == null || blockTarget.isKnockedDown) {
             blockTarget = FindEnemyToBlock();
         } else {
             thisChar.agent.SetDestination(blockTarget.position);

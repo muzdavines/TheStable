@@ -366,6 +366,9 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
             goOnRun.PlayFeedbacks();
         }
     }
+    public void GoNearEnemyGoal() {
+        state.TransitionTo(new SCGoNearEnemyGoal());
+    }
     public void OneTimerToGoal() {
         state.TransitionTo(new SCOneTimerToGoal());
     }
@@ -671,5 +674,9 @@ public static class StableCombatCharHelper {
     }
     public static float Distance(this StableCombatChar thisChar, StableCombatChar otherChar) {
         return Vector3.Distance(thisChar.position, otherChar.position);
+    }
+
+    public static bool IsForward(this Position pos) {
+        return (pos == Position.LW || pos == Position.STR || pos == Position.STL || pos == Position.STC || pos == Position.RW);
     }
 }

@@ -17,6 +17,11 @@ public class SCTryCatchPass : StableCombatCharState
         base.Update();
         targetPos = ball.passTargetPosition;
         thisChar.agent.SetDestination(targetPos);
+        if (Vector3.Distance(thisChar.transform.position, targetPos) < .25f) {
+            thisChar.agent.isStopped = true;
+        } else {
+            thisChar.agent.isStopped = false;
+        }
         if (thisChar.enemyGoal.Distance(thisChar) < 20) {
             if (ball.Distance(thisChar) < 3) {
                 thisChar.OneTimerToGoal();
@@ -28,9 +33,9 @@ public class SCTryCatchPass : StableCombatCharState
         //if ball is close go to one-Time state
 
         //create one-timer state with BallCollision override to launch into net
-        if (Time.time >= entryTime + .5f && (ball.isHeld || Vector3.Distance(thisChar.transform.position, targetPos) < .25f)) {
-            thisChar.Idle();
-        }
+        //if (Time.time >= entryTime + .5f && (ball.isHeld || Vector3.Distance(thisChar.transform.position, targetPos) < .25f)) {
+          //  thisChar.Idle();
+        //}
     }
 
     public override void AnimEventReceiver(string message) {

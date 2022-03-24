@@ -11,16 +11,14 @@ public class SCIdleTeammateWithBall : SCTeammateBallCarrierState
         //thisChar.anim.ResetAllTriggers();
         thisChar.anima.Idle();
         thisChar.agent.isStopped = true;
-        if (thisChar.enemyGoal.Distance(thisChar) < 200) {
-            goalOffset = new Vector3(Random.Range(-6, 6), 0, Random.Range(-2, 5));
+        if (thisChar.enemyGoal.Distance(thisChar) < 40 || thisChar.fieldPosition.IsForward()) {
+            thisChar.GoNearEnemyGoal();
+        } else {
+            thisChar.Block();
         }
     }
     public override void Update() {
         base.Update();
-        if (goalOffset != Vector3.zero) {
-            thisChar.agent.isStopped = false;
-            thisChar.agent.SetDestination(thisChar.enemyGoal.transform.position + (thisChar.enemyGoal.transform.forward * 10) + goalOffset);
-        }
     }
 
     public override void AnimEventReceiver(string message) {
