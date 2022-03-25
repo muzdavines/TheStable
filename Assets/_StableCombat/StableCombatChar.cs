@@ -407,6 +407,7 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
         state.TransitionTo(new SCBlockForTeammate());
     }
     public void BackOffCarrier(bool resetCooldowns = false) {
+        if (isKnockedDown) { return; }
         if (resetCooldowns) { SetTackleCooldown(); }
         state.TransitionTo(new SCBackOffCarrier());
     }
