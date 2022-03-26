@@ -313,7 +313,7 @@ public static class Helper {
     }
     
     public static Color GetCellViewColor() {
-        return new Color(1, 1, 1, .396f);
+        return new Color(1, 1, 1, .8f);
     }
     public static void Speech(Transform _t, string text, float delay = 0f) {
         text = text.Replace("NEWLINE", "\n");

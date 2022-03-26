@@ -57,7 +57,7 @@ public class StableManagementController : MonoBehaviour, UIElement
         UpdateHeader();
 
     }
-    public void OnClick (GameObject g)
+    public void OnClick(GameObject g)
     {
         if (activePanel != null)
         {
