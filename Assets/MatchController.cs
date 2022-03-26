@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
 using MoreMountains.Feedbacks;
+using UnityEngine.Playables;
 
 public class MatchController : MonoBehaviour
 {
@@ -22,6 +23,8 @@ public class MatchController : MonoBehaviour
     public bool debug;
     public GameObject debugPlayers;
     public MMCameraShaker goal;
+    public PlayableDirector introDirector;
+    public PlayableDirector outroDirector;
     public void Start() {
         //match = Game.instance.activeMatch;
         ball.transform.position = new Vector3(0,1,0);
@@ -56,7 +59,8 @@ public class MatchController : MonoBehaviour
         awayCoach.Init();
         homeCoach.Init();
         UpdateScoreboard();
-        StartCoroutine(DelayStart());
+        // StartCoroutine(DelayStart());
+        introDirector.Play();
     }
     public void SpawnPlayers() {
         Game thisGame = Game.instance;

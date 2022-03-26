@@ -411,6 +411,9 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
         if (resetCooldowns) { SetTackleCooldown(); }
         state.TransitionTo(new SCBackOffCarrier());
     }
+    public void IntroState(Transform pos) {
+        state.TransitionTo(new SCIntroState() { myPos = pos });
+    }
     public void GoalScored() {
         state.TransitionTo(new SCGoalScored());
     }
