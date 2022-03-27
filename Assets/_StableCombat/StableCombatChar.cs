@@ -51,7 +51,15 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
 
     //Combat Attributes
     public float health, stamina, balance, mind, maxHealth, maxStamina, maxBalance, maxMind;
-
+    [System.Serializable]
+    public class Mod {
+        public float timeEnd;
+        public float modAmount;
+        public GameObject modEffect;
+        public ModType modType;
+    }
+    [SerializeField]
+    public List<Mod> mods = new List<Mod>();
 
     //Status
 
@@ -176,6 +184,12 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
    void Update()
     {
         state.Update();
+        for (int i = 0; i < mods.Count; i++) {
+            if (mods[i] != null && Time.time >= mods[i].timeEnd) {
+                EndMod(mods[i]);
+                mods[i] = null;
+            }
+        }
     }
     
     public bool ShouldPursueBall() {
@@ -652,6 +666,24 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
         
     }
 
+    public void AddMod(Mod thisMod) {
+        Debug.Log("#MOD#AddMOD "+ thisMod.modAmount);
+        switch (thisMod.modType) {
+            case ModType.Speed:
+                agent.speed += myCharacter.runspeed * .4f * thisMod.modAmount;
+                break;
+        }
+        mods.Add(thisMod);
+    }
+    public void EndMod(Mod thisMod) {
+        Debug.Log("#MOD#endMOD " + thisMod.modAmount);
+        switch (thisMod.modType) {
+            case ModType.Speed:
+                agent.speed -= myCharacter.runspeed * .4f * thisMod.modAmount;
+                break;
+        }
+    }
+
     
     void OnDrawGizmos() {
 #if UNITY_EDITOR
@@ -663,7 +695,7 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
     
 
 }
-
+public enum ModType { Speed, DOT}
 public enum Position { NA, LW, STR, STL, STC, RW, LM, LCM, MC, RCM, RM, DL, LDC, DC, RDC, DR, GK }
 public enum TackleType { Tackle, Strip }
 public enum CombatFocus { Melee, Ranged }

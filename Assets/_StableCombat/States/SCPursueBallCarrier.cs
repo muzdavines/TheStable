@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SCPursueBallCarrier : StableCombatCharState
 {
-
+    bool speedBoosted;
     public override void EnterFrom(StableCombatCharState state) {
         base.EnterFrom(state);
         if (Time.time < thisChar.tackleCooldown) {
@@ -44,6 +44,10 @@ public class SCPursueBallCarrier : StableCombatCharState
                         break;
                 }
             }
+        }
+        if (!speedBoosted && Vector3.Distance(thisChar.position, holderPos) < 8) {
+            speedBoosted = true;
+            thisChar.AddMod(new StableCombatChar.Mod() { modAmount = thisChar.myCharacter.tackling * .05f, timeEnd = Time.time + 2f });
         }
         thisChar.agent.SetDestination(holderPos);
         thisChar.agent.isStopped = false;

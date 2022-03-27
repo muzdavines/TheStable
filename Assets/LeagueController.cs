@@ -10,6 +10,13 @@ public class LeagueController : MonoBehaviour, UIElement
     public Text matchInfo, leagueTable;
     public GameObject playMatchButton;
     public League.Match activeMatch;
+    public TextMeshProUGUI[] teamNames;
+    public TextMeshProUGUI[] wins;
+    public TextMeshProUGUI[] losses;
+    public TextMeshProUGUI[] draws;
+    public TextMeshProUGUI[] points;
+    public TextMeshProUGUI[] goals;
+    public TextMeshProUGUI[] GA;
     void Start()
     {
         
@@ -39,10 +46,33 @@ public class LeagueController : MonoBehaviour, UIElement
         
     }
     public void UpdateLeagueTable() {
-        leagueTable.text = "                 League Table\n";
-        foreach (string s in Game.instance.leagues[0].GetTable()) {
-            leagueTable.text += s + "\n";
+        League l = Game.instance.leagues[0];
+        var tempTable = new List<League.Team>();
+        foreach (League.Team t in l.teams) {
+            tempTable.Add(t);
         }
+        tempTable.Sort((a, b) => a.points.CompareTo(b.points));
+        tempTable.Reverse();
+        for (int i = 0; i < tempTable.Count; i++) {
+            teamNames[i].text = tempTable[i].stable.stableName;
+            wins[i].text = tempTable[i].wins.ToString();
+            losses[i].text = tempTable[i].losses.ToString();
+            draws[i].text = tempTable[i].draws.ToString();
+            points[i].text = tempTable[i].points.ToString();
+            goals[i].text = tempTable[i].goals.ToString();
+            GA[i].text = tempTable[i].goalsAllowed.ToString();
+        }
+        for (int i = tempTable.Count; i < teamNames.Length; i++) {
+            teamNames[i].text = "";
+            wins[i].text = "";
+            losses[i].text = "";
+            draws[i].text = "";
+            points[i].text = "";
+            goals[i].text = "";
+            GA[i].text = "";
+        }
+
+
         int topScorer = 0;
         Character topScorerChar = null;
         string topScorerStable = "";

@@ -67,6 +67,7 @@ public class MatchController : MonoBehaviour
         List<Character>[] bothTeams = new List<Character>[2];
         bothTeams[0] = thisGame.activeMatch.home.stable.heroes;
         bothTeams[1] = thisGame.activeMatch.away.stable.heroes;
+        int playersStable = thisGame.activeMatch.home.stable == Game.instance.playerStable ? 0 : 1;
         for (int thisTeam = 0; thisTeam<2; thisTeam++) {
             for (int i = 0; i < bothTeams[thisTeam].Count; i++) {
                 Character thisBaseChar = bothTeams[thisTeam][i];
@@ -77,7 +78,7 @@ public class MatchController : MonoBehaviour
                 thisChar.fieldSport = true;
                 thisChar.myCharacter = thisBaseChar;
                 thisChar.fieldPosition = thisBaseChar.currentPosition;
-                thisChar.GetComponent<SCModelSelector>().Init(thisBaseChar.modelNum, thisTeam);
+                thisChar.GetComponent<SCModelSelector>().Init(thisBaseChar.modelNum, thisTeam, thisTeam==playersStable);
                 thisChar.Init();
             }
         }

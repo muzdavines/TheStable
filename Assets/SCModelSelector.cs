@@ -6,8 +6,14 @@ public class SCModelSelector : MonoBehaviour
 {
     public GameObject[] models;
     public Material[] materials;
-    public void Init(int modelNum, int team) {
+    public int playerMatVariant = 0;
+    public void Init(int modelNum, int team, bool playerStable = false) {
         models[modelNum].SetActive(true);
-        models[modelNum].GetComponent<SkinnedMeshRenderer>().material = materials[team];
+        if (playerStable) {
+            models[modelNum].GetComponent<SkinnedMeshRenderer>().material = Resources.Load<Material>("PlayerStableMat"+playerMatVariant);
+        }
+        else {
+            models[modelNum].GetComponent<SkinnedMeshRenderer>().material = materials[team];
+        }
     }
 }

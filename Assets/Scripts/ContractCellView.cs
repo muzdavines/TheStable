@@ -4,14 +4,20 @@ using UnityEngine.UI;
 using UnityEngine;
 using EnhancedUI.EnhancedScroller;
 using EnhancedScrollerDemos.CellEvents;
+using TMPro;
 
 public class ContractCellView : EnhancedScrollerCellView {
-    public Text contractDescription;
+    public Text contractDescription, maxHeroes, diff, due;
+    public TextMeshProUGUI title;
     public MissionContract thisContract;
     public void SetData(MissionContract data) {
         thisContract = data;
         thisContract.Init();
-        contractDescription.text = "Contract: " + data.contractType.ToString() + "            " + data.description + "            Difficulty: " + data.difficulty + "    Due Date: " + data.executionDate.GetDateString()+"   Max Heroes: "+data.maxHeroes;
+        contractDescription.text = data.description;
+        maxHeroes.text = "Max Heroes: "+ data.maxHeroes;
+        diff.text = "Difficulty: " + data.difficulty;
+        due.text = "Due Date: " + data.executionDate.GetDateString();
+        title.text = data.contractType.ToString();
     }
 
     public void OnHoverEnter() {
