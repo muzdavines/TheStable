@@ -10,12 +10,14 @@ public class SCPass : SCBallCarrierState
         if (passTarget == null) { thisChar.RunToGoalWithBall(); return; }
         //thisChar.anim.SetTrigger("PassBall");
         thisChar.anima.PassBall();
+        thisChar.transform.LookAt(passTarget.transform);
         thisChar.agent.isStopped = true;
         canGrabBall = false;
     }
     public override void Update() {
         base.Update();
         thisChar.agent.isStopped = true;
+        thisChar.transform.LookAt(passTarget.transform);
     }
 
     public override void AnimEventReceiver(string message) {

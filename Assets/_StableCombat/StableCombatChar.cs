@@ -693,7 +693,7 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
     void OnDrawGizmos() {
 #if UNITY_EDITOR
         if (debugState && state!=null) {
-            Handles.Label(transform.position+new Vector3(0,2,0), state.GetType().ToString() + "\nTackling: " + myCharacter.tackling + "\nDodging: " + myCharacter.carrying + "\nType: "+myCharacter.archetype);
+            Handles.Label(_t.position + new Vector3(0, 2, 0), state.GetType().ToString());
         }
 #endif
     }

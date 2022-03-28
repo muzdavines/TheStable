@@ -43,6 +43,7 @@ public class Ball : MonoBehaviour
         isHeld = true;
         col.enabled = !isHeld;
         body.isKinematic = isHeld;
+        body.interpolation = RigidbodyInterpolation.None;
         transform.parent = holder._rightHand;
         transform.localPosition = new Vector3(0, 0, 0);
         return true;
@@ -100,6 +101,7 @@ public class Ball : MonoBehaviour
         isHeld = false;
         col.enabled = true;
         body.isKinematic = false;
+        body.interpolation = RigidbodyInterpolation.Interpolate;
         transform.parent = null;
         holder = null;
     }
