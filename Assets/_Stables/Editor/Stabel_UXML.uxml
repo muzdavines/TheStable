@@ -1,7 +1,7 @@
 <ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="True">
     <uie:PropertyField binding-path="stable" />
-    <ui:Label text="Create Hero Settings" display-tooltip-when-elided="true" style="width: 0; height: 0; -unity-font-style: bold; font-size: 18px;" />
+    <ui:Label text="Create Hero Settings" display-tooltip-when-elided="true" style="width: 0; height: 5%; -unity-font-style: bold; font-size: 18px;" />
     <uie:EnumField label="Hero Type to Create" value="Center" binding-path="createType" name="testEnum" style="justify-content: center; align-items: flex-start; width: auto; height: auto; font-size: 12px; -unity-font-style: normal;" />
     <uie:IntegerField label="Tier" value="0" binding-path="tier" />
-    <ui:Button text="Button" display-tooltip-when-elided="true" name="createhero" />
+    <ui:Button text="Create Hero" display-tooltip-when-elided="true" name="createhero" />
 </ui:UXML>

@@ -177,6 +177,10 @@ public class Character : Living
                 dexRange[0] = 10; dexRange[1] = 20;
                 strRange[0] = 2; strRange[1] = 4;
                 agiRange[0] = 4; agiRange[1] = 8;
+                if (Random.Range(0, 1f) >= .99f) {
+                    shootingRange[1] = 40;
+                    Debug.Log("#CreateHero#Striker Crit!");
+                }
                 modelNum = 0;
                 modelName = "SCUnit";
                 break;
@@ -241,17 +245,17 @@ public class Character : Living
                 modelName = "SCUnit";
                 break;
         }
-        shooting = RandDist(shootingRange[0], shootingRange[1]);
-        passing = RandDist(passingRange[0], passingRange[1]);
-        tackling = RandDist(tackleRange[0], tackleRange[1]);
-        carrying = RandDist(carryingRange[0], carryingRange[1]);
-        melee = RandDist(meleeRange[0], meleeRange[1]);
-        ranged = RandDist(rangedRange[0], rangedRange[1]);
-        magic = RandDist(magicRange[0], magicRange[1]);
-        runspeed = RandDist(speedRange[0], speedRange[1]);
-        dexterity = RandDist(dexRange[0], dexRange[1]);
-        strength = RandDist(strRange[0], strRange[1]);
-        agility = RandDist(agiRange[0], agiRange[1]);
+        shooting = RandDist(shootingRange[0], shootingRange[1]) + ((level - 1) * 20);
+        passing = RandDist(passingRange[0], passingRange[1]) + ((level - 1) * 20);
+        tackling = RandDist(tackleRange[0], tackleRange[1]) + ((level - 1) * 20);
+        carrying = RandDist(carryingRange[0], carryingRange[1]) + ((level - 1) * 20);
+        melee = RandDist(meleeRange[0], meleeRange[1]) + ((level - 1) * 20);
+        ranged = RandDist(rangedRange[0], rangedRange[1]) + ((level - 1) * 20);
+        magic = RandDist(magicRange[0], magicRange[1]) + ((level - 1) * 20);
+        runspeed = RandDist(speedRange[0], speedRange[1]) + ((level - 1) * 20);
+        dexterity = RandDist(dexRange[0], dexRange[1]) + ((level - 1) * 20);
+        strength = RandDist(strRange[0], strRange[1]) + ((level - 1) * 20);
+        agility = RandDist(agiRange[0], agiRange[1]) + ((level - 1) * 20);
         maxHealth = 5;
         maxMind = 5;
         maxStamina = 5;
