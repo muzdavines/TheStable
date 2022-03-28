@@ -242,7 +242,7 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
        return GuardNetPosition.None;
     }
     public bool ShouldPass() {
-        Collider[] hitColliders = Physics.OverlapSphere(transform.position, 10f);
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, 7f);
         foreach (var hitCollider in hitColliders) {
             var checkChar = hitCollider.GetComponent<StableCombatChar>();
             if (checkChar != null) {
@@ -252,7 +252,8 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
             }
         }
         foreach (var teammate in coach.players) {
-            if (enemyGoal.Distance(this) > enemyGoal.Distance(teammate)) {
+            float distToGoal = enemyGoal.Distance(teammate);
+            if (distToGoal < 25 && enemyGoal.Distance(this) > distToGoal) {
                 return true;
             }
         }
@@ -384,6 +385,10 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
         state.TransitionTo(new SCGoNearEnemyGoal());
     }
     public void OneTimerToGoal() {
+        if (myCharacter.archetype == Character.Archetype.Defender) {
+            Idle();
+            return;
+        }
         state.TransitionTo(new SCOneTimerToGoal());
     }
     public void Tackle() {

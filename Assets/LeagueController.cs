@@ -17,6 +17,10 @@ public class LeagueController : MonoBehaviour, UIElement
     public TextMeshProUGUI[] points;
     public TextMeshProUGUI[] goals;
     public TextMeshProUGUI[] GA;
+    public TextMeshProUGUI[] topScorers;
+    public TextMeshProUGUI[] topGoals;
+    public TextMeshProUGUI[] topTeam;
+
     void Start()
     {
         
@@ -45,6 +49,10 @@ public class LeagueController : MonoBehaviour, UIElement
         UpdateLeagueTable();
         
     }
+    class Scorer {
+        public Character scorer;
+        public string stableName;
+    }
     public void UpdateLeagueTable() {
         League l = Game.instance.leagues[0];
         var tempTable = new List<League.Team>();
@@ -54,13 +62,17 @@ public class LeagueController : MonoBehaviour, UIElement
         tempTable.Sort((a, b) => a.points.CompareTo(b.points));
         tempTable.Reverse();
         for (int i = 0; i < tempTable.Count; i++) {
-            teamNames[i].text = tempTable[i].stable.stableName;
-            wins[i].text = tempTable[i].wins.ToString();
-            losses[i].text = tempTable[i].losses.ToString();
-            draws[i].text = tempTable[i].draws.ToString();
-            points[i].text = tempTable[i].points.ToString();
-            goals[i].text = tempTable[i].goals.ToString();
-            GA[i].text = tempTable[i].goalsAllowed.ToString();
+            string colorMod = "";
+            if (tempTable[i].stable == Game.instance.playerStable) {
+                colorMod = "<color=green>";                                                                                                                                                                                                                                                                                                                                
+            }
+            teamNames[i].text = colorMod+ tempTable[i].stable.stableName;
+            wins[i].text = colorMod + tempTable[i].wins.ToString();
+            losses[i].text = colorMod + tempTable[i].losses.ToString();
+            draws[i].text = colorMod + tempTable[i].draws.ToString();
+            points[i].text = colorMod + tempTable[i].points.ToString();
+            goals[i].text = colorMod + tempTable[i].goals.ToString();
+            GA[i].text = colorMod + tempTable[i].goalsAllowed.ToString();
         }
         for (int i = tempTable.Count; i < teamNames.Length; i++) {
             teamNames[i].text = "";
@@ -71,29 +83,34 @@ public class LeagueController : MonoBehaviour, UIElement
             goals[i].text = "";
             GA[i].text = "";
         }
+        
+        List<Scorer> scorers = new List<Scorer>();
 
-
-        int topScorer = 0;
-        Character topScorerChar = null;
-        string topScorerStable = "";
         foreach (Character c in Game.instance.playerStable.heroes) {
-            if (c.seasonStats.goals > topScorer) {
-                topScorer = c.seasonStats.goals;
-                topScorerChar = c;
-                topScorerStable = Game.instance.playerStable.stableName;
+            if (c.seasonStats.goals > 0) {
+                scorers.Add(new Scorer() { scorer = c, stableName = Game.instance.playerStable.stableName });
             }
         }
         foreach (Stable s in Game.instance.otherStables) {
             foreach (Character c in s.heroes) {
-                if (c.seasonStats.goals > topScorer) {
-                    topScorer = c.seasonStats.goals;
-                    topScorerChar = c;
-                    topScorerStable = s.stableName;
+                if (c.seasonStats.goals > 0){
+                    scorers.Add(new Scorer() { scorer = c, stableName = s.stableName });
                 }
             }
         }
-        if (topScorerChar != null) {
-            leagueTable.text += "Top Scorer: " + topScorerChar.name + "  Goals: " + topScorer + ", " + topScorerStable;
+        
+        scorers.Sort((a, b) => a.scorer.seasonStats.goals.CompareTo(b.scorer.seasonStats.goals));
+        scorers.Reverse();
+        int scorerCount = Mathf.Min(scorers.Count, 8);
+        for (int x=0; x<scorerCount; x++) {
+            topScorers[x].text = scorers[x].scorer.name;
+            topGoals[x].text = scorers[x].scorer.seasonStats.goals.ToString();
+            topTeam[x].text = scorers[x].stableName;
+        }
+        for (int x = scorerCount; x<topScorers.Length; x++) {
+            topScorers[x].text = "";
+            topGoals[x].text = "";
+            topTeam[x].text = "";
         }
     }
     public void SimOtherGames() {
