@@ -20,6 +20,15 @@ public class CutSceneController : MonoBehaviour
     }
 
     public void LoadNextScene() {
+        InitFirstMatch();
         SceneManager.LoadScene(sceneToLoad);
+    }
+    public void InitFirstMatch() {
+        var thisMatch = new League.Match();
+        Stable home = Instantiate(Resources.Load<StableSO>("StartingStable")).stable;
+        Stable away = Instantiate(Resources.Load<StableSO>("Cutscene2Stable")).stable;
+        thisMatch.home = new League.Team() { stable = home };
+        thisMatch.away = new League.Team() { stable = away };
+        Game.instance.activeMatch = thisMatch;
     }
 }
