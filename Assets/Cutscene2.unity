@@ -235,9 +235,9 @@ MonoBehaviour:
   startingArmor: 
   startingMeleeWeapon: 
   startingRangedWeapon: 
-  armor: {fileID: 1508435284}
-  meleeWeapon: {fileID: 1811980495}
-  rangedWeapon: {fileID: 338021882}
+  armor: {fileID: 1871562382}
+  meleeWeapon: {fileID: 1467897764}
+  rangedWeapon: {fileID: 1070958418}
   mat: {fileID: 0}
   contract:
     weeksLeft: 10
@@ -258,30 +258,6 @@ MonoBehaviour:
   currentObject: {fileID: 0}
   archetype: 0
   warlordReputation: 0
---- !u!114 &18578745
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 47a74438d916a9e429ebbf10dd88341c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemName: 
-  condition: 0
-  isOwned: 0
-  damage: 0
-  prefabName: 
-  dualWield: 0
-  isHeavy: 0
-  usesLegs: 0
-  prefabNameLegs: 
-  settingsPrefab: 
-  weaponType: 0
-  moveType: 0
 --- !u!1 &19291262
 GameObject:
   m_ObjectHideFlags: 0
@@ -965,9 +941,9 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: This is the sport of [FIELDSPORT]. The rules are simple - First team to
-    score 3 goals wins. There are no other rules. Players may use any combat abilities
-    they have to disable or kill their opponents. Players may use any means necessary
-    to get the ball in the goal.
+    score 3 goals wins. There are no other rules. Your heroes may use any combat
+    abilities they have to disable or kill their opponents. Heroes may use any means
+    necessary to get the ball in the goal.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d4ab8c7d68abb1d43bfbc2428cc79018, type: 2}
   m_sharedMaterial: {fileID: -7367858217525935842, guid: d4ab8c7d68abb1d43bfbc2428cc79018,
@@ -1577,30 +1553,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &338021882
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 47a74438d916a9e429ebbf10dd88341c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemName: 
-  condition: 0
-  isOwned: 0
-  damage: 0
-  prefabName: 
-  dualWield: 0
-  isHeavy: 0
-  usesLegs: 0
-  prefabNameLegs: 
-  settingsPrefab: 
-  weaponType: 0
-  moveType: 0
 --- !u!1 &339479737
 GameObject:
   m_ObjectHideFlags: 0
@@ -3316,23 +3268,6 @@ Transform:
   m_Father: {fileID: 1647026083}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &787467188
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 623d911d423dd7740bd2b9c76fa1c164, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemName: 
-  condition: 0
-  isOwned: 0
-  defense: 0
-  health: 0
 --- !u!1 &799044247
 GameObject:
   m_ObjectHideFlags: 0
@@ -4095,30 +4030,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 20
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
---- !u!114 &957300367
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 47a74438d916a9e429ebbf10dd88341c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemName: 
-  condition: 0
-  isOwned: 0
-  damage: 0
-  prefabName: 
-  dualWield: 0
-  isHeavy: 0
-  usesLegs: 0
-  prefabNameLegs: 
-  settingsPrefab: 
-  weaponType: 0
-  moveType: 0
 --- !u!1 &964441927
 GameObject:
   m_ObjectHideFlags: 0
@@ -4444,6 +4355,30 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
+--- !u!114 &998804949
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47a74438d916a9e429ebbf10dd88341c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemName: 
+  condition: 0
+  isOwned: 0
+  damage: 0
+  prefabName: 
+  dualWield: 0
+  isHeavy: 0
+  usesLegs: 0
+  prefabNameLegs: 
+  settingsPrefab: 
+  weaponType: 0
+  moveType: 0
 --- !u!1 &1019504903
 GameObject:
   m_ObjectHideFlags: 0
@@ -4731,6 +4666,30 @@ Transform:
   m_Father: {fileID: 1647026083}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1070958418
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47a74438d916a9e429ebbf10dd88341c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemName: 
+  condition: 0
+  isOwned: 0
+  damage: 0
+  prefabName: 
+  dualWield: 0
+  isHeavy: 0
+  usesLegs: 0
+  prefabNameLegs: 
+  settingsPrefab: 
+  weaponType: 0
+  moveType: 0
 --- !u!1001 &1072784912
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9573,6 +9532,30 @@ Transform:
   m_Father: {fileID: 533980599}
   m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1329495696
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47a74438d916a9e429ebbf10dd88341c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemName: 
+  condition: 0
+  isOwned: 0
+  damage: 0
+  prefabName: 
+  dualWield: 0
+  isHeavy: 0
+  usesLegs: 0
+  prefabNameLegs: 
+  settingsPrefab: 
+  weaponType: 0
+  moveType: 0
 --- !u!1 &1331958011
 GameObject:
   m_ObjectHideFlags: 0
@@ -10344,6 +10327,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e10ef0564173cf42b72f62aa52ff7ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1467897764
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47a74438d916a9e429ebbf10dd88341c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemName: 
+  condition: 0
+  isOwned: 0
+  damage: 0
+  prefabName: 
+  dualWield: 0
+  isHeavy: 0
+  usesLegs: 0
+  prefabNameLegs: 
+  settingsPrefab: 
+  weaponType: 0
+  moveType: 0
 --- !u!114 &1482030115
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10545,23 +10552,6 @@ MonoBehaviour:
   - {fileID: 1820111894}
   - {fileID: 1874138213}
   - {fileID: 2082906753}
---- !u!114 &1508435284
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 623d911d423dd7740bd2b9c76fa1c164, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemName: 
-  condition: 0
-  isOwned: 0
-  defense: 0
-  health: 0
 --- !u!1 &1521476639
 GameObject:
   m_ObjectHideFlags: 0
@@ -10917,6 +10907,23 @@ Transform:
   m_Father: {fileID: 253989274}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1601202739
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 623d911d423dd7740bd2b9c76fa1c164, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemName: 
+  condition: 0
+  isOwned: 0
+  defense: 0
+  health: 0
 --- !u!1 &1607584698
 GameObject:
   m_ObjectHideFlags: 0
@@ -12245,30 +12252,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1803270932}
   m_CullTransparentMesh: 1
---- !u!114 &1811980495
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 47a74438d916a9e429ebbf10dd88341c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemName: 
-  condition: 0
-  isOwned: 0
-  damage: 0
-  prefabName: 
-  dualWield: 0
-  isHeavy: 0
-  usesLegs: 0
-  prefabNameLegs: 
-  settingsPrefab: 
-  weaponType: 0
-  moveType: 0
 --- !u!1 &1820111893
 GameObject:
   m_ObjectHideFlags: 0
@@ -12380,9 +12363,9 @@ MonoBehaviour:
   startingArmor: 
   startingMeleeWeapon: 
   startingRangedWeapon: 
-  armor: {fileID: 787467188}
-  meleeWeapon: {fileID: 957300367}
-  rangedWeapon: {fileID: 18578745}
+  armor: {fileID: 1601202739}
+  meleeWeapon: {fileID: 1329495696}
+  rangedWeapon: {fileID: 998804949}
   mat: {fileID: 0}
   contract:
     weeksLeft: 10
@@ -12463,6 +12446,23 @@ Transform:
   m_Father: {fileID: 1101493198}
   m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1871562382
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 623d911d423dd7740bd2b9c76fa1c164, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  itemName: 
+  condition: 0
+  isOwned: 0
+  defense: 0
+  health: 0
 --- !u!1 &1874138212
 GameObject:
   m_ObjectHideFlags: 0
@@ -12806,9 +12806,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Each team has 6 players: 5 field players and 1 goalkeeper. As the Stablemaster,
-    you must decide which players to put on the pitch, and in what position to player
-    them.'
+  m_text: 'Each team has 6 positions: 5 field players and 1 goalkeeper. As the Stablemaster,
+    you must decide which of your heroes to put on the pitch, and in what position
+    to play them.'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d4ab8c7d68abb1d43bfbc2428cc79018, type: 2}
   m_sharedMaterial: {fileID: -7367858217525935842, guid: d4ab8c7d68abb1d43bfbc2428cc79018,
