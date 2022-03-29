@@ -32,7 +32,7 @@ public class NewGameCreationController : MonoBehaviour
     public void CreateNewGame(string warlord) {
 
         DontDestroyOnLoad(gameObject);
-        SceneManager.LoadScene("StableManagement");
+        SceneManager.LoadScene("CutScene1");
         Game game = Game.instance;
         Stable player = game.playerStable = new Stable();
         warlord = activeStablemasterType;
@@ -94,7 +94,7 @@ public class NewGameCreationController : MonoBehaviour
         activeStablemasterType = s;
     }
     public void LoadGame() {
-        SceneManager.LoadScene("StableManagement");
+        SceneManager.LoadScene("CutScene1");
     }
 
 }

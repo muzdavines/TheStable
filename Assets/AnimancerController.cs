@@ -42,9 +42,12 @@ public class AnimancerController : MonoBehaviour {
         thisChar = GetComponent<StableCombatChar>();
         anim = GetComponent<AnimancerComponent>();
         agent = GetComponent<NavMeshAgent>();
-        baseMeleeAttackMoves = thisChar.meleeAttackMoves;
-        baseRangedAttackMoves = thisChar.rangedAttackMoves;
-        anim.Play(failStrip);
+        if (thisChar != null) {
+            baseMeleeAttackMoves = thisChar.meleeAttackMoves;
+            baseRangedAttackMoves = thisChar.rangedAttackMoves;
+            anim.Play(failStrip);
+        }
+        Idle();
     }
 
     public void Idle() {
