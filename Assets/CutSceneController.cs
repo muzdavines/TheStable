@@ -14,7 +14,7 @@ public class CutSceneController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.anyKeyDown) {
+        if (Input.GetKeyDown(KeyCode.Escape)) {
             LoadNextScene();
         }
     }
