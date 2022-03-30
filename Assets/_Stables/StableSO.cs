@@ -6,6 +6,7 @@ using UnityEngine;
 public class StableSO : ScriptableObject {
     [SerializeField]
     public Stable stable;
+#if UNITY_EDITOR
     public void CreateHero() {
         Debug.Log("Create");
         string path = "Assets/_Characters/Resources/" + stable.stableName;
@@ -27,6 +28,7 @@ public class StableSO : ScriptableObject {
             c.activeInLineup = false;
         }
     }
+#endif
     public Character.Archetype createType;
     public int tier;
 } 
