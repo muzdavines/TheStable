@@ -54,6 +54,7 @@ public class MatchController : MonoBehaviour
 
 
     public void Init() {
+        Physics.gravity = new Vector3(0, -9.81f, 0);
         match = Game.instance.activeMatch;
         SpawnPlayers();
         awayCoach.Init();
