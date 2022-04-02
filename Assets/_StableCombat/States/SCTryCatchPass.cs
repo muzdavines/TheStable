@@ -9,6 +9,7 @@ public class SCTryCatchPass : StableCombatCharState
 
     Vector3 targetPos;
     float entryTime;
+
     public override void EnterFrom(StableCombatCharState state) {
         base.EnterFrom(state);
         thisChar.agent.isStopped = false;
@@ -39,7 +40,7 @@ public class SCTryCatchPass : StableCombatCharState
                 return;
             }
         }
-        if (Time.time > entryTime + 1.5f)
+        if (Time.time > entryTime + 2.5f)
         {
             thisChar.Idle();
         }

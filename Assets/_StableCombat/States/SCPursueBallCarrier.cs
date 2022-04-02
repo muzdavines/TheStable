@@ -20,7 +20,7 @@ public class SCPursueBallCarrier : StableCombatCharState
         }
         Vector3 myPos = thisChar.transform.position;
         Vector3 holderPos = thisChar.ball.holder.transform.position;
-        if (Vector3.Distance(thisChar.transform.position, thisChar.ball.holder.transform.position)<=1) {
+        if (Vector3.Distance(thisChar.transform.position, thisChar.ball.holder.transform.position) <= 2f) {
             var resolution = thisChar.state.SendMessage(thisChar.ball.holder, "TryTackle");
             if (resolution == null) {
                 Debug.Log("#Tackle# Resolution Null");

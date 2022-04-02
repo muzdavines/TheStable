@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class SCShoot : SCBallCarrierState
 {
-    float shootAngleMin = 2.8f;
+    float shootAngleMin = .65f;
 
     float shotAdjustmentMod = 2.5f;
     Vector3 adjustment;
@@ -62,7 +62,7 @@ public class SCShoot : SCBallCarrierState
     public override void AnimEventReceiver(string message) {
         base.AnimEventReceiver(message);
         if (message == "Throw") {
-            thisChar.ball.Shoot(thisChar.enemyGoal.transform.position + adjustment, error, thisChar.myCharacter.strength * .01f);
+            thisChar.ball.Shoot(thisChar.enemyGoal.transform.position + adjustment, error, Mathf.Min(.3f + thisChar.myCharacter.strength * .1f, 1f));
         }
     }
 

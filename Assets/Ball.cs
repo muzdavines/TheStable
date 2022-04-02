@@ -57,7 +57,7 @@ public class Ball : MonoBehaviour
             holder.DisplayShotAccuracy(errorAdjustment.magnitude);
         }
         Release();
-        MoveToLaunchPosition(goalTarget);
+        MoveToLaunchPosition(goalTarget, shotPower);
         body.velocity = Vector3.zero;
 
         Vector3 targetPos = goalTarget - errorAdjustment;
@@ -66,7 +66,7 @@ public class Ball : MonoBehaviour
 
     public void PassTo(StableCombatChar passTarget, float shotPower = 1) {
         Release();
-        MoveToLaunchPosition(passTarget.transform.position);
+        MoveToLaunchPosition(passTarget.transform.position, shotPower);
         LaunchBall(passTarget.transform, true, shotPower);
     }
 
@@ -105,10 +105,10 @@ public class Ball : MonoBehaviour
         transform.parent = null;
         holder = null;
     }
-    void MoveToLaunchPosition(Vector3 launchTarget)
+    void MoveToLaunchPosition(Vector3 launchTarget, float amount = 1f)
     {
         transform.LookAt(launchTarget);
-        transform.position += transform.forward * 1;
+        transform.position += transform.forward * amount;
     }
     public void OnCollisionEnter(Collision collision) {
         Debug.Log("#BallCollision#" + collision.transform.name);

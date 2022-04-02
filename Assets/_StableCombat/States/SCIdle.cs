@@ -67,7 +67,6 @@ public class SCIdle : StableCombatCharState
             }*/
         }
         thisChar.agent.isStopped = true;
-
     }
 
     public override void AnimEventReceiver(string message) {
