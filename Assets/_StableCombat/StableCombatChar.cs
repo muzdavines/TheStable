@@ -242,18 +242,21 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
        return GuardNetPosition.None;
     }
     public bool ShouldPass() {
+        Vector3 goalDirection = enemyGoal.transform.position - transform.position;
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, 7f);
         foreach (var hitCollider in hitColliders) {
             var checkChar = hitCollider.GetComponent<StableCombatChar>();
             if (checkChar != null) {
-                if (checkChar.team != team) {
+                Vector3 hitDirection = hitCollider.transform.position - transform.position;
+
+                if (checkChar.team != team && Vector3.Dot(hitDirection, goalDirection) > 4f)  {
                     return true;
                 }
             }
         }
         foreach (var teammate in coach.players) {
             float distToGoal = enemyGoal.Distance(teammate);
-            if (distToGoal < 25 && enemyGoal.Distance(this) > distToGoal) {
+            if (distToGoal < 15 && enemyGoal.Distance(this) > distToGoal) {
                 return true;
             }
         }
@@ -519,10 +522,13 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
 
     float lastRunCalled;
     public void SendTeammateOnRun() {
-       if (lastRunCalled + 3 < Time.time) {
+       if (lastRunCalled + 1.5f < Time.time) {
             lastRunCalled = Time.time;
-            int teammateToSend = Random.Range(0, coach.players.Length);
-            state.SendMessage(coach.players[teammateToSend], "RunToOpposingGoal");
+            StableCombatChar nearest = GetNearestTeammate();
+            nearest.GoNearEnemyGoal();
+            
+            //int teammateToSend = Random.Range(0, coach.players.Length);
+            //state.SendMessage(coach.players[teammateToSend], "RunToOpposingGoal");
             //sendOnRun.PlayFeedbacks();
        }
     }
@@ -544,7 +550,7 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
         foreach (StableCombatChar c in coach.players) {
             if (c == this) { continue; }
             if (c.isKnockedDown) { continue; }
-            if (enemyGoal.Distance(c) < 20 && c.Distance(this) >= maxDist) {
+            if (enemyGoal.Distance(c) < 20 && c.Distance(this) > maxDist) {
                 maxDist = c.Distance(this);
                 returnChar = c;
             }

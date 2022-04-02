@@ -23,7 +23,7 @@ public class SCPass : SCBallCarrierState
     public override void AnimEventReceiver(string message) {
         base.AnimEventReceiver(message);
         if (message == "PassBall") {
-            ball.PassTo(passTarget);
+            ball.PassTo(passTarget,  Mathf.Min(.3f + thisChar.myCharacter.strength * .1f, 1f));
             passTarget.TryCatchPass();
         }
         
