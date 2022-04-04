@@ -46,20 +46,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerStable:
+    stableName: 
     reputation: 0
     alignment: 0
     favor: 
     warlord: {fileID: 0}
     heroes: []
+    heroesSave: []
     coaches: []
     buildings: []
     contracts: []
     availableTrainings: []
+    availableTrainingsSave: []
     finance:
       ledger: []
       businesses: []
+    inventory: []
     activeContract: {fileID: 0}
+    leagueLevel: 0
   otherStables: []
+  leagues: []
   gameDate:
     day: 1
     month: 1
@@ -67,9 +73,74 @@ MonoBehaviour:
     dayOfWeek: 0
   freeAgentMarket:
     market: []
+    marketSave: []
   contractMarket: []
+  contractMarketSave: []
   missionContractList: {fileID: 0}
   modifierList: []
+  activeMatch:
+    date:
+      day: 1
+      month: 1
+      year: 1000
+      dayOfWeek: 0
+    home:
+      stable:
+        stableName: 
+        reputation: 0
+        alignment: 0
+        favor: 
+        warlord: {fileID: 0}
+        heroes: []
+        heroesSave: []
+        coaches: []
+        buildings: []
+        contracts: []
+        availableTrainings: []
+        availableTrainingsSave: []
+        finance:
+          ledger: []
+          businesses: []
+        inventory: []
+        activeContract: {fileID: 0}
+        leagueLevel: 0
+      wins: 0
+      losses: 0
+      draws: 0
+      goals: 0
+      goalsAllowed: 0
+      isPlayer: 0
+    away:
+      stable:
+        stableName: 
+        reputation: 0
+        alignment: 0
+        favor: 
+        warlord: {fileID: 0}
+        heroes: []
+        heroesSave: []
+        coaches: []
+        buildings: []
+        contracts: []
+        availableTrainings: []
+        availableTrainingsSave: []
+        finance:
+          ledger: []
+          businesses: []
+        inventory: []
+        activeContract: {fileID: 0}
+        leagueLevel: 0
+      wins: 0
+      losses: 0
+      draws: 0
+      goals: 0
+      goalsAllowed: 0
+      isPlayer: 0
+    homeGoals: 0
+    awayGoals: 0
+    final: 0
+  tutorialStageFinished: 0
+  tutorialsComplete: []
 --- !u!114 &6174815602039560835
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -90,7 +161,7 @@ MonoBehaviour:
     - {fileID: 810439944612815340}
     - {fileID: 11500000, guid: db256d5281af0e64c8d3e4cfbfe7c535, type: 3}
     - {fileID: 6174815602039560835}
-    _Values: 501131e0a569ae597748ac3234e38d6b4969f3632f1f506d975534f02a163a02c9d6e4b939227708
+    _Values: 17dedd042ad0ee3752162d0bee4a4107e9a4ddd30b5a2b29335467ddaf2fab25638fec723d861f67
 --- !u!114 &3148386000595091703
 MonoBehaviour:
   m_ObjectHideFlags: 0
