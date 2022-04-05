@@ -25,6 +25,7 @@ public class MatchController : MonoBehaviour
     public MMCameraShaker goal;
     public PlayableDirector introDirector;
     public PlayableDirector outroDirector;
+    public HeroUIController heroUIController;
     public void Start() {
         //match = Game.instance.activeMatch;
         ball.transform.position = new Vector3(0,1,0);
@@ -59,9 +60,16 @@ public class MatchController : MonoBehaviour
         SpawnPlayers();
         awayCoach.Init();
         homeCoach.Init();
+        if (match.home.stable == Game.instance.playerStable) { homeCoach.isPlayer = true; } else { awayCoach.isPlayer = true; }
         UpdateScoreboard();
+        UpdatePlayerUI();
         // StartCoroutine(DelayStart());
         introDirector.Play();
+    }
+
+    public void UpdatePlayerUI() {
+        heroUIController = FindObjectOfType<HeroUIController>();
+        heroUIController.Init(homeCoach.isPlayer ? homeCoach : awayCoach);
     }
     public void SpawnPlayers() {
         Game thisGame = Game.instance;
