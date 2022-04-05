@@ -24,7 +24,7 @@ namespace ES3Types
 			writer.WriteProperty("contractMarket", instance.contractMarket, ES3Internal.ES3TypeMgr.GetES3Type(typeof(System.Collections.Generic.List<MissionContract>)));
 			writer.WriteProperty("contractMarketSave", instance.contractMarketSave, ES3Internal.ES3TypeMgr.GetES3Type(typeof(System.Collections.Generic.List<MissionContractSave>)));
 			writer.WritePropertyByRef("missionContractList", instance.missionContractList);
-			writer.WriteProperty("modifierList", instance.modifierList, ES3Internal.ES3TypeMgr.GetES3Type(typeof(System.Collections.Generic.List<MoveModifier>)));
+			//writer.WriteProperty("modifierList", instance.modifierList, ES3Internal.ES3TypeMgr.GetES3Type(typeof(System.Collections.Generic.List<MoveModifier>)));
 			writer.WriteProperty("activeMatch", instance.activeMatch, ES3Internal.ES3TypeMgr.GetES3Type(typeof(League.Match)));
 		}
 
@@ -61,7 +61,7 @@ namespace ES3Types
 						instance.missionContractList = reader.Read<MissionList>();
 						break;
 					case "modifierList":
-						instance.modifierList = reader.Read<System.Collections.Generic.List<MoveModifier>>();
+						//instance.modifierList = reader.Read<System.Collections.Generic.List<MoveModifier>>();
 						break;
 					case "activeMatch":
 						instance.activeMatch = reader.Read<League.Match>();
