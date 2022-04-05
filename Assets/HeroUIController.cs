@@ -15,4 +15,4 @@ public class HeroUIController : MonoBehaviour
 
 }
 
-public enum Playstyle { Play, Fight }
+public enum PlayStyle { Play, Fight }

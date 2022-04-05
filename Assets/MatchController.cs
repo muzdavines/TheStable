@@ -36,17 +36,8 @@ public class MatchController : MonoBehaviour
 
     public void DebugInit() {
         Game game = Game.instance;
-        Stable player = game.playerStable = new Stable();
+        Stable player = game.playerStable = Instantiate(Resources.Load<StableSO>("StartingStable")).stable;
 
-        for (int i = 0; i < 8; i++) {
-            Character thisHero = new Character();
-            thisHero.name = "Player " + i.ToString();
-            thisHero.tackling = Random.Range(8, 18);
-            thisHero.carrying = Random.Range(8, 18);
-            thisHero.blocking = Random.Range(8, 18);
-            thisHero.modelName = "SCRogue";
-            player.heroes.Add(thisHero);
-        }
         Game.instance.Init();
         Game.instance.activeMatch = Game.instance.leagues[0].schedule[0];
         Init();

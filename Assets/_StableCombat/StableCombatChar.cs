@@ -40,6 +40,7 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
     //Combat
     public StableCombatChar myAttackTarget;
     public CombatFocus combatFocus;
+    public PlayStyle playStyle;
     public float aggroRadius = 100f;
     public float attackRange = 5f;
     public float lastAttack = 0f;
@@ -479,6 +480,13 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
 
     public void SetTackleCooldown() {
         tackleCooldown = Time.time + (4 - (myCharacter.tackling * .2f));
+    }
+
+    public void SetCombatFocus(CombatFocus newFocus) {
+        combatFocus = newFocus;
+    }
+    public void SetPlayStyle(PlayStyle newStyle) {
+        playStyle = newStyle;
     }
 
     public void MeleeScanDamage(string message) {

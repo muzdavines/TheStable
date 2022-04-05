@@ -16,10 +16,12 @@ public class HeroPlaystyleSelectController : MonoBehaviour
             case "Fight":
                 styleSelectorFight.GetComponent<Image>().color = Color.white;
                 styleSelectorPlay.GetComponent<Image>().color = Color.grey;
+                myChar.SetPlayStyle(PlayStyle.Fight);
                 break;
             case "Play":
                 styleSelectorFight.GetComponent<Image>().color = Color.grey;
                 styleSelectorPlay.GetComponent<Image>().color = Color.white;
+                myChar.SetPlayStyle(PlayStyle.Play);
                 break;
         }
     }
@@ -30,21 +32,23 @@ public class HeroPlaystyleSelectController : MonoBehaviour
             case "Melee":
                 combatSelectorMelee.GetComponent<Image>().color = Color.white;
                 combatSelectorRanged.GetComponent<Image>().color = Color.grey;
+                myChar.SetCombatFocus(CombatFocus.Melee);
                 break;
             case "Ranged":
                 combatSelectorMelee.GetComponent<Image>().color = Color.grey;
                 combatSelectorRanged.GetComponent<Image>().color = Color.white;
+                myChar.SetCombatFocus(CombatFocus.Ranged);
                 break;
         }
     }
 
-    public void SetPlaystyle(Playstyle _playStyle) {
+    public void SetPlaystyle(PlayStyle _playStyle) {
         switch (_playStyle) {
-            case Playstyle.Fight:
+            case PlayStyle.Fight:
                 styleSelectorFight.GetComponent<Image>().color = Color.white;
                 styleSelectorPlay.GetComponent<Image>().color = Color.grey;
                 break;
-            case Playstyle.Play:
+            case PlayStyle.Play:
                 styleSelectorFight.GetComponent<Image>().color = Color.grey;
                 styleSelectorPlay.GetComponent<Image>().color = Color.white;
                 break;
@@ -67,6 +71,6 @@ public class HeroPlaystyleSelectController : MonoBehaviour
     public void Init(StableCombatChar _myChar) {
         myChar = _myChar;
         SetCombatStyle(myChar.combatFocus);
-        SetPlaystyle(Playstyle.Play);
+        SetPlaystyle(PlayStyle.Play);
     }
 }
