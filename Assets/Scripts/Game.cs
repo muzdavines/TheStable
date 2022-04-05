@@ -56,7 +56,9 @@ public class Game : MonoBehaviour {
     public MissionList missionContractList;
     public List<MoveModifier> modifierList;
     public League.Match activeMatch;
+    public int tutorialStageFinished = 0;
     public void Start() {
+    
         transform.name = "Game";
         DontDestroyOnLoad(gameObject);
         

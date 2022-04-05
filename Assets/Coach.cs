@@ -9,6 +9,7 @@ public class Coach : MonoBehaviour
     public StableCombatChar[] otherTeam;
     public List<StableCombatChar> pursuingBall;
     Ball ball;
+    public bool isPlayer;
     
     public Transform[] positions;
     private void Start() {

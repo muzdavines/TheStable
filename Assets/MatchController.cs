@@ -25,6 +25,7 @@ public class MatchController : MonoBehaviour
     public MMCameraShaker goal;
     public PlayableDirector introDirector;
     public PlayableDirector outroDirector;
+    public HeroUIController heroUIController;
     public void Start() {
         //match = Game.instance.activeMatch;
         ball.transform.position = new Vector3(0,1,0);
@@ -35,17 +36,8 @@ public class MatchController : MonoBehaviour
 
     public void DebugInit() {
         Game game = Game.instance;
-        Stable player = game.playerStable = new Stable();
+        Stable player = game.playerStable = Instantiate(Resources.Load<StableSO>("StartingStable")).stable;
 
-        for (int i = 0; i < 8; i++) {
-            Character thisHero = new Character();
-            thisHero.name = "Player " + i.ToString();
-            thisHero.tackling = Random.Range(8, 18);
-            thisHero.carrying = Random.Range(8, 18);
-            thisHero.blocking = Random.Range(8, 18);
-            thisHero.modelName = "SCRogue";
-            player.heroes.Add(thisHero);
-        }
         Game.instance.Init();
         Game.instance.activeMatch = Game.instance.leagues[0].schedule[0];
         Init();
@@ -59,9 +51,16 @@ public class MatchController : MonoBehaviour
         SpawnPlayers();
         awayCoach.Init();
         homeCoach.Init();
+        if (match.home.stable == Game.instance.playerStable) { homeCoach.isPlayer = true; } else { awayCoach.isPlayer = true; }
         UpdateScoreboard();
+        UpdatePlayerUI();
         // StartCoroutine(DelayStart());
         introDirector.Play();
+    }
+
+    public void UpdatePlayerUI() {
+        heroUIController = FindObjectOfType<HeroUIController>();
+        heroUIController.Init(homeCoach.isPlayer ? homeCoach : awayCoach);
     }
     public void SpawnPlayers() {
         Game thisGame = Game.instance;
