@@ -5,7 +5,7 @@ using UnityEngine;
 using VikingCrew.Tools.UI;
 using System.Globalization;
 using System.IO;
-using Newtonsoft.Json;
+
 using System.Text.RegularExpressions;
 using HardCodeLab.TutorialMaster;
 using UnityEngine.SceneManagement;
@@ -130,7 +130,7 @@ public class Game : MonoBehaviour {
         StreamReader reader = new StreamReader(path);
         var myText = reader.ReadToEnd();
         reader.Close();
-        modifierList = JsonConvert.DeserializeObject<List<MoveModifier>>(myText);
+        //modifierList = JsonConvert.DeserializeObject<List<MoveModifier>>(myText);
     }
 
     public void Advance() {
