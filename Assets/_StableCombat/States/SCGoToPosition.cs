@@ -20,7 +20,7 @@ public class SCGoToPosition : StableCombatCharState {
         }
         thisChar.agent.SetDestination(myPosition.position);
         if (Vector3.Distance(thisChar.transform.position, myPosition.position) < 1.5f) {
-            thisChar.CombatIdle();
+            //thisChar.CombatIdle();
         }
     }
 

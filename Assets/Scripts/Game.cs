@@ -112,6 +112,12 @@ public class Game : MonoBehaviour {
                 thisHero.GenerateCharacter((Character.Archetype)(Random.Range(0, 4)), 1);
                 thisStable.heroes.Add(thisHero);
             }
+            var GKHero = new Character();
+            GKHero.name = Names.Warrior[Random.Range(0, Names.Warrior.Length)];
+            GKHero.GenerateCharacter(Character.Archetype.Goalkeeper);
+            GKHero.currentPosition = Position.GK;
+            GKHero.activeInLineup = true;
+            thisStable.heroes.Add(GKHero);
             otherStables.Add(thisStable);
         }
     }
@@ -307,7 +313,7 @@ public static class Helper {
     }
     
     public static Color GetCellViewColor() {
-        return new Color(1, 1, 1, .396f);
+        return new Color(1, 1, 1, .8f);
     }
     public static void Speech(Transform _t, string text, float delay = 0f) {
         text = text.Replace("NEWLINE", "\n");

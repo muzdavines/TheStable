@@ -33,6 +33,7 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
     public MMFeedbacks sendOnRun;
     public MMFeedbacks takeDamage;
     public MMFeedbacks playerHasBall;
+    public MMFeedbacks shotAccuracy;
     public Vector3 position { get { return _t.position; } }
     public Coach coach;
     
@@ -50,6 +51,22 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
 
     //Combat Attributes
     public float health, stamina, balance, mind, maxHealth, maxStamina, maxBalance, maxMind;
+    [System.Serializable]
+    public class Mod {
+        public float timeEnd;
+        public float modAmount;
+        public GameObject modEffect;
+        public ModType modType;
+    }
+    [SerializeField]
+    public List<Mod> mods = new List<Mod>();
+
+    //Status
+
+    public bool isKnockedDown { get { return state.GetType() == typeof(SCGetTackled) || state.GetType() == typeof(SCKnockdown) || state.GetType() == typeof(SCCombatDowned); } }
+
+    //Sport
+    public float tackleCooldown; //Time after which the player can tackle again
 
     public void Init()
     {
@@ -167,6 +184,12 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
    void Update()
     {
         state.Update();
+        for (int i = 0; i < mods.Count; i++) {
+            if (mods[i] != null && Time.time >= mods[i].timeEnd) {
+                EndMod(mods[i]);
+                mods[i] = null;
+            }
+        }
     }
     
     public bool ShouldPursueBall() {
@@ -195,18 +218,45 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
         return false;
     }
 
+    public GuardNetPosition ShouldGuardNet() {
+        bool centerTaken = false;
+        bool leftTaken = false;
+        bool rightTaken = false;
+        
+        foreach (StableCombatChar teammate in coach.players) {
+            if (teammate.state.GetType() != typeof(SCGuardNet)) { continue; }
+            GuardNetPosition currentPos = ((SCGuardNet)teammate.state).guardPosition;
+            if (currentPos == GuardNetPosition.Center) {
+                centerTaken = true;
+            }
+            if (currentPos == GuardNetPosition.Left) {
+                leftTaken = true;
+            }
+            if (currentPos == GuardNetPosition.Right) {
+                rightTaken = true;
+            }
+        }
+       if (!centerTaken) { return GuardNetPosition.Center; }
+       if (!leftTaken) { return GuardNetPosition.Left; }
+       if (!rightTaken) { return GuardNetPosition.Right; }
+       return GuardNetPosition.None;
+    }
     public bool ShouldPass() {
-        Collider[] hitColliders = Physics.OverlapSphere(transform.position, 10f);
+        Vector3 goalDirection = enemyGoal.transform.position - transform.position;
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, 7f);
         foreach (var hitCollider in hitColliders) {
             var checkChar = hitCollider.GetComponent<StableCombatChar>();
             if (checkChar != null) {
-                if (checkChar.team != team) {
+                Vector3 hitDirection = hitCollider.transform.position - transform.position;
+
+                if (checkChar.team != team && Vector3.Dot(hitDirection, goalDirection) > 4f)  {
                     return true;
                 }
             }
         }
         foreach (var teammate in coach.players) {
-            if (enemyGoal.Distance(this) > enemyGoal.Distance(teammate)) {
+            float distToGoal = enemyGoal.Distance(teammate);
+            if (distToGoal < 15 && enemyGoal.Distance(this) > distToGoal) {
                 return true;
             }
         }
@@ -219,14 +269,19 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
 #if UNITY_EDITOR
             Debug.Log("#PassTargetEval#" + teammate.name + " current state is " + teammate.state.GetType().ToString());
 #endif
+            if (teammate.isKnockedDown) {
+                Debug.Log("#PassTargetEval#" + teammate.name + " is too knocked down.");
+                continue;
+            }
             if (Vector3.Distance(teammate.transform.position, position) < 7) {
                 Debug.Log("#PassTargetEval#" + teammate.name + " is too close");
                 continue;
             }
-            if (teammate.state.GetType() == typeof(SCKnockdown)) {
-                Debug.Log("#PassTargetEval#" + teammate.name + " is too knocked down.");
+            if (Vector3.Distance(teammate.transform.position, position) > 25) {
+                Debug.Log("#PassTargetEval#" + teammate.name + " is too far");
                 continue;
             }
+
             RaycastHit hit;
             if (Physics.Raycast(position, (teammate.position - position), out hit)){
                 if (hit.transform.GetComponent<StableCombatChar>() != teammate) {
@@ -311,6 +366,10 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
     public void Shoot() {
         state.TransitionTo(new SCShoot());
     }
+    public void DisplayShotAccuracy(float accuracy) {
+        shotAccuracy.GetComponent<MMFeedbackFloatingText>().Value = (accuracy.ToString("F1"));
+        shotAccuracy.PlayFeedbacks();
+    }
     public void PursueBallCarrier() {
         state.TransitionTo(new SCPursueBallCarrier());
     }
@@ -325,7 +384,14 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
             goOnRun.PlayFeedbacks();
         }
     }
+    public void GoNearEnemyGoal() {
+        state.TransitionTo(new SCGoNearEnemyGoal());
+    }
     public void OneTimerToGoal() {
+        if (myCharacter.archetype == Character.Archetype.Defender) {
+            Idle();
+            return;
+        }
         state.TransitionTo(new SCOneTimerToGoal());
     }
     public void Tackle() {
@@ -337,6 +403,22 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
     public void DodgeTackle(StableCombatChar tackler) {
         state.TransitionTo(new SCDodgeTackle() { tackler = tackler });
     }
+    public void BreakTackle(StableCombatChar tackler) {
+        state.TransitionTo(new SCBreakTackle { tackler = tackler });
+    }
+
+    public void GetStripped(StableCombatChar tackler) {
+        state.TransitionTo(new SCGetStripped() { tackler = tackler });
+    }
+    public void AvoidStrip(StableCombatChar tackler) {
+        state.TransitionTo(new SCAvoidStrip() { tackler = tackler });
+    }
+    public void SuccessStrip() {
+        state.TransitionTo(new SCSuccessStrip());
+    }
+    public void FailStrip() {
+        state.TransitionTo(new SCFailStrip());
+    }
     public void MissTackle() {
         state.TransitionTo(new SCMissTackle());
     }
@@ -346,7 +428,14 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
     public void Block() {
         state.TransitionTo(new SCBlockForTeammate());
     }
-
+    public void BackOffCarrier(bool resetCooldowns = false) {
+        if (isKnockedDown) { return; }
+        if (resetCooldowns) { SetTackleCooldown(); }
+        state.TransitionTo(new SCBackOffCarrier());
+    }
+    public void IntroState(Transform pos) {
+        state.TransitionTo(new SCIntroState() { myPos = pos });
+    }
     public void GoalScored() {
         state.TransitionTo(new SCGoalScored());
     }
@@ -365,6 +454,34 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
 
     public void GetRevived() {
         state.TransitionTo(new SCCombatRevive());
+    }
+
+    public void GuardNet(GuardNetPosition myPos) {
+        state.TransitionTo(new SCGuardNet() { guardPosition = myPos });
+    }
+
+
+    public void GKDiveForBall() {
+
+    }
+    public void GKPursueBall() {
+        state.TransitionTo(new SCPursueBall());
+    }
+    public void GKDefendNet() {
+        state.TransitionTo(new SCGKDefendNet());
+    }
+    public void GKIdle() {
+        state.TransitionTo(new SCGKIdle());
+    }
+    public void GKIdleWithBall() {
+        state.TransitionTo(new SCGKIdleWithBall());
+    }
+    public void GKClearBall() {
+        state.TransitionTo(new SCGKClearBall());
+    }
+
+    public void SetTackleCooldown() {
+        tackleCooldown = Time.time + (4 - (myCharacter.tackling * .2f));
     }
 
     public void MeleeScanDamage(string message) {
@@ -405,21 +522,41 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
 
     float lastRunCalled;
     public void SendTeammateOnRun() {
-       if (lastRunCalled + 3 < Time.time) {
+       if (lastRunCalled + 1.5f < Time.time) {
             lastRunCalled = Time.time;
-            int teammateToSend = Random.Range(0, coach.players.Length);
-            state.SendMessage(coach.players[teammateToSend], "RunToOpposingGoal");
+            StableCombatChar nearest = GetNearestTeammate();
+            nearest.GoNearEnemyGoal();
+            
+            //int teammateToSend = Random.Range(0, coach.players.Length);
+            //state.SendMessage(coach.players[teammateToSend], "RunToOpposingGoal");
             //sendOnRun.PlayFeedbacks();
        }
     }
     public StableCombatChar GetNearestTeammate() {
         StableCombatChar[] allChars =FindObjectsOfType<StableCombatChar>();
         foreach (var c in allChars) {
+            if (c == this) { continue; }
+            if (c.isKnockedDown) { continue; }
             if (c.team == team) {
                 return c;
             }
         }
         return null;
+    }
+
+    public StableCombatChar GetFarthestTeammateNearGoal() {
+        float maxDist = 0;
+        StableCombatChar returnChar = null;
+        foreach (StableCombatChar c in coach.players) {
+            if (c == this) { continue; }
+            if (c.isKnockedDown) { continue; }
+            if (enemyGoal.Distance(c) < 20 && c.Distance(this) > maxDist) {
+                maxDist = c.Distance(this);
+                returnChar = c;
+            }
+        }
+        if (maxDist < 3) { returnChar = null; }
+        return returnChar;
     }
 
     public bool MyTargetIsInAttackRange() {
@@ -540,19 +677,38 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
         
     }
 
+    public void AddMod(Mod thisMod) {
+        Debug.Log("#MOD#AddMOD "+ thisMod.modAmount);
+        switch (thisMod.modType) {
+            case ModType.Speed:
+                agent.speed += myCharacter.runspeed * .4f * thisMod.modAmount;
+                break;
+        }
+        mods.Add(thisMod);
+    }
+    public void EndMod(Mod thisMod) {
+        Debug.Log("#MOD#endMOD " + thisMod.modAmount);
+        switch (thisMod.modType) {
+            case ModType.Speed:
+                agent.speed -= myCharacter.runspeed * .4f * thisMod.modAmount;
+                break;
+        }
+    }
+
     
     void OnDrawGizmos() {
 #if UNITY_EDITOR
         if (debugState && state!=null) {
-            Handles.Label(transform.position+new Vector3(0,2,0), state.GetType().ToString() + "\nTackling: " + myCharacter.tackling + "\nDodging: " + myCharacter.carrying + "\nType: "+myCharacter.archetype);
+            Handles.Label(_t.position + new Vector3(0, 2, 0), state.GetType().ToString());
         }
 #endif
     }
     
 
 }
-
-public enum Position { NA, LW, STR, STL, STC, RW, LM, LCM, MC, RCM, RM, DL, LDC, DC, RDC, DR }
+public enum ModType { Speed, DOT}
+public enum Position { NA, LW, STR, STL, STC, RW, LM, LCM, MC, RCM, RM, DL, LDC, DC, RDC, DR, GK }
+public enum TackleType { Tackle, Strip }
 public enum CombatFocus { Melee, Ranged }
 public static class StableCombatCharHelper {
     public static void ResetAllTriggers(this Animator anim) {
@@ -565,5 +721,9 @@ public static class StableCombatCharHelper {
     }
     public static float Distance(this StableCombatChar thisChar, StableCombatChar otherChar) {
         return Vector3.Distance(thisChar.position, otherChar.position);
+    }
+
+    public static bool IsForward(this Position pos) {
+        return (pos == Position.LW || pos == Position.STR || pos == Position.STL || pos == Position.STC || pos == Position.RW);
     }
 }

@@ -4,9 +4,13 @@ using UnityEngine;
 
 public class SCPursueBallCarrier : StableCombatCharState
 {
-
+    bool speedBoosted;
     public override void EnterFrom(StableCombatCharState state) {
         base.EnterFrom(state);
+        if (Time.time < thisChar.tackleCooldown) {
+            thisChar.BackOffCarrier(false);
+            return;
+        }
     }
     public override void Update() {
         base.Update();
@@ -16,10 +20,34 @@ public class SCPursueBallCarrier : StableCombatCharState
         }
         Vector3 myPos = thisChar.transform.position;
         Vector3 holderPos = thisChar.ball.holder.transform.position;
-        if (Vector3.Distance(thisChar.transform.position, thisChar.ball.holder.transform.position)<=1) {
+        if (Vector3.Distance(thisChar.transform.position, thisChar.ball.holder.transform.position) <= 2f) {
             var resolution = thisChar.state.SendMessage(thisChar.ball.holder, "TryTackle");
-            bool didTackle = (resolution != null && resolution.success);
-            if (didTackle) { thisChar.Tackle(); return; } else { thisChar.MissTackle(); return; }
+            if (resolution == null) {
+                Debug.Log("#Tackle# Resolution Null");
+                thisChar.MissTackle();
+            } else {
+                switch (resolution.tackleType) {
+                    case TackleType.Strip:
+                        if (resolution.success) {
+                            thisChar.SuccessStrip();
+                        } else {
+                            thisChar.FailStrip();
+                        }
+                        break;
+                    case TackleType.Tackle:
+                        if (resolution.success) {
+                            thisChar.Tackle();
+                        }
+                        else {
+                            thisChar.MissTackle();
+                        }
+                        break;
+                }
+            }
+        }
+        if (!speedBoosted && Vector3.Distance(thisChar.position, holderPos) < 8) {
+            speedBoosted = true;
+            thisChar.AddMod(new StableCombatChar.Mod() { modAmount = thisChar.myCharacter.tackling * .05f, timeEnd = Time.time + 2f });
         }
         thisChar.agent.SetDestination(holderPos);
         thisChar.agent.isStopped = false;
@@ -41,13 +69,5 @@ public class SCPursueBallCarrier : StableCombatCharState
         else return null;
     }
 
-    SCResolution TryBlock(StableCombatChar blocker) {
-        var res = new SCResolution();
-        int tackling = blocker.myCharacter.blocking;
-        int dodging = thisChar.myCharacter.carrying;
-        float roll = Random.Range(0, dodging + 1) - Random.Range(0, tackling + 1);
-        Debug.Log("#DiceRoll#Dodge Roll: " + roll);
-        if (roll >= 0) { res.success = false; thisChar.DodgeTackle(blocker); } else { res.success = true; thisChar.GetTackled(blocker); }
-        return res;
-    }
+    
 }

@@ -12,6 +12,8 @@ public class Training : ScriptableObject {
     public int duration = 0;
     [Tooltip("One time cost per point")]
     public int cost = 0;
+    [Tooltip("Number of Points to Add Per Training")]
+    public int amount = 1;
     public Game.GameDate dateToTrain = new Game.GameDate() {year = 99999 };
     [SerializeField]
     public Move moveToTrain;

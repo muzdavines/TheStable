@@ -19,8 +19,17 @@ public class SCOneTimerToGoal : StableCombatCharState {
         base.AnimEventReceiver(message);
     }
     public override void BallCollision(Collision collision) {
-        ball.lastHolder = thisChar;
-        ball.Shoot(thisChar.enemyGoal);
+        // Failed One Timer
+        if (Random.value > thisChar.myCharacter.shooting * .01f)
+        {
+            thisChar.GetTackled(null);
+        }
+        // Succeed One Timer
+        else
+        {
+            ball.lastHolder = thisChar;
+            ball.Shoot(thisChar.enemyGoal.transform.position + (thisChar.enemyGoal.transform.right * Random.Range(2f, 2.5f) * (Random.Range(0f, 1f) > .5f ? 1 : -1)), 0, 1);
+        }
     }
 
     public override void WillExit() {

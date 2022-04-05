@@ -9,15 +9,24 @@ public class SCCombatIdle : SCCombatStanceState {
         Debug.Log("#SCCombatStance#Combat Idle Enter "+thisChar.myCharacter.name);
         thisChar.anima.Idle();
         thisChar.agent.isStopped = true;
-
-        if (thisChar.fieldSport && thisChar == ball.holder) {
-            thisChar.RunToGoalWithBall();
-            return;
+        if (thisChar.fieldSport) {
+            if (thisChar.fieldPosition == Position.GK) { thisChar.GKIdle(); return; }
+            if (thisChar == ball.holder) {
+                thisChar.RunToGoalWithBall();
+                return;
+            }
+            if (ball.Distance(thisChar) < 20) {
+                thisChar.Idle();
+                return;
+            }
         }
-        if (thisChar.myAttackTarget?.state.GetType() == typeof(SCCombatDowned)) {
+        
+        if (thisChar.myAttackTarget != null && thisChar.myAttackTarget.isKnockedDown) {
             thisChar.myAttackTarget = null;
             thisChar.Idle();
+            return;
         }
+        
         switch (thisChar.combatFocus) {
             case CombatFocus.Melee:
                 thisChar.attackRange = 1.2f;

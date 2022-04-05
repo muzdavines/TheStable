@@ -10,9 +10,9 @@ public class SCRunToGoalWithBall : SCBallCarrierState
         enterTime = Time.time;
         thisChar.agent.isStopped = false;
         thisChar.agent.speed = thisChar.myCharacter.runspeed * .33f;
-        thisChar.agent.SetDestination(thisChar.enemyGoal.transform.position);
+        thisChar.agent.SetDestination(thisChar.enemyGoal.transform.position + thisChar.enemyGoal.transform.forward * 5 + thisChar.enemyGoal.transform.right * (Random.value - .5f));
         canGrabBall = false;
-        Debug.Log("Check for one timer here");
+        //Debug.Log("Check for one timer here");
     }
     public override void Update() {
         base.Update();
@@ -26,7 +26,7 @@ public class SCRunToGoalWithBall : SCBallCarrierState
             return;
         }
         thisChar.SendTeammateOnRun();
-        if (Time.time < enterTime + 1.5f) { return; }
+        //if (Time.time < enterTime + Random.Range(0,2f)) { return; }
         if (thisChar.ShouldPass()) {
             var passTarget = thisChar.GetPassTarget();
             if (passTarget != null) {

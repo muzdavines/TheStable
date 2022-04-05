@@ -7,12 +7,28 @@ using EnhancedScrollerDemos.CellEvents;
 public class HeroCellView : EnhancedScrollerCellView
 {
     public Text heroNameText;
+    public Text shooting, passing, tackling, carrying, melee, ranged, magic, speed, dex, agi, str, meleeWeapon, rangedWeapon;
+    public Text archetype;
     public Character thisChar;
     public Color defaultColor;
     public void SetData(Character data)
     {
         thisChar = data;
         heroNameText.text = data.name;
+        shooting.text = "Shooting: "+data.shooting;
+        passing.text = "Passing: "+data.passing;
+        tackling.text = "Tackling: "+data.tackling;
+        carrying.text = "Carrying: "+data.carrying;
+        melee.text = "Melee: "+data.melee;
+        ranged.text = "Ranged: "+data.ranged;
+        magic.text = "Magic: "+data.magic;
+        speed.text = "Speed: "+data.runspeed;
+        dex.text = "Dexterity: "+data.dexterity;
+        agi.text = "Agility: "+data.agility;
+        str.text = "Strength: "+data.strength;
+        meleeWeapon.text = "Melee Weapon: "+data.meleeWeapon?.itemName;
+        rangedWeapon.text = "Ranged Weapon: "+data.rangedWeapon?.itemName;
+        archetype.text = data.archetype.ToString();
         GetComponent<Image>().color = Helper.GetCellViewColor();
     }
 

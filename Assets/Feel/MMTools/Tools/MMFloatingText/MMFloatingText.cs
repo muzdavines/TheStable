@@ -296,7 +296,8 @@ namespace MoreMountains.Tools
             _alignmentMode = alignmentMode;
             _fixedAlignment = fixedAlignment;
             _alwaysFaceCamera = alwaysFaceCamera;
-            _targetCamera = targetCamera;
+            _targetCamera = Camera.main;
+            //_targetCamera = targetCamera;
             _animateOpacity = animateOpacity;
             _animateOpacityCurve = animateOpacityCurve;
             _remapOpacityZero = remapOpacityZero;

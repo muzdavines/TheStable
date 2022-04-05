@@ -4,8 +4,7 @@ using UnityEngine;
 using Animancer;
 using UnityEngine.AI;
 
-public class AnimancerController : MonoBehaviour
-{
+public class AnimancerController : MonoBehaviour {
     public LinearMixerTransitionAsset.UnShared movement;
     public AnimancerComponent anim;
     public AnimancerAnimSet animSet;
@@ -18,6 +17,10 @@ public class AnimancerController : MonoBehaviour
     public ClipTransition catchBall;
     public ClipTransition missTackle;
     public ClipTransition[] dodgeTackle;
+    public ClipTransition avoidStrip;
+    public ClipTransition failStrip;
+    public ClipTransition getStripped;
+    public ClipTransition successStrip;
     public ClipTransition oneTimer;
     public ClipTransition goalScored;
     public ClipTransition takeDamage;
@@ -28,20 +31,23 @@ public class AnimancerController : MonoBehaviour
     public List<Move> baseRangedAttackMoves;
     NavMeshAgent agent;
     StableCombatChar thisChar;
-
+    public bool shouldBackpedal;
     public enum SkillAnims { Hunt = 0, NavigateLand = 0 };
 
     private void Awake() {
         Debug.Log("Init AnimSet");
         animSet.Init(this);
     }
-    void Start()
-    {
+    void Start() {
         thisChar = GetComponent<StableCombatChar>();
         anim = GetComponent<AnimancerComponent>();
         agent = GetComponent<NavMeshAgent>();
-        baseMeleeAttackMoves = thisChar.meleeAttackMoves;
-        baseRangedAttackMoves = thisChar.rangedAttackMoves;
+        if (thisChar != null) {
+            baseMeleeAttackMoves = thisChar.meleeAttackMoves;
+            baseRangedAttackMoves = thisChar.rangedAttackMoves;
+            anim.Play(failStrip);
+        }
+        Idle();
     }
 
     public void Idle() {
@@ -49,9 +55,9 @@ public class AnimancerController : MonoBehaviour
         movement.State.Root.Component.Animator.applyRootMotion = false;
     }
     // _Animancer.Play(_Action, 0.25f, FadeMode.FromStart)
-                //.Events.OnEnd = () => _Animancer.Play(_Idle, 0.25f);
+    //.Events.OnEnd = () => _Animancer.Play(_Idle, 0.25f);
     public void Knockdown() {
-        anim.Play(knockdown, .25f, FadeMode.FromStart).Events.OnEnd = () => anim.Play(downOnGround, .25f).Events.OnEnd = () => anim.Play(stayOnGround, .25f).Events.OnEnd =() => thisChar.Idle();     
+        anim.Play(knockdown, .25f, FadeMode.FromStart).Events.OnEnd = () => anim.Play(downOnGround, .25f).Events.OnEnd = () => anim.Play(stayOnGround, .25f).Events.OnEnd = () => thisChar.Idle();
     }
 
     public void MissTackle() {
@@ -85,7 +91,25 @@ public class AnimancerController : MonoBehaviour
         anim.Play(dodgeTackle[thisClip], .25f, FadeMode.FromStart).Events.OnEnd = () => thisChar.Idle();
         dodgeTackle[thisClip].State.Root.Component.Animator.applyRootMotion = true;
     }
+    public void AvoidStrip() {
+        anim.Play(avoidStrip, .25f, FadeMode.FromStart).Events.OnEnd = () => thisChar.Idle();
+        avoidStrip.State.Root.Component.Animator.applyRootMotion = true;
+    }
+    public void GetStripped() {
+        anim.Play(getStripped, .25f, FadeMode.FromStart).Events.OnEnd = () => thisChar.Idle();
+        getStripped.State.Root.Component.Animator.applyRootMotion = true;
+    }
 
+    public void SuccessStrip() {
+        anim.Play(successStrip, .25f, FadeMode.FromStart).Events.OnEnd = () => thisChar.Idle();
+        successStrip.State.Root.Component.Animator.applyRootMotion = true;
+    }
+
+    public void FailStrip() {
+        anim.Play(successStrip, .25f, FadeMode.FromStart).Events.OnEnd = () => anim.Play(failStrip, .25f, FadeMode.FromStart).Events.OnEnd = () => thisChar.Idle();
+        successStrip.State.Root.Component.Animator.applyRootMotion = true;
+        failStrip.State.Root.Component.Animator.applyRootMotion = true;
+    }
     public void CatchBall() {
         Debug.Log("#TODO# Add Mask for Catching");
         anim.Play(catchBall, .25f, FadeMode.FromStart).Events.OnEnd = () => thisChar.Idle();
@@ -109,6 +133,9 @@ public class AnimancerController : MonoBehaviour
     public void SkillGeneric() {
         Debug.Log("#TODO#Generic Skill Fired in Animancer Controller");
         anim.Play(skills[(int)SkillAnims.Hunt], .25f, FadeMode.FromStart).Events.OnEnd = () => Idle();
+    }
+    public void GKBored() {
+
     }
     public int currentMeleeAttackIndex;
     public Move currentMeleeMove;
@@ -182,6 +209,6 @@ public class AnimancerController : MonoBehaviour
 
     void Update()
     {
-        movement.State.Parameter = GetComponent<NavMeshAgent>().velocity.magnitude;
+        movement.State.Parameter = GetComponent<NavMeshAgent>().velocity.magnitude * (shouldBackpedal ? -1 : 1);
     }
 }

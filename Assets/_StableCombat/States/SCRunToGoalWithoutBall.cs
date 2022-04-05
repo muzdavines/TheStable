@@ -15,8 +15,8 @@ public class SCRunToGoalWithoutBall : SCTeammateBallCarrierState
     public override void Update() {
         base.Update();
         thisChar.agent.isStopped = false;
-        thisChar.agent.SetDestination(thisChar.enemyGoal.transform.position+ thisChar.enemyGoal.transform.forward*3);
-        if (enemyGoal.Distance(thisChar) < 4) {
+        thisChar.agent.SetDestination(thisChar.enemyGoal.transform.position+ thisChar.enemyGoal.transform.forward*5);
+        if (enemyGoal.Distance(thisChar) < 6) {
             thisChar.Idle();
         }
         if (!thisChar.ball.isHeld || (thisChar.ball.TeamHolding() != thisChar.team)) {

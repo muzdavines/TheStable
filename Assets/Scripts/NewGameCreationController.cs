@@ -14,7 +14,7 @@ public class NewGameCreationController : MonoBehaviour
     public List<Item> startingItems;
     public List<Finance.Business> startingBusinesses;
     public string myText;
-    
+    public string activeStablemasterType;
    
     public void Start()
     {
@@ -22,6 +22,7 @@ public class NewGameCreationController : MonoBehaviour
         {
             heroes.Add(new Character() { name = Names.Warrior[Random.Range(0, Names.Warrior.Length)], age = 18, modelName = "CharWarrior2" });
         }
+        activeStablemasterType = "Warlord";
         
     }
     public void OnClick (string warlord)
@@ -31,12 +32,12 @@ public class NewGameCreationController : MonoBehaviour
     public void CreateNewGame(string warlord) {
 
         DontDestroyOnLoad(gameObject);
-        SceneManager.LoadScene("StableManagement");
+        SceneManager.LoadScene("CutScene1");
         Game game = Game.instance;
         Stable player = game.playerStable = new Stable();
-
+        warlord = activeStablemasterType;
         switch (warlord) {
-            case "Warrior":
+            case "Warlord":
                 player.warlord.InitWarlord(CharClass.Warrior);
                 break;
             case "Wizard":
@@ -69,6 +70,12 @@ public class NewGameCreationController : MonoBehaviour
             }
             player.heroes.Add(thisHero);
         }
+        var GKHero = new Character();
+        GKHero.name = Names.Warrior[Random.Range(0, Names.Warrior.Length)];
+        GKHero.GenerateCharacter(Character.Archetype.Goalkeeper);
+        GKHero.currentPosition = Position.GK;
+        GKHero.activeInLineup = true;
+        player.heroes.Add(GKHero);
         Game.instance.playerStable.finance.AddRevenue(startingGold);
         //Game.instance.playerStable.availableTrainings.Add(new Training() { type = Training.Type.Attribute, training = "negotiating", duration = 2, cost = 50 });
         foreach (var training in trainingAdds) {
@@ -83,9 +90,11 @@ public class NewGameCreationController : MonoBehaviour
         Game.instance.Init();
         Destroy(gameObject);
     }
-
+    public void ChangeStablemasterType(string s) {
+        activeStablemasterType = s;
+    }
     public void LoadGame() {
-        SceneManager.LoadScene("StableManagement");
+        SceneManager.LoadScene("CutScene1");
     }
 
 }

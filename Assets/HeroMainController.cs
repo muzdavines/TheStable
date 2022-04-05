@@ -7,6 +7,7 @@ public class HeroMainController : MonoBehaviour
 {
     public Character activeChar;
     public TextMeshProUGUI heroName, heroType, games, goals, assists, tackles, kos, shooting, passing, tackling, carrying, melee, ranged, magic, speed, dex, agi, str;
+    public TextMeshProUGUI knownMoves;
     public StableManagementController controller;
     public GameObject panel;
     public GameObject movePanelMelee, movePanelRanged, weaponPanel, trainingPanel;
@@ -38,6 +39,11 @@ public class HeroMainController : MonoBehaviour
         dex.text = activeChar.dexterity.ToString();
         agi.text = activeChar.agility.ToString();
         str.text = activeChar.strength.ToString();
+        string moveString = "";
+        foreach (Move m in activeChar.knownMoves) {
+            moveString += m.name + "\n";
+        }
+        knownMoves.text = moveString;
     }
 
     public void OpenPanel(Character _active) {
@@ -60,7 +66,7 @@ public class HeroMainController : MonoBehaviour
     }
 
     public void OpenTraining() {
-        controller.OnClick(training.gameObject);
+        //controller.OnClick(training.gameObject);
         training.gameObject.SetActive(true);
         training.Init(activeChar);
 

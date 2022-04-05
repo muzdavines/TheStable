@@ -4,8 +4,10 @@ using UnityEngine;
 
 public class SCCombatAttack : SCCombatStanceState
 {
+    public float timeOut;
     public override void EnterFrom(StableCombatCharState state) {
         base.EnterFrom(state);
+        timeOut = Time.time + 8f;
         switch (thisChar.combatFocus) {
             case CombatFocus.Melee:
                 thisChar.anima.FireBaseMeleeAttackMoves();
@@ -23,6 +25,7 @@ public class SCCombatAttack : SCCombatStanceState
     public override void Update() {
         base.Update();
         thisChar.agent.isStopped = true;
+        if (Time.time >= timeOut) { thisChar.MeleeScanDamage("EndAll"); thisChar.Idle(); }
     }
 
     public override void AnimEventReceiver(string message) {

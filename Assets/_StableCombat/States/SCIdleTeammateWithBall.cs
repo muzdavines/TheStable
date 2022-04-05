@@ -4,15 +4,21 @@ using UnityEngine;
 
 public class SCIdleTeammateWithBall : SCTeammateBallCarrierState
 {
+    Vector3 goalOffset = Vector3.zero;
+    
     public override void EnterFrom(StableCombatCharState state) {
         base.EnterFrom(state);
         //thisChar.anim.ResetAllTriggers();
         thisChar.anima.Idle();
         thisChar.agent.isStopped = true;
+        if (thisChar.enemyGoal.Distance(thisChar) < 40 || thisChar.fieldPosition.IsForward()) {
+            thisChar.GoNearEnemyGoal();
+        } else {
+            thisChar.Block();
+        }
     }
     public override void Update() {
         base.Update();
-        thisChar.Block();
     }
 
     public override void AnimEventReceiver(string message) {

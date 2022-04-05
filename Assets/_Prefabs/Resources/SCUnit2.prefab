@@ -2031,7 +2031,7 @@ MonoBehaviour:
   ball: {fileID: 0}
   distToTrackBall: 90
   distToTrackEnemy: 0
-  distToShoot: 10
+  distToShoot: 18
   distToTrackBallCarrier: 90
   myGoal: {fileID: 0}
   enemyGoal: {fileID: 0}
@@ -2042,6 +2042,7 @@ MonoBehaviour:
   sendOnRun: {fileID: 8561113731472435861}
   takeDamage: {fileID: 413123037887526915}
   playerHasBall: {fileID: 448348476155145406}
+  shotAccuracy: {fileID: 6699327196387180237}
   coach: {fileID: 0}
   myAttackTarget: {fileID: 0}
   combatFocus: 0
@@ -2068,6 +2069,7 @@ MonoBehaviour:
   maxStamina: 0
   maxBalance: 0
   maxMind: 0
+  tackleCooldown: 0
   accumulatedCooldown: 0
 --- !u!114 &1753713943490138917
 MonoBehaviour:
@@ -2198,6 +2200,42 @@ MonoBehaviour:
     _Clip: {fileID: 0}
     _Speed: 1
     _NormalizedStartTime: 0
+  avoidStrip:
+    _FadeDuration: 0.25
+    _Events:
+      _NormalizedTimes: []
+      _Callbacks: []
+      _Names: []
+    _Clip: {fileID: 0}
+    _Speed: 1
+    _NormalizedStartTime: 0
+  failStrip:
+    _FadeDuration: 0.25
+    _Events:
+      _NormalizedTimes: []
+      _Callbacks: []
+      _Names: []
+    _Clip: {fileID: 0}
+    _Speed: 1
+    _NormalizedStartTime: 0
+  getStripped:
+    _FadeDuration: 0.25
+    _Events:
+      _NormalizedTimes: []
+      _Callbacks: []
+      _Names: []
+    _Clip: {fileID: 0}
+    _Speed: 1
+    _NormalizedStartTime: 0
+  successStrip:
+    _FadeDuration: 0.25
+    _Events:
+      _NormalizedTimes: []
+      _Callbacks: []
+      _Names: []
+    _Clip: {fileID: 0}
+    _Speed: 1
+    _NormalizedStartTime: 0
   oneTimer:
     _FadeDuration: 0.25
     _Events:
@@ -2254,6 +2292,7 @@ MonoBehaviour:
     _NormalizedStartTime: 0
   baseMeleeAttackMoves: []
   baseRangedAttackMoves: []
+  shouldBackpedal: 0
   currentMeleeAttackIndex: 0
   currentMeleeMove: {fileID: 0}
   currentRangedAttackIndex: 0
@@ -2289,6 +2328,7 @@ MonoBehaviour:
   materials:
   - {fileID: 2100000, guid: caf01dd5152f3934d8079e6160aa3b1e, type: 2}
   - {fileID: 2100000, guid: 6ecff158743e09e49af706d10ea4cefe, type: 2}
+  playerMatVariant: 1
 --- !u!1 &2801812572409770789
 GameObject:
   m_ObjectHideFlags: 0
@@ -3590,6 +3630,157 @@ Transform:
   m_Father: {fileID: 2804242951176935449}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: -48.259, z: 0}
+--- !u!1 &6773535881070270517
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1434427158143581140}
+  - component: {fileID: 6699327196387180237}
+  - component: {fileID: 9052630905234751267}
+  m_Layer: 10
+  m_Name: ShotAccuracy
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1434427158143581140
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6773535881070270517}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1, y: 2, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4413112044299850827}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6699327196387180237
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6773535881070270517}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 841b72de2996c5c40bfb394f3d0e0a98, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Feedbacks:
+  - {fileID: 9052630905234751267}
+  InitializationMode: 2
+  SafeMode: 3
+  Direction: 0
+  AutoChangeDirectionOnEnd: 0
+  AutoPlayOnStart: 0
+  AutoPlayOnEnable: 0
+  DurationMultiplier: 1
+  DisplayFullDurationDetails: 0
+  CooldownDuration: 0
+  InitialDelay: 0
+  CanPlayWhileAlreadyPlaying: 1
+  FeedbacksIntensity: 1
+  Events:
+    TriggerMMFeedbacksEvents: 0
+    TriggerUnityEvents: 1
+    OnPlay:
+      m_PersistentCalls:
+        m_Calls: []
+    OnPause:
+      m_PersistentCalls:
+        m_Calls: []
+    OnResume:
+      m_PersistentCalls:
+        m_Calls: []
+    OnRevert:
+      m_PersistentCalls:
+        m_Calls: []
+    OnComplete:
+      m_PersistentCalls:
+        m_Calls: []
+  DebugActive: 0
+--- !u!114 &9052630905234751267
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6773535881070270517}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78862ef1b0224f54ca210438008ce671, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Active: 1
+  Label: ShotAccuracy
+  Chance: 100
+  Timing:
+    TimescaleMode: 0
+    InitialDelay: 0
+    CooldownDuration: 3
+    ExcludeFromHoldingPauses: 0
+    InterruptsOnStop: 1
+    NumberOfRepeats: 0
+    RepeatForever: 0
+    DelayBetweenRepeats: 1
+    MMFeedbacksDirectionCondition: 0
+    PlayDirection: 0
+    ConstantIntensity: 0
+    UseIntensityInterval: 0
+    IntensityIntervalMin: 0
+    IntensityIntervalMax: 0
+    Sequence: {fileID: 0}
+    TrackID: 0
+    Quantized: 0
+    TargetBPM: 120
+  DebugActive: 0
+  Channel: 0
+  Intensity: 0
+  Value: ShotAccuracy
+  UseIntensityAsValue: 0
+  ForceColor: 1
+  AnimateColorGradient:
+    serializedVersion: 2
+    key0: {r: 1, g: 0, b: 0.06575394, a: 1}
+    key1: {r: 1, g: 1, b: 1, a: 1}
+    key2: {r: 0, g: 0, b: 0, a: 0}
+    key3: {r: 0, g: 0, b: 0, a: 0}
+    key4: {r: 0, g: 0, b: 0, a: 0}
+    key5: {r: 0, g: 0, b: 0, a: 0}
+    key6: {r: 0, g: 0, b: 0, a: 0}
+    key7: {r: 0, g: 0, b: 0, a: 0}
+    ctime0: 0
+    ctime1: 65535
+    ctime2: 0
+    ctime3: 0
+    ctime4: 0
+    ctime5: 0
+    ctime6: 0
+    ctime7: 0
+    atime0: 0
+    atime1: 65535
+    atime2: 0
+    atime3: 0
+    atime4: 0
+    atime5: 0
+    atime6: 0
+    atime7: 0
+    m_Mode: 0
+    m_NumColorKeys: 2
+    m_NumAlphaKeys: 2
+  ForceLifetime: 1
+  Lifetime: 3
+  PositionMode: 1
+  TargetTransform: {fileID: 0}
+  Direction: {x: 0, y: 0, z: 0}
 --- !u!1 &8507547848170347659
 GameObject:
   m_ObjectHideFlags: 0
@@ -3689,6 +3880,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 64353379e444d4f4a846e9168a826469, type: 3}
+--- !u!4 &4413112044299850827 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4072717734138767525, guid: 64353379e444d4f4a846e9168a826469,
+    type: 3}
+  m_PrefabInstance: {fileID: 413123037584162030}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &8561113731472435861 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8319444435483612795, guid: 64353379e444d4f4a846e9168a826469,
@@ -3737,9 +3934,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 841b72de2996c5c40bfb394f3d0e0a98, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!4 &4413112044299850827 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4072717734138767525, guid: 64353379e444d4f4a846e9168a826469,
-    type: 3}
-  m_PrefabInstance: {fileID: 413123037584162030}
-  m_PrefabAsset: {fileID: 0}

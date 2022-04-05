@@ -36,7 +36,7 @@ public class TrainingCellView : EnhancedScrollerCellView {
         foreach (TrainingCellView cell in cells) {
             cell.Deselect();
         }
-        GetComponent<Image>().color = Color.green;
+        GetComponent<Image>().color = new Color(255, 255, 255, 255);
     }
     public void Deselect() {
         GetComponent<Image>().color = Helper.GetCellViewColor();

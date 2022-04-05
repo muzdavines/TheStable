@@ -26,7 +26,7 @@ public class HeroScrollerController : MonoBehaviour, IEnhancedScrollerDelegate
     }
     public float GetCellViewSize(EnhancedScroller scroller, int dataIndex)
     {
-        return 100f;
+        return 300f;
     }
     public EnhancedScrollerCellView GetCellView(EnhancedScroller scroller, int
     dataIndex, int cellIndex)

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 [System.Serializable]
 public class League {
@@ -8,6 +9,7 @@ public class League {
     public int leagueLevel;
     public List<Team> teams = new List<Team>();
     public List<Match> schedule;
+   
 
     public void InitLeague() {
         NewSeason();

@@ -16,6 +16,10 @@ public class SCCombatPursueTarget : SCCombatStanceState {
         if (Time.frameCount % 30 != 0) {
             return;
         }
+        if (thisChar.fieldSport && ball.Distance(thisChar) < 10f) {
+            thisChar.Idle();
+            return;
+        }
         Vector3 attackTargetPos = thisChar.myAttackTarget._t.position;
         if (Vector3.Distance(thisChar._t.position, attackTargetPos) < thisChar.attackRange) {
             thisChar.CombatIdle();

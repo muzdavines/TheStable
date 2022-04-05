@@ -11,6 +11,10 @@ public class Ball : MonoBehaviour
     SphereCollider col;
     public Vector3 passTargetPosition;
     public StableCombatChar lastHolder;
+    public float velocity { get { return body.velocity.magnitude; } }
+
+    float shootErrorAdjustment = 2.5f;
+
     private void Start() {
         body = GetComponent<Rigidbody>();
         col = GetComponent<SphereCollider>();
@@ -42,23 +46,28 @@ public class Ball : MonoBehaviour
         isHeld = true;
         col.enabled = !isHeld;
         body.isKinematic = isHeld;
+        body.interpolation = RigidbodyInterpolation.None;
         transform.parent = holder._rightHand;
         transform.localPosition = new Vector3(0, 0, 0);
         return true;
     }
-    public void Shoot(Goal goalTarget) {
+    public void Shoot(Vector3 goalTarget, float error, float shotPower) {
+        Vector3 errorAdjustment = Random.insideUnitCircle * error * shootErrorAdjustment;
+        if (holder != null) {
+            holder.DisplayShotAccuracy(errorAdjustment.magnitude);
+        }
         Release();
-        transform.LookAt(goalTarget.transform);
-        transform.position += transform.forward * 1;
+        MoveToLaunchPosition(goalTarget, shotPower);
         body.velocity = Vector3.zero;
-        body.AddForce((goalTarget.transform.position- transform.position).normalized * 1000);
+
+        Vector3 targetPos = goalTarget - errorAdjustment;
+        body.AddForce((targetPos - transform.position).normalized * 1000 * shotPower);
     }
 
-    public void PassTo(StableCombatChar passTarget) {
+    public void PassTo(StableCombatChar passTarget, float shotPower = 1) {
         Release();
-        transform.LookAt(passTarget.transform);
-        transform.position += transform.forward * 1;
-        LaunchBall(passTarget.transform, true);
+        MoveToLaunchPosition(passTarget.transform.position, shotPower);
+        LaunchBall(passTarget.transform, true, shotPower);
     }
 
     private Vector3 GetLaunchVelocity(float flightTime, Vector3 startingPoint, Vector3 endPoint) {
@@ -72,16 +81,16 @@ public class Ball : MonoBehaviour
         return initialVelocityX + initialVelocityY;
     }
 
-    private void LaunchBall(Transform target, bool leadTarget = false) {
+    private void LaunchBall(Transform target, bool leadTarget = false, float shotPower = 1f) {
         Rigidbody projectile = body;
         projectile.velocity = Vector3.zero;
         float thisDist = Vector3.Distance(projectile.transform.position, target.position);
-        Debug.Log(thisDist);
+        //Debug.Log(thisDist);
         float hangtime = Mathf.Clamp(thisDist / 15f, 1f, 7f);
-        Debug.Log(hangtime);
+        //Debug.Log(hangtime);
         Vector3 futurePositionOfTarget = leadTarget ? target.GetComponent<NavMeshAgent>().velocity * hangtime : Vector3.zero;
-        passTargetPosition = target.position + futurePositionOfTarget;
-        projectile.AddForce(GetLaunchVelocity(hangtime, projectile.position, target.position + futurePositionOfTarget), ForceMode.VelocityChange);
+        passTargetPosition = target.position + futurePositionOfTarget * shotPower;
+        projectile.AddForce(GetLaunchVelocity(hangtime, projectile.position, target.position + futurePositionOfTarget) * shotPower, ForceMode.VelocityChange);
     }
 
     public void GetDropped() {
@@ -92,8 +101,14 @@ public class Ball : MonoBehaviour
         isHeld = false;
         col.enabled = true;
         body.isKinematic = false;
+        body.interpolation = RigidbodyInterpolation.Interpolate;
         transform.parent = null;
         holder = null;
+    }
+    void MoveToLaunchPosition(Vector3 launchTarget, float amount = 1f)
+    {
+        transform.LookAt(launchTarget);
+        transform.position += transform.forward * amount;
     }
     public void OnCollisionEnter(Collision collision) {
         Debug.Log("#BallCollision#" + collision.transform.name);

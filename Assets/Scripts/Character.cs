@@ -146,71 +146,116 @@ public class Character : Living
         int count = 0;
         for (int x = 0; x < 6; x++) {
             for (int z = 0; z < breaks[x]; z++) {
-                Debug.Log(count);
                 array[count++] = Mathf.Round(min + (x * interval));
             }
         }
         return (int)array[roll];
     }
     public void GenerateCharacter(Archetype thisArchetype, int level = 1) {
-        int[] dodgeRange = new int[2];
-        int[] tackleRange = new int[2]; 
-        int[] blockingRange = new int[2]; 
-        int[] runSpeedRange = new int[2];
+        int[] shootingRange = new int[2];
+        int[] passingRange = new int[2];
+        int[] tackleRange = new int[2];
+        int[] carryingRange = new int[2];
+        int[] meleeRange = new int[2];
+        int[] rangedRange = new int[2];
+        int[] magicRange = new int[2];
+        int[] speedRange = new int[2];
+        int[] dexRange = new int[2];
+        int[] strRange = new int[2];
+        int[] agiRange = new int[2];
+        
         switch (thisArchetype) {
             case Archetype.Striker:
-                dodgeRange[0] = 12;
-                dodgeRange[1] = 18;
-                tackleRange[0] = 2;
-                tackleRange[1] = 8;
-                blockingRange[0] = 2;
-                blockingRange[1] = 8;
-                runSpeedRange[0] = 9;
-                runSpeedRange[1] = 15;
+                shootingRange[0] = 10; shootingRange[1] = 20;
+                passingRange[0] = 4; passingRange[1] = 8;
+                tackleRange[0] = 2; tackleRange[1] = 4;
+                carryingRange[0] = 4; carryingRange[1] = 8;
+                meleeRange[0] = 2; meleeRange[1] = 4;
+                rangedRange[0] = 8; rangedRange[1] = 16;
+                magicRange[0] = 10; magicRange[1] = 20;
+                speedRange[0] = 9; speedRange[1] = 18;
+                dexRange[0] = 10; dexRange[1] = 20;
+                strRange[0] = 2; strRange[1] = 4;
+                agiRange[0] = 4; agiRange[1] = 8;
+                if (Random.Range(0, 1f) >= .99f) {
+                    shootingRange[1] = 40;
+                    Debug.Log("#CreateHero#Striker Crit!");
+                }
                 modelNum = 0;
                 modelName = "SCUnit";
                 break;
             case Archetype.Winger:
-                dodgeRange[0] = 7;
-                dodgeRange[1] = 13;
-                tackleRange[0] = 4;
-                tackleRange[1] = 10;
-                blockingRange[0] = 7;
-                blockingRange[1] = 13;
-                runSpeedRange[0] = 9;
-                runSpeedRange[1] = 12;
+                shootingRange[0] = 8; shootingRange[1] = 16;
+                passingRange[0] = 10; passingRange[1] = 20;
+                tackleRange[0] = 2; tackleRange[1] = 4;
+                carryingRange[0] = 8; carryingRange[1] = 16;
+                meleeRange[0] = 4; meleeRange[1] = 8;
+                rangedRange[0] = 4; rangedRange[1] = 8;
+                magicRange[0] = 4; magicRange[1] = 8;
+                speedRange[0] = 9; speedRange[1] = 12;
+                dexRange[0] = 8; dexRange[1] = 16;
+                strRange[0] = 4; strRange[1] = 8;
+                agiRange[0] = 4; agiRange[1] = 8;
                 modelNum = 1;
                 modelName = "SCUnit";
                 break;
             case Archetype.Midfielder:
-                dodgeRange[0] = 4;
-                dodgeRange[1] = 10;
-                tackleRange[0] = 6;
-                tackleRange[1] = 12;
-                blockingRange[0] = 12;
-                blockingRange[1] = 18;
-                runSpeedRange[0] = 9;
-                runSpeedRange[1] = 11;
+                shootingRange[0] = 4; shootingRange[1] = 8;
+                passingRange[0] = 8; passingRange[1] = 16;
+                tackleRange[0] = 8; tackleRange[1] = 16;
+                carryingRange[0] = 4; carryingRange[1] = 8;
+                meleeRange[0] = 8; meleeRange[1] = 16;
+                rangedRange[0] = 4; rangedRange[1] = 8;
+                magicRange[0] = 4; magicRange[1] = 8;
+                speedRange[0] = 9; speedRange[1] = 11;
+                dexRange[0] = 8; dexRange[1] = 16;
+                strRange[0] = 8; strRange[1] = 16;
+                agiRange[0] = 8; agiRange[1] = 16;
                 modelNum = 2;
                 modelName = "SCUnit";
                 break;
             case Archetype.Defender:
-                dodgeRange[0] = 2;
-                dodgeRange[1] = 8;
-                tackleRange[0] = 15;
-                tackleRange[1] = 30;
-                blockingRange[0] = 9;
-                blockingRange[1] = 15;
-                runSpeedRange[0] = 9;
-                runSpeedRange[1] = 10;
+                shootingRange[0] = 2; shootingRange[1] = 4;
+                passingRange[0] = 4; passingRange[1] = 8;
+                tackleRange[0] = 10; tackleRange[1] = 20;
+                carryingRange[0] = 2; carryingRange[1] = 4;
+                meleeRange[0] = 10; meleeRange[1] = 20;
+                rangedRange[0] = 4; rangedRange[1] = 8;
+                magicRange[0] = 8; magicRange[1] = 16;
+                speedRange[0] = 9; speedRange[1] = 10;
+                dexRange[0] = 4; dexRange[1] = 8;
+                strRange[0] = 10; strRange[1] = 20;
+                agiRange[0] = 2; agiRange[1] = 4;
                 modelNum = 0;
                 modelName = "SCUnit2";
                 break;
+            case Archetype.Goalkeeper:
+                shootingRange[0] = 2; shootingRange[1] = 4;
+                passingRange[0] = 4; passingRange[1] = 8;
+                tackleRange[0] = 10; tackleRange[1] = 20;
+                carryingRange[0] = 2; carryingRange[1] = 4;
+                meleeRange[0] = 10; meleeRange[1] = 20;
+                rangedRange[0] = 4; rangedRange[1] = 8;
+                magicRange[0] = 8; magicRange[1] = 16;
+                speedRange[0] = 11; speedRange[1] = 13;
+                dexRange[0] = 4; dexRange[1] = 8;
+                strRange[0] = 10; strRange[1] = 20;
+                agiRange[0] = 2; agiRange[1] = 4;
+                modelNum = 2;
+                modelName = "SCUnit";
+                break;
         }
-        carrying = RandDist(dodgeRange[0], dodgeRange[1]);
-        tackling = RandDist(tackleRange[0], tackleRange[1]);
-        blocking = RandDist(blockingRange[0], blockingRange[1]);
-        runspeed = RandDist(runSpeedRange[0], runSpeedRange[1]);
+        shooting = RandDist(shootingRange[0], shootingRange[1]) + ((level - 1) * 20);
+        passing = RandDist(passingRange[0], passingRange[1]) + ((level - 1) * 20);
+        tackling = RandDist(tackleRange[0], tackleRange[1]) + ((level - 1) * 20);
+        carrying = RandDist(carryingRange[0], carryingRange[1]) + ((level - 1) * 20);
+        melee = RandDist(meleeRange[0], meleeRange[1]) + ((level - 1) * 20);
+        ranged = RandDist(rangedRange[0], rangedRange[1]) + ((level - 1) * 20);
+        magic = RandDist(magicRange[0], magicRange[1]) + ((level - 1) * 20);
+        runspeed = RandDist(speedRange[0], speedRange[1]) + ((level - 1) * 20);
+        dexterity = RandDist(dexRange[0], dexRange[1]) + ((level - 1) * 20);
+        strength = RandDist(strRange[0], strRange[1]) + ((level - 1) * 20);
+        agility = RandDist(agiRange[0], agiRange[1]) + ((level - 1) * 20);
         maxHealth = 5;
         maxMind = 5;
         maxStamina = 5;
@@ -230,7 +275,7 @@ public class Character : Living
     }
 
    
-    public enum Archetype { Striker, Winger, Midfielder, Defender}
+    public enum Archetype { Striker, Winger, Midfielder, Defender, Goalkeeper}
     public Archetype archetype;
 
     public void Awake() {
@@ -252,9 +297,9 @@ public class Character : Living
         if (Helper.Today().IsOnOrAfter(currentTraining.dateToTrain, true)) {
             switch (currentTraining.type) {
                 case Training.Type.Attribute:
-                    Debug.Log("Rase Attribute " + currentTraining.training);
+                    Debug.Log("Raise Attribute " + currentTraining.training);
                     int currentValue = (int)typeof(Character).GetField(currentTraining.training).GetValue(this);
-                    typeof(Character).GetField(currentTraining.training).SetValue(this, currentValue + 1);
+                    typeof(Character).GetField(currentTraining.training).SetValue(this, currentValue + currentTraining.amount);
                     FindObjectOfType<DailyPopup>().Popup(name + " completed training: " + currentTraining.training.Title());
                     //raise the attribute
                     //add the skill

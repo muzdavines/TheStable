@@ -13,6 +13,7 @@ public class SCTackle : StableCombatCharState
         thisChar.anim.applyRootMotion = true;
         canGrabBall = false;
         checkForIdle = true;
+        
     }
     public override void Update() {
         base.Update();
@@ -25,6 +26,7 @@ public class SCTackle : StableCombatCharState
 
     public override void WillExit() {
         thisChar.anim.applyRootMotion = false;
+        thisChar.SetTackleCooldown();
         base.WillExit();
     }
 }

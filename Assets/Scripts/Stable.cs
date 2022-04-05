@@ -9,7 +9,7 @@ public class Stable
 
 
     //NEEDED: List of all Buildings
-    public static string[] stableNameList = {"The Calm Plate Pub","The Clumsy Dragon Tavern","The Full Piano Inn","The Royal Hyena Pub","The Cheap Dragonfruit Tavern","The Mixing Ducks Pub","The Hot Elephant Pub","The Chunky Hog Pub" };
+    public static string[] stableNameList = {"The Calm Plate Pub","The Clumsy Dragon Tavern","The Full Piano Inn","The Royal Hyena Pub","The Cheap Dragonfruit Tavern","The Mixing Ducks Pub","The Hot Elephant Pub","The Chunky Hog Tavern" };
 
     public string stableName;
    //Needed: List of all accolades

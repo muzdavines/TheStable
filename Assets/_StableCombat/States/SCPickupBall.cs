@@ -12,6 +12,13 @@ public class SCPickupBall : StableCombatCharState
             thisChar.agent.isStopped = true;
             //thisChar.IdleWithBall();
             canGrabBall = false;
+            foreach (var c in Physics.OverlapSphere(thisChar.position, 3)) {
+                var nearChar = c.GetComponent<StableCombatChar>();
+                if (nearChar!=null && nearChar.team != thisChar.team) {
+                    Debug.Log("#Backoff# Fired");
+                    nearChar.BackOffCarrier(true);
+                }
+            }
         }
     }
     public override void Update() {

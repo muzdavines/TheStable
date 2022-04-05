@@ -447,6 +447,9 @@ ModelImporter:
   - first:
       95: 9500000
     second: //RootNode
+  - first:
+      74: 1559393288489379839
+    second: DoubleStab
   externalObjects: {}
   materials:
     materialImportMode: 1
@@ -462,7 +465,11 @@ ModelImporter:
     rigImportErrors: 
     rigImportWarnings: 
     animationImportErrors: 
-    animationImportWarnings: 
+    animationImportWarnings: "\nClip 'Take 001' has import animation warnings that
+      might lower retargeting quality:\nNote: Activate translation DOF on avatar
+      to improve retargeting quality.\n\t'TargetSpine2' is inbetween humanoid transforms
+      and has rotation animation that will be discarded.\n\t'TargetChest' is inbetween
+      humanoid transforms and has rotation animation that will be discarded.\n"
     animationRetargetingWarnings: 
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
@@ -489,13 +496,13 @@ ModelImporter:
       hasAdditiveReferencePose: 0
       loopTime: 0
       loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
+      loopBlendOrientation: 1
+      loopBlendPositionY: 1
       loopBlendPositionXZ: 0
       keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
+      keepOriginalPositionY: 0
       keepOriginalPositionXZ: 0
-      heightFromFeet: 0
+      heightFromFeet: 1
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
@@ -648,6 +655,181 @@ ModelImporter:
       - path: TargetRoot/TargetSpine1/TargetSpine2/TargetSpine3/TargetChest/TargetR_Clav/TargetR_Shoulder/TargetR_Elbow/TargetR_Wrist/TargetR_Hand/TargetR_Thumb1/TargetR_Thumb2/TargetR_Thumb3/TargetR_Thumb4
         weight: 0
       maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: DoubleStab
+      takeName: Take 001
+      internalID: 0
+      firstFrame: 90
+      lastFrame: 259
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 1
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 0
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 1
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: TargetRoot
+        weight: 1
+      - path: TargetRoot/TargetL_Femur
+        weight: 1
+      - path: TargetRoot/TargetL_Femur/TargetL_Knee
+        weight: 1
+      - path: TargetRoot/TargetL_Femur/TargetL_Knee/TargetL_Ankle
+        weight: 1
+      - path: TargetRoot/TargetL_Femur/TargetL_Knee/TargetL_Ankle/TargetL_FootVis1
+        weight: 0
+      - path: TargetRoot/TargetL_Femur/TargetL_Knee/TargetL_Ankle/TargetL_FootVis1/TargetL_FootVis2
+        weight: 0
+      - path: TargetRoot/TargetL_Femur/TargetL_Knee/TargetL_Ankle/TargetL_Toe
+        weight: 1
+      - path: TargetRoot/TargetL_Femur/TargetL_Knee/TargetL_Ankle/TargetL_Toe/TargetL_ToeEnd
+        weight: 0
+      - path: TargetRoot/TargetR_Femur
+        weight: 1
+      - path: TargetRoot/TargetR_Femur/TargetR_Knee
+        weight: 1
+      - path: TargetRoot/TargetR_Femur/TargetR_Knee/TargetR_Ankle
+        weight: 1
+      - path: TargetRoot/TargetR_Femur/TargetR_Knee/TargetR_Ankle/TargetR_FootVis1
+        weight: 0
+      - path: TargetRoot/TargetR_Femur/TargetR_Knee/TargetR_Ankle/TargetR_FootVis1/TargetR_FootVis2
+        weight: 0
+      - path: TargetRoot/TargetR_Femur/TargetR_Knee/TargetR_Ankle/TargetR_Toe
+        weight: 1
+      - path: TargetRoot/TargetR_Femur/TargetR_Knee/TargetR_Ankle/TargetR_Toe/TargetR_ToeEnd
+        weight: 0
+      - path: TargetRoot/TargetSpine1
+        weight: 1
+      - path: TargetRoot/TargetSpine1/TargetSpine2
+        weight: 1
+      - path: TargetRoot/TargetSpine1/TargetSpine2/TargetSpine3
+        weight: 1
+      - path: TargetRoot/TargetSpine1/TargetSpine2/TargetSpine3/TargetChest
+        weight: 1
+      - path: TargetRoot/TargetSpine1/TargetSpine2/TargetSpine3/TargetChest/TargetL_Clav
+        weight: 1
+      - path: TargetRoot/TargetSpine1/TargetSpine2/TargetSpine3/TargetChest/TargetL_Clav/TargetL_Shoulder
+        weight: 1
+      - path: TargetRoot/TargetSpine1/TargetSpine2/TargetSpine3/TargetChest/TargetL_Clav/TargetL_Shoulder/TargetL_Elbow
+        weight: 1
+      - path: TargetRoot/TargetSpine1/TargetSpine2/TargetSpine3/TargetChest/TargetL_Clav/TargetL_Shoulder/TargetL_Elbow/TargetL_Wrist
+        weight: 1
+      - path: TargetRoot/TargetSpine1/TargetSpine2/TargetSpine3/TargetChest/TargetL_Clav/TargetL_Shoulder/TargetL_Elbow/TargetL_Wrist/TargetL_Hand
+        weight: 1
+      - path: TargetRoot/TargetSpine1/TargetSpine2/TargetSpine3/TargetChest/TargetL_Clav/TargetL_Shoulder/TargetL_Elbow/TargetL_Wrist/TargetL_Hand/TargetL_Index1
+        weight: 1
+      - path: TargetRoot/TargetSpine1/TargetSpine2/TargetSpine3/TargetChest/TargetL_Clav/TargetL_Shoulder/TargetL_Elbow/TargetL_Wrist/TargetL_Hand/TargetL_Index1/TargetL_Index2
+        weight: 1
+      - path: TargetRoot/TargetSpine1/TargetSpine2/TargetSpine3/TargetChest/TargetL_Clav/TargetL_Shoulder/TargetL_Elbow/TargetL_Wrist/TargetL_Hand/TargetL_Index1/TargetL_Index2/TargetL_Index3
+        weight: 1
+      - path: TargetRoot/TargetSpine1/TargetSpine2/TargetSpine3/TargetChest/TargetL_Clav/TargetL_Shoulder/TargetL_Elbow/TargetL_Wrist/TargetL_Hand/TargetL_Index1/TargetL_Index2/TargetL_Index3/TargetL_Index4
+        weight: 0
+      - path: TargetRoot/TargetSpine1/TargetSpine2/TargetSpine3/TargetChest/TargetL_Clav/TargetL_Shoulder/TargetL_Elbow/TargetL_Wrist/TargetL_Hand/TargetL_Middle1
+        weight: 1
+      - path: TargetRoot/TargetSpine1/TargetSpine2/TargetSpine3/TargetChest/TargetL_Clav/TargetL_Shoulder/TargetL_Elbow/TargetL_Wrist/TargetL_Hand/TargetL_Middle1/TargetL_Middle2
+        weight: 1
+      - path: TargetRoot/TargetSpine1/TargetSpine2/TargetSpine3/TargetChest/TargetL_Clav/TargetL_Shoulder/TargetL_Elbow/TargetL_Wrist/TargetL_Hand/TargetL_Middle1/TargetL_Middle2/TargetL_Middle3
+        weight: 1
+      - path: TargetRoot/TargetSpine1/TargetSpine2/TargetSpine3/TargetChest/TargetL_Clav/TargetL_Shoulder/TargetL_Elbow/TargetL_Wrist/TargetL_Hand/TargetL_Middle1/TargetL_Middle2/TargetL_Middle3/TargetL_Middle4
+        weight: 0
+      - path: TargetRoot/TargetSpine1/TargetSpine2/TargetSpine3/TargetChest/TargetL_Clav/TargetL_Shoulder/TargetL_Elbow/TargetL_Wrist/TargetL_Hand/TargetL_Pinky1
+        weight: 1
+      - path: TargetRoot/TargetSpine1/TargetSpine2/TargetSpine3/TargetChest/TargetL_Clav/TargetL_Shoulder/TargetL_Elbow/TargetL_Wrist/TargetL_Hand/TargetL_Pinky1/TargetL_Pinky2
+        weight: 1
+      - path: TargetRoot/TargetSpine1/TargetSpine2/TargetSpine3/TargetChest/TargetL_Clav/TargetL_Shoulder/TargetL_Elbow/TargetL_Wrist/TargetL_Hand/TargetL_Pinky1/TargetL_Pinky2/TargetL_Pinky3
+        weight: 1
+      - path: TargetRoot/TargetSpine1/TargetSpine2/TargetSpine3/TargetChest/TargetL_Clav/TargetL_Shoulder/TargetL_Elbow/TargetL_Wrist/TargetL_Hand/TargetL_Pinky1/TargetL_Pinky2/TargetL_Pinky3/TargetL_Pinky4
+        weight: 0
+      - path: TargetRoot/TargetSpine1/TargetSpine2/TargetSpine3/TargetChest/TargetL_Clav/TargetL_Shoulder/TargetL_Elbow/TargetL_Wrist/TargetL_Hand/TargetL_Ring1
+        weight: 1
+      - path: TargetRoot/TargetSpine1/TargetSpine2/TargetSpine3/TargetChest/TargetL_Clav/TargetL_Shoulder/TargetL_Elbow/TargetL_Wrist/TargetL_Hand/TargetL_Ring1/TargetL_Ring2
+        weight: 1
+      - path: TargetRoot/TargetSpine1/TargetSpine2/TargetSpine3/TargetChest/TargetL_Clav/TargetL_Shoulder/TargetL_Elbow/TargetL_Wrist/TargetL_Hand/TargetL_Ring1/TargetL_Ring2/TargetL_Ring3
+        weight: 1
+      - path: TargetRoot/TargetSpine1/TargetSpine2/TargetSpine3/TargetChest/TargetL_Clav/TargetL_Shoulder/TargetL_Elbow/TargetL_Wrist/TargetL_Hand/TargetL_Ring1/TargetL_Ring2/TargetL_Ring3/TargetL_Ring4
+        weight: 0
+      - path: TargetRoot/TargetSpine1/TargetSpine2/TargetSpine3/TargetChest/TargetL_Clav/TargetL_Shoulder/TargetL_Elbow/TargetL_Wrist/TargetL_Hand/TargetL_Thumb1
+        weight: 1
+      - path: TargetRoot/TargetSpine1/TargetSpine2/TargetSpine3/TargetChest/TargetL_Clav/TargetL_Shoulder/TargetL_Elbow/TargetL_Wrist/TargetL_Hand/TargetL_Thumb1/TargetL_Thumb2
+        weight: 1
+      - path: TargetRoot/TargetSpine1/TargetSpine2/TargetSpine3/TargetChest/TargetL_Clav/TargetL_Shoulder/TargetL_Elbow/TargetL_Wrist/TargetL_Hand/TargetL_Thumb1/TargetL_Thumb2/TargetL_Thumb3
+        weight: 1
+      - path: TargetRoot/TargetSpine1/TargetSpine2/TargetSpine3/TargetChest/TargetL_Clav/TargetL_Shoulder/TargetL_Elbow/TargetL_Wrist/TargetL_Hand/TargetL_Thumb1/TargetL_Thumb2/TargetL_Thumb3/TargetL_Thumb4
+        weight: 0
+      - path: TargetRoot/TargetSpine1/TargetSpine2/TargetSpine3/TargetChest/TargetNeck
+        weight: 1
+      - path: TargetRoot/TargetSpine1/TargetSpine2/TargetSpine3/TargetChest/TargetNeck/TargetHead
+        weight: 1
+      - path: TargetRoot/TargetSpine1/TargetSpine2/TargetSpine3/TargetChest/TargetNeck/TargetHead/TargetHead_End
+        weight: 0
+      - path: TargetRoot/TargetSpine1/TargetSpine2/TargetSpine3/TargetChest/TargetR_Clav
+        weight: 1
+      - path: TargetRoot/TargetSpine1/TargetSpine2/TargetSpine3/TargetChest/TargetR_Clav/TargetR_Shoulder
+        weight: 1
+      - path: TargetRoot/TargetSpine1/TargetSpine2/TargetSpine3/TargetChest/TargetR_Clav/TargetR_Shoulder/TargetR_Elbow
+        weight: 1
+      - path: TargetRoot/TargetSpine1/TargetSpine2/TargetSpine3/TargetChest/TargetR_Clav/TargetR_Shoulder/TargetR_Elbow/TargetR_Wrist
+        weight: 1
+      - path: TargetRoot/TargetSpine1/TargetSpine2/TargetSpine3/TargetChest/TargetR_Clav/TargetR_Shoulder/TargetR_Elbow/TargetR_Wrist/TargetR_Hand
+        weight: 1
+      - path: TargetRoot/TargetSpine1/TargetSpine2/TargetSpine3/TargetChest/TargetR_Clav/TargetR_Shoulder/TargetR_Elbow/TargetR_Wrist/TargetR_Hand/TargetR_Index1
+        weight: 1
+      - path: TargetRoot/TargetSpine1/TargetSpine2/TargetSpine3/TargetChest/TargetR_Clav/TargetR_Shoulder/TargetR_Elbow/TargetR_Wrist/TargetR_Hand/TargetR_Index1/TargetR_Index2
+        weight: 1
+      - path: TargetRoot/TargetSpine1/TargetSpine2/TargetSpine3/TargetChest/TargetR_Clav/TargetR_Shoulder/TargetR_Elbow/TargetR_Wrist/TargetR_Hand/TargetR_Index1/TargetR_Index2/TargetR_Index3
+        weight: 1
+      - path: TargetRoot/TargetSpine1/TargetSpine2/TargetSpine3/TargetChest/TargetR_Clav/TargetR_Shoulder/TargetR_Elbow/TargetR_Wrist/TargetR_Hand/TargetR_Index1/TargetR_Index2/TargetR_Index3/TargetR_Index4
+        weight: 0
+      - path: TargetRoot/TargetSpine1/TargetSpine2/TargetSpine3/TargetChest/TargetR_Clav/TargetR_Shoulder/TargetR_Elbow/TargetR_Wrist/TargetR_Hand/TargetR_Middle1
+        weight: 1
+      - path: TargetRoot/TargetSpine1/TargetSpine2/TargetSpine3/TargetChest/TargetR_Clav/TargetR_Shoulder/TargetR_Elbow/TargetR_Wrist/TargetR_Hand/TargetR_Middle1/TargetR_Middle2
+        weight: 1
+      - path: TargetRoot/TargetSpine1/TargetSpine2/TargetSpine3/TargetChest/TargetR_Clav/TargetR_Shoulder/TargetR_Elbow/TargetR_Wrist/TargetR_Hand/TargetR_Middle1/TargetR_Middle2/TargetR_Middle3
+        weight: 1
+      - path: TargetRoot/TargetSpine1/TargetSpine2/TargetSpine3/TargetChest/TargetR_Clav/TargetR_Shoulder/TargetR_Elbow/TargetR_Wrist/TargetR_Hand/TargetR_Middle1/TargetR_Middle2/TargetR_Middle3/TargetR_Middle4
+        weight: 0
+      - path: TargetRoot/TargetSpine1/TargetSpine2/TargetSpine3/TargetChest/TargetR_Clav/TargetR_Shoulder/TargetR_Elbow/TargetR_Wrist/TargetR_Hand/TargetR_Pinky1
+        weight: 1
+      - path: TargetRoot/TargetSpine1/TargetSpine2/TargetSpine3/TargetChest/TargetR_Clav/TargetR_Shoulder/TargetR_Elbow/TargetR_Wrist/TargetR_Hand/TargetR_Pinky1/TargetR_Pinky2
+        weight: 1
+      - path: TargetRoot/TargetSpine1/TargetSpine2/TargetSpine3/TargetChest/TargetR_Clav/TargetR_Shoulder/TargetR_Elbow/TargetR_Wrist/TargetR_Hand/TargetR_Pinky1/TargetR_Pinky2/TargetR_Pinky3
+        weight: 1
+      - path: TargetRoot/TargetSpine1/TargetSpine2/TargetSpine3/TargetChest/TargetR_Clav/TargetR_Shoulder/TargetR_Elbow/TargetR_Wrist/TargetR_Hand/TargetR_Pinky1/TargetR_Pinky2/TargetR_Pinky3/TargetR_Pinky4
+        weight: 0
+      - path: TargetRoot/TargetSpine1/TargetSpine2/TargetSpine3/TargetChest/TargetR_Clav/TargetR_Shoulder/TargetR_Elbow/TargetR_Wrist/TargetR_Hand/TargetR_Ring1
+        weight: 1
+      - path: TargetRoot/TargetSpine1/TargetSpine2/TargetSpine3/TargetChest/TargetR_Clav/TargetR_Shoulder/TargetR_Elbow/TargetR_Wrist/TargetR_Hand/TargetR_Ring1/TargetR_Ring2
+        weight: 1
+      - path: TargetRoot/TargetSpine1/TargetSpine2/TargetSpine3/TargetChest/TargetR_Clav/TargetR_Shoulder/TargetR_Elbow/TargetR_Wrist/TargetR_Hand/TargetR_Ring1/TargetR_Ring2/TargetR_Ring3
+        weight: 1
+      - path: TargetRoot/TargetSpine1/TargetSpine2/TargetSpine3/TargetChest/TargetR_Clav/TargetR_Shoulder/TargetR_Elbow/TargetR_Wrist/TargetR_Hand/TargetR_Ring1/TargetR_Ring2/TargetR_Ring3/TargetR_Ring4
+        weight: 0
+      - path: TargetRoot/TargetSpine1/TargetSpine2/TargetSpine3/TargetChest/TargetR_Clav/TargetR_Shoulder/TargetR_Elbow/TargetR_Wrist/TargetR_Hand/TargetR_Thumb1
+        weight: 1
+      - path: TargetRoot/TargetSpine1/TargetSpine2/TargetSpine3/TargetChest/TargetR_Clav/TargetR_Shoulder/TargetR_Elbow/TargetR_Wrist/TargetR_Hand/TargetR_Thumb1/TargetR_Thumb2
+        weight: 1
+      - path: TargetRoot/TargetSpine1/TargetSpine2/TargetSpine3/TargetChest/TargetR_Clav/TargetR_Shoulder/TargetR_Elbow/TargetR_Wrist/TargetR_Hand/TargetR_Thumb1/TargetR_Thumb2/TargetR_Thumb3
+        weight: 1
+      - path: TargetRoot/TargetSpine1/TargetSpine2/TargetSpine3/TargetChest/TargetR_Clav/TargetR_Shoulder/TargetR_Elbow/TargetR_Wrist/TargetR_Hand/TargetR_Thumb1/TargetR_Thumb2/TargetR_Thumb3/TargetR_Thumb4
+        weight: 0
+      maskType: 3
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     isReadable: 1

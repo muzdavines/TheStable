@@ -18,6 +18,10 @@ public class SCIdle : StableCombatCharState
             thisChar.MissionIdle();
             return;
         }
+        if (thisChar.fieldPosition == Position.GK) {
+            thisChar.GKIdle();
+            return;
+        }
         if (ball.holder == null) {
             if (thisChar.ShouldPursueBall()) {
                 thisChar.PursueBall();
@@ -47,13 +51,22 @@ public class SCIdle : StableCombatCharState
             if (thisChar.ShouldPursueBallCarrier()) {
                 thisChar.PursueBallCarrier();
                 return;
-            } else {
+            }
+            else {
+                GuardNetPosition myPos = thisChar.ShouldGuardNet();
+                if (myPos != GuardNetPosition.None) {
+                    thisChar.GuardNet(myPos);
+                    return;
+                }
+               
+            }
+            thisChar.PursueBallCarrier();
+            /*else {
                 //enemy has ball but I shouldn't pursue
                 //should I defend my zone or beat someone up
-            }
+            }*/
         }
         thisChar.agent.isStopped = true;
-
     }
 
     public override void AnimEventReceiver(string message) {
