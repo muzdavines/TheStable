@@ -35,12 +35,12 @@ public class SCTryCatchPass : StableCombatCharState
         }
         if (thisChar.enemyGoal.Distance(thisChar) < oneTimerDistanceToGoal) {
             if (ball.Distance(thisChar) < oneTimerDistanceToBall) {
-                if (Random.value > .5f) thisChar.OneTimerToGoal();
+                if (/*Random.value*/ 1f > .5f) thisChar.OneTimerToGoal();
                 else thisChar.PickupBall();
                 return;
             }
         }
-        if (Time.time > entryTime + 2.5f)
+        if (Time.time > entryTime + 5f)
         {
             thisChar.Idle();
         }

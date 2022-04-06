@@ -389,7 +389,7 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
         state.TransitionTo(new SCGoNearEnemyGoal());
     }
     public void OneTimerToGoal() {
-        if (myCharacter.archetype == Character.Archetype.Defender) {
+        if (!myCharacter.HasMove("OneTimer")) {
             Idle();
             return;
         }
@@ -543,6 +543,7 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
     public StableCombatChar GetNearestTeammate() {
         StableCombatChar[] allChars =FindObjectsOfType<StableCombatChar>();
         foreach (var c in allChars) {
+            if (c.fieldPosition == Position.GK) { continue; }
             if (c == this) { continue; }
             if (c.isKnockedDown) { continue; }
             if (c.team == team) {

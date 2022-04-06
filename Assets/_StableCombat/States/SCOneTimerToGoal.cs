@@ -20,7 +20,7 @@ public class SCOneTimerToGoal : StableCombatCharState {
     }
     public override void BallCollision(Collision collision) {
         // Failed One Timer
-        if (Random.value > thisChar.myCharacter.shooting * .01f)
+        if (Random.value-1 > thisChar.myCharacter.shooting * .01f)
         {
             thisChar.GetTackled(null);
         }

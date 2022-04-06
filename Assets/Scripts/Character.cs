@@ -94,9 +94,10 @@ public class Character : Living
     public SportStats seasonStats = new SportStats();
     public SportStats careerStats = new SportStats();
     public bool HasMove (string m) {
-        Debug.Log("HasMove called on Character. Need to Change This");
+        Debug.Log("#TODO#HasMove called on Character. Need to Change This");
         foreach (Move move in knownMoves) {
-            if (move.name == m) { return true; }
+           
+            if (move.name.Contains(m)) { return true; }
         }
         return false; // knownMoves.Contains(m);
     }
@@ -181,6 +182,7 @@ public class Character : Living
                     shootingRange[1] = 40;
                     Debug.Log("#CreateHero#Striker Crit!");
                 }
+                knownMoves.Add(Instantiate<Move>(Resources.Load<Move>("OneTimerKick")));
                 modelNum = 0;
                 modelName = "SCUnit";
                 break;
@@ -198,6 +200,7 @@ public class Character : Living
                 agiRange[0] = 4; agiRange[1] = 8;
                 modelNum = 1;
                 modelName = "SCUnit";
+                knownMoves.Add(Instantiate<Move>(Resources.Load<Move>("OneTimerKick")));
                 break;
             case Archetype.Midfielder:
                 shootingRange[0] = 4; shootingRange[1] = 8;
@@ -213,6 +216,7 @@ public class Character : Living
                 agiRange[0] = 8; agiRange[1] = 16;
                 modelNum = 2;
                 modelName = "SCUnit";
+                knownMoves.Add(Instantiate<Move>(Resources.Load<Move>("OneTimerKick")));
                 break;
             case Archetype.Defender:
                 shootingRange[0] = 2; shootingRange[1] = 4;
