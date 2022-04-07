@@ -13,11 +13,11 @@ public class SCCombatPursueTarget : SCCombatStanceState {
             thisChar.CombatIdle();
             return;
         }
-        if (Time.frameCount % 30 != 0) {
+        if (Time.frameCount % 20 != 0) {
             return;
         }
         if (thisChar.fieldSport && ball.Distance(thisChar) < 10f) {
-            thisChar.Idle();
+            //thisChar.Idle();
             return;
         }
         Vector3 attackTargetPos = thisChar.myAttackTarget._t.position;

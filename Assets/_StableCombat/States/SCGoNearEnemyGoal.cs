@@ -16,11 +16,8 @@ public class SCGoNearEnemyGoal : SCTeammateBallCarrierState
         base.Update();
         thisChar.agent.isStopped = false;
         thisChar.agent.SetDestination(thisChar.enemyGoal.transform.position + (thisChar.enemyGoal.transform.forward * 10) + goalOffset);
-        if (thisChar.enemyGoal.Distance(thisChar) < 20) {
-            if (ball.Distance(thisChar) < 3) {
-                thisChar.OneTimerToGoal();
-                return;
-            }
+        if (CheckOneTimer()) {
+            return;
         }
     }
 

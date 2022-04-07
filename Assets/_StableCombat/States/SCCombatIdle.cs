@@ -15,10 +15,10 @@ public class SCCombatIdle : SCCombatStanceState {
                 thisChar.RunToGoalWithBall();
                 return;
             }
-            if (ball.Distance(thisChar) < 20) {
+            /*if (ball.Distance(thisChar) < 20) {
                 thisChar.Idle();
                 return;
-            }
+            }*/
         }
         
         if (thisChar.myAttackTarget != null && thisChar.myAttackTarget.isKnockedDown) {
@@ -42,6 +42,17 @@ public class SCCombatIdle : SCCombatStanceState {
         base.Update();
         thisChar.agent.isStopped = true;
         StableCombatChar thisTarget;
+        if (thisChar.combatEngagementStatus == CombatEngagementStatus.Defender) {
+            //this whole section deals with a character that was pulled into combat. 
+            //We should check if the attacker is down
+            //check if the hero can disengage
+            //if not, then do combat normally.  Put all of that into a separate method so aggressors and defenders can use it with separate calls
+
+            return;
+        }
+
+        //from here on out it's all aggressor logic
+
         if (thisChar.myAttackTarget == null) {
              thisTarget = GetCombatTarget();
         } else { thisTarget = thisChar.myAttackTarget; }
@@ -50,6 +61,7 @@ public class SCCombatIdle : SCCombatStanceState {
             if (thisChar.myAttackTarget?.state.GetType() == typeof(SCCombatDowned)) {
                 thisChar.myAttackTarget = null;
                 thisChar.Idle();
+                return;
             }
             thisChar.myAttackTarget = thisTarget;
             thisChar._t.LookAt(thisTarget.position);
@@ -68,6 +80,10 @@ public class SCCombatIdle : SCCombatStanceState {
             else {
                 //is not cooling down and target not null
                 if (thisChar.MyTargetIsInAttackRange()) {
+                    //need logic here to pull people into combat
+                    //consider if they are ball carrier or not - drop ball on pull
+                    //consider whether they dodge or avoid
+                    
                     thisChar.CombatAttack();
                 }
                 else {

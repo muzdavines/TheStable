@@ -22,6 +22,17 @@ public class SCIdle : StableCombatCharState
             thisChar.GKIdle();
             return;
         }
+        if (ball.holder == thisChar) {
+            thisChar.IdleWithBall();
+            return;
+        }
+        //check whether to send to Combat
+
+        if (thisChar.playStyle == PlayStyle.Fight) {
+            thisChar.AggressorCombat();
+            return;
+        }
+        
         if (ball.holder == null) {
             if (thisChar.ShouldPursueBall()) {
                 thisChar.PursueBall();
@@ -40,10 +51,7 @@ public class SCIdle : StableCombatCharState
             }
         }
           
-        if (ball.holder == thisChar) {
-            thisChar.IdleWithBall();
-            return;
-        }
+        
         if (ball.holder.team == thisChar.team) {
             thisChar.IdleTeammateWithBall();
         } else {

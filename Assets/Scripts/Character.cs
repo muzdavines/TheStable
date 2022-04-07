@@ -164,7 +164,13 @@ public class Character : Living
         int[] dexRange = new int[2];
         int[] strRange = new int[2];
         int[] agiRange = new int[2];
-        
+        var leftjab = Resources.Load<Move>("LeftJab");
+        var rightjab = Resources.Load<Move>("RightJab");
+        knownMoves.Add(leftjab);
+        knownMoves.Add(rightjab);
+        activeMeleeMoves.Add(leftjab);
+        activeMeleeMoves.Add(leftjab);
+        activeMeleeMoves.Add(rightjab);
         switch (thisArchetype) {
             case Archetype.Striker:
                 shootingRange[0] = 10; shootingRange[1] = 20;
@@ -182,7 +188,7 @@ public class Character : Living
                     shootingRange[1] = 40;
                     Debug.Log("#CreateHero#Striker Crit!");
                 }
-                knownMoves.Add(Instantiate<Move>(Resources.Load<Move>("OneTimerKick")));
+                knownMoves.Add(Resources.Load<Move>("OneTimerKick"));
                 modelNum = 0;
                 modelName = "SCUnit";
                 break;
@@ -200,7 +206,7 @@ public class Character : Living
                 agiRange[0] = 4; agiRange[1] = 8;
                 modelNum = 1;
                 modelName = "SCUnit";
-                knownMoves.Add(Instantiate<Move>(Resources.Load<Move>("OneTimerKick")));
+                knownMoves.Add(Resources.Load<Move>("OneTimerKick"));
                 break;
             case Archetype.Midfielder:
                 shootingRange[0] = 4; shootingRange[1] = 8;
@@ -216,7 +222,6 @@ public class Character : Living
                 agiRange[0] = 8; agiRange[1] = 16;
                 modelNum = 2;
                 modelName = "SCUnit";
-                knownMoves.Add(Instantiate<Move>(Resources.Load<Move>("OneTimerKick")));
                 break;
             case Archetype.Defender:
                 shootingRange[0] = 2; shootingRange[1] = 4;
@@ -267,13 +272,7 @@ public class Character : Living
         startingMeleeWeapon = "FistsSO";
         startingRangedWeapon = "BowSO";
         archetype = thisArchetype;
-        var leftjab = Resources.Load<Move>("LeftJab");
-        var rightjab = Resources.Load<Move>("RightJab");
-        knownMoves.Add(Instantiate(leftjab)); 
-        knownMoves.Add(Instantiate(rightjab));
-        activeMeleeMoves.Add(Instantiate(leftjab));
-        activeMeleeMoves.Add(Instantiate(leftjab));
-        activeMeleeMoves.Add(Instantiate(rightjab));
+        
         seasonStats = new SportStats();
         careerStats = new SportStats();
     }

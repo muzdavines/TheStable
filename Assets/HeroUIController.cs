@@ -16,3 +16,4 @@ public class HeroUIController : MonoBehaviour
 }
 
 public enum PlayStyle { Play, Fight }
+public enum CombatEngagementStatus { None, Aggressor, Defender}

@@ -8,6 +8,9 @@ public class StableCombatCharState {
     public Ball ball;
     public bool canGrabBall = true;
     public bool checkForIdle = false;
+
+    const float oneTimerDistanceToGoal = 20f;
+    const float oneTimerDistanceToBall = 1.8f;
     public string name {
         get { return this.GetType().ToString(); }
     }
@@ -52,6 +55,21 @@ public class StableCombatCharState {
             thisChar.PickupBall();
             return;
         }
+    }
+
+    public bool CheckOneTimer() {
+        //int _rand = Random.Range(0, 1000000);
+        //Debug.Log("#OneTimer#player Dist to Goal: " + thisChar.enemyGoal.Distance(thisChar) + " vs " + oneTimerDistanceToGoal + "  " + _rand);
+        if (ball.isHeld) { return false; }
+        if (thisChar.enemyGoal.Distance(thisChar) < oneTimerDistanceToGoal) {
+            //Debug.Log("#OneTimer#ball Dist to player: " + ball.Distance(thisChar) + " vs " + oneTimerDistanceToBall + "  " + _rand);
+            if (ball.Distance(thisChar) < oneTimerDistanceToBall) {
+                //Debug.Log("#OneTimer#OneTime " + _rand);
+                thisChar.OneTimerToGoal();
+                return true;
+            }
+        }
+        return false;
     }
 
     public SCResolution TryBlock(StableCombatChar blocker) {

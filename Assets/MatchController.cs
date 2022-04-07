@@ -37,11 +37,11 @@ public class MatchController : MonoBehaviour
     public void DebugInit() {
         Game game = Game.instance;
         Stable player = game.playerStable = Instantiate(Resources.Load<StableSO>("StartingStable")).stable;
-
+        Move leftJab = Resources.Load<Move>("LeftJab");
+        Move rightJab = Resources.Load<Move>("RightJab");
         Game.instance.Init();
         Game.instance.activeMatch = Game.instance.leagues[0].schedule[0];
         Init();
-
     }
 
 

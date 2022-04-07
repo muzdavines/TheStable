@@ -10,23 +10,23 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5c751179885a4504bbe84727081f1f0c, type: 3}
-  m_Name: Luth
+  m_Name: Randal
   m_EditorClassIdentifier: 
-  name: Luth
+  name: Randal
   maxHP: 0
   HP: 0
   age: 0
-  strength: 12
-  agility: 9
+  strength: 7
+  agility: 7
   reaction: 5
-  dexterity: 11
-  carrying: 6
+  dexterity: 9
+  carrying: 12
   toughness: 10
-  tackling: 12
+  tackling: 3
   blocking: 5
   runspeed: 10
-  shooting: 5
-  passing: 8
+  shooting: 11
+  passing: 12
   speech: 5
   intelligence: 5
   education: 5
@@ -46,9 +46,9 @@ MonoBehaviour:
   trapDisarming: 5
   pugilism: 5
   martialarts: 2
-  melee: 12
-  ranged: 5
-  magic: 5
+  melee: 6
+  ranged: 7
+  magic: 6
   parry: 5
   shieldDefense: 0
   musician: 0
@@ -75,12 +75,13 @@ MonoBehaviour:
   maxMind: 5
   maxHealth: 5
   knownMoves:
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 11400000, guid: 5f509c17b3179c049b823d59a0601bf6, type: 2}
+  - {fileID: 11400000, guid: 9718ff2f87bcd694099066b587a15546, type: 2}
+  - {fileID: 11400000, guid: d5258ac87fc9d2d40a542a9d1d90e937, type: 2}
   activeMeleeMoves:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 11400000, guid: 5f509c17b3179c049b823d59a0601bf6, type: 2}
+  - {fileID: 11400000, guid: 5f509c17b3179c049b823d59a0601bf6, type: 2}
+  - {fileID: 11400000, guid: 9718ff2f87bcd694099066b587a15546, type: 2}
   activeRangedMoves: []
   activeSpecialMoves: []
   startingArmor: 
@@ -101,10 +102,10 @@ MonoBehaviour:
     year: 1000
     dayOfWeek: 0
   activeForNextMission: 0
-  activeInLineup: 0
-  currentPosition: 0
+  activeInLineup: 1
+  currentPosition: 5
   incapacitated: 0
   modelName: SCUnit
-  modelNum: 2
+  modelNum: 1
   currentObject: {fileID: 0}
-  archetype: 2
+  archetype: 1

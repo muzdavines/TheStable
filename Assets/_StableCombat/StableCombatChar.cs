@@ -41,6 +41,7 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
     public StableCombatChar myAttackTarget;
     public CombatFocus combatFocus;
     public PlayStyle playStyle;
+    public CombatEngagementStatus combatEngagementStatus;
     public float aggroRadius = 100f;
     public float attackRange = 5f;
     public float lastAttack = 0f;
@@ -335,6 +336,7 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
         state.TransitionTo(new SCReset());
     }
     public void Idle() {
+        combatEngagementStatus = CombatEngagementStatus.None;
         state.TransitionTo(new SCIdle());
     }
     public void IdleWithBall() {
@@ -443,6 +445,15 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
     public void CombatIdle() {
         state.TransitionTo(new SCCombatIdle());
     }
+    public void AggressorCombat() {
+        combatEngagementStatus = CombatEngagementStatus.Aggressor;
+        CombatIdle();
+    }
+    public void DefendCombat() {
+        combatEngagementStatus = CombatEngagementStatus.Defender;
+        CombatIdle();
+    }
+    
     public void CombatAttack() {
         state.TransitionTo(new SCCombatAttack());
     }
