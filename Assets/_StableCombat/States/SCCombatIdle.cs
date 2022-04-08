@@ -41,7 +41,7 @@ public class SCCombatIdle : SCCombatStanceState {
         thisChar.agent.isStopped = true;
         StableCombatChar thisTarget;
         if (thisChar.combatEngagementStatus == CombatEngagementStatus.Defender) {
-            if (ball.holder == thisChar) { ball.GetDropped(); }
+            if (ball?.holder == thisChar) { ball.GetDropped(); }
             ProcessCombat();
             //this whole section deals with a character that was pulled into combat. 
             //We should check if the attacker is down
@@ -52,7 +52,7 @@ public class SCCombatIdle : SCCombatStanceState {
         }
 
         //from here on out it's all aggressor logic
-        if (thisChar == ball.holder) {
+        if (thisChar == ball?.holder) {
             thisChar.RunToGoalWithBall();
             return;
         }
