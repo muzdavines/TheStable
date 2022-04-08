@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SCGoalScored : StableCombatCharState
+public class SCGoalScored : StableCombatCharState, SCReviveUnit
 {
 
     public override void EnterFrom(StableCombatCharState state) {

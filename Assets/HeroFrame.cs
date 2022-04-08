@@ -26,5 +26,12 @@ public class HeroFrame : MonoBehaviour
         mind.value = myChar.mind;
     }
 
+    public void UpdateAll() {
+        health.value = myChar.health;
+        stamina.value = myChar.stamina;
+        balance.value = myChar.balance;
+        mind.value = myChar.mind;
+    }
+
 
 }

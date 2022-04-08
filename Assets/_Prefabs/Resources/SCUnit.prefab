@@ -2611,7 +2611,9 @@ MonoBehaviour:
   coach: {fileID: 0}
   myAttackTarget: {fileID: 0}
   combatFocus: 0
-  aggroRadius: 100
+  playStyle: 0
+  combatEngagementStatus: 0
+  aggroRadius: 30
   attackRange: 5
   lastAttack: 0
   meleeAttackMoves: []
@@ -2634,6 +2636,7 @@ MonoBehaviour:
   maxStamina: 0
   maxBalance: 0
   maxMind: 0
+  mods: []
   tackleCooldown: 0
   accumulatedCooldown: 0
 --- !u!114 &3465658658279899419
@@ -2897,6 +2900,7 @@ MonoBehaviour:
   materials:
   - {fileID: 2100000, guid: 2516edcba6fec964787b5492b55edbd1, type: 2}
   - {fileID: 2100000, guid: 4586c39a14d97c44c97cf645cce83f0f, type: 2}
+  playerMatVariant: 0
 --- !u!1 &8654310594624942980
 GameObject:
   m_ObjectHideFlags: 0

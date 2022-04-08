@@ -51,6 +51,7 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
     public SCWeapon RHMWeapon, LHMWeapon, RLWeapon, LLWeapon;
     public SCWeapon RHRWeapon, LHRWeapon;
 
+    public HeroFrame uiController;
     //Combat Attributes
     public float health, stamina, balance, mind, maxHealth, maxStamina, maxBalance, maxMind;
     [System.Serializable]
@@ -449,7 +450,8 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
         combatEngagementStatus = CombatEngagementStatus.Aggressor;
         CombatIdle();
     }
-    public void DefendCombat() {
+    public void DefendCombat(StableCombatChar _attacker) {
+        myAttackTarget = _attacker;
         combatEngagementStatus = CombatEngagementStatus.Defender;
         CombatIdle();
     }
@@ -610,10 +612,17 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
         stamina -= damage.stamina;
         balance -= damage.balance;
         mind -= damage.mind;
-   
+        uiController?.UpdateAll();
         if (health <= 0) {
             GetDowned();
         }
+    }
+    public void RestoreHealth() {
+        health = maxHealth;
+        stamina = maxStamina;
+        balance = maxBalance;
+        mind = maxMind;
+        uiController?.UpdateAll();
     }
 
     public void MeleeWeaponsOn() {
@@ -730,6 +739,9 @@ public enum ModType { Speed, DOT}
 public enum Position { NA, LW, STR, STL, STC, RW, LM, LCM, MC, RCM, RM, DL, LDC, DC, RDC, DR, GK }
 public enum TackleType { Tackle, Strip }
 public enum CombatFocus { Melee, Ranged }
+public enum PlayStyle { Play, Fight }
+public enum CombatEngagementStatus { None, Aggressor, Defender }
+
 public static class StableCombatCharHelper {
     public static void ResetAllTriggers(this Animator anim) {
 

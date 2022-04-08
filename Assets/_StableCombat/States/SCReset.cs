@@ -6,6 +6,7 @@ public class SCReset : StableCombatCharState, SCReviveUnit {
 
     public override void EnterFrom(StableCombatCharState state) {
         base.EnterFrom(state);
+        thisChar.RestoreHealth();
         thisChar.Idle();
     }
     public override void Update() {

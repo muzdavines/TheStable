@@ -6,6 +6,7 @@ public class SCCombatPursueTarget : SCCombatStanceState {
 
     public override void EnterFrom(StableCombatCharState state) {
         base.EnterFrom(state);
+        thisChar.agent.isStopped = false;
     }
     public override void Update() {
         base.Update();
@@ -18,15 +19,16 @@ public class SCCombatPursueTarget : SCCombatStanceState {
         }
         if (thisChar.fieldSport && ball.Distance(thisChar) < 10f) {
             //thisChar.Idle();
-            return;
+            //return;
         }
         Vector3 attackTargetPos = thisChar.myAttackTarget._t.position;
+        thisChar.agent.SetDestination(attackTargetPos);
+        thisChar.agent.isStopped = false;
         if (Vector3.Distance(thisChar._t.position, attackTargetPos) < thisChar.attackRange) {
             thisChar.CombatIdle();
             return;
         }
-        thisChar.agent.SetDestination(attackTargetPos);
-        thisChar.agent.isStopped = false;
+        
     }
 
     public override void AnimEventReceiver(string message) {

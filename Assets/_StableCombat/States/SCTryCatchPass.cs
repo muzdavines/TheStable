@@ -27,6 +27,10 @@ public class SCTryCatchPass : StableCombatCharState
             thisChar.agent.isStopped = true;
             arrivedTime = Time.time;
             thisChar.transform.LookAt(Vector3.Project(ball.transform.position, Vector3.up));
+            if (ball.Distance(thisChar) < 1.5f) {
+                thisChar.PursueBall();
+                return;
+            }
         } else {
             thisChar.agent.isStopped = false;
 

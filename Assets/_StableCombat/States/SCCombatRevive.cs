@@ -6,6 +6,7 @@ public class SCCombatRevive : SCCombatStanceState, SCReviveUnit {
 
     public override void EnterFrom(StableCombatCharState state) {
         base.EnterFrom(state);
+        thisChar.RestoreHealth();
         thisChar.CombatIdle();
     }
     public override void Update() {

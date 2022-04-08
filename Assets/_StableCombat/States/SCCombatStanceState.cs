@@ -21,14 +21,17 @@ public class SCCombatStanceState : StableCombatCharState
     }
 
     public StableCombatChar GetCombatTarget() {
+        float closest = Mathf.Infinity;
+        StableCombatChar returnChar = null;
         foreach (Collider c in Physics.OverlapSphere(thisChar.position, thisChar.aggroRadius)) {
             var tempChar = c.GetComponent<StableCombatChar>();
-            if (tempChar == null || tempChar.team == thisChar.team || tempChar.state.GetType() == typeof(SCCombatDowned)) {
+            if (tempChar == null || tempChar.team == thisChar.team || tempChar.state.GetType() == typeof(SCCombatDowned) || tempChar.Distance(thisChar) > closest) {
                 continue;
             }
-            return tempChar;
+            returnChar = tempChar;
+            closest = tempChar.Distance(thisChar);
         }
-        return null;
+        return returnChar;
     }
 }
 

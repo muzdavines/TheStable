@@ -16,17 +16,15 @@ public class SCCombatDowned : SCCombatStanceState {
         thisChar.anima.GetDowned();
         if (thisChar.fieldSport) {
             ball.GetDropped();
-            getUpTime = Time.time + 10;
+            //getUpTime = Time.time + 10;
         } else { getUpTime = Mathf.Infinity; }
+        getUpTime = Mathf.Infinity;
     }
     public override void Update() {
         base.Update();
         if (Time.time < getUpTime) { return; }
         getUpTime = Mathf.Infinity;
-        thisChar.health = thisChar.maxHealth;
-        thisChar.stamina = thisChar.maxStamina;
-        thisChar.balance = thisChar.maxBalance;
-        thisChar.mind = thisChar.maxMind;
+        
         thisChar.GetRevived();
     }
 

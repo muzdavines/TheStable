@@ -10,10 +10,10 @@ public class HeroUIController : MonoBehaviour
         myCoach = _myCoach;
         for (int x = 0; x < myCoach.players.Length; x++) {
             heroes[x].Init(myCoach.players[x]);
+            myCoach.players[x].uiController = heroes[x];
         }
     }
+    
 
 }
 
-public enum PlayStyle { Play, Fight }
-public enum CombatEngagementStatus { None, Aggressor, Defender}
