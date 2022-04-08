@@ -30,6 +30,9 @@ public class TutorialStage : MonoBehaviour
             case Type.Button:
                 break;
             case Type.AnyKey:
+                if (Input.anyKey) {
+                    EndStage();
+                }
                 break;
         }
     }
@@ -40,6 +43,11 @@ public class TutorialStage : MonoBehaviour
     public void EndStage() {
         mySet.NextStage();
         gameObject.SetActive(false);
+    }
+    public void OnDisable() {
+        if (type == Type.Timer) {
+            EndStage();
+        }
     }
 
 }

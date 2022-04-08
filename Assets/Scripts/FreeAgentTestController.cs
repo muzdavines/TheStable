@@ -13,10 +13,7 @@ public class FreeAgentTestController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space)) {
-            Destroy(Game.instance.gameObject);
-            SceneManager.LoadScene("NewGameCreation");
-        }
+        
         if (Input.GetKeyDown(KeyCode.C)) {
             //Game.instance.playerStable.heroes[0].currentTraining.BeginTraining(Game.instance.playerStable.heroes[0]);
         }
