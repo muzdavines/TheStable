@@ -29,13 +29,13 @@ public class NewGameCreationController : MonoBehaviour
     {
         CreateNewGame(warlord);
     }
-    public void CreateNewGame(string warlord) {
+    public void CreateNewGame(string sceneToLoad = "CutScene1") {
 
         DontDestroyOnLoad(gameObject);
-        SceneManager.LoadScene("CutScene1");
+        SceneManager.LoadScene(sceneToLoad);
         Game game = Game.instance;
         Stable player = game.playerStable = new Stable();
-        warlord = activeStablemasterType;
+        var warlord = activeStablemasterType;
         switch (warlord) {
             case "Warlord":
                 player.warlord.InitWarlord(CharClass.Warrior);
@@ -93,8 +93,10 @@ public class NewGameCreationController : MonoBehaviour
     public void ChangeStablemasterType(string s) {
         activeStablemasterType = s;
     }
-    public void LoadGame() {
-        SceneManager.LoadScene("CutScene1");
+    public void Update() {
+        if (Input.GetKeyDown(KeyCode.Z)) {
+            CreateNewGame("StableManagement");
+        }
     }
 
 }

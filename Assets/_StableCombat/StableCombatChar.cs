@@ -741,7 +741,7 @@ public enum TackleType { Tackle, Strip }
 public enum CombatFocus { Melee, Ranged }
 public enum PlayStyle { Play, Fight }
 public enum CombatEngagementStatus { None, Aggressor, Defender }
-
+public enum RunSpeed { VerySlow, Slow, Average, Fast, VeryFast, WorldClass}
 public static class StableCombatCharHelper {
     public static void ResetAllTriggers(this Animator anim) {
 
