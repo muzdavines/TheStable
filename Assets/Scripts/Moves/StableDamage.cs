@@ -5,6 +5,7 @@ using UnityEngine;
 public class StableDamage 
 {
     public int stamina, balance, mind, health;
+    public bool isKnockdown;
     public void Modify(float mod) {
         stamina = (int)(stamina * mod);
         balance = (int)(balance * mod);

@@ -26,6 +26,9 @@ public class AnimancerController : MonoBehaviour {
     public ClipTransition takeDamage;
     public ClipTransition takeOutBow;
     public ClipTransition takeOutSword;
+    public ClipTransition shoulderBarge;
+    public ClipTransition backstab;
+    public ClipTransition backstabVictim;
     public ClipTransition[] skills;
     public List<Move> baseMeleeAttackMoves;
     public List<Move> baseRangedAttackMoves;
@@ -52,6 +55,8 @@ public class AnimancerController : MonoBehaviour {
 
     public void Idle() {
         anim.Play(movement);
+        currentMeleeAttackIndex = -1;
+        currentRangedAttackIndex = -1;
         movement.State.Root.Component.Animator.applyRootMotion = false;
     }
     // _Animancer.Play(_Action, 0.25f, FadeMode.FromStart)
@@ -133,6 +138,16 @@ public class AnimancerController : MonoBehaviour {
     public void SkillGeneric() {
         Debug.Log("#TODO#Generic Skill Fired in Animancer Controller");
         anim.Play(skills[(int)SkillAnims.Hunt], .25f, FadeMode.FromStart).Events.OnEnd = () => Idle();
+    }
+    public void ShoulderBarge() {
+        anim.Play(shoulderBarge, .25f, FadeMode.FromStart).Events.OnEnd = () => anim.Play(shoulderBarge, .25f, FadeMode.FromStart).Events.OnEnd = () => anim.Play(shoulderBarge, .25f, FadeMode.FromStart).Events.OnEnd = () => thisChar.CombatIdle();
+        shoulderBarge.State.Root.Component.Animator.applyRootMotion = true;
+    }
+    public void Backstab() {
+        anim.Play(backstab, .25f, FadeMode.FromStart).Events.OnEnd = () => thisChar.CombatIdle();
+    }
+    public void BackstabVictim() {
+        anim.Play(backstabVictim, .25f, FadeMode.FromStart).Events.OnEnd = () => thisChar.CombatIdle();
     }
     public void GKBored() {
 

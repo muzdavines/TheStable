@@ -1,5 +1,7 @@
 using Animancer;
 using MoreMountains.Feedbacks;
+using System;
+using System.Reflection;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
@@ -401,7 +403,7 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
     public void Tackle() {
         state.TransitionTo(new SCTackle());
     }
-    public void GetTackled(StableCombatChar tackler) {
+    public void GetTackled() {
         state.TransitionTo(new SCGetTackled());
     }
     public void DodgeTackle(StableCombatChar tackler) {
@@ -473,8 +475,16 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
     public void GuardNet(GuardNetPosition myPos) {
         state.TransitionTo(new SCGuardNet() { guardPosition = myPos });
     }
+    public void ShoulderBarge() {
+        state.TransitionTo(new SCShoulderBarge());
+    }
 
-
+    public void Backstab() {
+        state.TransitionTo(new SCBackstab());
+    }
+    public void BackstabVictim() {
+        state.TransitionTo(new SCBackstabVictim());
+    }
     public void GKDiveForBall() {
 
     }
@@ -554,6 +564,8 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
        }
     }
     public StableCombatChar GetNearestTeammate() {
+
+
         StableCombatChar[] allChars =FindObjectsOfType<StableCombatChar>();
         foreach (var c in allChars) {
             if (c.fieldPosition == Position.GK) { continue; }
@@ -565,7 +577,7 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
         }
         return null;
     }
-
+    
     public StableCombatChar GetFarthestTeammateNearGoal() {
         float maxDist = 0;
         StableCombatChar returnChar = null;
@@ -615,6 +627,9 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
         uiController?.UpdateAll();
         if (health <= 0) {
             GetDowned();
+        }
+        if (damage.isKnockdown) {
+            GetTackled();
         }
     }
     public void RestoreHealth() {
@@ -757,5 +772,32 @@ public static class StableCombatCharHelper {
 
     public static bool IsForward(this Position pos) {
         return (pos == Position.LW || pos == Position.STR || pos == Position.STL || pos == Position.STC || pos == Position.RW);
+    }
+}
+
+
+
+static class Methods {
+    public static void Inform(string parameter) {
+        Console.WriteLine("Inform:parameter={0}", parameter);
+    }
+}
+
+class Program {
+    static void Main() {
+        // Name of the method we want to call.
+        string name = "Inform";
+
+        // Call it with each of these parameters.
+        string[] parameters = { "Sam", "Perls" };
+
+        // Get MethodInfo.
+        Type type = typeof(Methods);
+        MethodInfo info = type.GetMethod(name);
+
+        // Loop over parameters.
+        foreach (string parameter in parameters) {
+            info.Invoke(null, new object[] { parameter });
+        }
     }
 }

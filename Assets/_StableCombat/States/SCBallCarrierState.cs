@@ -40,7 +40,7 @@ public class SCBallCarrierState : StableCombatCharState
                     tackleDodge = (thisChar.myCharacter.strength * .5f) + thisChar.myCharacter.carrying;
                     if (tackleRoll > tackleDodge) {
                         res.success = true;
-                        thisChar.GetTackled(tackler);
+                        thisChar.GetTackled();
 
                     }
                     else {
@@ -54,7 +54,7 @@ public class SCBallCarrierState : StableCombatCharState
                     tackleDodge = thisChar.myCharacter.agility + thisChar.myCharacter.carrying;
                     if (tackleRoll > tackleDodge) {
                         res.success = true;
-                        thisChar.GetTackled(tackler);
+                        thisChar.GetTackled();
 
                     }
                     else {

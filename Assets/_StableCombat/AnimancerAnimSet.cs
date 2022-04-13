@@ -1,3 +1,4 @@
+using Animancer;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -23,6 +24,11 @@ public class AnimancerAnimSet : ScriptableObject
     public AnimationClip takeDamage;
     public AnimationClip takeOutSword;
     public AnimationClip[] skills;
+    public AnimationClip shoulderBarge;
+    public AnimationClip backstab;
+    public AnimationClip backstabVictim;
+
+
 
     public void Init(AnimancerController anim) {
         Debug.Log("Initialize Animset");
@@ -49,5 +55,8 @@ public class AnimancerAnimSet : ScriptableObject
         anim.goalScored.Clip = goalScored;
         anim.takeDamage.Clip = takeDamage;
         anim.takeOutSword.Clip = takeOutSword;
+        anim.shoulderBarge.Clip = shoulderBarge;
+        anim.backstab.Clip = backstab;
+        anim.backstabVictim.Clip = backstabVictim;
     }
 }

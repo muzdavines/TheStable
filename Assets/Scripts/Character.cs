@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -89,7 +90,8 @@ public class Character : Living
     public List<MoveSave> knownMovesSave = new List<MoveSave>();
     public List<Move> activeMeleeMoves = new List<Move>();
     public List<Move> activeRangedMoves = new List<Move>();
-    public List<Move> activeSpecialMoves = new List<Move>();
+    public List<string> startingSpecialMoves = new List<string>();
+    public List<SpecialMove> activeSpecialMoves = new List<SpecialMove>();
     public List<MoveSave> activeMovesSave = new List<MoveSave>();
     public SportStats seasonStats = new SportStats();
     public SportStats careerStats = new SportStats();
@@ -140,7 +142,7 @@ public class Character : Living
     public GameObject currentObject;
     
     public int RandDist(float min, float max) {
-        int roll = Random.Range(0, 100);
+        int roll = UnityEngine.Random.Range(0, 100);
         float interval = (max - min) / 6;
         int[] breaks = { 5, 27, 18, 18, 27, 5 };
         float[] array = new float[100];
@@ -184,7 +186,7 @@ public class Character : Living
                 dexRange[0] = 10; dexRange[1] = 20;
                 strRange[0] = 2; strRange[1] = 4;
                 agiRange[0] = 4; agiRange[1] = 8;
-                if (Random.Range(0, 1f) >= .99f) {
+                if (UnityEngine.Random.Range(0, 1f) >= .99f) {
                     shootingRange[1] = 40;
                     Debug.Log("#CreateHero#Striker Crit!");
                 }
@@ -278,7 +280,7 @@ public class Character : Living
     }
 
    
-    public enum Archetype { Striker, Winger, Midfielder, Defender, Goalkeeper}
+    public enum Archetype { Striker, Winger, Midfielder, Defender, Goalkeeper, Warrior, Rogue, Wizard}
     public Archetype archetype;
 
     public void Awake() {
@@ -289,6 +291,12 @@ public class Character : Living
         if (startingMeleeWeaponSO == null) { Debug.Log("Character new melee weapon " + name); meleeWeapon = new Weapon(); } else { Debug.Log("Char inst weapon " + name); meleeWeapon = Instantiate(startingMeleeWeaponSO); }
         if (startingRangedWeaponSO == null) { Debug.Log("Character new ranged weapon " + name); rangedWeapon = new Weapon(); } else { Debug.Log("Char inst ranged weapon " + name); rangedWeapon = Instantiate(startingRangedWeaponSO); }
         if (currentTraining == null) { currentTraining = new Training(); }
+        activeSpecialMoves = new List<SpecialMove>();
+        foreach (string specialMove in startingSpecialMoves) {
+            Type myType = Type.GetType(specialMove);
+            SpecialMove myObj = (SpecialMove)Activator.CreateInstance(myType);
+            activeSpecialMoves.Add(myObj);
+        }
     }
 
     public void StartTraining (Training t) {

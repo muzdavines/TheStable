@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class SCCombatAttack : SCCombatStanceState
 {
-    public float timeOut;
     public override void EnterFrom(StableCombatCharState state) {
         base.EnterFrom(state);
         timeOut = Time.time + 8f;
@@ -25,8 +24,10 @@ public class SCCombatAttack : SCCombatStanceState
     public override void Update() {
         base.Update();
         thisChar.agent.isStopped = true;
+       
         if (Time.time >= timeOut) { thisChar.MeleeScanDamage("EndAll"); thisChar.Idle(); }
     }
+    
 
     public override void AnimEventReceiver(string message) {
         base.AnimEventReceiver(message);
@@ -41,6 +42,7 @@ public class SCCombatAttack : SCCombatStanceState
         if (message == "FaceTarget") {
             thisChar._t.LookAt(thisChar.myAttackTarget.position);
         }
+       
     }
 
     public void FireProjectile(string message) {

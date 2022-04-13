@@ -76,6 +76,9 @@ public class SCCombatIdle : SCCombatStanceState {
     }
 
     void ProcessCombat() {
+        if (CheckSpecials()) {
+            return;
+        }
         if (thisChar.IsCoolingDown()) {
             //is cooling down and target not null
             if (thisChar.MyTargetIsInAttackRange()) {

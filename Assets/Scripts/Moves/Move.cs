@@ -30,8 +30,10 @@ public class Move : ScriptableObject
     }
 
     public List<string> modifiers = new List<string>();
-    
+    public void Update() {
 
+    }
+  
 }
 
 public enum MoveType { Melee, Ranged, Support }

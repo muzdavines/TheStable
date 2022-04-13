@@ -1039,16 +1039,23 @@ ModelImporter:
       loopTime: 0
       loopBlend: 0
       loopBlendOrientation: 1
-      loopBlendPositionY: 1
+      loopBlendPositionY: 0
       loopBlendPositionXZ: 0
       keepOriginalOrientation: 1
-      keepOriginalPositionY: 1
+      keepOriginalPositionY: 0
       keepOriginalPositionXZ: 0
-      heightFromFeet: 0
+      heightFromFeet: 1
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
+      - time: 0.45652172
+        functionName: AnimEventReceiver
+        data: BeginFaceTarget
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       - time: 0.59006214
         functionName: AnimEventReceiver
         data: BeginScanRH
@@ -1056,7 +1063,7 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.76397514
+      - time: 0.76576406
         functionName: AnimEventReceiver
         data: EndScanRH
         objectReferenceParameter: {instanceID: 0}
@@ -1070,9 +1077,9 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.45652172
+      - time: 0.7754646
         functionName: AnimEventReceiver
-        data: FaceTarget
+        data: EndFaceTarget
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
@@ -1096,12 +1103,12 @@ ModelImporter:
       loopTime: 0
       loopBlend: 0
       loopBlendOrientation: 1
-      loopBlendPositionY: 1
+      loopBlendPositionY: 0
       loopBlendPositionXZ: 0
       keepOriginalOrientation: 1
-      keepOriginalPositionY: 1
+      keepOriginalPositionY: 0
       keepOriginalPositionXZ: 0
-      heightFromFeet: 0
+      heightFromFeet: 1
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
@@ -1129,7 +1136,14 @@ ModelImporter:
         messageOptions: 0
       - time: 0.45652184
         functionName: AnimEventReceiver
-        data: FaceTarget
+        data: BeginFaceTarget
+        objectReferenceParameter: {instanceID: 0}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
+      - time: 0.915985
+        functionName: AnimEventReceiver
+        data: EndFaceTarget
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0

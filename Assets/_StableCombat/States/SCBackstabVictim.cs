@@ -2,10 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SCGetTackled : SCFailAgainstTackle {
+public class SCBackstabVictim : StableCombatCharState {
+
     public override void EnterFrom(StableCombatCharState state) {
         base.EnterFrom(state);
-        thisChar.anima.Knockdown();
+        canGrabBall = false;
+        thisChar.agent.isStopped = true;
+        thisChar.agent.velocity = Vector3.zero;
+        thisChar.anima.BackstabVictim();
     }
     public override void Update() {
         base.Update();
@@ -17,9 +21,5 @@ public class SCGetTackled : SCFailAgainstTackle {
 
     public override void WillExit() {
         base.WillExit();
-    }
-
-    public override void FireAnimation() {
-        //thisChar.anima.Knockdown();
     }
 }

@@ -79,7 +79,7 @@ public class StableCombatCharState {
         //float roll = Random.Range(0, dodging + 1) - Random.Range(0, tackling + 1);
         //Debug.Log("#DiceRoll#Dodge Roll: " + roll);
         //if (roll >= 0) { res.success = false; thisChar.DodgeTackle(blocker); } else { res.success = true; thisChar.GetTackled(blocker); }
-        if (dodging>=tackling) { res.success = false; thisChar.DodgeTackle(blocker); } else { res.success = true; thisChar.GetTackled(blocker); }
+        if (dodging>=tackling) { res.success = false; thisChar.DodgeTackle(blocker); } else { res.success = true; thisChar.GetTackled(); }
 
         return res;
     }
@@ -97,6 +97,16 @@ public class StableCombatCharState {
     public virtual SCResolution SendMessage(StableCombatChar target, string message) {
         return target.state.ReceiveMessage(thisChar, message);
     }
+
+    public bool CheckSpecials() {
+        foreach (SpecialMove m in thisChar.myCharacter.activeSpecialMoves) {
+            if (m.Check(thisChar)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public virtual void Update() {
         if (Time.frameCount % 10 == 0) {
 

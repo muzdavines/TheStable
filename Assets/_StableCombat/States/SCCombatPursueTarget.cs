@@ -15,7 +15,7 @@ public class SCCombatPursueTarget : SCCombatStanceState {
             return;
         }
         if (Time.frameCount % 20 != 0) {
-            return;
+            //return;
         }
         if (thisChar.fieldSport && ball.Distance(thisChar) < 10f) {
             //thisChar.Idle();
