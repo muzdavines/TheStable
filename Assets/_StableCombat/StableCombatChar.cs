@@ -485,6 +485,44 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
     public void BackstabVictim() {
         state.TransitionTo(new SCBackstabVictim());
     }
+    public void FlameCircle() {
+        state.TransitionTo(new SCFlameCircle());
+    }
+    public void PowerSlam() {
+        state.TransitionTo(new SCPowerSlam());
+    }
+    public void Flechettes() {
+        state.TransitionTo(new SCFlechettes());
+    }
+    public void Summon(Character charToSummon) {
+
+    }
+    public void ClosingSpeed() {
+
+    }
+    public void DeepBall() {
+
+    }
+    public void WallOfForce() {
+
+    }
+    public void Sniper() {
+
+    }
+    public void TeleportBall() {
+
+    }
+    public void Taunt() {
+
+    }
+    public void Blink() {
+
+    }
+    public void Freeze() {
+
+    }
+
+
     public void GKDiveForBall() {
 
     }

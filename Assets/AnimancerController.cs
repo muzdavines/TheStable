@@ -30,6 +30,9 @@ public class AnimancerController : MonoBehaviour {
     public ClipTransition backstab;
     public ClipTransition backstabVictim;
     public ClipTransition[] skills;
+    public ClipTransition flameCircle;
+    public ClipTransition powerSlam;
+    public ClipTransition flechettes;
     public List<Move> baseMeleeAttackMoves;
     public List<Move> baseRangedAttackMoves;
     NavMeshAgent agent;
@@ -148,6 +151,15 @@ public class AnimancerController : MonoBehaviour {
     }
     public void BackstabVictim() {
         anim.Play(backstabVictim, .25f, FadeMode.FromStart).Events.OnEnd = () => thisChar.CombatIdle();
+    }
+    public void FlameCircle() {
+        anim.Play(flameCircle, .25f, FadeMode.FromStart).Events.OnEnd = () => thisChar.CombatIdle();
+    }
+    public void PowerSlam() {
+        anim.Play(powerSlam, .25f, FadeMode.FromStart).Events.OnEnd = () => thisChar.CombatIdle();
+    }
+    public void Flechettes() {
+        anim.Play(flechettes, .25f, FadeMode.FromStart).Events.OnEnd = () => thisChar.CombatIdle();
     }
     public void GKBored() {
 

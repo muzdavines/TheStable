@@ -27,8 +27,9 @@ public class AnimancerAnimSet : ScriptableObject
     public AnimationClip shoulderBarge;
     public AnimationClip backstab;
     public AnimationClip backstabVictim;
-
-
+    public AnimationClip flameCircle;
+    public AnimationClip powerSlam;
+    public AnimationClip flechettes;
 
     public void Init(AnimancerController anim) {
         Debug.Log("Initialize Animset");
@@ -58,5 +59,8 @@ public class AnimancerAnimSet : ScriptableObject
         anim.shoulderBarge.Clip = shoulderBarge;
         anim.backstab.Clip = backstab;
         anim.backstabVictim.Clip = backstabVictim;
+        anim.flameCircle.Clip = flameCircle;
+        anim.powerSlam.Clip = powerSlam;
+        anim.flechettes.Clip = flechettes;
     }
 }

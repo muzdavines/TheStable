@@ -11,11 +11,11 @@ public class SCBackstab : SCCombatStanceState {
         thisChar.agent.isStopped = true;
         thisChar.agent.velocity = Vector3.zero;
         thisChar._t.LookAt(thisChar.myAttackTarget.position);
-        /*GameObject effect = Resources.Load<GameObject>("SmokeEffect");
+        GameObject effect = Resources.Load<GameObject>("SmokeEffect");
         var fx1 = GameObject.Instantiate(effect, thisChar.position, thisChar.transform.rotation);
         var fx2 = GameObject.Instantiate(effect, thisChar.myAttackTarget.position - thisChar.myAttackTarget.transform.forward, thisChar.transform.rotation);
         GameObject.Destroy(fx1, 10);
-        GameObject.Destroy(fx2, 10);*/
+        GameObject.Destroy(fx2, 10);
         thisChar.transform.position = thisChar.myAttackTarget.position - thisChar.myAttackTarget.transform.forward;
         thisChar.transform.LookAt(thisChar.myAttackTarget.transform);
         thisChar.anima.Backstab();
