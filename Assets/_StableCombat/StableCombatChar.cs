@@ -497,8 +497,11 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
     public void Summon(Character charToSummon) {
 
     }
+    public void SummonFireGolem() {
+        state.TransitionTo(new SCSummonFireGolem());
+    }
     public void ClosingSpeed() {
-
+        state.TransitionTo(new SCClosingSpeed());
     }
     public void DeepBall() {
 
@@ -521,7 +524,15 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
     public void Freeze() {
 
     }
-
+    
+    /// <summary>
+    /// 
+    /// </summary>
+    /// <param name="duration"></param>
+    /// <param name="speedMod">speedMod should be in units of speed for the Character attribute. The method will convert the agent speed</param>
+    public SCSpeedBuff SpeedBuff(float duration, float speedMod) {
+        return gameObject.AddComponent<SCSpeedBuff>().Init(duration, speedMod);
+    }
 
     public void GKDiveForBall() {
 

@@ -32,7 +32,7 @@ public class FreeAgentMarket
             Character thisHero = new Character();
             thisHero.activeInLineup = false;
             thisHero.name = Names.Warrior[Random.Range(0, Names.Warrior.Length)];
-            thisHero.GenerateCharacter((Character.Archetype)(Random.Range(0, 4)), 1);
+            thisHero.GenerateCharacter((Character.Archetype)(Random.Range(5, 8)), 1);
             thisHero.contract = new EmploymentContract() { signingBonus = Random.Range(500, 2000), weeklySalary = Random.Range(50, 150), weeksLeft = 48 };
             market.Add(thisHero);
         }

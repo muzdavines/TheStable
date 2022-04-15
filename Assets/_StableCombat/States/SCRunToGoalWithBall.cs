@@ -5,11 +5,13 @@ using UnityEngine;
 public class SCRunToGoalWithBall : SCBallCarrierState
 {
     float enterTime;
+    SCSpeedBuff speedBuff;
     public override void EnterFrom(StableCombatCharState state) {
         base.EnterFrom(state);
         enterTime = Time.time;
         thisChar.agent.isStopped = false;
-        thisChar.agent.speed = thisChar.myCharacter.runspeed * .33f;
+        //thisChar.agent.speed = thisChar.myCharacter.runspeed * .33f;
+        speedBuff = thisChar.SpeedBuff(8, -0.825f);
         thisChar.agent.SetDestination(thisChar.enemyGoal.transform.position + thisChar.enemyGoal.transform.forward * 5 + thisChar.enemyGoal.transform.right * (Random.value - .5f));
         canGrabBall = false;
         //Debug.Log("Check for one timer here");
@@ -42,7 +44,7 @@ public class SCRunToGoalWithBall : SCBallCarrierState
     }
     
     public override void WillExit() {
-        thisChar.agent.speed = thisChar.myCharacter.runspeed * .4f;
+        if (speedBuff != null) { speedBuff.EndEffect(); }
         base.WillExit();
     }
 }

@@ -181,7 +181,7 @@ public class MissionController : MonoBehaviour
         print("Combat Begin");
         currentEnemies = new List<Character>();
         foreach (Character e in enemies) {
-            currentEnemies.Add(Instantiate<Character>(e));
+            currentEnemies.Add(Instantiate<Character>(e).Init());
         }
         var theseEnemies = SpawnChars(currentEnemies, enemySpawnLoc, 1);
         foreach (StableCombatChar t in theseEnemies) {

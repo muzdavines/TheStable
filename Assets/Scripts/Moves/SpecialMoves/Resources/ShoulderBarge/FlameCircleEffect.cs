@@ -19,6 +19,7 @@ public class FlameCircleEffect : MonoBehaviour
     public void Init(StableCombatChar _caster, StableDamage _damage) {
         caster = _caster;
         damage = _damage;
+        if (damage == null) { damage = new StableDamage(); }
         init = true;
     }
     void Update()

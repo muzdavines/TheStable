@@ -30,6 +30,7 @@ public class AnimancerAnimSet : ScriptableObject
     public AnimationClip flameCircle;
     public AnimationClip powerSlam;
     public AnimationClip flechettes;
+    public AnimationClip summon;
 
     public void Init(AnimancerController anim) {
         Debug.Log("Initialize Animset");
@@ -62,5 +63,7 @@ public class AnimancerAnimSet : ScriptableObject
         anim.flameCircle.Clip = flameCircle;
         anim.powerSlam.Clip = powerSlam;
         anim.flechettes.Clip = flechettes;
+        anim.summon.Clip = summon;
+
     }
 }

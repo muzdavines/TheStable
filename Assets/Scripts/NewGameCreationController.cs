@@ -18,10 +18,6 @@ public class NewGameCreationController : MonoBehaviour
    
     public void Start()
     {
-        if (heroes == null || heroes.Count == 0)
-        {
-            heroes.Add(new Character() { name = Names.Warrior[Random.Range(0, Names.Warrior.Length)], age = 18, modelName = "CharWarrior2" });
-        }
         activeStablemasterType = "Warlord";
         
     }
@@ -61,7 +57,7 @@ public class NewGameCreationController : MonoBehaviour
         for (int i = 0; i < 6; i++) {
             Character thisHero = new Character();
             thisHero.name = Names.Warrior[Random.Range(0, Names.Warrior.Length)];
-            thisHero.GenerateCharacter((Character.Archetype)(Random.Range(0,4)), 1);
+            thisHero.GenerateCharacter((Character.Archetype)(Random.Range(5,8)), 1);
             thisHero.currentPosition = Position.NA;
             if (activeInLineup < 5) {
                 thisHero.activeInLineup = true;

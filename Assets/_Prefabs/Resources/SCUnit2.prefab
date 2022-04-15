@@ -1333,7 +1333,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2804601539654312353
 Transform:
   m_ObjectHideFlags: 0
@@ -2063,6 +2063,7 @@ MonoBehaviour:
   LLWeapon: {fileID: 0}
   RHRWeapon: {fileID: 0}
   LHRWeapon: {fileID: 0}
+  uiController: {fileID: 0}
   health: 0
   stamina: 0
   balance: 0
@@ -2284,6 +2285,33 @@ MonoBehaviour:
     _Clip: {fileID: 0}
     _Speed: 1
     _NormalizedStartTime: 0
+  shoulderBarge:
+    _FadeDuration: 0.25
+    _Events:
+      _NormalizedTimes: []
+      _Callbacks: []
+      _Names: []
+    _Clip: {fileID: 0}
+    _Speed: 1
+    _NormalizedStartTime: 0
+  backstab:
+    _FadeDuration: 0.25
+    _Events:
+      _NormalizedTimes: []
+      _Callbacks: []
+      _Names: []
+    _Clip: {fileID: 0}
+    _Speed: 1
+    _NormalizedStartTime: 0
+  backstabVictim:
+    _FadeDuration: 0.25
+    _Events:
+      _NormalizedTimes: []
+      _Callbacks: []
+      _Names: []
+    _Clip: {fileID: 0}
+    _Speed: 1
+    _NormalizedStartTime: 0
   skills:
   - _FadeDuration: 0
     _Events:
@@ -2292,6 +2320,42 @@ MonoBehaviour:
       _Names: []
     _Clip: {fileID: 0}
     _Speed: 0
+    _NormalizedStartTime: 0
+  flameCircle:
+    _FadeDuration: 0.25
+    _Events:
+      _NormalizedTimes: []
+      _Callbacks: []
+      _Names: []
+    _Clip: {fileID: 0}
+    _Speed: 1
+    _NormalizedStartTime: 0
+  powerSlam:
+    _FadeDuration: 0.25
+    _Events:
+      _NormalizedTimes: []
+      _Callbacks: []
+      _Names: []
+    _Clip: {fileID: 0}
+    _Speed: 1
+    _NormalizedStartTime: 0
+  flechettes:
+    _FadeDuration: 0.25
+    _Events:
+      _NormalizedTimes: []
+      _Callbacks: []
+      _Names: []
+    _Clip: {fileID: 0}
+    _Speed: 1
+    _NormalizedStartTime: 0
+  summon:
+    _FadeDuration: 0.25
+    _Events:
+      _NormalizedTimes: []
+      _Callbacks: []
+      _Names: []
+    _Clip: {fileID: 0}
+    _Speed: 1
     _NormalizedStartTime: 0
   baseMeleeAttackMoves: []
   baseRangedAttackMoves: []
@@ -2328,9 +2392,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   models:
   - {fileID: 2801656599064311803}
+  - {fileID: 2801909497760450401}
   materials:
   - {fileID: 2100000, guid: caf01dd5152f3934d8079e6160aa3b1e, type: 2}
   - {fileID: 2100000, guid: 6ecff158743e09e49af706d10ea4cefe, type: 2}
+  - {fileID: 2100000, guid: 5c16178aa04e6aa49b93356b61cb492b, type: 2}
   playerMatVariant: 1
 --- !u!1 &2801812572409770789
 GameObject:

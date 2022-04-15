@@ -18,7 +18,6 @@ public class SCPursueBallCarrier : StableCombatCharState
             thisChar.Idle();
             return;
         }
-        Vector3 myPos = thisChar.transform.position;
         Vector3 holderPos = thisChar.ball.holder.transform.position;
         if (Vector3.Distance(thisChar.transform.position, thisChar.ball.holder.transform.position) <= 2f) {
             var resolution = thisChar.state.SendMessage(thisChar.ball.holder, "TryTackle");
@@ -45,10 +44,7 @@ public class SCPursueBallCarrier : StableCombatCharState
                 }
             }
         }
-        if (!speedBoosted && Vector3.Distance(thisChar.position, holderPos) < 8) {
-            speedBoosted = true;
-            thisChar.AddMod(new StableCombatChar.Mod() { modAmount = thisChar.myCharacter.tackling * .05f, timeEnd = Time.time + 2f });
-        }
+        
         thisChar.agent.SetDestination(holderPos);
         thisChar.agent.isStopped = false;
         ///if in range, try tackle. Might need messaging here, or just fire it. for now just do 50/50, pass tackle, fail animate a fall and stop the tackler for a bit

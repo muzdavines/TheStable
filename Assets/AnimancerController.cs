@@ -33,6 +33,7 @@ public class AnimancerController : MonoBehaviour {
     public ClipTransition flameCircle;
     public ClipTransition powerSlam;
     public ClipTransition flechettes;
+    public ClipTransition summon;
     public List<Move> baseMeleeAttackMoves;
     public List<Move> baseRangedAttackMoves;
     NavMeshAgent agent;
@@ -160,6 +161,9 @@ public class AnimancerController : MonoBehaviour {
     }
     public void Flechettes() {
         anim.Play(flechettes, .25f, FadeMode.FromStart).Events.OnEnd = () => thisChar.CombatIdle();
+    }
+    public void Summon() {
+        anim.Play(summon, 25f, FadeMode.FromStart).Events.OnEnd = () => thisChar.CombatIdle();
     }
     public void GKBored() {
 

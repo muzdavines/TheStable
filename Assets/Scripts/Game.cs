@@ -111,7 +111,7 @@ public class Game : MonoBehaviour {
                     thisHero.currentPosition = (Position)(x + 1);
                 }
                 thisHero.name = Names.Warrior[Random.Range(0, Names.Warrior.Length)];
-                thisHero.GenerateCharacter((Character.Archetype)(Random.Range(0, 4)), 1);
+                thisHero.GenerateCharacter((Character.Archetype)(Random.Range(5, 8)), 1);
                 thisStable.heroes.Add(thisHero);
             }
             var GKHero = new Character();

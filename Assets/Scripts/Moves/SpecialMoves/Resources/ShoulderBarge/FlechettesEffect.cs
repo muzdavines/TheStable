@@ -23,7 +23,9 @@ public class FlechettesEffect : MonoBehaviour
             if (scc == null) { continue; }
             if (scc.team == caster.team) { continue; }
             targets.Add(scc);
-            projectiles.Add(Instantiate(projectilePrefab, transform.position, transform.rotation));
+            var go = Instantiate(projectilePrefab, transform.position, transform.rotation);
+            go.SetActive(true);
+            projectiles.Add(go);
         }
         init = true;
     }

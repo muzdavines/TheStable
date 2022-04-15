@@ -109,10 +109,15 @@ public class StableCombatCharState {
 
     public virtual void Update() {
         if (Time.frameCount % 10 == 0) {
-
-        }
-        if (thisChar !=null && thisChar.fieldSport && canGrabBall) {
-            TryGrabBall();
+            if (thisChar.isKnockedDown) { return; }
+            foreach (var special in thisChar.myCharacter.activeSpecialMoves) {
+                if (special.Check(thisChar)) {
+                    return;
+                }
+            }
+            if (thisChar != null && thisChar.fieldSport && canGrabBall) {
+                TryGrabBall();
+            }
         }
     }
 

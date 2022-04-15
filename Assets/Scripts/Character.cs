@@ -274,9 +274,77 @@ public class Character : Living
         startingMeleeWeapon = "FistsSO";
         startingRangedWeapon = "BowSO";
         archetype = thisArchetype;
+        switch (archetype) {
+            case Archetype.Warrior:
+                shooting = 6;
+                passing = 12;
+                tackling = 20;
+                carrying = 12;
+                melee = 20;
+                ranged = 10;
+                magic = 5;
+                runspeed = 13;
+                dexterity = 10;
+                strength = 20;
+                agility = 10;
+                maxHealth = 3;
+                maxMind = 5;
+                maxStamina = 20;
+                maxBalance = 10;
+                startingSpecialMoves.Add("ShoulderBarge");
+                startingSpecialMoves.Add("PowerSlam");
+                startingSpecialMoves.Add("ClosingSpeed");
+                modelName = "SCUnit";
+                modelNum = 0;
+                break;
+            case Archetype.Rogue:
+                shooting = 20;
+                passing = 12;
+                tackling = 10;
+                carrying = 20;
+                melee = 10;
+                ranged = 10;
+                magic = 5;
+                runspeed = 16;
+                dexterity = 10;
+                strength = 5;
+                agility = 20;
+                maxHealth = 2;
+                maxMind = 10;
+                maxStamina = 5;
+                maxBalance = 20;
+                startingSpecialMoves.Add("Backstab");
+                startingSpecialMoves.Add("Flechettes");
+                knownMoves.Add(Resources.Load<Move>("OneTimerKick"));
+                modelName = "SCUnit";
+                modelNum = 2;
+                break;
+            case Archetype.Wizard:
+                shooting = 5;
+                passing = 20;
+                tackling = 5;
+                carrying = 5;
+                melee = 5;
+                ranged = 5;
+                magic = 20;
+                runspeed = 10;
+                dexterity = 20;
+                strength = 5;
+                agility = 10;
+                maxHealth = 1;
+                maxMind = 20;
+                maxStamina = 10;
+                maxBalance = 10;
+                startingSpecialMoves.Add("FlameCircle");
+                startingSpecialMoves.Add("SummonFireGolem");
+                modelName = "SCUnit";
+                modelNum = 1;
+                break;
+        }
         
         seasonStats = new SportStats();
         careerStats = new SportStats();
+        Init();
     }
 
    
@@ -284,9 +352,16 @@ public class Character : Living
     public Archetype archetype;
 
     public void Awake() {
+
+    }
+    public void Start() {
+        
+    }
+    public Character Init() {
         Armor startingArmorSO = Resources.Load<Armor>(startingArmor);
         Weapon startingMeleeWeaponSO = Resources.Load<Weapon>(startingMeleeWeapon);
         Weapon startingRangedWeaponSO = Resources.Load<Weapon>(startingRangedWeapon);
+        returnDate = new Game.GameDate();
         if (startingArmorSO == null) { armor = new Armor(); } else { armor = Instantiate(startingArmorSO); }
         if (startingMeleeWeaponSO == null) { Debug.Log("Character new melee weapon " + name); meleeWeapon = new Weapon(); } else { Debug.Log("Char inst weapon " + name); meleeWeapon = Instantiate(startingMeleeWeaponSO); }
         if (startingRangedWeaponSO == null) { Debug.Log("Character new ranged weapon " + name); rangedWeapon = new Weapon(); } else { Debug.Log("Char inst ranged weapon " + name); rangedWeapon = Instantiate(startingRangedWeaponSO); }
@@ -294,9 +369,11 @@ public class Character : Living
         activeSpecialMoves = new List<SpecialMove>();
         foreach (string specialMove in startingSpecialMoves) {
             Type myType = Type.GetType(specialMove);
+            Debug.Log("#CharInit#Special: " + specialMove);
             SpecialMove myObj = (SpecialMove)Activator.CreateInstance(myType);
             activeSpecialMoves.Add(myObj);
         }
+        return this;
     }
 
     public void StartTraining (Training t) {
@@ -486,7 +563,7 @@ public class CharacterSave {
     [SerializeField]
     public Training currentTraining;
 
-    public Game.GameDate returnDate = new Game.GameDate();
+    public Game.GameDate returnDate;
 
     public bool activeForNextMission;
     public bool incapacitated;
