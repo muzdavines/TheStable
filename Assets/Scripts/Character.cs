@@ -337,6 +337,7 @@ public class Character : Living
                 maxBalance = 10;
                 startingSpecialMoves.Add("FlameCircle");
                 startingSpecialMoves.Add("SummonFireGolem");
+                startingSpecialMoves.Add("DeepBall");
                 modelName = "SCUnit";
                 modelNum = 1;
                 break;

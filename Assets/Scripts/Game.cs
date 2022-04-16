@@ -100,15 +100,25 @@ public class Game : MonoBehaviour {
 
     public void InitOtherStables() {
         otherStables = new List<Stable>();
+        
         for (int i = 0; i < 5; i++) {
             var thisStable = new Stable() { stableName = Stable.stableNameList[i] };
             thisStable.heroes = new List<Character>();
+            List<int> poss = new List<int>();
+            for (int z = 1; z <= 15; z++) {
+                Debug.Log("#InitStable#" + z);
+                poss.Add(z);
+            }
             for (int x = 0; x < 8; x++) {
                 Character thisHero = new Character();
                 thisHero.currentPosition = Position.NA;
                 if (x < 5) {
                     thisHero.activeInLineup = true;
-                    thisHero.currentPosition = (Position)(x + 1);
+                    int randIndex = Random.Range(0, poss.Count);
+                    int thisPos = poss[randIndex];
+                    print("#InitStable#Pos:" + (Position)(thisPos));
+                    thisHero.currentPosition = (Position)(thisPos);
+                    poss.RemoveAt(randIndex);
                 }
                 thisHero.name = Names.Warrior[Random.Range(0, Names.Warrior.Length)];
                 thisHero.GenerateCharacter((Character.Archetype)(Random.Range(5, 8)), 1);

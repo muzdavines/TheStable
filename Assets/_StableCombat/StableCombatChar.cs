@@ -36,6 +36,7 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
     public MMFeedbacks takeDamage;
     public MMFeedbacks playerHasBall;
     public MMFeedbacks shotAccuracy;
+    public MMFeedbacks specialAbil;
     public Vector3 position { get { return _t.position; } }
     public Coach coach;
     
@@ -267,16 +268,24 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
         }
         return false;
     }
-    public StableCombatChar GetPassTarget() {
+   
+    public StableCombatChar GetPassTarget(PassTargetLogic logic = 0) {
         int passTargetScore = 0;
+        int tempTargetScore = 0;
         StableCombatChar currentTarget = null;
         foreach (var teammate in coach.players) {
 #if UNITY_EDITOR
             Debug.Log("#PassTargetEval#" + teammate.name + " current state is " + teammate.state.GetType().ToString());
 #endif
             if (teammate.isKnockedDown) {
-                Debug.Log("#PassTargetEval#" + teammate.name + " is too knocked down.");
+                //Debug.Log("#PassTargetEval#" + teammate.name + " is too knocked down.");
                 continue;
+            }
+            if (logic.HasFlag(PassTargetLogic.DeepBall)) {
+                if (teammate.Distance(this) >= 30 && enemyGoal.Distance(teammate) < 30) {
+                    return teammate;
+                }
+                else { continue; }
             }
             if (Vector3.Distance(teammate.transform.position, position) < 7) {
                 Debug.Log("#PassTargetEval#" + teammate.name + " is too close");
@@ -287,35 +296,32 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
                 continue;
             }
 
-            RaycastHit hit;
+            /*RaycastHit hit;
             if (Physics.Raycast(position, (teammate.position - position), out hit)){
                 if (hit.transform.GetComponent<StableCombatChar>() != teammate) {
                     continue;
                 }
-            }
+            }*/
             //Debug.Log("#PassTargetEval# My Dist to Goal: " + enemyGoal.Distance(this) + "  Teammate Dist to Goal: " + enemyGoal.Distance(teammate));
             if (enemyGoal.Distance(this) > enemyGoal.Distance(teammate)) {
-                if (passTargetScore <= 5) {
-                    passTargetScore = 5;
-                    currentTarget = teammate;
-#if UNITY_EDITOR
-                    Debug.Log("#PassTargetEval#" + teammate.name + " is closer to the goal than me, marking for pass.");
-#endif
+                tempTargetScore += 5;
+            } else if (!logic.HasFlag(PassTargetLogic.BackwardOK)){
+                continue;
+            }
+            if (teammate.state.GetType() == typeof(SCRunToGoalWithoutBall)) {
+               tempTargetScore += 10;
+            }
+            if (logic.HasFlag(PassTargetLogic.Open)) {
+                print("#TODO#Check how open a pass target is and add points");
+            }
+            if (logic.HasFlag(PassTargetLogic.Rogue)) {
+                if (teammate.myCharacter.archetype == Character.Archetype.Rogue) {
+                    tempTargetScore += 11;
                 }
             }
-            else {
-#if UNITY_EDITOR
-                Debug.Log("#PassTargetEval#" + teammate.name + " is further from the goal than me.");
-#endif
-                continue; }
-            if (teammate.state.GetType() == typeof(SCRunToGoalWithoutBall)) {
-                if (passTargetScore <= 10) {
-                    passTargetScore = 10;
-                    currentTarget = teammate;
-#if UNITY_EDITOR
-                    Debug.Log("#PassTargetEval#" + teammate.name + " is on a run. Marking.");
-#endif
-                }
+            if (tempTargetScore > passTargetScore) {
+                currentTarget = teammate;
+                passTargetScore = tempTargetScore;
             }
         }
         if (currentTarget == null) {
@@ -375,6 +381,10 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
     public void DisplayShotAccuracy(float accuracy) {
         shotAccuracy.GetComponent<MMFeedbackFloatingText>().Value = (accuracy.ToString("F1"));
         shotAccuracy.PlayFeedbacks();
+    }
+    public void DisplaySpecialAbilityFeedback(string ability) {
+        specialAbil.GetComponent<MMFeedbackFloatingText>().Value = ability;
+        specialAbil.PlayFeedbacks();
     }
     public void PursueBallCarrier() {
         state.TransitionTo(new SCPursueBallCarrier());
@@ -503,8 +513,9 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
     public void ClosingSpeed() {
         state.TransitionTo(new SCClosingSpeed());
     }
-    public void DeepBall() {
-
+    public void DeepBall(StableCombatChar passTarget) {
+        print("#DeepBall#DeepBall to " + passTarget.myCharacter.name);
+        state.TransitionTo(new SCDeepBall() { passTarget = passTarget });
     }
     public void WallOfForce() {
 
@@ -806,6 +817,8 @@ public enum CombatFocus { Melee, Ranged }
 public enum PlayStyle { Play, Fight }
 public enum CombatEngagementStatus { None, Aggressor, Defender }
 public enum RunSpeed { VerySlow, Slow, Average, Fast, VeryFast, WorldClass}
+[Flags]
+public enum PassTargetLogic { None = 0, Nearest = 1, Farthest = 2, Rogue = 4, Open = 8, DeepBall = 16, BackwardOK = 32 }
 public static class StableCombatCharHelper {
     public static void ResetAllTriggers(this Animator anim) {
 

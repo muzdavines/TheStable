@@ -33,25 +33,27 @@ public class SCShoot : SCBallCarrierState
         }
         LayerMask layerMask = LayerMask.GetMask("Character");
         if (ball.Distance(thisChar.enemyGoal.transform) > 3 && Physics.SphereCast(ball.transform.position+thisChar.transform.forward, 1f, thisChar.transform.forward, out frontRay, Mathf.Infinity, layerMask)) {
-            int randID = Random.Range(0, 100000);
-            Debug.Log("#ShootRay#"+randID + " "+ frontRay.collider.transform.name);
-            StableCombatChar collided = frontRay.collider.GetComponent<StableCombatChar>();
-            if (collided != null && collided != thisChar) {
-                //view blocked, look for someone to pass to
-                if (passTarget != null) {
-                    thisChar.Pass(passTarget);  //found a pass target - pass it to them
-                    return;
+            if (Random.Range(0, 100) > 50) {
+                int randID = Random.Range(0, 100000);
+                Debug.Log("#ShootRay#" + randID + " " + frontRay.collider.transform.name);
+                StableCombatChar collided = frontRay.collider.GetComponent<StableCombatChar>();
+                if (collided != null && collided != thisChar) {
+                    //view blocked, look for someone to pass to
+                    if (passTarget != null) {
+                        thisChar.Pass(passTarget);  //found a pass target - pass it to them
+                        return;
+                    }
+                    Debug.Log("#ShootRay#" + randID + " Adjust Shot");
+                    //Didn't find a pass target - shoot for a corner
+
+                    Vector3 upDownAdjustment = (Random.value - .5f) > 0 ? Vector3.up : Vector3.down;
+
+                    adjustment = thisChar.enemyGoal.transform.right * Mathf.Sign(Random.value - .5f) * shotAdjustmentMod + upDownAdjustment;
                 }
-                Debug.Log("#ShootRay#" + randID + " Adjust Shot");
-                //Didn't find a pass target - shoot for a corner
-
-                Vector3 upDownAdjustment = (Random.value - .5f) > 0 ? Vector3.up : Vector3.down;
-
-                adjustment = thisChar.enemyGoal.transform.right * Mathf.Sign(Random.value - .5f) * shotAdjustmentMod + upDownAdjustment;
             }
         }
 
-        error = 2f - thisChar.myCharacter.shooting * .01f;
+        error = Mathf.Clamp(1f - thisChar.myCharacter.shooting * .01f, 0, Mathf.Infinity);
         thisChar.anima.ShootBall();
     }
     public override void Update() {

@@ -14,6 +14,8 @@ public class Ball : MonoBehaviour
     public float velocity { get { return body.velocity.magnitude; } }
 
     float shootErrorAdjustment = 2.5f;
+    bool heatSeek;
+    public Transform heatSeekTarget;
 
     private void Start() {
         body = GetComponent<Rigidbody>();
@@ -21,6 +23,9 @@ public class Ball : MonoBehaviour
         //body.AddForce(new Vector3(Random.Range(0, 10), 0, 0));
     }
     public void Update() {
+        if (heatSeek && heatSeekTarget !=null) {
+            print("#TODO#Lerp towards target");
+        }
         if (Time.frameCount % 60 == 0) {
             if (transform.position.y <= -1) {
                 body.velocity = Vector3.zero;
@@ -43,6 +48,8 @@ public class Ball : MonoBehaviour
         if (isHeld) { Debug.Log("Cannot pickup, already held."); return false; }
         holder = picker;
         lastHolder = holder;
+        heatSeek = false;
+        heatSeekTarget = null;
         isHeld = true;
         col.enabled = !isHeld;
         body.isKinematic = isHeld;
@@ -98,6 +105,8 @@ public class Ball : MonoBehaviour
         body.AddForce(new Vector3(Random.Range(-2, 2), Random.Range(-2, 2), Random.Range(-2, 2)) * 100);
     }
     void Release() {
+        heatSeek = false;
+        heatSeekTarget = null;
         isHeld = false;
         col.enabled = true;
         body.isKinematic = false;

@@ -8,6 +8,7 @@ public class SCClosingSpeed : StableCombatCharState {
         base.EnterFrom(state);
         speedBuff = thisChar.SpeedBuff(10, 5);
         GameObject effect = GameObject.Instantiate(Resources.Load<GameObject>("ClosingSpeedEffect"));
+        thisChar.DisplaySpecialAbilityFeedback("Closing Speed");
         effect.transform.parent = thisChar.transform;
         effect.transform.localPosition = Vector3.zero;
         GameObject.Destroy(effect, 8f);
