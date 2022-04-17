@@ -23,10 +23,26 @@ public class SCRunToGoalWithBall : SCBallCarrierState
             return;
         }
         thisChar.agent.isStopped = false;
-        if (thisChar.ShouldShoot()) {
+        if (ShouldShoot()) {
             thisChar.Shoot();
             return;
         }
+        if (thisChar.enemyGoal.Distance(thisChar) < 30) {
+            //we are near the enemy goal but haven't shot
+            PassTargetLogic logic = PassTargetLogic.Rogue;
+            logic |= PassTargetLogic.NearGoal;
+
+            var rogueTarget = thisChar.GetPassTarget(logic);
+            if (rogueTarget != null) {
+                Debug.Log("#PassLogic#Rogue Found");
+                thisChar.Pass(rogueTarget);
+                return;
+            }
+
+        }
+
+
+
         thisChar.SendTeammateOnRun();
         //if (Time.time < enterTime + Random.Range(0,2f)) { return; }
         if (thisChar.ShouldPass()) {

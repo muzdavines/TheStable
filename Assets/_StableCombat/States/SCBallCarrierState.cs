@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class SCBallCarrierState : StableCombatCharState
 {
+    public const float shootAngleMin = .65f;
     public override SCResolution ReceiveMessage(StableCombatChar sender, string message) {
         base.ReceiveMessage(sender, message);
         if (message == "TryTackle") {
@@ -12,8 +13,74 @@ public class SCBallCarrierState : StableCombatCharState
         else return null;
     }
 
+    public bool HasAngleToShoot() {
+        Vector3 goalForward = thisChar.enemyGoal.transform.TransformDirection(Vector3.forward);
+        Vector3 toShooter = (thisChar.position - thisChar.enemyGoal.transform.position).normalized;
+        float shootAngle = Vector3.Dot(goalForward, toShooter);
+        return shootAngle > shootAngleMin;
+    }
+    public bool ShouldShoot() {
+        if (thisChar.enemyGoal.Distance(thisChar) <= thisChar.distToShoot && HasAngleToShoot()) {
+            return true;
+        }
+        return false;
+    }
     SCResolution TryTackle(StableCombatChar tackler) {
         var res = new SCResolution();
+        bool tackleSuccess = false;
+        int tacklerRoll = Random.Range(1, 21);
+        int carrierRoll = Random.Range(1, 21);
+        if (tacklerRoll == 20) { tacklerRoll = 40; }
+        if (carrierRoll == 20) { carrierRoll = 40; }
+        if (tacklerRoll == 1) { tacklerRoll = -20; }
+        if (carrierRoll == 1) { carrierRoll = -20; }
+        int tacklerValue = tackler.myCharacter.tackling + tacklerRoll;
+        int carrierValue = thisChar.myCharacter.carrying + carrierRoll;
+        if (tacklerValue > carrierValue) {
+            tackleSuccess = true;
+        }
+        Debug.Log("#TackleRoll#Tackler Roll: " + tacklerRoll + " Tackler Abil " + tackler.myCharacter.tackling + "  Carrier Roll: " + carrierRoll + " Carrier Abil: " + thisChar.myCharacter.carrying + " Success: " + tackleSuccess);
+        res.success = tackleSuccess;
+        res.tackleType = TackleType.Tackle;
+        if (tackler.myCharacter.archetype == Character.Archetype.Rogue) {
+            if (tackleSuccess) {
+                thisChar.GetStripped(tackler);
+            }
+            else {
+                thisChar.AvoidStrip(tackler);
+            }
+            res.tackleType = TackleType.Strip;
+            return res;
+        }
+        
+        switch (thisChar.myCharacter.archetype) {
+            case Character.Archetype.Rogue:
+                if (tackleSuccess) {
+                    thisChar.GetTackled();
+                } else {
+                    thisChar.DodgeTackle(tackler);
+                }
+                break;
+            case Character.Archetype.Wizard:
+                if (tackleSuccess) {
+                    thisChar.GetTackled();
+                }
+                else {
+                    thisChar.DodgeTackle(tackler);
+                }
+                break;
+            case Character.Archetype.Warrior:
+                if (tackleSuccess) {
+                    thisChar.GetTackled();
+                }
+                else {
+                    thisChar.BreakTackle(tackler);
+                }
+                break;
+        }
+        return res;
+        /*
+
         TackleType tackleType = tackler.myCharacter.strength >= tackler.myCharacter.dexterity ? TackleType.Tackle : TackleType.Strip;
         res.tackleType = tackleType;
         float tacklerRoll = 0;
@@ -72,7 +139,7 @@ public class SCBallCarrierState : StableCombatCharState
         //Debug.Log("#DiceRoll#Dodge Roll: " + roll);
         //if (roll >= 0) { res.success = false; thisChar.DodgeTackle(tackler); } else { res.success = true; thisChar.GetTackled(tackler); }
 
-        return res;
+        return res;*/
     }
 
 }

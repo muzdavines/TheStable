@@ -217,12 +217,6 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
         }
         return false;
     }
-    public bool ShouldShoot() {
-        if (enemyGoal.Distance(this) <= distToShoot) {
-            return true;
-        }
-        return false;
-    }
 
     public GuardNetPosition ShouldGuardNet() {
         bool centerTaken = false;
@@ -286,6 +280,14 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
                     return teammate;
                 }
                 else { continue; }
+            }
+            if (logic.HasFlag(PassTargetLogic.NearGoal) && enemyGoal.Distance(teammate)>20) {
+                continue;
+            } else { tempTargetScore += 100; }
+            if (logic.HasFlag(PassTargetLogic.Rogue) && teammate.myCharacter.archetype != Character.Archetype.Rogue) {
+                continue;
+            } else {
+                tempTargetScore += 100;
             }
             if (Vector3.Distance(teammate.transform.position, position) < 7) {
                 Debug.Log("#PassTargetEval#" + teammate.name + " is too close");
@@ -818,7 +820,7 @@ public enum PlayStyle { Play, Fight }
 public enum CombatEngagementStatus { None, Aggressor, Defender }
 public enum RunSpeed { VerySlow, Slow, Average, Fast, VeryFast, WorldClass}
 [Flags]
-public enum PassTargetLogic { None = 0, Nearest = 1, Farthest = 2, Rogue = 4, Open = 8, DeepBall = 16, BackwardOK = 32 }
+public enum PassTargetLogic { None = 0, Nearest = 1, Farthest = 2, Rogue = 4, Open = 8, DeepBall = 16, BackwardOK = 32, NearGoal = 64 }
 public static class StableCombatCharHelper {
     public static void ResetAllTriggers(this Animator anim) {
 
@@ -835,8 +837,19 @@ public static class StableCombatCharHelper {
     public static bool IsForward(this Position pos) {
         return (pos == Position.LW || pos == Position.STR || pos == Position.STL || pos == Position.STC || pos == Position.RW);
     }
+    public static StableCombatChar FindEnemyWithinRange(this StableCombatChar thisChar, float range) {
+        foreach (var scc in thisChar.coach.otherTeam) {
+            if (thisChar.Distance(scc) <= range) {
+                return scc;
+            }
+        }
+        return null;
+    }
 }
 
+public interface CannotInterrupt {
+
+}
 
 
 static class Methods {

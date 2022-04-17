@@ -11,10 +11,13 @@ public class Backstab : ActiveSpecialMove {
     }
 
     public override bool Check(StableCombatChar _char) {
-        if (_char.playStyle != PlayStyle.Fight) { return false; }
-        if (Time.time <= lastFired + 15 || _char.Distance(_char.myAttackTarget) > 7) {
+        if (Time.time <= lastFired + 30) {
             return false;
         }
+        var target = _char.FindEnemyWithinRange(7);
+        if (target != null) {
+            _char.myAttackTarget = target;
+        } else { return false; }
         OnActivate(_char);
         return true;
     }

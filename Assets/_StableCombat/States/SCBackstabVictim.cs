@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SCBackstabVictim : StableCombatCharState {
+public class SCBackstabVictim : StableCombatCharState, CannotInterrupt {
 
     public override void EnterFrom(StableCombatCharState state) {
         base.EnterFrom(state);

@@ -2,10 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SCBackstab : SCCombatStanceState {
+public class SCBackstab : SCCombatStanceState, CannotInterrupt {
 
     public override void EnterFrom(StableCombatCharState state) {
         base.EnterFrom(state);
+        if (thisChar.myAttackTarget == null || thisChar.myAttackTarget.isKnockedDown) {
+            thisChar.Idle();
+            return;
+        }
         canGrabBall = false;
         timeOut = Time.time + 8f;
         thisChar.agent.isStopped = true;
@@ -23,6 +27,9 @@ public class SCBackstab : SCCombatStanceState {
     }
     public override void Update() {
         base.Update();
+        thisChar.agent.isStopped = true;
+        thisChar.transform.position = thisChar.myAttackTarget.position - thisChar.myAttackTarget.transform.forward;
+        thisChar.transform.LookAt(thisChar.myAttackTarget.transform);
     }
 
     public override void AnimEventReceiver(string message) {

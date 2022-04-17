@@ -16,6 +16,10 @@ public class StableCombatCharState {
     }
     public static string AppStateChangedNotification = "StableCombatCharStateChangedNotification";
     public virtual void TransitionTo(StableCombatCharState state) {
+        if (state.GetType() != typeof(SCReset)&& state.GetType()!=typeof(SCIdle) && owner.state.GetType() == typeof(SCBackstab)) {
+            Debug.LogError("Attempting to Transition to " + state.GetType() + " but current state is " + owner.state.GetType());
+            return;
+        }
         owner.state = state;
         state.owner = owner;
         thisChar = owner.controller;

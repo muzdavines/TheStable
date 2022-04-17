@@ -278,8 +278,8 @@ public class Character : Living
             case Archetype.Warrior:
                 shooting = 6;
                 passing = 12;
-                tackling = 20;
-                carrying = 12;
+                tackling = 25;
+                carrying = 5;
                 melee = 20;
                 ranged = 10;
                 magic = 5;
@@ -300,8 +300,8 @@ public class Character : Living
             case Archetype.Rogue:
                 shooting = 20;
                 passing = 12;
-                tackling = 10;
-                carrying = 20;
+                tackling = 5;
+                carrying = 25;
                 melee = 10;
                 ranged = 10;
                 magic = 5;
@@ -322,8 +322,8 @@ public class Character : Living
             case Archetype.Wizard:
                 shooting = 5;
                 passing = 20;
-                tackling = 5;
-                carrying = 5;
+                tackling = 15;
+                carrying = 15;
                 melee = 5;
                 ranged = 5;
                 magic = 20;

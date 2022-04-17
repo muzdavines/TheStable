@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SCIdleWithBall : StableCombatCharState
+public class SCIdleWithBall : SCBallCarrierState
 {
     public override void EnterFrom(StableCombatCharState state) {
         base.EnterFrom(state);
-        if (thisChar.ShouldShoot()) {
+        if (ShouldShoot()) {
             thisChar.Shoot();
             return;
         }
@@ -14,7 +14,7 @@ public class SCIdleWithBall : StableCombatCharState
     }
     public override void Update() {
         base.Update();
-        if (thisChar.ShouldShoot()) {
+        if (ShouldShoot()) {
             thisChar.Shoot();
         }
     }
