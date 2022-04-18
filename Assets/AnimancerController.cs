@@ -148,10 +148,10 @@ public class AnimancerController : MonoBehaviour {
         shoulderBarge.State.Root.Component.Animator.applyRootMotion = true;
     }
     public void Backstab() {
-        anim.Play(backstab, .25f, FadeMode.FromStart).Events.OnEnd = () => thisChar.CombatIdle();
+        anim.Play(backstab, .25f, FadeMode.FromStart).Events.OnEnd = () => thisChar.Idle();
     }
     public void BackstabVictim() {
-        anim.Play(backstabVictim, .25f, FadeMode.FromStart).Events.OnEnd = () => thisChar.CombatIdle();
+        anim.Play(backstabVictim, .25f, FadeMode.FromStart).Events.OnEnd = () => thisChar.Idle();
     }
     public void FlameCircle() {
         anim.Play(flameCircle, .25f, FadeMode.FromStart).Events.OnEnd = () => thisChar.CombatIdle();

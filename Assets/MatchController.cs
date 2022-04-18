@@ -6,6 +6,7 @@ using UnityEngine.UI;
 using TMPro;
 using MoreMountains.Feedbacks;
 using UnityEngine.Playables;
+using PsychoticLab;
 
 public class MatchController : MonoBehaviour
 {
@@ -69,6 +70,8 @@ public class MatchController : MonoBehaviour
         bothTeams[1] = thisGame.activeMatch.away.stable.heroes;
         int playersStable = thisGame.activeMatch.home.stable == Game.instance.playerStable ? 0 : 1;
         for (int thisTeam = 0; thisTeam<2; thisTeam++) {
+            Color primaryColor = thisTeam == 0 ? thisGame.activeMatch.home.stable.primaryColor : thisGame.activeMatch.away.stable.primaryColor;
+            Color secondaryColor = thisTeam == 0 ? thisGame.activeMatch.home.stable.secondaryColor : thisGame.activeMatch.away.stable.secondaryColor;
             for (int i = 0; i < bothTeams[thisTeam].Count; i++) {
                 Character thisBaseChar = bothTeams[thisTeam][i];
                 if (!thisBaseChar.activeInLineup) { continue; }
@@ -78,7 +81,7 @@ public class MatchController : MonoBehaviour
                 thisChar.fieldSport = true;
                 thisChar.myCharacter = thisBaseChar;
                 thisChar.fieldPosition = thisBaseChar.currentPosition;
-                thisChar.GetComponent<SCModelSelector>().Init(thisBaseChar.modelNum, thisTeam, thisTeam==playersStable);
+                thisChar.GetComponent<CharacterRandomizer>().Init(thisBaseChar, primaryColor, secondaryColor);
                 thisChar.Init();
             }
         }

@@ -2,9 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SCIdle : StableCombatCharState
+public class SCIdle : StableCombatCharState, ApexState
 {
-
     public override void EnterFrom(StableCombatCharState state) {
         base.EnterFrom(state);
         //thisChar.anim.ResetAllTriggers();

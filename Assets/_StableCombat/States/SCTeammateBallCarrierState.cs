@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SCTeammateBallCarrierState : StableCombatCharState
+public class SCTeammateBallCarrierState : StableCombatCharState, CanBackStab
 {
     float looseBallTimer;
     public override SCResolution ReceiveMessage(StableCombatChar sender, string message) {

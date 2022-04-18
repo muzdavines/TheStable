@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Backstab : ActiveSpecialMove {
@@ -11,7 +12,10 @@ public class Backstab : ActiveSpecialMove {
     }
 
     public override bool Check(StableCombatChar _char) {
-        if (Time.time <= lastFired + 30) {
+        if (Time.time <= lastFired + 60) {
+            return false;
+        }
+        if (!_char.state.GetType().GetInterfaces().Contains(typeof(CanBackStab))) {
             return false;
         }
         var target = _char.FindEnemyWithinRange(7);
@@ -21,4 +25,8 @@ public class Backstab : ActiveSpecialMove {
         OnActivate(_char);
         return true;
     }
+}
+
+public interface CanBackStab {
+
 }

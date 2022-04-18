@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class SCCombatDowned : SCCombatStanceState {
+public class SCCombatDowned : SCCombatStanceState, ApexState {
 
     public float getUpTime;
     public override void TransitionTo(StableCombatCharState state) {

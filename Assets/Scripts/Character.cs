@@ -3,7 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum CharClass { Warrior, Wizard, Rogue};
+public enum StableMasterType { Warrior, Wizard, Rogue};
+public enum Gender { Male, Female }
+public enum Race { Human, Elf }
+public enum SkinColor { White, Brown, Black, Elf }
+public enum Elements { Yes, No }
+public enum HeadCovering { HeadCoverings_Base_Hair, HeadCoverings_No_FacialHair, HeadCoverings_No_Hair }
+public enum FacialHair { Yes, No }
 [CreateAssetMenu]
 [System.Serializable]
 public class Character : Living 
@@ -21,6 +27,7 @@ public class Character : Living
     public int runspeed = 5;
     public int shooting = 5;
     public int passing = 5;
+    public int catching = 5;
     //Mental Attributes
     public int speech = 5;
     public int intelligence = 5;
@@ -95,6 +102,14 @@ public class Character : Living
     public List<MoveSave> activeMovesSave = new List<MoveSave>();
     public SportStats seasonStats = new SportStats();
     public SportStats careerStats = new SportStats();
+
+    public Gender gender;
+    public Race race = Race.Human;
+    public SkinColor skinColor;
+    public Elements elements;
+    public HeadCovering headCovering;
+    public FacialHair facialHair;
+    public CharacterGearSet myGearSet;
     public bool HasMove (string m) {
         Debug.Log("#TODO#HasMove called on Character. Need to Change This");
         foreach (Move move in knownMoves) {
@@ -253,7 +268,7 @@ public class Character : Living
                 strRange[0] = 10; strRange[1] = 20;
                 agiRange[0] = 2; agiRange[1] = 4;
                 modelNum = 2;
-                modelName = "SCUnit";
+                modelName = "SCUnit3";
                 break;
         }
         shooting = RandDist(shootingRange[0], shootingRange[1]) + ((level - 1) * 20);
@@ -274,12 +289,34 @@ public class Character : Living
         startingMeleeWeapon = "FistsSO";
         startingRangedWeapon = "BowSO";
         archetype = thisArchetype;
+        gender = Gender.Male;
+        if (GetPercent(50)) {
+            gender = Gender.Female;
+        }
+        elements = Elements.Yes;
+        race = Race.Human;
+        int skinColorRoll = UnityEngine.Random.Range(0, 100);
+        skinColor = SkinColor.White;
+        if (skinColorRoll > 33) {
+            skinColor = SkinColor.Brown;
+        }
+        if (skinColorRoll > 66) {
+            skinColor = SkinColor.Black;
+        }
+        facialHair = FacialHair.No;
+        if (gender == Gender.Male) {
+            if (GetPercent(50)) {
+                facialHair = FacialHair.Yes;
+            }
+        }
+        
         switch (archetype) {
-            case Archetype.Warrior:
+            case Archetype.Goalkeeper:
                 shooting = 6;
                 passing = 12;
                 tackling = 25;
                 carrying = 5;
+                catching = 15;
                 melee = 20;
                 ranged = 10;
                 magic = 5;
@@ -288,20 +325,44 @@ public class Character : Living
                 strength = 20;
                 agility = 10;
                 maxHealth = 3;
-                maxMind = 5;
-                maxStamina = 20;
-                maxBalance = 10;
+                maxMind = 15;
+                maxStamina = 25;
+                maxBalance = 15;
+                modelName = "SCUnit3";
+                myGearSet = Resources.Load<CharacterGearSet>("GearSets/Warrior");
+                modelNum = 0;
+                break;
+            case Archetype.Warrior:
+                shooting = 6;
+                passing = 12;
+                tackling = 25;
+                carrying = 5;
+                catching = 15;
+                melee = 20;
+                ranged = 10;
+                magic = 5;
+                runspeed = 13;
+                dexterity = 10;
+                strength = 20;
+                agility = 10;
+                maxHealth = 3;
+                maxMind = 15;
+                maxStamina = 25;
+                maxBalance = 15;
                 startingSpecialMoves.Add("ShoulderBarge");
                 startingSpecialMoves.Add("PowerSlam");
                 startingSpecialMoves.Add("ClosingSpeed");
-                modelName = "SCUnit";
+                modelName = "SCUnit3";
+                myGearSet = Resources.Load<CharacterGearSet>("GearSets/Warrior");
                 modelNum = 0;
+
                 break;
             case Archetype.Rogue:
                 shooting = 20;
                 passing = 12;
                 tackling = 5;
                 carrying = 25;
+                catching = 15;
                 melee = 10;
                 ranged = 10;
                 magic = 5;
@@ -310,20 +371,22 @@ public class Character : Living
                 strength = 5;
                 agility = 20;
                 maxHealth = 2;
-                maxMind = 10;
-                maxStamina = 5;
+                maxMind = 5;
+                maxStamina = 15;
                 maxBalance = 20;
                 startingSpecialMoves.Add("Backstab");
                 startingSpecialMoves.Add("Flechettes");
                 knownMoves.Add(Resources.Load<Move>("OneTimerKick"));
-                modelName = "SCUnit";
+                modelName = "SCUnit3";
                 modelNum = 2;
+                myGearSet = Resources.Load<CharacterGearSet>("GearSets/Rogue");
                 break;
             case Archetype.Wizard:
                 shooting = 5;
                 passing = 20;
                 tackling = 15;
                 carrying = 15;
+                catching = 15;
                 melee = 5;
                 ranged = 5;
                 magic = 20;
@@ -332,14 +395,15 @@ public class Character : Living
                 strength = 5;
                 agility = 10;
                 maxHealth = 1;
-                maxMind = 20;
-                maxStamina = 10;
-                maxBalance = 10;
+                maxMind = 25;
+                maxStamina = 5;
+                maxBalance = 15;
                 startingSpecialMoves.Add("FlameCircle");
                 startingSpecialMoves.Add("SummonFireGolem");
                 startingSpecialMoves.Add("DeepBall");
-                modelName = "SCUnit";
+                modelName = "SCUnit3";
                 modelNum = 1;
+                myGearSet = Resources.Load<CharacterGearSet>("GearSets/Wizard");
                 break;
         }
         
@@ -406,6 +470,15 @@ public class Character : Living
         }
 
         return false;
+    }
+
+    bool GetPercent(int pct) {
+        bool p = false;
+        int roll = UnityEngine.Random.Range(0, 100);
+        if (roll <= pct) {
+            p = true;
+        }
+        return p;
     }
     public void CopyValues(Character source) {
         this.strength = source.strength;

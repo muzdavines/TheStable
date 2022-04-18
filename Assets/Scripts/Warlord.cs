@@ -6,18 +6,18 @@ public class Warlord : Character
 {
     public int warlordReputation;
 
-    public void InitWarlord(CharClass c){
+    public void InitWarlord(StableMasterType c){
 
         switch (c)
         {
-            case CharClass.Warrior:
+            case StableMasterType.Warrior:
                 swordsmanship = 10;
                 strength = 10;
                 break;
-            case CharClass.Wizard:
+            case StableMasterType.Wizard:
                 attackmagic = defensemagic = supportmagic = 10;
                 break;
-            case CharClass.Rogue:
+            case StableMasterType.Rogue:
                 lockpicking = pickpocketing = 10;
                 break;
 

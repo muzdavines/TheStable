@@ -34,13 +34,13 @@ public class NewGameCreationController : MonoBehaviour
         var warlord = activeStablemasterType;
         switch (warlord) {
             case "Warlord":
-                player.warlord.InitWarlord(CharClass.Warrior);
+                player.warlord.InitWarlord(StableMasterType.Warrior);
                 break;
             case "Wizard":
-                player.warlord.InitWarlord(CharClass.Wizard);
+                player.warlord.InitWarlord(StableMasterType.Wizard);
                 break;
             case "Rogue":
-                player.warlord.InitWarlord(CharClass.Rogue);
+                player.warlord.InitWarlord(StableMasterType.Rogue);
                 break;
         }
         int activeInLineup = 0;
@@ -83,6 +83,8 @@ public class NewGameCreationController : MonoBehaviour
         }
         Game.instance.missionContractList = Instantiate<MissionList>(Resources.Load<MissionList>("1000"));
         //Game.instance.playerStable.finance.businesses.Add(new Finance.Business() { benefit = Finance.Business.Benefit.Gold, description = "Market Stall in Genoa", duration = 12, number = 125 });
+        Game.instance.playerStable.primaryColor = Color.red;
+        Game.instance.playerStable.secondaryColor = Color.black;
         Game.instance.Init();
         Destroy(gameObject);
     }

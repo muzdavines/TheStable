@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SCReset : StableCombatCharState, SCReviveUnit {
+public class SCReset : StableCombatCharState, SCReviveUnit, ApexState {
 
     public override void EnterFrom(StableCombatCharState state) {
         base.EnterFrom(state);

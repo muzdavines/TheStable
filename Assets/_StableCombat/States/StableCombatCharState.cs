@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class StableCombatCharState {
@@ -11,12 +12,13 @@ public class StableCombatCharState {
 
     const float oneTimerDistanceToGoal = 20f;
     const float oneTimerDistanceToBall = 1.8f;
+    
     public string name {
         get { return this.GetType().ToString(); }
     }
     public static string AppStateChangedNotification = "StableCombatCharStateChangedNotification";
     public virtual void TransitionTo(StableCombatCharState state) {
-        if (state.GetType() != typeof(SCReset)&& state.GetType()!=typeof(SCIdle) && owner.state.GetType() == typeof(SCBackstab)) {
+        if (!state.IsApexState() && thisChar.isStateLocked) {
             Debug.LogError("Attempting to Transition to " + state.GetType() + " but current state is " + owner.state.GetType());
             return;
         }
@@ -136,4 +138,14 @@ public interface StableCombatCharStateOwner {
 public interface SCReviveUnit {
 
 
+}
+
+public interface ApexState {
+
+}
+
+public static class SCCSHelper {
+    public static bool IsApexState(this StableCombatCharState thisState) {
+        return thisState.GetType().GetInterfaces().Contains(typeof(ApexState));
+    }
 }

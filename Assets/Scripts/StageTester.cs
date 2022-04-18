@@ -21,7 +21,7 @@ public class StageTester : MonoBehaviour
         Time.timeScale = timeScale;
         Game game = Game.instance;
         Stable player = game.playerStable = new Stable();
-        player.warlord.InitWarlord(CharClass.Warrior);
+        player.warlord.InitWarlord(StableMasterType.Warrior);
         if (heroes.Count == 0) {
             for (int i = 0; i < 4; i++) {
                 Character c = new Character() { name = Names.Warrior[Random.Range(0, Names.Warrior.Length)], age = 18, health = 3, modelName = "CharRogue", activeForNextMission = true };

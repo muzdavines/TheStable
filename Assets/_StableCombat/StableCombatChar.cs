@@ -7,6 +7,8 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.AI;
+using System.Linq;
+
 public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
 {
     public StableCombatCharState state { get; set; }
@@ -70,7 +72,7 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
     //Status
 
     public bool isKnockedDown { get { return state.GetType() == typeof(SCGetTackled) || state.GetType() == typeof(SCKnockdown) || state.GetType() == typeof(SCCombatDowned); } }
-
+    public bool isStateLocked { get { return state.GetType().GetInterfaces().Contains(typeof(CannotInterrupt)); } }
     //Sport
     public float tackleCooldown; //Time after which the player can tackle again
 
@@ -839,6 +841,9 @@ public static class StableCombatCharHelper {
     }
     public static StableCombatChar FindEnemyWithinRange(this StableCombatChar thisChar, float range) {
         foreach (var scc in thisChar.coach.otherTeam) {
+            if (scc.isKnockedDown) {
+                continue;
+            }
             if (thisChar.Distance(scc) <= range) {
                 return scc;
             }

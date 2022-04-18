@@ -30,6 +30,8 @@ public class Stable
     public List<Item> inventory = new List<Item>();
     public MissionContract activeContract;
     public int leagueLevel = 0;
+    public Color primaryColor;
+    public Color secondaryColor;
     public bool PurchaseHero(Character hero) {
         if (hero.contract.signingBonus > finance.gold) {
             Debug.Log("Player does not have enough money to sign " + hero.name);

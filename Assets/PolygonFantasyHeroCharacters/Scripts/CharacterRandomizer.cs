@@ -4,15 +4,10 @@ using UnityEngine;
 
 namespace PsychoticLab
 {
-    public enum Gender { Male, Female }
-    public enum Race { Human, Elf }
-    public enum SkinColor { White, Brown, Black, Elf }
-    public enum Elements {  Yes, No }
-    public enum HeadCovering { HeadCoverings_Base_Hair, HeadCoverings_No_FacialHair, HeadCoverings_No_Hair }
-    public enum FacialHair { Yes, No }
-
     public class CharacterRandomizer : MonoBehaviour
     {
+        public Character myCharacter;
+
         [Header("Demo Settings")]
         public bool repeatOnPlay = false;
         public float shuffleSpeed = 0.7f;
@@ -103,14 +98,17 @@ namespace PsychoticLab
 
         private void Start()
         {
+            
+
+        }
+        public void Init(Character _char, Color _primary, Color _secondary) {
+            mat = Instantiate(mat);
             // rebuild all lists
             BuildLists();
 
             // disable any enabled objects before clear
-            if (enabledObjects.Count != 0)
-            {
-                foreach (GameObject g in enabledObjects)
-                {
+            if (enabledObjects.Count != 0) {
+                foreach (GameObject g in enabledObjects) {
                     g.SetActive(false);
                 }
             }
@@ -132,53 +130,100 @@ namespace PsychoticLab
             ActivateItem(male.hips[0]);
             ActivateItem(male.leg_Right[0]);
             ActivateItem(male.leg_Left[0]);
-
-            // setting up the camera position, rotation, and reference for use
-            Transform cam = Camera.main.transform;
-            if(cam)
-            {
-                cam.position = transform.position + new Vector3(0, 0.3f, 2);
-                cam.rotation = Quaternion.Euler(0, -180, 0);
-                camHolder = new GameObject().transform;
-                camHolder.position = transform.position + new Vector3(0, 1, 0);
-                cam.LookAt(camHolder);
-                cam.SetParent(camHolder);
-            }
-
-            // if repeat on play is checked in the inspector, repeat the randomize method based on the shuffle speed, also defined in the inspector
-            if (repeatOnPlay)
-                InvokeRepeating("Randomize", shuffleSpeed, shuffleSpeed);
+            myCharacter = _char;
+            SetGear();
+            RandomizeColors(SkinColor.Brown);
+            SetColor(_primary, _secondary, SetColorType.Team);
         }
 
         private void Update()
         {
-            if (camHolder)
-            {
-                if (Input.GetKey(KeyCode.Mouse1))
-                {
-                    x += 1 * Input.GetAxis("Mouse X");
-                    y -= 1 * Input.GetAxis("Mouse Y");
-                    Cursor.lockState = CursorLockMode.Locked;
-                    Cursor.visible = false;
-                }
-                else
-                {
-                    x -= 1 * Input.GetAxis("Horizontal");
-                    y -= 1 * Input.GetAxis("Vertical");
-                    Cursor.lockState = CursorLockMode.None;
-                    Cursor.visible = true;
-                }
-            }
+           
         }
 
         void LateUpdate()
         {
-            // method for handling the camera rotation around the character
-            if (camHolder)
-            {
-                y = Mathf.Clamp(y, -45, 15);
-                camHolder.eulerAngles = new Vector3(y, x, 0.0f);
+          
+        }
+        public enum SetColorType { Base, Leather, Metal, All, Team}
+        public void SetColor(Color colorPrimary, Color colorSecondary, SetColorType colorType) {
+            
+            switch (colorType) {
+                case SetColorType.All:
+                    mat.SetColor("_Color_Primary", colorPrimary);
+                    mat.SetColor("_Color_Secondary", colorSecondary);
+                    mat.SetColor("_Color_Metal_Primary", colorPrimary);
+                    mat.SetColor("_Color_Metal_Secondary", colorSecondary);
+                    mat.SetColor("_Color_Leather_Primary", colorPrimary);
+                    mat.SetColor("_Color_Leather_Secondary", colorSecondary);
+                    break;
+                case SetColorType.Base:
+                    mat.SetColor("_Color_Primary", colorPrimary);
+                    mat.SetColor("_Color_Secondary", colorSecondary);
+                    break;
+                case SetColorType.Leather:
+                    mat.SetColor("_Color_Leather_Primary", colorPrimary);
+                    mat.SetColor("_Color_Leather_Secondary", colorSecondary);
+                    break;
+                case SetColorType.Metal:
+                    mat.SetColor("_Color_Metal_Primary", colorPrimary);
+                    mat.SetColor("_Color_Metal_Secondary", colorSecondary);
+                    break;
+                case SetColorType.Team:
+                    mat.SetColor("_Color_Primary", colorPrimary);
+                    mat.SetColor("_Color_Leather_Secondary", colorPrimary);
+                    mat.SetColor("_Color_Secondary", colorSecondary);
+                    mat.SetColor("_Color_Metal_Dark", colorSecondary);
+                    mat.SetColor("_Color_Metal_Primary", colorSecondary);
+                    mat.SetColor("_Color_Metal_Secondary", colorPrimary);
+                    mat.SetColor("_Color_Leather_Primary", new Color(0.4622642f, 0.3351999f, 0.2122345f));
+                    break;
             }
+        }
+            
+
+        void SetGear() {
+            // initialize settings
+            Gender gender = myCharacter.gender;
+            Race race = myCharacter.race;
+            SkinColor skinColor = myCharacter.skinColor;
+            Elements elements = myCharacter.elements;
+            HeadCovering headCovering = myCharacter.headCovering;
+            FacialHair facialHair = myCharacter.facialHair;
+
+            // disable any enabled objects before clear
+            if (enabledObjects.Count != 0) {
+                foreach (GameObject g in enabledObjects) {
+                    g.SetActive(false);
+                }
+            }
+
+            // clear enabled objects list (all objects now disabled)
+            enabledObjects.Clear();
+            CharacterObjectGroups cog = new CharacterObjectGroups();
+            if (gender == Gender.Male) { cog = male; } else { cog = female; }
+            ActivateItem(cog.headAllElements[Random.Range(0, cog.headAllElements.Count)]);
+            ActivateItem(cog.torso[myCharacter.myGearSet.torso]);
+            ActivateItem(cog.arm_Upper_Left[myCharacter.myGearSet.upperArm]);
+            ActivateItem(cog.arm_Upper_Right[myCharacter.myGearSet.upperArm]);
+            ActivateItem(cog.arm_Lower_Left[myCharacter.myGearSet.lowerArm]);
+            ActivateItem(cog.arm_Lower_Right[myCharacter.myGearSet.lowerArm]);
+            ActivateItem(cog.hand_Left[myCharacter.myGearSet.hand]);
+            ActivateItem(cog.hand_Right[myCharacter.myGearSet.hand]);
+            ActivateItem(cog.hips[myCharacter.myGearSet.hips]);
+            ActivateItem(cog.leg_Left[myCharacter.myGearSet.leg]);
+            ActivateItem(cog.leg_Right[myCharacter.myGearSet.leg]);
+            if (myCharacter.myGearSet.headNoElements > -1) {
+                ActivateItem(cog.headNoElements[myCharacter.myGearSet.headNoElements]);
+            }
+            if (myCharacter.myGearSet.headCoveringBaseHair > -1) {
+                ActivateItem(allGender.all_Hair[1]);
+                ActivateItem(allGender.headCoverings_Base_Hair[myCharacter.myGearSet.headCoveringBaseHair]);
+            }
+            if (myCharacter.myGearSet.headCoveringNoHair > -1) {
+                ActivateItem(allGender.headCoverings_No_Hair[myCharacter.myGearSet.headCoveringNoHair]);
+            }
+            RandomizeColors(skinColor);
         }
 
         // character randomization method
@@ -616,12 +661,17 @@ namespace PsychoticLab
 
                 // add object to the targeted object list
                 targetList.Add(go);
-
+                if (go.GetComponent<SkinnedMeshRenderer>()) {
+                    go.GetComponent<SkinnedMeshRenderer>().material = mat;
+                }
+                
                 // collect the material for the random character, only if null in the inspector;
                 if (!mat)
                 {
-                    if (go.GetComponent<SkinnedMeshRenderer>())
+                    if (go.GetComponent<SkinnedMeshRenderer>()) {
+                        
                         mat = go.GetComponent<SkinnedMeshRenderer>().material;
+                    }
                 }
             }
         }

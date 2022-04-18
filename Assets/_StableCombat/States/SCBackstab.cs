@@ -35,7 +35,7 @@ public class SCBackstab : SCCombatStanceState, CannotInterrupt {
     public override void AnimEventReceiver(string message) {
         base.AnimEventReceiver(message);
         if (message == "BackstabDamage") {
-            thisChar.myAttackTarget.TakeDamage(new StableDamage() { balance = 50, health = 50, mind = 50, stamina = 50, isKnockdown = true });
+            thisChar.myAttackTarget.TakeDamage(new StableDamage() { balance = 1, health = 2, mind = 1, stamina = 8, isKnockdown = true });
         }
     }
 
