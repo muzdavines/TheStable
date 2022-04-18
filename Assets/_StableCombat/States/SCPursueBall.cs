@@ -4,14 +4,19 @@ using UnityEngine;
 
 public class SCPursueBall : StableCombatCharState
 {
+    float startTime;
     public override void EnterFrom(StableCombatCharState state) {
         base.EnterFrom(state);
         thisChar.agent.isStopped = false;
         canGrabBall = true;
+        startTime = Time.time;
     }
     public override void Update() {
         base.Update();
         if (ball.isHeld) { thisChar.Idle(); return; }
+        if (Time.time - startTime < .8f && CheckOneTimer()) {
+            return;
+        }
         thisChar.agent.SetDestination(ball.transform.position);
         if (ball.Distance(thisChar) < .6f) {
             thisChar.PickupBall();

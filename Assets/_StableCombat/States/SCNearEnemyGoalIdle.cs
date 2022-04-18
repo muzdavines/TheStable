@@ -13,6 +13,9 @@ public class SCNearEnemyGoalIdle : StableCombatCharState
     public override void Update() {
         base.Update();
         thisChar.agent.isStopped = true;
+        if (CheckOneTimer()) {
+            return;
+        }
         if (ball.holder == null) {
             if (thisChar.ShouldPursueBall()) {
                 thisChar.PursueBall();

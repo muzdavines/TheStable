@@ -30,8 +30,9 @@ public class NewGameCreationController : MonoBehaviour
         DontDestroyOnLoad(gameObject);
         SceneManager.LoadScene(sceneToLoad);
         Game game = Game.instance;
-        Stable player = game.playerStable = new Stable();
+        Stable player = game.playerStable =(Instantiate<StableSO>(Resources.Load<StableSO>("StartingStable")).stable);
         var warlord = activeStablemasterType;
+        player.warlord = new Warlord();
         switch (warlord) {
             case "Warlord":
                 player.warlord.InitWarlord(StableMasterType.Warrior);
@@ -43,35 +44,10 @@ public class NewGameCreationController : MonoBehaviour
                 player.warlord.InitWarlord(StableMasterType.Rogue);
                 break;
         }
-        int activeInLineup = 0;
-        foreach (Character h in heroes) {
-            Character thisHero = Instantiate<Character>(h);
-            player.heroes.Add(thisHero);
-            thisHero.activeInLineup = true;
-            thisHero.currentPosition = (Position)(activeInLineup + 1);
-            activeInLineup++;
+        for (int i = 0; i<game.playerStable.heroes.Count; i++) {
+            game.playerStable.heroes[i] = Instantiate(game.playerStable.heroes[i]);
+            game.playerStable.heroes[i].Init();
         }
-        foreach (Finance.Business business in startingBusinesses) {
-            player.finance.AddBusiness(business);
-        }
-        for (int i = 0; i < 6; i++) {
-            Character thisHero = new Character();
-            thisHero.name = Names.Warrior[Random.Range(0, Names.Warrior.Length)];
-            thisHero.GenerateCharacter((Character.Archetype)(Random.Range(5,8)), 1);
-            thisHero.currentPosition = Position.NA;
-            if (activeInLineup < 5) {
-                thisHero.activeInLineup = true;
-                thisHero.currentPosition = (Position)(activeInLineup + 1);
-                activeInLineup++;
-            }
-            player.heroes.Add(thisHero);
-        }
-        var GKHero = new Character();
-        GKHero.name = Names.Warrior[Random.Range(0, Names.Warrior.Length)];
-        GKHero.GenerateCharacter(Character.Archetype.Goalkeeper);
-        GKHero.currentPosition = Position.GK;
-        GKHero.activeInLineup = true;
-        player.heroes.Add(GKHero);
         Game.instance.playerStable.finance.AddRevenue(startingGold);
         //Game.instance.playerStable.availableTrainings.Add(new Training() { type = Training.Type.Attribute, training = "negotiating", duration = 2, cost = 50 });
         foreach (var training in trainingAdds) {
@@ -83,8 +59,6 @@ public class NewGameCreationController : MonoBehaviour
         }
         Game.instance.missionContractList = Instantiate<MissionList>(Resources.Load<MissionList>("1000"));
         //Game.instance.playerStable.finance.businesses.Add(new Finance.Business() { benefit = Finance.Business.Benefit.Gold, description = "Market Stall in Genoa", duration = 12, number = 125 });
-        Game.instance.playerStable.primaryColor = Color.red;
-        Game.instance.playerStable.secondaryColor = Color.black;
         Game.instance.Init();
         Destroy(gameObject);
     }

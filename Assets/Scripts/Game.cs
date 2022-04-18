@@ -130,8 +130,9 @@ public class Game : MonoBehaviour {
             GKHero.currentPosition = Position.GK;
             GKHero.activeInLineup = true;
             thisStable.heroes.Add(GKHero);
-            thisStable.primaryColor = Helper.primaryColor[Random.Range(0, Helper.primaryColor.Length)];
-            thisStable.secondaryColor = Helper.primaryColor[Random.Range(0, Helper.secondaryColor.Length)];
+            StableColorPalette colorPalette = Resources.Load<StableColorPalette>("Colors/League1");
+            thisStable.primaryColor = colorPalette.randomPrimaryColor[Random.Range(0, colorPalette.randomPrimaryColor.Length)];
+            thisStable.secondaryColor = colorPalette.randomSecondaryColor[Random.Range(0, colorPalette.randomSecondaryColor.Length)];
             otherStables.Add(thisStable);
         }
     }

@@ -7,6 +7,7 @@ public class Ball : MonoBehaviour
 {
     public StableCombatChar holder;
     public bool isHeld;
+    
     public Rigidbody body;
     SphereCollider col;
     public Vector3 passTargetPosition;
@@ -45,7 +46,9 @@ public class Ball : MonoBehaviour
         return Vector3.Distance(pos, transform.position);
     }
     public bool PickupBall(StableCombatChar picker) {
-        if (isHeld) { Debug.Log("Cannot pickup, already held."); return false; }
+        if (ignoreCollisions) { Debug.Log("#Ball#Cannot pickup, ignoring collisions"); return false; }
+        if (isHeld) { Debug.Log("#Ball#Cannot pickup, already held."); return false; }
+        Debug.Log("#Ball#Picked up by: " + picker.myCharacter.name);
         holder = picker;
         lastHolder = holder;
         heatSeek = false;
@@ -59,6 +62,7 @@ public class Ball : MonoBehaviour
         return true;
     }
     public void Shoot(Vector3 goalTarget, float error, float shotPower) {
+        BeginIgnoreCollisions(.2f);
         Vector3 errorAdjustment = Random.insideUnitCircle * error * shootErrorAdjustment;
         if (holder != null) {
             holder.DisplayShotAccuracy(errorAdjustment.magnitude);
@@ -89,6 +93,7 @@ public class Ball : MonoBehaviour
     }
 
     private void LaunchBall(Transform target, bool leadTarget = false, float shotPower = 1f) {
+        BeginIgnoreCollisions();
         Rigidbody projectile = body;
         projectile.velocity = Vector3.zero;
         float thisDist = Vector3.Distance(projectile.transform.position, target.position);
@@ -98,6 +103,12 @@ public class Ball : MonoBehaviour
         Vector3 futurePositionOfTarget = leadTarget ? target.GetComponent<NavMeshAgent>().velocity * hangtime : Vector3.zero;
         passTargetPosition = target.position + futurePositionOfTarget * shotPower;
         projectile.AddForce(GetLaunchVelocity(hangtime, projectile.position, target.position + futurePositionOfTarget) * shotPower, ForceMode.VelocityChange);
+    }
+    public bool ignoreCollisions = false;
+    public void BeginIgnoreCollisions(float duration = .4f) {
+        ignoreCollisions = true;
+        Physics.IgnoreLayerCollision(14, 10, true);
+        StartCoroutine(DelayLayerCollisionActive(duration, 10));
     }
 
     public void GetDropped() {
@@ -113,6 +124,11 @@ public class Ball : MonoBehaviour
         body.interpolation = RigidbodyInterpolation.Interpolate;
         transform.parent = null;
         holder = null;
+    }
+    IEnumerator DelayLayerCollisionActive(float duration, int layerToTurnOn) {
+        yield return new WaitForSeconds(duration);
+        ignoreCollisions = false;
+        Physics.IgnoreLayerCollision(14, layerToTurnOn, false);
     }
     void MoveToLaunchPosition(Vector3 launchTarget, float amount = 1f)
     {

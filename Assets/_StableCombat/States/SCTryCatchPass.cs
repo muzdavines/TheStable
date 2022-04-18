@@ -9,6 +9,7 @@ public class SCTryCatchPass : StableCombatCharState
     Vector3 targetPos;
     float entryTime;
     float arrivedTime = Mathf.Infinity;
+    float lastBallDist;
     public override void EnterFrom(StableCombatCharState state) {
         base.EnterFrom(state);
         thisChar.agent.isStopped = false;
@@ -23,22 +24,21 @@ public class SCTryCatchPass : StableCombatCharState
         if (CheckOneTimer()) {
             return;
         }
-        if (Vector3.Distance(thisChar.transform.position, targetPos) < .25f) {
+        if (Vector3.Distance(thisChar.transform.position, targetPos) < .1f) {
+
+            var thisballDist = ball.Distance(thisChar);
             thisChar.agent.isStopped = true;
+            thisChar.agent.velocity = Vector3.zero;
             arrivedTime = Time.time;
             thisChar.transform.LookAt(Vector3.Project(ball.transform.position, Vector3.up));
-            if (ball.Distance(thisChar) < 1.5f) {
+            if (thisballDist > lastBallDist || thisballDist < 1.5f) {
                 thisChar.PursueBall();
                 return;
             }
+            lastBallDist = thisballDist;
         } else {
             thisChar.agent.isStopped = false;
 
-            if (Vector3.Dot(thisChar.transform.forward, ball.transform.position - thisChar.transform.position) < 0)
-            {
-                //thisChar.PursueBall();
-                return;
-            }
         }
         
         
