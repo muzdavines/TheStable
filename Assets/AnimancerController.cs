@@ -34,6 +34,7 @@ public class AnimancerController : MonoBehaviour {
     public ClipTransition powerSlam;
     public ClipTransition flechettes;
     public ClipTransition summon;
+    public ClipTransition gkSwat;
     public List<Move> baseMeleeAttackMoves;
     public List<Move> baseRangedAttackMoves;
     NavMeshAgent agent;
@@ -167,6 +168,9 @@ public class AnimancerController : MonoBehaviour {
     }
     public void GKBored() {
 
+    }
+    public void GKSwat() {
+        anim.Play(gkSwat, .25f, FadeMode.FromStart).Events.OnEnd = () => thisChar.Idle();
     }
     public int currentMeleeAttackIndex;
     public Move currentMeleeMove;

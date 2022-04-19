@@ -8,6 +8,10 @@ public class SCOneTimerToGoal : StableCombatCharState {
     bool shotFired = false;
     public override void EnterFrom(StableCombatCharState state) {
         base.EnterFrom(state);
+        if (ball.transform.position.y <= .2f) {
+            thisChar.PickupBall();
+            return;
+        }
         thisChar.anima.OneTimer();
         thisChar.transform.LookAt(thisChar.enemyGoal.transform);
         thisChar.agent.isStopped = true;
@@ -33,7 +37,6 @@ public class SCOneTimerToGoal : StableCombatCharState {
         if (shotFired) { return; }
         shotFired = true;
         ball.lastHolder = thisChar;
-        Debug.Log("#Franco#Ball is grounded: " + (ball.transform.position.y <= .2f));
         ball.Shoot(thisChar.enemyGoal.transform.position + (thisChar.enemyGoal.transform.right * Random.Range(2f, 2.5f) * (Random.Range(0f, 1f) > .5f ? 1 : -1)), 0, 1);
     }
 

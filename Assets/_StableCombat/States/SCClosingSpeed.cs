@@ -23,6 +23,7 @@ public class SCClosingSpeed : StableCombatCharState {
         Vector3 holderPos = thisChar.ball.holder.transform.position;
         if (Vector3.Distance(thisChar.transform.position, thisChar.ball.holder.transform.position) <= 2f) {
             thisChar.Tackle();
+            thisChar.ball.holder.TakeDamage(new StableDamage() { balance = 5, health = 1 }, false);
             thisChar.ball.holder.GetTackled();
             if (speedBuff != null) { speedBuff.EndEffect(); }
             return;

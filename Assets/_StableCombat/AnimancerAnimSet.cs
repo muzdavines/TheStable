@@ -31,7 +31,7 @@ public class AnimancerAnimSet : ScriptableObject
     public AnimationClip powerSlam;
     public AnimationClip flechettes;
     public AnimationClip summon;
-
+    public AnimationClip gkSwat;
     public void Init(AnimancerController anim) {
         Debug.Log("Initialize Animset");
         anim.shootBall.Clip = shootBall;
@@ -64,6 +64,7 @@ public class AnimancerAnimSet : ScriptableObject
         anim.powerSlam.Clip = powerSlam;
         anim.flechettes.Clip = flechettes;
         anim.summon.Clip = summon;
+        anim.gkSwat.Clip = gkSwat;
 
     }
 }

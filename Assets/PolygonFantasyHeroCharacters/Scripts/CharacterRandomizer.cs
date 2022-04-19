@@ -173,8 +173,8 @@ namespace PsychoticLab
                     mat.SetColor("_Color_Primary", colorPrimary);
                     mat.SetColor("_Color_Leather_Secondary", colorPrimary);
                     mat.SetColor("_Color_Secondary", colorSecondary);
-                    mat.SetColor("_Color_Metal_Dark", colorSecondary);
-                    mat.SetColor("_Color_Metal_Primary", colorSecondary);
+                    mat.SetColor("_Color_Metal_Dark", myCharacter.archetype == Character.Archetype.Warrior ? colorPrimary : colorSecondary);
+                    mat.SetColor("_Color_Metal_Primary", myCharacter.archetype == Character.Archetype.Warrior ? new Color(.48f, .48f, .48f) : colorSecondary);
                     mat.SetColor("_Color_Metal_Secondary", colorPrimary);
                     mat.SetColor("_Color_Leather_Primary", new Color(0.4622642f, 0.3351999f, 0.2122345f));
                     break;

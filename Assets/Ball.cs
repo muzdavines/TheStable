@@ -62,7 +62,7 @@ public class Ball : MonoBehaviour
         return true;
     }
     public void Shoot(Vector3 goalTarget, float error, float shotPower) {
-        BeginIgnoreCollisions(.2f);
+        BeginIgnoreCollisions(.4f);
         Vector3 errorAdjustment = Random.insideUnitCircle * error * shootErrorAdjustment;
         if (holder != null) {
             holder.DisplayShotAccuracy(errorAdjustment.magnitude);
@@ -114,6 +114,11 @@ public class Ball : MonoBehaviour
     public void GetDropped() {
         Release();
         body.AddForce(new Vector3(Random.Range(-2, 2), Random.Range(-2, 2), Random.Range(-2, 2)) * 100);
+    }
+    public void GetSwatted(Goal goal) {
+        Release();
+        body.velocity = Vector3.zero;
+        body.AddForce(new Vector3(Random.Range(-5.0f,5.0f)*100,500, Random.Range(-5.0f, 5.0f)*100));
     }
     void Release() {
         heatSeek = false;

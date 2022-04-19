@@ -67,6 +67,7 @@ public class StableCombatCharState {
         //int _rand = Random.Range(0, 1000000);
         //Debug.Log("#OneTimer#player Dist to Goal: " + thisChar.enemyGoal.Distance(thisChar) + " vs " + oneTimerDistanceToGoal + "  " + _rand);
         if (ball.isHeld) { return false; }
+        
         if (thisChar.enemyGoal.Distance(thisChar) < oneTimerDistanceToGoal) {
             //Debug.Log("#OneTimer#ball Dist to player: " + ball.Distance(thisChar) + " vs " + oneTimerDistanceToBall + "  " + _rand);
             if (ball.Distance(thisChar) < oneTimerDistanceToBall) {

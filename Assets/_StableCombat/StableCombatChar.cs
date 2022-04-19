@@ -127,7 +127,17 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
         maxStamina = stamina = myCharacter.maxStamina;
         maxBalance = balance = myCharacter.maxBalance;
         maxMind = mind = myCharacter.maxMind;
-       
+        if (myCharacter.archetype == Character.Archetype.Goalkeeper) {
+            var gkblocker = Instantiate(Resources.Load<GameObject>("GKBlocker"));
+            gkblocker.transform.parent = transform;
+            gkblocker.transform.localRotation = Quaternion.Euler(Vector3.zero);
+            gkblocker.transform.localPosition = Vector3.zero;
+        }
+        switch (myCharacter.archetype) {
+            case Character.Archetype.Warrior:
+                distToShoot = 8;
+                break;
+        }
     }
     bool weaponsInited;
     void WeaponSetup() {
@@ -459,6 +469,13 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
         if (resetCooldowns) { SetTackleCooldown(); }
         state.TransitionTo(new SCBackOffCarrier());
     }
+
+    public void GKSwat() {
+        if (isKnockedDown) {
+            return;
+        }
+        state.TransitionTo(new SCGKSwat());
+    }
     public void IntroState(Transform pos) {
         state.TransitionTo(new SCIntroState() { myPos = pos });
     }
@@ -682,11 +699,13 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
         return coach.positions[(int)fieldPosition];
     }
 
-    public void TakeDamage(StableDamage damage) {
+    public void TakeDamage(StableDamage damage, bool shouldAnimate = true) {
         if (health <= 0)
             return;
         takeDamage.PlayFeedbacks();
-        state.TransitionTo(new SCTakeDamage());
+        if (shouldAnimate) {
+            state.TransitionTo(new SCTakeDamage());
+        }
         if (stamina <= 0 || balance <= 0 || mind <= 0) {
             health -= damage.health;
             Debug.Log("TODO: more health damage adjustments needed");
