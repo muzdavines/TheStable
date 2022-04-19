@@ -14,7 +14,7 @@ public class SCPursueBall : StableCombatCharState
     public override void Update() {
         base.Update();
         if (ball.isHeld) { thisChar.Idle(); return; }
-        if (Time.time - startTime < .8f && CheckOneTimer()) {
+        if (Time.time - startTime < 3f && CheckOneTimer()) {
             return;
         }
         thisChar.agent.SetDestination(ball.transform.position);

@@ -40,6 +40,15 @@ public class SCRunToGoalWithBall : SCBallCarrierState
             }
 
         }
+        if (thisChar.enemyGoal.Distance(thisChar)> 60) {
+            PassTargetLogic logic = PassTargetLogic.Wizard;
+            logic |= PassTargetLogic.BackwardOK;
+            var wizardTarget = thisChar.GetPassTarget(logic);
+            if (wizardTarget != null) {
+                Debug.Log("#PassLogic#Wizard Found");
+                thisChar.Pass(wizardTarget);
+            }
+        }
 
 
 

@@ -140,6 +140,7 @@ public class Ball : MonoBehaviour
         passTargetPosition = Vector3.zero;
         collision.transform.GetComponent<StableCombatChar>()?.state.BallCollision(collision);
     }
+    
 }
  
 public static class ProjectileMath {

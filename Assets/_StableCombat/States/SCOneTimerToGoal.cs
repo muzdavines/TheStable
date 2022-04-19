@@ -33,6 +33,7 @@ public class SCOneTimerToGoal : StableCombatCharState {
         if (shotFired) { return; }
         shotFired = true;
         ball.lastHolder = thisChar;
+        Debug.Log("#Franco#Ball is grounded: " + (ball.transform.position.y <= .2f));
         ball.Shoot(thisChar.enemyGoal.transform.position + (thisChar.enemyGoal.transform.right * Random.Range(2f, 2.5f) * (Random.Range(0f, 1f) > .5f ? 1 : -1)), 0, 1);
     }
 

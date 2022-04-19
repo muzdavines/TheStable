@@ -277,11 +277,17 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
                 //Debug.Log("#PassTargetEval#" + teammate.name + " is too knocked down.");
                 continue;
             }
+            if (teammate.isStateLocked) {
+                continue;
+            }
             if (logic.HasFlag(PassTargetLogic.DeepBall)) {
                 if (teammate.Distance(this) >= 30 && enemyGoal.Distance(teammate) < 30) {
                     return teammate;
                 }
                 else { continue; }
+            }
+            if (logic.HasFlag(PassTargetLogic.Wizard) && teammate.myCharacter.archetype != Character.Archetype.Wizard) {
+                continue;
             }
             if (logic.HasFlag(PassTargetLogic.NearGoal) && enemyGoal.Distance(teammate)>20) {
                 continue;
@@ -822,7 +828,7 @@ public enum PlayStyle { Play, Fight }
 public enum CombatEngagementStatus { None, Aggressor, Defender }
 public enum RunSpeed { VerySlow, Slow, Average, Fast, VeryFast, WorldClass}
 [Flags]
-public enum PassTargetLogic { None = 0, Nearest = 1, Farthest = 2, Rogue = 4, Open = 8, DeepBall = 16, BackwardOK = 32, NearGoal = 64 }
+public enum PassTargetLogic { None = 0, Nearest = 1, Farthest = 2, Rogue = 4, Open = 8, DeepBall = 16, BackwardOK = 32, NearGoal = 64, Wizard = 128 }
 public static class StableCombatCharHelper {
     public static void ResetAllTriggers(this Animator anim) {
 

@@ -24,25 +24,24 @@ public class SCTryCatchPass : StableCombatCharState
         if (CheckOneTimer()) {
             return;
         }
+        Vector3 ballZero = new Vector3(ball.transform.position.x, 0, ball.transform.position.z);
+        Vector3 charZero = new Vector3(thisChar.position.x, 0, thisChar.position.z);
+        var thisballDist = Vector3.Distance(ballZero, charZero);
         if (Vector3.Distance(thisChar.transform.position, targetPos) < .1f) {
-
-            var thisballDist = ball.Distance(thisChar);
             thisChar.agent.isStopped = true;
             thisChar.agent.velocity = Vector3.zero;
-            arrivedTime = Time.time;
             thisChar.transform.LookAt(Vector3.Project(ball.transform.position, Vector3.up));
-            if (thisballDist > lastBallDist || thisballDist < 1.5f) {
+            if (thisballDist > lastBallDist) {
                 thisChar.PursueBall();
                 return;
             }
             lastBallDist = thisballDist;
         } else {
             thisChar.agent.isStopped = false;
-
         }
         
         
-        if (Time.time > entryTime + 5f || Time.time > arrivedTime + 2f)
+        if (ball.holder!=null && ball.holder.team != thisChar.team)
         {
             thisChar.Idle();
         }
