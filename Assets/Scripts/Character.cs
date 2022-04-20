@@ -333,8 +333,8 @@ public class Character : Living
                 modelNum = 0;
                 break;
             case Archetype.Warrior:
-                shooting = 6;
-                passing = 12;
+                shooting = 15;
+                passing = 15;
                 tackling = 25;
                 carrying = 5;
                 catching = 15;
@@ -358,8 +358,8 @@ public class Character : Living
 
                 break;
             case Archetype.Rogue:
-                shooting = 20;
-                passing = 12;
+                shooting = 25;
+                passing = 5;
                 tackling = 5;
                 carrying = 25;
                 catching = 15;
@@ -383,10 +383,10 @@ public class Character : Living
                 break;
             case Archetype.Wizard:
                 shooting = 5;
-                passing = 20;
+                passing = 25;
                 tackling = 15;
-                carrying = 15;
-                catching = 15;
+                carrying = 10;
+                catching = 20;
                 melee = 5;
                 ranged = 5;
                 magic = 20;

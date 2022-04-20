@@ -20,6 +20,7 @@ public class MissionList : ScriptableObject
     public List<MissionContract> GetContracts() {
         List<MissionContract> missions = new List<MissionContract>();
         foreach (MissionListEntry e in list) {
+            if (!Game.instance.gameDate.IsOnOrAfter(e.availableAfter)) { continue; }
             MissionContract m = Instantiate(e.contract);
             m.attributeReq = e.attributeReq;
             m.attributeReq2 = e.attributeReq2;

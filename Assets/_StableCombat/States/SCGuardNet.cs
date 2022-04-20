@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SCGuardNet : StableCombatCharState
+public class SCGuardNet : StableCombatCharState, CanFlechettes
 {
     Transform playerWithBall;
     Transform myNet;

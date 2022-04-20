@@ -14,6 +14,7 @@ public class SCModelSelector : MonoBehaviour
 
     public void Init(int modelNum, int team, bool playerStable = false) {
         models[modelNum].SetActive(true);
+        if (team == 99) { models[modelNum].GetComponent<SkinnedMeshRenderer>().material = Resources.Load<Material>("PlayerStableMat" + team); return; }
         if (playerStable) {
             models[modelNum].GetComponent<SkinnedMeshRenderer>().material = Resources.Load<Material>("PlayerStableMat"+playerMatVariant);
         }

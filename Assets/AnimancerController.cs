@@ -155,16 +155,16 @@ public class AnimancerController : MonoBehaviour {
         anim.Play(backstabVictim, .25f, FadeMode.FromStart).Events.OnEnd = () => thisChar.Idle();
     }
     public void FlameCircle() {
-        anim.Play(flameCircle, .25f, FadeMode.FromStart).Events.OnEnd = () => thisChar.CombatIdle();
+        anim.Play(flameCircle, .25f, FadeMode.FromStart).Events.OnEnd = () => thisChar.Idle();
     }
     public void PowerSlam() {
-        anim.Play(powerSlam, .25f, FadeMode.FromStart).Events.OnEnd = () => thisChar.CombatIdle();
+        anim.Play(powerSlam, .25f, FadeMode.FromStart).Events.OnEnd = () => thisChar.Idle();
     }
     public void Flechettes() {
-        anim.Play(flechettes, .25f, FadeMode.FromStart).Events.OnEnd = () => thisChar.CombatIdle();
+        anim.Play(flechettes, .25f, FadeMode.FromStart).Events.OnEnd = () => thisChar.Idle();
     }
     public void Summon() {
-        anim.Play(summon, 25f, FadeMode.FromStart).Events.OnEnd = () => thisChar.CombatIdle();
+        anim.Play(summon, 25f, FadeMode.FromStart).Events.OnEnd = () => thisChar.Idle();
     }
     public void GKBored() {
 

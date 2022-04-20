@@ -89,7 +89,7 @@ public class MissionContract : ScriptableObject
         
     }
 }
-public enum ContractType { Assassinate, Heist, Recruitment, MercantileExpansion, Intimidate, Interrogate, Defend, Protect, MercenaryBattle, Collection, Persuade, Passage}
+public enum ContractType { Assassinate, Heist, Recruitment, MercantileExpansion, Intimidate, Interrogate, Defend, Protect, MercenaryBattle, Collection, Persuade, Passage, ClearDungeon}
 [System.Serializable]
 public class MissionContractSave {
     public string description;

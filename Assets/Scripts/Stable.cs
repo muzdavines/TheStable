@@ -27,6 +27,7 @@ public class Stable
     public List<TrainingSave> availableTrainingsSave = new List<TrainingSave>();
     [SerializeField]
     public Finance finance = new Finance();
+    public int coachPoints;
     public List<Item> inventory = new List<Item>();
     public MissionContract activeContract;
     public int leagueLevel = 0;

@@ -118,7 +118,7 @@ public class Ball : MonoBehaviour
     public void GetSwatted(Goal goal) {
         Release();
         body.velocity = Vector3.zero;
-        body.AddForce(new Vector3(Random.Range(-5.0f,5.0f)*100,500, Random.Range(-5.0f, 5.0f)*100));
+        body.AddForce(new Vector3(Random.Range(-2.5f,2.5f)*100,500, Random.Range(-2.5f, 2.5f)*100));
     }
     void Release() {
         heatSeek = false;

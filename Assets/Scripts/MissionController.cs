@@ -6,6 +6,7 @@ using UnityEngine.AI;
 using NavMeshBuilder = UnityEngine.AI.NavMeshBuilder;
 using UnityEngine.SceneManagement;
 using CoverShooter;
+using PsychoticLab;
 
 public class MissionController : MonoBehaviour
 {
@@ -150,7 +151,9 @@ public class MissionController : MonoBehaviour
             thisChar.myCharacter = thisBaseChar;
             thisChar.team = team;
             thisChar.combatFocus = thisBaseChar.combatFocus;
-            thisChar.GetComponent<SCModelSelector>().Init(thisBaseChar.modelNum, team);
+            
+            thisChar.GetComponent<SCModelSelector>()?.Init(thisBaseChar.modelNum, 99);
+            thisChar.GetComponent<CharacterRandomizer>()?.Init(thisBaseChar, team == 0 ? Game.instance.playerStable.primaryColor : Color.gray, team == 0 ? Game.instance.playerStable.secondaryColor : Color.black);
             thisChar.Init();
             co.GetComponent<NavMeshAgent>().enabled = false;
             co.transform.position = spawns[i].transform.position;

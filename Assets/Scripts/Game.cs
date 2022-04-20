@@ -189,7 +189,6 @@ public class Game : MonoBehaviour {
                 if (contractMarket.Any(i=>i.ID == m.ID))
                     { print("contract contained");  continue; }
                 bool contractAvailable = true;
-                print(m.attributeReq);
                 if (m.attributeReq == "None" || playerStable.heroes.Any(i => i.GetCharacterAttributeValue(m.attributeReq) >= m.attributeReqAmount)) { print("Attribute Req 1 met. "+m.attributeReq + "  "+m.attributeReqAmount); } else { contractAvailable = false; }
                 if (m.attributeReq2 == "None" || playerStable.heroes.Any(i => i.GetCharacterAttributeValue(m.attributeReq2) >= m.attributeReqAmount2)) { print("Attribute Req 2 met"); } else { contractAvailable = false; }
                 if (!contractAvailable) { continue; }

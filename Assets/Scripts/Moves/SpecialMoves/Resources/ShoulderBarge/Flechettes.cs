@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Flechettes : ActiveSpecialMove {
@@ -11,11 +12,23 @@ public class Flechettes : ActiveSpecialMove {
     }
 
     public override bool Check(StableCombatChar _char) {
-        if (_char.playStyle != PlayStyle.Fight) { return false; }
-        if (Time.time <= lastFired + 15 || _char.Distance(_char.myAttackTarget) > 10) {
+        if (Time.time <= lastFired + 30) {
             return false;
         }
+        if (!_char.state.GetType().GetInterfaces().Contains(typeof(CanFlechettes))) {
+            return false;
+        }
+        if (_char.myGoal.Distance(_char) > 30) { return false; }
+        var target = _char.FindEnemyWithinRange(10);
+        if (target != null) {
+            _char.myAttackTarget = target;
+        }
+        else { return false; }
         OnActivate(_char);
         return true;
     }
+}
+
+public interface CanFlechettes {
+
 }

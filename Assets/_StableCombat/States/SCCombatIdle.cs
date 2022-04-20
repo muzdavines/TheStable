@@ -53,6 +53,7 @@ public class SCCombatIdle : SCCombatStanceState {
 
         //from here on out it's all aggressor logic
         if (thisChar == ball?.holder) {
+            thisChar.playStyle = PlayStyle.Play;
             thisChar.RunToGoalWithBall();
             return;
         }

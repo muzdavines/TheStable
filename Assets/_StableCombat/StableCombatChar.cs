@@ -365,6 +365,7 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
         state.TransitionTo(new SCReset());
     }
     public void Idle() {
+        playStyle = PlayStyle.Play;
         combatEngagementStatus = CombatEngagementStatus.None;
         state.TransitionTo(new SCIdle());
     }

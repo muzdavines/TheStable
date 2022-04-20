@@ -10,6 +10,9 @@ public class SCFlechettes : SCCombatStanceState {
     public override void EnterFrom(StableCombatCharState state) {
         base.EnterFrom(state);
         thisChar.anima.Flechettes();
+        thisChar.DisplaySpecialAbilityFeedback("Flechettes");
+        thisChar.agent.isStopped = true;
+        thisChar.agent.velocity = Vector3.zero;
     }
     public override void Update() {
         base.Update();

@@ -6,6 +6,7 @@ public class SCReset : StableCombatCharState, SCReviveUnit, ApexState {
 
     public override void EnterFrom(StableCombatCharState state) {
         base.EnterFrom(state);
+        thisChar.playStyle = PlayStyle.Play;
         thisChar.RestoreHealth();
         thisChar.Idle();
     }

@@ -34,7 +34,7 @@ public class LeagueController : MonoBehaviour, UIElement
 
     public void PlayMatch() {
         Game.instance.activeMatch = activeMatch;
-        SceneManager.LoadScene("MissionCombatTester");
+        SceneManager.LoadScene("FieldSport");
     }
     public void UpdateOnAdvance() {
         UpdateLeague();

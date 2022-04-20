@@ -10,6 +10,7 @@ public class SCKnockdown : StableCombatCharState
         thisChar.agent.isStopped = true;
         //thisChar.anim.SetTrigger("Knockdown");
         thisChar.anima.Knockdown();
+        thisChar.playStyle = PlayStyle.Play;
         thisChar.SetTackleCooldown();
     }
     public override void Update() {

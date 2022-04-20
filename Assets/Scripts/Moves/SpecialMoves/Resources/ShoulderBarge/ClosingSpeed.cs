@@ -14,7 +14,7 @@ public class ClosingSpeed :  ActiveSpecialMove {
         if (Time.time <= lastFired + 15) { return false; }
         if (_char.isKnockedDown) { return false; }
         Ball ball = _char.ball;
-        if (ball.holder == null || ball.holder.team == _char.team || ball.Distance(_char) > 10 || ball.Distance(_char) < 4) {
+        if (ball?.holder == null || ball.holder.team == _char.team || ball.Distance(_char) > 10 || ball.Distance(_char) < 4) {
             return false;
         }
         OnActivate(_char);
