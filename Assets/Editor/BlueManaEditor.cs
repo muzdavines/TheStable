@@ -2,25 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
+using UnityEngine.AI;
+
 public class BlueManaEditor : EditorWindow
 {
-    [MenuItem("Blue Mana/Utils")]
+
+    [MenuItem("Blue Mana/CreateCharacter")]
     static void Init() {
         BlueManaEditor window = (BlueManaEditor)EditorWindow.GetWindow(typeof(BlueManaEditor));
         window.Show();
     }
-
+    GameObject target;
     private void OnGUI() {
-        if (GUILayout.Button("Create Saved Characters")) {
-            for (int i = 0; i < 50; i++) {
-                var example = ScriptableObject.CreateInstance<Character>();
-                string path = "Assets/_Characters/Resources/SavedCharacters/Char" + i + ".asset";
-                AssetDatabase.CreateAsset(example, path);
-                AssetDatabase.SaveAssets();
-                AssetDatabase.Refresh();
-                EditorUtility.FocusProjectWindow();
-                Selection.activeObject = example;
-            }
-        }
+        target = (GameObject)EditorGUILayout.ObjectField(target, typeof(GameObject), true);
+    }
+
+    private void Create() {
+        var body = target.AddComponent<Rigidbody>();
+        body.mass = 60;
+        body.isKinematic = true;
+        var agent = target.AddComponent<NavMeshAgent>();
     }
 }

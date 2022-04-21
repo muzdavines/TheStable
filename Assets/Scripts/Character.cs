@@ -120,8 +120,8 @@ public class Character : Living
     }
     //Inventory
     public string startingArmor;
-    public string startingMeleeWeapon;
-    public string startingRangedWeapon;
+    public string startingMeleeWeapon = "FistsSO";
+    public string startingRangedWeapon = "BowSO";
     public Armor armor;
     public Weapon meleeWeapon;
     public Weapon rangedWeapon;
@@ -153,6 +153,7 @@ public class Character : Living
     public bool incapacitated;
     public string modelName;
     public int modelNum;
+    public int skinNum = -1;
 
     public GameObject currentObject;
     

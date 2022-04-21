@@ -152,7 +152,7 @@ public class MissionController : MonoBehaviour
             thisChar.team = team;
             thisChar.combatFocus = thisBaseChar.combatFocus;
             
-            thisChar.GetComponent<SCModelSelector>()?.Init(thisBaseChar.modelNum, 99);
+            thisChar.GetComponent<SCModelSelector>()?.Init(thisBaseChar.modelNum, thisBaseChar.skinNum);
             thisChar.GetComponent<CharacterRandomizer>()?.Init(thisBaseChar, team == 0 ? Game.instance.playerStable.primaryColor : Color.gray, team == 0 ? Game.instance.playerStable.secondaryColor : Color.black);
             thisChar.Init();
             co.GetComponent<NavMeshAgent>().enabled = false;
@@ -181,7 +181,7 @@ public class MissionController : MonoBehaviour
     }
     MissionPOICombat poiCombat;
     public void BeginCombat(List<Character> enemies, List<Transform> enemySpawnLoc, MissionPOICombat _poiCombat) {
-        print("Combat Begin");
+        Debug.Log("#Combat#Combat Begin");
         currentEnemies = new List<Character>();
         foreach (Character e in enemies) {
             currentEnemies.Add(Instantiate<Character>(e).Init());
