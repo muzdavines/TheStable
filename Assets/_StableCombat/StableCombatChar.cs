@@ -155,23 +155,27 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
         RHMWeapon = Instantiate<SCWeapon>(weaponPrefab, RH);
         RHMWeapon.transform.localPosition = Vector3.zero;
         RHMWeapon.transform.localRotation = Quaternion.identity;
+        RHMWeapon.transform.localScale = Vector3.one;
         RHMWeapon.GetComponent<SCWeapon>().Init(this, weaponBlueprint);
 
         SCWeapon leftHandPrefab = weaponBlueprint.dualWield ? weaponPrefab : defaultFists;
         LHMWeapon = Instantiate<SCWeapon>(leftHandPrefab, LH);
         LHMWeapon.transform.localPosition = Vector3.zero;
         LHMWeapon.transform.localRotation = Quaternion.identity;
+        LHMWeapon.transform.localScale = Vector3.one;
         LHMWeapon.GetComponent<SCWeapon>().Init(this, weaponBlueprint);
 
         SCWeapon legWeaponPrefab = weaponBlueprint.usesLegs ? Resources.Load<GameObject>(weaponBlueprint.prefabNameLegs).GetComponent<SCWeapon>() : defaultFists;
         LLWeapon = Instantiate<SCWeapon>(legWeaponPrefab, LL);
         LLWeapon.transform.localPosition = Vector3.zero;
         LLWeapon.transform.localRotation = Quaternion.identity;
+        LLWeapon.transform.localScale = Vector3.one;
         LLWeapon.GetComponent<SCWeapon>().Init(this, weaponBlueprint);
 
         RLWeapon = Instantiate<SCWeapon>(legWeaponPrefab, RL);
         RLWeapon.transform.localPosition = Vector3.zero;
         RLWeapon.transform.localRotation = Quaternion.identity;
+        RLWeapon.transform.localScale = Vector3.one;
         RLWeapon.GetComponent<SCWeapon>().Init(this, weaponBlueprint);
 
         //Ranged Weapon Setup

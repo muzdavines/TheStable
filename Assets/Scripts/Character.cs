@@ -88,10 +88,10 @@ public class Character : Living
     public CombatFocus combatFocus;
 
     //new combat system
-    public int maxStamina;
-    public int maxBalance;
-    public int maxMind;
-    public int maxHealth; //health defined above
+    public int maxStamina = 5;
+    public int maxBalance = 5;
+    public int maxMind = 5;
+    public int maxHealth = 1; //health defined above
 
     public List<Move> knownMoves = new List<Move>();
     public List<MoveSave> knownMovesSave = new List<MoveSave>();

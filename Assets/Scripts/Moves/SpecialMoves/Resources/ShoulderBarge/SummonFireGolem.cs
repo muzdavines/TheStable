@@ -11,7 +11,7 @@ public class SummonFireGolem : ActiveSpecialMove {
     }
 
     public override bool Check(StableCombatChar _char) {
-        if (_char.ball.holder == null || _char.ball.holder.team == _char.team) { return false; }
+        if (_char.ball?.holder == null || _char.ball.holder.team == _char.team) { return false; }
         if (_char.myGoal.Distance(_char) > 30) { return false; }
         if (Time.time <= lastFired + Random.Range(45,65)) {
             return false;

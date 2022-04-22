@@ -14,7 +14,7 @@ public class DeepBall : ActiveSpecialMove {
     public override bool Check(StableCombatChar _char) {
         if (Time.time <= lastFired + 15) { return false; }
         Ball ball = _char.ball;
-        if (ball.holder != _char) { return false; }
+        if (ball?.holder != _char) { return false; }
         var target = _char.GetPassTarget(PassTargetLogic.DeepBall);
         if (target==null) {
             return false;

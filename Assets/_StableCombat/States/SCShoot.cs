@@ -15,7 +15,7 @@ public class SCShoot : SCBallCarrierState
         RaycastHit frontRay;
         adjustment = Vector3.zero;
         LayerMask layerMask = LayerMask.GetMask("Character");
-        if (ball.Distance(thisChar.enemyGoal.transform) > 3 && Physics.SphereCast(ball.transform.position+thisChar.transform.forward, 1f, thisChar.transform.forward, out frontRay, Mathf.Infinity, layerMask)) {
+        if (ball.Distance(thisChar.enemyGoal.transform) > 3 && Physics.SphereCast(thisChar.transform.position + new Vector3(0,1,0) + thisChar.transform.forward, 1f, thisChar.transform.forward, out frontRay, Mathf.Infinity, layerMask)) {
             if (Random.Range(0, 100) > 50) {
                 int randID = Random.Range(0, 100000);
                 Debug.Log("#ShootRay#" + randID + " " + frontRay.collider.transform.name);
