@@ -10,6 +10,7 @@ public class SCFlameCircle : SCCombatStanceState {
     public override void EnterFrom(StableCombatCharState state) {
         base.EnterFrom(state);
         thisChar.anima.FlameCircle();
+        thisChar.DisplaySpecialAbilityFeedback("Flame Circle");
     }
     public override void Update() {
         base.Update();

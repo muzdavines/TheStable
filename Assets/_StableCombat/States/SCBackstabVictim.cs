@@ -9,6 +9,8 @@ public class SCBackstabVictim : StableCombatCharState, CannotInterrupt {
         canGrabBall = false;
         thisChar.agent.isStopped = true;
         thisChar.agent.velocity = Vector3.zero;
+        thisChar.lastAttack = Time.time;
+        thisChar.accumulatedCooldown = 6;
         thisChar.anima.BackstabVictim();
     }
     public override void Update() {

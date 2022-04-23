@@ -13,11 +13,12 @@ public class StageTester : MonoBehaviour
     public Slider slider;
     void Start()
     {
+        slider.value = timeScale;
+        
         if (!active) {
             return;
         }
-        slider.value = timeScale;
-
+        
         Time.timeScale = timeScale;
         Game game = Game.instance;
         Stable player = game.playerStable = new Stable();

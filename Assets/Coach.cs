@@ -12,6 +12,7 @@ public class Coach : MonoBehaviour
     public bool isPlayer;
     
     public Transform[] positions;
+    public List<StableCombatChar> otherTeamList;
     private void Start() {
         
     }
@@ -30,6 +31,10 @@ public class Coach : MonoBehaviour
         for (int i = 0; i < tempChars.Length; i++) {
             if (tempChars[i] == this) { continue; }
             if (tempChars[i].team == team) { players[teammateCount++] = tempChars[i]; } else { otherTeam[enemycount++] = tempChars[i]; }
+        }
+        otherTeamList = new List<StableCombatChar>();
+        foreach (var s in otherTeam) {
+            otherTeamList.Add(s);
         }
     }
 

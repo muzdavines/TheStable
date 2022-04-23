@@ -9,6 +9,8 @@ public class SCIntroState :  StableCombatCharState {
         base.EnterFrom(state);
         thisChar.transform.position = myPos.position;
         thisChar.transform.rotation = myPos.rotation;
+        thisChar.agent.isStopped = true;
+        thisChar.agent.velocity = Vector3.zero;
         thisChar.anima.Idle();
     }
     public override void Update() {

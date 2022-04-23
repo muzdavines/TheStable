@@ -8,7 +8,9 @@ public class TutorialController : MonoBehaviour
     void Start()
     {
         int thisIndex = Game.instance.tutorialStageFinished;
-        tutorials[thisIndex].StartTutorial();
+        if (thisIndex < tutorials.Length) {
+            tutorials[thisIndex].StartTutorial();
+        }
     }
 
     // Update is called once per frame

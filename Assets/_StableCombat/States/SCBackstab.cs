@@ -24,6 +24,7 @@ public class SCBackstab : SCCombatStanceState, CannotInterrupt {
         thisChar.transform.LookAt(thisChar.myAttackTarget.transform);
         thisChar.anima.Backstab();
         thisChar.myAttackTarget.BackstabVictim();
+        thisChar.DisplaySpecialAbilityFeedback("Backstab");
     }
     public override void Update() {
         base.Update();

@@ -86,6 +86,7 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
         meleeAttackMoves = myCharacter.activeMeleeMoves;
         rangedAttackMoves = myCharacter.activeRangedMoves;
         agent.speed = myCharacter.runspeed * .4f;
+        agent.radius = .375f;
         accumulatedCooldown = 4f;
         WeaponSetup();
         if (fieldSport) {
@@ -703,12 +704,13 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
     public Transform GetFieldPosition() {
         return coach.positions[(int)fieldPosition];
     }
-
+    float lastTakeDamageAnim;
     public void TakeDamage(StableDamage damage, bool shouldAnimate = true) {
         if (health <= 0)
             return;
         takeDamage.PlayFeedbacks();
-        if (shouldAnimate) {
+        if (shouldAnimate && Time.time > lastTakeDamageAnim + 3) {
+            lastTakeDamageAnim = Time.time;
             state.TransitionTo(new SCTakeDamage());
         }
         if (stamina <= 0 || balance <= 0 || mind <= 0) {
@@ -870,7 +872,14 @@ public static class StableCombatCharHelper {
         return (pos == Position.LW || pos == Position.STR || pos == Position.STL || pos == Position.STC || pos == Position.RW);
     }
     public static StableCombatChar FindEnemyWithinRange(this StableCombatChar thisChar, float range) {
-        foreach (var scc in thisChar.coach.otherTeam) {
+        List<StableCombatChar> enemies;
+        if (!thisChar.fieldSport) {
+            enemies = GameObject.FindObjectOfType<CombatController>().enemies;
+        } else {
+            enemies = thisChar.coach.otherTeamList;
+        }
+
+        foreach (var scc in enemies) {
             if (scc.isKnockedDown) {
                 continue;
             }

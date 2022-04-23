@@ -19,12 +19,14 @@ public class SCCombatAttack : SCCombatStanceState
         }
        
         thisChar.agent.isStopped = true;
+        thisChar.agent.velocity = Vector3.zero;
         thisChar._t.LookAt(thisChar.myAttackTarget.position);
     }
     public override void Update() {
         base.Update();
+        if (thisChar.myAttackTarget == null) { thisChar.Idle(); return; }
         thisChar.agent.isStopped = true;
-       
+        thisChar._t.LookAt(thisChar.myAttackTarget.position);
         if (Time.time >= timeOut) { thisChar.MeleeScanDamage("EndAll"); thisChar.Idle(); }
     }
     

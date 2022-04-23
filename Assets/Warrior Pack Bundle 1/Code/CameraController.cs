@@ -52,17 +52,17 @@ public class CameraController : MonoBehaviour{
 			}
 		} 
 		if(Input.GetKey(KeyCode.Q)){
-			rotate = -2;
+			rotate = -5;
 		} 
 		else if(Input.GetKey(KeyCode.E)){
-			rotate = 2;
+			rotate = 5;
 		} 
 		else{
 			rotate = 0;
 		}
         float mouseScroll = Input.GetAxis("Mouse ScrollWheel");
         if (mouseScroll != 0) {
-            mouseScroll *= -4;
+            mouseScroll *= -7;
 
             offset = new Vector3(Mathf.Clamp(offset.x + mouseScroll, 0, 300), Mathf.Clamp(offset.y + mouseScroll, 4, 100), offset.z);
         }

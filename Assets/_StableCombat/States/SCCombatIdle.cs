@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SCCombatIdle : SCCombatStanceState {
+public class SCCombatIdle : SCCombatStanceState, CanBackStab {
 
     public override void EnterFrom(StableCombatCharState state) {
         base.EnterFrom(state);

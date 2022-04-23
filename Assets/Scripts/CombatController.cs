@@ -12,6 +12,7 @@ public class CombatController : MonoBehaviour
     public bool combatActive;
     public List<StableCombatChar> heroes;
     public List<StableCombatChar> enemies;
+    public HeroUIController enemyUI;
     public void Init(List<StableCombatChar> _heroes, List<StableCombatChar> _enemies) {
         combatActive = true;
         heroes = _heroes;
@@ -42,6 +43,7 @@ public class CombatController : MonoBehaviour
         }
     }
     bool combatEnded = false;
+    int lastEnemyCount;
     void CheckEndCombat() {
         if (combatEnded) { return; }
         foreach (StableCombatChar c in heroes) {
@@ -51,7 +53,10 @@ public class CombatController : MonoBehaviour
         }
         heroes.RemoveAll((x) => x.health <= 0);
         enemies.RemoveAll((x) => x.health <= 0);
-
+        if (enemies.Count != lastEnemyCount) {
+            lastEnemyCount = enemies.Count;
+            enemyUI.Init(enemies);
+        }
         if (heroes.Count == 0) {
             combatEnded = true;
             EndCombat(false);

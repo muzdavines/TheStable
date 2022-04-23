@@ -37,6 +37,6 @@ public class FlameCircleEffect : MonoBehaviour
         StableCombatChar scc = other.GetComponent<StableCombatChar>();
         if (scc == null) { return; }
         if (scc.team == caster.team) { return; }
-        scc.TakeDamage(damage);
+        scc.TakeDamage(new StableDamage() { mind = 3 });
     }
 }

@@ -28,6 +28,8 @@ public class MissionController : MonoBehaviour
     public MissionFinalDetails details;
     public AudioSource audioSource;
     public BuzzPanelController buzz;
+    public HeroUIController heroUI;
+    public HeroUIController enemyUI;
     // Start is called before the first frame update
     void Start()
     {
@@ -61,6 +63,7 @@ public class MissionController : MonoBehaviour
         details.finalMod = 1;
         audioSource = gameObject.AddComponent<AudioSource>();
         audioSource.spatialBlend = 0;
+        
     }
 
     public void NextStage()
@@ -128,10 +131,11 @@ public class MissionController : MonoBehaviour
     IEnumerator DelaySpawnChars()
     {
         yield return new WaitForSeconds(5.0f);
-        SpawnChars();
+        var theseChars = SpawnChars();
+        heroUI.Init(theseChars);
     }
-    public void SpawnChars() {
-        SpawnChars(heroes, currentStage.GetComponentInChildren<SpawnLocController>().spawnLocs);
+    public List<StableCombatChar> SpawnChars() {
+        return SpawnChars(heroes, currentStage.GetComponentInChildren<SpawnLocController>().spawnLocs);
        
     }
 
