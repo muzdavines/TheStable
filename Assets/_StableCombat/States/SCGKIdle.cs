@@ -33,7 +33,7 @@ public class SCGKIdle : SCGKState
             return;
             }
             else {
-                //ball is loose but far away
+                thisChar.GKDefendNet();
                 return;
             }
         }

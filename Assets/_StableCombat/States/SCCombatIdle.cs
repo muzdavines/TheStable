@@ -20,7 +20,7 @@ public class SCCombatIdle : SCCombatStanceState, CanBackStab {
         }
         
         if (thisChar.myAttackTarget != null && thisChar.myAttackTarget.isKnockedDown) {
-            thisChar.myAttackTarget = null;
+            thisChar.ReleaseTarget();
             thisChar.Idle();
             return;
         }
@@ -59,21 +59,24 @@ public class SCCombatIdle : SCCombatStanceState, CanBackStab {
         }
         if (thisChar.myAttackTarget == null) {
              thisTarget = GetCombatTarget();
+             if (thisTarget ==null || !thisChar.AcquireTarget(thisTarget)) {
+                Debug.Log("#TODO#Good place to make a unit jockey around the combat");
+                return;
+             }
         } else { thisTarget = thisChar.myAttackTarget; }
 
         if (thisTarget != null) {
             if (thisChar.myAttackTarget?.state.GetType() == typeof(SCCombatDowned)) {
-                thisChar.myAttackTarget = null;
+                thisChar.ReleaseTarget();
                 thisChar.Idle();
                 return;
             }
-            thisChar.myAttackTarget = thisTarget;
-            thisChar._t.LookAt(thisTarget.position);
-            ProcessCombat();
         } else {
+            return;
             //target is null - figure out what else to do. maybe look to heal or lay a trap, or exit combat. Or look at other allies and see if something reveals itself
             //or perhaps look for a POI
         }
+        ProcessCombat();
     }
 
     void ProcessCombat() {

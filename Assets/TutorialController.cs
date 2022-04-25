@@ -16,6 +16,10 @@ public class TutorialController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.Escape)) {
+            foreach (var t in tutorials) {
+                t.gameObject.SetActive(false);
+            }
+        }
     }
 }

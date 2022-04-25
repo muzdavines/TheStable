@@ -22,7 +22,7 @@ public class SCPowerSlam : SCCombatStanceState {
             var effectObj = GameObject.Instantiate(effect);
             effectObj.transform.position = thisChar.transform.position;
             effectObj.transform.rotation = thisChar.transform.rotation;
-            if (damage == null) { damage = new StableDamage(); }
+            if (damage == null) { damage = new StableDamage() { stamina = 8, isKnockdown = true }; }
             effectObj.GetComponent<PowerSlamEffect>().Init(thisChar, damage);
         }
     }

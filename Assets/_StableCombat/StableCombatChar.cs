@@ -13,7 +13,7 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
 {
     public StableCombatCharState state { get; set; }
     public StableCombatChar controller { get; set; }
-    
+    public const int maxTickets = 4;
     public NavMeshAgent agent;
     public Animator anim;
     public AnimancerController anima;
@@ -44,6 +44,10 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
     
     //Combat
     public StableCombatChar myAttackTarget;
+    [SerializeField]
+    public CombatTicket myAttackTargetTicket;
+    [SerializeField]
+    public List<CombatTicket> myCombatTickets;
     public CombatFocus combatFocus;
     public PlayStyle playStyle;
     public CombatEngagementStatus combatEngagementStatus;
@@ -55,7 +59,7 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
     public Transform RH, LH, LL, RL;
     public SCWeapon RHMWeapon, LHMWeapon, RLWeapon, LLWeapon;
     public SCWeapon RHRWeapon, LHRWeapon;
-
+    
     public HeroFrame uiController;
     //Combat Attributes
     public float health, stamina, balance, mind, maxHealth, maxStamina, maxBalance, maxMind;
@@ -80,18 +84,25 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
     {
         controller = this;
         _t = transform;
+        myAttackTargetTicket = new CombatTicket();
+        myCombatTickets = new List<CombatTicket>();
+        for (int c = 0; c<maxTickets; c++) {
+            myCombatTickets.Add(new CombatTicket() { owner = this });
+        }
         anima = GetComponent<AnimancerController>();
         agent = GetComponent<NavMeshAgent>();
         anim = GetComponent<Animator>();
         meleeAttackMoves = myCharacter.activeMeleeMoves;
         rangedAttackMoves = myCharacter.activeRangedMoves;
         agent.speed = myCharacter.runspeed * .4f;
-        agent.radius = .375f;
+        agent.radius = .6f;
         accumulatedCooldown = 4f;
         WeaponSetup();
+        debugState = true;
         if (fieldSport) {
             int teammateCount = 0;
             int enemycount = 0;
+            agent.radius = .2f;
             ball = FindObjectOfType<Ball>();
             Goal[] tempGoals = FindObjectsOfType<Goal>();
             foreach (var tg in tempGoals) {
@@ -153,17 +164,18 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
         Weapon weaponBlueprint = character.meleeWeapon;
         SCWeapon weaponPrefab = Resources.Load<GameObject>(weaponBlueprint.prefabName).GetComponent<SCWeapon>();
         SCWeapon defaultFists = Resources.Load<GameObject>("Fists").GetComponent<SCWeapon>();
-        RHMWeapon = Instantiate<SCWeapon>(weaponPrefab, RH);
+        RHMWeapon = Instantiate<SCWeapon>(weaponPrefab);
+        RHMWeapon.transform.parent = RH;
         RHMWeapon.transform.localPosition = Vector3.zero;
         RHMWeapon.transform.localRotation = Quaternion.identity;
-        RHMWeapon.transform.localScale = Vector3.one;
+        
         RHMWeapon.GetComponent<SCWeapon>().Init(this, weaponBlueprint);
 
         SCWeapon leftHandPrefab = weaponBlueprint.dualWield ? weaponPrefab : defaultFists;
-        LHMWeapon = Instantiate<SCWeapon>(leftHandPrefab, LH);
+        LHMWeapon = Instantiate<SCWeapon>(leftHandPrefab);
+        LHMWeapon.transform.parent = LH;
         LHMWeapon.transform.localPosition = Vector3.zero;
         LHMWeapon.transform.localRotation = Quaternion.identity;
-        LHMWeapon.transform.localScale = Vector3.one;
         LHMWeapon.GetComponent<SCWeapon>().Init(this, weaponBlueprint);
 
         SCWeapon legWeaponPrefab = weaponBlueprint.usesLegs ? Resources.Load<GameObject>(weaponBlueprint.prefabNameLegs).GetComponent<SCWeapon>() : defaultFists;
@@ -496,7 +508,7 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
         CombatIdle();
     }
     public void DefendCombat(StableCombatChar _attacker) {
-        myAttackTarget = _attacker;
+        AcquireTarget(_attacker);
         combatEngagementStatus = CombatEngagementStatus.Defender;
         CombatIdle();
     }
@@ -736,15 +748,17 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
         uiController?.UpdateAll();
     }
 
-    public void MeleeWeaponsOn() {
-        if (RHMWeapon.gameObject.activeInHierarchy) { return; }
-        RHMWeapon.gameObject.SetActive(true);
-        LHMWeapon.gameObject.SetActive(true);
-        LLWeapon.gameObject.SetActive(true);
-        RLWeapon.gameObject.SetActive(true);
+    public void MeleeWeaponsOn(bool on = true) {
+        if (RHMWeapon.gameObject.activeInHierarchy==on) { return; }
+        RHMWeapon.gameObject.SetActive(on);
+        LHMWeapon.gameObject.SetActive(on);
+        LLWeapon.gameObject.SetActive(on);
+        RLWeapon.gameObject.SetActive(on);
         RHRWeapon.gameObject.SetActive(false);
         LHRWeapon?.gameObject.SetActive(false);
-        anima.TakeOutSword();
+        if (on) {
+            anima.TakeOutSword();
+        }
     }
 
     public void RangedWeaponsOn() {
@@ -834,7 +848,27 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
                 break;
         }
     }
-
+    public CombatTicket GetTargeted(StableCombatChar attacker) {
+        return myCombatTickets.GetNextTicket(attacker);
+    }
+    public bool AcquireTarget(StableCombatChar target) {
+        var a = target.GetTargeted(this);
+        if (a != null) {
+            if (myAttackTargetTicket != null) { ReleaseTarget(); }
+            myAttackTargetTicket = a;
+            myAttackTarget = target;
+            return true;
+        } else {
+            return false;
+        }
+    }
+    public void ReleaseTarget() {
+        if (myAttackTargetTicket != null) {
+            myAttackTargetTicket.attacker = null;
+        }
+        myAttackTargetTicket = new CombatTicket();
+        myAttackTarget = null;
+    }
     
     void OnDrawGizmos() {
 #if UNITY_EDITOR
@@ -901,7 +935,22 @@ static class Methods {
         Console.WriteLine("Inform:parameter={0}", parameter);
     }
 }
-
+[System.Serializable]
+public class CombatTicket {
+    public StableCombatChar owner;
+    public StableCombatChar attacker;
+}
+public static class CombatTicketHelper {
+    public static CombatTicket GetNextTicket(this List<CombatTicket> thisList, StableCombatChar attacker) {
+        foreach (var t in thisList) {
+            if (t.attacker == null) {
+                t.attacker = attacker;
+                return t;
+            }
+        }
+        return null;
+    }
+}
 class Program {
     static void Main() {
         // Name of the method we want to call.

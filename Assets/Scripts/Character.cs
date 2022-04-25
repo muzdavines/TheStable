@@ -353,6 +353,15 @@ public class Character : Living
                 startingSpecialMoves.Add("ShoulderBarge");
                 startingSpecialMoves.Add("PowerSlam");
                 startingSpecialMoves.Add("ClosingSpeed");
+                startingMeleeWeapon = "LongswordSO";
+                knownMoves.Add(Resources.Load<Move>("Sword Hit Left"));
+                knownMoves.Add(Resources.Load<Move>("Sword Hit Right"));
+                knownMoves.Add(Resources.Load<Move>("SwordOverheadHack"));
+                activeMeleeMoves = new List<Move>();
+                activeMeleeMoves.Add(Resources.Load<Move>("Sword Hit Left"));
+                activeMeleeMoves.Add(Resources.Load<Move>("Sword Hit Right"));
+                activeMeleeMoves.Add(Resources.Load<Move>("SwordOverheadHack"));
+
                 modelName = "SCUnit3";
                 myGearSet = Resources.Load<CharacterGearSet>("GearSets/Warrior");
                 modelNum = 0;
@@ -377,6 +386,14 @@ public class Character : Living
                 maxBalance = 20;
                 startingSpecialMoves.Add("Backstab");
                 startingSpecialMoves.Add("Flechettes");
+                knownMoves.Add(Resources.Load<Move>("DaggerLeft"));
+                knownMoves.Add(Resources.Load<Move>("DaggerRight"));
+                knownMoves.Add(Resources.Load<Move>("DaggerDualThrust"));
+                activeMeleeMoves = new List<Move>();
+                activeMeleeMoves.Add(Resources.Load<Move>("DaggerLeft"));
+                activeMeleeMoves.Add(Resources.Load<Move>("DaggerRight"));
+                activeMeleeMoves.Add(Resources.Load<Move>("DaggerDualThrust"));
+                startingMeleeWeapon = "DaggerSO";
                 knownMoves.Add(Resources.Load<Move>("OneTimerKick"));
                 modelName = "SCUnit3";
                 modelNum = 2;
@@ -402,6 +419,12 @@ public class Character : Living
                 startingSpecialMoves.Add("FlameCircle");
                 startingSpecialMoves.Add("SummonFireGolem");
                 startingSpecialMoves.Add("DeepBall");
+                startingRangedWeapon = "MageGlovesSO";
+                knownMoves.Add(Resources.Load<Move>("Fireball"));
+                for (int i = 0; i < 3; i++) {
+                    activeRangedMoves.Add(Resources.Load<Move>("Fireball"));
+                }
+                combatFocus = CombatFocus.Ranged;
                 modelName = "SCUnit3";
                 modelNum = 1;
                 myGearSet = Resources.Load<CharacterGearSet>("GearSets/Wizard");

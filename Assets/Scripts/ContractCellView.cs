@@ -34,6 +34,7 @@ public class ContractCellView : EnhancedScrollerCellView {
         Game.instance.playerStable.AcceptContract(thisContract);
         Game.instance.contractMarket.Remove(thisContract);
         OnHoverExit();
-        FindObjectOfType<ContractScrollerController>().OnEnable();
+        FindObjectOfType<StableMainMenu>().StableContract();
+        FindObjectOfType<LaunchMissionController>().OpenMissionPanel(thisContract);
     }
 }

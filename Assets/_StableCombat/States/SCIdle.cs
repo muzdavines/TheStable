@@ -9,10 +9,18 @@ public class SCIdle : StableCombatCharState, ApexState
         //thisChar.anim.ResetAllTriggers();
         //thisChar.anim.SetTrigger("OverrideToIdle");
         thisChar.anima.Idle();
+        if (thisChar.fieldSport) {
+            thisChar.MeleeWeaponsOn(false);
+        }
     }
     public override void Update() {
         base.Update();
-        thisChar.agent.isStopped = true;
+        if (ball?.holder == thisChar) {
+            thisChar.agent.isStopped = false;
+        }
+        else {
+            thisChar.agent.isStopped = true;
+        }
         if (!thisChar.fieldSport) {
             thisChar.MissionIdle();
             return;

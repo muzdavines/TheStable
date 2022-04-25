@@ -21,7 +21,7 @@ public class Flechettes : ActiveSpecialMove {
         if (_char.myGoal.Distance(_char) > 30) { return false; }
         var target = _char.FindEnemyWithinRange(10);
         if (target != null) {
-            _char.myAttackTarget = target;
+            if (!_char.AcquireTarget(target)) { return false; }
         }
         else { return false; }
         OnActivate(_char);

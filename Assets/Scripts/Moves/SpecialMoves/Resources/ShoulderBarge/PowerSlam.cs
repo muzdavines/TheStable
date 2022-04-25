@@ -11,8 +11,9 @@ public class PowerSlam : ActiveSpecialMove {
     }
 
     public override bool Check(StableCombatChar _char) {
-        if (_char.playStyle != PlayStyle.Fight) { return false; }
-        if (Time.time <= lastFired + 15 || _char.Distance(_char.myAttackTarget) > 5) {
+        //if (_char.playStyle != PlayStyle.Fight) { return false; }
+        if (_char.myAttackTarget == null) { return false; }
+        if (Time.time <= lastFired + 30 || _char.Distance(_char.myAttackTarget) > 5) {
             return false;
         }
         OnActivate(_char);

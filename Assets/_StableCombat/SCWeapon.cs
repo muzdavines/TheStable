@@ -32,6 +32,7 @@ public class SCWeapon : MonoBehaviour
         StableCombatChar target = other.GetComponent<StableCombatChar>();
         if (target == null || target == me || target.team == me.team) { return; }
         target.TakeDamage(anim.currentMeleeMove.damage);
+        EndScan();
     }
 
     public void Scan() {

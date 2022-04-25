@@ -24,7 +24,7 @@ public class SCCombatAttack : SCCombatStanceState
     }
     public override void Update() {
         base.Update();
-        if (thisChar.myAttackTarget == null) { thisChar.Idle(); return; }
+        if (thisChar.myAttackTarget == null || thisChar.myAttackTarget.isKnockedDown) { thisChar.Idle(); return; }
         thisChar.agent.isStopped = true;
         thisChar._t.LookAt(thisChar.myAttackTarget.position);
         if (Time.time >= timeOut) { thisChar.MeleeScanDamage("EndAll"); thisChar.Idle(); }

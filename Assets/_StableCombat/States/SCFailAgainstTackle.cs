@@ -15,7 +15,7 @@ public abstract class SCFailAgainstTackle : SCBallCarrierState {
         thisChar.agent.velocity = Vector3.zero;
         thisChar.agent.destination = thisChar.transform.position;
         
-        if (ball.holder != null && ball.holder == thisChar) {
+        if (ball !=null && ball.holder != null && ball.holder == thisChar) {
             ball.GetDropped();
         }
         FireAnimation();

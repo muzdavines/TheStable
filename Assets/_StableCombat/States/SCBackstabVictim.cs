@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class SCBackstabVictim : StableCombatCharState, CannotInterrupt {
-
+    Vector3 stayPos;
     public override void EnterFrom(StableCombatCharState state) {
         base.EnterFrom(state);
         canGrabBall = false;
@@ -12,9 +12,13 @@ public class SCBackstabVictim : StableCombatCharState, CannotInterrupt {
         thisChar.lastAttack = Time.time;
         thisChar.accumulatedCooldown = 6;
         thisChar.anima.BackstabVictim();
+        stayPos = thisChar._t.position;
     }
     public override void Update() {
         base.Update();
+        thisChar.agent.isStopped = true;
+        thisChar.agent.velocity = Vector3.zero;
+        thisChar._t.position = stayPos;
     }
 
     public override void AnimEventReceiver(string message) {

@@ -35,6 +35,7 @@ public class AnimancerController : MonoBehaviour {
     public ClipTransition flechettes;
     public ClipTransition summon;
     public ClipTransition gkSwat;
+    public ClipTransition runForward;
     public List<Move> baseMeleeAttackMoves;
     public List<Move> baseRangedAttackMoves;
     NavMeshAgent agent;
@@ -122,7 +123,9 @@ public class AnimancerController : MonoBehaviour {
     }
     public void CatchBall() {
         Debug.Log("#TODO# Add Mask for Catching");
-        anim.Play(catchBall, .25f, FadeMode.FromStart).Events.OnEnd = () => thisChar.Idle();
+        //anim.Play(runForward, .25f, FadeMode.FromStart).Events.OnEnd = () => thisChar.Idle();
+        thisChar.Idle();
+        
     }
 
     public void TakeOutSword() {
@@ -189,7 +192,7 @@ public class AnimancerController : MonoBehaviour {
         if (currentMeleeAttackIndex < 0) { return; }
         if (currentMeleeAttackIndex >= baseMeleeAttackMoves.Count) { anim.Stop();  currentMeleeAttackIndex = 0; thisChar.CombatIdle(); }
         currentMeleeMove = baseMeleeAttackMoves[currentMeleeAttackIndex++];
-        anim.Play(currentMeleeMove.animation, .6f, FadeMode.FromStart).Events.OnEnd = () => ProcessBaseMeleeAttackCombo();
+        anim.Play(currentMeleeMove.animation, .2f, FadeMode.FromStart).Events.OnEnd = () => ProcessBaseMeleeAttackCombo();
         thisChar.lastAttack = Time.time;
         thisChar.accumulatedCooldown += currentMeleeMove.cooldown;
         currentMeleeMove.animation.State.Root.Component.Animator.applyRootMotion = true;

@@ -6,6 +6,8 @@ public class SCGetTackled : SCFailAgainstTackle {
     public override void EnterFrom(StableCombatCharState state) {
         base.EnterFrom(state);
         thisChar.anima.Knockdown();
+        thisChar.lastAttack = Time.time;
+        thisChar.accumulatedCooldown = 6;
     }
     public override void Update() {
         base.Update();

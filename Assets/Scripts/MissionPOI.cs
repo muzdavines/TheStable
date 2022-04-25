@@ -62,13 +62,13 @@ public class MissionPOI : MonoBehaviour
         foreach (StableCombatChar c in heroes) {
             if (c != characterToAttempt) { c.MissionIdleDontAct(); }
         }
-        print(characterToAttempt.name);
         control.currentActiveStepChar = characterToAttempt;
         if (attributePrereq != "" && characterToAttempt.myCharacter.GetCharacterAttributeValue(attributePrereq) < attributePrereqAmount) {
             print("Does not meet minimum Req");
             Avoid(true);
         }
         else {
+            Debug.Log("#Mission#Step Activated " + characterToAttempt.myCharacter.name);
             characterToAttempt.ActivateStep(this);
         }
         
