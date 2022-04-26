@@ -19,7 +19,7 @@ public class SCBuzzState : SCSkillState {
     public string playerIntro, NPCIntro;
     public List<string> dialogue = new List<string>(); // always start with the NPC
     public List<int> attitudes = new List<int>();
-    public int maxRounds = 4; //set max rounds based on difficulty, default should be 6
+    public int maxRounds = 5; //set max rounds based on difficulty, default should be 6
 
     public string[] npcPositive = { "I'm listening.", "Without respecting authority, we have nothing but chaos.", "Profits are good. I think we can work something out.", "I don't see why not! Let's drink to this new endeavor!" };
     public string[] npcNegative = { "No1.", "No2.", "No3.", "No4." };
@@ -35,10 +35,10 @@ public class SCBuzzState : SCSkillState {
         thisChar.agent.isStopped = false;
         walkTarget = poi.allPurposeTransforms[0];
 
-        npcNegative = new string[] { "N", "N", "N", "N" };
-        npcPositive = new string[] { "N", "N", "N", "N" };
-        playerNegative = new string[] { "N", "N", "N", "N" };
-        playerPositive = new string[] { "N", "N", "N", "N" };
+        npcNegative = new string[] { "N", "N", "N", "N", "N" };
+        npcPositive = new string[] { "N", "N", "N", "N", "N" };
+        playerNegative = new string[] { "N", "N", "N", "N", "N" };
+        playerPositive = new string[] { "N", "N", "N", "N", "N" };
         playerIntro = "Hello";
         NPCIntro = "Hi";
         maxRounds = npcNegative.Length;
@@ -72,7 +72,12 @@ public class SCBuzzState : SCSkillState {
         base.Update();
         //Debug.Log(nextNumCheck + " : " + Time.time);
         if (!didFireAction && Vector3.Distance(thisChar.transform.position, walkTarget.position) < 1) { FireAction(); }
-
+        if (Input.GetKeyDown(KeyCode.Space)) {
+            nextNumCheck = 0;
+            if (speechIndex >= dialogue.Count) {
+                nextNumCheck = Time.time + 6;
+            }
+        }
         if (Time.time >= nextNumCheck) {
             nextNumCheck = Mathf.Infinity;
             NextDialogue();
@@ -106,9 +111,10 @@ public class SCBuzzState : SCSkillState {
         if (poi.isFinalForMission) {
             MissionFinalDetails details = GameObject.FindObjectOfType<MissionFinalDetails>();
             float tempMod = 1;
-            if (finalScore >= 50) { tempMod = 1.1f; }
-            if (finalScore >= 75) { tempMod = 1.25f; }
-            if (finalScore >= 100) { tempMod = 1.50f; }
+            Debug.Log("#Mission#Final Score: " + finalScore);
+            if (finalScore >= 30) { tempMod = 1.1f; }
+            if (finalScore >= 40) { tempMod = 1.25f; }
+            if (finalScore >= 50) { tempMod = 1.50f; }
             if (tempMod > 1) {
                 details.narrative.Add(thisChar.myCharacter.name + " obtained a " + (int)((tempMod - 1) * 100) + "% bonus ");
             }
@@ -142,12 +148,15 @@ public class SCBuzzState : SCSkillState {
             if (comp >= threshold) {
                 dialogue.Add(playerPositive[x]);
                 dialogue.Add(npcPositive[x]);
-                attitude += 25;
+                attitude += 10;
             }
             else {
-                attitude -= 25;
+                attitude -= 10;
                 dialogue.Add(playerNegative[x]);
                 dialogue.Add(npcNegative[x]);
+            }
+            if (comp >= 100) {
+                attitude += 10;
             }
             attitudes.Add(attitude);
         }

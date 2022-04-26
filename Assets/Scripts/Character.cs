@@ -464,7 +464,7 @@ public class Character : Living
     }
     public Trait GetBestTrait(StepType step) {
         int bestScore = 0;
-        Trait bestTrait = new Trait();
+        Trait bestTrait = new Trait() { level = 0 } ;
         foreach (var t in activeTraits) {
             if (t.usableFor.Contains(step)) {
                 if (t.level > bestScore) {

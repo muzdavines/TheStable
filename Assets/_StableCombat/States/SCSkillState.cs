@@ -31,17 +31,21 @@ public class SCSkillState : StableCombatCharState {
     }
     public int[] skillArray = { 6, 10, 12, 14, 15 };
     public virtual float GetPlayerScore(int skill) {
-        int numberOfDice = skill;
+        int numberOfDice = Mathf.Clamp(skill,1,20);
         float comp = 0;
         float crit = Random.Range(1, 101);
-       
+        int bestRoll = 0;
         for (int i = 0; i<numberOfDice; i++) {
             var thisRoll = Random.Range(1, 21);
             if (thisRoll > comp) {
                 comp = thisRoll;
+                bestRoll = thisRoll;
             }
         }
         comp += (skill * 4);
+        comp += skill == 0 ? -5 : 0;
+        comp = Mathf.Clamp(comp, 1, 200);
+        Debug.LogFormat("#Player Roll#Skill:{0}  Roll: {1}  Value: {2} Crit: {3}", skill, bestRoll, comp, crit);
         if (crit <= 1) {
             comp = 100;
         }

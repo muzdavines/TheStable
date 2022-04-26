@@ -57,7 +57,7 @@ public class StableCombatCharState {
     }
    
     public void TryGrabBall() {
-        if (ball.Distance(thisChar) < .6f) {
+        if (ball?.Distance(thisChar) < .6f) {
             thisChar.PickupBall();
             return;
         }

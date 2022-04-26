@@ -24,7 +24,7 @@ public class SCMissionMoveTo : StableCombatCharState
             return;
         }
         if (Time.time >= timeOut) {
-            timeOut = Time.time + 60;
+            timeOut = Time.time + 20;
             thisChar.transform.position = target.position;
             return;
         }

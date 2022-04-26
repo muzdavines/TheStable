@@ -19,6 +19,7 @@ public class MissionPOI : MonoBehaviour
     public AudioClip backgroundMusic;
     public string attributePrereq;
     public int levelReq;
+    public string successText, failText;
     void Start()
     {
         control = GameObject.FindObjectOfType<MissionController>();
@@ -87,17 +88,19 @@ public class MissionPOI : MonoBehaviour
         print("Resolve " + step.type + "  " + success);
         if (success) {
             print ("Sucess!");
-            GetComponent<OnStepSuccess>().OnSuccess();
+            GetComponent<OnStepSuccess>()?.OnSuccess();
+            GetComponent<SkillStepResolution>()?.OnSuccess(successText);
             Helper.PlayOneShot(onSuccessSound);
-            control.RemovePOI(this);
         } else {
             print("Fail. Step Required: " + step.required);
-            GetComponent<OnStepFail>().OnFail();
+            GetComponent<OnStepFail>()?.OnFail();
+            GetComponent<SkillStepResolution>()?.OnFailed(successText);
             if (step.required) {
                 control.MissionFailed();
             }
-            control.RemovePOI(this);
         }
+        
+        control.RemovePOI(this);
     }
 
     public virtual void Resolve(int quality) {
