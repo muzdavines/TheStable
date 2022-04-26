@@ -13,7 +13,7 @@ public class Backstab : ActiveSpecialMove {
 
     public override bool Check(StableCombatChar _char) {
         Debug.Log("#Backstab#Checking " + _char.myCharacter.name);
-        if (Time.time <= lastFired + 60) {
+        if (Time.time <= lastFired + 45) {
             Debug.Log("#Backstab#CoolingDown");
             return false;
         }

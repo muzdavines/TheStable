@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-public enum StepType { Combat, Lockpick, Assassinate, Sneak, Demolish, Distract, DetectTrap, DisarmTrap, Intimidate, Persuade, Pickpocket, Entertain, Exit, Hunt, Forage, Fish, Camp, NavigateLand, Connection, NegotiateBusiness, Inspire, Portal, Gamble}
+public enum StepType { Combat, Lockpick, Assassinate, Sneak, Demolish, Distract, DetectTrap, DisarmTrap, Intimidate, Persuade, Pickpocket, Entertain, Exit, Hunt, Forage, Fish, Camp, NavigateLand, Connection, NegotiateBusiness, Inspire, Portal, Gamble, Medicine}
 [System.Serializable]
 public class Step {
 
@@ -12,7 +12,7 @@ public class Step {
     public bool required;
     public Reward reward;
     [SerializeField]
-    public List<Step> saves;
+    //public List<Step> saves;
     [Tooltip("Enter the score that the player should match or exceed. Think of it like Armor Class.")]
     public int level;
     public float mod = 0;
@@ -21,56 +21,34 @@ public class Step {
         required = blueprint.required;
         reward = blueprint.reward;
         level = blueprint.level;
-        foreach (StepBlueprint b in blueprint.saves) {
+        /*foreach (StepBlueprint b in blueprint.saves) {
             Step s = new Step();
             s.blueprint = b;
             s.Blueprint();
             saves.Add(s);
-        }
+        }*/
     }
 
-    public StableCombatChar CharacterToAttempt(List<StableCombatChar> heroes) {
-
-        string property = "";
-        switch (type) {
-            case StepType.Hunt:
-                property = "hunting";
-                break;
-            case StepType.Camp:
-                property = "survivalist";
-                break;
-            case StepType.NavigateLand:
-                property = "landNavigation";
-                break;
-            case StepType.NegotiateBusiness:
-            case StepType.Connection:
-            case StepType.Inspire:
-                property = "negotiating";
-                break;
-            case StepType.Portal:
-                property = "strength";
-                break;
-            case StepType.Gamble:
-                property = "gambling";
-                break;
-            case StepType.Lockpick:
-                property = "lockpicking";
-                break;
-            
-        }
-        Debug.Log(property);
-        StableCombatChar returnChar = new StableCombatChar();
-        returnChar.myCharacter = new Character() { name = "ReturnChar" };
-        typeof(Character).GetField(property).SetValue(returnChar.myCharacter, -1);
+    public MissionPOI.Attempter CharacterToAttempt(List<StableCombatChar> heroes) {
+        var attempter = new MissionPOI.Attempter() { trait = new Trait() { level = 0 } };
+        int bestScore = 0;
+        int lastNotIncapacitated=-1;
         for (int i = 0; i < heroes.Count; i++) {
             if (heroes[i].myCharacter.incapacitated) { continue; }
-            Debug.Log(heroes[i].myCharacter.name + " Prop: " + typeof(Character).GetField(property).GetValue(returnChar.myCharacter) + "  " + typeof(Character).GetField(property).GetValue(heroes[i].myCharacter));
-            if ((int)typeof(Character).GetField(property).GetValue(returnChar.myCharacter) < (int)typeof(Character).GetField(property).GetValue(heroes[i].myCharacter)) { 
-                returnChar = heroes[i];
+            lastNotIncapacitated = i;
+            var thisHeroTrait = heroes[i].myCharacter.GetBestTrait(type);
+            if (thisHeroTrait.level > bestScore) {
+                attempter.thisChar = heroes[i];
+                attempter.trait = thisHeroTrait;
+                bestScore = thisHeroTrait.level;
             }
         }
-
-        return returnChar;
+        if (attempter.trait.level == 0) {
+            Debug.Log("#Step#No trait found.");
+            attempter.thisChar = heroes[lastNotIncapacitated];
+            attempter.trait = new Trait() { level = 0 };
+        }
+        return attempter;
         /*
 
         for (int i = 1; i<heroes.Count; i++) {
@@ -105,6 +83,6 @@ public class StepBlueprint : ScriptableObject {
     public bool required;
     public Reward reward;
    
-    public List<StepBlueprint> saves;
+    //public List<StepBlueprint> saves;
     public int level;
 }

@@ -20,6 +20,7 @@ public class SCCombatDowned : SCCombatStanceState, ApexState {
         thisChar.anima.GetDowned();
         thisChar.ReleaseTarget();
         thisChar.agent.enabled = false;
+        thisChar.GetComponent<Collider>().enabled = false;
         if (thisChar.fieldSport) {
             if (ball?.holder == thisChar) { ball.GetDropped(); }
             //getUpTime = Time.time + 10;
@@ -43,5 +44,6 @@ public class SCCombatDowned : SCCombatStanceState, ApexState {
     public override void WillExit() {
         base.WillExit();
         thisChar.agent.enabled = true;
+        thisChar.GetComponent<Collider>().enabled = true;
     }
 }

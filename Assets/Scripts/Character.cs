@@ -17,71 +17,22 @@ public class Character : Living
     //Physical Attributes
     public int strength = 5;
     public int agility = 5;
-    public int reaction = 5;
+    
     public int dexterity = 5;
     
     public int carrying = 5;
-    public int toughness = 10;
+    
     public int tackling = 5;
-    public int blocking = 5;
+    
     public int runspeed = 5;
     public int shooting = 5;
     public int passing = 5;
     public int catching = 5;
-    //Mental Attributes
-    public int speech = 5;
-    public int intelligence = 5;
-    public int education = 5;
-    public int motivation = 5;
-    public int strategist = 5;
-    public int economics = 5;
-    public int negotiating = 5;
-    public int insight = 5; //tell if people are lying
-    public int deception = 5;
-    public int intimidation = 5;
-    public int persuasion = 5;
-    public int gambling = 5;
-    public int confidence = 5;
-
-    //Technical Attributes
-    public int lockpicking = 5;
-    public int pickpocketing = 5;
-    public int trapSetting = 5;
-    public int trapDisarming = 5;
-    public int pugilism = 5;
-    public int martialarts = 2;
     public int melee = 10;
     public int ranged = 10;
     public int magic = 10;
-    public int parry = 5;
-    public int shieldDefense;
-    public int musician;
-    public int medicine;
-    public int swordsmanship = 5;
-    public int dualwielding = 5;
-    public int archery = 5;
-    public int pistols = 5;
-
-    //Survival Attributes
-    public int survivalist = 10;
-    public int landNavigation = 10;
-    public int hunting = 15;
-    public int foraging;
-    public int herbLore;
-    public int camping;
 
 
-    //Magical Attributes
-    public int attackmagic, defensemagic, supportmagic;
-
-    //Coaching Attributes
-
-    //Current Condition
-    public int condition; //current tiredness 0-100
-    public int sharpness; //how well trained they are 0-100
-    /// <summary>
-    /// dots, 0 = death
-    /// </summary>
     public int health; //dots - 0 = death
 
     //need some enums for armor type so we can have bonuses and penalties - dodge penalty for plate, etc.
@@ -98,6 +49,8 @@ public class Character : Living
     public List<Move> activeMeleeMoves = new List<Move>();
     public List<Move> activeRangedMoves = new List<Move>();
     public List<string> startingSpecialMoves = new List<string>();
+    public List<Trait> startingTraits = new List<Trait>();
+    public List<Trait> activeTraits = new List<Trait>();
     public List<SpecialMove> activeSpecialMoves = new List<SpecialMove>();
     public List<MoveSave> activeMovesSave = new List<MoveSave>();
     public SportStats seasonStats = new SportStats();
@@ -462,7 +415,12 @@ public class Character : Living
             SpecialMove myObj = (SpecialMove)Activator.CreateInstance(myType);
             activeSpecialMoves.Add(myObj);
         }
+        activeTraits = new List<Trait>();
+        foreach (Trait t in startingTraits) {
+            activeTraits.Add(Instantiate(t));
+        }
         return this;
+
     }
 
     public void StartTraining (Training t) {
@@ -504,246 +462,22 @@ public class Character : Living
         }
         return p;
     }
-    public void CopyValues(Character source) {
-        this.strength = source.strength;
-        this.agility = source.agility;
-        this.reaction = source.reaction;
-        
-        this.swordsmanship = source.swordsmanship;
-        this.dualwielding = source.dualwielding;
-        this.carrying = source.carrying;
-        this.archery = source.archery;
-        this.toughness = source.toughness;
-        this.toughness = source.toughness;
-        this.intelligence = source.intelligence;
-        this.education = source.education;
-        this.motivation = source.motivation;
-        this.strategist = source.strategist;
-        this.economics = source.economics;
-        this.negotiating = source.negotiating;
-        this.insight = source.insight;
-        this.deception = source.deception;
-        this.intimidation = source.intimidation;
-        this.lockpicking = source.lockpicking;
-        this.pickpocketing = source.pickpocketing;
-        this.trapSetting = source.trapSetting;
-        this.trapDisarming = source.trapDisarming;
-        this.pugilism = source.pugilism;
-        this.martialarts = source.martialarts;
-        this.melee = source.melee;
-        this.parry = source.parry;
-        this.shieldDefense = source.shieldDefense;
-        this.survivalist = source.survivalist;
-        this.landNavigation = source.landNavigation;
-        this.hunting = source.hunting;
-        this.foraging = source.foraging;
-        this.herbLore = source.herbLore;
-        this.camping = source.camping;
-        this.attackmagic = source.attackmagic;
-        this.condition = source.condition;
-        this.sharpness = source.sharpness;
-        this.health = source.health;
-        this.maxStamina = source.maxStamina;
-        this.maxBalance = source.maxBalance;
-        this.maxMind = source.maxMind;
-        this.maxHealth = source.maxHealth;
-        this.knownMoves = source.knownMoves;
-        this.activeMeleeMoves = source.activeMeleeMoves;
-        this.startingArmor = source.startingArmor;
-        this.startingMeleeWeapon = source.startingMeleeWeapon;
-        this.armor = source.armor;
-        this.meleeWeapon = source.meleeWeapon;
-        this.mat = source.mat;
-        this.contract = source.contract;
-        this.currentTraining = source.currentTraining;
-        this.returnDate = source.returnDate;
-        this.activeForNextMission = source.activeForNextMission;
-        this.incapacitated = source.incapacitated;
-        this.modelName = source.modelName;
-        this.currentObject = source.currentObject;
-        
-        this.defensemagic = source.defensemagic;
-        this.supportmagic = source.supportmagic;
-        this.name = source.name;
-    }
-}
-[System.Serializable]
-public class CharacterSave {
-    public string name;
-    //Physical Attributes
-    public int strength = 5;
-    public int agility = 5;
-    public int reaction = 5;
-    public int running = 5;
-    public int swordsmanship = 5;
-    public int dualwielding = 5;
-    public int dodging = 5;
-    public int archery = 5;
-
-    public int toughness = 10;
-
-    //Mental Attributes
-    public int speech = 5;
-    public int intelligence = 5;
-    public int education = 5;
-    public int motivation = 5;
-    public int strategist = 5;
-    public int economics = 5;
-    public int negotiating = 5;
-    public int insight = 5; //tell if people are lying
-    public int deception = 5;
-    public int intimidation = 5;
-
-
-    //Technical Attributes
-    public int lockpicking = 5;
-    public int pickpocketing = 5;
-    public int trapSetting = 5;
-    public int trapDisarming = 5;
-    public int pugilism = 5;
-    public int martialarts = 2;
-    public int melee = 10;
-    public int parry = 5;
-    public int shieldDefense;
-
-    //Survival Attributes
-    public int survivalist = 10;
-    public int landNavigation = 10;
-    public int hunting = 15;
-    public int foraging;
-    public int herbLore;
-    public int camping;
-
-
-    //Magical Attributes
-    public int attackMagic, defenseMagic, supportMagic;
-
-    //Coaching Attributes
-
-    //Current Condition
-    public int condition; //current tiredness 0-100
-    public int sharpness; //how well trained they are 0-100
-    /// <summary>
-    /// dots, 0 = death
-    /// </summary>
-    public int health; //dots - 0 = death
-
-    //need some enums for armor type so we can have bonuses and penalties - dodge penalty for plate, etc.
-
-
-    //new combat system
-    public int maxStamina;
-    public int maxBalance;
-    public int maxMind;
-    public int maxHealth; //health defined above
-
-    public List<Move> knownMoves = new List<Move>();
-    public List<MoveSave> knownMovesSave = new List<MoveSave>();
-    public List<Move> activeMoves = new List<Move>();
-    public List<MoveSave> activeMovesSave = new List<MoveSave>();
-    
-    //Inventory
-    public string startingArmor;
-    public string startingWeapon;
-    public Armor armor;
-    public Weapon weapon;
-
-    //Visuals
-    /// <summary>
-    /// If blank, default mat
-    /// </summary>
-    public Material mat;
-
-    //NEEDED: List of accolades, stats, and other historical information like missions run, crippling injuries, etc
-    [SerializeField]
-    public EmploymentContract contract = new EmploymentContract();
-
-    [SerializeField]
-    public Training currentTraining;
-
-    public Game.GameDate returnDate;
-
-    public bool activeForNextMission;
-    public bool incapacitated;
-    public string modelName;
-
-    public GameObject currentObject;
-    public MissionCharacter currentMissionCharacter;
-    
-    public CharacterSave CopyValues(Character source) {
-        var activeMoveSaveList = new List<MoveSave>();
-        var knownMoveSaveList = new List<MoveSave>();
-        for (int i = 0; i < source.activeMeleeMoves.Count; i++) {
-            activeMoveSaveList.Add(new MoveSave().CopyValues(source.activeMeleeMoves[i]));
+    public Trait GetBestTrait(StepType step) {
+        int bestScore = 0;
+        Trait bestTrait = new Trait();
+        foreach (var t in activeTraits) {
+            if (t.usableFor.Contains(step)) {
+                if (t.level > bestScore) {
+                    bestScore = t.level;
+                    bestTrait = t;
+                }
+            }
         }
-        this.activeMovesSave = activeMoveSaveList;
-        for (int i = 0; i < source.knownMoves.Count; i++) {
-            knownMoveSaveList.Add(new MoveSave().CopyValues(source.knownMoves[i]));
-        }
-        this.knownMovesSave = knownMoveSaveList;
-        this.strength = source.strength;
-        this.agility = source.agility;
-        this.reaction = source.reaction;
-        
-        this.swordsmanship = source.swordsmanship;
-        this.dualwielding = source.dualwielding;
-        this.dodging = source.carrying;
-        this.archery = source.archery;
-        this.toughness = source.toughness;
-        this.toughness = source.toughness;
-        this.intelligence = source.intelligence;
-        this.education = source.education;
-        this.motivation = source.motivation;
-        this.strategist = source.strategist;
-        this.economics = source.economics;
-        this.negotiating = source.negotiating;
-        this.insight = source.insight;
-        this.deception = source.deception;
-        this.intimidation = source.intimidation;
-        this.lockpicking = source.lockpicking;
-        this.pickpocketing = source.pickpocketing;
-        this.trapSetting = source.trapSetting;
-        this.trapDisarming = source.trapDisarming;
-        this.pugilism = source.pugilism;
-        this.martialarts = source.martialarts;
-        this.melee = source.melee;
-        this.parry = source.parry;
-        this.shieldDefense = source.shieldDefense;
-        this.survivalist = source.survivalist;
-        this.landNavigation = source.landNavigation;
-        this.hunting = source.hunting;
-        this.foraging = source.foraging;
-        this.herbLore = source.herbLore;
-        this.camping = source.camping;
-        this.attackMagic = source.attackmagic;
-        this.condition = source.condition;
-        this.sharpness = source.sharpness;
-        this.health = source.health;
-        this.maxStamina = source.maxStamina;
-        this.maxBalance = source.maxBalance;
-        this.maxMind = source.maxMind;
-        this.maxHealth = source.maxHealth;
-        this.knownMoves = source.knownMoves;
-        this.activeMoves = source.activeMeleeMoves;
-        this.startingArmor = source.startingArmor;
-        this.startingWeapon = source.startingMeleeWeapon;
-        this.armor = source.armor;
-        this.weapon = source.meleeWeapon;
-        this.mat = source.mat;
-        this.contract = source.contract;
-        this.currentTraining = source.currentTraining;
-        this.returnDate = source.returnDate;
-        this.activeForNextMission = source.activeForNextMission;
-        this.incapacitated = source.incapacitated;
-        this.modelName = source.modelName;
-        this.currentObject = source.currentObject;
-        
-        this.defenseMagic = source.defensemagic;
-        this.supportMagic = source.supportmagic;
-        this.name = source.name;
-        return this;
+        return bestTrait;
     }
+    
 }
+
 
 public class SportStats {
     public int games = 0;

@@ -93,7 +93,8 @@ public class SCNavigateLand :  SCSkillState {
     public bool NavigationResult() {
         float threshold = step.level * 10;
         float diceRoll = Random.Range(1, 21) * poi.step.mod;
-        int skill = thisChar.myCharacter.landNavigation;
+        int skill = 10;//thisChar.myCharacter.landNavigation;
+        Debug.Log("#TODO#Switch this to Trait");
         float comp = diceRoll + skill;
         GameObject.FindObjectOfType<MissionController>().update.text = "Roll: " + comp + " Needed: " + threshold;
         if (comp >= threshold) {

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SCBackstab : SCCombatStanceState, CannotInterrupt {
+public class SCBackstab : SCCombatStanceState, CannotInterrupt, CannotTarget {
 
     Vector3 backstabDaggerPos = new Vector3(0, 3.2f, -1f);
     Vector3 backStabDaggerRot = new Vector3(-180f, 0, 0);
@@ -13,6 +13,7 @@ public class SCBackstab : SCCombatStanceState, CannotInterrupt {
             thisChar.Idle();
             return;
         }
+        thisChar.ReleaseAttackers();
         canGrabBall = false;
         timeOut = Time.time + 8f;
         thisChar.agent.isStopped = true;

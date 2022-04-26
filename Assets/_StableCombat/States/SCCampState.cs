@@ -78,7 +78,8 @@ public class SCCampState : SCSkillState {
     public int CampResult() {
         float threshold = step.level * 10;
         float diceRoll = Random.Range(1, 21);
-        int skill = thisChar.myCharacter.survivalist;
+        int skill = 10;// thisChar.myCharacter.survivalist;
+        Debug.Log("#TODO#Switch this to Trait");
         float comp = diceRoll + skill;
         int quality = (int)(comp * .1f);
         GameObject.FindObjectOfType<MissionController>().update.text = "Quality of Camp: " + quality;

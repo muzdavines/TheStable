@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public enum Attribute {None, Lockpick, Demolish, Pay, Camp, Negotiate, Charm, Intimidate, Stealth, Snipe, Beatdown, Reputation, Socialize, }
-public enum StageType { Combat, Lockpick, Travel, Connection, Negotiate, Intimidate, Assassinate, PitchedBattle, Inspire, Collection, DungeonCrawl}
+public enum StageType { Combat, Lockpick, Travel, Connection, Negotiate, Intimidate, Assassinate, PitchedBattle, Inspire, Collection, DungeonCrawl, Medicine}
 [System.Serializable]
 public class Stage
 {

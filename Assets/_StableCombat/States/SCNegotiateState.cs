@@ -132,10 +132,12 @@ public class SCNegotiateState : SCSkillState
         dialogue.Add(playerIntro);
         dialogue.Add(NPCIntro);
         attitudes.Add(attitude);
+        threshold = (poi.step.level * 4) + skillArray[poi.step.level - 1];
         for (int x = 0; x < maxRounds; x++) {
             //need a list of NPC statements and another list of Player negotiating statements
             npcTalking = !npcTalking;
-            float comp = GetPlayerScore(thisChar.myCharacter.negotiating);
+            float comp = GetPlayerScore(poi.attempter.trait.level);
+            
             //Helper.UIUpdate("Roll: " + comp + " Needed: " + threshold);
 
             if (comp >= threshold) {

@@ -9,6 +9,7 @@ using UnityEngine;
 using UnityEngine.AI;
 using System.Linq;
 
+
 public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
 {
     public StableCombatCharState state { get; set; }
@@ -77,6 +78,7 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
 
     public bool isKnockedDown { get { return state.GetType() == typeof(SCGetTackled) || state.GetType() == typeof(SCKnockdown) || state.GetType() == typeof(SCCombatDowned); } }
     public bool isStateLocked { get { return state.GetType().GetInterfaces().Contains(typeof(CannotInterrupt)); } }
+    public bool isCannotTarget { get { return state.GetType().GetInterfaces().Contains(typeof(CannotTarget)); } }
     //Sport
     public float tackleCooldown; //Time after which the player can tackle again
 
@@ -798,9 +800,12 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
         state.TransitionTo(new SCMissionMoveTo() { target = target });
     }
 
-    public void ActivateStep(MissionPOI poi) {
+    public void ActivateStep(MissionPOI poi, Trait trait) {
         print("#Mission#Activate " + poi.step.type.ToString());
          switch (poi.step.type) {
+            case StepType.Medicine:
+                state.TransitionTo(new SCBuzzState() { poi = poi });
+                break;
             case StepType.Lockpick:
                // state.TransitionTo(new MissionCharacterStateLockpick() { poi = poi });
                 break;
@@ -869,6 +874,14 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
         myAttackTargetTicket = new CombatTicket();
         myAttackTarget = null;
     }
+
+    public void ReleaseAttackers() {
+        foreach (CombatTicket t in myCombatTickets) {
+            if (t.attacker != null) {
+                t.attacker.ReleaseTarget();
+            }
+        }
+    }
     
     void OnDrawGizmos() {
 #if UNITY_EDITOR
@@ -926,6 +939,9 @@ public static class StableCombatCharHelper {
 }
 
 public interface CannotInterrupt {
+
+}
+public interface CannotTarget {
 
 }
 

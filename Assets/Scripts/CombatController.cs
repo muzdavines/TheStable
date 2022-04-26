@@ -5,7 +5,7 @@ using UnityEngine.AI;
 using NavMeshBuilder = UnityEngine.AI.NavMeshBuilder;
 using UnityEngine.SceneManagement;
 using UnityEngine;
-using CoverShooter;
+
 
 public class CombatController : MonoBehaviour
 {

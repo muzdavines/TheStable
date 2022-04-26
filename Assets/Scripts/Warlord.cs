@@ -11,14 +11,13 @@ public class Warlord : Character
         switch (c)
         {
             case StableMasterType.Warrior:
-                swordsmanship = 10;
-                strength = 10;
+                
                 break;
             case StableMasterType.Wizard:
-                attackmagic = defensemagic = supportmagic = 10;
+              
                 break;
             case StableMasterType.Rogue:
-                lockpicking = pickpocketing = 10;
+              
                 break;
 
         }

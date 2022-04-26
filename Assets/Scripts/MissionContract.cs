@@ -28,10 +28,12 @@ public class MissionContract : ScriptableObject
     //need to add more robust rewards here, perhaps a subclass for things like establishing a recruitment station
     public int minHeroes = 1;
     public int maxHeroes = 1;
-    public string attributeReq = "None";
-    public int attributeReqAmount = 0;
-    public string attributeReq2 = "None";
-    public int attributeReqAmount2 = 0;
+    public Trait traitReq;
+    public int traitLevelReq = 1;
+    public Trait traitReq2;
+    public int traitLevelReq2 = 1;
+    
+    
     public virtual void GiveRewards() {
 
     }
@@ -89,7 +91,7 @@ public class MissionContract : ScriptableObject
         
     }
 }
-public enum ContractType { Assassinate, Heist, Recruitment, MercantileExpansion, Intimidate, Interrogate, Defend, Protect, MercenaryBattle, Collection, Persuade, Passage, ClearDungeon}
+public enum ContractType { Assassinate, Heist, Recruitment, MercantileExpansion, Intimidate, Interrogate, Defend, Protect, MercenaryBattle, Collection, Persuade, Passage, ClearDungeon, Medical}
 [System.Serializable]
 public class MissionContractSave {
     public string description;
@@ -121,24 +123,5 @@ public class MissionContractSave {
     public string attributeReq2 = "None";
     public int attributeReqAmount2 = 0;
 
-    public MissionContractSave CopyValues (MissionContract source) {
-        this.description = source.description;
-        this.ID = source.ID;
-        this.contractType = source.contractType;
-        this.difficulty = source.difficulty;
-        this.stages = source.stages;
-        this.goldReward = source.goldReward;
-        this.businessReward = source.businessReward;
-        this.moveReward = source.moveReward;
-        this.executionDate = source.executionDate;
-        this.dayCost = source.dayCost;
-        this.minHeroes = source.minHeroes;
-        this.maxHeroes = source.maxHeroes;
-        this.attributeReq = source.attributeReq;
-        this.attributeReqAmount = source.attributeReqAmount;
-        this.attributeReq2 = source.attributeReq2;
-        this.attributeReqAmount2 = source.attributeReqAmount2;
-        this.itemsRewards = source.itemRewards;
-        return this;
-    }
+   
 }

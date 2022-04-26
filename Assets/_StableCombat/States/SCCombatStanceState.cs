@@ -29,7 +29,7 @@ public class SCCombatStanceState : StableCombatCharState
         StableCombatChar returnChar = null;
         foreach (Collider c in Physics.OverlapSphere(thisChar.position, thisChar.aggroRadius)) {
             var tempChar = c.GetComponent<StableCombatChar>();
-            if (tempChar == null || tempChar.team == thisChar.team || tempChar.state.GetType() == typeof(SCCombatDowned) || tempChar.Distance(thisChar) > closest) {
+            if (tempChar == null || tempChar.team == thisChar.team || tempChar.isKnockedDown || tempChar.isCannotTarget || tempChar.Distance(thisChar) > closest) {
                 continue;
             }
             returnChar = tempChar;

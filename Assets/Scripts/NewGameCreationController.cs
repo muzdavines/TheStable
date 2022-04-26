@@ -9,7 +9,6 @@ public class NewGameCreationController : MonoBehaviour
 
     public List<Character> heroes = new List<Character>();
     public int startingGold = 400;
-    public List<MoveModifier> mods;
     public List<Training> trainingAdds;
     public List<Item> startingItems;
     public List<Finance.Business> startingBusinesses;

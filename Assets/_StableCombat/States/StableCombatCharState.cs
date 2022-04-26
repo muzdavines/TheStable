@@ -82,7 +82,7 @@ public class StableCombatCharState {
 
     public SCResolution TryBlock(StableCombatChar blocker) {
         var res = new SCResolution();
-        int tackling = blocker.myCharacter.blocking;
+        int tackling = blocker.myCharacter.tackling;
         int dodging = thisChar.myCharacter.carrying;
         //float roll = Random.Range(0, dodging + 1) - Random.Range(0, tackling + 1);
         //Debug.Log("#DiceRoll#Dodge Roll: " + roll);

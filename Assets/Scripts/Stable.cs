@@ -19,7 +19,6 @@ public class Stable
     [SerializeField]
     public Warlord warlord = new Warlord();
     public List<Character> heroes = new List<Character>();
-    public List<CharacterSave> heroesSave = new List<CharacterSave>();
     public List<Character> coaches = new List<Character>();
     public List<StableBuilding> buildings = new List<StableBuilding>();
     public List<MissionContract> contracts = new List<MissionContract>();
@@ -87,42 +86,7 @@ public class Stable
         }
         return count;
     }
-    public void PrepForSave() {
-        PrepAvailableTrainingForSave();
-        PrepHeroesForSave();
-    }
-    public void OnLoad() {
-        LoadAvailableTraining();
-        LoadHeroes();
-    }
-
-    public void PrepAvailableTrainingForSave() {
-        var saveList = new List<TrainingSave>();
-        for (int i = 0; i < availableTrainings.Count; i++) {
-            saveList.Add(new TrainingSave().CopyValues(availableTrainings[i]));
-        }
-        availableTrainingsSave = saveList;
-    }
-    public void LoadAvailableTraining() {
-        if (availableTrainingsSave != null && availableTrainingsSave.Count > 0) {
-            availableTrainings = availableTrainingsSave.LoadTrainings();
-        }
-        availableTrainingsSave = new List<TrainingSave>();
-    }
-    public void PrepHeroesForSave() {
-        var saveList = new List<CharacterSave>();
-        for (int i = 0; i < heroes.Count; i++) {
-            saveList.Add(new CharacterSave().CopyValues(heroes[i]));
-        }
-        heroesSave = saveList;
-    }
-    public void LoadHeroes() {
-        if (heroesSave != null && heroesSave.Count > 0) {
-            heroes = heroesSave.LoadCharacters();
-        }
-        heroesSave = new List<CharacterSave>();
-    }
-
+    
 }
 
 

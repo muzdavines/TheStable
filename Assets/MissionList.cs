@@ -7,11 +7,6 @@ public class MissionList : ScriptableObject
     [System.Serializable]
    public class MissionListEntry {
         public MissionContract contract;
-        public string attributeReq = "None";
-        public int attributeReqAmount = 0;
-        public string attributeReq2 = "None";
-        public int attributeReqAmount2 = 0;
-        public int minHeroes = 1;
         public Game.GameDate availableAfter = new Game.GameDate();
     }
     [SerializeField]
@@ -22,10 +17,10 @@ public class MissionList : ScriptableObject
         foreach (MissionListEntry e in list) {
             if (!Game.instance.gameDate.IsOnOrAfter(e.availableAfter)) { continue; }
             MissionContract m = Instantiate(e.contract);
-            m.attributeReq = e.attributeReq;
-            m.attributeReq2 = e.attributeReq2;
-            m.attributeReqAmount = e.attributeReqAmount;
-            m.attributeReqAmount2 = e.attributeReqAmount2;
+            /*m.traitReq = e.traitReq;
+            m.traitReq2 = e.traitReq2;
+            m.traitLevelReq = e.traitLevelReq;
+            m.traitLevelReq2 = e.traitLevelReq2;*/
             missions.Add(m);
         }
         return missions;

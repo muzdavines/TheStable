@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.AI;
 using NavMeshBuilder = UnityEngine.AI.NavMeshBuilder;
 using UnityEngine.SceneManagement;
-using CoverShooter;
+ 
 using PsychoticLab;
 
 public class MissionController : MonoBehaviour

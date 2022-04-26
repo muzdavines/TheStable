@@ -50,7 +50,8 @@ public class SCHuntState :  SCSkillState {
     public bool HuntResult() {
         float threshold = step.level * 10;
         float diceRoll = Random.Range(1, 21) * poi.step.mod;
-        int skill = thisChar.myCharacter.hunting;
+        int skill = 10;// thisChar.myCharacter.hunting;
+        Debug.Log("#TODO#Switch this to Trait");
         float comp = diceRoll + skill;
         GameObject.FindObjectOfType<MissionController>().update.text = "Roll: " + comp + " Needed: " + threshold;
         if (comp >= threshold) {

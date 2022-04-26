@@ -18,7 +18,7 @@ public class MissionPOI : MonoBehaviour
     public Vector3 cameraAngle = Vector3.zero;
     public AudioClip backgroundMusic;
     public string attributePrereq;
-    public int attributePrereqAmount;
+    public int levelReq;
     void Start()
     {
         control = GameObject.FindObjectOfType<MissionController>();
@@ -49,6 +49,11 @@ public class MissionPOI : MonoBehaviour
     /// </summary>
    
     public StableCombatChar currentCharacterToAttempt;
+    public Attempter attempter;
+    public class Attempter {
+        public StableCombatChar thisChar;
+        public Trait trait;
+    }
     public virtual void StepActivated(StableCombatChar activeChar) {
         //POI activated, start task and broadcast to teammates to move here
         //Start task - call step type on Character, let the state machine handle it
@@ -57,19 +62,19 @@ public class MissionPOI : MonoBehaviour
         //Calculate the best character to use
 
         List<StableCombatChar> heroes = control.allChars;
-        StableCombatChar characterToAttempt = step.CharacterToAttempt(heroes);
-        currentCharacterToAttempt = characterToAttempt;
+        attempter = step.CharacterToAttempt(heroes);
+        currentCharacterToAttempt = attempter.thisChar;
         foreach (StableCombatChar c in heroes) {
-            if (c != characterToAttempt) { c.MissionIdleDontAct(); }
+            if (c != currentCharacterToAttempt) { c.MissionIdleDontAct(); }
         }
-        control.currentActiveStepChar = characterToAttempt;
-        if (attributePrereq != "" && characterToAttempt.myCharacter.GetCharacterAttributeValue(attributePrereq) < attributePrereqAmount) {
+        control.currentActiveStepChar = currentCharacterToAttempt;
+        if (attempter.trait.level < levelReq) {
             print("Does not meet minimum Req");
             Avoid(true);
         }
         else {
-            Debug.Log("#Mission#Step Activated " + characterToAttempt.myCharacter.name);
-            characterToAttempt.ActivateStep(this);
+            Debug.Log("#Mission#Step Activated " + attempter.thisChar.myCharacter.name);
+            currentCharacterToAttempt.ActivateStep(this, attempter.trait);
         }
         
         MissionHelper help = GetComponent<MissionHelper>();

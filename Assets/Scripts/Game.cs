@@ -54,7 +54,7 @@ public class Game : MonoBehaviour {
     public List<MissionContract> contractMarket = new List<MissionContract>();
     public List<MissionContractSave> contractMarketSave = new List<MissionContractSave>();
     public MissionList missionContractList;
-    public List<MoveModifier> modifierList;
+    
     public League.Match activeMatch;
     public int tutorialStageFinished = 0;
     public void Start() {
@@ -64,11 +64,7 @@ public class Game : MonoBehaviour {
         
         LoadModifiers();
     }
-    public void OnLoad() {
-        freeAgentMarket.OnLoad();
-        LoadMarketContracts();
-        playerStable.OnLoad();
-    }
+    
     public void TutorialComplete(Tutorial thisTutorial) {
         tutorialsComplete.Add(thisTutorial.Name);
     }
@@ -189,8 +185,9 @@ public class Game : MonoBehaviour {
                 if (contractMarket.Any(i=>i.ID == m.ID))
                     { print("contract contained");  continue; }
                 bool contractAvailable = true;
-                if (m.attributeReq == "None" || playerStable.heroes.Any(i => i.GetCharacterAttributeValue(m.attributeReq) >= m.attributeReqAmount)) { print("Attribute Req 1 met. "+m.attributeReq + "  "+m.attributeReqAmount); } else { contractAvailable = false; }
-                if (m.attributeReq2 == "None" || playerStable.heroes.Any(i => i.GetCharacterAttributeValue(m.attributeReq2) >= m.attributeReqAmount2)) { print("Attribute Req 2 met"); } else { contractAvailable = false; }
+                Debug.Log("#Contract#Name: " + m.name + " Trait1: " + m.traitReq?.traitName);
+                if (m.traitReq == null || playerStable.heroes.Any(i => i.GetCharacterTraitValue(m.traitReq) >= m.traitLevelReq)) { contractAvailable = true; } else { contractAvailable = false; }
+                if (m.traitReq2 == null || playerStable.heroes.Any(i => i.GetCharacterTraitValue(m.traitReq2) >= m.traitLevelReq2)) { } else { contractAvailable = false; }
                 if (!contractAvailable) { continue; }
                 m.executionDate = Helper.Today().Add(10);
                 contractMarket.Add(m);
@@ -209,19 +206,8 @@ public class Game : MonoBehaviour {
         MarketContractScrollerController scsc = GameObject.FindObjectOfType<MarketContractScrollerController>();
         
     }
-    public void PrepContractMarketForSave() {
-        var saveList = new List<MissionContractSave>();
-        for (int i = 0; i < contractMarket.Count; i++) {
-            saveList.Add(new MissionContractSave().CopyValues(contractMarket[i]));
-        }
-        contractMarketSave = saveList;
-    }
-    public void LoadMarketContracts() {
-        if (contractMarketSave!=null && contractMarketSave.Count > 0) {
-            contractMarket = contractMarketSave.LoadMissionContracts();
-        }
-        contractMarketSave = new List<MissionContractSave>();
-    }
+   
+   
     public void ProcessTraining() {
         foreach (Character c in playerStable.heroes) {
             if (c.currentTraining == null) {
@@ -260,13 +246,6 @@ public class Game : MonoBehaviour {
         return isMatchDay;
     }
    
-
-    public void PrepForSave() {
-        freeAgentMarket.PrepForSave();
-        PrepContractMarketForSave();
-        playerStable.PrepForSave();
-    }
-
 }
 
 public static class Helper {
@@ -355,6 +334,14 @@ public static class Helper {
         Debug.Log("GetChar " + _attribute);
         return (int)typeof(Character).GetField(_attribute).GetValue(c);
     }
+    public static int GetCharacterTraitValue(this Character c, Trait trait) {
+        foreach (Trait t in c.activeTraits){
+            if (t.traitName == trait.traitName) {
+                return t.level;
+            }
+        }
+        return 0;
+    }
 
     public static string Title(this string s) {
         TextInfo myTI = new CultureInfo("en-US", false).TextInfo;
@@ -374,7 +361,7 @@ public static class Helper {
     public static Color[] primaryColor = { new Color(0.2862745f, 0.4f, 0.4941177f), new Color(0.4392157f, 0.1960784f, 0.172549f), new Color(0.3529412f, 0.3803922f, 0.2705882f), new Color(0.682353f, 0.4392157f, 0.2196079f), new Color(0.4313726f, 0.2313726f, 0.2705882f), new Color(0.5921569f, 0.4941177f, 0.2588235f), new Color(0.482353f, 0.4156863f, 0.3529412f), new Color(0.2352941f, 0.2352941f, 0.2352941f), new Color(0.2313726f, 0.4313726f, 0.4156863f) };
     public static Color[] secondaryColor = { new Color(0.7019608f, 0.6235294f, 0.4666667f), new Color(0.7372549f, 0.7372549f, 0.7372549f), new Color(0.1647059f, 0.1647059f, 0.1647059f), new Color(0.2392157f, 0.2509804f, 0.1882353f) };
 
-    public static MoveModifier GetModifier(this List<MoveModifier> mods, string modSearch) => mods.Where(m => m.modName == modSearch).FirstOrDefault();
+    
 
 }
 
@@ -395,148 +382,7 @@ public static class JsonHelper {
         wrapper.Items = array;
         return JsonUtility.ToJson(wrapper, prettyPrint);
     }
-    public static List<Character> LoadCharacters(this List<CharacterSave> source) {
-        var returnList = new List<Character>();
-        foreach (var character in source) {
-            returnList.Add(character.LoadCharacter());
-        }
-        return returnList;
-    }
-    public static Character LoadCharacter(this CharacterSave source) {
-        var thisChar = new Character();
-        thisChar.strength = source.strength;
-        thisChar.agility = source.agility;
-        thisChar.reaction = source.reaction;
-       
-        thisChar.swordsmanship = source.swordsmanship;
-        thisChar.dualwielding = source.dualwielding;
-        thisChar.carrying = source.dodging;
-        thisChar.archery = source.archery;
-        thisChar.toughness = source.toughness;
-        thisChar.toughness = source.toughness;
-        thisChar.intelligence = source.intelligence;
-        thisChar.education = source.education;
-        thisChar.motivation = source.motivation;
-        thisChar.strategist = source.strategist;
-        thisChar.economics = source.economics;
-        thisChar.negotiating = source.negotiating;
-        thisChar.insight = source.insight;
-        thisChar.deception = source.deception;
-        thisChar.intimidation = source.intimidation;
-        thisChar.lockpicking = source.lockpicking;
-        thisChar.pickpocketing = source.pickpocketing;
-        thisChar.trapSetting = source.trapSetting;
-        thisChar.trapDisarming = source.trapDisarming;
-        thisChar.pugilism = source.pugilism;
-        thisChar.martialarts = source.martialarts;
-        thisChar.melee = source.melee;
-        thisChar.parry = source.parry;
-        thisChar.shieldDefense = source.shieldDefense;
-        thisChar.survivalist = source.survivalist;
-        thisChar.landNavigation = source.landNavigation;
-        thisChar.hunting = source.hunting;
-        thisChar.foraging = source.foraging;
-        thisChar.herbLore = source.herbLore;
-        thisChar.camping = source.camping;
-        thisChar.attackmagic = source.attackMagic;
-        thisChar.condition = source.condition;
-        thisChar.sharpness = source.sharpness;
-        thisChar.health = source.health;
-        thisChar.maxStamina = source.maxStamina;
-        thisChar.maxBalance = source.maxBalance;
-        thisChar.maxMind = source.maxMind;
-        thisChar.maxHealth = source.maxHealth;
-        thisChar.knownMoves = source.knownMovesSave.LoadMoves();
-        thisChar.activeMeleeMoves = source.activeMovesSave.LoadMoves();
-        thisChar.startingArmor = source.startingArmor;
-        thisChar.startingMeleeWeapon = source.startingWeapon;
-        thisChar.armor = source.armor;
-        thisChar.meleeWeapon = source.weapon;
-        thisChar.mat = source.mat;
-        thisChar.contract = source.contract;
-        thisChar.currentTraining = source.currentTraining;
-        thisChar.returnDate = source.returnDate;
-        thisChar.activeForNextMission = source.activeForNextMission;
-        thisChar.incapacitated = source.incapacitated;
-        thisChar.modelName = source.modelName;
-        thisChar.currentObject = source.currentObject;
-        thisChar.defensemagic = source.defenseMagic;
-        thisChar.supportmagic = source.supportMagic;
-        thisChar.name = source.name;
-        return thisChar;
-    }
-    public static List<MissionContract> LoadMissionContracts(this List<MissionContractSave> source) {
-        var returnList = new List<MissionContract>();
-        foreach (var contract in source) {
-            returnList.Add(contract.LoadMissionContract());
-        }
-        return returnList;
-    }
-    public static MissionContract LoadMissionContract(this MissionContractSave source) {
-        var thisContract = new MissionContract();
-        thisContract.description = source.description;
-        thisContract.ID = source.ID;
-        thisContract.contractType = source.contractType;
-        thisContract.difficulty = source.difficulty;
-        thisContract.stages = source.stages;
-        thisContract.goldReward = source.goldReward;
-        thisContract.businessReward = source.businessReward;
-        thisContract.moveReward = source.moveReward;
-        thisContract.executionDate = source.executionDate;
-        thisContract.dayCost = source.dayCost;
-        thisContract.minHeroes = source.minHeroes;
-        thisContract.maxHeroes = source.maxHeroes;
-        thisContract.attributeReq = source.attributeReq;
-        thisContract.attributeReqAmount = source.attributeReqAmount;
-        thisContract.attributeReq2 = source.attributeReq2;
-        thisContract.attributeReqAmount2 = source.attributeReqAmount2;
-        return thisContract;
-    }
-
-    public static List<Training> LoadTrainings(this List<TrainingSave> source) {
-        var returnList = new List<Training>();
-        foreach (var training in source) {
-            returnList.Add(training.LoadTraining());
-        }
-        return returnList;
-    }
-    public static Training LoadTraining(this TrainingSave source) {
-        var thisTraining = new Training();
-        thisTraining.type = source.type;
-        thisTraining.training = source.training;
-        thisTraining.duration = source.duration;
-        thisTraining.cost = source.cost;
-        thisTraining.dateToTrain = source.dateToTrain;
-        thisTraining.moveToTrain = source.moveToTrain;
-        return thisTraining;
-    }
-
-    public static List<Move> LoadMoves(this List<MoveSave> source) {
-        var returnList = new List<Move>();
-        foreach (var move in source) {
-            returnList.Add(move.LoadMove());
-        }
-        return returnList;
-    }
-    public static Move LoadMove(this MoveSave source) {
-        var thisMove = new Move();
-        thisMove.description = source.description;
-        thisMove.cooldown = source.cooldown;
-        thisMove.accuracy = source.accuracy;
-        thisMove.staminaDamage = source.staminaDamage;
-        thisMove.balanceDamage = source.balanceDamage;
-        thisMove.mindDamage = source.mindDamage;
-        thisMove.healthDamage = source.healthDamage;
-        thisMove.keyPhysicalAttribute = source.keyPhysicalAttribute;
-        thisMove.keyTechnicalAttribute = source.keyTechnicalAttribute;
-        thisMove.limb = source.limb;
-        thisMove.moveType = source.moveType;
-        thisMove.moveWeaponType = source.moveWeaponType;
-        thisMove.modifiers = source.modifiers;
-        return thisMove;
-    }
-
-
+   
     [System.Serializable]
     private class Wrapper<T> {
         public T[] Items;

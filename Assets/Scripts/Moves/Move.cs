@@ -1,5 +1,5 @@
 using Animancer;
-using CoverShooter;
+ 
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -25,7 +25,7 @@ public class Move : ScriptableObject
     public StableDamage damage { get { return new StableDamage() { balance = balanceDamage, health = healthDamage, mind = mindDamage, stamina = staminaDamage }; } }
     public MoveWeaponType moveWeaponType;
     public SCProjectile projectile;
-    public virtual void HitEffect(CharacterHealth health, Character attacker) {
+    public virtual void HitEffect(Character attacker) {
 
     }
 
@@ -35,7 +35,7 @@ public class Move : ScriptableObject
     }
   
 }
-
+public enum Limb { RightHand, LeftHand, LeftLeg, RightLeg}
 public enum MoveType { Melee, Ranged, Support }
 [System.Flags]
 public enum MoveWeaponType { None = 0, Fists = 1, Sword = 2, Axe = 4, Bow = 8, Pistol = 16, MageGloves = 32, Dagger = 64 }
