@@ -35,10 +35,10 @@ public class SCBuzzState : SCSkillState {
         thisChar.agent.isStopped = false;
         walkTarget = poi.allPurposeTransforms[0];
 
-        npcNegative = new string[] { "N", "N", "N", "N", "N", "N", };
-        npcPositive = new string[] { "N", "N", "N", "N", "N", "N", };
-        playerNegative = new string[] { "N", "N", "N", "N", "N", "N", };
-        playerPositive = new string[] { "N", "N", "N", "N", "N", "N", };
+        npcNegative = new string[] { "N", "N", "N", "N" };
+        npcPositive = new string[] { "N", "N", "N", "N" };
+        playerNegative = new string[] { "N", "N", "N", "N" };
+        playerPositive = new string[] { "N", "N", "N", "N" };
         playerIntro = "Hello";
         NPCIntro = "Hi";
         maxRounds = npcNegative.Length;
@@ -135,7 +135,8 @@ public class SCBuzzState : SCSkillState {
             //need a list of NPC statements and another list of Player negotiating statements
             npcTalking = !npcTalking;
             float comp = GetPlayerScore(poi.attempter.trait.level);
-
+            playerScore.Add(new Roll() { total = comp, max = 40, threshold = threshold });
+            otherScore.Add(new Roll() { total = threshold, max = 40, threshold = threshold });
             //Helper.UIUpdate("Roll: " + comp + " Needed: " + threshold);
 
             if (comp >= threshold) {

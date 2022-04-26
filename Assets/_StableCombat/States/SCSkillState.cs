@@ -11,10 +11,12 @@ public class SCSkillState : StableCombatCharState {
 
 
     public virtual void ProcessBuzz() {
+        Debug.Log("#Mission#ProcessBuzz");
         if (scoreIndex < 0) {
             scoreIndex++;
         }
         else {
+            Debug.Log("#Buzz#Score Index: " + scoreIndex + " playerScore Count: " + playerScore.Count);
             if (scoreIndex < playerScore.Count) {
                 poi.control.buzz.Display(playerScore[scoreIndex], otherScore[scoreIndex], scoreIndex++);
             }
