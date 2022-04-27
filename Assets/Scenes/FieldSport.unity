@@ -570,57 +570,16 @@ MonoBehaviour:
   age: 0
   strength: 5
   agility: 5
-  reaction: 5
   dexterity: 5
   carrying: 5
-  toughness: 10
   tackling: 5
-  blocking: 5
   runspeed: 5
   shooting: 5
   passing: 5
   catching: 5
-  speech: 5
-  intelligence: 5
-  education: 5
-  motivation: 5
-  strategist: 5
-  economics: 5
-  negotiating: 5
-  insight: 5
-  deception: 5
-  intimidation: 5
-  persuasion: 5
-  gambling: 5
-  confidence: 5
-  lockpicking: 5
-  pickpocketing: 5
-  trapSetting: 5
-  trapDisarming: 5
-  pugilism: 5
-  martialarts: 2
   melee: 10
   ranged: 10
   magic: 10
-  parry: 5
-  shieldDefense: 0
-  musician: 0
-  medicine: 0
-  swordsmanship: 5
-  dualwielding: 5
-  archery: 5
-  pistols: 5
-  survivalist: 10
-  landNavigation: 10
-  hunting: 15
-  foraging: 0
-  herbLore: 0
-  camping: 0
-  attackmagic: 0
-  defensemagic: 0
-  supportmagic: 0
-  condition: 0
-  sharpness: 0
   health: 0
   combatFocus: 0
   maxStamina: 0
@@ -631,6 +590,8 @@ MonoBehaviour:
   activeMeleeMoves: []
   activeRangedMoves: []
   startingSpecialMoves: []
+  startingTraits: []
+  activeTraits: []
   activeSpecialMoves: []
   gender: 0
   race: 0
@@ -6146,7 +6107,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &139374020
 Transform:
   m_ObjectHideFlags: 0
@@ -6154,8 +6115,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 139374019}
-  m_LocalRotation: {x: -0.19304541, y: 0.20330879, z: -0.041732065, w: -0.9589877}
-  m_LocalPosition: {x: 43.61003, y: 11.791826, z: -0.5238571}
+  m_LocalRotation: {x: 0.19571069, y: 0.6802332, z: -0.19213477, w: 0.6797532}
+  m_LocalPosition: {x: 1.1, y: 36.77069, z: 46.8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1275737027}
@@ -6511,18 +6472,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47a74438d916a9e429ebbf10dd88341c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemName: 
-  condition: 0
-  isOwned: 0
-  damage: 0
-  prefabName: 
-  dualWield: 0
-  isHeavy: 0
-  usesLegs: 0
-  prefabNameLegs: 
-  settingsPrefab: 
-  weaponType: 0
-  moveType: 0
 --- !u!1 &156710687
 GameObject:
   m_ObjectHideFlags: 0
@@ -10264,7 +10213,6 @@ MonoBehaviour:
         favor: 
         warlord: {fileID: 1822094475}
         heroes: []
-        heroesSave: []
         coaches: []
         buildings: []
         contracts: []
@@ -10293,7 +10241,6 @@ MonoBehaviour:
         favor: 
         warlord: {fileID: 16429241}
         heroes: []
-        heroesSave: []
         coaches: []
         buildings: []
         contracts: []
@@ -27427,18 +27374,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47a74438d916a9e429ebbf10dd88341c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemName: 
-  condition: 0
-  isOwned: 0
-  damage: 0
-  prefabName: 
-  dualWield: 0
-  isHeavy: 0
-  usesLegs: 0
-  prefabNameLegs: 
-  settingsPrefab: 
-  weaponType: 0
-  moveType: 0
 --- !u!1 &741418430
 GameObject:
   m_ObjectHideFlags: 0
@@ -40486,6 +40421,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2100000, guid: c783499f3e3f67348bc9b7d9e731abf3, type: 2}
     - target: {fileID: 2300090, guid: 326f6ba982043af4496f866fee104536, type: 3}
+      propertyPath: m_ReceiveShadows
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2300090, guid: 326f6ba982043af4496f866fee104536, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 3fdac458f59866a44a37ca251da14e7b, type: 2}
@@ -44276,6 +44215,7 @@ MonoBehaviour:
   - {fileID: 194851762}
   - {fileID: 410210863}
   - {fileID: 1754769863}
+  otherTeamList: []
 --- !u!1 &1164771889
 GameObject:
   m_ObjectHideFlags: 0
@@ -46815,18 +46755,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47a74438d916a9e429ebbf10dd88341c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemName: 
-  condition: 0
-  isOwned: 0
-  damage: 0
-  prefabName: 
-  dualWield: 0
-  isHeavy: 0
-  usesLegs: 0
-  prefabNameLegs: 
-  settingsPrefab: 
-  weaponType: 0
-  moveType: 0
 --- !u!1 &1218081991
 GameObject:
   m_ObjectHideFlags: 0
@@ -57116,6 +57044,7 @@ MonoBehaviour:
   - {fileID: 1820111894}
   - {fileID: 1874138213}
   - {fileID: 2082906753}
+  otherTeamList: []
 --- !u!1 &1496300170
 GameObject:
   m_ObjectHideFlags: 0
@@ -67059,18 +66988,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47a74438d916a9e429ebbf10dd88341c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemName: 
-  condition: 0
-  isOwned: 0
-  damage: 0
-  prefabName: 
-  dualWield: 0
-  isHeavy: 0
-  usesLegs: 0
-  prefabNameLegs: 
-  settingsPrefab: 
-  weaponType: 0
-  moveType: 0
 --- !u!1 &1807190722
 GameObject:
   m_ObjectHideFlags: 0
@@ -67599,57 +67516,16 @@ MonoBehaviour:
   age: 0
   strength: 5
   agility: 5
-  reaction: 5
   dexterity: 5
   carrying: 5
-  toughness: 10
   tackling: 5
-  blocking: 5
   runspeed: 5
   shooting: 5
   passing: 5
   catching: 5
-  speech: 5
-  intelligence: 5
-  education: 5
-  motivation: 5
-  strategist: 5
-  economics: 5
-  negotiating: 5
-  insight: 5
-  deception: 5
-  intimidation: 5
-  persuasion: 5
-  gambling: 5
-  confidence: 5
-  lockpicking: 5
-  pickpocketing: 5
-  trapSetting: 5
-  trapDisarming: 5
-  pugilism: 5
-  martialarts: 2
   melee: 10
   ranged: 10
   magic: 10
-  parry: 5
-  shieldDefense: 0
-  musician: 0
-  medicine: 0
-  swordsmanship: 5
-  dualwielding: 5
-  archery: 5
-  pistols: 5
-  survivalist: 10
-  landNavigation: 10
-  hunting: 15
-  foraging: 0
-  herbLore: 0
-  camping: 0
-  attackmagic: 0
-  defensemagic: 0
-  supportmagic: 0
-  condition: 0
-  sharpness: 0
   health: 0
   combatFocus: 0
   maxStamina: 0
@@ -67660,6 +67536,8 @@ MonoBehaviour:
   activeMeleeMoves: []
   activeRangedMoves: []
   startingSpecialMoves: []
+  startingTraits: []
+  activeTraits: []
   activeSpecialMoves: []
   gender: 0
   race: 0
@@ -69520,7 +69398,7 @@ Light:
   m_Type: 1
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 1.4
+  m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -140079,6 +139957,21 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1376729077279819475, guid: b6e5e79a2b6681e4298a8014ae154c32,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1376729077279819475, guid: b6e5e79a2b6681e4298a8014ae154c32,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1376729077279819475, guid: b6e5e79a2b6681e4298a8014ae154c32,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1376729077299567346, guid: b6e5e79a2b6681e4298a8014ae154c32,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -140149,6 +140042,21 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4436868375015141393, guid: b6e5e79a2b6681e4298a8014ae154c32,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4436868375015141393, guid: b6e5e79a2b6681e4298a8014ae154c32,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4436868375015141393, guid: b6e5e79a2b6681e4298a8014ae154c32,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4436868376376105720, guid: b6e5e79a2b6681e4298a8014ae154c32,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -140159,6 +140067,21 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4436868376398587911, guid: b6e5e79a2b6681e4298a8014ae154c32,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4436868376398587911, guid: b6e5e79a2b6681e4298a8014ae154c32,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4436868376398587911, guid: b6e5e79a2b6681e4298a8014ae154c32,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4436868376445695014, guid: b6e5e79a2b6681e4298a8014ae154c32,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -140167,6 +140090,51 @@ PrefabInstance:
     - target: {fileID: 4436868376445695014, guid: b6e5e79a2b6681e4298a8014ae154c32,
         type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4436868376465016537, guid: b6e5e79a2b6681e4298a8014ae154c32,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4436868376465016537, guid: b6e5e79a2b6681e4298a8014ae154c32,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4436868376465016537, guid: b6e5e79a2b6681e4298a8014ae154c32,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4436868376769704134, guid: b6e5e79a2b6681e4298a8014ae154c32,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4436868376769704134, guid: b6e5e79a2b6681e4298a8014ae154c32,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4436868376769704134, guid: b6e5e79a2b6681e4298a8014ae154c32,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4436868376804964304, guid: b6e5e79a2b6681e4298a8014ae154c32,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4436868376804964304, guid: b6e5e79a2b6681e4298a8014ae154c32,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4436868376804964304, guid: b6e5e79a2b6681e4298a8014ae154c32,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4436868376858258417, guid: b6e5e79a2b6681e4298a8014ae154c32,

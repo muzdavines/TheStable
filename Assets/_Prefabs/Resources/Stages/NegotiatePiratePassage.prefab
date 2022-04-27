@@ -101,8 +101,7 @@ GameObject:
   - component: {fileID: 1921153387}
   - component: {fileID: 1921153390}
   - component: {fileID: 1921153389}
-  - component: {fileID: 6021443349745989218}
-  - component: {fileID: 3006941359937778567}
+  - component: {fileID: 1023012177014283551}
   m_Layer: 0
   m_Name: NegotiateWithLeandro
   m_TagString: Untagged
@@ -147,8 +146,8 @@ MonoBehaviour:
     type: 19
     required: 1
     reward: {fileID: 0}
-    saves: []
-    level: 24
+    level: 1
+    challengeNum: 5
     mod: 0
   onSuccessSound: {fileID: 8300000, guid: df3857c2bb4a55146b7d12b3bddd434e, type: 3}
   allPurposeTransforms:
@@ -161,7 +160,9 @@ MonoBehaviour:
   cameraAngle: {x: 0, y: 0, z: 0}
   backgroundMusic: {fileID: 0}
   attributePrereq: lockpicking
-  attributePrereqAmount: 10
+  levelReq: 0
+  successText: 
+  failText: 
   currentCharacterToAttempt: {fileID: 0}
 --- !u!65 &1921153389
 BoxCollider:
@@ -176,7 +177,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 11.72, y: 1.87, z: 20.4}
   m_Center: {x: -0.82, y: 0.33, z: -1.94}
---- !u!114 &6021443349745989218
+--- !u!114 &1023012177014283551
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -185,25 +186,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1921153386}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8cb65d0da10ec7f4687a260d966a8fdb, type: 3}
+  m_Script: {fileID: 11500000, guid: f3fff30c8b7ae7d4ea82cf4b2c6de98d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  affectedPOI: []
-  affecttedPOIMod: 0
---- !u!114 &3006941359937778567
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1921153386}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6cc7405dae85df04bb306e1fb1a4517d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  affectedPOI: []
-  affecttedPOIMod: 0
 --- !u!1 &1977738367
 GameObject:
   m_ObjectHideFlags: 0
@@ -508,8 +493,7 @@ GameObject:
   - component: {fileID: 7765560022338520030}
   - component: {fileID: 5065406731366239370}
   - component: {fileID: 7818810088630397092}
-  - component: {fileID: 1321997840481804693}
-  - component: {fileID: 1782900953266670157}
+  - component: {fileID: 23582485129443606}
   m_Layer: 0
   m_Name: Lockpick
   m_TagString: Untagged
@@ -548,14 +532,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   col: {fileID: 0}
   control: {fileID: 0}
-  targetPos: {fileID: 2106767046749277595}
+  targetPos: {fileID: 6169577027143381617}
   step:
     blueprint: {fileID: 0}
     type: 1
     required: 0
     reward: {fileID: 0}
-    saves: []
-    level: 20
+    level: 1
+    challengeNum: 1
     mod: 0
   onSuccessSound: {fileID: 8300000, guid: df3857c2bb4a55146b7d12b3bddd434e, type: 3}
   allPurposeTransforms:
@@ -567,7 +551,9 @@ MonoBehaviour:
   cameraAngle: {x: 0, y: 0, z: 0}
   backgroundMusic: {fileID: 0}
   attributePrereq: lockpicking
-  attributePrereqAmount: 10
+  levelReq: 0
+  successText: Lockpick Successful!
+  failText: 
   currentCharacterToAttempt: {fileID: 0}
 --- !u!65 &7818810088630397092
 BoxCollider:
@@ -582,7 +568,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 11.72, y: 1.87, z: 20.4}
   m_Center: {x: -0.82, y: 0.33, z: -1.94}
---- !u!114 &1321997840481804693
+--- !u!114 &23582485129443606
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -591,31 +577,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 2274748763823564267}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6323336dde420334997becef00251a1e, type: 3}
+  m_Script: {fileID: 11500000, guid: f3fff30c8b7ae7d4ea82cf4b2c6de98d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  affectedPOI:
-  - {fileID: 1921153390}
-  affecttedPOIMod: 1
-  leftDoor: {fileID: 893521949931076697}
-  leftDoorTarget: {x: 0, y: 0, z: 90}
-  rotateDoors: 1
-  notification: Chest Successfully Opened!
---- !u!114 &1782900953266670157
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2274748763823564267}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c3f1c6b24e3fa08429bf5dda475cd8c0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  affectedPOI: []
-  affecttedPOIMod: 0
-  notification: Chest could not be opened!
 --- !u!1 &2324086312762588876
 GameObject:
   m_ObjectHideFlags: 0
@@ -657,7 +621,7 @@ GameObject:
   - component: {fileID: 1394941829320658829}
   - component: {fileID: 5369389435784091529}
   - component: {fileID: 1230303354946047594}
-  - component: {fileID: 5830019615753207672}
+  - component: {fileID: 8507498797729060700}
   m_Layer: 0
   m_Name: LockpickConversation
   m_TagString: Untagged
@@ -696,14 +660,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   col: {fileID: 0}
   control: {fileID: 0}
-  targetPos: {fileID: 18336365466238639}
+  targetPos: {fileID: 642802763130626927}
   step:
     blueprint: {fileID: 0}
     type: 19
     required: 0
     reward: {fileID: 0}
-    saves: []
     level: 0
+    challengeNum: 1
     mod: 0
   onSuccessSound: {fileID: 8300000, guid: df3857c2bb4a55146b7d12b3bddd434e, type: 3}
   allPurposeTransforms:
@@ -716,7 +680,9 @@ MonoBehaviour:
   cameraAngle: {x: 0, y: 0, z: 0}
   backgroundMusic: {fileID: 0}
   attributePrereq: lockpicking
-  attributePrereqAmount: 10
+  levelReq: 0
+  successText: Discussion Successful
+  failText: 
   currentCharacterToAttempt: {fileID: 0}
 --- !u!65 &1230303354946047594
 BoxCollider:
@@ -731,7 +697,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 11.72, y: 1.87, z: 20.4}
   m_Center: {x: -0.82, y: 0.33, z: -1.94}
---- !u!114 &5830019615753207672
+--- !u!114 &8507498797729060700
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -740,15 +706,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 2793025158581840382}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6323336dde420334997becef00251a1e, type: 3}
+  m_Script: {fileID: 11500000, guid: f3fff30c8b7ae7d4ea82cf4b2c6de98d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  affectedPOI: []
-  affecttedPOIMod: 0
-  leftDoor: {fileID: 3326628077902526403}
-  leftDoorTarget: {x: 0, y: 0, z: 90}
-  rotateDoors: 1
-  notification: Chest Successfully Opened!
 --- !u!1 &2829535390916016426
 GameObject:
   m_ObjectHideFlags: 0
@@ -911,9 +871,7 @@ GameObject:
   - component: {fileID: 5679713343379897833}
   - component: {fileID: 5679713343379897834}
   - component: {fileID: 5679713343379897835}
-  - component: {fileID: 5679713343379897832}
-  - component: {fileID: 5679713343379897364}
-  - component: {fileID: 5679713343379897365}
+  - component: {fileID: 1573253795166132252}
   m_Layer: 0
   m_Name: Gamble
   m_TagString: Untagged
@@ -952,14 +910,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   col: {fileID: 0}
   control: {fileID: 0}
-  targetPos: {fileID: 5679713345362112242}
+  targetPos: {fileID: 5679713344721705156}
   step:
     blueprint: {fileID: 0}
     type: 22
     required: 0
     reward: {fileID: 0}
-    saves: []
-    level: 10
+    level: 1
+    challengeNum: 5
     mod: 0
   onSuccessSound: {fileID: 8300000, guid: df3857c2bb4a55146b7d12b3bddd434e, type: 3}
   allPurposeTransforms:
@@ -971,7 +929,9 @@ MonoBehaviour:
   cameraAngle: {x: 0, y: 0, z: 0}
   backgroundMusic: {fileID: 0}
   attributePrereq: gambling
-  attributePrereqAmount: 5
+  levelReq: 0
+  successText: 
+  failText: 
   currentCharacterToAttempt: {fileID: 0}
 --- !u!65 &5679713343379897835
 BoxCollider:
@@ -986,7 +946,7 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 11.62, y: 1.87, z: 4.07}
   m_Center: {x: -0.82, y: 0.33, z: -1.94}
---- !u!114 &5679713343379897832
+--- !u!114 &1573253795166132252
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -995,42 +955,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 5679713343379897838}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b32c30004e31e5d4eb1d839186dff8a8, type: 3}
+  m_Script: {fileID: 11500000, guid: f3fff30c8b7ae7d4ea82cf4b2c6de98d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &5679713343379897364
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5679713343379897838}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1539b55a6cc489e418c8601eab37da7f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  affectedPOI:
-  - {fileID: 5065406731366239370}
-  - {fileID: 1921153390}
-  affecttedPOIMod: -0.05
-  speaker: {fileID: 0}
---- !u!114 &5679713343379897365
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5679713343379897838}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4eb1685f82713824db87e52adf722a26, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  affectedPOI:
-  - {fileID: 5065406731366239370}
-  - {fileID: 1921153390}
-  affecttedPOIMod: 0.05
 --- !u!1 &5679713344721705157
 GameObject:
   m_ObjectHideFlags: 0
@@ -1379,12 +1306,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 893521949930608009}
   m_PrefabAsset: {fileID: 0}
---- !u!4 &893521949931076697 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 469456, guid: 931c64dfd4f2c9247a14476c29f94228,
-    type: 3}
-  m_PrefabInstance: {fileID: 893521949930608009}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3326628077902978579
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1442,12 +1363,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 931c64dfd4f2c9247a14476c29f94228, type: 3}
---- !u!4 &3326628077902526403 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 469456, guid: 931c64dfd4f2c9247a14476c29f94228,
-    type: 3}
-  m_PrefabInstance: {fileID: 3326628077902978579}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &3326628077902500789 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 478630, guid: 931c64dfd4f2c9247a14476c29f94228,
@@ -1752,15 +1667,15 @@ PrefabInstance:
       objectReference: {fileID: 9100000, guid: f5289b32ea04b094ea25cfa86290817e, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cd3b4bf6d7e36af41b2bc986a4ab13c7, type: 3}
---- !u!1 &5679713344177813795 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 110404, guid: cd3b4bf6d7e36af41b2bc986a4ab13c7,
-    type: 3}
-  m_PrefabInstance: {fileID: 5679713344177706599}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5679713344177885899 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 443564, guid: cd3b4bf6d7e36af41b2bc986a4ab13c7,
+    type: 3}
+  m_PrefabInstance: {fileID: 5679713344177706599}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &5679713344177813795 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 110404, guid: cd3b4bf6d7e36af41b2bc986a4ab13c7,
     type: 3}
   m_PrefabInstance: {fileID: 5679713344177706599}
   m_PrefabAsset: {fileID: 0}
@@ -1855,15 +1770,15 @@ PrefabInstance:
       objectReference: {fileID: 9100000, guid: f5289b32ea04b094ea25cfa86290817e, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a0285b189c83e4240874d46f667867e2, type: 3}
---- !u!1 &5679713345372922499 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 132726, guid: a0285b189c83e4240874d46f667867e2,
-    type: 3}
-  m_PrefabInstance: {fileID: 5679713345372792053}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5679713345372601551 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 464954, guid: a0285b189c83e4240874d46f667867e2,
+    type: 3}
+  m_PrefabInstance: {fileID: 5679713345372792053}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &5679713345372922499 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 132726, guid: a0285b189c83e4240874d46f667867e2,
     type: 3}
   m_PrefabInstance: {fileID: 5679713345372792053}
   m_PrefabAsset: {fileID: 0}

@@ -807,7 +807,7 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
                 state.TransitionTo(new SCBuzzState() { poi = poi });
                 break;
             case StepType.Lockpick:
-               // state.TransitionTo(new MissionCharacterStateLockpick() { poi = poi });
+                state.TransitionTo(new SCBuzzState() { poi = poi });
                 break;
             case StepType.Assassinate:
                 //state.TransitionTo(new MissionCharacterStateAssassinate() { poi = poi, killTarget = poi.allPurposeTransforms[0] });
@@ -824,12 +824,14 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
             case StepType.Connection:
             case StepType.NegotiateBusiness:
             case StepType.Inspire:
-                state.TransitionTo(new SCNegotiateState() { poi = poi, negotiateTarget = poi.allPurposeTransforms[1] });
+                state.TransitionTo(new SCBuzzState() { poi = poi });
+                //state.TransitionTo(new SCNegotiateState() { poi = poi, negotiateTarget = poi.allPurposeTransforms[1] });
                 break;
             case StepType.Portal:
                 poi.Resolve(true);
                 break;
             case StepType.Gamble:
+                state.TransitionTo(new SCBuzzState() { poi = poi });
                 //state.TransitionTo(new MissionCharacterStateGamble() { poi = poi, gambleTarget = poi.allPurposeTransforms[1] });
                 break;
         }

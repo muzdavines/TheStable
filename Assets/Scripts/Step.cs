@@ -13,8 +13,9 @@ public class Step {
     public Reward reward;
     [SerializeField]
     //public List<Step> saves;
-    [Tooltip("Enter the score that the player should match or exceed. Think of it like Armor Class.")]
+    [Tooltip("Level 1-5")]
     public int level;
+    public int challengeNum = 5;
     public float mod = 0;
     public void Blueprint() {
         type = blueprint.type;

@@ -18,7 +18,7 @@ public class SCBuzzState : SCSkillState {
     public int finalScore;
     public string playerIntro, NPCIntro;
     public List<string> dialogue = new List<string>(); // always start with the NPC
-    public List<int> attitudes = new List<int>();
+    
     public int maxRounds = 5; //set max rounds based on difficulty, default should be 6
 
     public string[] npcPositive = { "I'm listening.", "Without respecting authority, we have nothing but chaos.", "Profits are good. I think we can work something out.", "I don't see why not! Let's drink to this new endeavor!" };
@@ -29,6 +29,7 @@ public class SCBuzzState : SCSkillState {
     public override void EnterFrom(StableCombatCharState state) {
         base.EnterFrom(state);
         nextNumCheck = Mathf.Infinity;
+        maxRounds = poi.step.challengeNum;
         step = poi.step;
         nextNumCheck = Time.time + Mathf.Infinity;
         thisChar.anima.Idle();
@@ -67,14 +68,15 @@ public class SCBuzzState : SCSkillState {
         nextNumCheck = Time.time + 4.0f;
 
     }
-
+    bool finalSkipped;
     public override void Update() {
         base.Update();
         //Debug.Log(nextNumCheck + " : " + Time.time);
         if (!didFireAction && Vector3.Distance(thisChar.transform.position, walkTarget.position) < 1) { FireAction(); }
         if (Input.GetKeyDown(KeyCode.Space)) {
             nextNumCheck = 0;
-            if (speechIndex >= dialogue.Count) {
+            if (!finalSkipped && speechIndex >= dialogue.Count) {
+                finalSkipped = true;
                 nextNumCheck = Time.time + 6;
             }
         }
@@ -135,8 +137,12 @@ public class SCBuzzState : SCSkillState {
         maxRounds = playerPositive.Length;
         dialogue.Add(playerIntro);
         dialogue.Add(NPCIntro);
-        attitudes.Add(attitude);
-        threshold = (poi.step.level * 4) + skillArray[poi.step.level - 1];
+        if (poi.step.level == 0) {
+            threshold = 0;
+        }
+        else {
+            threshold = (poi.step.level * 4) + skillArray[poi.step.level - 1];
+        }
         for (int x = 0; x < maxRounds; x++) {
             //need a list of NPC statements and another list of Player negotiating statements
             npcTalking = !npcTalking;

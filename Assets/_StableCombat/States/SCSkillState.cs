@@ -8,7 +8,7 @@ public class SCSkillState : StableCombatCharState {
     public float threshold;
     public List<Roll> playerScore = new List<Roll>();
     public List<Roll> otherScore = new List<Roll>();
-
+    public List<int> attitudes = new List<int>();
 
     public virtual void ProcessBuzz() {
         Debug.Log("#Mission#ProcessBuzz");
@@ -18,7 +18,7 @@ public class SCSkillState : StableCombatCharState {
         else {
             Debug.Log("#Buzz#Score Index: " + scoreIndex + " playerScore Count: " + playerScore.Count);
             if (scoreIndex < playerScore.Count) {
-                poi.control.buzz.Display(playerScore[scoreIndex], otherScore[scoreIndex], scoreIndex++);
+                poi.control.buzz.Display(playerScore[scoreIndex], otherScore[scoreIndex], attitudes[scoreIndex], scoreIndex++);
             }
         }
     }

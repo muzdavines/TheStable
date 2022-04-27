@@ -18,9 +18,9 @@ public class BuzzStageDisplay : MonoBehaviour
         playerRol = player;
         otherRol = other;
         print("Display called " + player.total + "  "+player.max + "  "+player.total/player.max);
-        pScore = DisplayScore(playerImage, playerText, player.total, player.max, 4f);
+        pScore = DisplayScore(playerImage, playerText, player.total, player.max, 4f, true);
         oScore = DisplayScore(otherImage, otherText, other.total, other.max, 1f);
-        pScoreComplete = DisplayScore(playerImage, playerText, player.total, player.max, 0f);
+        pScoreComplete = DisplayScore(playerImage, playerText, player.total, player.max, 0f, true);
         oScoreComplete = DisplayScore(otherImage, otherText, other.total, other.max, 0f);
         StartCoroutine(pScore);
         StartCoroutine(oScore);
@@ -28,7 +28,7 @@ public class BuzzStageDisplay : MonoBehaviour
         // oScore = StartCoroutine(DisplayScore(otherImage, otherText, other.total, other.max, 1f));
     }
 
-    public IEnumerator DisplayScore(Image thisImage, TextMeshProUGUI thisText, float thisScore, float thisMax, float delay = 0f) {
+    public IEnumerator DisplayScore(Image thisImage, TextMeshProUGUI thisText, float thisScore, float thisMax, float delay = 0f, bool shouldUpdateSuccess = false) {
         yield return new WaitForSeconds(delay);
         float targetFill = thisScore / thisMax;
         while (thisImage.fillAmount < targetFill && thisImage.fillAmount < 1) {
@@ -37,6 +37,11 @@ public class BuzzStageDisplay : MonoBehaviour
         }
         thisImage.fillAmount = thisScore / thisMax;
         thisText.text = thisScore.ToString("F0");
+        if (shouldUpdateSuccess) {
+            displaying = false;
+            FindObjectOfType<BuzzPanelController>().UpdateSuccess();
+           
+        }
     }
     public void Start() {
         

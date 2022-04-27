@@ -65,6 +65,7 @@ public class MissionPOI : MonoBehaviour
         List<StableCombatChar> heroes = control.allChars;
         attempter = step.CharacterToAttempt(heroes);
         currentCharacterToAttempt = attempter.thisChar;
+        levelReq = step.level;
         foreach (StableCombatChar c in heroes) {
             if (c != currentCharacterToAttempt) { c.MissionIdleDontAct(); }
         }
@@ -113,7 +114,7 @@ public class MissionPOI : MonoBehaviour
     public virtual void Avoid(bool minReqNotMet = true) {
         control.buzz.Reset();
         print("Avoiding");
-        GetComponent<OnStepAvoided>().OnAvoided(minReqNotMet);
+        GetComponent<SkillStepResolution>().OnAvoid(minReqNotMet);
         Helper.PlayOneShot(onSuccessSound);
         control.RemovePOI(this);
     }
