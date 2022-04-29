@@ -58,7 +58,11 @@ public class NewGameCreationController : MonoBehaviour
         }
         Game.instance.missionContractList = Instantiate<MissionList>(Resources.Load<MissionList>("1000"));
         //Game.instance.playerStable.finance.businesses.Add(new Finance.Business() { benefit = Finance.Business.Benefit.Gold, description = "Market Stall in Genoa", duration = 12, number = 125 });
+        if (sceneToLoad == "StableManagement") {
+            Game.instance.tutorialStageFinished = 99;
+        }
         Game.instance.Init();
+        
         Destroy(gameObject);
     }
     public void ChangeStablemasterType(string s) {

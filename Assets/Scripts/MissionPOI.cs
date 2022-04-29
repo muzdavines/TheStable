@@ -70,7 +70,7 @@ public class MissionPOI : MonoBehaviour
             if (c != currentCharacterToAttempt) { c.MissionIdleDontAct(); }
         }
         control.currentActiveStepChar = currentCharacterToAttempt;
-        if (attempter.trait.level < levelReq) {
+        if (!step.required && attempter.trait.level < levelReq) {
             print("Does not meet minimum Req");
             Avoid(true);
         }
