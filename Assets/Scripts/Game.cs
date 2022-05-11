@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -8,7 +8,6 @@ using System.IO;
 
 using System.Text.RegularExpressions;
 using HardCodeLab.TutorialMaster;
-using UnityEngine.SceneManagement;
 
 [System.Serializable]
 public class Game : MonoBehaviour {
@@ -52,11 +51,13 @@ public class Game : MonoBehaviour {
     public FreeAgentMarket freeAgentMarket = new FreeAgentMarket();
     [SerializeField]
     public List<MissionContract> contractMarket = new List<MissionContract>();
-    public List<MissionContractSave> contractMarketSave = new List<MissionContractSave>();
+    
     public MissionList missionContractList;
     
     public League.Match activeMatch;
     public int tutorialStageFinished = 0;
+    
+    
     public void Start() {
     
         transform.name = "Game";
@@ -291,8 +292,8 @@ public static class Helper {
         return Game.instance.gameDate.IsOnOrAfter(c.executionDate, false);
     }
 
-    public static CameraController Cam() {
-        return Camera.main.GetComponent<CameraController>();
+    public static com.ootii.Cameras.CameraController Cam() {
+        return GameObject.FindObjectOfType<com.ootii.Cameras.CameraController>();
     }
 
     public static Canvas GetMainCanvas() {
@@ -372,8 +373,9 @@ public static class JsonHelper {
     }
 
     public static string ToJson<T>(T[] array) {
-        Wrapper<T> wrapper = new Wrapper<T>();
-        wrapper.Items = array;
+        Wrapper<T> wrapper = new Wrapper<T> {
+            Items = array
+        };
         return JsonUtility.ToJson(wrapper);
     }
 

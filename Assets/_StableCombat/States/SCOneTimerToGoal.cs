@@ -16,7 +16,9 @@ public class SCOneTimerToGoal : StableCombatCharState {
         thisChar.transform.LookAt(thisChar.enemyGoal.transform);
         thisChar.agent.isStopped = true;
         canGrabBall = false;
+       // thisChar.matchController.ZoomCam(thisChar);
     }
+
     public override void Update() {
         base.Update();
         if (ball.Distance(thisChar) < 1.8f && kickReady) {
@@ -42,5 +44,6 @@ public class SCOneTimerToGoal : StableCombatCharState {
 
     public override void WillExit() {
         base.WillExit();
+       // thisChar.matchController.ZoomCamOff();
     }
 }

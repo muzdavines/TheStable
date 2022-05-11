@@ -79,22 +79,7 @@ namespace PsychoticLab
 		float y = -30;
 
         // randomize character creating button
-        void OnGUI()
-        {
-            /*
-            if (GUI.Button(new Rect(10, 10, 150, 50), "Randomize Character"))
-            {
-                // call randomization method
-                Randomize();
-            }
-            */
-
-            GUIStyle style = new GUIStyle();
-            style.normal.textColor = Color.white;
-            style.fontStyle = FontStyle.Bold;
-            style.fontSize = 24;
-            GUI.Label(new Rect(10, 10, 150, 50), "Hold Right Mouse Button Down\nor use W A S D To Rotate.", style);
-        }
+       
 
         private void Start()
         {
@@ -139,6 +124,24 @@ namespace PsychoticLab
         private void Update()
         {
            
+        }
+
+        public void ShowRogue() {
+            Character thisChar = new Character();
+            thisChar.GenerateCharacter(Character.Archetype.Rogue);
+            Init(thisChar, Color.red, Color.black);
+        }
+
+        public void ShowWizard() {
+            Character thisChar = new Character();
+            thisChar.GenerateCharacter(Character.Archetype.Wizard);
+            Init(thisChar, Color.red, Color.black);
+        }
+
+        public void ShowWarrior() {
+            Character thisChar = new Character();
+            thisChar.GenerateCharacter(Character.Archetype.Warrior);
+            Init(thisChar, Color.red, Color.black);
         }
 
         void LateUpdate()

@@ -66,6 +66,13 @@ namespace com.ootii.Cameras
             set { _AutoFindInputSource = value; }
         }
 
+        public void SetTarget(Transform _target) {
+            Anchor = _target;
+            foreach (var m in Motors) {
+                ((WorldMotor)m).IsFollowConnected = true;
+            }
+            
+        }
         /// <summary>
         /// Transform that represents the anchor we want to follow
         /// </summary>
@@ -1103,6 +1110,7 @@ namespace com.ootii.Cameras
             mLastRotation = _Transform.rotation;
         }
 
+        public float groundDistanceMod;
         /// <summary>
         /// LateUpdate logic for the controller should be done here. This allows us
         /// to support dynamic and fixed update times
@@ -1112,6 +1120,17 @@ namespace com.ootii.Cameras
         public override void RigLateUpdate(float rDeltaTime, int rUpdateIndex)
         {
             CameraMotor lActiveMotor = ActiveMotor;
+           
+                if (UnityEngine.Input.GetKey(KeyCode.Z)) {
+                    groundDistanceMod += Time.deltaTime * -20f;
+                }
+
+                if (UnityEngine.Input.GetKey(KeyCode.C)) {
+                    groundDistanceMod += Time.deltaTime * 20f;
+                }
+
+                groundDistanceMod = Mathf.Clamp(groundDistanceMod, -20,100);
+                
 
             // Update the tilt before we do anything and determine tilt changes
             float lTiltAngle = UpdateTilt();
@@ -1225,6 +1244,7 @@ namespace com.ootii.Cameras
         {
             // Set the controller who owns the camera
             mCharacterController = rController;
+           
 
             // Update the camera and its motoers
             RigLateUpdate(rDeltaTime, rUpdateIndex);

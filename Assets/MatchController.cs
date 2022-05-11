@@ -27,6 +27,7 @@ public class MatchController : MonoBehaviour
     public PlayableDirector introDirector;
     public PlayableDirector outroDirector;
     public HeroUIController heroUIController;
+    public Transform oneTimerCam;
     public void Start() {
         //match = Game.instance.activeMatch;
         ball.transform.position = new Vector3(0,1,0);
@@ -49,6 +50,10 @@ public class MatchController : MonoBehaviour
     public void Init() {
         Physics.gravity = new Vector3(0, -9.81f, 0);
         match = Game.instance.activeMatch;
+        if (oneTimerCam != null) {
+            oneTimerCam.gameObject.SetActive(false);
+        }
+
         SpawnPlayers();
         awayCoach.Init();
         homeCoach.Init();
@@ -117,6 +122,31 @@ public class MatchController : MonoBehaviour
         FinalizeResult(homeGoals, awayGoals);
         DisplayResults();
     }
+
+    
+    public void ZoomCam(StableCombatChar thisChar) {
+        if (oneTimerCam == null) {
+            return;
+        }
+        Transform cam = oneTimerCam;
+        cam.position = thisChar.position + (thisChar._t.forward * -8) + new Vector3(-2.5f, 4f, 0);
+        cam.LookAt(thisChar._t);
+        cam.gameObject.SetActive(true);
+        StartCoroutine(ZoomCamOffTimer());
+    }
+
+    IEnumerator ZoomCamOffTimer() {
+        yield return new WaitForSeconds(3.0f);
+        ZoomCamOff();
+    }
+
+    public void ZoomCamOff() {
+        if (oneTimerCam == null) {
+            return;
+        }
+        oneTimerCam.gameObject.SetActive(false);
+    }
+
 
     public void ScoreGoal(int team) {
         if (team == 0) { homeScore++; } else { awayScore++; }

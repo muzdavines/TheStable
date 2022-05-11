@@ -60,7 +60,9 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
     public Transform RH, LH, LL, RL;
     public SCWeapon RHMWeapon, LHMWeapon, RLWeapon, LLWeapon;
     public SCWeapon RHRWeapon, LHRWeapon;
-    
+
+    public MatchController matchController;
+
     public HeroFrame uiController;
     //Combat Attributes
     public float health, stamina, balance, mind, maxHealth, maxStamina, maxBalance, maxMind;
@@ -105,6 +107,7 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
             int teammateCount = 0;
             int enemycount = 0;
             agent.radius = .2f;
+            matchController = FindObjectOfType<MatchController>();
             ball = FindObjectOfType<Ball>();
             Goal[] tempGoals = FindObjectsOfType<Goal>();
             foreach (var tg in tempGoals) {

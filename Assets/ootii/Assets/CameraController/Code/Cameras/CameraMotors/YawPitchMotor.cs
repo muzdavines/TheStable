@@ -689,6 +689,7 @@ namespace com.ootii.Cameras
             return lFrameEuler;
         }
 
+       
         /// <summary>
         /// Allows the motor to process after the camera and controller have completed
         /// </summary>

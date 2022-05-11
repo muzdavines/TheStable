@@ -4,6 +4,7 @@ using com.ootii.Helpers;
 using com.ootii.Geometry;
 using com.ootii.Input;
 
+
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -116,7 +117,7 @@ namespace com.ootii.Cameras
             set { _GripPanSpeed = value; }
         }
 
-
+        private CameraController camControl;
         public bool _EdgePan = true;
         public bool EdgePan
         {
@@ -231,10 +232,10 @@ namespace com.ootii.Cameras
             mGripUnitsPerTick = _GripPanSpeed * Time.deltaTime;
             mEdgeUnitsPerTick = _EdgePanSpeed * Time.deltaTime;
             mInputUnitsPerTick = _InputPanSpeed * Time.deltaTime;
-
+            camControl = GameObject.FindObjectOfType<CameraController>();
             mRigTransform.Position = RigController.Transform.position;
             mRigTransform.Rotation = RigController.Transform.rotation;
-
+            
             mPositionTarget = mRigTransform.Position;
 
             if (_MaxDistance == 0f)
@@ -304,7 +305,7 @@ namespace com.ootii.Cameras
                     else
                     {
                         lMovement.x = lAnchorPosition.x - RigController._Transform.position.x;
-                        lMovement.y = (_FollowElevation ? lAnchorPosition.y - RigController._Transform.position.y : 0f);
+                        lMovement.y = (_FollowElevation ? lAnchorPosition.y - RigController._Transform.position.y : _MaxDistance);
                         lMovement.z = lAnchorPosition.z - RigController._Transform.position.z;
                     }
                 }
@@ -430,7 +431,7 @@ namespace com.ootii.Cameras
                 Vector3 lGroundTarget = GetGroundTarget();
                 if (lGroundTarget != Vector3Ext.Null)
                 {
-                    mPositionTarget.y = SmoothDamp(mPositionTarget.y, lGroundTarget.y + _GroundDistance, _GroundSmoothing, rDeltaTime);
+                    mPositionTarget.y = SmoothDamp(mPositionTarget.y, lGroundTarget.y + _GroundDistance + camControl.groundDistanceMod, _GroundSmoothing, rDeltaTime);
                 }
             }
 

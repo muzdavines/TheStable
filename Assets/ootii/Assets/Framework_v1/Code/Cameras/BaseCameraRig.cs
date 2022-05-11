@@ -379,6 +379,15 @@ namespace com.ootii.Cameras
         /// </summary>
         protected virtual void FixedUpdate()
         {
+            if (UnityEngine.Input.GetKey(KeyCode.Q)) {
+                transform.rotation = Quaternion.Euler(new Vector3(transform.rotation.eulerAngles.x,
+                    transform.rotation.eulerAngles.y + (Time.deltaTime * -20f), transform.rotation.eulerAngles.z));
+            }
+            if (UnityEngine.Input.GetKey(KeyCode.E)) {
+                transform.rotation = Quaternion.Euler(new Vector3(transform.rotation.eulerAngles.x,
+                    transform.rotation.eulerAngles.y + (Time.deltaTime * 20f), transform.rotation.eulerAngles.z));
+            }
+
             if (_IsInternalUpdateEnabled && _UseFixedUpdate)
             {
                 InternalUpdate();

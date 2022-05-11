@@ -148,6 +148,7 @@ namespace com.ootii.Cameras
             }
         }
 
+        
         /// <summary>
         /// Clears all values and references stored with the motor
         /// </summary>
@@ -166,9 +167,10 @@ namespace com.ootii.Cameras
         /// <param name="rTiltAngle">Amount of tilting the camera needs to do to match the anchor</param>
         public override CameraTransform RigLateUpdate(float rDeltaTime, int rUpdateIndex, float rTiltAngle = 0f)
         {
+
             if (RigController == null) { return mRigTransform; }
             if (RigController.Anchor == null) { return mRigTransform; }
-
+            
             Quaternion lTilt = RigController.Tilt;
             Transform lAnchorTransform = Anchor;
             Transform lCameraTransform = RigController._Transform;
@@ -209,7 +211,7 @@ namespace com.ootii.Cameras
             // Set the rotation
             Vector3 lLocalForward = lOldMatrix.inverse.MultiplyVector(lCameraTransform.forward);
             Vector3 lForward = Quaternion.AngleAxis(mFrameEuler.x, lRight) * Quaternion.AngleAxis(mFrameEuler.y, lUp) * lNewMatrix.MultiplyVector(lLocalForward);
-
+           
             Quaternion lNewCameraRotation = Quaternion.LookRotation(lForward, lUp);
 
             // We use the motor anchor to modify our position, not rotation.

@@ -5,7 +5,9 @@ using UnityEngine.UI;
 using UnityEngine.AI;
 using NavMeshBuilder = UnityEngine.AI.NavMeshBuilder;
 using UnityEngine.SceneManagement;
- 
+using com.ootii.Cameras;
+
+
 using PsychoticLab;
 
 public class MissionController : MonoBehaviour
@@ -30,6 +32,7 @@ public class MissionController : MonoBehaviour
     public BuzzPanelController buzz;
     public HeroUIController heroUI;
     public HeroUIController enemyUI;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -43,6 +46,7 @@ public class MissionController : MonoBehaviour
         initialized = true;
         stageCompleteFired = false;
         print("Init");
+        
         contract = Game.instance.playerStable.activeContract;
         combatController = GetComponent<CombatController>();
         heroes = new List<Character>();
@@ -165,8 +169,10 @@ public class MissionController : MonoBehaviour
             theseChars.Add(thisChar);
         }
         UpdateChars();
-        CameraController cam = Camera.main.GetComponent<CameraController>();
-        cam.SetTarget(allChars[0].transform);
+        var cam = FindObjectOfType<com.ootii.Cameras.CameraController>();
+        cam.transform.position = allChars[0].transform.position + new Vector3(10,20,10);
+        cam.transform.LookAt(allChars[0].transform);
+        cam.Anchor = allChars[0].transform;
         return theseChars;
         
     }
@@ -212,7 +218,7 @@ public class MissionController : MonoBehaviour
             //c.healthBar.Hide(true);
             if (c.health > 0) {
                 c.MissionIdle();
-                Helper.Cam().SetTarget(c.transform);
+                //Helper.Cam().SetTarget(c.transform);
             }
         }
         poiCombat.Resolve(success);
@@ -266,7 +272,7 @@ public class MissionController : MonoBehaviour
         }
         pois[0].gameObject.SetActive(true);
         if (pois[0].cameraAngle != Vector3.zero) {
-            FindObjectOfType<CameraController>().offset = pois[0].cameraAngle;
+            FindObjectOfType<com.ootii.Cameras.CameraController>().AnchorOffset = pois[0].cameraAngle;
         }
         if (pois[0].backgroundMusic != null) {
             audioSource.clip = pois[0].backgroundMusic;

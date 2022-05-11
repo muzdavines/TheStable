@@ -42,7 +42,7 @@ public class SCNavigateLand :  SCSkillState {
             thisChar.agent.SetDestination(badLocation.position);
             thisChar.agent.isStopped = false;
             thisChar.anima.Idle();
-            Helper.Cam().SetControl(); }
+        }
     }
 
     public override void AnimEventReceiver(string message) {

@@ -6,10 +6,17 @@ public class HeroUIController : MonoBehaviour
 {
     public HeroFrame[] heroes;
     public Coach myCoach;
+    private bool init;
+
     private void Start() {
-       
+        if (init) return;
+        foreach (var h in heroes) {
+            h.gameObject.SetActive(false);
+        }
     }
+
     public void Init(Coach _myCoach) {
+        init = true;
         myCoach = _myCoach;
         for (int x = 0; x < myCoach.players.Length; x++) {
             heroes[x].Init(myCoach.players[x]);
