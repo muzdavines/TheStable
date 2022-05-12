@@ -8,6 +8,7 @@ public class Goal : MonoBehaviour
     public int team;
     public bool canScore;
     public MMFeedbacks goalScoredFeedback;
+    public Transform topRight;
     public void OnCollisionEnter(Collision collision) {
         if (collision.transform.GetComponent<Ball>()) {
             FindObjectOfType<MatchController>().ScoreGoal(team == 0 ? 1 : 0);

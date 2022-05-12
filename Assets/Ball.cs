@@ -64,9 +64,6 @@ public class Ball : MonoBehaviour
     public void Shoot(Vector3 goalTarget, float error, float shotPower) {
         BeginIgnoreCollisions(.4f);
         Vector3 errorAdjustment = Random.insideUnitCircle * error * shootErrorAdjustment;
-        if (holder != null) {
-            holder.DisplayShotAccuracy(errorAdjustment.magnitude);
-        }
         Release();
         MoveToLaunchPosition(goalTarget, shotPower);
         body.velocity = Vector3.zero;

@@ -12,13 +12,13 @@ public class Backstab : ActiveSpecialMove {
     }
 
     public override bool Check(StableCombatChar _char) {
-        Debug.Log("#Backstab#Checking " + _char.myCharacter.name);
+        //Debug.Log("#Backstab#Checking " + _char.myCharacter.name);
         if (Time.time <= lastFired + 45) {
-            Debug.Log("#Backstab#CoolingDown");
+          //  Debug.Log("#Backstab#CoolingDown");
             return false;
         }
         if (!_char.state.GetType().GetInterfaces().Contains(typeof(CanBackStab))) {
-            Debug.Log("#Backstab#Can't Backstab State");
+            //Debug.Log("#Backstab#Can't Backstab State");
             return false;
         }
         var target = _char.FindEnemyWithinRange(7);

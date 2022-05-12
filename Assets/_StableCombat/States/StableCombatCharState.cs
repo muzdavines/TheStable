@@ -53,7 +53,9 @@ public class StableCombatCharState {
         //Helper.Cam().SetTarget(thisChar.shoulderCam.transform);
     }
     public virtual void AnimEventReceiver(string message) {
+#if UNITY_EDITOR
         Debug.Log("#Anim# Anim Event Received by " + name + " " + message);
+#endif
     }
    
     public void TryGrabBall() {

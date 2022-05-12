@@ -39,7 +39,16 @@ public class SCShoot : SCBallCarrierState
     public override void AnimEventReceiver(string message) {
         base.AnimEventReceiver(message);
         if (message == "Throw") {
-            thisChar.ball.Shoot(thisChar.enemyGoal.transform.position + adjustment, error, Mathf.Min(.3f + thisChar.myCharacter.strength * .1f, 1f));
+            Vector3 shootTarget = thisChar.enemyGoal.transform.position;
+            if (Random.Range(0,100)<thisChar.myCharacter.shooting) {
+                thisChar.DisplayShotAccuracy(100);
+                shootTarget = thisChar.enemyGoal.topRight.position;
+                error = 0;
+            }
+            else {
+                shootTarget += adjustment;
+            }
+            thisChar.ball.Shoot(shootTarget, error, 1);
         }
     }
 

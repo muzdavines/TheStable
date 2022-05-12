@@ -39,7 +39,17 @@ public class SCOneTimerToGoal : StableCombatCharState {
         if (shotFired) { return; }
         shotFired = true;
         ball.lastHolder = thisChar;
-        ball.Shoot(thisChar.enemyGoal.transform.position + (thisChar.enemyGoal.transform.right * Random.Range(2f, 2.5f) * (Random.Range(0f, 1f) > .5f ? 1 : -1)), 0, 1);
+        Vector3 shotTarget = thisChar.enemyGoal.transform.position;
+        //if (Random.Range(0, 100) < thisChar.myCharacter.shooting) {
+        if (true){
+            thisChar.DisplayShotAccuracy(1000);
+            shotTarget = thisChar.enemyGoal.topRight.position;
+        }
+        else {
+            shotTarget += thisChar.enemyGoal.transform.right * Random.Range(2f, 2.5f) * (Random.Range(0f, 1f) > .5f ? 1 : -1);
+        }
+        Debug.Log("#OneTimer#Pos:"+ shotTarget);
+        ball.Shoot(shotTarget, 0, 1.5f);
     }
 
     public override void WillExit() {
