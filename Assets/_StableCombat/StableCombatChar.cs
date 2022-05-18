@@ -330,11 +330,11 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
                 tempTargetScore += 100;
             }
             if (Vector3.Distance(teammate.transform.position, position) < 7) {
-                Debug.Log("#PassTargetEval#" + teammate.name + " is too close");
+                //Debug.Log("#PassTargetEval#" + teammate.name + " is too close");
                 continue;
             }
             if (Vector3.Distance(teammate.transform.position, position) > 25) {
-                Debug.Log("#PassTargetEval#" + teammate.name + " is too far");
+                //Debug.Log("#PassTargetEval#" + teammate.name + " is too far");
                 continue;
             }
 
@@ -722,7 +722,7 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
         return coach.positions[(int)fieldPosition];
     }
     float lastTakeDamageAnim;
-    public void TakeDamage(StableDamage damage, bool shouldAnimate = true) {
+    public void TakeDamage(StableDamage damage, StableCombatChar attacker, bool shouldAnimate = true) {
         if (health <= 0)
             return;
         takeDamage.PlayFeedbacks();
@@ -740,10 +740,20 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
         uiController?.UpdateAll();
         if (health <= 0) {
             GetDowned();
+            if (attacker != null) {
+                attacker.myCharacter.xp += Game.XPCombatDown;
+            }
+
+            return;
         }
         if (damage.isKnockdown) {
+            if (attacker != null) {
+                attacker.myCharacter.xp += Game.XPTackle;
+            }
+
             GetTackled();
         }
+        
     }
     public void RestoreHealth() {
         health = maxHealth;

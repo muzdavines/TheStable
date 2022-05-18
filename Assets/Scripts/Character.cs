@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public enum StableMasterType { Warrior, Wizard, Rogue};
 public enum Gender { Male, Female }
@@ -31,7 +32,7 @@ public class Character : Living
     public int melee = 10;
     public int ranged = 10;
     public int magic = 10;
-
+    public int xp = 0;
 
     public int health; //dots - 0 = death
 
@@ -389,6 +390,13 @@ public class Character : Living
         Init();
     }
 
+    public void ModifyCharacter() {
+        shooting += Random.Range(-5, 6);
+        passing += Random.Range(-5, 6);
+        tackling += Random.Range(-5, 6);
+        carrying += Random.Range(-5, 6);
+        runspeed += Random.Range(-3, 4);
+    }
    
     public enum Archetype { Striker, Winger, Midfielder, Defender, Goalkeeper, Warrior, Rogue, Wizard}
     public Archetype archetype;
@@ -454,6 +462,10 @@ public class Character : Living
         return false;
     }
 
+    public void AddXP(int amount) {
+        xp += amount;
+    }
+    
     bool GetPercent(int pct) {
         bool p = false;
         int roll = UnityEngine.Random.Range(0, 100);

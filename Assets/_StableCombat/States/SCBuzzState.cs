@@ -36,14 +36,15 @@ public class SCBuzzState : SCSkillState {
         thisChar.agent.isStopped = false;
         walkTarget = poi.allPurposeTransforms[0];
 
-        npcNegative = new string[] { "N", "N", "N", "N", "N" };
-        npcPositive = new string[] { "N", "N", "N", "N", "N" };
-        playerNegative = new string[] { "N", "N", "N", "N", "N" };
-        playerPositive = new string[] { "N", "N", "N", "N", "N" };
+        npcNegative = new string[] { "[QUERY OPENAI] NPCDialogue1", "[QUERY OPENAI] NPCDialogue2", "[QUERY OPENAI] NPCDialogue3", "[QUERY OPENAI] NPCDialogue4", "[QUERY OPENAI] NPCDialogue5" };
+        npcPositive = new string[] { "[QUERY OPENAI] NPCDialogue1", "[QUERY OPENAI] NPCDialogue2", "[QUERY OPENAI] NPCDialogue3", "[QUERY OPENAI] NPCDialogue4", "[QUERY OPENAI] NPCDialogue5" };
+        playerNegative = new string[] { "[QUERY OPENAI] Dialogue1", "[QUERY OPENAI] Dialogue2", "[QUERY OPENAI] Dialogue3", "[QUERY OPENAI] Dialogue4", "[QUERY OPENAI] Dialogue5" };
+        playerPositive = new string[] { "[QUERY OPENAI] Dialogue1", "[QUERY OPENAI] Dialogue2", "[QUERY OPENAI] Dialogue3", "[QUERY OPENAI] Dialogue4", "[QUERY OPENAI] Dialogue5" };
         playerIntro = "Hello";
         NPCIntro = "Hi";
         maxRounds = npcNegative.Length;
         ///GameObject.FindObjectOfType<MissionController>().SetAllHeroesDontAct(thisChar);
+        skillTarget = poi.allPurposeTransforms[1];
         thisChar.agent.SetDestination(walkTarget.position + new Vector3(0, 0, 0));
         didFireAction = false;
         SkillResult();
@@ -65,7 +66,7 @@ public class SCBuzzState : SCSkillState {
         //Arrow
         //thisChar.ControlCam();
 
-        nextNumCheck = Time.time + 4.0f;
+        nextNumCheck = Time.time + 2.0f;
 
     }
     bool finalSkipped;

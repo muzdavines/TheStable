@@ -149,6 +149,7 @@ public class LeagueController : MonoBehaviour, UIElement
                 if (thisRoll > 1.2f) {
                     awayGoals++;
                     awayChar.seasonStats.goals++;
+                    awayChar.xp += Game.XPGoal;
                 }
             }
             homeAggressor = !homeAggressor;

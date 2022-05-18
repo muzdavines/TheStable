@@ -35,7 +35,7 @@ public class FlechettesEffect : MonoBehaviour
             projectiles[x].transform.LookAt(targets[x].position + new Vector3(0, 1, 0));
             projectiles[x].transform.position += projectiles[x].transform.forward * Time.deltaTime * projectileSpeed;
             if (Vector3.Distance(projectiles[x].transform.position, targets[x].position) <= 1.25f) {
-                targets[x].TakeDamage(new StableDamage() { mind = 2, balance = 2, stamina = 2, health = 1, isKnockdown = true });
+                targets[x].TakeDamage(new StableDamage() { mind = 2, balance = 2, stamina = 2, health = 1, isKnockdown = true }, caster);
                 print("#TODO#Add Slow Effect");
                 Destroy(projectiles[x]);
                 projectiles[x] = null;

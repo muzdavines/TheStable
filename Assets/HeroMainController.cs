@@ -21,6 +21,15 @@ public class HeroMainController : MonoBehaviour
     }
     public void Init(Character _char) {
         activeChar = _char;
+        training.gameObject.SetActive(false);
+        UpdateUI();
+    }
+
+    public void OnDisable() {
+        
+    }
+
+    public void UpdateUI() {
         heroName.text = activeChar.name;
         heroType.text = activeChar.archetype.ToString();
         games.text = activeChar.seasonStats.games.ToString();

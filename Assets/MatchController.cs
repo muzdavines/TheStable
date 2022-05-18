@@ -154,6 +154,7 @@ public class MatchController : MonoBehaviour
         goal.ShakeCamera(2, .5f, 5, 1, 1, 1, false);
         if (team == ball.lastHolder.team) {
             ball.lastHolder.myCharacter.seasonStats.goals++;
+            ball.lastHolder.myCharacter.xp += Game.XPGoal;
             ball.lastHolder = null;
         }
         UpdateScoreboard();
@@ -190,9 +191,11 @@ public class MatchController : MonoBehaviour
         Game.instance.activeMatch.ProcessResult();
         foreach (StableCombatChar homePlayer in homeCoach.players) {
             homePlayer.myCharacter.seasonStats.games++;
+            homePlayer.myCharacter.xp += Game.XPGame;
         }
         foreach (StableCombatChar awayPlayer in awayCoach.players) {
             awayPlayer.myCharacter.seasonStats.games++;
+            awayPlayer.myCharacter.xp += Game.XPGame;
         }
         Destroy(ball.gameObject);
         var players = FindObjectsOfType<StableCombatChar>();
@@ -207,6 +210,7 @@ public class MatchController : MonoBehaviour
     }
 
     public void ExitMatch() {
+        Game.instance.managementScreenToLoadOnStartup = "league";
         SceneManager.LoadScene("StableManagement");
     }
 }

@@ -24,7 +24,7 @@ public class Backstab : ActiveSpecialMove {
         var target = _char.FindEnemyWithinRange(7);
         if (target != null) {
             if (!_char.AcquireTarget(target)) { return false; }
-        } else { Debug.Log("#Backstab#TargetNull"); return false; }
+        } else { return false; }
         Debug.Log("#Backstab#Activating "+_char.myCharacter.name);
         OnActivate(_char);
         return true;

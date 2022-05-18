@@ -31,7 +31,7 @@ public class SCWeapon : MonoBehaviour
         Debug.Log("#SCWeapon#Collision: " + other.name);
         StableCombatChar target = other.GetComponent<StableCombatChar>();
         if (target == null || target == me || target.team == me.team) { return; }
-        target.TakeDamage(anim.currentMeleeMove.damage);
+        target.TakeDamage(anim.currentMeleeMove.damage, me);
         EndScan();
     }
 

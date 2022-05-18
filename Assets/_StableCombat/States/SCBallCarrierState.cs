@@ -57,6 +57,7 @@ public class SCBallCarrierState : StableCombatCharState
             case Character.Archetype.Rogue:
                 if (tackleSuccess) {
                     thisChar.GetTackled();
+                    tackler.myCharacter.xp += Game.XPTackle;
                 } else {
                     thisChar.DodgeTackle(tackler);
                 }
@@ -64,6 +65,7 @@ public class SCBallCarrierState : StableCombatCharState
             case Character.Archetype.Wizard:
                 if (tackleSuccess) {
                     thisChar.GetTackled();
+                    tackler.myCharacter.xp += Game.XPTackle;
                 }
                 else {
                     thisChar.DodgeTackle(tackler);
@@ -72,6 +74,7 @@ public class SCBallCarrierState : StableCombatCharState
             case Character.Archetype.Warrior:
                 if (tackleSuccess) {
                     thisChar.GetTackled();
+                    tackler.myCharacter.xp += Game.XPTackle;
                 }
                 else {
                     thisChar.BreakTackle(tackler);

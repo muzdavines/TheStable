@@ -33,6 +33,6 @@ public class SpecialAbilityEffect : MonoBehaviour {
         StableCombatChar scc = other.GetComponent<StableCombatChar>();
         if (scc == null) { return; }
         if (scc.team == caster.team) { return; }
-        scc.TakeDamage(damage);
+        scc.TakeDamage(damage, caster);
     }
 }

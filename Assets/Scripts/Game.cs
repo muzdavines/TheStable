@@ -13,7 +13,12 @@ using HardCodeLab.TutorialMaster;
 public class Game : MonoBehaviour {
     private static Game _instance;
     public static Game instance { get { if (_instance == null) { _instance = GameObject.FindObjectOfType<Game>(); } if (_instance == null) { _instance = Instantiate(Resources.Load<GameObject>("Game")).GetComponent<Game>(); } return _instance; } }
-
+    public const int XPGame = 20;
+    public const int XPGoal = 50;
+    public const int XPTackle = 10;
+    public const int XPCombatDown = 30;
+    public const int XPAssist = 50;
+    
     public Stable playerStable;
     public List<Stable> otherStables = new List<Stable>();
     [SerializeField]
@@ -56,7 +61,7 @@ public class Game : MonoBehaviour {
     
     public League.Match activeMatch;
     public int tutorialStageFinished = 0;
-    
+    public string managementScreenToLoadOnStartup = "";
     
     public void Start() {
     
@@ -311,7 +316,7 @@ public static class Helper {
     }
     public static void Speech(Transform _t, string text, float delay = 0f) {
         text = text.Replace("NEWLINE", "\n");
-        Debug.Log("TEXT IS: "+text);
+        Debug.Log("TEXT IS: "+text + "  "+_t.name);
         SpeechBubbleManager.Instance.AddDelayedSpeechBubble(delay, _t, text);
     }
 

@@ -45,7 +45,7 @@ public class SCBackstab : SCCombatStanceState, CannotInterrupt, CannotTarget {
         base.AnimEventReceiver(message);
         if (message == "BackstabDamage") {
             damageDelivered = true;
-            thisChar.myAttackTarget.TakeDamage(new StableDamage() { balance = 1, health = 2, mind = 1, stamina = 8, isKnockdown = true });
+            thisChar.myAttackTarget.TakeDamage(new StableDamage() { balance = 1, health = 2, mind = 1, stamina = 8, isKnockdown = true }, thisChar);
         }
         if (message == "RotateKnifeStab") {
             RotateKnifeStab();

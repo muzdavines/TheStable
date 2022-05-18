@@ -8,6 +8,7 @@ public class HeroCellView : EnhancedScrollerCellView
 {
     public Text heroNameText;
     public Text shooting, passing, tackling, carrying, melee, ranged, magic, speed, dex, agi, str, meleeWeapon, rangedWeapon;
+    public Text xp;
     public Text archetype;
     public Character thisChar;
     public Color defaultColor;
@@ -28,6 +29,7 @@ public class HeroCellView : EnhancedScrollerCellView
         str.text = "Strength: "+data.strength;
         meleeWeapon.text = "Melee Weapon: "+data.meleeWeapon?.itemName;
         rangedWeapon.text = "Ranged Weapon: "+data.rangedWeapon?.itemName;
+        xp.text = "XP to Spend: " + data.xp;
         archetype.text = data.archetype.ToString();
         GetComponent<Image>().color = Helper.GetCellViewColor();
     }

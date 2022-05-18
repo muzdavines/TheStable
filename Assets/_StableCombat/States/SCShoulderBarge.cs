@@ -23,11 +23,11 @@ public class SCShoulderBarge : SCCombatStanceState
             if (scc.isKnockedDown) { continue; }
             if (alreadyHit.Contains(scc)) { continue; }
             if (scc.myCharacter.archetype == Character.Archetype.Rogue || scc.myCharacter.archetype == Character.Archetype.Midfielder) {
-                scc.GetDowned();
+                scc.GetTackled();
                 alreadyHit.Add(scc);
                 return;
             }
-            scc.TakeDamage(new StableDamage() { stamina = 10 });
+            scc.TakeDamage(new StableDamage() { stamina = 10 }, thisChar);
             alreadyHit.Add(scc);
         }
     }

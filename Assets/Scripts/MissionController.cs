@@ -271,9 +271,11 @@ public class MissionController : MonoBehaviour
             return null;
         }
         pois[0].gameObject.SetActive(true);
+        com.ootii.Cameras.CameraController _cam = FindObjectOfType<com.ootii.Cameras.CameraController>();
         if (pois[0].cameraAngle != Vector3.zero) {
-            FindObjectOfType<com.ootii.Cameras.CameraController>().AnchorOffset = pois[0].cameraAngle;
+            _cam.AnchorOffset = pois[0].cameraAngle;
         }
+        _cam.SetTarget(allChars[0].transform);
         if (pois[0].backgroundMusic != null) {
             audioSource.clip = pois[0].backgroundMusic;
             audioSource.Play();

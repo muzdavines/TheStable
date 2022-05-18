@@ -21,7 +21,7 @@ public class PowerSlamEffect : MonoBehaviour {
                 
             Debug.Log("#SpecialAbility#Power Slam Damage" + ssc.name);
             damage.isKnockdown = true;
-            ssc.TakeDamage(damage);
+            ssc.TakeDamage(damage, caster);
         }
     }
  }

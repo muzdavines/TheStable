@@ -13,6 +13,7 @@ public class StableManagementController : MonoBehaviour, UIElement
     public Text headerActivePanel;
     public Text headerGold;
     public Text headerDate;
+    public Text headerCoachPoints;
     public GameObject activePanel;
     public List<GameObject> lastPanels = new List<GameObject>();
     //---------------------------------
@@ -21,6 +22,11 @@ public class StableManagementController : MonoBehaviour, UIElement
     void Start()
     {
         //if (!GameObject.FindObjectOfType<Game>()) { SceneManager.LoadScene("NewGameCreation"); return; }
+        if (Game.instance.managementScreenToLoadOnStartup == "league") {
+            GameObject.Find("LeagueButton").GetComponent<Button>().onClick.Invoke();
+            Game.instance.managementScreenToLoadOnStartup = "";
+            return;
+        }
         GameObject.Find("HomeButton").GetComponent<Button>().onClick.Invoke();
        
     }
@@ -40,6 +46,7 @@ public class StableManagementController : MonoBehaviour, UIElement
         headerActivePanel.text = activePanel.name;
         headerGold.text = "Gold: "+Game.instance.playerStable.finance.gold.ToString();
         headerDate.text = Game.instance.gameDate.GetDateString();
+        headerCoachPoints.text = "Manager XP: " + Game.instance.playerStable.coachPoints;
         foreach (MainMenuButton b in FindObjectsOfType<MainMenuButton>()) {
             b.UpdateIndicator();
         }

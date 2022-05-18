@@ -40,7 +40,7 @@ public class SCProjectile : MonoBehaviour
         fired = false;
         col.enabled = false;
         if (otherChar != null) {
-            otherChar.TakeDamage(myDamage);
+            otherChar.TakeDamage(myDamage, launcherChar);
         }
         if (collisionEffect != null) {
             Destroy(Instantiate<GameObject>(collisionEffect, transform.position, transform.rotation), 5.0f);
