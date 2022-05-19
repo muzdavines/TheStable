@@ -9,7 +9,7 @@ public class Stable
 
 
     //NEEDED: List of all Buildings
-    public static string[] stableNameList = {"The Calm Plate Pub","The Clumsy Dragon Tavern","The Full Piano Inn","The Royal Hyena Pub","The Cheap Dragonfruit Tavern","The Mixing Ducks Pub","The Hot Elephant Pub","The Chunky Hog Tavern" };
+    public static string[] stableNameList = {"The Clumsy Dragon Tavern","The Full Piano Inn","The Royal Hyena Pub", "The Calm Plate Pub", "The Mixing Ducks Pub","The Hot Elephant Pub","The Chunky Hog Tavern" };
 
     public string stableName;
    //Needed: List of all accolades
@@ -22,8 +22,8 @@ public class Stable
     public List<Character> coaches = new List<Character>();
     public List<StableBuilding> buildings = new List<StableBuilding>();
     public List<MissionContract> contracts = new List<MissionContract>();
-    public List<Training> availableTrainings = new List<Training>();
-    public List<TrainingSave> availableTrainingsSave = new List<TrainingSave>();
+    public List<Trait> availableTrainings = new List<Trait>();
+    
     [SerializeField]
     public Finance finance = new Finance();
     public int coachPoints;

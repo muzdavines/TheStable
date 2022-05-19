@@ -24,7 +24,7 @@ public class PostMissionController : MonoBehaviour
             }
             Game.instance.playerStable.finance.AddRevenue(goldRewardAmount, "Mission Reward", "Mission");
             if (d.moveReward != null) {
-                Game.instance.playerStable.availableTrainings.Add(new Training() { cost = 300, duration = 10, moveToTrain = d.moveReward, type = Training.Type.Skill });
+                //Game.instance.playerStable.availableTrainings.Add(new Training() { cost = 300, duration = 10, moveToTrain = d.moveReward, type = Training.Type.Skill });
             }
             if (d.itemRewards != null) {
                 foreach (Item i in d.itemRewards) {

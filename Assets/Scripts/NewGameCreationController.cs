@@ -50,8 +50,9 @@ public class NewGameCreationController : MonoBehaviour
         Game.instance.playerStable.finance.AddRevenue(startingGold);
         //Game.instance.playerStable.availableTrainings.Add(new Training() { type = Training.Type.Attribute, training = "negotiating", duration = 2, cost = 50 });
         foreach (var training in trainingAdds) {
-            Game.instance.playerStable.availableTrainings.Add(training);
+            //Game.instance.playerStable.availableTrainings.Add(training);
         }
+        Game.instance.playerStable.availableTrainings.Add(new Trait(){traitName = "testTrait", level = 0});
         Game.instance.playerStable.inventory = new List<Item>();
         foreach (var item in startingItems) {
             Game.instance.playerStable.inventory.Add(Instantiate(item));

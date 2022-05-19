@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using MoreMountains.Tools;
 using UnityEngine;
 
 public class SCBallCarrierState : StableCombatCharState
@@ -57,6 +58,12 @@ public class SCBallCarrierState : StableCombatCharState
             case Character.Archetype.Rogue:
                 if (tackleSuccess) {
                     thisChar.GetTackled();
+                    thisChar.TakeDamage(
+                        new StableDamage() {
+                            balance = (int)(tackler.myCharacter.strength*.5f),
+                            stamina = (int)(tackler.myCharacter.strength*10),
+                            health = 1
+                        }, tackler, false);
                     tackler.myCharacter.xp += Game.XPTackle;
                 } else {
                     thisChar.DodgeTackle(tackler);
@@ -65,6 +72,12 @@ public class SCBallCarrierState : StableCombatCharState
             case Character.Archetype.Wizard:
                 if (tackleSuccess) {
                     thisChar.GetTackled();
+                    thisChar.TakeDamage(
+                        new StableDamage() {
+                            balance = (int)(tackler.myCharacter.strength * .5f),
+                            stamina = (int)(tackler.myCharacter.strength*10),
+                            health = 1
+                        }, tackler, false);
                     tackler.myCharacter.xp += Game.XPTackle;
                 }
                 else {
@@ -74,6 +87,12 @@ public class SCBallCarrierState : StableCombatCharState
             case Character.Archetype.Warrior:
                 if (tackleSuccess) {
                     thisChar.GetTackled();
+                    thisChar.TakeDamage(
+                        new StableDamage() {
+                            balance = (int)(tackler.myCharacter.strength * .5f),
+                            stamina = (int)(tackler.myCharacter.strength*10), health = 1
+                        }
+                        , tackler, false);
                     tackler.myCharacter.xp += Game.XPTackle;
                 }
                 else {

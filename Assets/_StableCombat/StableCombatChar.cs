@@ -81,6 +81,7 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
     public bool isKnockedDown { get { return state.GetType() == typeof(SCGetTackled) || state.GetType() == typeof(SCKnockdown) || state.GetType() == typeof(SCCombatDowned); } }
     public bool isStateLocked { get { return state.GetType().GetInterfaces().Contains(typeof(CannotInterrupt)); } }
     public bool isCannotTarget { get { return state.GetType().GetInterfaces().Contains(typeof(CannotTarget)); } }
+    public bool isCannotSpecial { get { return state.GetType().GetInterfaces().Contains(typeof(CannotSpecial)); } } 
     //Sport
     public float tackleCooldown; //Time after which the player can tackle again
 
@@ -230,7 +231,15 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
                 mods[i] = null;
             }
         }
+
+        if (Time.time > nextStam) {
+            nextStam = Time.time + 4;
+            //stamina -= 1;
+            uiController?.UpdateAll();
+        }
     }
+
+   private float nextStam;
     
     public bool ShouldPursueBall() {
         if (ball == null) { return false; }
@@ -413,10 +422,10 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
     public void TryCatchPass() {
         state.TransitionTo(new SCTryCatchPass());
     }
-    public void PickupBall() {
+    public void PickupBall(bool jump = false) {
         playerHasBall.GetComponent<MMFeedbackFloatingText>().Value = myCharacter.name;
         playerHasBall.PlayFeedbacks();
-        state.TransitionTo(new SCPickupBall());
+        state.TransitionTo(new SCPickupBall(){jump = jump});
     }
     public void Shoot() {
         state.TransitionTo(new SCShoot());
@@ -562,6 +571,10 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
     }
     public void ClosingSpeed() {
         state.TransitionTo(new SCClosingSpeed());
+    }
+
+    public void BallHawk() {
+        state.TransitionTo(new SCBallHawk());
     }
     public void DeepBall(StableCombatChar passTarget) {
         print("#DeepBall#DeepBall to " + passTarget.myCharacter.name);
@@ -957,6 +970,10 @@ public interface CannotInterrupt {
 
 }
 public interface CannotTarget {
+
+}
+
+public interface CannotSpecial {
 
 }
 

@@ -49,6 +49,7 @@ public class Ball : MonoBehaviour
         if (ignoreCollisions) { Debug.Log("#Ball#Cannot pickup, ignoring collisions"); return false; }
         if (isHeld) { Debug.Log("#Ball#Cannot pickup, already held."); return false; }
         Debug.Log("#Ball#Picked up by: " + picker.myCharacter.name);
+        passTargetPosition = Vector3.zero;
         holder = picker;
         lastHolder = holder;
         heatSeek = false;
@@ -67,7 +68,6 @@ public class Ball : MonoBehaviour
         Release();
         MoveToLaunchPosition(goalTarget, shotPower);
         body.velocity = Vector3.zero;
-
         Vector3 targetPos = goalTarget - errorAdjustment;
         body.AddForce((targetPos - transform.position).normalized * 1000 * shotPower);
     }
@@ -101,6 +101,8 @@ public class Ball : MonoBehaviour
         passTargetPosition = target.position + futurePositionOfTarget * shotPower;
         projectile.AddForce(GetLaunchVelocity(hangtime, projectile.position, target.position + futurePositionOfTarget) * shotPower, ForceMode.VelocityChange);
     }
+
+    
     public bool ignoreCollisions = false;
     public void BeginIgnoreCollisions(float duration = .4f) {
         ignoreCollisions = true;
@@ -110,10 +112,12 @@ public class Ball : MonoBehaviour
 
     public void GetDropped() {
         Release();
+        passTargetPosition = Vector3.zero;
         body.AddForce(new Vector3(Random.Range(-2, 2), Random.Range(-2, 2), Random.Range(-2, 2)) * 100);
     }
     public void GetSwatted(Goal goal) {
         Release();
+        passTargetPosition = Vector3.zero;
         body.velocity = Vector3.zero;
         body.AddForce(new Vector3(Random.Range(-2.5f,2.5f)*100,500, Random.Range(-2.5f, 2.5f)*100));
     }
@@ -126,6 +130,7 @@ public class Ball : MonoBehaviour
         body.interpolation = RigidbodyInterpolation.Interpolate;
         transform.parent = null;
         holder = null;
+
     }
     IEnumerator DelayLayerCollisionActive(float duration, int layerToTurnOn) {
         yield return new WaitForSeconds(duration);

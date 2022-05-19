@@ -121,7 +121,7 @@ public class StableCombatCharState {
 
     public virtual void Update() {
         if (Time.frameCount % 10 == 0) {
-            if (thisChar.isKnockedDown) { return; }
+            if (thisChar.isKnockedDown || thisChar.isCannotSpecial) { return; }
             foreach (var special in thisChar.myCharacter.activeSpecialMoves) {
                 if (special.Check(thisChar)) {
                     return;

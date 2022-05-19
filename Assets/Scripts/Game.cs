@@ -102,8 +102,16 @@ public class Game : MonoBehaviour {
 
     public void InitOtherStables() {
         otherStables = new List<Stable>();
+        StableSO cheap = Resources.Load<StableSO>("Tier1/CheapDragonfruitInn");
+        cheap = Instantiate(cheap);
+        Stable firstStable = cheap.stable;
+        for (int i = 0; i < firstStable.heroes.Count; i++) {
+            firstStable.heroes[i] = Instantiate(firstStable.heroes[i]);
+            firstStable.heroes[i].Init();
+        }
+        otherStables.Add(cheap.stable);
         
-        for (int i = 0; i < 5; i++) {
+        for (int i = 1; i < 5; i++) {
             var thisStable = new Stable() { stableName = Stable.stableNameList[i] };
             thisStable.heroes = new List<Character>();
             List<int> poss = new List<int>();

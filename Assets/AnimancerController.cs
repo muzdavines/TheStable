@@ -36,6 +36,7 @@ public class AnimancerController : MonoBehaviour {
     public ClipTransition summon;
     public ClipTransition gkSwat;
     public ClipTransition runForward;
+    public ClipTransition jumpCatch;
     public List<Move> baseMeleeAttackMoves;
     public List<Move> baseRangedAttackMoves;
     NavMeshAgent agent;
@@ -167,12 +168,18 @@ public class AnimancerController : MonoBehaviour {
         anim.Play(flechettes, .25f, FadeMode.FromStart).Events.OnEnd = () => thisChar.Idle();
     }
     public void Summon() {
-        anim.Play(summon, 25f, FadeMode.FromStart).Events.OnEnd = () => thisChar.Idle();
+        anim.Play(summon, .25f, FadeMode.FromStart).Events.OnEnd = () => thisChar.Idle();
+    }
+
+    public void JumpCatch() {
+        Debug.Log("#BallHawk#JumpCatchAnim");
+        anim.Play(jumpCatch, .25f, FadeMode.FromStart).Events.OnEnd = () => thisChar.Idle();
     }
     public void GKBored() {
 
     }
     public void GKSwat() {
+        gkSwat.Speed = 1.7f;
         anim.Play(gkSwat, .25f, FadeMode.FromStart).Events.OnEnd = () => thisChar.Idle();
     }
     public int currentMeleeAttackIndex;
