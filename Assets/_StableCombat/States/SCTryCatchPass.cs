@@ -39,7 +39,10 @@ public class SCTryCatchPass : StableCombatCharState
         } else {
             thisChar.agent.isStopped = false;
         }
-        
+
+        if (Time.time > entryTime + 2 && ball.passTargetPosition == Vector3.zero) {
+            thisChar.Idle();
+        }
         
         if (ball.holder!=null && ball.holder.team != thisChar.team)
         {

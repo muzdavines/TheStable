@@ -155,6 +155,11 @@ public class MatchController : MonoBehaviour
         if (team == ball.lastHolder.team) {
             ball.lastHolder.myCharacter.seasonStats.goals++;
             ball.lastHolder.myCharacter.xp += Game.XPGoal;
+            if (ball.lastlastHolder?.team == lastTeamToScore && ball.lastlastHolder != ball.lastHolder) {
+                ball.lastlastHolder.myCharacter.seasonStats.assists++;
+                ball.lastlastHolder.myCharacter.xp += Game.XPAssist;
+            }
+            ball.lastlastHolder = null;
             ball.lastHolder = null;
         }
         UpdateScoreboard();

@@ -425,7 +425,9 @@ public class Character : Living
         }
         activeTraits = new List<Trait>();
         foreach (Trait t in startingTraits) {
-            activeTraits.Add(Instantiate(t));
+            Trait tempTrait = Instantiate(t);
+            t.level = 1;
+            activeTraits.Add(tempTrait);
         }
         return this;
 

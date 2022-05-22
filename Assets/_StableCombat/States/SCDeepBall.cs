@@ -27,7 +27,7 @@ public class SCDeepBall : StableCombatCharState {
     public override void AnimEventReceiver(string message) {
         base.AnimEventReceiver(message);
         if (message == "PassBall") {
-            ball.PassTo(passTarget, 1);
+            ball.PassTo(passTarget, 1, false);
             passTarget.TryCatchPass();
         }
     }

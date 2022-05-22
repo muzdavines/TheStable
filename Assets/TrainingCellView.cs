@@ -13,7 +13,7 @@ public class TrainingCellView : EnhancedScrollerCellView {
         traitDescription.text = thisTrait.description;
         traitLevel.text = thisTrait.level > 0 ? "Current Level: "+thisTrait.level : "";
 
-        costToUpgrade.text = thisTrait.level > 0 ? "Cost To Upgrade: 1000" : "Cost to Add: 2000";
+        costToUpgrade.text = thisTrait.level > 0 ? "Cost To Upgrade: "+thisTrait.baseCost * thisTrait.level : "Cost to Add: " + thisTrait.baseCost * 4;
     }
 
     public void OnHoverEnter() {
@@ -28,7 +28,9 @@ public class TrainingCellView : EnhancedScrollerCellView {
     }
     public virtual void OnClick() {
 
-        //FindObjectOfType<TrainingController>().SetActiveTraining(thisTraining);
+        FindObjectOfType<TrainingController>().TraitTraining(thisTrait);
+
+
         TrainingCellView[] cells = FindObjectsOfType<TrainingCellView>();
         foreach (TrainingCellView cell in cells) {
             cell.Deselect();

@@ -35,10 +35,11 @@ public class SCOneTimerToGoal : StableCombatCharState {
     public override void BallCollision(Collision collision) {
         Shoot();
     }
+
     public void Shoot() {
         if (shotFired) { return; }
         shotFired = true;
-        ball.lastHolder = thisChar;
+        ball.ChangeHolder(thisChar);
         Vector3 shotTarget = thisChar.enemyGoal.transform.position;
         //if (Random.Range(0, 100) < thisChar.myCharacter.shooting) {
         if (true){

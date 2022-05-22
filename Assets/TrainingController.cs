@@ -37,6 +37,7 @@ public class TrainingController : MonoBehaviour, UIElement
         UpdateUI();
     }
     public void UpdateUI() {
+        
         if (activeChar == null) {
             HeroMainController main = GetComponentInParent<HeroMainController>();
             if (main == null) {
@@ -48,6 +49,7 @@ public class TrainingController : MonoBehaviour, UIElement
                 Debug.LogError("No Active Character");
             }
         }
+        scroller.Start();
         string known = "";
         if (activeChar != null) {
             heroName.text = activeChar.name;
@@ -68,6 +70,7 @@ public class TrainingController : MonoBehaviour, UIElement
                 known += m.name + "\n";
             }
         }
+        
         knownMoves.text = known;
         string activeTrainingText = "";
         trainingText.text = "";
@@ -251,6 +254,29 @@ public class TrainingController : MonoBehaviour, UIElement
                 break;
         }
         UpdateUI();
+    }
+
+    public void TraitTraining(Trait traitToTrain) {
+        int cost = traitToTrain.level == 0 ? traitToTrain.baseCost * 4 : traitToTrain.level * traitToTrain.baseCost;
+        if (cost > activeChar.xp) {
+            Debug.Log("#Training#Not enough XP");
+            return;
+        }
+
+        if (traitToTrain.level >= 5) {
+            Debug.Log("#Training#Max Level.");
+            return;
+        }
+        activeChar.xp -= cost;
+        if (traitToTrain.level == 0) {
+            Trait newTrait = Instantiate(traitToTrain);
+            newTrait.level = 1;
+            activeChar.activeTraits.Add(newTrait);
+        }
+        else {
+            traitToTrain.level++;
+        }
+        Init(activeChar);
     }
 
     public void UpdateXP() {

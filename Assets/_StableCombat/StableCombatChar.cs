@@ -333,17 +333,23 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
             if (logic.HasFlag(PassTargetLogic.NearGoal) && enemyGoal.Distance(teammate)>20) {
                 continue;
             } else { tempTargetScore += 100; }
-            if (logic.HasFlag(PassTargetLogic.Rogue) && teammate.myCharacter.archetype != Character.Archetype.Rogue) {
-                continue;
-            } else {
-                tempTargetScore += 100;
+
+            if (logic.HasFlag(PassTargetLogic.Rogue)) {
+                if (teammate.myCharacter.archetype != Character.Archetype.Rogue) {
+                    continue;
+                }
+                else {
+                    tempTargetScore += 100;
+                }
             }
-            if (Vector3.Distance(teammate.transform.position, position) < 7) {
-                //Debug.Log("#PassTargetEval#" + teammate.name + " is too close");
+            float dist = Vector3.Distance(ball.transform.position, teammate.position);
+            int passing = myCharacter.passing;
+            float need = (passing / (dist * 10 / 8)) * 50;
+            if (need <= 20) {
+                //too far
                 continue;
             }
-            if (Vector3.Distance(teammate.transform.position, position) > 25) {
-                //Debug.Log("#PassTargetEval#" + teammate.name + " is too far");
+            if (dist < 7) {
                 continue;
             }
 

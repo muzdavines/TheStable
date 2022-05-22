@@ -30,19 +30,22 @@ public class SCBallHawk : StableCombatCharState {
             thisChar.Idle();
             return;
         }
+
+        bool enemyNear = false;
         if (Vector3.Distance(thisChar.position, ball.transform.position) <= 4f) {
             thisChar.agent.isStopped = true;
             thisChar.agent.velocity = Vector3.zero;
-            var cols = Physics.OverlapSphere(thisChar.position, 5);
+            var cols = Physics.OverlapSphere(thisChar.position, 3);
             foreach (var col in cols) {
                 StableCombatChar c = col.GetComponent<StableCombatChar>();
                 if (c != null && c.team != thisChar.team) {
+                    enemyNear = true;
                     c.FailStrip();
                 }
             }
 
             ballHawked = true;
-            thisChar.PickupBall(true);
+            thisChar.PickupBall(enemyNear);
             return;
             thisChar.ball.holder.TakeDamage(new StableDamage() { balance = 5, health = 1 }, thisChar, false);
             thisChar.ball.holder.GetTackled();

@@ -9,9 +9,10 @@ public class NewGameCreationController : MonoBehaviour
 
     public List<Character> heroes = new List<Character>();
     public int startingGold = 400;
-    public List<Training> trainingAdds;
+    public List<Trait> trainingAdds;
     public List<Item> startingItems;
     public List<Finance.Business> startingBusinesses;
+    
     public string myText;
     public string activeStablemasterType;
    
@@ -50,9 +51,11 @@ public class NewGameCreationController : MonoBehaviour
         Game.instance.playerStable.finance.AddRevenue(startingGold);
         //Game.instance.playerStable.availableTrainings.Add(new Training() { type = Training.Type.Attribute, training = "negotiating", duration = 2, cost = 50 });
         foreach (var training in trainingAdds) {
-            //Game.instance.playerStable.availableTrainings.Add(training);
+            Trait thisT = Instantiate(training);
+            thisT.level = 0;
+            Game.instance.playerStable.availableTrainings.Add(thisT);
         }
-        Game.instance.playerStable.availableTrainings.Add(new Trait(){traitName = "testTrait", level = 0});
+        
         Game.instance.playerStable.inventory = new List<Item>();
         foreach (var item in startingItems) {
             Game.instance.playerStable.inventory.Add(Instantiate(item));

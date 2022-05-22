@@ -14,9 +14,12 @@ public class StableTrainingScrollerController : MonoBehaviour, IEnhancedScroller
         Start();
     }
     public void Start() {
+        Debug.Log("#Training#ScrollerStart");
         activeChar = controller.activeChar;
         _data = new List<Trait>();
+
         foreach (Trait t in activeChar.activeTraits){
+            Debug.Log("#Training#"+t.traitName + "  "+t.level);
             _data.Add(t);
         }
 
