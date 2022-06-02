@@ -27,6 +27,7 @@ public class AnimancerAnimSet : ScriptableObject
     public AnimationClip shoulderBarge;
     public AnimationClip backstab;
     public AnimationClip backstabVictim;
+    public AnimationClip assassinate;
     public AnimationClip flameCircle;
     public AnimationClip powerSlam;
     public AnimationClip flechettes;
@@ -69,5 +70,6 @@ public class AnimancerAnimSet : ScriptableObject
         anim.gkSwat.Clip = gkSwat;
         anim.runForward.Clip = runForward;
         anim.jumpCatch.Clip = jumpCatch;
+        anim.assassinate.Clip = assassinate;
     }
 }

@@ -52,6 +52,11 @@ public class Ball : MonoBehaviour
             return holder.team;
         } else { return -1; }
     }
+    public bool OtherTeamHolding(int myTeam) {
+        if (holder == null) { return false; }
+        if (holder.team == myTeam) { return false; }
+        return true;
+    }
     public float Distance(Vector3 pos) {
         return Vector3.Distance(pos, transform.position);
     }

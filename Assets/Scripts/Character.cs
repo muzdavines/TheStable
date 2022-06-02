@@ -11,20 +11,20 @@ public enum SkinColor { White, Brown, Black, Elf }
 public enum Elements { Yes, No }
 public enum HeadCovering { HeadCoverings_Base_Hair, HeadCoverings_No_FacialHair, HeadCoverings_No_Hair }
 public enum FacialHair { Yes, No }
+public enum CharacterAttribute { shooting, passing, tackling, carrying}
 [CreateAssetMenu]
 [System.Serializable]
-public class Character : Living 
-{
+public class Character : Living {
     //Physical Attributes
     public int strength = 5;
     public int agility = 5;
-    
+
     public int dexterity = 5;
-    
+
     public int carrying = 5;
-    
+
     public int tackling = 5;
-    
+
     public int runspeed = 5;
     public int shooting = 5;
     public int passing = 5;
@@ -64,10 +64,10 @@ public class Character : Living
     public HeadCovering headCovering;
     public FacialHair facialHair;
     public CharacterGearSet myGearSet;
-    public bool HasMove (string m) {
+    public bool HasMove(string m) {
         Debug.Log("#TODO#HasMove called on Character. Need to Change This");
         foreach (Move move in knownMoves) {
-           
+
             if (move.name.Contains(m)) { return true; }
         }
         return false; // knownMoves.Contains(m);
@@ -110,7 +110,7 @@ public class Character : Living
     public int skinNum = -1;
 
     public GameObject currentObject;
-    
+
     public int RandDist(float min, float max) {
         int roll = UnityEngine.Random.Range(0, 100);
         float interval = (max - min) / 6;
@@ -264,7 +264,7 @@ public class Character : Living
                 facialHair = FacialHair.Yes;
             }
         }
-        
+
         switch (archetype) {
             case Archetype.Goalkeeper:
                 shooting = 6;
@@ -384,7 +384,7 @@ public class Character : Living
                 myGearSet = Resources.Load<CharacterGearSet>("GearSets/Wizard");
                 break;
         }
-        
+
         seasonStats = new SportStats();
         careerStats = new SportStats();
         Init();
@@ -397,20 +397,21 @@ public class Character : Living
         carrying += Random.Range(-5, 6);
         runspeed += Random.Range(-3, 4);
     }
-   
-    public enum Archetype { Striker, Winger, Midfielder, Defender, Goalkeeper, Warrior, Rogue, Wizard}
-    public Archetype archetype;
 
+    public enum Archetype { Striker, Winger, Midfielder, Defender, Goalkeeper, Warrior, Rogue, Wizard, Swashbuckler, Assassin }
+    public Archetype archetype;
+    public UpgradeModifier mod;
     public void Awake() {
 
     }
     public void Start() {
-        
+
     }
     public Character Init() {
         Armor startingArmorSO = Resources.Load<Armor>(startingArmor);
         Weapon startingMeleeWeaponSO = Resources.Load<Weapon>(startingMeleeWeapon);
         Weapon startingRangedWeaponSO = Resources.Load<Weapon>(startingRangedWeapon);
+        mod = Resources.Load<UpgradeModifier>(archetype + "Upgrade");
         returnDate = new Game.GameDate();
         if (startingArmorSO == null) { armor = new Armor(); } else { armor = Instantiate(startingArmorSO); }
         if (startingMeleeWeaponSO == null) { Debug.Log("Character new melee weapon " + name); meleeWeapon = new Weapon(); } else { Debug.Log("Char inst weapon " + name); meleeWeapon = Instantiate(startingMeleeWeaponSO); }
@@ -433,7 +434,7 @@ public class Character : Living
 
     }
 
-    public void StartTraining (Training t) {
+    public void StartTraining(Training t) {
         currentTraining = t;
         currentTraining.dateToTrain = Helper.Today().Add(currentTraining.duration);
         returnDate = currentTraining.dateToTrain;
@@ -467,7 +468,7 @@ public class Character : Living
     public void AddXP(int amount) {
         xp += amount;
     }
-    
+
     bool GetPercent(int pct) {
         bool p = false;
         int roll = UnityEngine.Random.Range(0, 100);
@@ -478,7 +479,7 @@ public class Character : Living
     }
     public Trait GetBestTrait(StepType step) {
         int bestScore = 0;
-        Trait bestTrait = new Trait() { level = 0 } ;
+        Trait bestTrait = new Trait() { level = 0 };
         foreach (var t in activeTraits) {
             if (t.usableFor.Contains(step)) {
                 if (t.level > bestScore) {
@@ -489,7 +490,78 @@ public class Character : Living
         }
         return bestTrait;
     }
-    
+    public int UpgradeCost(CharacterAttribute attribute, int current = 0) {
+        switch (attribute) {
+            case CharacterAttribute.shooting:
+                return (int)((shooting + current) * 10 * mod.shooting);
+            case CharacterAttribute.passing:
+                return (int)((passing + current) * 10 * mod.passing);
+            case CharacterAttribute.carrying:
+                return (int)((carrying + current) * 10 * mod.carrying);
+            case CharacterAttribute.tackling:
+                return (int)((tackling + current) * 10 * mod.tackling);
+        }
+        return 0;
+
+    }
+    public bool ReadyToPromote() {
+        if (shooting < mod.shootingReq) {
+            return false;
+        }
+        if (passing < mod.passingReq) {
+            return false;
+        }
+        if (carrying < mod.carryingReq) {
+            return false;
+        }
+        if (tackling < mod.tacklingReq) {
+            return false;
+        }
+        return true;
+    }
+    public string GetPromoteText() {
+        string s = "Hero needs\n";
+        if (mod.shooting > 0) {
+            var p = mod.shootingReq - shooting;
+            s += p > 0 ? p + " more points of shooting\n" : "";
+        }
+        if (mod.passingReq > 0) {
+            var p = mod.passingReq - passing;
+            s += p > 0 ? p + " more points of passing\n" : "";
+        }
+
+        if (mod.tackling > 0) {
+            var p = mod.tacklingReq - tackling;
+            s += p > 0 ? p + " more points of tackling\n" : "";
+        }
+        if (mod.carrying > 0) {
+            var p = mod.carryingReq - carrying;
+            s += p > 0 ? p + " more points of carrying\n" : "";
+        }
+        s += "to be promoted.";
+        return s;
+    }
+
+    public void Promote(Archetype newArchetype) {
+        switch (newArchetype) {
+            case Archetype.Assassin:
+                shooting += 10;
+                tackling -= 10;
+                runspeed += 1;
+                maxHealth += 1;
+                maxMind += 25;
+                maxStamina += 25;
+                maxBalance += 25;
+                Type myType = Type.GetType("Assassinate");
+                SpecialMove myObj = (SpecialMove)Activator.CreateInstance(myType);
+                activeSpecialMoves.Add(myObj);
+                modelName = "SCUnit3";
+                myGearSet = Resources.Load<CharacterGearSet>("GearSets/Assassin");
+                archetype = newArchetype;
+                modelNum = 0;
+                break;
+        }
+    }
 }
 
 

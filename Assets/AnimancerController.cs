@@ -37,6 +37,7 @@ public class AnimancerController : MonoBehaviour {
     public ClipTransition gkSwat;
     public ClipTransition runForward;
     public ClipTransition jumpCatch;
+    public ClipTransition assassinate;
     public List<Move> baseMeleeAttackMoves;
     public List<Move> baseRangedAttackMoves;
     NavMeshAgent agent;
@@ -157,6 +158,9 @@ public class AnimancerController : MonoBehaviour {
     }
     public void BackstabVictim() {
         anim.Play(backstabVictim, .25f, FadeMode.FromStart).Events.OnEnd = () => thisChar.Idle();
+    }
+    public void Assassinate() {
+        anim.Play(assassinate, .25f, FadeMode.FromStart).Events.OnEnd = () => thisChar.Idle();
     }
     public void FlameCircle() {
         anim.Play(flameCircle, .25f, FadeMode.FromStart).Events.OnEnd = () => thisChar.Idle();

@@ -263,6 +263,10 @@ public class Game : MonoBehaviour {
 }
 
 public static class Helper {
+
+    public static string NewLine(this string s) {
+       return s.Replace("@n", "\n");
+    }
     public static void PlayOneShot (AudioClip clip) {
         if (clip == null) { return; }
         Debug.Log("Play");

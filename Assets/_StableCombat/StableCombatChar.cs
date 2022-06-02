@@ -582,6 +582,9 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
     public void BallHawk() {
         state.TransitionTo(new SCBallHawk());
     }
+    public void Assassinate() {
+        state.TransitionTo(new SCAssassinate());
+    }
     public void DeepBall(StableCombatChar passTarget) {
         print("#DeepBall#DeepBall to " + passTarget.myCharacter.name);
         state.TransitionTo(new SCDeepBall() { passTarget = passTarget });

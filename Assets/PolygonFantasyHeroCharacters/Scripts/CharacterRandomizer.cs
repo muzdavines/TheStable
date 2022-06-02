@@ -226,6 +226,9 @@ namespace PsychoticLab
             if (myCharacter.myGearSet.headCoveringNoHair > -1) {
                 ActivateItem(allGender.headCoverings_No_Hair[myCharacter.myGearSet.headCoveringNoHair]);
             }
+            if (myCharacter.myGearSet.headCoveringNoFacialHair > -1) {
+                ActivateItem(allGender.headCoverings_No_FacialHair[myCharacter.myGearSet.headCoveringNoFacialHair]);
+            }
             RandomizeColors(skinColor);
         }
 

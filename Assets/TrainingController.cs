@@ -27,6 +27,9 @@ public class TrainingController : MonoBehaviour, UIElement
     public TextMeshProUGUI nextShootingCost, nextPassingCost, nextTacklingCost, nextCarryingCost;
     public int currentCost;
     public int currentShooting, currentPassing, currentTackling, currentCarrying;
+    public GameObject promoteButton;
+    public TextMeshProUGUI promoteText;
+    public GameObject promoteWindow;
     public void SetTraining() {
 
     }
@@ -37,7 +40,7 @@ public class TrainingController : MonoBehaviour, UIElement
         UpdateUI();
     }
     public void UpdateUI() {
-        
+        promoteWindow.SetActive(false);
         if (activeChar == null) {
             HeroMainController main = GetComponentInParent<HeroMainController>();
             if (main == null) {
@@ -101,11 +104,18 @@ public class TrainingController : MonoBehaviour, UIElement
         currentPassingText.text = currentPassing > 0 ? currentPassing.ToString() : "";
         currentTacklingText.text = currentTackling > 0 ? currentTackling.ToString() : "";
         currentCarryingText.text = currentCarrying > 0 ? currentCarrying.ToString() : "";
-        nextShootingCost.text = "Next XP: "+(activeChar.shooting + currentShooting) * 10+"";
-        nextPassingCost.text = "Next XP: " + (activeChar.passing + currentPassing) * 10 + "";
-        nextTacklingCost.text = "Next XP: " + (activeChar.tackling + currentTackling) * 10 + "";
-        nextCarryingCost.text = "Next XP: " + (activeChar.carrying + currentCarrying) * 10 + "";
-
+        nextShootingCost.text = "Next XP: "+activeChar.UpgradeCost(CharacterAttribute.shooting, currentShooting);
+        nextPassingCost.text = "Next XP: " + activeChar.UpgradeCost(CharacterAttribute.passing, currentPassing);
+        nextTacklingCost.text = "Next XP: " + activeChar.UpgradeCost(CharacterAttribute.tackling, currentTackling);
+        nextCarryingCost.text = "Next XP: " + activeChar.UpgradeCost(CharacterAttribute.carrying, currentCarrying);
+        if (activeChar.ReadyToPromote()) {
+            promoteButton.SetActive(true);
+            promoteText.text = "Ready to Promote";
+        }else {
+            promoteButton.SetActive(false);
+            promoteText.text = activeChar.GetPromoteText();
+        }
+         
 
     }
     public void SetActiveChar(Character c) {
@@ -182,7 +192,7 @@ public class TrainingController : MonoBehaviour, UIElement
         int thisCost = 0;
         switch (attribute) {
             case "shooting":
-                thisCost = (activeChar.shooting + currentShooting) * 10;
+                thisCost = activeChar.UpgradeCost(CharacterAttribute.shooting, currentShooting);
                 if (thisCost > activeChar.xp - currentCost) {
                     return;
                 }
@@ -190,7 +200,7 @@ public class TrainingController : MonoBehaviour, UIElement
                 currentShootingText.text = currentShooting.ToString();
                 break;
             case "passing":
-                thisCost = (activeChar.passing + currentPassing) * 10;
+                thisCost = activeChar.UpgradeCost(CharacterAttribute.passing, currentPassing);
                 if (thisCost > activeChar.xp - currentCost) {
                     return;
                 }
@@ -198,7 +208,7 @@ public class TrainingController : MonoBehaviour, UIElement
                 currentPassingText.text = currentPassing.ToString();
                 break;
             case "tackling":
-                thisCost = (activeChar.tackling + currentTackling) * 10;
+                thisCost = activeChar.UpgradeCost(CharacterAttribute.tackling, currentTackling);
                 if (thisCost > activeChar.xp - currentCost) {
                     return;
                 }
@@ -206,7 +216,7 @@ public class TrainingController : MonoBehaviour, UIElement
                 currentTacklingText.text = currentTackling.ToString();
                 break;
             case "carrying":
-                thisCost = (activeChar.carrying + currentCarrying) * 10;
+                thisCost = activeChar.UpgradeCost(CharacterAttribute.carrying, currentCarrying);
                 if (thisCost > activeChar.xp - currentCost) {
                     return;
                 }
@@ -219,13 +229,14 @@ public class TrainingController : MonoBehaviour, UIElement
     }
 
     public void DecreaseAmount(string attribute) {
+        int thisCost = 0;
         switch (attribute) {
             case "shooting":
                 if (currentShooting <= 0) {
                     return;
                 }
                 currentShooting -= 1;
-                currentCost -= (activeChar.shooting + currentShooting) * 10;
+                thisCost = activeChar.UpgradeCost(CharacterAttribute.shooting);
                 currentShootingText.text = currentShooting.ToString();
                 break;
             case "tackling":
@@ -233,7 +244,7 @@ public class TrainingController : MonoBehaviour, UIElement
                     return;
                 }
                 currentTackling -= 1;
-                currentCost -= (activeChar.tackling + currentTackling) * 10;
+                thisCost = activeChar.UpgradeCost(CharacterAttribute.tackling);
                 currentTacklingText.text = currentTackling.ToString();
                 break;
             case "passing":
@@ -241,7 +252,7 @@ public class TrainingController : MonoBehaviour, UIElement
                     return;
                 }
                 currentPassing -= 1;
-                currentCost -= (activeChar.passing + currentPassing) * 10;
+                thisCost = activeChar.UpgradeCost(CharacterAttribute.passing);
                 currentPassingText.text = currentPassing.ToString();
                 break;
             case "carrying":
@@ -249,10 +260,11 @@ public class TrainingController : MonoBehaviour, UIElement
                     return;
                 }
                 currentCarrying -= 1;
-                currentCost -= (activeChar.carrying + currentCarrying) * 10;
+                thisCost = activeChar.UpgradeCost(CharacterAttribute.carrying);
                 currentCarryingText.text = currentCarrying.ToString();
                 break;
         }
+        currentCost -= thisCost;
         UpdateUI();
     }
 
@@ -278,7 +290,13 @@ public class TrainingController : MonoBehaviour, UIElement
         }
         Init(activeChar);
     }
-
+    public void Promote() {
+        if (!activeChar.ReadyToPromote()) {
+            return;
+        }
+        promoteWindow.SetActive(true);
+        promoteWindow.GetComponent<PromotionController>().Init(activeChar);
+    }
     public void UpdateXP() {
         currentCostText.text = "Current XP Cost: " + currentCost;
         currentXP.text = "Current XP: " + activeChar.xp;
