@@ -6,6 +6,7 @@ using UnityEngine.AI;
 
 public class AnimancerController : MonoBehaviour {
     public LinearMixerTransitionAsset.UnShared movement;
+    public LinearMixerTransitionAsset.UnShared injuredMovement;
     public AnimancerComponent anim;
     public AnimancerAnimSet animSet;
     public ClipTransition shootBall;
@@ -38,12 +39,16 @@ public class AnimancerController : MonoBehaviour {
     public ClipTransition runForward;
     public ClipTransition jumpCatch;
     public ClipTransition assassinate;
+    public ClipTransition kneecap;
+    public ClipTransition getKneecapped;
     public List<Move> baseMeleeAttackMoves;
     public List<Move> baseRangedAttackMoves;
     NavMeshAgent agent;
     StableCombatChar thisChar;
     public bool shouldBackpedal;
     public enum SkillAnims { Hunt = 0, NavigateLand = 0 };
+
+    public bool injured;
 
     private void Awake() {
         Debug.Log("Init AnimSet");
@@ -53,6 +58,7 @@ public class AnimancerController : MonoBehaviour {
         thisChar = GetComponent<StableCombatChar>();
         anim = GetComponent<AnimancerComponent>();
         agent = GetComponent<NavMeshAgent>();
+        injured = false;
         if (thisChar != null) {
             baseMeleeAttackMoves = thisChar.meleeAttackMoves;
             baseRangedAttackMoves = thisChar.rangedAttackMoves;
@@ -62,7 +68,12 @@ public class AnimancerController : MonoBehaviour {
     }
 
     public void Idle() {
-        anim.Play(movement);
+        if (injured) {
+            anim.Play(injuredMovement);
+        }
+        else {
+            anim.Play(movement);
+        }
         currentMeleeAttackIndex = -1;
         currentRangedAttackIndex = -1;
         movement.State.Root.Component.Animator.applyRootMotion = false;
@@ -85,6 +96,9 @@ public class AnimancerController : MonoBehaviour {
 
     public void PassBall() {
         anim.Play(passBall, .25f, FadeMode.FromStart).Events.OnEnd = () => thisChar.Idle();
+    }
+    public void FaceSmash() {
+        anim.Play(passBall, .25f, FadeMode.FromStart).Events.OnEnd = () => Idle();
     }
 
     public void ShootBall() {
@@ -174,6 +188,13 @@ public class AnimancerController : MonoBehaviour {
     public void Summon() {
         anim.Play(summon, .25f, FadeMode.FromStart).Events.OnEnd = () => thisChar.Idle();
     }
+    public void Kneecap() {
+        anim.Play(kneecap, .25f, FadeMode.FromStart).Events.OnEnd = () => thisChar.Idle();
+    }
+    public void GetKneecapped() {
+        injured = true;
+        anim.Play(getKneecapped, .25f, FadeMode.FromStart).Events.OnEnd = () => Knockdown();
+    }
 
     public void JumpCatch() {
         Debug.Log("#BallHawk#JumpCatchAnim");
@@ -258,6 +279,11 @@ public class AnimancerController : MonoBehaviour {
 
     void Update()
     {
-        movement.State.Parameter = GetComponent<NavMeshAgent>().velocity.magnitude * (shouldBackpedal ? -1 : 1);
+        if (injured) {
+            injuredMovement.State.Parameter = GetComponent<NavMeshAgent>().velocity.magnitude * (shouldBackpedal ? -1 : 1);
+        } else {
+            movement.State.Parameter = GetComponent<NavMeshAgent>().velocity.magnitude * (shouldBackpedal ? -1 : 1);
+        }
+        
     }
 }

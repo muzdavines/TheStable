@@ -15,6 +15,7 @@ public class TrainingController : MonoBehaviour, UIElement
     public StableTrainingScrollerController scroller;
     public TextMeshProUGUI currentXP;
     public TextMeshProUGUI currentCostText;
+        public TextMeshProUGUI archetype;
 
     public TextMeshProUGUI currentShootingText,
         currentPassingText,
@@ -39,8 +40,17 @@ public class TrainingController : MonoBehaviour, UIElement
         currentCost = 0;
         UpdateUI();
     }
+
+    public void DelayUpdate() {
+        StartCoroutine(IDelayUpdate());
+    }
+    IEnumerator IDelayUpdate() {
+        yield return new WaitForEndOfFrame();
+        GetComponentInParent<HeroMainController>().UpdateUI();
+        UpdateUI();
+    }
     public void UpdateUI() {
-        promoteWindow.SetActive(false);
+        
         if (activeChar == null) {
             HeroMainController main = GetComponentInParent<HeroMainController>();
             if (main == null) {
@@ -57,7 +67,7 @@ public class TrainingController : MonoBehaviour, UIElement
         if (activeChar != null) {
             heroName.text = activeChar.name;
             heroType.text = activeChar.archetype.ToString();
-
+            archetype.text = activeChar.archetype.ToString();
             shooting.text = activeChar.shooting.ToString();
             passing.text = activeChar.passing.ToString();
             tackling.text = activeChar.tackling.ToString();
@@ -115,7 +125,7 @@ public class TrainingController : MonoBehaviour, UIElement
             promoteButton.SetActive(false);
             promoteText.text = activeChar.GetPromoteText();
         }
-         
+        promoteWindow.SetActive(false);
 
     }
     public void SetActiveChar(Character c) {
@@ -168,7 +178,13 @@ public class TrainingController : MonoBehaviour, UIElement
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.P)) {
+            activeChar.shooting = 100;
+            activeChar.carrying = 100;
+            activeChar.tackling = 100;
+            UpdateUI();
+            GetComponentInParent<HeroMainController>().UpdateUI();
+        }
     }
 
     public void ConfirmTraining() {

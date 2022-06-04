@@ -17,7 +17,9 @@ public class SCPursueBall : StableCombatCharState
         if (CheckOneTimer()) {
             return;
         }
-        thisChar.agent.SetDestination(ball.transform.position);
+        
+        Rigidbody body = ball.body;
+        thisChar.agent.SetDestination(ball.transform.position + (body.velocity.magnitude > 5 && ball.passTargetPosition == Vector3.zero ? ball.body.velocity : Vector3.zero));
         if (ball.Distance(thisChar) < .6f) {
             thisChar.PickupBall();
             return;

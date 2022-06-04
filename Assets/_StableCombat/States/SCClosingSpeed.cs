@@ -2,11 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SCClosingSpeed : StableCombatCharState {
+public class SCClosingSpeed : StableCombatCharState, CannotTarget {
     SCSpeedBuff speedBuff;
     public override void EnterFrom(StableCombatCharState state) {
         base.EnterFrom(state);
         speedBuff = thisChar.SpeedBuff(10, 5);
+        thisChar.ReleaseAttackers();
+        canGrabBall = false;
         GameObject effect = GameObject.Instantiate(Resources.Load<GameObject>("ClosingSpeedEffect"));
         thisChar.DisplaySpecialAbilityFeedback("Closing Speed");
         effect.transform.parent = thisChar.transform;

@@ -12,7 +12,7 @@ public class SCSpeedBuff : SCBuff
     /// <param name="_startTime"></param>
     /// <param name="speedMod">speedMod should be in units of speed for the Character attribute. The method will convert the agent speed</param>
     float speedMod;
-    public SCSpeedBuff Init(float _duration, float _speedMod) {
+    public virtual SCSpeedBuff Init(float _duration, float _speedMod) {
         base.Init(_duration);
         speedMod = _speedMod;
         Debug.Log("#SpeedMod#" + _duration + " " + _speedMod);
@@ -39,7 +39,7 @@ public class SCSpeedBuff : SCBuff
     public override void EndEffect() {
         base.EndEffect();
     }
-    public void OnDestroy() {
+    public virtual void OnDestroy() {
         GetComponent<NavMeshAgent>().speed -= (speedMod * .4f);
     }
 }

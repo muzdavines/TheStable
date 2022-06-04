@@ -125,7 +125,12 @@ namespace PsychoticLab
         {
            
         }
-
+        public Character.Archetype testType;
+        public void ShowTestType() {
+            Character thisChar = new Character();
+            thisChar.GenerateCharacter(testType);
+            Init(thisChar, Color.red, Color.black);
+        }
         public void ShowRogue() {
             Character thisChar = new Character();
             thisChar.GenerateCharacter(Character.Archetype.Rogue);
@@ -205,7 +210,7 @@ namespace PsychoticLab
             enabledObjects.Clear();
             CharacterObjectGroups cog = new CharacterObjectGroups();
             if (gender == Gender.Male) { cog = male; } else { cog = female; }
-            ActivateItem(cog.headAllElements[Random.Range(0, cog.headAllElements.Count)]);
+            
             ActivateItem(cog.torso[myCharacter.myGearSet.torso]);
             ActivateItem(cog.arm_Upper_Left[myCharacter.myGearSet.upperArm]);
             ActivateItem(cog.arm_Upper_Right[myCharacter.myGearSet.upperArm]);
@@ -218,6 +223,8 @@ namespace PsychoticLab
             ActivateItem(cog.leg_Right[myCharacter.myGearSet.leg]);
             if (myCharacter.myGearSet.headNoElements > -1) {
                 ActivateItem(cog.headNoElements[myCharacter.myGearSet.headNoElements]);
+            } else {
+                ActivateItem(cog.headAllElements[Random.Range(0, cog.headAllElements.Count)]);
             }
             if (myCharacter.myGearSet.headCoveringBaseHair > -1) {
                 ActivateItem(allGender.all_Hair[1]);
@@ -228,6 +235,15 @@ namespace PsychoticLab
             }
             if (myCharacter.myGearSet.headCoveringNoFacialHair > -1) {
                 ActivateItem(allGender.headCoverings_No_FacialHair[myCharacter.myGearSet.headCoveringNoFacialHair]);
+            }
+            if (myCharacter.myGearSet.randomHair) {
+                ActivateItem(allGender.all_Hair[myCharacter.hair]);
+            }
+            if (myCharacter.myGearSet.shoulderAttachmentLeft > -1) {
+                ActivateItem(allGender.shoulder_Attachment_Left[myCharacter.myGearSet.shoulderAttachmentLeft]);
+            }
+            if (myCharacter.myGearSet.hipsAttachment > -1) {
+                ActivateItem(allGender.hips_Attachment[myCharacter.myGearSet.hipsAttachment]);
             }
             RandomizeColors(skinColor);
         }

@@ -6,8 +6,13 @@ public class SCAssassinate : SCCombatStanceState, CannotInterrupt, CannotTarget 
     GameObject weapon;
     public override void EnterFrom(StableCombatCharState state) {
         base.EnterFrom(state);
-        thisChar.ReleaseTarget();
-        thisChar.myAttackTarget = ball.holder;
+        if (thisChar.ball == null) {
+
+        }
+        else {
+            thisChar.ReleaseTarget();
+            thisChar.myAttackTarget = ball.holder;
+        }
         if (thisChar.myAttackTarget == null || thisChar.myAttackTarget.isKnockedDown || thisChar.myAttackTarget.team == thisChar.team) {
             thisChar.Idle();
             return;
@@ -31,8 +36,10 @@ public class SCAssassinate : SCCombatStanceState, CannotInterrupt, CannotTarget 
         weapon.transform.parent = thisChar._rightHand;
         weapon.transform.localPosition = Vector3.zero;
         weapon.transform.localRotation = Quaternion.Euler(Vector3.zero);
+        weapon.transform.localScale = Vector3.one;
         DisplayWeapon(false);
         thisChar.DisplaySpecialAbilityFeedback("Assassinate");
+        thisChar.myAttackTarget.DisplaySpecialAbilityFeedback("Assassinated by " + thisChar.myCharacter.name);
     }
     bool damageDelivered;
     public override void Update() {

@@ -77,7 +77,7 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
     public List<Mod> mods = new List<Mod>();
 
     //Status
-
+    public bool isInjured { get { return anima.injured; } }
     public bool isKnockedDown { get { return state.GetType() == typeof(SCGetTackled) || state.GetType() == typeof(SCKnockdown) || state.GetType() == typeof(SCCombatDowned); } }
     public bool isStateLocked { get { return state.GetType().GetInterfaces().Contains(typeof(CannotInterrupt)); } }
     public bool isCannotTarget { get { return state.GetType().GetInterfaces().Contains(typeof(CannotTarget)); } }
@@ -582,6 +582,18 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
     public void BallHawk() {
         state.TransitionTo(new SCBallHawk());
     }
+    public void FaceSmash(StableCombatChar _enemy) {
+        state.TransitionTo(new SCFaceSmash() { attackTarget = _enemy.transform });
+    }
+    public void Kneecap() {
+        state.TransitionTo(new SCKneecap());
+    }
+    public void GetKneecapped() {
+        state.TransitionTo(new SCGetKneecapped());
+    }
+    public void KneecapAttack() {
+        state.TransitionTo(new SCKneecapAttack());
+    }
     public void Assassinate() {
         state.TransitionTo(new SCAssassinate());
     }
@@ -615,6 +627,9 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
     /// <param name="speedMod">speedMod should be in units of speed for the Character attribute. The method will convert the agent speed</param>
     public SCSpeedBuff SpeedBuff(float duration, float speedMod) {
         return gameObject.AddComponent<SCSpeedBuff>().Init(duration, speedMod);
+    }
+    public SCSpeedBuff InjuredBuff(float duration, float speedMod) {
+        return gameObject.AddComponent<SCInjuredBuff>().Init(duration, speedMod);
     }
 
     public void GKDiveForBall() {
@@ -705,6 +720,14 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
             if (c.isKnockedDown) { continue; }
             if (c.team == team) {
                 return c;
+            }
+        }
+        return null;
+    }
+    public StableCombatChar GetNearestEnemy() {
+        foreach (var o in coach.otherTeam) {
+            if (Vector3.Distance(o.position, position)< 5) {
+                return o;
             }
         }
         return null;

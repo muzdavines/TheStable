@@ -20,5 +20,8 @@ public class CharacterRandomizerEditor : Editor
         if (GUILayout.Button("Warrior")) {
             ((CharacterRandomizer)target).ShowWarrior();
         }
+        if (GUILayout.Button("TestType")) {
+            ((CharacterRandomizer)target).ShowTestType();
+        }
     }
 }

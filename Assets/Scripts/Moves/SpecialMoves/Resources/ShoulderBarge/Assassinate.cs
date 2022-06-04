@@ -15,7 +15,7 @@ public class Assassinate : ActiveSpecialMove {
 
         if (Time.time <= lastFired + 20) { return false; }
         if (_char.isKnockedDown) { return false; }
-        if (_char.ball.OtherTeamHolding(_char.team)) {
+        if (_char.ball == null || _char.ball.OtherTeamHolding(_char.team)) {
             Debug.Log("#Assassinate#Fired");
             OnActivate(_char);
             return true;

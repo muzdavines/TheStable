@@ -35,6 +35,8 @@ public class AnimancerAnimSet : ScriptableObject
     public AnimationClip gkSwat;
     public AnimationClip runForward;
     public AnimationClip jumpCatch;
+    public AnimationClip kneecap;
+    public AnimationClip getKneecapped;
     public void Init(AnimancerController anim) {
         Debug.Log("Initialize Animset");
         anim.shootBall.Clip = shootBall;
@@ -71,5 +73,7 @@ public class AnimancerAnimSet : ScriptableObject
         anim.runForward.Clip = runForward;
         anim.jumpCatch.Clip = jumpCatch;
         anim.assassinate.Clip = assassinate;
+        anim.kneecap.Clip = kneecap;
+        anim.getKneecapped.Clip = getKneecapped;
     }
 }

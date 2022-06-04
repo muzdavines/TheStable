@@ -40,7 +40,7 @@ public class SCTryCatchPass : StableCombatCharState
             thisChar.agent.isStopped = false;
         }
 
-        if (Time.time > entryTime + 2 && ball.passTargetPosition == Vector3.zero) {
+        if (Time.time > entryTime + 4 && ball.passTargetPosition == Vector3.zero) {
             thisChar.Idle();
         }
         

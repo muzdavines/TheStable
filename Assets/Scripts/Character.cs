@@ -63,6 +63,8 @@ public class Character : Living {
     public Elements elements;
     public HeadCovering headCovering;
     public FacialHair facialHair;
+    [Range(0, 37)]
+    public int hair;
     public CharacterGearSet myGearSet;
     public bool HasMove(string m) {
         Debug.Log("#TODO#HasMove called on Character. Need to Change This");
@@ -136,6 +138,7 @@ public class Character : Living {
         int[] dexRange = new int[2];
         int[] strRange = new int[2];
         int[] agiRange = new int[2];
+        hair = Random.Range(0, 38);
         var leftjab = Resources.Load<Move>("LeftJab");
         var rightjab = Resources.Load<Move>("RightJab");
         knownMoves.Add(leftjab);
@@ -384,7 +387,7 @@ public class Character : Living {
                 myGearSet = Resources.Load<CharacterGearSet>("GearSets/Wizard");
                 break;
         }
-
+        myGearSet = Resources.Load<CharacterGearSet>("GearSets/" + archetype.ToString());
         seasonStats = new SportStats();
         careerStats = new SportStats();
         Init();
@@ -398,7 +401,7 @@ public class Character : Living {
         runspeed += Random.Range(-3, 4);
     }
 
-    public enum Archetype { Striker, Winger, Midfielder, Defender, Goalkeeper, Warrior, Rogue, Wizard, Swashbuckler, Assassin }
+    public enum Archetype { Striker, Winger, Midfielder, Defender, Goalkeeper, Warrior, Rogue, Wizard, Swashbuckler, Assassin, Thief, Thug, Enforcer, Charlatan }
     public Archetype archetype;
     public UpgradeModifier mod;
     public void Awake() {
@@ -505,6 +508,7 @@ public class Character : Living {
 
     }
     public bool ReadyToPromote() {
+        if (mod.shootingReq == -1) { return false; }
         if (shooting < mod.shootingReq) {
             return false;
         }
@@ -520,6 +524,9 @@ public class Character : Living {
         return true;
     }
     public string GetPromoteText() {
+        if (mod.shootingReq == -1) {
+            return "Highest Class Reached.";
+        }
         string s = "Hero needs\n";
         if (mod.shooting > 0) {
             var p = mod.shootingReq - shooting;
@@ -543,24 +550,70 @@ public class Character : Living {
     }
 
     public void Promote(Archetype newArchetype) {
+        List<string> specialsToAdd = new List<string>();
         switch (newArchetype) {
             case Archetype.Assassin:
                 shooting += 10;
                 tackling -= 10;
                 runspeed += 1;
                 maxHealth += 1;
-                maxMind += 25;
+                maxMind += 35;
                 maxStamina += 25;
-                maxBalance += 25;
-                Type myType = Type.GetType("Assassinate");
-                SpecialMove myObj = (SpecialMove)Activator.CreateInstance(myType);
-                activeSpecialMoves.Add(myObj);
+                maxBalance += 35;
+                specialsToAdd.Add("Assassinate");
                 modelName = "SCUnit3";
-                myGearSet = Resources.Load<CharacterGearSet>("GearSets/Assassin");
-                archetype = newArchetype;
                 modelNum = 0;
                 break;
+            case Archetype.Thief:
+                modelNum = 0;
+                shooting += 10;
+                tackling -= 10;
+                runspeed += 1;
+                maxMind += 25;
+                maxStamina += 15;
+                maxBalance += 35;
+                break;
+            case Archetype.Thug:
+                shooting -= 10;
+                tackling += 10;
+                runspeed -= 1;
+                maxMind += 15;
+                maxStamina += 35;
+                maxBalance += 25;
+                specialsToAdd.Add("Kneecapper");
+                break;
+            case Archetype.Swashbuckler:
+                shooting -= 10;
+                tackling += 10;
+                maxMind += 25;
+                maxStamina += 35;
+                maxBalance += 35;
+                break;
+            case Archetype.Enforcer:
+                shooting -= 10;
+                tackling += 10;
+                maxMind += 15;
+                maxStamina += 35;
+                maxBalance += 25;
+                specialsToAdd.Add("FaceSmash");
+                break;
+            case Archetype.Charlatan:
+                shooting += 10;
+                tackling -= 10;
+                maxMind += 35;
+                maxStamina += 15;
+                maxBalance += 25;
+                break;
         }
+        foreach (string s in specialsToAdd) {
+            Type myType = Type.GetType(s);
+            SpecialMove myObj = (SpecialMove)Activator.CreateInstance(myType);
+            activeSpecialMoves.Add(myObj);
+        }
+        
+        archetype = newArchetype;
+        mod = Resources.Load<UpgradeModifier>(archetype + "Upgrade");
+        myGearSet = Resources.Load<CharacterGearSet>("GearSets/" + archetype.ToString());
     }
 }
 

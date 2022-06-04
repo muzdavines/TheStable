@@ -22516,6 +22516,7 @@ MonoBehaviour:
     knee_Attachement_Left: []
     all_12_Extra: []
     elf_Ear: []
+  testType: 0
 --- !u!54 &7929432556201041659
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -22639,6 +22640,7 @@ MonoBehaviour:
   LLWeapon: {fileID: 0}
   RHRWeapon: {fileID: 0}
   LHRWeapon: {fileID: 0}
+  matchController: {fileID: 0}
   uiController: {fileID: 0}
   health: 0
   stamina: 0
@@ -22665,6 +22667,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movement:
     _Asset: {fileID: 11400000, guid: f290228f6b5e52140b7c70493cdce3a4, type: 2}
+  injuredMovement:
+    _Asset: {fileID: 11400000, guid: 71f800deece1cd74a86ff180957b348e, type: 2}
   anim: {fileID: 2751614528593624734}
   animSet: {fileID: 11400000, guid: 2aea35ddebd424347b2afa7aaa492281, type: 2}
   shootBall:
@@ -22951,9 +22955,46 @@ MonoBehaviour:
     _Clip: {fileID: 0}
     _Speed: 1
     _NormalizedStartTime: 0
+  jumpCatch:
+    _FadeDuration: 0.25
+    _Events:
+      _NormalizedTimes: []
+      _Callbacks: []
+      _Names: []
+    _Clip: {fileID: 0}
+    _Speed: 1
+    _NormalizedStartTime: 0
+  assassinate:
+    _FadeDuration: 0.25
+    _Events:
+      _NormalizedTimes: []
+      _Callbacks: []
+      _Names: []
+    _Clip: {fileID: 0}
+    _Speed: 1
+    _NormalizedStartTime: 0
+  kneecap:
+    _FadeDuration: 0.25
+    _Events:
+      _NormalizedTimes: []
+      _Callbacks: []
+      _Names: []
+    _Clip: {fileID: 0}
+    _Speed: 1
+    _NormalizedStartTime: 0
+  getKneecapped:
+    _FadeDuration: 0.25
+    _Events:
+      _NormalizedTimes: []
+      _Callbacks: []
+      _Names: []
+    _Clip: {fileID: 0}
+    _Speed: 1
+    _NormalizedStartTime: 0
   baseMeleeAttackMoves: []
   baseRangedAttackMoves: []
   shouldBackpedal: 0
+  injured: 0
   currentMeleeAttackIndex: 0
   currentMeleeMove: {fileID: 0}
   currentRangedAttackIndex: 0
