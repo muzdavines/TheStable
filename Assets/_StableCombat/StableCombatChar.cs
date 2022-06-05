@@ -265,7 +265,8 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
         bool centerTaken = false;
         bool leftTaken = false;
         bool rightTaken = false;
-        for (int x = coach.players.Length-1; x>=0; x--) {
+        if (fieldPosition.IsForward()) { return GuardNetPosition.None; }
+        for (int x = coach.players.Length-2; x>=0; x--) {
             var teammate = coach.players[x];
             if (teammate.state.GetType() != typeof(SCGuardNet)) { continue; }
             GuardNetPosition currentPos = ((SCGuardNet)teammate.state).guardPosition;
