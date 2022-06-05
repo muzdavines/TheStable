@@ -265,8 +265,8 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
         bool centerTaken = false;
         bool leftTaken = false;
         bool rightTaken = false;
-        
-        foreach (StableCombatChar teammate in coach.players) {
+        for (int x = coach.players.Length-1; x>=0; x--) {
+            var teammate = coach.players[x];
             if (teammate.state.GetType() != typeof(SCGuardNet)) { continue; }
             GuardNetPosition currentPos = ((SCGuardNet)teammate.state).guardPosition;
             if (currentPos == GuardNetPosition.Center) {
@@ -279,9 +279,10 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
                 rightTaken = true;
             }
         }
-       if (!centerTaken) { return GuardNetPosition.Center; }
+      
        if (!leftTaken) { return GuardNetPosition.Left; }
-       if (!rightTaken) { return GuardNetPosition.Right; }
+        if (!centerTaken) { return GuardNetPosition.Center; }
+        if (!rightTaken) { return GuardNetPosition.Right; }
        return GuardNetPosition.None;
     }
     public bool ShouldPass() {
@@ -582,6 +583,9 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
     public void BallHawk() {
         state.TransitionTo(new SCBallHawk());
     }
+    public void UncannyDodge() {
+        state.TransitionTo(new SCUncannyDodge());
+    }
     public void FaceSmash(StableCombatChar _enemy) {
         state.TransitionTo(new SCFaceSmash() { attackTarget = _enemy.transform });
     }
@@ -597,9 +601,20 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
     public void Assassinate() {
         state.TransitionTo(new SCAssassinate());
     }
+    public void PistolShot() {
+        state.TransitionTo(new SCPistolShot());
+    }
     public void DeepBall(StableCombatChar passTarget) {
         print("#DeepBall#DeepBall to " + passTarget.myCharacter.name);
         state.TransitionTo(new SCDeepBall() { passTarget = passTarget });
+    }
+
+    public void BolaThrow(StableCombatChar target) {
+        state.TransitionTo(new SCBolaThrow() { target = target });
+    }
+
+    public void ViciousMockery() {
+
     }
     public void WallOfForce() {
 
@@ -724,13 +739,21 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
         }
         return null;
     }
-    public StableCombatChar GetNearestEnemy() {
+    public StableCombatChar GetNearestEnemy(float min = 0, float max=Mathf.Infinity) {
+        StableCombatChar nearest = null;
+        float nearestDist = Mathf.Infinity;
         foreach (var o in coach.otherTeam) {
-            if (Vector3.Distance(o.position, position)< 5) {
-                return o;
+            if (o.isKnockedDown || o.isCannotTarget) { continue; }
+            float dist = Vector3.Distance(o.position, position);
+            if (dist < min || dist > max) {
+                continue;
+            }
+            if (dist < nearestDist) {
+                nearestDist = dist;
+                nearest = o;
             }
         }
-        return null;
+        return nearest;
     }
     
     public StableCombatChar GetFarthestTeammateNearGoal() {
@@ -767,6 +790,14 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
         return coach.positions[(int)fieldPosition];
     }
     float lastTakeDamageAnim;
+    public bool FireAbility(string s) {
+        foreach (ActiveSpecialMove m in myCharacter.activeSpecialMoves) {
+            if (m.GetType().ToString() == s) {
+                return m.SpotCheck(this);
+            }
+        }
+        return false;
+    }
     public void TakeDamage(StableDamage damage, StableCombatChar attacker, bool shouldAnimate = true) {
         if (health <= 0)
             return;

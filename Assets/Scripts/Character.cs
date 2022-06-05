@@ -572,6 +572,7 @@ public class Character : Living {
                 maxMind += 25;
                 maxStamina += 15;
                 maxBalance += 35;
+                specialsToAdd.Add("BolaThrow");
                 break;
             case Archetype.Thug:
                 shooting -= 10;
@@ -588,6 +589,7 @@ public class Character : Living {
                 maxMind += 25;
                 maxStamina += 35;
                 maxBalance += 35;
+                specialsToAdd.Add("UncannyDodge");
                 break;
             case Archetype.Enforcer:
                 shooting -= 10;

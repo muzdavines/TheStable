@@ -10,4 +10,9 @@ public class ActiveSpecialMove : SpecialMove {
     public override void OnActivate(StableCombatChar _char) {
         
     }
+
+    public virtual bool SpotCheck(StableCombatChar _char) {
+        return false;
+    }
+
 }

@@ -2,17 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SCAssassinate : SCCombatStanceState, CannotInterrupt, CannotTarget {
+public class SCPistolShot : SCCombatStanceState, CannotInterrupt, CannotTarget {
     GameObject weapon;
+    StableCombatChar target;
     public override void EnterFrom(StableCombatCharState state) {
         base.EnterFrom(state);
-        if (thisChar.ball == null || thisChar.ball.holder == null) {
 
-        }
-        else {
-            thisChar.ReleaseTarget();
-            thisChar.myAttackTarget = ball.holder;
-        }
+        thisChar.ReleaseTarget();
+        thisChar.myAttackTarget = thisChar.GetNearestEnemy(0, 20);
+
         if (thisChar.myAttackTarget == null || thisChar.myAttackTarget.isKnockedDown || thisChar.myAttackTarget.team == thisChar.team) {
             thisChar.Idle();
             return;
@@ -28,18 +26,19 @@ public class SCAssassinate : SCCombatStanceState, CannotInterrupt, CannotTarget 
         //var fx2 = GameObject.Instantiate(effect, thisChar.myAttackTarget.position - thisChar.myAttackTarget.transform.forward, thisChar.transform.rotation);
         GameObject.Destroy(fx1, 10);
         //GameObject.Destroy(fx2, 10);
-        
+
         thisChar.transform.LookAt(thisChar.myAttackTarget.transform);
-        thisChar.anima.Assassinate();
-        GameObject weaponPrefab = Resources.Load<GameObject>("AssassinateWeapon");
+        Debug.Log("#PistolShot#Animation Called");
+        thisChar.anima.PistolShot();
+        GameObject weaponPrefab = Resources.Load<GameObject>("PistolWeapon");
         weapon = GameObject.Instantiate<GameObject>(weaponPrefab);
         weapon.transform.parent = thisChar._rightHand;
         weapon.transform.localPosition = Vector3.zero;
         weapon.transform.localRotation = Quaternion.Euler(Vector3.zero);
         weapon.transform.localScale = Vector3.one;
         DisplayWeapon(false);
-        thisChar.DisplaySpecialAbilityFeedback("Assassinate");
-        thisChar.myAttackTarget.DisplaySpecialAbilityFeedback("Assassinated by " + thisChar.myCharacter.name);
+        thisChar.DisplaySpecialAbilityFeedback("Pirate Pistol");
+        thisChar.myAttackTarget.DisplaySpecialAbilityFeedback("Pistol Shot by " + thisChar.myCharacter.name);
     }
     bool damageDelivered;
     public override void Update() {
@@ -47,14 +46,14 @@ public class SCAssassinate : SCCombatStanceState, CannotInterrupt, CannotTarget 
         thisChar.agent.isStopped = true;
         thisChar.agent.velocity = Vector3.zero;
         if (!damageDelivered) {
-            
+
             thisChar.transform.LookAt(thisChar.myAttackTarget.transform);
         }
     }
 
     public override void AnimEventReceiver(string message) {
         base.AnimEventReceiver(message);
-        if (message == "AssassinateDamage") {
+        if (message == "PistolShotDamage") {
             damageDelivered = true;
             thisChar.myAttackTarget.TakeDamage(new StableDamage() { balance = 100, health = 5, mind = 100, stamina = 100, isKnockdown = true }, thisChar);
             thisChar.myAttackTarget.TakeDamage(new StableDamage() { balance = 100, health = 5, mind = 100, stamina = 100, isKnockdown = true }, thisChar);

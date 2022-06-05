@@ -41,6 +41,9 @@ public class AnimancerController : MonoBehaviour {
     public ClipTransition assassinate;
     public ClipTransition kneecap;
     public ClipTransition getKneecapped;
+    public ClipTransition uncannyDodge;
+    public ClipTransition bolaThrow;
+    public ClipTransition pistolShot;
     public List<Move> baseMeleeAttackMoves;
     public List<Move> baseRangedAttackMoves;
     NavMeshAgent agent;
@@ -126,7 +129,9 @@ public class AnimancerController : MonoBehaviour {
         anim.Play(getStripped, .25f, FadeMode.FromStart).Events.OnEnd = () => thisChar.Idle();
         getStripped.State.Root.Component.Animator.applyRootMotion = true;
     }
-
+    public void PistolShot() {
+        anim.Play(pistolShot, .25f, FadeMode.FromStart).Events.OnEnd = () => thisChar.Idle();
+    }
     public void SuccessStrip() {
         anim.Play(successStrip, .25f, FadeMode.FromStart).Events.OnEnd = () => thisChar.Idle();
         successStrip.State.Root.Component.Animator.applyRootMotion = true;
@@ -166,6 +171,15 @@ public class AnimancerController : MonoBehaviour {
     public void ShoulderBarge() {
         anim.Play(shoulderBarge, .25f, FadeMode.FromStart).Events.OnEnd = () => anim.Play(shoulderBarge, .25f, FadeMode.FromStart).Events.OnEnd = () => anim.Play(shoulderBarge, .25f, FadeMode.FromStart).Events.OnEnd = () => thisChar.CombatIdle();
         shoulderBarge.State.Root.Component.Animator.applyRootMotion = true;
+    }
+
+    public void UncannyDodge() {
+        anim.Play(uncannyDodge, .25f, FadeMode.FromStart).Events.OnEnd = () => thisChar.PistolShot();
+        uncannyDodge.State.Root.Component.Animator.applyRootMotion = true;
+        uncannyDodge.Speed = .7f;
+    }
+    public void BolaThrow() {
+        anim.Play(bolaThrow, .25f, FadeMode.FromStart).Events.OnEnd = () => thisChar.Idle();
     }
     public void Backstab() {
         anim.Play(backstab, .25f, FadeMode.FromStart).Events.OnEnd = () => thisChar.Idle();

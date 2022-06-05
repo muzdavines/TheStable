@@ -20,7 +20,7 @@ public class FaceSmash : ActiveSpecialMove {
         if (ball.holder == null || ball.holder != _char) {
             return false;
         }
-        StableCombatChar _enemy = _char.GetNearestEnemy();
+        StableCombatChar _enemy = _char.GetNearestEnemy(0,5f);
         if (_enemy.isKnockedDown || _enemy.isCannotTarget) { return false; }
         if (_enemy != null) {
             enemy = _enemy;

@@ -10,41 +10,47 @@ public class FlechettesEffect : MonoBehaviour
     public float startTime;
     StableCombatChar caster;
     public GameObject projectilePrefab;
-    public List<StableCombatChar> targets;
-    public List<GameObject> projectiles;
     public float projectileSpeed = 1;
+    class ProjectileTargets {
+        public StableCombatChar target;
+        public GameObject proj;
+    }
+    List<ProjectileTargets> projs = new List<ProjectileTargets>();
     public void Init(StableCombatChar _caster, StableDamage _damage) {
         caster = _caster;
         damage = _damage;
-        targets = new List<StableCombatChar>();
-        projectiles = new List<GameObject>();
         foreach (Collider col in Physics.OverlapSphere(transform.position, 15)) {
             var scc = col.GetComponent<StableCombatChar>();
             if (scc == null) { continue; }
             if (scc.team == caster.team) { continue; }
-            targets.Add(scc);
+            ProjectileTargets thisProj = new ProjectileTargets();
+            thisProj.target = scc;
             var go = Instantiate(projectilePrefab, transform.position, transform.rotation);
             go.SetActive(true);
-            projectiles.Add(go);
+            thisProj.proj = go;
+            projs.Add(thisProj);
         }
         init = true;
     }
     public void Update() {
         if (!init) { return; }
-        for (int x = 0; x < targets.Count; x++) {
-            projectiles[x].transform.LookAt(targets[x].position + new Vector3(0, 1, 0));
-            projectiles[x].transform.position += projectiles[x].transform.forward * Time.deltaTime * projectileSpeed;
-            if (Vector3.Distance(projectiles[x].transform.position, targets[x].position) <= 1.25f) {
-                targets[x].TakeDamage(new StableDamage() { mind = 2, balance = 2, stamina = 2, health = 1, isKnockdown = true }, caster);
+       
+        for (int x = 0; x < projs.Count; x++) {
+            if (projs[x].target == null || projs[x].proj == null) {
+                projs[x] = null;
+                continue;
+            }
+            projs[x].proj.transform.LookAt(projs[x].target.position + new Vector3(0, 1, 0));
+            projs[x].proj.transform.position += projs[x].proj.transform.forward * Time.deltaTime * projectileSpeed;
+            if (Vector3.Distance(projs[x].proj.transform.position, projs[x].target.position) <= 1.25f) {
+                projs[x].target.TakeDamage(new StableDamage() { mind = 2, balance = 2, stamina = 2, health = 1, isKnockdown = true }, caster);
                 print("#TODO#Add Slow Effect");
-                Destroy(projectiles[x]);
-                projectiles[x] = null;
-                targets[x] = null;
+                Destroy(projs[x].proj);
+                projs[x] = null;
             }
         }
-        projectiles.RemoveAll(x => x == null);
-        targets.RemoveAll(x => x == null);
-        if (targets.Count == 0) {
+        projs.RemoveAll(x => x == null);
+        if (projs.Count == 0) {
             Destroy(gameObject);
         }
     }

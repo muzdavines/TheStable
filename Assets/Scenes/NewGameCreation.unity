@@ -179,7 +179,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &11398720
 GameObject:
@@ -533,6 +533,36 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 38858765}
   m_CullTransparentMesh: 1
+--- !u!1 &84981523
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 84981524}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &84981524
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 84981523}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.00011917547, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &165477008
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -889,7 +919,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &382988949
 MonoBehaviour:
@@ -1049,88 +1079,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 554506816}
   m_CullTransparentMesh: 1
---- !u!114 &735832264
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5c751179885a4504bbe84727081f1f0c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  name: 
-  maxHP: 0
-  HP: 0
-  age: 0
-  strength: 20
-  agility: 10
-  dexterity: 10
-  carrying: 5
-  tackling: 25
-  runspeed: 13
-  shooting: 6
-  passing: 12
-  catching: 15
-  melee: 20
-  ranged: 10
-  magic: 5
-  xp: 0
-  health: 0
-  combatFocus: 0
-  maxStamina: 25
-  maxBalance: 15
-  maxMind: 15
-  maxHealth: 3
-  knownMoves:
-  - {fileID: 11400000, guid: 5f509c17b3179c049b823d59a0601bf6, type: 2}
-  - {fileID: 11400000, guid: 9718ff2f87bcd694099066b587a15546, type: 2}
-  activeMeleeMoves:
-  - {fileID: 11400000, guid: 5f509c17b3179c049b823d59a0601bf6, type: 2}
-  - {fileID: 11400000, guid: 5f509c17b3179c049b823d59a0601bf6, type: 2}
-  - {fileID: 11400000, guid: 9718ff2f87bcd694099066b587a15546, type: 2}
-  activeRangedMoves: []
-  startingSpecialMoves: []
-  startingTraits: []
-  activeTraits: []
-  activeSpecialMoves: []
-  gender: 0
-  race: 0
-  skinColor: 0
-  elements: 0
-  headCovering: 0
-  facialHair: 1
-  hair: 7
-  myGearSet: {fileID: 11400000, guid: 191611545beceb140932f90c2d424100, type: 2}
-  startingArmor: 
-  startingMeleeWeapon: FistsSO
-  startingRangedWeapon: BowSO
-  armor: {fileID: 1615838637}
-  meleeWeapon: {fileID: 1562622231}
-  rangedWeapon: {fileID: 1737570525}
-  mat: {fileID: 0}
-  contract:
-    weeksLeft: 10
-    weeklySalary: 100
-    signingBonus: 500
-  currentTraining: {fileID: 2087286826}
-  returnDate:
-    day: 1
-    month: 1
-    year: 1000
-    dayOfWeek: 0
-  activeForNextMission: 0
-  activeInLineup: 0
-  currentPosition: 0
-  incapacitated: 0
-  modelName: SCUnit3
-  modelNum: 0
-  skinNum: -1
-  currentObject: {fileID: 0}
-  archetype: 4
-  mod: {fileID: 0}
 --- !u!114 &737279039
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2112,7 +2060,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &1059052387
 AudioSource:
@@ -2379,7 +2327,7 @@ RectTransform:
   m_Children:
   - {fileID: 7771889540987082215}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -2995,7 +2943,7 @@ PrefabInstance:
     - target: {fileID: 4020228094471742083, guid: 7a170a5323a179d4d81f47c006828be4,
         type: 3}
       propertyPath: m_RootOrder
-      value: 7
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 4020228094471742083, guid: 7a170a5323a179d4d81f47c006828be4,
         type: 3}
@@ -3154,7 +3102,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1358724093
 MonoBehaviour:
@@ -3714,47 +3662,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1534500098}
   m_CullTransparentMesh: 0
---- !u!114 &1562622231
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5891795b828bc254085e32d277641456, type: 3}
-  m_Name: FistsSO(Clone)
-  m_EditorClassIdentifier: 
-  itemName: Fists
-  condition: 100
-  isOwned: 0
-  damage: 1
-  prefabName: Fists
-  dualWield: 1
-  isHeavy: 0
-  usesLegs: 1
-  prefabNameLegs: Fists
-  settingsPrefab: 
-  weaponType: 1
-  moveType: 0
---- !u!114 &1615838637
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 623d911d423dd7740bd2b9c76fa1c164, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemName: 
-  condition: 0
-  isOwned: 0
-  defense: 0
-  health: 0
 --- !u!1001 &1627338778
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -19058,30 +18965,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1627338778}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1737570525
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5891795b828bc254085e32d277641456, type: 3}
-  m_Name: BowSO(Clone)
-  m_EditorClassIdentifier: 
-  itemName: Bow
-  condition: 0
-  isOwned: 0
-  damage: 0
-  prefabName: Bow
-  dualWield: 0
-  isHeavy: 0
-  usesLegs: 0
-  prefabNameLegs: 
-  settingsPrefab: 
-  weaponType: 8
-  moveType: 1
 --- !u!1 &1757564560
 GameObject:
   m_ObjectHideFlags: 0
@@ -20186,29 +20069,6 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 2075474073}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2087286826
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 111af6b810b377e4ea76ec04a21b2336, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  type: 0
-  training: None
-  duration: 0
-  cost: 0
-  amount: 1
-  dateToTrain:
-    day: 1
-    month: 1
-    year: 99999
-    dayOfWeek: 0
-  moveToTrain: {fileID: 0}
 --- !u!21 &2090335088
 Material:
   serializedVersion: 6

@@ -28,6 +28,12 @@ public class SCBallCarrierState : StableCombatCharState
     }
     SCResolution TryTackle(StableCombatChar tackler) {
         var res = new SCResolution();
+        if (thisChar.FireAbility("UncannyDodge")) {
+            thisChar.UncannyDodge();
+            res.tackleType = TackleType.Strip;
+            res.success = false;
+            return res;
+        }
         bool tackleSuccess = false;
         int tacklerRoll = Random.Range(1, 21);
         int carrierRoll = Random.Range(1, 21);
@@ -41,6 +47,7 @@ public class SCBallCarrierState : StableCombatCharState
             tackleSuccess = true;
         }
         Debug.Log("#TackleRoll#Tackler Roll: " + tacklerRoll + " Tackler Abil " + tackler.myCharacter.tackling + "  Carrier Roll: " + carrierRoll + " Carrier Abil: " + thisChar.myCharacter.carrying + " Success: " + tackleSuccess);
+        thisChar.DisplaySpecialAbilityFeedback("Tackle: " + tacklerValue + " v. Carrier: " + carrierValue);
         res.success = tackleSuccess;
         res.tackleType = TackleType.Tackle;
         if (tackler.myCharacter.archetype == Character.Archetype.Rogue) {
