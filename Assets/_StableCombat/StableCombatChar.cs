@@ -394,6 +394,7 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
             Debug.Log("#PassTargetEvalReturn#" + currentTarget.name + " is my pass target.");
 #endif
         }
+        ball.ChangePassTarget(currentTarget);
         return currentTarget;
     }
     public bool ShouldSignalTeammateToRun() {

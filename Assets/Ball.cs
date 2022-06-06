@@ -13,6 +13,7 @@ public class Ball : MonoBehaviour
     public Vector3 passTargetPosition;
     public StableCombatChar lastlastHolder;
     public StableCombatChar lastHolder;
+    public StableCombatChar passTarget;
     public float velocity { get { return body.velocity.magnitude; } }
 
     float shootErrorAdjustment = 2.5f;
@@ -34,6 +35,10 @@ public class Ball : MonoBehaviour
                 transform.position = new Vector3(transform.position.x, 10, transform.position.z);
             }
         }
+    }
+
+    public void ChangePassTarget(StableCombatChar _target) {
+        passTarget = _target;
     }
 
     public void ChangeHolder(StableCombatChar newHolder) {
@@ -63,6 +68,7 @@ public class Ball : MonoBehaviour
     public bool PickupBall(StableCombatChar picker) {
         if (ignoreCollisions) { Debug.Log("#Ball#Cannot pickup, ignoring collisions"); return false; }
         if (isHeld) { Debug.Log("#Ball#Cannot pickup, already held."); return false; }
+        ChangePassTarget(null);
         Debug.Log("#Ball#Picked up by: " + picker.myCharacter.name);
         passTargetPosition = Vector3.zero;
         ChangeHolder(picker);
@@ -130,12 +136,14 @@ public class Ball : MonoBehaviour
         Release();
         passTargetPosition = Vector3.zero;
         body.AddForce(new Vector3(Random.Range(-2, 2), Random.Range(-2, 2), Random.Range(-2, 2)) * 100);
+        ChangePassTarget(null);
     }
     public void GetSwatted(Goal goal) {
         Release();
         passTargetPosition = Vector3.zero;
         body.velocity = Vector3.zero;
         body.AddForce(new Vector3(Random.Range(-2.5f,2.5f)*100,500, Random.Range(-2.5f, 2.5f)*100));
+        ChangePassTarget(null);
     }
     void Release() {
         heatSeek = false;
@@ -162,6 +170,7 @@ public class Ball : MonoBehaviour
         Debug.Log("#BallCollision#" + collision.transform.name);
         passTargetPosition = Vector3.zero;
         collision.transform.GetComponent<StableCombatChar>()?.state.BallCollision(collision);
+        ChangePassTarget(null);
     }
     
 }

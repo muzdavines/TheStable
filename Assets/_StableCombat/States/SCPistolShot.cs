@@ -21,10 +21,7 @@ public class SCPistolShot : SCCombatStanceState, CannotInterrupt, CannotTarget {
         thisChar.agent.isStopped = true;
         thisChar.agent.velocity = Vector3.zero;
         thisChar._t.LookAt(thisChar.myAttackTarget.position);
-        GameObject effect = Resources.Load<GameObject>("SmokeEffect");
-        var fx1 = GameObject.Instantiate(effect, thisChar.position, thisChar.transform.rotation);
-        //var fx2 = GameObject.Instantiate(effect, thisChar.myAttackTarget.position - thisChar.myAttackTarget.transform.forward, thisChar.transform.rotation);
-        GameObject.Destroy(fx1, 10);
+        
         //GameObject.Destroy(fx2, 10);
 
         thisChar.transform.LookAt(thisChar.myAttackTarget.transform);
@@ -60,10 +57,19 @@ public class SCPistolShot : SCCombatStanceState, CannotInterrupt, CannotTarget {
         }
         if (message == "DisplayWeapon") {
             DisplayWeapon(true);
+            
         }
         if (message == "HideWeapon") {
             DisplayWeapon(false);
             GameObject.Destroy(weapon);
+        }
+
+        if (message == "DisplayEffect") {
+            GameObject effect = Resources.Load<GameObject>("PistolShotSmokeEffect");
+            var fx1 = GameObject.Instantiate(effect);
+            fx1.transform.position = weapon.transform.position;
+            fx1.transform.rotation = Quaternion.Euler(new Vector3(-90,0,0));
+            GameObject.Destroy(fx1, 10);
         }
     }
     void DisplayWeapon(bool display) {

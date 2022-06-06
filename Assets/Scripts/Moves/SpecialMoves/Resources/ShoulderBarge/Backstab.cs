@@ -17,6 +17,12 @@ public class Backstab : ActiveSpecialMove {
           //  Debug.Log("#Backstab#CoolingDown");
             return false;
         }
+
+        if (_char.ball != null) {
+            if (_char.ball.passTarget == _char) {
+                return false;
+            }
+        }
         if (!_char.state.GetType().GetInterfaces().Contains(typeof(CanBackStab))) {
             //Debug.Log("#Backstab#Can't Backstab State");
             return false;

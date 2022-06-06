@@ -13,11 +13,11 @@ using HardCodeLab.TutorialMaster;
 public class Game : MonoBehaviour {
     private static Game _instance;
     public static Game instance { get { if (_instance == null) { _instance = GameObject.FindObjectOfType<Game>(); } if (_instance == null) { _instance = Instantiate(Resources.Load<GameObject>("Game")).GetComponent<Game>(); } return _instance; } }
-    public const int XPGame = 20;
-    public const int XPGoal = 50;
-    public const int XPTackle = 10;
-    public const int XPCombatDown = 30;
-    public const int XPAssist = 50;
+    public const int XPGame = 500;
+    public const int XPGoal = 500;
+    public const int XPTackle = 250;
+    public const int XPCombatDown = 250;
+    public const int XPAssist = 500;
     
     public Stable playerStable;
     public List<Stable> otherStables = new List<Stable>();

@@ -39,7 +39,11 @@ public class SCIdle : StableCombatCharState, ApexState
             thisChar.AggressorCombat();
             return;
         }
-        
+
+        if (ball.passTarget != null && ball.passTarget == thisChar) {
+            thisChar.TryCatchPass();
+            return;
+        }
         if (ball.holder == null) {
             if (thisChar.ShouldPursueBall()) {
                 thisChar.PursueBall();
