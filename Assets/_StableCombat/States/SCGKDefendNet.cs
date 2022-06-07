@@ -14,7 +14,17 @@ public class SCGKDefendNet : SCGKState
     public override void Update() {
         base.Update();
         thisChar.agent.isStopped = false;
-        if (Time.frameCount % 30 != 0) { return; }
+        float ballDist = thisChar.ball.Distance(thisChar);
+        if (ballDist>30) {
+            return;
+        }
+        if (ball.holder == null) {
+            if (ballDist < 10) {
+                thisChar.GKPursueBall();
+                return;
+            }
+        }
+        if (Time.frameCount % 10 != 0) { return; }
         Vector3 a = thisChar.myGoal.transform.position;
         Vector3 b = ball.transform.position;
 
