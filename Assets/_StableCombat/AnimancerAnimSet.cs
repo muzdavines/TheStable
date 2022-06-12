@@ -40,6 +40,7 @@ public class AnimancerAnimSet : ScriptableObject
     public AnimationClip uncannyDodge;
     public AnimationClip bolaThrow;
     public AnimationClip pistolShot;
+    public AnimationClip viciousMockery;
     public void Init(AnimancerController anim) {
         Debug.Log("Initialize Animset");
         anim.shootBall.Clip = shootBall;
@@ -81,5 +82,6 @@ public class AnimancerAnimSet : ScriptableObject
         anim.uncannyDodge.Clip = uncannyDodge;
         anim.bolaThrow.Clip = bolaThrow;
         anim.pistolShot.Clip = pistolShot;
+        anim.viciousMockery.Clip = viciousMockery;
     }
 }

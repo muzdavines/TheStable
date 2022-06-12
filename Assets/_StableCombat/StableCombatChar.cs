@@ -615,8 +615,8 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
         state.TransitionTo(new SCBolaThrow() { target = target });
     }
 
-    public void ViciousMockery() {
-
+    public void ViciousMockery(StableCombatChar target) {
+        state.TransitionTo(new SCViciousMockery() { target = target });
     }
     public void WallOfForce() {
 
@@ -648,7 +648,9 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
     public SCSpeedBuff InjuredBuff(float duration, float speedMod) {
         return gameObject.AddComponent<SCInjuredBuff>().Init(duration, speedMod);
     }
-
+    public SCAbilityBuff(float duration, float abilityMod, CharacterAttribute[] attributes) {
+        return GameObject.AddComponent<SCAbilityBuff>().Init(duration, abilityMod, attributes);
+    }
     public void GKDiveForBall() {
 
     }

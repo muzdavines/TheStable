@@ -44,6 +44,7 @@ public class AnimancerController : MonoBehaviour {
     public ClipTransition uncannyDodge;
     public ClipTransition bolaThrow;
     public ClipTransition pistolShot;
+    public ClipTransition viciousMockery;
     public List<Move> baseMeleeAttackMoves;
     public List<Move> baseRangedAttackMoves;
     NavMeshAgent agent;
@@ -172,7 +173,9 @@ public class AnimancerController : MonoBehaviour {
         anim.Play(shoulderBarge, .25f, FadeMode.FromStart).Events.OnEnd = () => anim.Play(shoulderBarge, .25f, FadeMode.FromStart).Events.OnEnd = () => anim.Play(shoulderBarge, .25f, FadeMode.FromStart).Events.OnEnd = () => thisChar.CombatIdle();
         shoulderBarge.State.Root.Component.Animator.applyRootMotion = true;
     }
-
+    public void ViciousMockery() {
+        anim.Play(viciousMockery, .25f, FadeMode.FromStart).Events.OnEnd = () => thisChar.Idle();
+    }
     public void UncannyDodge() {
         anim.Play(uncannyDodge, .25f, FadeMode.FromStart).Events.OnEnd = () => thisChar.PistolShot();
         uncannyDodge.State.Root.Component.Animator.applyRootMotion = true;
