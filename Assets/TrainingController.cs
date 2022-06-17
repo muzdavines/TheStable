@@ -182,6 +182,7 @@ public class TrainingController : MonoBehaviour, UIElement
             activeChar.shooting = 100;
             activeChar.carrying = 100;
             activeChar.tackling = 100;
+            activeChar.passing = 100;
             UpdateUI();
             GetComponentInParent<HeroMainController>().UpdateUI();
         }

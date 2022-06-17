@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SCPass : SCBallCarrierState
+public class SCPass : SCBallCarrierState, CannotSpecial
 {
     public StableCombatChar passTarget;
     public override void EnterFrom(StableCombatCharState state) {

@@ -8,11 +8,14 @@ public class SCBuff : MonoBehaviour
     public float startTime;
     public bool init;
     public bool endCalled;
+    public StableCombatChar thisChar;
     public virtual void Init(float _duration) {
+        thisChar = GetComponent<StableCombatChar>();
         duration = _duration;
         startTime = Time.time;
         init = true;
     }
+    
     public virtual void Start() {
 
     }

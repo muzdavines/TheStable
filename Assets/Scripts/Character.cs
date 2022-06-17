@@ -401,7 +401,7 @@ public class Character : Living {
         runspeed += Random.Range(-3, 4);
     }
 
-    public enum Archetype { Striker, Winger, Midfielder, Defender, Goalkeeper, Warrior, Rogue, Wizard, Swashbuckler, Assassin, Thief, Thug, Enforcer, Charlatan }
+    public enum Archetype { Striker, Winger, Midfielder, Defender, Goalkeeper, Warrior, Rogue, Wizard, Swashbuckler, Assassin, Thief, Thug, Enforcer, Charlatan, DarkWizard, LightWizard, ImperialWizard, VoidWizard, ExiledWizard, HolyWizard }
     public Archetype archetype;
     public UpgradeModifier mod;
     public void Awake() {
@@ -605,6 +605,55 @@ public class Character : Living {
                 maxMind += 35;
                 maxStamina += 15;
                 maxBalance += 25;
+                specialsToAdd.Add("ViciousMockery");
+                break;
+            case Archetype.LightWizard:
+                passing += 10;
+                tackling -= 10;
+                maxMind += 35;
+                maxStamina += 15;
+                maxBalance += 25;
+                specialsToAdd.Add("BallOfPower");
+                break;
+            case Archetype.DarkWizard:
+                passing -= 10;
+                tackling += 10;
+                maxMind += 25;
+                maxStamina += 25;
+                maxBalance += 25;
+                specialsToAdd.Add("BallHawk");
+                break;
+            case Archetype.ExiledWizard:
+                passing -= 10;
+                tackling += 10;
+                maxMind += 25;
+                maxStamina += 25;
+                maxBalance += 25;
+                specialsToAdd.Add("SummonVoidSpawn");
+                break;
+            case Archetype.HolyWizard:
+                passing += 10;
+                tackling -= 10;
+                maxMind += 35;
+                maxStamina += 15;
+                maxBalance += 25;
+                specialsToAdd.Add("BallOfDevotion");
+                break;
+            case Archetype.ImperialWizard:
+                passing += 10;
+                tackling -= 10;
+                maxMind += 35;
+                maxStamina += 15;
+                maxBalance += 25;
+                specialsToAdd.Add("Protection");
+                break;
+            case Archetype.VoidWizard:
+                passing -= 10;
+                tackling += 10;
+                maxMind += 25;
+                maxStamina += 25;
+                maxBalance += 25;
+                specialsToAdd.Add("TeleportTeammate");
                 break;
         }
         foreach (string s in specialsToAdd) {

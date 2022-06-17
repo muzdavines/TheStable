@@ -60,7 +60,7 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
     public Transform RH, LH, LL, RL;
     public SCWeapon RHMWeapon, LHMWeapon, RLWeapon, LLWeapon;
     public SCWeapon RHRWeapon, LHRWeapon;
-
+    public Transform hipsAttach;
     public MatchController matchController;
 
     public HeroFrame uiController;
@@ -329,7 +329,7 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
                 }
                 else { continue; }
             }
-            if (logic.HasFlag(PassTargetLogic.Wizard) && teammate.myCharacter.archetype != Character.Archetype.Wizard) {
+            if (logic.HasFlag(PassTargetLogic.Wizard) && !teammate.myCharacter.archetype.IsWizard()) {
                 continue;
             }
             if (logic.HasFlag(PassTargetLogic.NearGoal) && enemyGoal.Distance(teammate)>20) {
@@ -475,6 +475,12 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
         state.TransitionTo(new SCTackle());
     }
     public void GetTackled() {
+        var protection = GetComponent<SCProtectionBuff>();
+        if (protection != null) {
+            protection.GetTackled();
+            Idle();
+            return;
+        }
         state.TransitionTo(new SCGetTackled());
     }
     public void DodgeTackle(StableCombatChar tackler) {
@@ -618,6 +624,43 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
     public void ViciousMockery(StableCombatChar target) {
         state.TransitionTo(new SCViciousMockery() { target = target });
     }
+    public void GetMocked() {
+        state.TransitionTo(new SCGetMocked());
+    }
+
+    public void BallOfPower() {
+        state.TransitionTo(new SCBallOfPower());
+    }
+
+    public void BallOfDevotion() {
+        state.TransitionTo(new SCBallOfDevotion());
+    }
+
+    public void TeleportTeammate() {
+        state.TransitionTo(new SCTeleportTeammate());
+    }
+
+    public void Protection() {
+        state.TransitionTo(new SCProtection());
+    }
+
+    public bool IsProtected(string s) {
+        var protection = GetComponent<SCProtectionBuff>();
+        if (protection == null) {
+            return false;}
+
+        switch (s) {
+            case "Tackle":
+                protection.GetTackled();
+                break;
+            case "Damage":
+                protection.TakeDamage();
+                break;
+        }
+
+        return true;
+    }
+    
     public void WallOfForce() {
 
     }
@@ -648,8 +691,12 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
     public SCSpeedBuff InjuredBuff(float duration, float speedMod) {
         return gameObject.AddComponent<SCInjuredBuff>().Init(duration, speedMod);
     }
-    public SCAbilityBuff(float duration, float abilityMod, CharacterAttribute[] attributes) {
-        return GameObject.AddComponent<SCAbilityBuff>().Init(duration, abilityMod, attributes);
+    public SCAbilityBuff AbilityBuff(float duration, float abilityMod, CharacterAttribute[] attributes) {
+        return gameObject.AddComponent<SCAbilityBuff>().Init(duration, abilityMod, attributes); 
+    }
+
+    public void ProtectionBuff() {
+        gameObject.AddComponent<SCProtectionBuff>().Init(10f);
     }
     public void GKDiveForBall() {
 
@@ -805,6 +852,10 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
     public void TakeDamage(StableDamage damage, StableCombatChar attacker, bool shouldAnimate = true) {
         if (health <= 0)
             return;
+        
+        if (IsProtected("Damage")) {
+            return;
+        }
         takeDamage.PlayFeedbacks();
         if (shouldAnimate && Time.time > lastTakeDamageAnim + 3) {
             lastTakeDamageAnim = Time.time;
@@ -1012,6 +1063,13 @@ public static class StableCombatCharHelper {
 
     public static bool IsForward(this Position pos) {
         return (pos == Position.LW || pos == Position.STR || pos == Position.STL || pos == Position.STC || pos == Position.RW);
+    }
+
+    public static bool IsWizard(this Character.Archetype archetype) {
+        return (archetype == Character.Archetype.DarkWizard || archetype == Character.Archetype.LightWizard ||
+                archetype == Character.Archetype.Wizard || archetype == Character.Archetype.ImperialWizard ||
+                archetype == Character.Archetype.HolyWizard || archetype == Character.Archetype.ExiledWizard ||
+                archetype == Character.Archetype.VoidWizard);
     }
     public static StableCombatChar FindEnemyWithinRange(this StableCombatChar thisChar, float range) {
         List<StableCombatChar> enemies;

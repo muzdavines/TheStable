@@ -34,6 +34,11 @@ public class SCBallCarrierState : StableCombatCharState
             res.success = false;
             return res;
         }
+        if (thisChar.IsProtected("Tackle")) {
+            res.tackleType = TackleType.Strip;
+            res.success = false;
+            return res;
+        }
         bool tackleSuccess = false;
         int tacklerRoll = Random.Range(1, 21);
         int carrierRoll = Random.Range(1, 21);

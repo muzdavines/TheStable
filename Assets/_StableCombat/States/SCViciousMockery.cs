@@ -29,10 +29,11 @@ public class SCViciousMockery : SCCombatStanceState, CannotInterrupt, CannotTarg
         thisChar.anima.ViciousMockery();
         GameObject weaponPrefab = Resources.Load<GameObject>("ViciousMockeryWeapon");
         weapon = GameObject.Instantiate<GameObject>(weaponPrefab);
-        weapon.transform.parent = thisChar._rightHand;
+        weapon.transform.localScale = Vector3.one;
+        weapon.transform.parent = thisChar.hipsAttach;
         weapon.transform.localPosition = Vector3.zero;
         weapon.transform.localRotation = Quaternion.Euler(Vector3.zero);
-        weapon.transform.localScale = Vector3.one;
+        
         DisplayWeapon(false);
         thisChar.DisplaySpecialAbilityFeedback("Vicious Mockery");
         target.DisplaySpecialAbilityFeedback("Mocked by " + thisChar.myCharacter.name);
@@ -51,7 +52,7 @@ public class SCViciousMockery : SCCombatStanceState, CannotInterrupt, CannotTarg
         base.AnimEventReceiver(message);
         if (message == "ViciousMockeryDamage") {
             damageDelivered = true;
-            target.TakeDamage(new StableDamage() { balance = 100, health = 5, mind = 100, stamina = 100, isKnockdown = true }, thisChar);
+            target.GetMocked();
         }
         if (message == "DisplayWeapon") {
             DisplayWeapon(true);
