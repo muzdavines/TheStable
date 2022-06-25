@@ -53,7 +53,6 @@ public class Character : Living {
     public List<Trait> startingTraits = new List<Trait>();
     public List<Trait> activeTraits = new List<Trait>();
     public List<SpecialMove> activeSpecialMoves = new List<SpecialMove>();
-    public List<MoveSave> activeMovesSave = new List<MoveSave>();
     public SportStats seasonStats = new SportStats();
     public SportStats careerStats = new SportStats();
 
@@ -401,7 +400,7 @@ public class Character : Living {
         runspeed += Random.Range(-3, 4);
     }
 
-    public enum Archetype { Striker, Winger, Midfielder, Defender, Goalkeeper, Warrior, Rogue, Wizard, Swashbuckler, Assassin, Thief, Thug, Enforcer, Charlatan, DarkWizard, LightWizard, ImperialWizard, VoidWizard, ExiledWizard, HolyWizard }
+    public enum Archetype { Striker, Winger, Midfielder, Defender, Goalkeeper, Warrior, Rogue, Wizard, Swashbuckler, Assassin, Thief, Thug, Enforcer, Charlatan, DarkWizard, LightWizard, ImperialWizard, VoidWizard, ExiledWizard, HolyWizard, Soldier, Mercenary, DarkKnight, Paladin, Champion, Marauder }
     public Archetype archetype;
     public UpgradeModifier mod;
     public void Awake() {
@@ -655,6 +654,55 @@ public class Character : Living {
                 maxBalance += 25;
                 specialsToAdd.Add("TeleportTeammate");
                 break;
+            case Archetype.Mercenary:
+                tackling -= 10;
+                carrying += 10;
+                maxMind += 10;
+                maxStamina += 30;
+                maxBalance += 20;
+                specialsToAdd.Add("BullRush");
+                break;
+            case Archetype.Soldier:
+                tackling += 10;
+                carrying -= 10;
+                maxMind += 25;
+                maxStamina += 25;
+                maxBalance += 25;
+                specialsToAdd.Add("SwordFlurry");
+                break;
+            case Archetype.Champion:
+                tackling += 10;
+                carrying -= 10;
+                maxMind += 30;
+                maxStamina += 30;
+                maxBalance += 30;
+                specialsToAdd.Add("RallyingCry");
+                break;
+            case Archetype.DarkKnight:
+                tackling -= 10;
+                carrying += 10;
+                maxMind += 40;
+                maxStamina += 20;
+                maxBalance += 20;
+                specialsToAdd.Add("SoulSteal");
+                break;
+            case Archetype.Marauder:
+                tackling -= 10;
+                carrying += 10;
+                maxMind += 15;
+                maxStamina += 35;
+                maxBalance += 20;
+                specialsToAdd.Add("Execute");
+                break;
+            case Archetype.Paladin:
+                tackling += 10;
+                carrying -= 10;
+                maxMind += 25;
+                maxStamina += 25;
+                maxBalance += 25;
+                specialsToAdd.Add("ArrowSwat");
+                break;
+           
         }
         foreach (string s in specialsToAdd) {
             Type myType = Type.GetType(s);

@@ -45,8 +45,16 @@ public class AnimancerController : MonoBehaviour {
     public ClipTransition bolaThrow;
     public ClipTransition pistolShot;
     public ClipTransition viciousMockery;
+    public List<ClipTransition> swordFlurry;
+    public ClipTransition bullRush;
+    public ClipTransition arrowSwat;
+    public ClipTransition soulSteal;
+    public ClipTransition execute;
+    public ClipTransition rallyingCry;
+    public ClipTransition divineIntervention;
     public List<Move> baseMeleeAttackMoves;
     public List<Move> baseRangedAttackMoves;
+    
     NavMeshAgent agent;
     StableCombatChar thisChar;
     public bool shouldBackpedal;
@@ -216,6 +224,19 @@ public class AnimancerController : MonoBehaviour {
     public void JumpCatch() {
         Debug.Log("#BallHawk#JumpCatchAnim");
         anim.Play(jumpCatch, .25f, FadeMode.FromStart).Events.OnEnd = () => thisChar.Idle();
+    }
+
+    public void SwordFlurry(int index=0) {
+        currentMeleeMove = new Move() { healthDamage = 1, staminaDamage = 20, mindDamage = 20, balanceDamage = 20 };
+        if (index >= swordFlurry.Count) {
+            thisChar.Idle();
+            return;
+        }
+        anim.Play(swordFlurry[index++], .25f, FadeMode.FromStart).Events.OnEnd = () => SwordFlurry(index);
+    }
+
+    public void DivineIntervention() {
+        anim.Play(divineIntervention, .25f, FadeMode.FromStart).Events.OnEnd = () => thisChar.Idle();
     }
     public void GKBored() {
 

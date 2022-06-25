@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SCIntroState :  StableCombatCharState {
+public class SCIntroState :  StableCombatCharState, CannotSpecial {
 
     public Transform myPos;
     public override void EnterFrom(StableCombatCharState state) {

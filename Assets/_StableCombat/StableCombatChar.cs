@@ -644,6 +644,38 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
         state.TransitionTo(new SCProtection());
     }
 
+    public void SwordFlurry(StableCombatChar victim) {
+        state.TransitionTo(new SCSwordFlurry() { victim = victim });
+    }
+
+    public void SwordFlurryVictim(StableCombatChar attacker) {
+        state.TransitionTo(new SCSwordFlurryVictim(){attacker = attacker});
+    }
+
+    public void BullRush() {
+        state.TransitionTo(new SCBullRush());
+    }
+
+    public void DivineIntervention() {
+        state.TransitionTo(new SCDivineIntervention());
+    }
+
+    public void ArrowSwat() {
+        state.TransitionTo(new SCArrowSwat());
+    }
+
+    public void SoulSteal() {
+        state.TransitionTo(new SCSoulSteal());
+    }
+
+    public void Execute() {
+        state.TransitionTo(new SCExecute());
+    }
+
+    public void RallyingCry() {
+        state.TransitionTo(new SCRallyingCry());
+    }
+    
     public bool IsProtected(string s) {
         var protection = GetComponent<SCProtectionBuff>();
         if (protection == null) {

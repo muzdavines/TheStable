@@ -8,6 +8,7 @@ using System.IO;
 
 using System.Text.RegularExpressions;
 using HardCodeLab.TutorialMaster;
+using UnityEngine.AI;
 
 [System.Serializable]
 public class Game : MonoBehaviour {
@@ -303,6 +304,12 @@ public static class Helper {
         i += (thisDate.month - otherDate.month) * 30;
         i += thisDate.day - otherDate.day;
         return Mathf.Abs(i);
+    }
+
+    public static NavMeshAgent TotalStop (this NavMeshAgent agent) {
+        agent.isStopped = true;
+        agent.velocity = Vector3.zero;
+        return agent;
     }
 
         public static bool IsExpired(MissionContract c) {
