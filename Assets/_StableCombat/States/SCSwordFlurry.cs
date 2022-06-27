@@ -20,11 +20,20 @@ public class SCSwordFlurry: StableCombatCharState, CannotSpecial, CannotTarget {
     }
 
     private bool attackFired = false;
+    IEnumerator DelayIdle() {
+        yield return new WaitForSeconds(1.5f);
+        thisChar.Idle();
+        thisChar.RHMWeapon.gameObject.SetActive(false);
+    }
+    bool notActive;
     public override void Update() {
+        if (notActive) {
+            return;
+        }
         base.Update();
         if (victim == null || victim.isKnockedDown) {
-            thisChar.Idle();
-            thisChar.RHMWeapon.gameObject.SetActive(false);
+            notActive = true;
+            thisChar.StartCoroutine(DelayIdle());
             return;
         }
         if (thisChar.Distance(victim) > 1.5f) {

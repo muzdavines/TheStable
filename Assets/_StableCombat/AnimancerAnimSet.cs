@@ -46,6 +46,7 @@ public class AnimancerAnimSet : ScriptableObject
     public AnimationClip arrowSwat;
     public AnimationClip soulSteal;
     public AnimationClip execute;
+    public AnimationClip executeVictim;
     public AnimationClip rallyingCry;
     public void Init(AnimancerController anim) {
         Debug.Log("Initialize Animset");
@@ -93,12 +94,13 @@ public class AnimancerAnimSet : ScriptableObject
         foreach (var t in swordFlurry) {
             anim.swordFlurry.Add(new ClipTransition(){Clip = t});
         }
-
+        anim.execute.Clip = execute;
+        anim.executeVictim.Clip = executeVictim;
         return;
         anim.bullRush.Clip = bullRush;
         anim.arrowSwat.Clip = arrowSwat;
         anim.soulSteal.Clip = soulSteal;
-        anim.execute.Clip = execute; 
+        
         anim.rallyingCry.Clip = rallyingCry; 
 }
 }

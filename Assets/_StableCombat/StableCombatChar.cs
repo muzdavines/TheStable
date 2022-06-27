@@ -82,7 +82,11 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
     public bool isStateLocked { get { return state.GetType().GetInterfaces().Contains(typeof(CannotInterrupt)); } }
     public bool isCannotTarget { get { return state.GetType().GetInterfaces().Contains(typeof(CannotTarget)); } }
     public bool isCannotSpecial { get { return state.GetType().GetInterfaces().Contains(typeof(CannotSpecial)); } } 
+    public bool isCanDamageButNotChangeState { get { return state.GetType().GetInterfaces().Contains(typeof(CanDamageButNotChangeState)); } }
+    public bool isShouldHoldBall { get { return state.GetType().GetInterfaces().Contains(typeof(ShouldHoldBall)); } }    //Sport
+
     //Sport
+
     public float tackleCooldown; //Time after which the player can tackle again
 
     public void Init()
@@ -154,6 +158,12 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
         switch (myCharacter.archetype) {
             case Character.Archetype.Warrior:
                 distToShoot = 8;
+                break;
+            case Character.Archetype.Soldier:
+                distToShoot = 7;
+                break;
+            case Character.Archetype.Mercenary:
+                distToShoot = 11;
                 break;
         }
     }
@@ -287,6 +297,9 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
        return GuardNetPosition.None;
     }
     public bool ShouldPass() {
+        if (isShouldHoldBall) {
+            return false;
+        }
         Vector3 goalDirection = enemyGoal.transform.position - transform.position;
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, 7f);
         foreach (var hitCollider in hitColliders) {
@@ -668,8 +681,11 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
         state.TransitionTo(new SCSoulSteal());
     }
 
-    public void Execute() {
-        state.TransitionTo(new SCExecute());
+    public void Execute(StableCombatChar victim) {
+        state.TransitionTo(new SCExecute() { victim = victim });
+    }
+    public void ExecuteVictim() {
+        state.TransitionTo(new SCExecuteVictim());
     }
 
     public void RallyingCry() {
@@ -888,8 +904,11 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
         if (IsProtected("Damage")) {
             return;
         }
+
         takeDamage.PlayFeedbacks();
-        if (shouldAnimate && Time.time > lastTakeDamageAnim + 3) {
+        if (isCanDamageButNotChangeState) {
+            anima.TakeDamage(false);
+        } else if (shouldAnimate && Time.time > lastTakeDamageAnim + 3) {
             lastTakeDamageAnim = Time.time;
             state.TransitionTo(new SCTakeDamage());
         }
@@ -1133,7 +1152,12 @@ public interface CannotTarget {
 public interface CannotSpecial {
 
 }
+public interface CanDamageButNotChangeState {
 
+}
+public interface ShouldHoldBall {
+
+}
 
 static class Methods {
     public static void Inform(string parameter) {

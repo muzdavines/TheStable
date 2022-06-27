@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ClosingSpeed :  ActiveSpecialMove {
+public class ClosingSpeed : ActiveSpecialMove {
     float lastFired;
     public override void OnActivate(StableCombatChar _char) {
         base.OnActivate(_char);

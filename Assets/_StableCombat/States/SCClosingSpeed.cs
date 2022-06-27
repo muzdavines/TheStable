@@ -28,6 +28,9 @@ public class SCClosingSpeed : StableCombatCharState, CannotTarget {
                 thisChar.GetTackled();
                 thisChar.ball.holder.UncannyDodge();
             }
+            else if (thisChar.ball.holder.state.GetType() == typeof(SCBullRush)) {
+                thisChar.GetTackled();
+            }
             else {
                 thisChar.Tackle();
                 thisChar.ball.holder.TakeDamage(new StableDamage() { balance = 5, health = 1 }, thisChar, false);

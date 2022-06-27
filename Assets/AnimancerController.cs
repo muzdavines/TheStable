@@ -50,8 +50,10 @@ public class AnimancerController : MonoBehaviour {
     public ClipTransition arrowSwat;
     public ClipTransition soulSteal;
     public ClipTransition execute;
+    public ClipTransition executeVictim;
     public ClipTransition rallyingCry;
     public ClipTransition divineIntervention;
+    
     public List<Move> baseMeleeAttackMoves;
     public List<Move> baseRangedAttackMoves;
     
@@ -198,6 +200,7 @@ public class AnimancerController : MonoBehaviour {
     public void BackstabVictim() {
         anim.Play(backstabVictim, .25f, FadeMode.FromStart).Events.OnEnd = () => thisChar.Idle();
     }
+   
     public void Assassinate() {
         anim.Play(assassinate, .25f, FadeMode.FromStart).Events.OnEnd = () => thisChar.Idle();
     }
@@ -229,12 +232,18 @@ public class AnimancerController : MonoBehaviour {
     public void SwordFlurry(int index=0) {
         currentMeleeMove = new Move() { healthDamage = 1, staminaDamage = 20, mindDamage = 20, balanceDamage = 20 };
         if (index >= swordFlurry.Count) {
-            thisChar.Idle();
+            Idle();
+            StartCoroutine(DelayIdle());
             return;
         }
         anim.Play(swordFlurry[index++], .25f, FadeMode.FromStart).Events.OnEnd = () => SwordFlurry(index);
     }
-
+    public void Execute() {
+        anim.Play(execute, .25f, FadeMode.FromStart).Events.OnEnd = () => thisChar.Idle();
+    }
+    public void ExecuteVictim() {
+        anim.Play(executeVictim, .25f, FadeMode.FromStart).Events.OnEnd = () => thisChar.Idle();
+    }
     public void DivineIntervention() {
         anim.Play(divineIntervention, .25f, FadeMode.FromStart).Events.OnEnd = () => thisChar.Idle();
     }
@@ -309,10 +318,14 @@ public class AnimancerController : MonoBehaviour {
 
 
 
-    public void TakeDamage() {
+    public void TakeDamage(bool idleOnEnd = true) {
         currentMeleeAttackIndex = -1;
         currentRangedAttackIndex = -1;
-        anim.Play(takeDamage).Events.OnEnd = () => thisChar.CombatIdle();
+        anim.Play(takeDamage).Events.OnEnd = () => { if (idleOnEnd) { thisChar.CombatIdle(); } else { Idle(); } };
+    }
+    IEnumerator DelayIdle() {
+        yield return new WaitForSeconds(1.0f);
+        thisChar.Idle();
     }
 
     void Update()

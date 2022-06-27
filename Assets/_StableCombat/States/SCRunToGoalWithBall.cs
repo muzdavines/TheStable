@@ -14,6 +14,8 @@ public class SCRunToGoalWithBall : SCBallCarrierState
         speedBuff = thisChar.SpeedBuff(8, -0.825f);
         thisChar.agent.SetDestination(thisChar.enemyGoal.transform.position + thisChar.enemyGoal.transform.forward * 5 + thisChar.enemyGoal.transform.right * (Random.value - .5f));
         canGrabBall = false;
+        runTime = 0;
+        runTolerance = thisChar.myCharacter.archetype == Character.Archetype.Mercenary ? 2f : 0;
         //Debug.Log("Check for one timer here");
     }
     public override void Update() {
@@ -25,6 +27,9 @@ public class SCRunToGoalWithBall : SCBallCarrierState
         thisChar.agent.isStopped = false;
         if (ShouldShoot()) {
             thisChar.Shoot();
+            return;
+        }
+        if (ShouldRun()) {
             return;
         }
         if (thisChar.enemyGoal.Distance(thisChar) < 30) {

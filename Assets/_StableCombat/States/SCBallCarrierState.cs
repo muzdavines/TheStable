@@ -26,6 +26,20 @@ public class SCBallCarrierState : StableCombatCharState
         }
         return false;
     }
+    public float runTolerance;
+    public float runTime;
+    public bool ShouldRun() {
+        if (runTime > runTolerance) {
+            return false;
+        } else {
+            return true;
+        }
+
+    }
+    public override void Update() {
+        base.Update();
+        runTime += Time.deltaTime;
+    }
     SCResolution TryTackle(StableCombatChar tackler) {
         var res = new SCResolution();
         if (thisChar.FireAbility("UncannyDodge")) {
