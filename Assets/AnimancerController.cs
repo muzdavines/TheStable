@@ -126,7 +126,9 @@ public class AnimancerController : MonoBehaviour {
     public void GoalScored() {
         anim.Play(goalScored, .25f, FadeMode.FromStart);
     }
-
+    public void SoulSteal() {
+        anim.Play(soulSteal, .25f, FadeMode.FromStart).Events.OnEnd = () => thisChar.Idle();
+    }
     public void DodgeTackle(string dodgeType = "Front") {
         int thisClip = dodgeType == "Front" ? 0 : 1;
         anim.Play(dodgeTackle[thisClip], .25f, FadeMode.FromStart).Events.OnEnd = () => thisChar.Idle();

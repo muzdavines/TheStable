@@ -677,8 +677,8 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
         state.TransitionTo(new SCArrowSwat());
     }
 
-    public void SoulSteal() {
-        state.TransitionTo(new SCSoulSteal());
+    public void SoulSteal(StableCombatChar enemy) {
+        state.TransitionTo(new SCSoulSteal() { enemy = enemy });
     }
 
     public void Execute(StableCombatChar victim) {
@@ -688,8 +688,8 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
         state.TransitionTo(new SCExecuteVictim());
     }
 
-    public void RallyingCry() {
-        state.TransitionTo(new SCRallyingCry());
+    public void RallyingCry(ActiveSpecialMove specialMove) {
+        state.TransitionTo(new SCRallyingCry() { specialMove = specialMove });
     }
     
     public bool IsProtected(string s) {
@@ -741,6 +741,9 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
     }
     public SCAbilityBuff AbilityBuff(float duration, float abilityMod, CharacterAttribute[] attributes) {
         return gameObject.AddComponent<SCAbilityBuff>().Init(duration, abilityMod, attributes); 
+    }
+    public SCAbilityBuff RallyingCryBuff(float duration, float abilityMod, CharacterAttribute[] attributes) {
+        return gameObject.AddComponent<SCRallyingCryBuff>().Init(duration, abilityMod, attributes);
     }
 
     public void ProtectionBuff() {

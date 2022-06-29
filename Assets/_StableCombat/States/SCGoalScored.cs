@@ -9,6 +9,17 @@ public class SCGoalScored : StableCombatCharState, SCReviveUnit
         base.EnterFrom(state);
         thisChar.agent.isStopped = true;
         canGrabBall = false;
+        foreach (ActiveSpecialMove m in thisChar.myCharacter.activeSpecialMoves) {
+            if (m.GetType() == typeof(RallyingCry)) {
+                int myScore = thisChar.team == 0 ? thisChar.matchController.homeScore : thisChar.matchController.awayScore;
+                int otherScore = thisChar.team == 1 ? thisChar.matchController.homeScore : thisChar.matchController.awayScore;
+                if (myScore < otherScore) {
+                    m.OnActivate(thisChar);
+                } else {
+                    (m as RallyingCry).DeactivateAll();
+                }
+            }
+        }
         thisChar.anima.GoalScored();
     }
     public override void Update() {

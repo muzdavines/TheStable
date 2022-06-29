@@ -96,10 +96,11 @@ public class AnimancerAnimSet : ScriptableObject
         }
         anim.execute.Clip = execute;
         anim.executeVictim.Clip = executeVictim;
+        anim.soulSteal.Clip = soulSteal;
         return;
         anim.bullRush.Clip = bullRush;
         anim.arrowSwat.Clip = arrowSwat;
-        anim.soulSteal.Clip = soulSteal;
+       
         
         anim.rallyingCry.Clip = rallyingCry; 
 }
