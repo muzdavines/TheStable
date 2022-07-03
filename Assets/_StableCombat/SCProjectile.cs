@@ -16,7 +16,8 @@ public class SCProjectile : MonoBehaviour
     public bool isKinematic;
     public float speed = 1f;
     public bool fired = false;
-    StableCombatChar launcherChar;
+    public StableCombatChar launcherChar;
+    public StableCombatChar targetChar;
     Transform _t;
     private void Start() {
         _t = transform;

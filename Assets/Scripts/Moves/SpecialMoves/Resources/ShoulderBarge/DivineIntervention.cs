@@ -2,17 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DivineIntervention : MonoBehaviour
-{
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+public class DivineIntervention : ActiveSpecialMove {
+    float lastFired;
+
+    public override void OnActivate(StableCombatChar _char) {
+        base.OnActivate(_char);
+        lastFired = Time.time;
+        _char.DivineIntervention();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+    public override bool Check(StableCombatChar _char) {
+
+        if (Time.time <= lastFired + 15) { return false; }
+        if (_char.isKnockedDown) { return false; }
+        if (FindObjectOfType<SCProjectile>()) {
+            OnActivate(_char);
+            return true;
+        }
+        return false;
     }
 }

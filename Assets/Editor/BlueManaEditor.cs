@@ -31,35 +31,45 @@ public class BlueManaEditor : EditorWindow
     }
 
     private void Create() {
-        var body = target.AddComponent<Rigidbody>();
+        Rigidbody body = target.GetComponent<Rigidbody>();
+        body ??= target.AddComponent<Rigidbody>();
         body.mass = 60;
         body.isKinematic = true;
-        var agent = target.AddComponent<NavMeshAgent>();
+        var agent = target.GetComponent<NavMeshAgent>();
+        agent ??= target.AddComponent<NavMeshAgent>();
         agent.radius = .3f;
-        var capsule = target.AddComponent<CapsuleCollider>();
+        var capsule = target.GetComponent<CapsuleCollider>();
+        capsule ??= target.AddComponent<CapsuleCollider>();
         capsule.radius = .3f;
         capsule.height = 2f;
         capsule.center = new Vector3(0,1f,0);
-        target.AddComponent<MovementAnimationController>();
-        var thisChar = target.AddComponent<StableCombatChar>();
+        MovementAnimationController animControl = target.GetComponent<MovementAnimationController>();
+        animControl ??= target.AddComponent<MovementAnimationController>();
+        var thisChar = target.GetComponent<StableCombatChar>();
+        thisChar ??= target.AddComponent<StableCombatChar>();
         thisChar.distToTrackBall = 90;
         thisChar.distToTrackEnemy = 20;
         thisChar.distToTrackBallCarrier = 2;
-        var feedbacks = Instantiate<GameObject>(Resources.Load<GameObject>("Feedbacks"));
-        feedbacks.transform.parent = target.transform;
-        feedbacks.transform.localPosition = Vector3.zero;
-        feedbacks.transform.localRotation = Quaternion.Euler(Vector3.zero);
-        feedbacks.GetComponent<FeedbacksController>().Init(thisChar);
+        var feedbackControl = target.GetComponentInChildren<FeedbacksController>();
+        if (feedbackControl == null) {
+            var feedbacks = Instantiate<GameObject>(Resources.Load<GameObject>("Feedbacks"));
+            feedbacks.transform.parent = target.transform;
+            feedbacks.transform.localPosition = Vector3.zero;
+            feedbacks.transform.localRotation = Quaternion.Euler(Vector3.zero);
+            feedbacks.GetComponent<FeedbacksController>().Init(thisChar);
+        }
         thisChar._rightHand = rightHandFinger;
         thisChar.RH = RH;
         thisChar.LH = LH;
         thisChar.RL = RL;
         thisChar.LL = LL;
-        var anim = target.AddComponent<AnimancerController>();
+        var anim = target.GetComponent<AnimancerController>();
+        anim ??= target.AddComponent<AnimancerController>();
         anim.animSet = Resources.Load<AnimancerAnimSet>("DefaultAnimSet");
         anim.dodgeTackle = new ClipTransition[5];
         anim.skills = new ClipTransition[1];
-        var animc = target.AddComponent<AnimancerComponent>();
+        var animc = target.GetComponent<AnimancerComponent>();
+        animc ??= target.AddComponent<AnimancerComponent>();
         anim.anim = animc;
         animc.Animator = target.GetComponent<Animator>();
         target.tag = "Character";

@@ -86,7 +86,7 @@ public class MatchController : MonoBehaviour
                 thisChar.fieldSport = true;
                 thisChar.myCharacter = thisBaseChar;
                 thisChar.fieldPosition = thisBaseChar.currentPosition;
-                thisChar.GetComponent<CharacterRandomizer>().Init(thisBaseChar, primaryColor, secondaryColor);
+                thisChar.GetComponent<CharacterRandomizer>()?.Init(thisBaseChar, primaryColor, secondaryColor);
                 thisChar.Init();
             }
         }

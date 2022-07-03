@@ -415,7 +415,9 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
         return false;
     }
     public void Reset() {
-        state.TransitionTo(new SCReset());
+        if (state != null) {
+            state.TransitionTo(new SCReset());
+        }
     }
     public void Idle() {
         playStyle = PlayStyle.Play;
@@ -596,6 +598,9 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
     }
     public void SummonFireGolem() {
         state.TransitionTo(new SCSummonFireGolem());
+    }
+    public void SummonVoidspawn() {
+        state.TransitionTo(new SCSummonVoidspawn());
     }
     public void ClosingSpeed() {
         state.TransitionTo(new SCClosingSpeed());

@@ -19,16 +19,22 @@ public class FlechettesEffect : MonoBehaviour
     public void Init(StableCombatChar _caster, StableDamage _damage) {
         caster = _caster;
         damage = _damage;
+        var flechettePrefab = Resources.Load<GameObject>("FlechettesProjectile");
         foreach (Collider col in Physics.OverlapSphere(transform.position, 15)) {
             var scc = col.GetComponent<StableCombatChar>();
             if (scc == null) { continue; }
             if (scc.team == caster.team) { continue; }
             ProjectileTargets thisProj = new ProjectileTargets();
             thisProj.target = scc;
-            var go = Instantiate(projectilePrefab, transform.position, transform.rotation);
-            go.SetActive(true);
-            thisProj.proj = go;
-            projs.Add(thisProj);
+            SCProjectile projectile = Instantiate<GameObject>(flechettePrefab).GetComponent<SCProjectile>();
+            projectile.transform.position = caster.RH.position;
+            projectile.transform.localRotation = caster.RH.rotation;
+            projectile.Fire(scc._t, new StableDamage() { mind = 2, balance = 2, stamina = 2, health = 1, isKnockdown = true }, caster);
+
+            //var go = Instantiate(projectilePrefab, transform.position, transform.rotation);
+            //go.SetActive(true);
+            //thisProj.proj = go;
+            //projs.Add(thisProj);
         }
         init = true;
     }

@@ -628,7 +628,7 @@ public class Character : Living {
                 maxMind += 25;
                 maxStamina += 25;
                 maxBalance += 25;
-                specialsToAdd.Add("SummonVoidSpawn");
+                specialsToAdd.Add("SummonVoidspawn");
                 break;
             case Archetype.HolyWizard:
                 passing += 10;
@@ -700,7 +700,7 @@ public class Character : Living {
                 maxMind += 25;
                 maxStamina += 25;
                 maxBalance += 25;
-                specialsToAdd.Add("ArrowSwat");
+                specialsToAdd.Add("DivineIntervention");
                 break;
            
         }
