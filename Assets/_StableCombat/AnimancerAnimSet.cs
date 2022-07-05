@@ -43,7 +43,7 @@ public class AnimancerAnimSet : ScriptableObject
     public AnimationClip viciousMockery;
     public AnimationClip[] swordFlurry;
     public AnimationClip bullRush;
-    public AnimationClip arrowSwat;
+    public AnimationClip divineIntervention;
     public AnimationClip soulSteal;
     public AnimationClip execute;
     public AnimationClip executeVictim;
@@ -97,9 +97,10 @@ public class AnimancerAnimSet : ScriptableObject
         anim.execute.Clip = execute;
         anim.executeVictim.Clip = executeVictim;
         anim.soulSteal.Clip = soulSteal;
+        anim.divineIntervention.Clip = divineIntervention;
         return;
         anim.bullRush.Clip = bullRush;
-        anim.arrowSwat.Clip = arrowSwat;
+       
        
         
         anim.rallyingCry.Clip = rallyingCry; 

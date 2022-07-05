@@ -13,12 +13,14 @@ public class DivineIntervention : ActiveSpecialMove {
 
     public override bool Check(StableCombatChar _char) {
 
-        if (Time.time <= lastFired + 15) { return false; }
+        if (Time.time <= lastFired + 5) { return false; }
         if (_char.isKnockedDown) { return false; }
         if (FindObjectOfType<SCProjectile>()) {
+            Debug.Log("#DivineIntervention#Activate");
             OnActivate(_char);
             return true;
         }
         return false;
     }
+
 }

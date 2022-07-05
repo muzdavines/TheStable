@@ -38,7 +38,15 @@ public class Coach : MonoBehaviour
         }
     }
 
-
+    public void CheckDivineIntervention() {
+        foreach (var p in players) {
+            foreach (var a in p.myCharacter.activeSpecialMoves) {
+                if (a.GetType() == typeof(DivineIntervention)) {
+                    a.Check(p);
+                }
+            }
+        }
+    }
 
     public bool AddBallPursuer(StableCombatChar newPursuer) {
         for (int i = 0; i<players.Length; i++) {

@@ -47,7 +47,6 @@ public class AnimancerController : MonoBehaviour {
     public ClipTransition viciousMockery;
     public List<ClipTransition> swordFlurry;
     public ClipTransition bullRush;
-    public ClipTransition arrowSwat;
     public ClipTransition soulSteal;
     public ClipTransition execute;
     public ClipTransition executeVictim;

@@ -19,12 +19,14 @@ public class SCProjectile : MonoBehaviour
     public StableCombatChar launcherChar;
     public StableCombatChar targetChar;
     Transform _t;
+
     private void Start() {
         _t = transform;
         col = GetComponent<SphereCollider>();
         body = GetComponent<Rigidbody>();
         col.isTrigger = true;
         body.isKinematic = isKinematic;
+        targetChar.coach.CheckDivineIntervention();
     }
     private void Update() {
         if (!fired) { return; }
@@ -34,18 +36,27 @@ public class SCProjectile : MonoBehaviour
 
     public void OnTriggerEnter(Collider other) {
         StableCombatChar otherChar = other.GetComponent<StableCombatChar>();
-        if (otherChar == null) { return; }
+        if (otherChar == null) {
+            return;
+        }
+
         if (otherChar == launcherChar || otherChar.team == launcherChar.team) {
             return;
         }
+
         fired = false;
         col.enabled = false;
+
+
         if (otherChar != null) {
             otherChar.TakeDamage(myDamage, launcherChar);
         }
+
         if (collisionEffect != null) {
             Destroy(Instantiate<GameObject>(collisionEffect, transform.position, transform.rotation), 5.0f);
         }
+
+
         Destroy(gameObject, .05f);
     }
 
