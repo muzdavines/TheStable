@@ -28,9 +28,19 @@ public class MatchController : MonoBehaviour
     public PlayableDirector outroDirector;
     public HeroUIController heroUIController;
     public Transform oneTimerCam;
+
+    public TextMeshProUGUI announcer;
+    public List<AnnouncerLine> announcerLines;
+    public class AnnouncerLine {
+        public string line;
+        public float endTime;
+    }
+
     public void Start() {
         //match = Game.instance.activeMatch;
         ball.transform.position = new Vector3(0,1,0);
+        announcerLines = new List<AnnouncerLine>();
+        AddAnnouncerLine("Welcome to the Match!");
         if (debug) {
             DebugInit();
         } else { Init(); }
@@ -153,12 +163,17 @@ public class MatchController : MonoBehaviour
         lastTeamToScore = team;
         goal.ShakeCamera(2, .5f, 5, 1, 1, 1, false);
         if (team == ball.lastHolder.team) {
+            announcerLines = new List<AnnouncerLine>();
             ball.lastHolder.myCharacter.seasonStats.goals++;
             ball.lastHolder.myCharacter.xp += Game.XPGoal;
             if (ball.lastlastHolder?.team == lastTeamToScore && ball.lastlastHolder != ball.lastHolder) {
                 ball.lastlastHolder.myCharacter.seasonStats.assists++;
                 ball.lastlastHolder.myCharacter.xp += Game.XPAssist;
+                AddAnnouncerLine("It was set up with the assist from " + ball.lastlastHolder.myCharacter.name);
             }
+            string goalString = announcerGoalLines[Random.Range(0, announcerGoalLines.Length)].Replace("XYZ", ball.lastHolder.myCharacter.name);
+            AddAnnouncerLine(goalString);
+            
             ball.lastlastHolder = null;
             ball.lastHolder = null;
         }
@@ -181,6 +196,8 @@ public class MatchController : MonoBehaviour
     bool gameOver;
     private void Update() {
         if (gameOver) { return; }
+        if (Time.frameCount % 30 != 0) { return; }
+        UpdateAnnouncerLines();
     }
     IEnumerator DelayGameOver() {
         yield return new WaitForSeconds(3.0f);
@@ -218,4 +235,48 @@ public class MatchController : MonoBehaviour
         Game.instance.managementScreenToLoadOnStartup = "league";
         SceneManager.LoadScene("StableManagement");
     }
+
+    //Announcer
+
+    public void AddAnnouncerLine(string _line) {
+        Debug.Log("#Announcer#Adding " + _line);
+        announcerLines.Add(new AnnouncerLine() { line = _line, endTime = Time.time + 5f });
+        UpdateAnnouncerLines(true);
+    }
+
+    public void UpdateAnnouncerLines(bool changed = false) {
+        for (int i = 0; i < announcerLines.Count; i++){
+            if (announcerLines[i].endTime > Time.time) {
+                break;
+            }
+            else {
+                announcerLines[i] = null;
+                changed = true;
+            }
+        }
+        announcerLines.RemoveAll(x => x == null);
+        if (changed) {
+            announcer.text = "";
+            for (int x = announcerLines.Count-1; x >= 0; x--) {
+                announcer.text += announcerLines[x].line + "\n";
+            }
+        }
+    }
+    public static readonly string[] announcerGoalLines = {
+"And that's a goal for XYZ!",
+"What a great goal by XYZ!",
+"That was an amazing goal by XYZ!",
+"Wow, what a great goal by XYZ!",
+"That was an incredible goal by XYZ!",
+"XYZ scores a great goal!",
+"An amazing goal by XYZ!",
+"That's a goal for XYZ!",
+"Wow, XYZ is on fire!",
+"What a great goal for XYZ!",
+"XYZ is really turning it on now!",
+"XYZ is absolutely dominating now!",
+"XYZ is just too good today!",
+"XYZ is just unstoppable today!",
+"What a performance by XYZ!",
+};
 }

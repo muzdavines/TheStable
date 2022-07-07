@@ -5,6 +5,7 @@ using UnityEngine;
 public class SCOneTimerToGoal : StableCombatCharState {
 
     bool kickReady = false;
+    bool ballClose = false;
     bool shotFired = false;
     public override void EnterFrom(StableCombatCharState state) {
         base.EnterFrom(state);
@@ -16,17 +17,28 @@ public class SCOneTimerToGoal : StableCombatCharState {
         thisChar.transform.LookAt(thisChar.enemyGoal.transform);
         thisChar.agent.isStopped = true;
         canGrabBall = false;
-       // thisChar.matchController.ZoomCam(thisChar);
+        Time.timeScale = .25f;
+        // thisChar.matchController.ZoomCam(thisChar);
+        thisChar.matchController.AddAnnouncerLine(thisChar.myCharacter.name + " Attempts the One Timer!");
     }
 
     public override void Update() {
         base.Update();
-        if (ball.Distance(thisChar) < 1.8f && kickReady) {
+        if (ball.Distance(thisChar) < 2f) {
+            ballClose = true;
+        }
+        if (kickReady && ballClose) {
             Shoot();
         }
     }
 
     public override void AnimEventReceiver(string message) {
+        if (message == "SlowTimeOn") {
+            Time.timeScale = .25f;
+        }
+        if (message == "SlowTimeOff") {
+            Time.timeScale = 1f;
+        }
         if (message == "OneTimer") {
             kickReady = true;
         }
@@ -43,7 +55,6 @@ public class SCOneTimerToGoal : StableCombatCharState {
         Vector3 shotTarget = thisChar.enemyGoal.transform.position;
         //if (Random.Range(0, 100) < thisChar.myCharacter.shooting) {
         if (true){
-            thisChar.DisplayShotAccuracy(1000);
             shotTarget = thisChar.enemyGoal.topRight.position;
         }
         else {
@@ -51,10 +62,12 @@ public class SCOneTimerToGoal : StableCombatCharState {
         }
         Debug.Log("#OneTimer#Pos:"+ shotTarget);
         ball.Shoot(shotTarget, 0, 1.5f);
+        Time.timeScale = 1f;
     }
 
     public override void WillExit() {
         base.WillExit();
+        Time.timeScale = 1f;
        // thisChar.matchController.ZoomCamOff();
     }
 }
