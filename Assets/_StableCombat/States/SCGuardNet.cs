@@ -21,9 +21,15 @@ public class SCGuardNet : StableCombatCharState, CanFlechettes
         thisChar.transform.rotation = Quaternion.Euler(new Vector3(0, thisChar.transform.rotation.eulerAngles.y, 0));
         if (Time.frameCount % 15 != 0) { return; }
         if (ball.holder == null || ball.holder.team == thisChar.team) { thisChar.Idle(); }
-        if (guardPosition != GuardNetPosition.Center && ball.Distance(thisChar.myGoal.transform) < 24) {
+        float ballDist = ball.Distance(thisChar.myGoal.transform);
+        if (guardPosition != GuardNetPosition.Center && ballDist < 24) {
             thisChar.PursueBallCarrier();
             return;
+        }
+
+        if (ballDist < 13) {
+            thisChar.PursueBallCarrier();
+                return;
         }
         Vector3 targetPos = (playerWithBall.position + myNet.position) / 2;
         switch (guardPosition) {

@@ -337,7 +337,8 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
                 continue;
             }
             if (logic.HasFlag(PassTargetLogic.DeepBall)) {
-                if (teammate.Distance(this) >= 30 && enemyGoal.Distance(teammate) < 30) {
+                if (teammate.Distance(this) >= 30 && enemyGoal.Distance(teammate) < 40) {
+                    Debug.Log("#DeepBall#Returning Pass Target " + teammate.myCharacter.name);
                     return teammate;
                 }
                 else { continue; }

@@ -21,6 +21,11 @@ public class SCCombatDowned : SCCombatStanceState, ApexState {
         thisChar.ReleaseTarget();
         thisChar.agent.enabled = false;
         thisChar.GetComponent<Collider>().enabled = false;
+        if (thisChar.matchController !=null && thisChar.myCharacter.name != "FireGolem") {
+            thisChar.matchController.AddAnnouncerLine("Ouch! " + thisChar.myCharacter.name +
+                                                      " is down and isn't getting back up.");
+        }
+
         if (thisChar.fieldSport) {
             if (ball?.holder == thisChar) { ball.GetDropped(); }
             //getUpTime = Time.time + 10;

@@ -15,6 +15,7 @@ public class DeepBall : ActiveSpecialMove {
         if (Time.time <= lastFired + 15) { return false; }
         Ball ball = _char.ball;
         if (ball?.holder != _char) { return false; }
+        
         var target = _char.GetPassTarget(PassTargetLogic.DeepBall);
         if (target==null) {
             return false;

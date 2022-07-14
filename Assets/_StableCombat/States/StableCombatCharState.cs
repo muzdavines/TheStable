@@ -12,14 +12,15 @@ public class StableCombatCharState {
 
     const float oneTimerDistanceToGoal = 20f;
     const float oneTimerDistanceToBall = 1.8f;
-    
+
+    public bool didShowHighlight;
     public string name {
         get { return this.GetType().ToString(); }
     }
     public static string AppStateChangedNotification = "StableCombatCharStateChangedNotification";
     public virtual void TransitionTo(StableCombatCharState state) {
         if (!state.IsApexState() && thisChar.isStateLocked) {
-            Debug.LogError("Attempting to Transition to " + state.GetType() + " but current state is " + owner.state.GetType());
+            Debug.Log("#StateChange#Attempting to Transition to " + state.GetType() + " but current state is " + owner.state.GetType());
             return;
         }
         owner.state = state;
@@ -111,6 +112,7 @@ public class StableCombatCharState {
     }
 
     public bool CheckSpecials() {
+        
         foreach (SpecialMove m in thisChar.myCharacter.activeSpecialMoves) {
             if (m.Check(thisChar)) {
                 return true;
@@ -121,6 +123,9 @@ public class StableCombatCharState {
 
     public virtual void Update() {
         if (Time.frameCount % 10 == 0) {
+            if (Time.timeSinceLevelLoad < 20) {
+                return;
+            }
             if (thisChar.isKnockedDown || thisChar.isCannotSpecial) { return; }
             foreach (var special in thisChar.myCharacter.activeSpecialMoves) {
                 if (special.Check(thisChar)) {

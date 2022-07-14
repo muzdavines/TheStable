@@ -7,6 +7,9 @@ public class SCPass : SCBallCarrierState, CannotSpecial
     public StableCombatChar passTarget;
     public override void EnterFrom(StableCombatCharState state) {
         base.EnterFrom(state);
+        if (CheckSpecials()) {
+            return;
+        }
         if (passTarget == null) { thisChar.RunToGoalWithBall(); return; }
         //thisChar.anim.SetTrigger("PassBall");
         thisChar.anima.PassBall();
@@ -30,6 +33,7 @@ public class SCPass : SCBallCarrierState, CannotSpecial
             bool fail = roll > need;
             if (fail) {
                 thisChar.DisplaySpecialAbilityFeedback("BAD PASS! " + (int)roll+ " v. " + (int)need);
+                thisChar.matchController.AddAnnouncerLine("Oh, that's a bad pass by "+thisChar.myCharacter.name);
             }
             ball.PassTo(passTarget,  Mathf.Min(.3f + thisChar.myCharacter.strength * .1f, 1f), fail);
             passTarget.TryCatchPass();

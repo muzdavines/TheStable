@@ -28,7 +28,7 @@ public class MatchController : MonoBehaviour
     public PlayableDirector outroDirector;
     public HeroUIController heroUIController;
     public Transform oneTimerCam;
-
+   
     public TextMeshProUGUI announcer;
     public List<AnnouncerLine> announcerLines;
     public class AnnouncerLine {
@@ -41,6 +41,7 @@ public class MatchController : MonoBehaviour
         ball.transform.position = new Vector3(0,1,0);
         announcerLines = new List<AnnouncerLine>();
         AddAnnouncerLine("Welcome to the Match!");
+        
         if (debug) {
             DebugInit();
         } else { Init(); }
