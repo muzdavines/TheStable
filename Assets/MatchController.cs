@@ -246,7 +246,9 @@ public class MatchController : MonoBehaviour
     }
 
     public void UpdateAnnouncerLines(bool changed = false) {
-        for (int i = 0; i < announcerLines.Count; i++){
+        if (announcer == null) {
+            return;}
+            for (int i = 0; i < announcerLines.Count; i++){
             if (announcerLines[i].endTime > Time.time) {
                 break;
             }

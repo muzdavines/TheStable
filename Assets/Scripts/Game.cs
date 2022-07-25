@@ -24,6 +24,8 @@ public class Game : MonoBehaviour {
     public List<Stable> otherStables = new List<Stable>();
     [SerializeField]
     public List<League> leagues = new List<League>();
+
+    public List<NewsItem> news = new List<NewsItem>();
     [System.Serializable]
     public class GameDate {
         public int day = 1;
@@ -99,6 +101,8 @@ public class Game : MonoBehaviour {
            // playerStable.inventory.Add(Instantiate(Resources.Load<Item>("LongswordSO")));
         }
         //playerStable.inventory.Add(Instantiate(Resources.Load<Item>("BowSO")));
+        playerStable.SortHeroes();
+        news.Add(new NewsItem(){body = "Welcome to the Stable. You will need all of your acumen to succeed.", date = Game.instance.gameDate, sender = "The Boss", subject = "Welcome"});
     }
 
     public void InitOtherStables() {
@@ -191,7 +195,7 @@ public class Game : MonoBehaviour {
         //Create notes for every upgrade and dump them in an "Inbox", see FM2020
 
         Helper.UpdateAllUI();
-
+        playerStable.SortHeroes();
     }
 
     public void UpdateContractMarket() {
@@ -388,6 +392,14 @@ public static class Helper {
 
     
 
+}
+
+public class NewsItem {
+    public string subject;
+    public string body;
+    public Game.GameDate date;
+    public string sender;
+    public bool read;
 }
 
 public static class JsonHelper {

@@ -7,7 +7,7 @@ using EnhancedScrollerDemos.CellEvents;
 using TMPro;
 
 public class ContractCellView : EnhancedScrollerCellView {
-    public Text contractDescription, maxHeroes, diff, due;
+    public Text contractDescription, maxHeroes, diff, due, gold;
     public TextMeshProUGUI title;
     public MissionContract thisContract;
     public void SetData(MissionContract data) {
@@ -18,6 +18,7 @@ public class ContractCellView : EnhancedScrollerCellView {
         diff.text = "Difficulty: " + data.difficulty;
         due.text = "Due Date: " + data.executionDate.GetDateString();
         title.text = data.contractType.ToString();
+        gold.text = "Gold Reward: " + data.goldReward;
     }
 
     public void OnHoverEnter() {

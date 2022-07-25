@@ -39,6 +39,7 @@ public class Stable
         }
         finance.AddExpense(hero.contract.signingBonus, LedgerAccount.Personnel, "Signing Bonus for " + hero.name);
         heroes.Add(hero);
+        SortHeroes();
         return true;
     }
     public void AcceptContract(MissionContract c) {
@@ -56,6 +57,10 @@ public class Stable
            
             c.activeForNextMission = false;
         }
+    }
+
+    public void SortHeroes() {
+        heroes.Sort((x, y) => (x.archetype).CompareTo(y.archetype));
     }
 
     bool IsDead(Character c) {

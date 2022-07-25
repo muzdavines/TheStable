@@ -10,7 +10,7 @@ public class SCGoalScored : StableCombatCharState, SCReviveUnit
         thisChar.agent.isStopped = true;
         canGrabBall = false;
         foreach (ActiveSpecialMove m in thisChar.myCharacter.activeSpecialMoves) {
-            if (m.GetType() == typeof(RallyingCry)) {
+            if (m!=null && m.GetType() == typeof(RallyingCry)) {
                 int myScore = thisChar.team == 0 ? thisChar.matchController.homeScore : thisChar.matchController.awayScore;
                 int otherScore = thisChar.team == 1 ? thisChar.matchController.homeScore : thisChar.matchController.awayScore;
                 if (myScore < otherScore) {

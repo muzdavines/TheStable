@@ -114,7 +114,7 @@ public class StableCombatCharState {
     public bool CheckSpecials() {
         
         foreach (SpecialMove m in thisChar.myCharacter.activeSpecialMoves) {
-            if (m.Check(thisChar)) {
+            if (m !=null && m.Check(thisChar)) {
                 return true;
             }
         }

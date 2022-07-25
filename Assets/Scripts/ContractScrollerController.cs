@@ -16,7 +16,7 @@ public class ContractScrollerController : MonoBehaviour, IEnhancedScrollerDelega
         return _data.Count;
     }
     public float GetCellViewSize(EnhancedScroller scroller, int dataIndex) {
-        return 100f;
+        return 200f;
     }
     public EnhancedScrollerCellView GetCellView(EnhancedScroller scroller, int
     dataIndex, int cellIndex) {
