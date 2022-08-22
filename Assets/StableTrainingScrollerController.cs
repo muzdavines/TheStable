@@ -17,10 +17,11 @@ public class StableTrainingScrollerController : MonoBehaviour, IEnhancedScroller
         Debug.Log("#Training#ScrollerStart");
         activeChar = controller.activeChar;
         _data = new List<Trait>();
-
-        foreach (Trait t in activeChar.activeTraits){
-            Debug.Log("#Training#"+t.traitName + "  "+t.level);
-            _data.Add(t);
+        if (activeChar?.activeTraits != null) {
+            foreach (Trait t in activeChar.activeTraits) {
+                Debug.Log("#Training#" + t.traitName + "  " + t.level);
+                _data.Add(t);
+            }
         }
 
         foreach (Trait t in Game.instance.playerStable.availableTrainings) {

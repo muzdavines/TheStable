@@ -385,6 +385,27 @@ public class Character : Living {
                 modelNum = 1;
                 myGearSet = Resources.Load<CharacterGearSet>("GearSets/Wizard");
                 break;
+            case Archetype.Amateur:
+                shooting = 5;
+                passing = 5;
+                tackling = 5;
+                carrying = 5;
+                catching = 5;
+                melee = 1;
+                ranged = 1;
+                magic = 1;
+                runspeed = 7;
+                dexterity = 5;
+                strength = 5;
+                agility = 5;
+                maxHealth = 1;
+                maxMind = 5;
+                maxStamina = 5;
+                maxBalance = 5;
+                modelName = "SCUnit3";
+                modelNum = 1;
+                myGearSet = Resources.Load<CharacterGearSet>("GearSets/Amateur");
+                break;
         }
         myGearSet = Resources.Load<CharacterGearSet>("GearSets/" + archetype.ToString());
         seasonStats = new SportStats();
@@ -400,7 +421,7 @@ public class Character : Living {
         runspeed += Random.Range(-3, 4);
     }
 
-    public enum Archetype { Striker, Winger, Midfielder, Defender, Goalkeeper, Warrior, Rogue, Wizard, Swashbuckler, Assassin, Thief, Thug, Enforcer, Charlatan, DarkWizard, LightWizard, ImperialWizard, VoidWizard, ExiledWizard, HolyWizard, Soldier, Mercenary, DarkKnight, Paladin, Champion, Marauder }
+    public enum Archetype { Striker, Winger, Midfielder, Defender, Goalkeeper, Warrior, Rogue, Wizard, Swashbuckler, Assassin, Thief, Thug, Enforcer, Charlatan, DarkWizard, LightWizard, ImperialWizard, VoidWizard, ExiledWizard, HolyWizard, Soldier, Mercenary, DarkKnight, Paladin, Champion, Marauder, Amateur }
     public Archetype archetype;
     public UpgradeModifier mod;
     public void Awake() {

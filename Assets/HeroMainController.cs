@@ -14,6 +14,7 @@ public class HeroMainController : MonoBehaviour
     public MoveListScrollerController moveListMelee, moveListRanged;
     public ActiveMoveListScrollerController activeMoveListMelee, activeMoveListRanged;
     public TrainingController training;
+    public GameObject trainingButton;
     public void Start() {
         panel.SetActive(false);
         movePanelMelee.SetActive(false);
@@ -48,6 +49,10 @@ public class HeroMainController : MonoBehaviour
         dex.text = activeChar.dexterity.ToString();
         agi.text = activeChar.agility.ToString();
         str.text = activeChar.strength.ToString();
+        trainingButton.SetActive(true);
+        if (activeChar.archetype == Character.Archetype.Amateur) {
+            trainingButton.SetActive(false);
+        }
         string moveString = "";
         foreach (Move m in activeChar.knownMoves) {
             moveString += m.name + "\n";
