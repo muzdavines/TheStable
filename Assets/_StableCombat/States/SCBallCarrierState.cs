@@ -82,6 +82,7 @@ public class SCBallCarrierState : StableCombatCharState
         
         switch (thisChar.myCharacter.archetype) {
             case Character.Archetype.Rogue:
+            case Character.Archetype.Amateur:
                 if (tackleSuccess) {
                     thisChar.GetTackled();
                     thisChar.TakeDamage(
