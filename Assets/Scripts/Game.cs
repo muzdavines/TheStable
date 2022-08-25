@@ -86,6 +86,8 @@ public class Game : MonoBehaviour {
     public List<string> tutorialsComplete;
 
 
+    bool negativeBalanceNews;
+    
     public void Init() {
         freeAgentMarket.UpdateMarket();
         InitOtherStables();
@@ -103,6 +105,7 @@ public class Game : MonoBehaviour {
         //playerStable.inventory.Add(Instantiate(Resources.Load<Item>("BowSO")));
         playerStable.SortHeroes();
         news.Add(new NewsItem(){body = "Welcome to the Stable. You will need all of your acumen to succeed.", date = Game.instance.gameDate, sender = "The Boss", subject = "Welcome"});
+        news.Add(new NewsItem() { body = "All of the veteran players except for your Goalkeeper and Striker have left the team. You will have to make due with Amateurs until you can afford to hire new Heroes.", date = Game.instance.gameDate, sender = "The Boss", subject = "Amateurs" });
     }
 
     public void InitOtherStables() {
@@ -194,6 +197,11 @@ public class Game : MonoBehaviour {
         //Process business income
         //Create notes for every upgrade and dump them in an "Inbox", see FM2020
 
+
+        if (!negativeBalanceNews && playerStable.finance.gold < 0) {
+            negativeBalanceNews = true;
+            news.Add(new NewsItem() { body = "If you start a match with a negative balance, your heroes will not play for you that game. They don't work for free and need to know they will be paid on payday. Your roster will be filled with Amateurs if this happens.", date = Game.instance.gameDate, sender = "The Boss", subject = "Negative Balance" });
+        }
         Helper.UpdateAllUI();
         playerStable.SortHeroes();
     }
