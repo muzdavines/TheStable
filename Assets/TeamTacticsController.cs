@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class TeamTacticsController : MonoBehaviour
+public class TeamTacticsController : MonoBehaviour, UIElement
 {
     public TacticsFieldPositionController[] positions;
 
@@ -25,7 +25,23 @@ public class TeamTacticsController : MonoBehaviour
             t.GetComponentInChildren<TextMeshProUGUI>().text = "";
         }
     }
+    public void Update() {
+        if (Time.frameCount % 10 == 0) {
+            //Init();
+        }
+    }
+    public void DelayInit() {
+        StartCoroutine(InitAfter(.5f));
+    }
+    IEnumerator InitAfter(float time) {
+        yield return new WaitForEndOfFrame();
+        Init();
+    }
+    public void UpdateOnAdvance() {
+        OnEnable();
+    }
     public void Init() {
+        Debug.Log("Init Team Tactics Controller");
         ResetPositions();
         foreach (Character c in Game.instance.playerStable.heroes) {
             if (c.activeInLineup) {

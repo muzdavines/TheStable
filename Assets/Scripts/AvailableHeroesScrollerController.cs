@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AvailableHeroesScrollerController : MissionHeroesScrollerController {
+public class AvailableHeroesScrollerController : MissionHeroesScrollerController, UIElement {
     public bool tactics;
     public override void OnEnable() {
         _data = new List<Character>();
@@ -16,5 +16,8 @@ public class AvailableHeroesScrollerController : MissionHeroesScrollerController
     IEnumerator DelayReload() {
         yield return new WaitForEndOfFrame();
         myScroller.ReloadData();
+    }
+    public void UpdateOnAdvance() {
+        OnEnable();
     }
 }

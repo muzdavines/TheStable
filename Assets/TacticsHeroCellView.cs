@@ -25,6 +25,9 @@ public class TacticsHeroCellView : EnhancedScrollerCellView {
         GameObject.FindObjectOfType<HeroInfoPanelController>().OnHoverExit();
     }
     public void OnClick() {
+        if (Game.instance.playerStable.finance.gold < 0) {
+            return;
+        }
         if (!thisChar.activeInLineup) {
             if (Game.instance.playerStable.NumberHeroesInLineup() >= 5 || !thisChar.IsAvailable()) {
                 print("Max Heroes Reached or Hero Not Available");

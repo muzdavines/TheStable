@@ -36,8 +36,11 @@ public class MissionHeroCellView : EnhancedScrollerCellView {
     }
     public void OnClick() {
         if (tactics) {
+            if (Game.instance.playerStable.finance.gold < 0) {
+                return;
+            }
             if (!thisChar.activeInLineup) {
-                if (Game.instance.playerStable.NumberHeroesInLineup() >= 6 || !thisChar.IsAvailable()) {
+                if (Game.instance.playerStable.NumberHeroesInLineup() >= 6) {
                     print("Max Heroes Reached or Hero Not Available");
                     return;
                 }
