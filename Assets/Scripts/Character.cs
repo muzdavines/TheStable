@@ -737,11 +737,19 @@ public class Character : Living {
     }
 }
 
-
+[System.Serializable]
 public class SportStats {
     public int games = 0;
     public int goals = 0;
     public int assists = 0;
     public int tackles = 0;
     public int kos = 0;
+
+    public void AddStats(SportStats adds) {
+        games += adds.games;
+        goals += adds.goals;
+        assists += adds.assists;
+        tackles += adds.tackles;
+        kos += adds.kos;
+    }
 }

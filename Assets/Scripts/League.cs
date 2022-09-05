@@ -9,7 +9,7 @@ public class League {
     public int leagueLevel;
     public List<Team> teams = new List<Team>();
     public List<Match> schedule;
-   
+    public bool endOfSeasonCompleted;
 
     public void InitLeague() {
         NewSeason();
@@ -20,25 +20,43 @@ public class League {
         //reset currentStats
         //relegate and promote
     }
-    public void NewSeason() {
-        teams = new List<Team>();
-        if (Game.instance.playerStable.leagueLevel == leagueLevel) {
-            teams.Add(new Team() { stable = Game.instance.playerStable, isPlayer = true });
-        }
-        foreach (var s in Game.instance.otherStables) {
-            if (s.leagueLevel == leagueLevel) {
-                teams.Add(new Team() { stable = s });
+    public bool IsSeasonComplete() {
+        foreach (League.Match match in Game.instance.leagues[0].schedule) {
+            if (!match.final) {
+                return false;
             }
         }
+        return true;
+    }
+    public void NewSeason(int year = -1) {
+        
+        if (year == -1) {
+            year = Game.instance.gameDate.year;
+        }
+        else {
+            foreach (Team t in teams) {
+                foreach (Character c in t.stable.heroes) {
+                    c.careerStats.AddStats(c.seasonStats);
+                    c.seasonStats = new SportStats();
+                }
+            }
+        }
+        teams = new List<Team>();
+        teams.Add(new Team() { stable = Game.instance.playerStable, isPlayer = true });
+        Debug.Log("#NewSeason#Year:"+year);
+        foreach (var s in Game.instance.otherStables) {
+            teams.Add(new Team() { stable = s });
+        }
+
         schedule = new List<Match>();
         for (int i = 1; i <= 12; i++) {
-            schedule.Add(new Match() { home = teams[0], away = teams[UnityEngine.Random.Range(1, teams.Count - 1)], date = new Game.GameDate() { day = 5, month = i, year = Game.instance.gameDate.year } });
+            schedule.Add(new Match() { home = teams[0], away = teams[UnityEngine.Random.Range(1, teams.Count - 1)], date = new Game.GameDate() { day = 5, month = i, year = year } });
         }
-        CreateSchedule();
+        CreateSchedule(year);
     }
     public List<Team> temp;
     public List<Team> thisteams;
-    public void CreateSchedule() {
+    public void CreateSchedule(int year) {
         string results = null;
         List<Match> matchList = new List<Match>();
         temp = new List<Team>();
@@ -50,7 +68,7 @@ public class League {
         int teamSize = thisteams.Count;
         int numDays = teams.Count - 1;
         int halfsize = teams.Count / 2;
-        Game.GameDate matchDay = new Game.GameDate() { year = Helper.Today().year, day = 5, month = 1 };
+        Game.GameDate matchDay = new Game.GameDate() { year = year, day = 5, month = 1 };
         for (int day = 0; day < numDays * 2; day++) {
             if (day % 2 == 0) {
                 results += String.Format("\n\nDay {0}\n", (day + 1));
@@ -97,6 +115,22 @@ public class League {
             }
         }
         return null;
+    }
+
+    public bool PlayerIsFirst() {
+        int playerPoints = 0;
+        int mostPoints = 0;
+        foreach (Team t in teams) {
+            if (t.isPlayer) {
+                playerPoints = t.points;
+            }
+            else {
+                if (t.points > mostPoints) {
+                    mostPoints = t.points;
+                }
+            }
+        }
+        return (playerPoints >= mostPoints);
     }
 
     public List<string> GetTable() {

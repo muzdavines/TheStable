@@ -20,7 +20,7 @@ public class LeagueController : MonoBehaviour, UIElement
     public TextMeshProUGUI[] topScorers;
     public TextMeshProUGUI[] topGoals;
     public TextMeshProUGUI[] topTeam;
-
+    public GameObject endOfSeason;
     void Start()
     {
         
@@ -30,6 +30,13 @@ public class LeagueController : MonoBehaviour, UIElement
     void Update()
     {
         
+    }
+
+    void EndSeason() {
+        if (Game.instance.leagues[0].endOfSeasonCompleted) {
+            return;}
+        endOfSeason.SetActive(true);
+        endOfSeason.GetComponent<EndOfSeasonController>().Init();
     }
 
     public void PlayMatch() {
@@ -194,7 +201,15 @@ public class LeagueController : MonoBehaviour, UIElement
                     break;
                 }
                 activeMatch = nextMatch;
-                matchInfo.text = "Next Match in " + nextMatch.date.DaysBetween(Helper.Today()) + " days. \n" + nextMatch.home.stable.stableName + " v. " + nextMatch.away.stable.stableName;
+                if (Game.instance.leagues[0].IsSeasonComplete()) {
+                    matchInfo.text = "Season Complete";
+                    EndSeason();
+                }
+                else {
+                    matchInfo.text = "Next Match in " + nextMatch.date.DaysBetween(Helper.Today()) + " days. \n" +
+                                     nextMatch.home.stable.stableName + " v. " + nextMatch.away.stable.stableName;
+                }
+
                 playMatchButton.SetActive(false);
             }
         }
