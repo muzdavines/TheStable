@@ -6,17 +6,38 @@ using TMPro;
 public class TeamTacticsController : MonoBehaviour, UIElement
 {
     public TacticsFieldPositionController[] positions;
+    public MissionHeroesScrollerController[] scrollers;
 
     public void ChangePosition(Position pos, Character character) {
         if (pos == Position.GK && character.archetype != Character.Archetype.Goalkeeper) { return; }
+        //check if occupied
+        Character swapPlayer = null;
+        Position swapPosition = Position.NA;
+        foreach (Character c in Game.instance.playerStable.heroes) {
+            if (c.activeInLineup && c.currentPosition == pos) {
+                swapPlayer = c;
+                swapPosition = c.currentPosition;
+                break;
+            }
+        }
         if (character.currentPosition != Position.NA) {
-            positions[((int)character.currentPosition) - 1].GetComponentInChildren<TextMeshProUGUI>().text = "";
+            positions[((int)character.currentPosition) - 1].GetComponentInChildren<TextMeshProUGUI>().text = swapPlayer == null ? "" : swapPlayer.name;
+            if (swapPlayer != null) {
+                swapPlayer.currentPosition = character.currentPosition;
+            }
+        }
+        else {
+            if (swapPlayer != null) {
+                swapPlayer.currentPosition = Position.NA;
+            }
         }
         if ((int)pos > 0) {
             positions[((int)pos) - 1].GetComponentInChildren<TextMeshProUGUI>().text = character.name;
         }
         character.currentPosition = pos;
+        
     }
+
     public void OnEnable() {
         Init();
     }
@@ -49,5 +70,6 @@ public class TeamTacticsController : MonoBehaviour, UIElement
             }
         }
     }
+    
    
 }

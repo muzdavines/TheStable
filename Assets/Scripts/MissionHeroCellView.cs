@@ -68,5 +68,6 @@ public class MissionHeroCellView : EnhancedScrollerCellView {
     }
     public void ChangePosition(int newPos) {
         tacticsController.ChangePosition((Position)(newPos), thisChar);
+        SetData(thisChar);
     }
 }

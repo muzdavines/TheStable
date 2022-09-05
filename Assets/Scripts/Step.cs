@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-public enum StepType { Combat, Lockpick, Assassinate, Sneak, Demolish, Distract, DetectTrap, DisarmTrap, Intimidate, Persuade, Pickpocket, Entertain, Exit, Hunt, Forage, Fish, Camp, NavigateLand, Connection, NegotiateBusiness, Inspire, Portal, Gamble, Medicine}
+public enum StepType { Combat, Lockpick, Assassinate, Sneak, Demolish, Distract, DetectTrap, DisarmTrap, Intimidate, Persuade, Pickpocket, Entertain, Exit, Hunt, Forage, Fish, Camp, NavigateLand, Connection, NegotiateBusiness, Inspire, Portal, Gamble, Medicine, Collection}
 [System.Serializable]
 public class Step {
 

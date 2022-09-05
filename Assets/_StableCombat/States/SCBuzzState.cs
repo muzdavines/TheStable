@@ -42,7 +42,10 @@ public class SCBuzzState : SCSkillState {
         playerPositive = new string[] { "[QUERY OPENAI] Dialogue1", "[QUERY OPENAI] Dialogue2", "[QUERY OPENAI] Dialogue3", "[QUERY OPENAI] Dialogue4", "[QUERY OPENAI] Dialogue5" };
         playerIntro = "Hello";
         NPCIntro = "Hi";
-        maxRounds = npcNegative.Length;
+        if (maxRounds > npcNegative.Length || maxRounds <= 0) {
+            maxRounds = npcNegative.Length;
+        }
+
         ///GameObject.FindObjectOfType<MissionController>().SetAllHeroesDontAct(thisChar);
         skillTarget = poi.allPurposeTransforms[1];
         thisChar.agent.SetDestination(walkTarget.position + new Vector3(0, 0, 0));
@@ -135,7 +138,7 @@ public class SCBuzzState : SCSkillState {
         dialogue = new List<string>();
         bool npcTalking = true;
         int attitude = 0; //made modifications if there is an initital bonus;
-        maxRounds = playerPositive.Length;
+        //maxRounds = playerPositive.Length;
         dialogue.Add(playerIntro);
         dialogue.Add(NPCIntro);
         if (poi.step.level == 0) {

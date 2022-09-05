@@ -1038,6 +1038,10 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
                 state.TransitionTo(new SCBuzzState() { poi = poi });
                 //state.TransitionTo(new MissionCharacterStateGamble() { poi = poi, gambleTarget = poi.allPurposeTransforms[1] });
                 break;
+            case StepType.Collection:
+                state.TransitionTo(new SCBuzzState() { poi = poi, maxRounds = 1});
+                break;
+
         }
         
     }
