@@ -17,6 +17,7 @@ public class SCMissionMoveTo : StableCombatCharState
         catch { Debug.Log("Error with agent for " + thisChar.agent.name); }
         thisChar.anima.Idle();
         thisChar.agent.isStopped = false;
+        thisChar.agent.speed = 15 * .4f;
     }
     public override void Update() {
         base.Update();
@@ -36,6 +37,8 @@ public class SCMissionMoveTo : StableCombatCharState
         catch { Debug.Log("Error with agent for " + thisChar.agent.name); }
         if (Vector3.Distance(thisChar.transform.position, target.position) < 4f) {
             Debug.Log("Target Met");
+            thisChar.agent.velocity = Vector3.zero;
+            thisChar.agent.speed = thisChar.myCharacter.runspeed * .4f;
             thisChar.Idle();
         }
         nextNumCheck = Time.time + 1.0f;
@@ -46,6 +49,8 @@ public class SCMissionMoveTo : StableCombatCharState
     }
 
     public override void WillExit() {
+        thisChar.agent.speed = thisChar.myCharacter.runspeed * .4f;
+        thisChar.agent.velocity = Vector3.zero;
         base.WillExit();
     }
 }

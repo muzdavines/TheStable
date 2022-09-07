@@ -10,6 +10,9 @@ public class TeamTacticsController : MonoBehaviour, UIElement
 
     public void ChangePosition(Position pos, Character character) {
         if (pos == Position.GK && character.archetype != Character.Archetype.Goalkeeper) { return; }
+
+        if (character.archetype == Character.Archetype.Goalkeeper && pos != Position.GK) { return; }
+
         //check if occupied
         Character swapPlayer = null;
         Position swapPosition = Position.NA;

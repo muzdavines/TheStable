@@ -25,7 +25,7 @@ public class PnL : MonoBehaviour, UIElement
         //add Buildings
         //add Net Income
         text.text = "Revenue: " + revenue + "\nPersonnel: " + personnel + "\nOperations: " + operations + "\nEquipment: " + equipment + "\nBuildings: " + buildings + "\nNet Income: " + net;
-        
+        //add ability to click on Revenue and breakout revenue by tag
     }
 
     public void UpdateOnAdvance() {

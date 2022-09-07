@@ -7,6 +7,8 @@ using TMPro;
 using MoreMountains.Feedbacks;
 using UnityEngine.Playables;
 using PsychoticLab;
+using Unity.Mathematics;
+using Random = UnityEngine.Random;
 
 public class MatchController : MonoBehaviour
 {
@@ -212,6 +214,10 @@ public class MatchController : MonoBehaviour
         Game.instance.activeMatch.homeGoals = homeGoals;
         Game.instance.activeMatch.final = true;
         Game.instance.activeMatch.ProcessResult();
+        if (match.home.stable == Game.instance.playerStable) {
+            Game.instance.playerStable.finance.AddRevenue(500, "Match Income", "Match");
+        }
+
         foreach (StableCombatChar homePlayer in homeCoach.players) {
             homePlayer.myCharacter.seasonStats.games++;
             homePlayer.myCharacter.xp += Game.XPGame;

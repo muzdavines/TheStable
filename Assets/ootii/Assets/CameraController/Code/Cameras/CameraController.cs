@@ -1120,15 +1120,15 @@ namespace com.ootii.Cameras
         public override void RigLateUpdate(float rDeltaTime, int rUpdateIndex)
         {
             CameraMotor lActiveMotor = ActiveMotor;
-           
-                if (UnityEngine.Input.GetKey(KeyCode.Z)) {
+           groundDistanceMod += -mInputSource.GetValue(_ZoomActionAlias) * _ZoomSpeed;
+            /*if (UnityEngine.Input.GetKey(KeyCode.Z)) {
                     groundDistanceMod += Time.deltaTime * -20f;
                 }
 
                 if (UnityEngine.Input.GetKey(KeyCode.C)) {
                     groundDistanceMod += Time.deltaTime * 20f;
                 }
-
+                */
                 groundDistanceMod = Mathf.Clamp(groundDistanceMod, -20,100);
                 
 
@@ -1200,7 +1200,7 @@ namespace com.ootii.Cameras
             _Transform.rotation = lTransform.Rotation;
 
             // Update the FOV zoom
-            UpdateZoom(rDeltaTime);
+            //UpdateZoom(rDeltaTime);
 
             // Update character fading
             UpdateFade(rDeltaTime);

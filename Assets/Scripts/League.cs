@@ -75,14 +75,14 @@ public class League {
                 int teamIdx = day % teamSize;
 
                 results += String.Format("{0} vs {1}\n", thisteams[teamIdx].stable.stableName, temp[0].stable.stableName);
-                matchList.Add(new Match() { away = GetTeam(thisteams[teamIdx].stable), home = GetTeam(temp[0].stable), date = matchDay.Add((day * 10)) });
+                matchList.Add(new Match() { away = GetTeam(thisteams[teamIdx].stable), home = GetTeam(temp[0].stable), date = matchDay.Add((day * 16)) });
                 for (int idx = 0; idx < halfsize; idx++) {
                     int firstTeam = (day + idx) % teamSize;
                     int secondTeam = ((day + teamSize) - idx) % teamSize;
 
                     if (firstTeam != secondTeam) {
                         results += String.Format("{0} vs {1}\n", thisteams[firstTeam].stable.stableName, thisteams[secondTeam].stable.stableName);
-                        matchList.Add(new Match() { away = GetTeam(thisteams[firstTeam].stable), home = GetTeam(thisteams[secondTeam].stable), date = matchDay.Add((day * 10)) });
+                        matchList.Add(new Match() { away = GetTeam(thisteams[firstTeam].stable), home = GetTeam(thisteams[secondTeam].stable), date = matchDay.Add((day * 16)) });
                     }
                 }
             }
