@@ -4,12 +4,13 @@ using System.Collections;
 using EnhancedUI.EnhancedScroller;
 using EnhancedScrollerDemos.CellEvents;
 
-public class HeroCellView : EnhancedScrollerCellView
+public class HeroCellView : EnhancedScrollerCellView, UIElement
 {
     public Text heroNameText;
     public Text shooting, passing, tackling, carrying, melee, ranged, magic, speed, dex, agi, str, meleeWeapon, rangedWeapon;
     public Text xp;
     public Text archetype;
+    public Text nextAvailable;
     public Character thisChar;
     public Color defaultColor;
     public void SetData(Character data)
@@ -31,7 +32,15 @@ public class HeroCellView : EnhancedScrollerCellView
         rangedWeapon.text = "Ranged Weapon: "+data.rangedWeapon?.itemName;
         xp.text = "XP to Spend: " + data.xp;
         archetype.text = data.archetype.ToString();
+        if (data.returnDate.IsOnOrAfter(Helper.Today(), false)) {
+            nextAvailable.text = "Next available for contract:\n"+ data.returnDate.GetDateString();
+        } else {
+            nextAvailable.text = "";
+        }
         GetComponent<Image>().color = Helper.GetCellViewColor();
+    }
+    public void UpdateOnAdvance() {
+        SetData(thisChar);
     }
 
     public void OnHoverEnter()

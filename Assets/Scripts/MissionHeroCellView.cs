@@ -7,6 +7,7 @@ using UnityEngine.UI;
 using TMPro;
 public class MissionHeroCellView : EnhancedScrollerCellView {
     public Text heroNameText;
+    public Text nextAvailable;
     public Character thisChar;
     public LaunchMissionController missionController;
     public TeamTacticsController tacticsController;
@@ -21,7 +22,13 @@ public class MissionHeroCellView : EnhancedScrollerCellView {
             myDropdown.value = (int)thisChar.currentPosition;
             if (!thisChar.activeInLineup) { myDropdown.gameObject.SetActive(false); }
         }
-        
+        if (data.returnDate.IsOnOrAfter(Helper.Today(), false)) {
+            nextAvailable.text = "Next available: " + data.returnDate.GetDateString();
+        }
+        else {
+            nextAvailable.text = "";
+        }
+
     }
 
     public void OnHoverEnter() {
