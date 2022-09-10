@@ -4,5 +4,6 @@ using UnityEngine;
 
 [CreateAssetMenu]
 public class LeagueSO : ScriptableObject {
-    public League league;
+    public List<StableSO> stables;
+    public int leagueLevel = 0;
 }

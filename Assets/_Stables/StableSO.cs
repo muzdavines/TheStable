@@ -15,13 +15,15 @@ public class StableSO : ScriptableObject {
         }
         Character thisHero = new Character();
         tier = Mathf.Clamp(tier, 1, 4);
-        thisHero.name = Names.Warrior[Random.Range(0, Names.Warrior.Length)];
+        thisHero.name = Character.GenerateName(createType);
         thisHero.GenerateCharacter(createType, tier);
         thisHero.currentPosition = Position.NA;
         stable.heroes.Add(thisHero);
         AssetDatabase.CreateAsset(thisHero, "Assets/_Characters/Resources/" + stable.stableName + "/" + thisHero.name + ".asset");
         AssetDatabase.SaveAssets();
     }
+   
+
     public void InitStable() {
         foreach (Character c in stable.heroes) {
             c.activeForNextMission = false;

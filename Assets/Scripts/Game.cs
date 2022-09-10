@@ -126,7 +126,7 @@ public class Game : MonoBehaviour {
             firstStable.heroes[i].Init();
         }
         otherStables.Add(cheap.stable);
-        
+       
         for (int i = 1; i < 5; i++) {
             var thisStable = new Stable() { stableName = Stable.stableNameList[i] };
             thisStable.heroes = new List<Character>();
@@ -146,12 +146,12 @@ public class Game : MonoBehaviour {
                     thisHero.currentPosition = (Position)(thisPos);
                     poss.RemoveAt(randIndex);
                 }
-                thisHero.name = Names.Warrior[Random.Range(0, Names.Warrior.Length)];
+                
                 thisHero.GenerateCharacter((Character.Archetype)(Random.Range(5, 8)), 1);
                 thisStable.heroes.Add(thisHero);
             }
             var GKHero = new Character();
-            GKHero.name = Names.Warrior[Random.Range(0, Names.Warrior.Length)];
+            
             GKHero.GenerateCharacter(Character.Archetype.Goalkeeper);
             GKHero.currentPosition = Position.GK;
             GKHero.activeInLineup = true;

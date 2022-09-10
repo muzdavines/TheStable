@@ -111,6 +111,23 @@ public class Character : Living {
     public int skinNum = -1;
 
     public GameObject currentObject;
+    public static string GenerateName(Archetype archetype) {
+
+        switch (archetype) {
+            case Archetype.Rogue:
+                return Names.Rogue[Random.Range(0, Names.Rogue.Length)];
+                break;
+            case Archetype.Warrior:
+                return Names.Warrior[Random.Range(0, Names.Warrior.Length)];
+                break;
+            case Archetype.Wizard:
+                return Names.Wizard[Random.Range(0, Names.Wizard.Length)];
+                break;
+            default:
+                return Names.Rogue[Random.Range(0, Names.Rogue.Length)];
+                break;
+        }
+    }
 
     public int RandDist(float min, float max) {
         int roll = UnityEngine.Random.Range(0, 100);
@@ -410,6 +427,7 @@ public class Character : Living {
         myGearSet = Resources.Load<CharacterGearSet>("GearSets/" + archetype.ToString());
         seasonStats = new SportStats();
         careerStats = new SportStats();
+        name = Character.GenerateName(archetype);
         Init();
     }
 
@@ -593,6 +611,7 @@ public class Character : Living {
                 maxStamina += 15;
                 maxBalance += 35;
                 specialsToAdd.Add("BolaThrow");
+                name += " the " + Names.RogueNick[Random.Range(0, Names.RogueNick.Length)];
                 break;
             case Archetype.Thug:
                 shooting -= 10;

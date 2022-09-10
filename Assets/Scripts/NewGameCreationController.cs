@@ -19,6 +19,11 @@ public class NewGameCreationController : MonoBehaviour
     public void Start()
     {
         activeStablemasterType = "Warlord";
+        /*string s = "";
+        for (int i = 0; i <= 26; i++) {
+            s += (Character.Archetype)i + "\n";  
+        }
+        print(s);*/
         
     }
     public void OnClick (string warlord)
