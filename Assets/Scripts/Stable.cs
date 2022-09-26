@@ -16,8 +16,7 @@ public class Stable
     public int reputation; //Quality of the Stable
     public float alignment; //Good, Neutral, Evil (1,0,-1)
     public int[] favor; //how does each faction like them? map faction id to const enum
-    [SerializeField]
-    public Warlord warlord = new Warlord();
+    [SerializeField] public Warlord warlord;
     public List<Character> heroes = new List<Character>();
     public List<Character> coaches = new List<Character>();
     public List<StableBuilding> buildings = new List<StableBuilding>();

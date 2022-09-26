@@ -210,7 +210,7 @@ namespace PsychoticLab
             enabledObjects.Clear();
             CharacterObjectGroups cog = new CharacterObjectGroups();
             if (gender == Gender.Male) { cog = male; } else { cog = female; }
-            
+            myCharacter.myGearSet = Resources.Load<CharacterGearSet>("GearSets/" + myCharacter.archetype.ToString());
             ActivateItem(cog.torso[myCharacter.myGearSet.torso]);
             ActivateItem(cog.arm_Upper_Left[myCharacter.myGearSet.upperArm]);
             ActivateItem(cog.arm_Upper_Right[myCharacter.myGearSet.upperArm]);

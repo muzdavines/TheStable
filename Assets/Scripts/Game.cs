@@ -117,7 +117,21 @@ public class Game : MonoBehaviour {
     }
 
     public void InitOtherStables() {
+        LeagueSO thisLeague = Resources.Load<LeagueSO>("League" + playerStable.leagueLevel);
+
         otherStables = new List<Stable>();
+        foreach (StableSO stable in thisLeague.stables) {
+            var thisStableSO = Instantiate(stable);
+            var thisStable = thisStableSO.stable;
+            for (int i = 0; i < thisStable.heroes.Count; i++) {
+                thisStable.heroes[i] = Instantiate(thisStable.heroes[i]);
+                thisStable.heroes[i].Init();
+            }
+            otherStables.Add(thisStable);
+        }
+
+        return;
+
         StableSO cheap = Resources.Load<StableSO>("Tier1/CheapDragonfruitInn");
         cheap = Instantiate(cheap);
         Stable firstStable = cheap.stable;
@@ -424,8 +438,6 @@ public static class Helper {
     }
     public static Color[] primaryColor = { new Color(0.2862745f, 0.4f, 0.4941177f), new Color(0.4392157f, 0.1960784f, 0.172549f), new Color(0.3529412f, 0.3803922f, 0.2705882f), new Color(0.682353f, 0.4392157f, 0.2196079f), new Color(0.4313726f, 0.2313726f, 0.2705882f), new Color(0.5921569f, 0.4941177f, 0.2588235f), new Color(0.482353f, 0.4156863f, 0.3529412f), new Color(0.2352941f, 0.2352941f, 0.2352941f), new Color(0.2313726f, 0.4313726f, 0.4156863f) };
     public static Color[] secondaryColor = { new Color(0.7019608f, 0.6235294f, 0.4666667f), new Color(0.7372549f, 0.7372549f, 0.7372549f), new Color(0.1647059f, 0.1647059f, 0.1647059f), new Color(0.2392157f, 0.2509804f, 0.1882353f) };
-
-    
 
 }
 

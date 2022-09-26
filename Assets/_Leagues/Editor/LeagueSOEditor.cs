@@ -8,10 +8,7 @@ public class LeagueSOEditor : Editor
     
     public override void OnInspectorGUI() {
         base.OnInspectorGUI();
-        
-        if (GUILayout.Button("Test")) {
-            CreateNewTeam();
-        }
+       
     }
     public void CreateNewTeam() {
         Character.Archetype[] possibleArchetypes = { Character.Archetype.Warrior, Character.Archetype.Wizard, Character.Archetype.Rogue };

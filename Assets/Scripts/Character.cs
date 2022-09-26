@@ -303,7 +303,6 @@ public class Character : Living {
                 maxStamina = 25;
                 maxBalance = 15;
                 modelName = "SCUnit3";
-                myGearSet = Resources.Load<CharacterGearSet>("GearSets/Warrior");
                 modelNum = 0;
                 break;
             case Archetype.Warrior:
@@ -336,7 +335,7 @@ public class Character : Living {
                 activeMeleeMoves.Add(Resources.Load<Move>("SwordOverheadHack"));
 
                 modelName = "SCUnit3";
-                myGearSet = Resources.Load<CharacterGearSet>("GearSets/Warrior");
+                
                 modelNum = 0;
 
                 break;
@@ -370,7 +369,7 @@ public class Character : Living {
                 knownMoves.Add(Resources.Load<Move>("OneTimerKick"));
                 modelName = "SCUnit3";
                 modelNum = 2;
-                myGearSet = Resources.Load<CharacterGearSet>("GearSets/Rogue");
+                
                 break;
             case Archetype.Wizard:
                 shooting = 5;
@@ -400,7 +399,7 @@ public class Character : Living {
                 combatFocus = CombatFocus.Ranged;
                 modelName = "SCUnit3";
                 modelNum = 1;
-                myGearSet = Resources.Load<CharacterGearSet>("GearSets/Wizard");
+                
                 break;
             case Archetype.Amateur:
                 shooting = 5;
@@ -421,10 +420,10 @@ public class Character : Living {
                 maxBalance = 5;
                 modelName = "SCUnit3";
                 modelNum = 1;
-                myGearSet = Resources.Load<CharacterGearSet>("GearSets/Amateur");
+                
                 break;
         }
-        myGearSet = Resources.Load<CharacterGearSet>("GearSets/" + archetype.ToString());
+       // myGearSet = Resources.Load<CharacterGearSet>("GearSets/" + archetype.ToString());
         seasonStats = new SportStats();
         careerStats = new SportStats();
         name = Character.GenerateName(archetype);
@@ -471,6 +470,7 @@ public class Character : Living {
             t.level = 1;
             activeTraits.Add(tempTrait);
         }
+        //myGearSet = Resources.Load<CharacterGearSet>("GearSets/" + archetype.ToString());
         return this;
 
     }
@@ -621,6 +621,7 @@ public class Character : Living {
                 maxStamina += 35;
                 maxBalance += 25;
                 specialsToAdd.Add("Kneecapper");
+                name += " the " + Names.RogueNick[Random.Range(0, Names.RogueNick.Length)];
                 break;
             case Archetype.Swashbuckler:
                 shooting -= 10;
@@ -653,6 +654,7 @@ public class Character : Living {
                 maxStamina += 15;
                 maxBalance += 25;
                 specialsToAdd.Add("BallOfPower");
+                name += " the " + Names.Wizardnick[Random.Range(0, Names.Wizardnick.Length)];
                 break;
             case Archetype.DarkWizard:
                 passing -= 10;
@@ -661,6 +663,7 @@ public class Character : Living {
                 maxStamina += 25;
                 maxBalance += 25;
                 specialsToAdd.Add("BallHawk");
+                name += " the " + Names.Wizardnick[Random.Range(0, Names.Wizardnick.Length)];
                 break;
             case Archetype.ExiledWizard:
                 passing -= 10;
@@ -701,6 +704,7 @@ public class Character : Living {
                 maxStamina += 30;
                 maxBalance += 20;
                 specialsToAdd.Add("BullRush");
+                name += " the " + Names.Warriornick[Random.Range(0, Names.Warriornick.Length)];
                 break;
             case Archetype.Soldier:
                 tackling += 10;
@@ -709,6 +713,7 @@ public class Character : Living {
                 maxStamina += 25;
                 maxBalance += 25;
                 specialsToAdd.Add("SwordFlurry");
+                name += " the " + Names.Warriornick[Random.Range(0, Names.Warriornick.Length)];
                 break;
             case Archetype.Champion:
                 tackling += 10;
@@ -752,7 +757,7 @@ public class Character : Living {
         
         archetype = newArchetype;
         mod = Resources.Load<UpgradeModifier>(archetype + "Upgrade");
-        myGearSet = Resources.Load<CharacterGearSet>("GearSets/" + archetype.ToString());
+        //myGearSet = Resources.Load<CharacterGearSet>("GearSets/" + archetype.ToString());
     }
 }
 
