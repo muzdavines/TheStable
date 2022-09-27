@@ -69,38 +69,40 @@ public class League {
         int numDays = teams.Count - 1;
         int halfsize = teams.Count / 2;
         Game.GameDate matchDay = new Game.GameDate() { year = year, day = 5, month = 1 };
-        for (int day = 0; day < numDays * 2; day++) {
-            if (day % 2 == 0) {
-                results += String.Format("\n\nDay {0}\n", (day + 1));
-                int teamIdx = day % teamSize;
+        for (int zz = 0; zz < 2; zz++) {
+            for (int day = 0; day < numDays * 2; day++) {
+                if (day % 2 == 0) {
+                    results += String.Format("\n\nDay {0}\n", (day + 1));
+                    int teamIdx = day % teamSize;
 
-                results += String.Format("{0} vs {1}\n", thisteams[teamIdx].stable.stableName, temp[0].stable.stableName);
-                matchList.Add(new Match() { away = GetTeam(thisteams[teamIdx].stable), home = GetTeam(temp[0].stable), date = matchDay.Add((day * 16)) });
-                for (int idx = 0; idx < halfsize; idx++) {
-                    int firstTeam = (day + idx) % teamSize;
-                    int secondTeam = ((day + teamSize) - idx) % teamSize;
+                    results += String.Format("{0} vs {1}\n", thisteams[teamIdx].stable.stableName, temp[0].stable.stableName);
+                    matchList.Add(new Match() { away = GetTeam(thisteams[teamIdx].stable), home = GetTeam(temp[0].stable), date = matchDay.Add((day * 12 *(zz+1))) });
+                    for (int idx = 0; idx < halfsize; idx++) {
+                        int firstTeam = (day + idx) % teamSize;
+                        int secondTeam = ((day + teamSize) - idx) % teamSize;
 
-                    if (firstTeam != secondTeam) {
-                        results += String.Format("{0} vs {1}\n", thisteams[firstTeam].stable.stableName, thisteams[secondTeam].stable.stableName);
-                        matchList.Add(new Match() { away = GetTeam(thisteams[firstTeam].stable), home = GetTeam(thisteams[secondTeam].stable), date = matchDay.Add((day * 16)) });
+                        if (firstTeam != secondTeam) {
+                            results += String.Format("{0} vs {1}\n", thisteams[firstTeam].stable.stableName, thisteams[secondTeam].stable.stableName);
+                            matchList.Add(new Match() { away = GetTeam(thisteams[firstTeam].stable), home = GetTeam(thisteams[secondTeam].stable), date = matchDay.Add(day * 12 * (zz + 1)) });
+                        }
                     }
                 }
-            }
 
-            if (day % 2 != 0) {
-                int teamIdx = day % teamSize;
+                if (day % 2 != 0) {
+                    int teamIdx = day % teamSize;
 
-                results += String.Format("\n\nDay {0}\n", (day + 1));
+                    results += String.Format("\n\nDay {0}\n", (day + 1));
 
-                results += String.Format("{0} vs {1}\n", temp[0].stable.stableName, thisteams[teamIdx].stable.stableName);
-                matchList.Add(new Match() { home = GetTeam(thisteams[teamIdx].stable), away = GetTeam(temp[0].stable), date = matchDay.Add((day * 10)) });
-                for (int idx = 0; idx < halfsize; idx++) {
-                    int firstTeam = (day + idx) % teamSize;
-                    int secondTeam = ((day + teamSize) - idx) % teamSize;
+                    results += String.Format("{0} vs {1}\n", temp[0].stable.stableName, thisteams[teamIdx].stable.stableName);
+                    matchList.Add(new Match() { home = GetTeam(thisteams[teamIdx].stable), away = GetTeam(temp[0].stable), date = matchDay.Add(day * 12 * (zz + 1)) });
+                    for (int idx = 0; idx < halfsize; idx++) {
+                        int firstTeam = (day + idx) % teamSize;
+                        int secondTeam = ((day + teamSize) - idx) % teamSize;
 
-                    if (firstTeam != secondTeam) {
-                        results += String.Format("{0} vs {1}\n", thisteams[secondTeam].stable.stableName, thisteams[firstTeam].stable.stableName);
-                        matchList.Add(new Match() { home = GetTeam(thisteams[firstTeam].stable), away = GetTeam(thisteams[secondTeam].stable), date = matchDay.Add((day * 10)) });
+                        if (firstTeam != secondTeam) {
+                            results += String.Format("{0} vs {1}\n", thisteams[secondTeam].stable.stableName, thisteams[firstTeam].stable.stableName);
+                            matchList.Add(new Match() { home = GetTeam(thisteams[firstTeam].stable), away = GetTeam(thisteams[secondTeam].stable), date = matchDay.Add(day * 12 * (zz + 1)) });
+                        }
                     }
                 }
             }

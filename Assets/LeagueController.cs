@@ -206,8 +206,13 @@ public class LeagueController : MonoBehaviour, UIElement
                     EndSeason();
                 }
                 else {
-                    matchInfo.text = "Next Match in " + nextMatch.date.DaysBetween(Helper.Today()) + " days. \n" +
-                                     nextMatch.home.stable.stableName + " v. " + nextMatch.away.stable.stableName;
+                    if (nextMatch == null || nextMatch.date == null) {
+                        matchInfo.text = "No more matches";
+                    }
+                    else {
+                        matchInfo.text = "Next Match in " + nextMatch.date.DaysBetween(Helper.Today()) + " days. \n" +
+                                         nextMatch.home.stable.stableName + " v. " + nextMatch.away.stable.stableName;
+                    }
                 }
 
                 playMatchButton.SetActive(false);

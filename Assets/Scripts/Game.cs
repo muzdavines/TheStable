@@ -77,9 +77,11 @@ public class Game : MonoBehaviour {
     void Update() {
         if (Input.GetKeyDown(KeyCode.X)) {
             foreach (League.Match m in Game.instance.leagues[0].schedule) {
+                if (!m.IsPlayerMatch()) { continue; }
                 m.final = true;
             }
         }
+
     }
     
     public void TutorialComplete(Tutorial thisTutorial) {
@@ -352,6 +354,9 @@ public static class Helper {
     }
     public static int DaysBetween(this Game.GameDate thisDate, Game.GameDate otherDate) {
         int i = 0;
+        if (thisDate == null || otherDate == null) {
+            return 999;
+        }
         //int monthMod = thisDate.day < otherDate.day ? -1 : 0;
         i += (thisDate.year - otherDate.year) * 359;
         i += (thisDate.month - otherDate.month) * 30;
