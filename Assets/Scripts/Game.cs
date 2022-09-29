@@ -359,7 +359,7 @@ public static class Helper {
         }
         //int monthMod = thisDate.day < otherDate.day ? -1 : 0;
         i += (thisDate.year - otherDate.year) * 359;
-        i += (thisDate.month - otherDate.month) * 30;
+        i += (thisDate.month - otherDate.month) * 28;
         i += thisDate.day - otherDate.day;
         return Mathf.Abs(i);
     }

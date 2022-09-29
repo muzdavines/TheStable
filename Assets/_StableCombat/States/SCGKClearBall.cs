@@ -29,7 +29,7 @@ public class SCGKClearBall : SCGKState {
             }
 
             float error = 2 - thisChar.myCharacter.shooting * .01f;
-            thisChar.ball.Shoot(thisChar.enemyGoal.transform.position + adjustment + new Vector3(0,30,0), error, 1);
+            thisChar.ball.Shoot(thisChar.enemyGoal.transform.position + adjustment + new Vector3(0,30,0), error, .5f);
         }
     }
 
