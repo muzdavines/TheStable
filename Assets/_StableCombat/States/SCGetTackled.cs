@@ -6,6 +6,7 @@ public class SCGetTackled : SCFailAgainstTackle {
     public override void EnterFrom(StableCombatCharState state) {
         base.EnterFrom(state);
         thisChar.anima.Knockdown();
+        GameObject.FindObjectOfType<FieldSportSoundManager>()?.Ooh();
         thisChar.lastAttack = Time.time;
         thisChar.accumulatedCooldown = 6;
     }

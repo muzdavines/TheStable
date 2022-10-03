@@ -162,6 +162,7 @@ public class MatchController : MonoBehaviour
 
 
     public void ScoreGoal(int team) {
+        FindObjectOfType<FieldSportSoundManager>()?.Goal();
         if (team == 0) { homeScore++; } else { awayScore++; }
         lastTeamToScore = team;
         goal.ShakeCamera(2, .5f, 5, 1, 1, 1, false);
