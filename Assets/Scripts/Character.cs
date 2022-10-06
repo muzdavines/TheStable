@@ -704,6 +704,11 @@ public class Character : Living {
                 maxStamina += 30;
                 maxBalance += 20;
                 specialsToAdd.Add("BullRush");
+                activeMeleeMoves[0] = Resources.Load<BaseMeleeMove>("Halberd1");
+                activeMeleeMoves[1] = Resources.Load<BaseMeleeMove>("Halberd2");
+                activeMeleeMoves[2] = Resources.Load<BaseMeleeMove>("Halberd3");
+                meleeWeapon = Instantiate(Resources.Load<Weapon>("HalberdSO"));
+
                 name += " the " + Names.Warriornick[Random.Range(0, Names.Warriornick.Length)];
                 break;
             case Archetype.Soldier:
