@@ -13,7 +13,7 @@ public class Execute : ActiveSpecialMove {
     }
 
     public override bool Check(StableCombatChar _char) {
-        if (Time.time <= lastFired + 20) {
+        if (Time.time <= lastFired + 20 || _char.coach == null) {
             return false;
         }
         foreach (StableCombatChar c in _char.coach.otherTeam) {

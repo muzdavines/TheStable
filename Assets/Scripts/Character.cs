@@ -742,6 +742,10 @@ public class Character : Living {
                 maxMind += 15;
                 maxStamina += 35;
                 maxBalance += 20;
+                activeMeleeMoves[0] = Resources.Load<BaseMeleeMove>("Starspear1");
+                activeMeleeMoves[1] = Resources.Load<BaseMeleeMove>("Starspear2");
+                activeMeleeMoves[2] = Resources.Load<BaseMeleeMove>("Starspear3");
+                meleeWeapon = Instantiate(Resources.Load<Weapon>("StarspearSO"));
                 specialsToAdd.Add("Execute");
                 break;
             case Archetype.Paladin:
