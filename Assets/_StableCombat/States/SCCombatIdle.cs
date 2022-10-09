@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using MoreMountains.Tools;
 using UnityEngine;
 
 public class SCCombatIdle : SCCombatStanceState, CanBackStab {
@@ -27,7 +28,8 @@ public class SCCombatIdle : SCCombatStanceState, CanBackStab {
         
         switch (thisChar.combatFocus) {
             case CombatFocus.Melee:
-                thisChar.attackRange = 1.2f;
+                var range = thisChar.RHMWeapon.weaponBlueprint.meleeAttackRange;
+                thisChar.attackRange = range == -1 ? 1.2f : range;
                 thisChar.MeleeWeaponsOn();
                 break;
             case CombatFocus.Ranged:

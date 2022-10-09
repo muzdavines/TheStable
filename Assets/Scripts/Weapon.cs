@@ -15,5 +15,6 @@ public class Weapon : Item
     public string settingsPrefab;
     public MoveWeaponType weaponType;
     public MoveType moveType;
-    
+    public int meleeAttackRange = -1;
+
 }

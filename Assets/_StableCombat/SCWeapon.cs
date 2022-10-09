@@ -9,6 +9,9 @@ public class SCWeapon : MonoBehaviour
     public StableCombatChar me;
     public Weapon weaponBlueprint;
     public Transform projectileSpawnPoint;
+    private bool isHeavy;
+    private int numHits;
+    public List<StableCombatChar> hitThisTurn;
     void Start()
     {
         if (col == null) { col = GetComponent<Collider>(); }
@@ -24,24 +27,36 @@ public class SCWeapon : MonoBehaviour
         weaponBlueprint = _blueprint;
         me = character;
         anim = me.GetComponent<AnimancerController>();
+        isHeavy = weaponBlueprint.isHeavy;
+        hitThisTurn = new List<StableCombatChar>();
     }
 
 
     public void OnTriggerEnter(Collider other) {
-        Debug.Log("#SCWeapon#Collision: " + other.name);
+        Debug.Log("#SCWeapon#"+transform.name+" Collision: " + other.name);
         StableCombatChar target = other.GetComponent<StableCombatChar>();
         if (target == null || target == me || target.team == me.team) { return; }
+
+        if (hitThisTurn.Contains(target)) {
+            return;}
         target.TakeDamage(anim.currentMeleeMove.damage, me);
-        EndScan();
+        numHits++;
+        hitThisTurn.Add(target);
+        if (!isHeavy || numHits >= 4) {
+            EndScan();
+        }
     }
 
     public void Scan() {
+        hitThisTurn = new List<StableCombatChar>();
+        numHits = 0;
         col.enabled = true;
         Debug.Log("#SCWeapon#Scan");
     }
 
     public void EndScan() {
         col.enabled = false;
+        numHits = 0;
         Debug.Log("#SCWeapon#EndScan");
     }
 

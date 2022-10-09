@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &1162784097131502
+--- !u!1 &2880806055620279493
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,11 +8,9 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4461231718772068}
-  - component: {fileID: 33445834805382582}
-  - component: {fileID: 23652931822856964}
-  - component: {fileID: 7296856358220339487}
-  - component: {fileID: 2568883828387098190}
+  - component: {fileID: 2880806055620279492}
+  - component: {fileID: 9201772146394714560}
+  - component: {fileID: 2313225270219038269}
   m_Layer: 0
   m_Name: Halberd
   m_TagString: Untagged
@@ -20,35 +18,98 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4461231718772068
+--- !u!4 &2880806055620279492
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1162784097131502}
+  m_GameObject: {fileID: 2880806055620279493}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 8774130504828729295}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &33445834805382582
+--- !u!114 &9201772146394714560
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2880806055620279493}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3e1efe357ed11f478df5eca40a03225, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  col: {fileID: 2313225270219038269}
+  anim: {fileID: 0}
+  me: {fileID: 0}
+  weaponBlueprint: {fileID: 0}
+  projectileSpawnPoint: {fileID: 0}
+--- !u!65 &2313225270219038269
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2880806055620279493}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.37, y: 0.31, z: 1.18}
+  m_Center: {x: 0.15, y: -0.15, z: -1.06}
+--- !u!1 &8775265833642934597
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8774130504828729295}
+  - component: {fileID: 8771589910523877149}
+  - component: {fileID: 8761797557318136239}
+  m_Layer: 0
+  m_Name: Halberd
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8774130504828729295
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8775265833642934597}
+  m_LocalRotation: {x: -0.54397964, y: 0.45537406, z: -0.51600766, w: 0.480059}
+  m_LocalPosition: {x: 0.124, y: 0.046, z: 0.317}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2880806055620279492}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: -177, y: -89.62399, z: 82.847}
+--- !u!33 &8771589910523877149
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1162784097131502}
+  m_GameObject: {fileID: 8775265833642934597}
   m_Mesh: {fileID: 4300000, guid: 24b3c18d7359de245809ae8c696566ff, type: 3}
---- !u!23 &23652931822856964
+--- !u!23 &8761797557318136239
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1162784097131502}
+  m_GameObject: {fileID: 8775265833642934597}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -83,33 +144,3 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &7296856358220339487
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1162784097131502}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.22, y: 0.86, z: 0.3292544}
-  m_Center: {x: 0.0000000018626451, y: 1.68, z: 0.02824565}
---- !u!114 &2568883828387098190
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1162784097131502}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c3e1efe357ed11f478df5eca40a03225, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  col: {fileID: 0}
-  anim: {fileID: 0}
-  me: {fileID: 0}
-  weaponBlueprint: {fileID: 0}
-  projectileSpawnPoint: {fileID: 0}
