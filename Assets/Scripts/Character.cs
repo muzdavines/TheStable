@@ -734,6 +734,10 @@ public class Character : Living {
                 maxMind += 40;
                 maxStamina += 20;
                 maxBalance += 20;
+                activeMeleeMoves[0] = Resources.Load<BaseMeleeMove>("DarkHammer1");
+                activeMeleeMoves[1] = Resources.Load<BaseMeleeMove>("DarkHammer2");
+                activeMeleeMoves[2] = Resources.Load<BaseMeleeMove>("DarkHammer3");
+                meleeWeapon = Instantiate(Resources.Load<Weapon>("DarkHammerSO"));
                 specialsToAdd.Add("SoulSteal");
                 break;
             case Archetype.Marauder:

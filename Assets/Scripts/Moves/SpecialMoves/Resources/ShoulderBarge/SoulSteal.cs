@@ -13,7 +13,7 @@ public class SoulSteal : ActiveSpecialMove {
 
     public override bool Check(StableCombatChar _char) {
 
-        if (Time.time <= lastFired + 20) { return false; }
+        if (!_char.fieldSport || Time.time <= lastFired + 20) { return false; }
         enemy = _char.GetNearestEnemy(20);
         Debug.Log("#SoulSteal#" + (enemy ? enemy.name : "null"));
         if (enemy) {

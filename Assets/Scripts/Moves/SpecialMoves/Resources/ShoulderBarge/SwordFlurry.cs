@@ -12,7 +12,7 @@ public class SwordFlurry : ActiveSpecialMove {
     }
 
     public override bool Check(StableCombatChar _char) {
-        if (Time.time < lastFired + 20) {
+        if (!_char.fieldSport || Time.time < lastFired + 20) {
             return false;
         }
 

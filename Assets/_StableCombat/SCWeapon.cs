@@ -51,13 +51,13 @@ public class SCWeapon : MonoBehaviour
         hitThisTurn = new List<StableCombatChar>();
         numHits = 0;
         col.enabled = true;
-        Debug.Log("#SCWeapon#Scan");
+        Debug.Log("#SCWeapon#Scan "+name);
     }
 
     public void EndScan() {
         col.enabled = false;
         numHits = 0;
-        Debug.Log("#SCWeapon#EndScan");
+        Debug.Log("#SCWeapon#EndScan "+name);
     }
 
     public void FireProjectile(Move thisMove) {
