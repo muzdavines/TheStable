@@ -758,6 +758,10 @@ public class Character : Living {
                 maxMind += 25;
                 maxStamina += 25;
                 maxBalance += 25;
+                activeMeleeMoves[0] = Resources.Load<BaseMeleeMove>("HolyMace1");
+                activeMeleeMoves[1] = Resources.Load<BaseMeleeMove>("HolyMace2");
+                activeMeleeMoves[2] = Resources.Load<BaseMeleeMove>("HolyMace3");
+                meleeWeapon = Instantiate(Resources.Load<Weapon>("HolyMaceSO"));
                 specialsToAdd.Add("DivineIntervention");
                 break;
            
