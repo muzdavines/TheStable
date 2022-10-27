@@ -55,6 +55,8 @@ public class Character : Living {
     public List<SpecialMove> activeSpecialMoves = new List<SpecialMove>();
     public SportStats seasonStats = new SportStats();
     public SportStats careerStats = new SportStats();
+    public QuestStats careerQuestStats = new QuestStats();
+    public QuestStats thisQuestStats = new QuestStats();
 
     public Gender gender;
     public Race race = Race.Human;
@@ -777,7 +779,16 @@ public class Character : Living {
         //myGearSet = Resources.Load<CharacterGearSet>("GearSets/" + archetype.ToString());
     }
 }
-
+[System.Serializable]
+public class QuestStats {
+    public int staminaDamage, balanceDamage, mindDamage, healthDamage = 0;
+    public void Add(QuestStats stats) {
+        staminaDamage += stats.staminaDamage;
+        balanceDamage += stats.balanceDamage;
+        mindDamage += stats.mindDamage;
+        healthDamage += stats.healthDamage;
+    }
+}
 [System.Serializable]
 public class SportStats {
     public int games = 0;

@@ -922,9 +922,14 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
             state.TransitionTo(new SCTakeDamage());
         }
         if (stamina <= 0 || balance <= 0 || mind <= 0) {
+            attacker.myCharacter.thisQuestStats.healthDamage += Mathf.Max((int)Mathf.Min(damage.health, health),0);
             health -= damage.health;
+            
             Debug.Log("TODO: more health damage adjustments needed");
         }
+        attacker.myCharacter.thisQuestStats.staminaDamage += Mathf.Max((int)Mathf.Min(damage.stamina, stamina),0);
+        attacker.myCharacter.thisQuestStats.balanceDamage += Mathf.Max((int)Mathf.Min(damage.balance, balance), 0);
+        attacker.myCharacter.thisQuestStats.mindDamage += Mathf.Max((int)Mathf.Min(damage.mind, mind), 0);
         stamina -= damage.stamina;
         balance -= damage.balance;
         mind -= damage.mind;

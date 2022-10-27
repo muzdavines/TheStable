@@ -119,15 +119,23 @@ public class MissionController : MonoBehaviour
         //move heroes to spawn locations
 
     }
-
+    void DamageDetails() {
+        MissionFinalDetails details = FindObjectOfType<MissionFinalDetails>();
+        details.damageDetails = new List<MissionFinalDetails.DamageDetails>();
+        foreach (var h in heroes) {
+            details.damageDetails.Add(new MissionFinalDetails.DamageDetails() { character = h, stats = h.thisQuestStats });
+            h.careerQuestStats.Add(h.thisQuestStats);
+        }
+    }
     public void MissionComplete() {
         print("Rewards");
-        
+        DamageDetails();
         SceneManager.LoadScene("PostMission");
 
     }
     public void MissionFailed() {
         missionFailed = true;
+        DamageDetails();
         FindObjectOfType<MissionFinalDetails>().successful = false;
         stageNum = 1000000;
         SceneManager.LoadScene("PostMission");
@@ -153,6 +161,7 @@ public class MissionController : MonoBehaviour
         for (int i = 0; i < chars.Count; i++) {
             if (chars[i].incapacitated) { continue; }
             Character thisBaseChar = chars[i];
+            thisBaseChar.thisQuestStats = new QuestStats();
             GameObject co = Instantiate<GameObject>(Resources.Load<GameObject>(thisBaseChar.modelName), spawns[i].transform.position, Quaternion.identity);
             StableCombatChar thisChar = co.GetComponent<StableCombatChar>();
             thisChar.fieldSport = false;
