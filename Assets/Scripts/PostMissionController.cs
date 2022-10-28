@@ -11,7 +11,7 @@ public class PostMissionController : MonoBehaviour
     public Text businessReward;
     public Text modReward;
     public Text itemReward;
-    public Text damageName, damageStam, damageBal, damageMind, damageHealth;
+    public Text damageName, damageStam, damageBal, damageMind, damageHealth, damageKills;
 
     public MissionFinalDetails d;
     int goldRewardAmount;
@@ -77,6 +77,7 @@ public class PostMissionController : MonoBehaviour
         damageMind.text = "Mind\n";
         damageBal.text = "Balance\n";
         damageHealth.text = "Health\n";
+        damageKills.text = "Kills\n";
 
         foreach (var dd in d.damageDetails) {
             damageName.text += dd.character.name + "\n";
@@ -84,6 +85,7 @@ public class PostMissionController : MonoBehaviour
             damageBal.text += dd.stats.balanceDamage + "\n";
             damageMind.text += dd.stats.mindDamage + "\n";
             damageHealth.text += dd.stats.healthDamage + "\n";
+            damageKills.text += dd.stats.kills + "\n";
             
         }
     }

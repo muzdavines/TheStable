@@ -631,6 +631,10 @@ public class Character : Living {
                 maxMind += 25;
                 maxStamina += 35;
                 maxBalance += 35;
+                activeMeleeMoves[0] = Resources.Load<BaseMeleeMove>("Rapier1");
+                activeMeleeMoves[1] = Resources.Load<BaseMeleeMove>("Rapier2");
+                activeMeleeMoves[2] = Resources.Load<BaseMeleeMove>("Rapier3");
+                meleeWeapon = Instantiate(Resources.Load<Weapon>("RapierSO"));
                 specialsToAdd.Add("UncannyDodge");
                 break;
             case Archetype.Enforcer:
@@ -782,11 +786,13 @@ public class Character : Living {
 [System.Serializable]
 public class QuestStats {
     public int staminaDamage, balanceDamage, mindDamage, healthDamage = 0;
+    public int kills;
     public void Add(QuestStats stats) {
         staminaDamage += stats.staminaDamage;
         balanceDamage += stats.balanceDamage;
         mindDamage += stats.mindDamage;
         healthDamage += stats.healthDamage;
+        kills += stats.kills;
     }
 }
 [System.Serializable]

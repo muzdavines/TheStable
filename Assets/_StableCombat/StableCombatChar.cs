@@ -938,6 +938,7 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
             GetDowned();
             if (attacker != null) {
                 attacker.myCharacter.xp += Game.XPCombatDown;
+                attacker.myCharacter.thisQuestStats.kills++;
             }
 
             return;
