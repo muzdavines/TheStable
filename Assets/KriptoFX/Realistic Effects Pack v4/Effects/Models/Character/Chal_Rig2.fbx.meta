@@ -418,7 +418,8 @@ ModelImporter:
     animationPositionError: 0.5
     animationScaleError: 0.5
     animationWrapMode: 0
-    extraExposedTransformPaths: []
+    extraExposedTransformPaths:
+    - challenger_Reference
     extraUserProperties: []
     clipAnimations: []
     isReadable: 1
@@ -429,7 +430,7 @@ ModelImporter:
     addColliders: 0
     useSRGBMaterialColor: 1
     importVisibility: 0
-    importBlendShapes: 0
+    importBlendShapes: 1
     importCameras: 0
     importLights: 0
     swapUVChannels: 0
@@ -449,13 +450,13 @@ ModelImporter:
     hasPreviousCalculatedGlobalScale: 1
   tangentSpace:
     normalSmoothAngle: 60
-    normalImportMode: 1
+    normalImportMode: 0
     tangentImportMode: 3
-    normalCalculationMode: 1
+    normalCalculationMode: 0
     legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 1
     blendShapeNormalImportMode: 1
     normalSmoothingSource: 0
-  importAnimation: 0
+  importAnimation: 1
   copyAvatar: 0
   humanDescription:
     serializedVersion: 2
@@ -899,879 +900,875 @@ ModelImporter:
       rotation: {x: 0, y: 0, z: 0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: challenger_geo_grp
-      parentName: 
-      position: {x: 0, y: 0, z: 0}
-      rotation: {x: 0.000000021855694, y: 0, z: 0, w: 1}
+      parentName: Chal_Rig2(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0.000000021855694, y: 0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: challenger_beard
-      parentName: 
-      position: {x: 0, y: 0, z: 0}
+      parentName: challenger_geo_grp
+      position: {x: -0, y: 0, z: 0}
       rotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
       scale: {x: 1, y: 1, z: 1}
     - name: challenger_boots
-      parentName: 
-      position: {x: 0, y: 0, z: 0}
+      parentName: challenger_geo_grp
+      position: {x: -0, y: 0, z: 0}
       rotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
       scale: {x: 0.99999994, y: 0.99999994, z: 0.99999994}
     - name: challenger_dress
-      parentName: 
-      position: {x: 0, y: 0, z: 0}
+      parentName: challenger_geo_grp
+      position: {x: -0, y: 0, z: 0}
       rotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
       scale: {x: 0.99999994, y: 0.99999994, z: 0.99999994}
     - name: challenger_eyes_refl
-      parentName: 
-      position: {x: 0, y: 0, z: 0}
+      parentName: challenger_geo_grp
+      position: {x: -0, y: 0, z: 0}
       rotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
       scale: {x: 1, y: 1, z: 1}
     - name: challenger_eyes_refl 1
-      parentName: 
-      position: {x: 0, y: 0, z: 0}
+      parentName: challenger_geo_grp
+      position: {x: -0, y: 0, z: 0}
       rotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
       scale: {x: 1, y: 1, z: 1}
     - name: challenger_eyes_refl2
-      parentName: 
-      position: {x: 0, y: 0, z: 0}
+      parentName: challenger_geo_grp
+      position: {x: -0, y: 0, z: 0}
       rotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
       scale: {x: 1, y: 1, z: 1}
     - name: challenger_fingers
-      parentName: 
-      position: {x: 0, y: 0, z: 0}
+      parentName: challenger_geo_grp
+      position: {x: -0, y: 0, z: 0}
       rotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
       scale: {x: 0.99999994, y: 0.99999994, z: 0.99999994}
     - name: challenger_hair
-      parentName: 
-      position: {x: 0, y: 0, z: 0}
+      parentName: challenger_geo_grp
+      position: {x: -0, y: 0, z: 0}
       rotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
       scale: {x: 1, y: 1, z: 1}
     - name: challenger_hands
-      parentName: 
-      position: {x: 0, y: 0, z: 0}
+      parentName: challenger_geo_grp
+      position: {x: -0, y: 0, z: 0}
       rotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
       scale: {x: 0.99999994, y: 0.99999994, z: 0.99999994}
     - name: challenger_head
-      parentName: 
-      position: {x: 0, y: 0, z: 0}
+      parentName: challenger_geo_grp
+      position: {x: -0, y: 0, z: 0}
       rotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
       scale: {x: 0.99999994, y: 0.99999994, z: 0.99999994}
     - name: challenger_helm
-      parentName: 
-      position: {x: 0, y: 0, z: 0}
+      parentName: challenger_geo_grp
+      position: {x: -0, y: 0, z: 0}
       rotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
       scale: {x: 0.99999994, y: 0.99999994, z: 0.99999994}
     - name: challenger_hood
-      parentName: 
-      position: {x: 0, y: 0, z: 0}
+      parentName: challenger_geo_grp
+      position: {x: -0, y: 0, z: 0}
       rotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
       scale: {x: 0.99999994, y: 0.99999994, z: 0.99999994}
     - name: challenger_knife
-      parentName: 
-      position: {x: 0, y: 0, z: 0}
+      parentName: challenger_geo_grp
+      position: {x: -0, y: 0, z: 0}
       rotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
       scale: {x: 0.99999994, y: 0.99999994, z: 0.99999994}
     - name: challenger_pants
-      parentName: 
-      position: {x: 0, y: 0, z: 0}
+      parentName: challenger_geo_grp
+      position: {x: -0, y: 0, z: 0}
       rotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
       scale: {x: 0.99999994, y: 0.99999994, z: 0.99999994}
     - name: challenger_sholders
-      parentName: 
-      position: {x: 0, y: 0, z: 0}
+      parentName: challenger_geo_grp
+      position: {x: -0, y: 0, z: 0}
       rotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
       scale: {x: 0.99999994, y: 0.99999994, z: 0.99999994}
     - name: challenger_sword_holder
-      parentName: 
-      position: {x: 0, y: 0, z: 0}
+      parentName: challenger_geo_grp
+      position: {x: -0, y: 0, z: 0}
       rotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
       scale: {x: 0.99999994, y: 0.99999994, z: 0.99999994}
     - name: challenger_sword_holder2
-      parentName: 
-      position: {x: 0, y: 0, z: 0}
+      parentName: challenger_geo_grp
+      position: {x: -0, y: 0, z: 0}
       rotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
       scale: {x: 0.99999994, y: 0.99999994, z: 0.99999994}
     - name: challenger_teeth
-      parentName: 
-      position: {x: 0, y: 0, z: 0}
+      parentName: challenger_geo_grp
+      position: {x: -0, y: 0, z: 0}
       rotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
       scale: {x: 1, y: 1, z: 1}
     - name: challenger_tongue
-      parentName: 
-      position: {x: 0, y: 0, z: 0}
+      parentName: challenger_geo_grp
+      position: {x: -0, y: 0, z: 0}
       rotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
       scale: {x: 1, y: 1, z: 1}
     - name: challenger_torso
-      parentName: 
-      position: {x: 0, y: 0, z: 0}
+      parentName: challenger_geo_grp
+      position: {x: -0, y: 0, z: 0}
       rotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
       scale: {x: 0.99999994, y: 0.99999994, z: 0.99999994}
     - name: challenger_Reference
-      parentName: 
-      position: {x: 0, y: 0, z: 0}
-      rotation: {x: 0.000000021855694, y: 0, z: 0, w: 1}
+      parentName: Chal_Rig2(Clone)
+      position: {x: -0, y: 0, z: 0}
+      rotation: {x: 0.000000021855694, y: 0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: challenger_LeftHandProp
-      parentName: 
+      parentName: challenger_Reference
       position: {x: -0.5757009, y: 1.0174099, z: 0.09110667}
       rotation: {x: -0.5891848, y: 0.36476314, z: 0.7042013, w: 0.15462756}
       scale: {x: 1, y: 0.99999994, z: 1}
     - name: challenger_RightHandProp
-      parentName: 
+      parentName: challenger_Reference
       position: {x: 0.5757009, y: 1.0174092, z: 0.09110664}
       rotation: {x: -0.36476314, y: 0.5891848, z: 0.15462756, w: 0.7042013}
       scale: {x: 1, y: 0.99999994, z: 1}
     - name: challenger_Hips
-      parentName: 
+      parentName: challenger_Reference
       position: {x: -0.0000000047683715, y: 1.0581626, z: -0.02054997}
-      rotation: {x: 0.50842166, y: -0.49143413, z: -0.5084216, w: 0.49143413}
-      scale: {x: 1.0000001, y: 1.0000008, z: 1}
+      rotation: {x: 0.5084216, y: -0.49143416, z: -0.5084216, w: 0.4914341}
+      scale: {x: 1, y: 1, z: 1}
     - name: challenger_FrontKnife
-      parentName: 
+      parentName: challenger_Hips
       position: {x: -0.095549695, y: 0.121757045, z: -0.15244623}
-      rotation: {x: 0.7368604, y: -0.13250387, z: 0.5705051, w: -0.33764404}
-      scale: {x: 1.0000002, y: 0.99999976, z: 0.99999994}
+      rotation: {x: 0.7368604, y: -0.13250399, z: 0.570505, w: -0.33764398}
+      scale: {x: 1, y: 0.99999994, z: 1}
     - name: challenger_BeltBuckle
-      parentName: 
+      parentName: challenger_Hips
       position: {x: -0.07306839, y: 0.18725383, z: 0.000048883558}
-      rotation: {x: -0.7071069, y: 0.7071067, z: -0.0000000023283064, w: 0.000000031664968}
-      scale: {x: 1.0000001, y: 1.0000004, z: 0.9999999}
+      rotation: {x: -0.7071068, y: 0.7071068, z: -0.00000003090862, w: 0.000000030908623}
+      scale: {x: 1, y: 1, z: 1}
     - name: challenger_Belt
-      parentName: 
+      parentName: challenger_BeltBuckle
       position: {x: 0.0037233543, y: -0.026198806, z: -0.059334215}
-      rotation: {x: -0.14817947, y: -0.0905666, z: 0.65472585, w: 0.73564583}
-      scale: {x: 0.9999997, y: 0.9999999, z: 1.0000001}
+      rotation: {x: -0.14817944, y: -0.09056667, z: 0.65472573, w: 0.7356458}
+      scale: {x: 1.0000001, y: 1, z: 1}
     - name: challenger_RearSword_Strap_01
-      parentName: 
+      parentName: challenger_Hips
       position: {x: -0.11439788, y: -0.036680903, z: 0.15418108}
-      rotation: {x: -0.88870513, y: 0.07273594, z: -0.007176578, w: -0.45261604}
-      scale: {x: 1, y: 0.9999999, z: 0.9999997}
+      rotation: {x: 0.88870513, y: -0.07273597, z: 0.0071766176, w: 0.452616}
+      scale: {x: 0.99999994, y: 1, z: 0.99999994}
     - name: challenger_RearSword_Strap_02
-      parentName: 
+      parentName: challenger_RearSword_Strap_01
       position: {x: 0.034346085, y: 0.013770752, z: 0.03191894}
-      rotation: {x: 0.33209047, y: -0.2628207, z: 0.7606101, w: 0.4920504}
-      scale: {x: 1.0000001, y: 0.9999997, z: 0.9999997}
+      rotation: {x: 0.33209047, y: -0.26282078, z: 0.76061, w: 0.4920504}
+      scale: {x: 1, y: 0.9999999, z: 0.99999994}
     - name: challenger_RearSword_Strap_03
-      parentName: 
+      parentName: challenger_RearSword_Strap_02
       position: {x: 0.05105259, y: 0.026153488, z: 0.014272994}
-      rotation: {x: 0.049938593, y: -0.1453609, z: 0.16988628, w: 0.9734038}
-      scale: {x: 0.9999997, y: 1.0000001, z: 1.0000004}
+      rotation: {x: 0.049938668, y: -0.14536095, z: 0.1698862, w: 0.9734039}
+      scale: {x: 0.99999994, y: 1, z: 1}
     - name: challenger_RearSword_Strap_04
-      parentName: 
+      parentName: challenger_RearSword_Strap_03
       position: {x: 0.01848999, y: 0.00006278991, z: -0.0005062866}
       rotation: {x: -0.001864849, y: 0.019458989, z: -0.014354335, w: 0.9997059}
       scale: {x: 1, y: 1.0000001, z: 1}
     - name: challenger_LeftUpLeg
-      parentName: 
+      parentName: challenger_Hips
       position: {x: 0.06382111, y: 0.03867082, z: 0.089099966}
-      rotation: {x: 0.0012900828, y: 0.99661314, z: 0.002900183, w: 0.082171716}
-      scale: {x: 1.0000002, y: 0.9999998, z: 0.9999997}
+      rotation: {x: 0.001290209, y: 0.99661314, z: 0.0029002982, w: 0.08217165}
+      scale: {x: 1, y: 1, z: 0.99999994}
     - name: challenger_LeftLeg
-      parentName: 
+      parentName: challenger_LeftUpLeg
       position: {x: -0.41793224, y: -0.00000008702278, z: 0.000000057220458}
-      rotation: {x: 0.0017296821, y: 0.038707495, z: 0.00804694, w: 0.99921674}
-      scale: {x: 0.9999997, y: 0.9999997, z: 0.99999964}
+      rotation: {x: 0.0017295963, y: 0.038707424, z: 0.008046869, w: 0.99921674}
+      scale: {x: 1.0000001, y: 0.99999994, z: 0.9999999}
     - name: challenger_LeftFoot
-      parentName: 
+      parentName: challenger_LeftLeg
       position: {x: -0.48284873, y: -0.000000028610229, z: 0.000000038146972}
-      rotation: {x: -0.11977671, y: -0.022252647, z: -0.5558385, w: 0.8223149}
-      scale: {x: 1, y: 1.0000002, z: 0.99999994}
+      rotation: {x: -0.11977664, y: -0.02225256, z: -0.55583847, w: 0.82231504}
+      scale: {x: 1.0000001, y: 1.0000001, z: 1.0000001}
     - name: challenger_LeftToeBase
-      parentName: 
+      parentName: challenger_LeftFoot
       position: {x: -0.16562095, y: 0, z: 0.000000057220458}
-      rotation: {x: -0.007272362, y: -0.016771931, z: -0.17587748, w: 0.9842424}
-      scale: {x: 1.0000002, y: 1.0000001, z: 1}
+      rotation: {x: -0.007272353, y: -0.016771913, z: -0.17587756, w: 0.9842423}
+      scale: {x: 1, y: 1, z: 0.9999999}
     - name: challenger_RightUpLeg
-      parentName: 
+      parentName: challenger_Hips
       position: {x: 0.0638208, y: 0.038670857, z: -0.08910004}
-      rotation: {x: -0.99661314, y: 0.0013254732, z: 0.082171515, w: -0.0029016584}
-      scale: {x: 1.0000001, y: 1.0000001, z: 0.9999997}
-    - name: challenger_RightLeg
-      parentName: 
-      position: {x: 0.41793305, y: 0.00000007987022, z: 0.00000028610228}
-      rotation: {x: 0.0017271191, y: 0.03870754, z: 0.007981047, w: 0.9992173}
-      scale: {x: 1, y: 0.9999997, z: 0.99999994}
-    - name: challenger_RightFoot
-      parentName: 
-      position: {x: 0.48284838, y: 0.000000023841856, z: -0.00000034332274}
-      rotation: {x: 0.11977488, y: 0.022255654, z: 0.55581343, w: -0.8223321}
-      scale: {x: 1.0000002, y: 0.99999976, z: 1.0000001}
-    - name: challenger_RightToeBase
-      parentName: 
-      position: {x: 0.16562074, y: 0.000000047683713, z: -0.000000057220458}
-      rotation: {x: -0.0072723813, y: -0.016771853, z: -0.17587748, w: 0.9842423}
-      scale: {x: 0.99999976, y: 0.99999976, z: 0.9999995}
-    - name: challenger_Spine
-      parentName: 
-      position: {x: -0.098673016, y: 0.0000000047683715, z: -9.094947e-15}
-      rotation: {x: -0.000000029802322, y: -0.000000029802322, z: 0.09931895, w: 0.99505574}
-      scale: {x: 0.9999998, y: 0.9999995, z: 0.99999964}
-    - name: challenger_Spine1
-      parentName: 
-      position: {x: -0.0907563, y: 0.0018795966, z: 0}
-      rotation: {x: 0.000000029802319, y: -0.000000029802319, z: 0.035819497, w: 0.9993583}
-      scale: {x: 0.99999946, y: 0.9999993, z: 0.99999976}
-    - name: challenger_RightArmorStrap01
-      parentName: 
-      position: {x: -0.093389355, y: 0.16700256, z: -0.150651}
-      rotation: {x: 0.39059222, y: 0.2668185, z: 0.8684635, w: 0.14838101}
-      scale: {x: 0.9999999, y: 0.99999994, z: 0.9999999}
-    - name: challenger_RightArmorStrap02
-      parentName: 
-      position: {x: 0.086294934, y: 0, z: 0}
-      rotation: {x: -0.00000011920929, y: 0.000000067055225, z: 0.000000011175871,
-        w: 1}
-      scale: {x: 1.0000001, y: 1.0000004, z: 1.0000004}
-    - name: challenger_LeftArmorStrap01
-      parentName: 
-      position: {x: -0.09339027, y: 0.16700275, z: 0.1506507}
-      rotation: {x: -0.26682165, y: 0.39058083, z: 0.14838119, w: -0.86846757}
+      rotation: {x: 0.99661314, y: -0.0013255803, z: -0.08217156, w: 0.0029016312}
       scale: {x: 1, y: 1.0000001, z: 1}
-    - name: challenger_LeftArmorStrap02
-      parentName: 
-      position: {x: -0.086296916, y: 0.000000038146972, z: -0.000000076293944}
-      rotation: {x: 0.000000029802315, y: 0.000000029802315, z: -0.000000029802315,
+    - name: challenger_RightLeg
+      parentName: challenger_RightUpLeg
+      position: {x: 0.41793305, y: 0.00000007987022, z: 0.00000028610228}
+      rotation: {x: 0.0017270421, y: 0.03870754, z: 0.007980932, w: 0.9992173}
+      scale: {x: 1, y: 1, z: 0.99999994}
+    - name: challenger_RightFoot
+      parentName: challenger_RightLeg
+      position: {x: 0.48284838, y: 0.000000023841856, z: -0.00000034332274}
+      rotation: {x: -0.11977484, y: -0.022255568, z: -0.5558133, w: 0.8223322}
+      scale: {x: 1.0000001, y: 0.99999994, z: 1.0000001}
+    - name: challenger_RightToeBase
+      parentName: challenger_RightFoot
+      position: {x: 0.16562074, y: 0.000000047683713, z: -0.000000057220458}
+      rotation: {x: -0.0072723455, y: -0.016771875, z: -0.17587756, w: 0.9842423}
+      scale: {x: 1, y: 1, z: 0.99999994}
+    - name: challenger_Spine
+      parentName: challenger_Hips
+      position: {x: -0.098673016, y: 0.0000000047683715, z: -9.094947e-15}
+      rotation: {x: 1.7675742e-15, y: 1.7642575e-16, z: 0.09931886, w: 0.9950557}
+      scale: {x: 0.99999994, y: 0.99999994, z: 1}
+    - name: challenger_Spine1
+      parentName: challenger_Spine
+      position: {x: -0.0907563, y: 0.0018795966, z: 0}
+      rotation: {x: -5.074325e-16, y: 1.7593098e-15, z: 0.035819545, w: 0.9993583}
+      scale: {x: 1, y: 1, z: 1}
+    - name: challenger_RightArmorStrap01
+      parentName: challenger_Spine1
+      position: {x: -0.093389355, y: 0.16700256, z: -0.150651}
+      rotation: {x: 0.3905922, y: 0.26681837, z: 0.86846346, w: 0.14838096}
+      scale: {x: 1, y: 1.0000001, z: 1}
+    - name: challenger_RightArmorStrap02
+      parentName: challenger_RightArmorStrap01
+      position: {x: 0.086294934, y: 0, z: 0}
+      rotation: {x: -0.000000014901159, y: 0.000000014901161, z: 0.000000011175872,
         w: 1}
-      scale: {x: 1.0000001, y: 0.9999999, z: 1}
+      scale: {x: 0.99999994, y: 1.0000001, z: 1}
+    - name: challenger_LeftArmorStrap01
+      parentName: challenger_Spine1
+      position: {x: -0.09339027, y: 0.16700275, z: 0.1506507}
+      rotation: {x: 0.26682165, y: -0.39058083, z: -0.1483812, w: 0.8684675}
+      scale: {x: 1, y: 0.9999999, z: 1}
+    - name: challenger_LeftArmorStrap02
+      parentName: challenger_LeftArmorStrap01
+      position: {x: -0.086296916, y: 0.000000038146972, z: -0.000000076293944}
+      rotation: {x: -0.000000011175871, y: -0.000000029802322, z: -3.330669e-16, w: 1}
+      scale: {x: 1, y: 1, z: 0.99999994}
     - name: challenger_Spine2
-      parentName: 
+      parentName: challenger_Spine1
       position: {x: -0.09700218, y: 0.000000038146972, z: -0.0000000028103204}
-      rotation: {x: 0.000000029802319, y: -0.000000029802319, z: 0.17341764, w: -0.9848484}
-      scale: {x: 0.99999976, y: 1.0000001, z: 0.99999976}
+      rotation: {x: -2.7534718e-15, y: 2.2885323e-15, z: -0.17341767, w: 0.9848484}
+      scale: {x: 1, y: 1, z: 1}
     - name: challenger_RearGorget_OriCnstLoc
-      parentName: 
+      parentName: challenger_Spine2
       position: {x: -0.2616159, y: 0.010065403, z: -0.15498099}
       rotation: {x: 4.440892e-16, y: 1.7763568e-15, z: -7.888609e-31, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: challenger_Spine3
-      parentName: 
+      parentName: challenger_Spine2
       position: {x: -0.27354538, y: -0.000000038146972, z: -0.000000007448411}
-      rotation: {x: 0.52719086, y: -0.47124293, z: -0.5271908, w: -0.47124293}
-      scale: {x: 1.0000004, y: 1.0000004, z: 1.0000004}
+      rotation: {x: 0.52719074, y: -0.47124293, z: -0.52719074, w: -0.47124293}
+      scale: {x: 1, y: 1, z: 1}
     - name: challenger_Gorget_Ik
-      parentName: 
+      parentName: challenger_Spine3
       position: {x: 0.15498099, y: -0.012979584, z: 0.008669655}
       rotation: {x: -3.9252314e-16, y: 0.7071068, z: 3.9252314e-16, w: 0.7071068}
       scale: {x: 0.99999994, y: 0.99999994, z: 1}
     - name: challenger_Gorget_PvLoc
-      parentName: 
+      parentName: challenger_Spine3
       position: {x: 0.000095443014, y: 0.12519912, z: 0.008669653}
       rotation: {x: -9.751664e-31, y: 1.7567037e-15, z: 5.551115e-16, w: 1}
       scale: {x: 1, y: 0.99999994, z: 0.99999994}
     - name: challenger_FrontGorget
-      parentName: 
+      parentName: challenger_Spine3
       position: {x: -0.1547901, y: -0.012979584, z: 0.008669653}
-      rotation: {x: -9.523251e-15, y: 0.7071068, z: -1.7763568e-15, w: 0.7071068}
-      scale: {x: 0.9999999, y: 0.99999994, z: 1}
+      rotation: {x: -3.9252314e-17, y: 0.7071068, z: 3.9252314e-17, w: 0.7071068}
+      scale: {x: 0.99999994, y: 0.99999994, z: 1}
     - name: LeftArmorStrap_AimNull
-      parentName: 
+      parentName: challenger_FrontGorget
       position: {x: -0.14990413, y: -0.15917923, z: 0.05585121}
       rotation: {x: 0.65388703, y: -0.5904953, z: -0.032025024, w: -0.47193387}
       scale: {x: 1, y: 0.99999994, z: 1}
     - name: LeftArmorStrap_AimLoc
-      parentName: 
-      position: {x: 0, y: 0, z: 0}
+      parentName: LeftArmorStrap_AimNull
+      position: {x: -0, y: 0, z: 0}
       rotation: {x: -0.000000014901158, y: -1.6653341e-16, z: 0.000000011175871, w: 1}
       scale: {x: 1, y: 1.0000001, z: 1}
     - name: RightArmorStrap_AimNull
-      parentName: 
+      parentName: challenger_FrontGorget
       position: {x: -0.14990407, y: -0.15918319, z: 0.253729}
       rotation: {x: 0.5904953, y: 0.653887, z: -0.4719339, w: 0.03202502}
       scale: {x: 1, y: 0.99999994, z: 1}
     - name: RightArmorStrap_AimLoc
-      parentName: 
-      position: {x: 0, y: 0, z: 0}
+      parentName: RightArmorStrap_AimNull
+      position: {x: -0, y: 0, z: 0}
       rotation: {x: -0.0000000074505815, y: 0.000000014901165, z: -0.000000014901163,
         w: 1}
       scale: {x: 0.99999994, y: 0.99999994, z: 0.99999994}
     - name: challenger_RearGorget
-      parentName: 
+      parentName: challenger_FrontGorget
       position: {x: 0.0000000023841857, y: 0, z: 0.3097711}
-      rotation: {x: 0, y: 0, z: 0, w: 1}
+      rotation: {x: 0, y: 2.4169762e-16, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: challenger_RearSword
-      parentName: 
+      parentName: challenger_RearGorget
       position: {x: 0.14220686, y: -0.06260376, z: -0.06568077}
-      rotation: {x: -0.6769861, y: -0.68401754, z: -0.18985407, w: 0.19433331}
-      scale: {x: 1, y: 0.99999964, z: 0.99999964}
+      rotation: {x: 0.67698604, y: 0.6840175, z: 0.18985409, w: -0.19433327}
+      scale: {x: 1, y: 1, z: 0.99999994}
     - name: challenger_LeftShoulder
-      parentName: 
+      parentName: challenger_Spine3
       position: {x: -0.036968093, y: -0.08782684, z: -0.0025938605}
-      rotation: {x: -0.000000059604638, y: 0.000000029802315, z: -0.000000029802322,
-        w: 1}
-      scale: {x: 1, y: 1, z: 0.99999964}
+      rotation: {x: -9.751664e-32, y: 1.7567037e-15, z: 5.551115e-17, w: 1}
+      scale: {x: 1, y: 0.99999994, z: 0.99999994}
     - name: challenger_FrontGorget_PntCnstLoc
-      parentName: 
+      parentName: challenger_LeftShoulder
       position: {x: -0.117822, y: 0.07484726, z: 0.011263513}
       rotation: {x: -3.5327084e-16, y: 0.7071068, z: 3.5327084e-16, w: 0.7071068}
       scale: {x: 1, y: 1, z: 1}
     - name: challenger_LeftArm
-      parentName: 
+      parentName: challenger_LeftShoulder
       position: {x: -0.15746674, y: 0, z: -0.000000007152557}
-      rotation: {x: -0.0004982022, y: -0.000040529325, z: 0.02037128, w: 0.99979234}
-      scale: {x: 1, y: 1.0000002, z: 0.9999997}
+      rotation: {x: -0.00049839896, y: -0.000040382132, z: 0.020371594, w: 0.99979234}
+      scale: {x: 1, y: 1, z: 1}
     - name: challenger_LeftShoulderpad
-      parentName: 
+      parentName: challenger_LeftArm
       position: {x: 0.047769394, y: 0.035597228, z: -0.0000000047683715}
-      rotation: {x: 0.00009415227, y: -0.0001264108, z: 0.07932969, w: -0.99684846}
-      scale: {x: 0.99999976, y: 0.99999994, z: 0.99999976}
+      rotation: {x: -0.0000941526, y: 0.0001263479, z: -0.07932975, w: 0.9968484}
+      scale: {x: 0.99999994, y: 1, z: 0.9999999}
     - name: challenger_LeftForeArm
-      parentName: 
+      parentName: challenger_LeftArm
       position: {x: -0.3074109, y: -0.0000003814697, z: 0.0000000023841857}
-      rotation: {x: 0.7496532, y: 0.0003080226, z: -0.04416534, w: 0.66035545}
-      scale: {x: 1.0000001, y: 0.9999998, z: 1}
+      rotation: {x: 0.74965334, y: 0.00030757513, z: -0.044165462, w: 0.6603554}
+      scale: {x: 1, y: 0.9999999, z: 0.99999994}
     - name: challenger_LeftForeArmRoll
-      parentName: 
+      parentName: challenger_LeftForeArm
       position: {x: -0.118736304, y: 0, z: 0}
-      rotation: {x: 0.08759167, y: -0.005065529, z: 0.05361514, w: 0.9946998}
-      scale: {x: 0.9999999, y: 1.0000004, z: 1.0000007}
+      rotation: {x: 0.08759157, y: -0.0050655403, z: 0.053615004, w: 0.9946997}
+      scale: {x: 0.99999994, y: 1, z: 1}
     - name: challenger_LeftHand
-      parentName: 
+      parentName: challenger_LeftForeArmRoll
       position: {x: -0.13070671, y: 0.014139404, z: 0.00009735107}
-      rotation: {x: -0.78748447, y: 0.046374723, z: -0.021074425, w: 0.614226}
-      scale: {x: 0.9999999, y: 0.99999964, z: 0.9999992}
+      rotation: {x: -0.78748447, y: 0.04637454, z: -0.021074463, w: 0.614226}
+      scale: {x: 1.0000001, y: 1.0000001, z: 0.9999999}
     - name: challenger_LeftHandRing1
-      parentName: 
+      parentName: challenger_LeftHand
       position: {x: -0.09034981, y: -0.0038341521, z: -0.025316734}
-      rotation: {x: -0.087395966, y: -0.021821672, z: 0.060492154, w: 0.9940958}
-      scale: {x: 1.0000001, y: 1.0000008, z: 1.0000005}
+      rotation: {x: -0.08739615, y: -0.021821829, z: 0.060492486, w: 0.9940958}
+      scale: {x: 0.99999994, y: 1, z: 1.0000001}
     - name: challenger_LeftHandRing2
-      parentName: 
+      parentName: challenger_LeftHandRing1
       position: {x: -0.053381193, y: 0.00000015258789, z: 0.000000038146972}
-      rotation: {x: -0.0000000864092, y: 0.00000008847557, z: 0.030856816, w: 0.9995238}
-      scale: {x: 0.9999999, y: 1.0000001, z: 1.0000001}
+      rotation: {x: -0.00000015646212, y: 0.00000035576505, z: 0.030858276, w: 0.99952376}
+      scale: {x: 1.0000001, y: 1.0000001, z: 1.0000001}
     - name: challenger_LeftHandRing3
-      parentName: 
+      parentName: challenger_LeftHandRing2
       position: {x: -0.027685013, y: 0.0000001335144, z: 0}
-      rotation: {x: -0.0000001344596, y: 0.0000006682235, z: 0.035745535, w: 0.9993609}
-      scale: {x: 0.99999934, y: 1.0000002, z: 1.0000002}
+      rotation: {x: 0.000000047011934, y: 0.0000012137939, z: 0.035747603, w: 0.9993609}
+      scale: {x: 0.9999998, y: 1, z: 0.99999994}
     - name: challenger_LeftHandRing4
-      parentName: 
+      parentName: challenger_LeftHandRing3
       position: {x: -0.034337386, y: 0.00000019073485, z: -0.000000019073486}
-      rotation: {x: 0.0000001341104, y: -0.000000058673294, z: -0.0000001700827, w: 1}
-      scale: {x: 1.0000001, y: 1, z: 1.0000002}
+      rotation: {x: 0, y: -0.0000000037252894, z: -0, w: 1}
+      scale: {x: 1.0000001, y: 1, z: 1.0000001}
     - name: challenger_LeftHandPinky1
-      parentName: 
+      parentName: challenger_LeftHand
       position: {x: -0.07688942, y: -0.013340759, z: -0.04659704}
-      rotation: {x: -0.10734455, y: -0.040065333, z: 0.054022603, w: 0.99194425}
-      scale: {x: 0.9999995, y: 1.0000005, z: 1.0000001}
+      rotation: {x: -0.10734468, y: -0.04006547, z: 0.054022443, w: 0.99194425}
+      scale: {x: 1, y: 1.0000001, z: 0.99999994}
     - name: challenger_LeftHandPinky2
-      parentName: 
+      parentName: challenger_LeftHandPinky1
       position: {x: -0.04003746, y: 0, z: -0.000000009536743}
-      rotation: {x: -0.00000017264384, y: -0.00000063469605, z: 0.031865392, w: 0.9994922}
-      scale: {x: 0.99999976, y: 1, z: 1.0000001}
+      rotation: {x: -0.000000052154054, y: -0.0000003166496, z: 0.031865276, w: 0.9994922}
+      scale: {x: 1, y: 1, z: 1.0000002}
     - name: challenger_LeftHandPinky3
-      parentName: 
+      parentName: challenger_LeftHandPinky2
       position: {x: -0.019720078, y: 0.00000034332274, z: 0}
-      rotation: {x: 0.00000010331853, y: -0.000000067055176, z: 0.03621257, w: 0.99934417}
-      scale: {x: 0.9999994, y: 0.99999994, z: 1.0000002}
+      rotation: {x: -0.00000011095498, y: 0.0000010711415, z: 0.036208715, w: 0.9993443}
+      scale: {x: 1, y: 0.99999994, z: 1.0000001}
     - name: challenger_LeftHandPinky4
-      parentName: 
+      parentName: challenger_LeftHandPinky3
       position: {x: -0.027315063, y: 0.00000015258789, z: 0}
-      rotation: {x: -0.00000008847558, y: 0.00000014901151, z: 0.0000000870786, w: 1}
-      scale: {x: 1, y: 0.99999994, z: 1.0000004}
-    - name: challenger_LeftHandMiddle1
-      parentName: 
-      position: {x: -0.099998094, y: 0.001633911, z: -0.0004915428}
-      rotation: {x: -0.050845355, y: -0.0076677892, z: 0.06270314, w: 0.9967068}
-      scale: {x: 0.99999994, y: 0.9999998, z: 0.9999998}
-    - name: challenger_LeftHandMiddle2
-      parentName: 
-      position: {x: -0.0554805, y: 0, z: 0.0000030708313}
-      rotation: {x: -0.000013415574, y: 0.00000240444, z: 0.029156331, w: 0.9995749}
-      scale: {x: 0.9999998, y: 1.0000002, z: 1.0000004}
-    - name: challenger_LeftHandMiddle3
-      parentName: 
-      position: {x: -0.03483803, y: 0, z: 0.0000017166137}
-      rotation: {x: -0.0000023392474, y: 0.0000037879186, z: 0.038996156, w: 0.9992394}
-      scale: {x: 0.9999996, y: 0.9999999, z: 0.9999999}
-    - name: challenger_LeftHandMiddle4
-      parentName: 
-      position: {x: -0.034666747, y: 0.000000038146972, z: 0.0000012779235}
-      rotation: {x: -0.00000012665984, y: 0.000000008381901, z: 0.00000008428467,
-        w: 1}
+      rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1.0000001}
-    - name: challenger_LeftHandIndex1
-      parentName: 
-      position: {x: -0.09573597, y: -0.005858154, z: 0.02856903}
-      rotation: {x: 0.013011335, y: 0.005552725, z: 0.06606029, w: 0.99771535}
-      scale: {x: 0.9999998, y: 1.0000001, z: 1.0000001}
-    - name: challenger_LeftHandIndex2
-      parentName: 
-      position: {x: -0.047696225, y: -0.00000022888183, z: 0}
-      rotation: {x: 0.0000014890677, y: -0.0000010202634, z: 0.030243717, w: 0.99954253}
-      scale: {x: 0.99999964, y: 1.0000004, z: 1}
-    - name: challenger_LeftHandIndex3
-      parentName: 
-      position: {x: -0.025657043, y: -0.00000015258789, z: 0}
-      rotation: {x: -0.000012422439, y: 0.000026454201, z: 0.038828284, w: 0.99924594}
-      scale: {x: 0.99999976, y: 0.9999997, z: 0.9999999}
-    - name: challenger_LeftHandIndex4
-      parentName: 
-      position: {x: -0.03434479, y: -0.00000015258789, z: -0.0000004196167}
-      rotation: {x: 0.000000089406925, y: -0.00013292575, z: 0.00000029616044, w: 1}
-      scale: {x: 0.99999994, y: 1, z: 1.0000002}
-    - name: challenger_LeftHandThumb1
-      parentName: 
-      position: {x: -0.009010239, y: -0.011414184, z: 0.029026298}
-      rotation: {x: 0.37092933, y: 0.33844143, z: -0.088823184, w: 0.8602205}
-      scale: {x: 1, y: 1.0000006, z: 0.99999994}
-    - name: challenger_LeftHandThumb2
-      parentName: 
-      position: {x: -0.054460183, y: 0.0007000732, z: 0.000000076293944}
-      rotation: {x: -0.0000002570449, y: 0.0000017676492, z: 0.026971785, w: 0.9996362}
-      scale: {x: 0.9999994, y: 1.0000001, z: 0.9999998}
-    - name: challenger_LeftHandThumb3
-      parentName: 
-      position: {x: -0.03689247, y: 0, z: -0.000000038146972}
-      rotation: {x: 0.00000014156092, y: 0.0000012489025, z: 0.036987312, w: 0.99931574}
-      scale: {x: 0.9999998, y: 0.9999999, z: 1.0000002}
-    - name: challenger_LeftHandThumb4
-      parentName: 
-      position: {x: -0.035888594, y: 0.000000076293944, z: 0}
-      rotation: {x: 0.000000059604616, y: -0.000000089406925, z: -0.000000059604616,
+    - name: challenger_LeftHandMiddle1
+      parentName: challenger_LeftHand
+      position: {x: -0.099998094, y: 0.001633911, z: -0.0004915428}
+      rotation: {x: -0.050845485, y: -0.0076678963, z: 0.062702544, w: 0.9967067}
+      scale: {x: 1, y: 0.99999994, z: 0.99999994}
+    - name: challenger_LeftHandMiddle2
+      parentName: challenger_LeftHandMiddle1
+      position: {x: -0.0554805, y: 0, z: 0.0000030708313}
+      rotation: {x: -0.000013619657, y: 0.0000039180727, z: 0.029155273, w: 0.9995749}
+      scale: {x: 1, y: 0.99999994, z: 0.99999994}
+    - name: challenger_LeftHandMiddle3
+      parentName: challenger_LeftHandMiddle2
+      position: {x: -0.03483803, y: 0, z: 0.0000017166137}
+      rotation: {x: -0.0000023006494, y: 0.0000037669001, z: 0.03899502, w: 0.99923944}
+      scale: {x: 0.99999994, y: 1.0000001, z: 1}
+    - name: challenger_LeftHandMiddle4
+      parentName: challenger_LeftHandMiddle3
+      position: {x: -0.034666747, y: 0.000000038146972, z: 0.0000012779235}
+      rotation: {x: 0.000000007450581, y: 0.000000007450581, z: -0.000000014901161,
         w: 1}
+      scale: {x: 1, y: 1, z: 1}
+    - name: challenger_LeftHandIndex1
+      parentName: challenger_LeftHand
+      position: {x: -0.09573597, y: -0.005858154, z: 0.02856903}
+      rotation: {x: 0.013011334, y: 0.005553288, z: 0.066062234, w: 0.99771523}
+      scale: {x: 1.0000001, y: 1, z: 1}
+    - name: challenger_LeftHandIndex2
+      parentName: challenger_LeftHandIndex1
+      position: {x: -0.047696225, y: -0.00000022888183, z: 0}
+      rotation: {x: 0.0000016828997, y: -0.0000016442498, z: 0.030244758, w: 0.9995426}
+      scale: {x: 1.0000001, y: 1, z: 1.0000001}
+    - name: challenger_LeftHandIndex3
+      parentName: challenger_LeftHandIndex2
+      position: {x: -0.025657043, y: -0.00000015258789, z: 0}
+      rotation: {x: -0.000012353017, y: 0.000028428103, z: 0.038824625, w: 0.99924606}
+      scale: {x: 1, y: 0.9999999, z: 1}
+    - name: challenger_LeftHandIndex4
+      parentName: challenger_LeftHandIndex3
+      position: {x: -0.03434479, y: -0.00000015258789, z: -0.0000004196167}
+      rotation: {x: -0.00000001117389, y: -0.00013291094, z: 0.000000014899679, w: 1}
       scale: {x: 0.9999999, y: 1, z: 1}
+    - name: challenger_LeftHandThumb1
+      parentName: challenger_LeftHand
+      position: {x: -0.009010239, y: -0.011414184, z: 0.029026298}
+      rotation: {x: 0.37092835, y: 0.33844128, z: -0.08882442, w: 0.86022085}
+      scale: {x: 1.0000001, y: 0.99999994, z: 1}
+    - name: challenger_LeftHandThumb2
+      parentName: challenger_LeftHandThumb1
+      position: {x: -0.054460183, y: 0.0007000732, z: 0.000000076293944}
+      rotation: {x: -0.0000002086163, y: 0.00000089406984, z: 0.026970198, w: 0.99963623}
+      scale: {x: 1, y: 0.99999994, z: 1.0000001}
+    - name: challenger_LeftHandThumb3
+      parentName: challenger_LeftHandThumb2
+      position: {x: -0.03689247, y: 0, z: -0.000000038146972}
+      rotation: {x: 0.00000007687996, y: 0.0000007659597, z: 0.036988653, w: 0.99931574}
+      scale: {x: 1, y: 1.0000002, z: 1.0000001}
+    - name: challenger_LeftHandThumb4
+      parentName: challenger_LeftHandThumb3
+      position: {x: -0.035888594, y: 0.000000076293944, z: 0}
+      rotation: {x: 0.000000008614735, y: 0.0000000018626451, z: 0.000000007450581,
+        w: 1}
+      scale: {x: 1, y: 0.99999994, z: 0.99999994}
     - name: challenger_RightShoulder
-      parentName: 
+      parentName: challenger_Spine3
       position: {x: 0.036968097, y: -0.08782272, z: -0.0025939036}
-      rotation: {x: 1, y: -0.000000029802314, z: 0.000000029802312, w: -0.000000089406946}
-      scale: {x: 1, y: 1, z: 0.9999999}
+      rotation: {x: 1, y: 5.551123e-17, z: -1.7567037e-15, w: 0.00000004371139}
+      scale: {x: 1, y: 0.99999994, z: 0.99999994}
     - name: challenger_RearGorget_PntCnstLoc
-      parentName: 
+      parentName: challenger_RightShoulder
       position: {x: 0.11801289, y: -0.07484314, z: -0.011263559}
       rotation: {x: 0, y: 1.7191421e-15, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: challenger_RightArm
-      parentName: 
+      parentName: challenger_RightShoulder
       position: {x: 0.15746689, y: 0, z: -0.0000000023841857}
-      rotation: {x: -0.0004986016, y: -0.00004040268, z: 0.0203692, w: 0.99979246}
-      scale: {x: 1.0000001, y: 1.0000001, z: 1}
+      rotation: {x: -0.0004984596, y: -0.000040204213, z: 0.020369256, w: 0.99979246}
+      scale: {x: 1, y: 1, z: 1}
     - name: challenger_RightShoulderpad
-      parentName: 
+      parentName: challenger_RightArm
       position: {x: -0.047766265, y: -0.035594635, z: -0.000000038146972}
-      rotation: {x: 0.00009419546, y: -0.00012636409, z: 0.07932974, w: -0.9968484}
-      scale: {x: 1, y: 1, z: 0.9999998}
+      rotation: {x: -0.00009415271, y: 0.00012634782, z: -0.07932975, w: 0.9968484}
+      scale: {x: 0.99999994, y: 1, z: 0.9999999}
     - name: challenger_RightForeArm
-      parentName: 
+      parentName: challenger_RightArm
       position: {x: 0.3074131, y: 0.0000017547607, z: -0.0000000500679}
-      rotation: {x: -0.7496538, y: -0.00030753, z: 0.044166267, w: -0.66035473}
-      scale: {x: 0.99999994, y: 0.9999998, z: 0.9999998}
+      rotation: {x: 0.74965376, y: 0.00030736605, z: -0.04416618, w: 0.6603548}
+      scale: {x: 1, y: 0.9999999, z: 1}
     - name: challenger_RightForeArmRoll
-      parentName: 
+      parentName: challenger_RightForeArm
       position: {x: 0.118736796, y: 0.000000104904174, z: -0.0000012207031}
-      rotation: {x: 0.08759158, y: -0.005065529, z: 0.05361503, w: 0.9946998}
-      scale: {x: 1.0000004, y: 0.9999999, z: 1.0000002}
+      rotation: {x: 0.087591566, y: -0.00506557, z: 0.053614993, w: 0.9946997}
+      scale: {x: 1.0000001, y: 1.0000001, z: 1.0000001}
     - name: challenger_RightHand
-      parentName: 
+      parentName: challenger_RightForeArmRoll
       position: {x: 0.13070664, y: -0.014139518, z: -0.00009773254}
-      rotation: {x: 0.78748447, y: -0.046374574, z: 0.021074504, w: -0.614226}
-      scale: {x: 0.99999976, y: 0.9999999, z: 0.9999999}
-    - name: challenger_RightHandThumb1
-      parentName: 
-      position: {x: 0.0090104295, y: 0.011413345, z: -0.029026136}
-      rotation: {x: 0.37093037, y: 0.33843175, z: -0.088812634, w: 0.860225}
-      scale: {x: 0.9999999, y: 0.9999999, z: 1}
-    - name: challenger_RightHandThumb2
-      parentName: 
-      position: {x: 0.05445732, y: -0.0007026672, z: -0.00000072479247}
-      rotation: {x: 0.00000041350677, y: 0.000011563288, z: 0.026904041, w: 0.9996381}
-      scale: {x: 1.0000002, y: 0.99999994, z: 1.0000002}
-    - name: challenger_RightHandThumb3
-      parentName: 
-      position: {x: 0.03689926, y: 0.0000028991699, z: 0.00000057220456}
-      rotation: {x: 0.0000005811447, y: -0.000006020063, z: 0.03703541, w: 0.99931395}
-      scale: {x: 1, y: 0.9999995, z: 0.99999994}
-    - name: challenger_RightHandThumb4
-      parentName: 
-      position: {x: 0.03588562, y: -0.00000045776366, z: -0.000000076293944}
-      rotation: {x: -0.00000005960461, y: -0.00000005960461, z: 0, w: 1}
-      scale: {x: 0.99999994, y: 0.99999976, z: 0.99999994}
-    - name: challenger_RightHandIndex1
-      parentName: 
-      position: {x: 0.09573547, y: 0.0058572385, z: -0.028569326}
-      rotation: {x: 0.013012244, y: 0.005560479, z: 0.066044666, w: 0.9977163}
-      scale: {x: 1.0000004, y: 0.9999999, z: 1.0000006}
-    - name: challenger_RightHandIndex2
-      parentName: 
-      position: {x: 0.047696836, y: 0.00000061035155, z: 0.0000008010864}
-      rotation: {x: -0.0000033036313, y: 0.00000891275, z: -0.030247923, w: -0.9995424}
-      scale: {x: 0.9999996, y: 1.0000002, z: 0.9999997}
-    - name: challenger_RightHandIndex3
-      parentName: 
-      position: {x: 0.025657577, y: 0.000000114440915, z: 0}
-      rotation: {x: -0.000012872962, y: 0.00002253426, z: 0.03883308, w: 0.9992457}
-      scale: {x: 0.99999994, y: 1.0000001, z: 0.9999997}
-    - name: challenger_RightHandIndex4
-      parentName: 
-      position: {x: 0.034344405, y: -0.00000015258789, z: -0.000000114440915}
-      rotation: {x: 0.000000029802305, y: -0.00013284378, z: 0.00000020861613, w: 1}
+      rotation: {x: -0.78748447, y: 0.04637455, z: -0.021074483, w: 0.61422604}
       scale: {x: 1, y: 0.9999999, z: 0.9999999}
+    - name: challenger_RightHandThumb1
+      parentName: challenger_RightHand
+      position: {x: 0.0090104295, y: 0.011413345, z: -0.029026136}
+      rotation: {x: 0.37093052, y: 0.3384319, z: -0.0888125, w: 0.86022484}
+      scale: {x: 1, y: 0.99999994, z: 0.9999998}
+    - name: challenger_RightHandThumb2
+      parentName: challenger_RightHandThumb1
+      position: {x: 0.05445732, y: -0.0007026672, z: -0.00000072479247}
+      rotation: {x: 0.00000026822082, y: 0.000013381238, z: 0.026904112, w: 0.9996381}
+      scale: {x: 1.0000001, y: 1.0000001, z: 1}
+    - name: challenger_RightHandThumb3
+      parentName: challenger_RightHandThumb2
+      position: {x: 0.03689926, y: 0.0000028991699, z: 0.00000057220456}
+      rotation: {x: 0.0000005929694, y: -0.0000060787106, z: 0.037035745, w: 0.999314}
+      scale: {x: 1.0000001, y: 1, z: 1}
+    - name: challenger_RightHandThumb4
+      parentName: challenger_RightHandThumb3
+      position: {x: 0.03588562, y: -0.00000045776366, z: -0.000000076293944}
+      rotation: {x: -0.0000000055879354, y: -4.163337e-17, z: 0.0000000074505815,
+        w: 1}
+      scale: {x: 0.99999994, y: 1, z: 1}
+    - name: challenger_RightHandIndex1
+      parentName: challenger_RightHand
+      position: {x: 0.09573547, y: 0.0058572385, z: -0.028569326}
+      rotation: {x: 0.013012309, y: 0.005560153, z: 0.06604516, w: 0.9977163}
+      scale: {x: 0.99999994, y: 1, z: 1}
+    - name: challenger_RightHandIndex2
+      parentName: challenger_RightHandIndex1
+      position: {x: 0.047696836, y: 0.00000061035155, z: 0.0000008010864}
+      rotation: {x: 0.000003398394, y: -0.000008993777, z: 0.030247502, w: 0.9995424}
+      scale: {x: 1.0000001, y: 1, z: 1}
+    - name: challenger_RightHandIndex3
+      parentName: challenger_RightHandIndex2
+      position: {x: 0.025657577, y: 0.000000114440915, z: 0}
+      rotation: {x: -0.000013024465, y: 0.000022160633, z: 0.0388315, w: 0.99924576}
+      scale: {x: 1.0000001, y: 1.0000001, z: 1}
+    - name: challenger_RightHandIndex4
+      parentName: challenger_RightHandIndex3
+      position: {x: 0.034344405, y: -0.00000015258789, z: -0.000000114440915}
+      rotation: {x: 3.961277e-12, y: -0.00013291837, z: 0.000000029802326, w: 1}
+      scale: {x: 0.99999994, y: 1, z: 0.99999994}
     - name: challenger_RightHandMiddle1
-      parentName: 
+      parentName: challenger_RightHand
       position: {x: 0.099996105, y: -0.0016366576, z: 0.00049093243}
-      rotation: {x: -0.05084556, y: -0.007662528, z: 0.06268329, w: 0.996708}
-      scale: {x: 1.0000001, y: 1, z: 0.9999999}
+      rotation: {x: -0.050845418, y: -0.0076626204, z: 0.06268396, w: 0.99670804}
+      scale: {x: 0.9999999, y: 0.99999994, z: 1.0000001}
     - name: challenger_RightHandMiddle2
-      parentName: 
+      parentName: challenger_RightHandMiddle1
       position: {x: 0.05548355, y: 0.00000061035155, z: -0.000002746582}
-      rotation: {x: 0.00001031951, y: -0.00000896304, z: -0.029156754, w: -0.9995749}
-      scale: {x: 0.99999994, y: 1.0000001, z: 0.9999999}
+      rotation: {x: -0.000010132781, y: 0.000009422648, z: 0.029154936, w: 0.99957496}
+      scale: {x: 1.0000001, y: 1.0000001, z: 1}
     - name: challenger_RightHandMiddle3
-      parentName: 
+      parentName: challenger_RightHandMiddle2
       position: {x: 0.034838486, y: 0.00000034332274, z: -0.0000010299682}
-      rotation: {x: -0.0000024312158, y: -0.000008041034, z: 0.03900676, w: 0.9992389}
-      scale: {x: 1.0000004, y: 1.0000001, z: 1}
+      rotation: {x: -0.0000024732308, y: -0.000007525244, z: 0.03900421, w: 0.999239}
+      scale: {x: 1.0000001, y: 1.0000001, z: 1}
     - name: challenger_RightHandMiddle4
-      parentName: 
+      parentName: challenger_RightHandMiddle3
       position: {x: 0.034665678, y: -0.00000030517577, z: -0.000002002716}
-      rotation: {x: -0.000000007450576, y: -0.00000007078047, z: -0.00000014901153,
-        w: 1}
-      scale: {x: 0.99999994, y: 0.9999999, z: 0.9999998}
+      rotation: {x: -0.000000014901161, y: 0, z: -0, w: 1}
+      scale: {x: 1, y: 1, z: 0.9999999}
     - name: challenger_RightHandRing1
-      parentName: 
+      parentName: challenger_RightHand
       position: {x: 0.0903479, y: 0.003831024, z: 0.02531623}
-      rotation: {x: -0.0873965, y: -0.02181414, z: 0.060463276, w: 0.9940977}
-      scale: {x: 1.0000005, y: 1.0000005, z: 0.9999999}
+      rotation: {x: -0.08739644, y: -0.021814313, z: 0.06046308, w: 0.9940977}
+      scale: {x: 1, y: 1, z: 1}
     - name: challenger_RightHandRing2
-      parentName: 
+      parentName: challenger_RightHandRing1
       position: {x: 0.05338409, y: 0.000001373291, z: 0.00000036239624}
-      rotation: {x: -0.00000093197684, y: 0.0000030002539, z: -0.030882493, w: -0.9995231}
-      scale: {x: 0.99999964, y: 1.0000001, z: 0.99999976}
+      rotation: {x: 0.00000088661886, y: -0.0000033807, z: 0.030881392, w: 0.9995231}
+      scale: {x: 1, y: 1.0000001, z: 1.0000001}
     - name: challenger_RightHandRing3
-      parentName: 
+      parentName: challenger_RightHandRing2
       position: {x: 0.027684936, y: -0.000000629425, z: 0.000000019073486}
-      rotation: {x: 0.0000002507583, y: 0.0000014966336, z: 0.035739075, w: 0.99936116}
-      scale: {x: 1.0000001, y: 1.0000002, z: 1.0000004}
+      rotation: {x: 0.00000034257943, y: 0.0000028142588, z: 0.035741393, w: 0.99936104}
+      scale: {x: 0.9999999, y: 1.0000001, z: 1}
     - name: challenger_RightHandRing4
-      parentName: 
+      parentName: challenger_RightHandRing3
       position: {x: 0.034337997, y: -0.00000019073485, z: 0.00000015258789}
-      rotation: {x: 0.00000011920922, y: -0.000000048428745, z: -0.00000011920922,
-        w: 1}
-      scale: {x: 1.0000001, y: 1.0000001, z: 1}
+      rotation: {x: 0, y: -0.0000000037252907, z: -0, w: 1}
+      scale: {x: 0.99999994, y: 1, z: 1}
     - name: challenger_RightHandPinky1
-      parentName: 
+      parentName: challenger_RightHand
       position: {x: 0.07689129, y: 0.013342819, z: 0.04659764}
-      rotation: {x: -0.107342504, y: -0.04006438, z: 0.05402724, w: 0.9919443}
-      scale: {x: 1.0000004, y: 1.0000006, z: 1}
+      rotation: {x: -0.10734282, y: -0.04006535, z: 0.054026272, w: 0.9919443}
+      scale: {x: 0.99999994, y: 1, z: 1}
     - name: challenger_RightHandPinky2
-      parentName: 
+      parentName: challenger_RightHandPinky1
       position: {x: 0.04003395, y: -0.000001373291, z: -0.00000034332274}
-      rotation: {x: -0.00000004982573, y: -0.000007022168, z: -0.03184242, w: -0.9994929}
-      scale: {x: 0.99999917, y: 1.0000001, z: 0.9999999}
+      rotation: {x: -0.00000007450577, y: 0.000008743252, z: 0.031840105, w: 0.999493}
+      scale: {x: 1, y: 0.99999994, z: 1}
     - name: challenger_RightHandPinky3
-      parentName: 
+      parentName: challenger_RightHandPinky2
       position: {x: 0.019721068, y: -0.00000015258789, z: 0.00000014305114}
-      rotation: {x: 0.00000006565819, y: -0.0000049518385, z: 0.036222916, w: 0.9993438}
-      scale: {x: 1.0000001, y: 1.0000001, z: 1}
+      rotation: {x: 0.00000007250468, y: -0.0000071964487, z: 0.036227405, w: 0.9993436}
+      scale: {x: 1, y: 1, z: 1}
     - name: challenger_RightHandPinky4
-      parentName: 
+      parentName: challenger_RightHandPinky3
       position: {x: 0.027314147, y: -0.0000004959106, z: -0.00000017166137}
-      rotation: {x: -0.0000000037252885, y: 0.000000006519255, z: 0.00000014901154,
-        w: 1}
-      scale: {x: 1.0000002, y: 1.0000001, z: 1.0000001}
+      rotation: {x: 0, y: 0.0000000037252894, z: -0, w: 1}
+      scale: {x: 1.0000001, y: 1.0000001, z: 1.0000001}
     - name: challenger_Neck
-      parentName: 
+      parentName: challenger_Spine3
       position: {x: -7.0440364e-12, y: -0.00025009154, z: 0}
-      rotation: {x: 0.5859917, y: -0.39574456, z: -0.5859917, w: 0.3957445}
-      scale: {x: 1.0000004, y: 0.9999993, z: 0.9999999}
+      rotation: {x: -0.5859916, y: 0.39574468, z: 0.5859916, w: -0.39574462}
+      scale: {x: 1, y: 1, z: 1}
     - name: challenger_Neck1
-      parentName: 
+      parentName: challenger_Neck
       position: {x: -0.052746885, y: -0.000000076293944, z: -0.000000002986162}
-      rotation: {x: -0.000000029802322, y: -0.000000029802322, z: 0.15469553, w: 0.98796225}
-      scale: {x: 1.0000002, y: 1.0000004, z: 1.0000004}
+      rotation: {x: -2.851832e-15, y: -4.465407e-16, z: 0.15469542, w: 0.98796225}
+      scale: {x: 1, y: 1, z: 1}
     - name: challenger_Head
-      parentName: 
+      parentName: challenger_Neck1
       position: {x: -0.051997375, y: -0.000000009536743, z: 1.1040356e-10}
-      rotation: {x: -0.73216337, y: 0.68112916, z: 0.00000007246059, w: 0.0000000138191965}
-      scale: {x: 1.0000001, y: 0.99999964, z: 0.9999999}
+      rotation: {x: 0.73216337, y: -0.68112904, z: 0.000000029773094, w: -0.00000003200388}
+      scale: {x: 1.0000001, y: 1.0000001, z: 1}
     - name: challenger_Helmet
-      parentName: 
+      parentName: challenger_Head
       position: {x: -0.034459446, y: 0.058919523, z: 1.8189894e-14}
-      rotation: {x: 0.00000012644053, y: -0.00000017881389, z: 0.00000018604517, w: -1}
-      scale: {x: 1.0000002, y: 1, z: 1.0000002}
+      rotation: {x: 7.1054274e-15, y: -2.223564e-15, z: 1.5799372e-29, w: 1}
+      scale: {x: 1, y: 1, z: 1}
     - name: challenger_RightHemetFlap
-      parentName: 
+      parentName: challenger_Helmet
       position: {x: -0.035246134, y: -0.022722626, z: 0.0768724}
-      rotation: {x: 0.6087614, y: 0.00000009200188, z: 0.79335344, w: -0.00000011989918}
-      scale: {x: 0.9999996, y: 1, z: 0.99999994}
+      rotation: {x: 0.6087614, y: -0.000000026609817, z: 0.7933534, w: 0.00000003467858}
+      scale: {x: 1, y: 1, z: 1}
     - name: challenger_LeftHemetFlap
-      parentName: 
+      parentName: challenger_Helmet
       position: {x: -0.035246097, y: -0.02272583, z: -0.07687242}
-      rotation: {x: 0.00000009200189, y: -0.60876155, z: 0.00000011989917, w: 0.7933533}
-      scale: {x: 0.99999976, y: 1, z: 0.9999995}
+      rotation: {x: 5.0676503e-15, y: -0.6087614, z: -5.0676503e-15, w: 0.7933534}
+      scale: {x: 1, y: 1, z: 1}
     - name: challenger_RightEye
-      parentName: 
+      parentName: challenger_Head
       position: {x: -0.10110526, y: 0.043991853, z: 0.030881766}
-      rotation: {x: -0.058085896, y: -0.7268837, z: -0.054509193, w: 0.68212533}
-      scale: {x: 0.99999976, y: 1, z: 1.0000001}
+      rotation: {x: -0.05808596, y: -0.72688365, z: -0.054509297, w: 0.68212533}
+      scale: {x: 1, y: 1, z: 1}
     - name: challenger_LeftEye
-      parentName: 
+      parentName: challenger_Head
       position: {x: -0.10110526, y: 0.043914642, z: -0.03094431}
-      rotation: {x: -0.00000006273695, y: -0.7071068, z: -0.000000012344528, w: 0.70710677}
-      scale: {x: 1.0000001, y: 1, z: 1.0000001}
+      rotation: {x: 1.256074e-15, y: -0.7071068, z: 1.256074e-15, w: 0.7071068}
+      scale: {x: 1, y: 1, z: 1}
     - name: left_eyeBrow_jnt02
-      parentName: 
+      parentName: challenger_Head
       position: {x: -0.12765525, y: 0.060642242, z: -0.028520802}
-      rotation: {x: -0.25802118, y: -0.01067612, z: 0.65897185, w: -0.7064469}
-      scale: {x: 1.0000002, y: 0.99999994, z: 0.9999999}
+      rotation: {x: 0.25802112, y: 0.010676137, z: -0.65897185, w: 0.7064469}
+      scale: {x: 1, y: 1, z: 1.0000001}
     - name: left_eyeBrow_jnt01
-      parentName: 
+      parentName: challenger_Head
       position: {x: -0.12983346, y: 0.05216278, z: -0.011366019}
-      rotation: {x: -0.105092324, y: -0.27422, z: -0.5250789, w: 0.7987811}
-      scale: {x: 1.0000001, y: 0.99999976, z: 0.9999998}
+      rotation: {x: -0.10509225, y: -0.27421996, z: -0.5250788, w: 0.79878116}
+      scale: {x: 1, y: 1.0000001, z: 1}
     - name: left_eyeBrow_jnt03
-      parentName: 
+      parentName: challenger_Head
       position: {x: -0.117786735, y: 0.05926727, z: -0.045656104}
-      rotation: {x: 0.24264605, y: -0.31963423, z: -0.7332472, w: 0.5489129}
-      scale: {x: 0.9999999, y: 1.0000001, z: 0.99999976}
+      rotation: {x: 0.24264602, y: -0.31963417, z: -0.7332472, w: 0.54891294}
+      scale: {x: 1, y: 0.99999994, z: 0.9999998}
     - name: left_eyeBrow_jnt04
-      parentName: 
+      parentName: challenger_Head
       position: {x: -0.10677383, y: 0.047417905, z: -0.051255543}
-      rotation: {x: 0.5010705, y: 0.5609956, z: -0.007255016, w: 0.658908}
-      scale: {x: 0.99999976, y: 0.9999998, z: 1.0000002}
+      rotation: {x: 0.5010705, y: 0.5609956, z: -0.00725503, w: 0.65890795}
+      scale: {x: 1, y: 1, z: 1}
     - name: right_eyeBrow_jnt03
-      parentName: 
+      parentName: challenger_Head
       position: {x: -0.1297916, y: 0.05329727, z: 0.011619755}
-      rotation: {x: -0.5048374, y: -0.79096, z: -0.12878542, w: 0.32083622}
-      scale: {x: 0.9999996, y: 0.9999995, z: 0.99999994}
+      rotation: {x: 0.5048374, y: 0.79096, z: 0.12878524, w: -0.3208362}
+      scale: {x: 0.9999998, y: 0.99999994, z: 0.9999999}
     - name: right_eyeBrow_jnt04
-      parentName: 
+      parentName: challenger_Head
       position: {x: -0.12765954, y: 0.060647734, z: 0.028523386}
-      rotation: {x: -0.38295266, y: 0.5637113, z: 0.59302944, w: 0.42882767}
-      scale: {x: 0.99999976, y: 0.9999997, z: 0.9999997}
+      rotation: {x: -0.38295248, y: 0.56371135, z: 0.5930293, w: 0.4288277}
+      scale: {x: 1, y: 0.99999994, z: 0.99999994}
     - name: right_eyeBrow_jnt02
-      parentName: 
+      parentName: challenger_Head
       position: {x: -0.12070237, y: 0.057895966, z: 0.040996704}
-      rotation: {x: -0.44141993, y: -0.70986825, z: 0.5091191, w: -0.20502062}
-      scale: {x: 1.0000002, y: 0.9999999, z: 0.99999964}
+      rotation: {x: 0.44141978, y: 0.7098683, z: -0.509119, w: 0.2050205}
+      scale: {x: 1, y: 1.0000001, z: 1}
     - name: right_eyeBrow_jnt01
-      parentName: 
+      parentName: challenger_Head
       position: {x: -0.11144125, y: 0.05116455, z: 0.049863137}
-      rotation: {x: -0.09528029, y: 0.5699749, z: -0.57631695, w: 0.57784885}
-      scale: {x: 0.9999994, y: 0.9999995, z: 1}
+      rotation: {x: -0.09528039, y: 0.56997484, z: -0.5763169, w: 0.57784873}
+      scale: {x: 1.0000001, y: 1.0000001, z: 1.0000001}
     - name: challenger_RightUpperEyelid
-      parentName: 
+      parentName: challenger_Head
       position: {x: -0.10110526, y: 0.043991853, z: 0.030881766}
-      rotation: {x: -0.022453127, y: -0.71116334, z: -0.022736426, w: 0.7023003}
-      scale: {x: 0.9999998, y: 1, z: 0.9999999}
+      rotation: {x: -0.02245317, y: -0.7111633, z: -0.022736527, w: 0.7023003}
+      scale: {x: 1, y: 1, z: 1}
     - name: challenger_RightLowerEyelid
-      parentName: 
+      parentName: challenger_Head
       position: {x: -0.10110526, y: 0.043991853, z: 0.030881766}
-      rotation: {x: -0.016841104, y: -0.7113223, z: -0.01705358, w: 0.70245725}
-      scale: {x: 0.9999998, y: 1.0000001, z: 0.99999964}
+      rotation: {x: -0.016841134, y: -0.71132225, z: -0.017053667, w: 0.70245725}
+      scale: {x: 1, y: 1, z: 1}
     - name: challenger_LeftUpperEyelid
-      parentName: 
+      parentName: challenger_Head
       position: {x: -0.10110526, y: 0.043914642, z: -0.03094431}
-      rotation: {x: -0.000000042146848, y: -0.7071068, z: 0.000000017457793, w: 0.70710677}
+      rotation: {x: 1.256074e-15, y: -0.7071068, z: 1.256074e-15, w: 0.7071068}
       scale: {x: 1, y: 1, z: 1}
     - name: challenger_LeftLowerEyelid
-      parentName: 
+      parentName: challenger_Head
       position: {x: -0.10110526, y: 0.043914642, z: -0.03094431}
-      rotation: {x: -0.000000042146848, y: -0.7071068, z: 0.000000017457793, w: 0.70710677}
+      rotation: {x: -0, y: -0.7071068, z: 0, w: 0.7071068}
       scale: {x: 1, y: 1, z: 1}
     - name: challenger_Jaw
-      parentName: 
+      parentName: challenger_Head
       position: {x: -0.039924078, y: -0.0071874997, z: 0}
-      rotation: {x: 1.2434496e-14, y: -4.76456e-22, z: -0.00000007989579, w: 1}
-      scale: {x: 1.0000002, y: 0.9999999, z: 1.0000002}
+      rotation: {x: 7.1054274e-15, y: -2.223564e-15, z: 1.5799372e-29, w: 1}
+      scale: {x: 1, y: 1, z: 1}
     - name: left_beard_jnt13
-      parentName: 
+      parentName: challenger_Jaw
       position: {x: -0.09187536, y: -0.011567382, z: -0.00018295713}
-      rotation: {x: 0.7876088, y: 0.6157259, z: -0.015038843, w: 0.018110247}
+      rotation: {x: 0.7876087, y: 0.6157258, z: -0.015038841, w: 0.018110245}
       scale: {x: 0.99999994, y: 1, z: 1}
     - name: left_beard_jnt03
-      parentName: 
+      parentName: challenger_Jaw
       position: {x: -0.0734413, y: -0.016836852, z: -0.032331754}
-      rotation: {x: 0.66334134, y: 0.42634922, z: -0.15730672, w: 0.5945243}
-      scale: {x: 1, y: 0.9999998, z: 1}
+      rotation: {x: 0.66334134, y: 0.42634925, z: -0.1573067, w: 0.59452444}
+      scale: {x: 1, y: 0.99999994, z: 0.99999994}
     - name: left_beard_jnt02
-      parentName: 
+      parentName: challenger_Jaw
       position: {x: -0.07873638, y: -0.0037364196, z: -0.024210194}
-      rotation: {x: -0.44521508, y: 0.12129018, z: 0.4507298, w: 0.7641432}
-      scale: {x: 1.0000002, y: 0.99999964, z: 1}
+      rotation: {x: -0.4452151, y: 0.12129019, z: 0.45072982, w: 0.7641433}
+      scale: {x: 1, y: 1, z: 0.99999994}
     - name: left_beard_jnt01
-      parentName: 
+      parentName: challenger_Jaw
       position: {x: -0.08429999, y: -0.0019978331, z: -0.014215662}
-      rotation: {x: -0.24283282, y: 0.073954925, z: 0.75752646, w: -0.60142887}
-      scale: {x: 1, y: 0.9999993, z: 1.0000001}
+      rotation: {x: 0.2428328, y: -0.07395492, z: -0.75752646, w: 0.6014288}
+      scale: {x: 1, y: 1, z: 1}
     - name: right_beard_jnt01
-      parentName: 
+      parentName: challenger_Jaw
       position: {x: -0.09148203, y: -0.005924225, z: 0.00030392088}
-      rotation: {x: 0.71594, y: -0.69789785, z: 0.0056033432, w: 0.018364025}
-      scale: {x: 0.99999976, y: 0.9999995, z: 0.99999934}
+      rotation: {x: 0.71593994, y: -0.6978978, z: 0.0056033395, w: 0.018364005}
+      scale: {x: 1, y: 1, z: 0.99999994}
     - name: left_beard_jnt06
-      parentName: 
+      parentName: challenger_Jaw
       position: {x: -0.06634563, y: -0.0363414, z: -0.032340977}
-      rotation: {x: 0.10001349, y: -0.44195762, z: -0.6186808, w: 0.64179826}
-      scale: {x: 0.99999964, y: 0.99999976, z: 0.9999998}
+      rotation: {x: 0.10001343, y: -0.44195756, z: -0.6186808, w: 0.64179826}
+      scale: {x: 1, y: 0.99999994, z: 1}
     - name: right_beard_jnt02
-      parentName: 
+      parentName: challenger_Jaw
       position: {x: -0.08427584, y: -0.0013578796, z: 0.013931675}
-      rotation: {x: -0.7560371, y: -0.59081215, z: 0.26437688, w: 0.09723089}
-      scale: {x: 1, y: 1, z: 0.9999999}
+      rotation: {x: 0.75603706, y: 0.5908122, z: -0.264377, w: -0.09723096}
+      scale: {x: 1, y: 1, z: 0.99999994}
     - name: left_beard_jnt07
-      parentName: 
+      parentName: challenger_Jaw
       position: {x: -0.061446685, y: -0.007622223, z: -0.04288956}
-      rotation: {x: 0.039343573, y: -0.6013203, z: 0.75539327, w: 0.25738522}
-      scale: {x: 0.9999997, y: 0.9999998, z: 1.0000001}
+      rotation: {x: 0.039343566, y: -0.60132027, z: 0.7553932, w: 0.25738525}
+      scale: {x: 1, y: 1, z: 1.0000001}
     - name: left_beard_jnt05
-      parentName: 
+      parentName: challenger_Jaw
       position: {x: -0.07850078, y: -0.041947477, z: -0.01896162}
-      rotation: {x: 0.29402485, y: -0.07191087, z: -0.6052666, w: 0.73622733}
-      scale: {x: 0.9999998, y: 0.99999976, z: 1}
+      rotation: {x: 0.2940248, y: -0.07191088, z: -0.6052665, w: 0.73622733}
+      scale: {x: 1, y: 1, z: 1}
     - name: left_beard_jnt04
-      parentName: 
+      parentName: challenger_Jaw
       position: {x: -0.08353268, y: -0.030057373, z: -0.01660743}
-      rotation: {x: 0.2879061, y: -0.18803854, z: -0.56659573, w: 0.74881303}
-      scale: {x: 0.9999998, y: 0.99999964, z: 1.0000001}
+      rotation: {x: 0.28790596, y: -0.18803853, z: -0.56659573, w: 0.74881303}
+      scale: {x: 1, y: 1, z: 1.0000001}
     - name: right_beard_jnt09
-      parentName: 
+      parentName: challenger_Jaw
       position: {x: -0.08599027, y: -0.044883117, z: 0.00056843297}
-      rotation: {x: 0.61032534, y: -0.79172724, z: -0.014804602, w: -0.021259535}
-      scale: {x: 0.9999999, y: 0.9999995, z: 0.9999994}
+      rotation: {x: -0.6103253, y: 0.7917272, z: 0.014804497, w: 0.021259591}
+      scale: {x: 1, y: 1, z: 0.99999994}
     - name: left_beard_jnt11
-      parentName: 
+      parentName: challenger_Jaw
       position: {x: -0.04515335, y: -0.05130203, z: -0.038131893}
-      rotation: {x: 0.41393372, y: 0.095647484, z: -0.105582535, w: 0.89908993}
-      scale: {x: 0.9999999, y: 1, z: 0.9999997}
+      rotation: {x: 0.41393375, y: 0.09564751, z: -0.10558255, w: 0.89908993}
+      scale: {x: 1, y: 0.99999994, z: 1}
     - name: right_beard_jnt06
-      parentName: 
+      parentName: challenger_Jaw
       position: {x: -0.0889394, y: -0.03142044, z: -0.00003865698}
-      rotation: {x: -0.94645286, y: 0.3228071, z: 0.004472017, w: 0.0015660939}
-      scale: {x: 0.99999976, y: 1.0000005, z: 1.0000001}
+      rotation: {x: 0.9464529, y: -0.32280722, z: -0.0044720345, w: -0.0015660403}
+      scale: {x: 1, y: 1, z: 1}
     - name: right_beard_jnt08
-      parentName: 
+      parentName: challenger_Jaw
       position: {x: -0.078431584, y: -0.0419075, z: 0.018183947}
-      rotation: {x: -0.6191705, y: -0.7028991, z: 0.3444203, w: 0.06273345}
-      scale: {x: 0.9999994, y: 0.9999999, z: 0.99999976}
+      rotation: {x: 0.6191705, y: 0.7028991, z: -0.34442022, w: -0.062733375}
+      scale: {x: 1, y: 1, z: 1}
     - name: left_beard_jnt12
-      parentName: 
+      parentName: challenger_Jaw
       position: {x: -0.046574164, y: -0.03079483, z: -0.04723598}
-      rotation: {x: -0.26820588, y: -0.36986136, z: 0.6865744, w: 0.56558275}
-      scale: {x: 0.9999999, y: 0.99999976, z: 1}
+      rotation: {x: -0.26820585, y: -0.36986133, z: 0.6865744, w: 0.56558275}
+      scale: {x: 1, y: 1, z: 1}
     - name: left_beard_jnt09
-      parentName: 
+      parentName: challenger_Jaw
       position: {x: -0.032567646, y: -0.015108948, z: -0.05882156}
-      rotation: {x: 0.47405595, y: -0.18797599, z: -0.44714105, w: 0.7348476}
-      scale: {x: 0.99999976, y: 0.99999976, z: 1}
+      rotation: {x: 0.4740559, y: -0.18797599, z: -0.44714102, w: 0.7348476}
+      scale: {x: 1, y: 1, z: 0.99999994}
     - name: left_beard_jnt08
-      parentName: 
+      parentName: challenger_Jaw
       position: {x: -0.04671012, y: -0.0033047486, z: -0.053230047}
-      rotation: {x: 0.45074502, y: 0.75790673, z: 0.43879694, w: 0.1728113}
-      scale: {x: 0.9999996, y: 0.99999964, z: 0.9999995}
+      rotation: {x: 0.45074493, y: 0.75790673, z: 0.43879682, w: 0.17281127}
+      scale: {x: 1.0000001, y: 1, z: 1}
     - name: left_beard_jnt10
-      parentName: 
+      parentName: challenger_Jaw
       position: {x: -0.016087655, y: -0.028800048, z: -0.061524827}
-      rotation: {x: 0.2148111, y: 0.74920183, z: 0.5496675, w: 0.3006969}
-      scale: {x: 0.9999994, y: 1.0000001, z: 1.0000001}
+      rotation: {x: 0.214811, y: 0.74920183, z: 0.54966754, w: 0.3006968}
+      scale: {x: 1, y: 1, z: 1.0000001}
     - name: right_beard_jnt05
-      parentName: 
+      parentName: challenger_Jaw
       position: {x: -0.08421262, y: -0.029110258, z: 0.01645161}
-      rotation: {x: 0.7562128, y: -0.45637843, z: 0.03180724, w: 0.46781322}
-      scale: {x: 0.9999995, y: 1.0000005, z: 1.0000002}
+      rotation: {x: 0.75621283, y: -0.45637837, z: 0.031807233, w: 0.46781325}
+      scale: {x: 0.99999994, y: 1, z: 1}
     - name: right_beard_jnt04
-      parentName: 
+      parentName: challenger_Jaw
       position: {x: -0.07439722, y: -0.017729796, z: 0.030850837}
-      rotation: {x: -0.03253984, y: 0.4306561, z: -0.65485305, w: 0.62019676}
-      scale: {x: 0.99999976, y: 0.9999995, z: 1.0000002}
+      rotation: {x: -0.03253981, y: 0.4306561, z: -0.6548531, w: 0.62019676}
+      scale: {x: 1, y: 0.99999994, z: 1}
     - name: right_beard_jnt03
-      parentName: 
+      parentName: challenger_Jaw
       position: {x: -0.07858192, y: -0.007678375, z: 0.02531424}
-      rotation: {x: 0.16646573, y: -0.27623978, z: 0.739756, w: -0.5905437}
-      scale: {x: 0.99999976, y: 0.99999976, z: 1.0000001}
+      rotation: {x: -0.16646579, y: 0.27623972, z: -0.739756, w: 0.59054375}
+      scale: {x: 1, y: 1, z: 1}
     - name: right_beard_jnt07
-      parentName: 
+      parentName: challenger_Jaw
       position: {x: -0.06611723, y: -0.036667023, z: 0.03170626}
-      rotation: {x: 0.37931752, y: 0.7821196, z: -0.46713763, w: 0.16183192}
-      scale: {x: 1.0000002, y: 0.9999997, z: 0.9999998}
+      rotation: {x: 0.37931755, y: 0.78211963, z: -0.46713758, w: 0.16183193}
+      scale: {x: 1, y: 1, z: 0.99999994}
     - name: right_beard_jnt12
-      parentName: 
+      parentName: challenger_Jaw
       position: {x: -0.06034773, y: -0.010569152, z: 0.04259786}
-      rotation: {x: -0.49137303, y: -0.6886763, z: 0.46971858, w: 0.25227383}
-      scale: {x: 1, y: 0.9999996, z: 0.99999964}
+      rotation: {x: 0.4913729, y: 0.6886763, z: -0.46971855, w: -0.2522739}
+      scale: {x: 1, y: 1, z: 1}
     - name: right_beard_jnt15
-      parentName: 
+      parentName: challenger_Jaw
       position: {x: -0.04510992, y: -0.051411286, z: 0.038774423}
-      rotation: {x: -0.27259654, y: -0.7923943, z: 0.31845787, w: 0.44315585}
-      scale: {x: 0.99999976, y: 0.9999999, z: 0.9999996}
+      rotation: {x: 0.2725965, y: 0.79239416, z: -0.3184579, w: -0.4431559}
+      scale: {x: 0.99999994, y: 1, z: 1}
     - name: right_beard_jnt11
-      parentName: 
+      parentName: challenger_Jaw
       position: {x: -0.052565955, y: -0.031900786, z: 0.044483114}
-      rotation: {x: -0.36198035, y: 0.33849177, z: -0.5364999, w: 0.68305296}
-      scale: {x: 1.0000004, y: 0.99999964, z: 0.9999999}
+      rotation: {x: -0.36198038, y: 0.33849183, z: -0.53649986, w: 0.683053}
+      scale: {x: 1, y: 0.99999994, z: 1}
     - name: right_beard_jnt14
-      parentName: 
+      parentName: challenger_Jaw
       position: {x: -0.03258172, y: -0.015021514, z: 0.05879775}
-      rotation: {x: -0.45502576, y: -0.72339576, z: 0.48319307, w: 0.19019641}
-      scale: {x: 1.0000002, y: 0.9999997, z: 0.9999999}
+      rotation: {x: 0.45502573, y: 0.72339576, z: -0.483193, w: -0.19019645}
+      scale: {x: 1, y: 1, z: 1.0000001}
     - name: right_beard_jnt13
-      parentName: 
+      parentName: challenger_Jaw
       position: {x: -0.050863292, y: -0.0054597473, z: 0.048930526}
-      rotation: {x: -0.40664935, y: 0.18716742, z: -0.48844403, w: 0.7490174}
-      scale: {x: 0.99999994, y: 0.9999995, z: 0.99999964}
+      rotation: {x: -0.40664938, y: 0.18716736, z: -0.48844406, w: 0.7490174}
+      scale: {x: 0.99999994, y: 1, z: 1}
     - name: right_beard_jnt10
-      parentName: 
+      parentName: challenger_Jaw
       position: {x: -0.016121874, y: -0.028562622, z: 0.06151009}
-      rotation: {x: -0.53798455, y: 0.3063264, z: -0.22158633, w: 0.75341636}
-      scale: {x: 1, y: 1, z: 0.99999976}
+      rotation: {x: -0.5379846, y: 0.3063264, z: -0.22158621, w: 0.7534165}
+      scale: {x: 0.99999994, y: 1, z: 1}
     - name: right_lowerEyelash_jnt02
-      parentName: 
+      parentName: challenger_Head
       position: {x: -0.11541079, y: 0.03802841, z: 0.032756437}
-      rotation: {x: -0.8783199, y: -0.47629714, z: 0.038770273, w: 0.01386192}
-      scale: {x: 0.99999994, y: 1.0000006, z: 1.0000001}
+      rotation: {x: 0.8783198, y: 0.47629726, z: -0.038770366, w: -0.013862006}
+      scale: {x: 1, y: 0.9999999, z: 0.99999994}
     - name: right_lowerEyelash_jnt03
-      parentName: 
+      parentName: challenger_Head
       position: {x: -0.11331841, y: 0.038373716, z: 0.022892049}
-      rotation: {x: -0.09515474, y: -0.22667983, z: 0.37128875, w: 0.89538074}
-      scale: {x: 0.9999996, y: 1.0000001, z: 0.9999999}
+      rotation: {x: -0.09515465, y: -0.22667986, z: 0.37128893, w: 0.8953806}
+      scale: {x: 1, y: 1, z: 0.99999994}
     - name: right_lowerEyelash_jnt01
-      parentName: 
+      parentName: challenger_Head
       position: {x: -0.11087987, y: 0.04110214, z: 0.0419558}
-      rotation: {x: -0.7509588, y: -0.46625936, z: 0.4632235, w: -0.06393164}
-      scale: {x: 0.9999999, y: 1.0000001, z: 0.99999917}
+      rotation: {x: 0.75095874, y: 0.46625942, z: -0.4632234, w: 0.06393148}
+      scale: {x: 1, y: 1, z: 0.99999994}
     - name: right_upperEyelash_jnt01
-      parentName: 
+      parentName: challenger_Head
       position: {x: -0.11113539, y: 0.043659363, z: 0.04219035}
-      rotation: {x: 0.483466, y: -0.12374574, z: 0.80510485, w: 0.3205525}
-      scale: {x: 0.99999964, y: 0.9999994, z: 1}
+      rotation: {x: 0.483466, y: -0.123745754, z: 0.8051048, w: 0.32055247}
+      scale: {x: 1, y: 1, z: 0.99999994}
     - name: right_upperEyelash_jnt02
-      parentName: 
+      parentName: challenger_Head
       position: {x: -0.11651056, y: 0.04731918, z: 0.032421943}
-      rotation: {x: 0.0625981, y: -0.019892205, z: 0.8806149, w: 0.46925822}
-      scale: {x: 1.0000005, y: 0.99999976, z: 1.0000001}
+      rotation: {x: 0.06259815, y: -0.019892218, z: 0.88061494, w: 0.46925813}
+      scale: {x: 1, y: 1.0000001, z: 1}
     - name: right_upperEyelash_jnt03
-      parentName: 
+      parentName: challenger_Head
       position: {x: -0.11275988, y: 0.04281662, z: 0.020623595}
-      rotation: {x: -0.34610885, y: 0.18104902, z: 0.8002874, w: 0.45493948}
-      scale: {x: 1.0000001, y: 0.9999993, z: 0.99999994}
+      rotation: {x: -0.34610885, y: 0.18104893, z: 0.80028754, w: 0.45493934}
+      scale: {x: 0.99999994, y: 1, z: 1}
     - name: left_lowerEyelash_jnt02
-      parentName: 
+      parentName: challenger_Head
       position: {x: -0.11540735, y: 0.038030393, z: -0.032753315}
-      rotation: {x: -0.04071763, y: 0.015834998, z: 0.87468606, w: -0.48271698}
-      scale: {x: 0.9999998, y: 1.0000005, z: 0.99999964}
+      rotation: {x: -0.040717717, y: 0.015834946, z: 0.874686, w: -0.48271713}
+      scale: {x: 1, y: 1, z: 1}
     - name: left_lowerEyelash_jnt03
-      parentName: 
+      parentName: challenger_Head
       position: {x: -0.113322444, y: 0.038375854, z: -0.022890965}
-      rotation: {x: 0.35919955, y: -0.90065914, z: -0.09066545, w: 0.22708715}
-      scale: {x: 0.9999997, y: 1, z: 0.9999999}
+      rotation: {x: -0.3591996, y: 0.90065914, z: 0.09066556, w: -0.2270872}
+      scale: {x: 1, y: 1, z: 1}
     - name: left_lowerEyelash_jnt01
-      parentName: 
+      parentName: challenger_Head
       position: {x: -0.1108812, y: 0.041102752, z: -0.041956168}
-      rotation: {x: -0.46296048, y: -0.06438391, z: 0.75110024, w: -0.46623027}
-      scale: {x: 0.99999917, y: 1, z: 0.99999964}
+      rotation: {x: -0.4629605, y: -0.06438401, z: 0.75110024, w: -0.4662304}
+      scale: {x: 1, y: 1.0000001, z: 1}
     - name: left_upperEyelash_jnt01
-      parentName: 
+      parentName: challenger_Head
       position: {x: -0.11113247, y: 0.043662414, z: -0.04218909}
-      rotation: {x: 0.8056151, y: -0.31999087, z: 0.48272505, w: 0.12476617}
-      scale: {x: 1.0000001, y: 0.9999994, z: 0.9999998}
+      rotation: {x: 0.8056152, y: -0.31999075, z: 0.48272508, w: 0.124765985}
+      scale: {x: 0.99999994, y: 0.99999994, z: 1}
     - name: left_upperEyelash_jnt02
-      parentName: 
+      parentName: challenger_Head
       position: {x: -0.116511516, y: 0.047318418, z: -0.032423213}
-      rotation: {x: 0.8802038, y: -0.4700056, z: 0.06296063, w: 0.01928785}
-      scale: {x: 1.0000007, y: 0.9999998, z: 1.0000001}
+      rotation: {x: 0.8802039, y: -0.47000542, z: 0.06296058, w: 0.019287817}
+      scale: {x: 1, y: 1, z: 1}
     - name: left_upperEyelash_jnt03
-      parentName: 
+      parentName: challenger_Head
       position: {x: -0.11275773, y: 0.042816926, z: -0.020624155}
-      rotation: {x: -0.7990956, y: 0.45705667, z: 0.3464058, w: 0.18041235}
-      scale: {x: 1.0000001, y: 0.9999993, z: 1}
+      rotation: {x: 0.79909563, y: -0.45705646, z: -0.34640583, w: -0.18041226}
+      scale: {x: 1, y: 0.99999994, z: 1}
     armTwist: 0.5
     foreArmTwist: 0.5
     upperLegTwist: 0.5
@@ -1780,8 +1777,8 @@ ModelImporter:
     legStretch: 0.05
     feetSpacing: 0
     rootMotionBoneName: 
-    hasTranslationDoF: 0
-    hasExtraRoot: 0
+    hasTranslationDoF: 1
+    hasExtraRoot: 1
     skeletonHasParents: 0
   lastHumanDescriptionAvatarSource: {instanceID: 0}
   animationType: 3
