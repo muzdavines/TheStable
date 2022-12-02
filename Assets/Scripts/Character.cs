@@ -733,6 +733,7 @@ public class Character : Living {
                 maxStamina += 30;
                 maxBalance += 30;
                 specialsToAdd.Add("RallyingCry");
+
                 break;
             case Archetype.DarkKnight:
                 tackling -= 10;
