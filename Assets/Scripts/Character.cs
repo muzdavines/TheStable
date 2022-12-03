@@ -622,6 +622,11 @@ public class Character : Living {
                 maxMind += 15;
                 maxStamina += 35;
                 maxBalance += 25;
+                activeMeleeMoves[0] = Resources.Load<BaseMeleeMove>("SpikedBat1");
+                activeMeleeMoves[1] = Resources.Load<BaseMeleeMove>("SpikedBat2");
+                activeMeleeMoves[2] = Resources.Load<BaseMeleeMove>("SpikedBat3");
+                meleeWeapon = Instantiate(Resources.Load<Weapon>("SpikedBatSO"));
+
                 specialsToAdd.Add("Kneecapper");
                 name += " the " + Names.RogueNick[Random.Range(0, Names.RogueNick.Length)];
                 break;
