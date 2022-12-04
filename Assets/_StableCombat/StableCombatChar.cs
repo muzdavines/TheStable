@@ -76,6 +76,7 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
     [SerializeField]
     public List<Mod> mods = new List<Mod>();
 
+    public bool isIgnoringDamage;
     //Status
     public bool isInjured { get { return anima.injured; } }
     public bool isKnockedDown { get { return state.GetType() == typeof(SCGetTackled) || state.GetType() == typeof(SCKnockdown) || state.GetType() == typeof(SCCombatDowned); } }
@@ -909,7 +910,9 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
     public void TakeDamage(StableDamage damage, StableCombatChar attacker, bool shouldAnimate = true) {
         if (health <= 0)
             return;
-        
+        if (isIgnoringDamage) {
+            return;
+        }
         if (IsProtected("Damage")) {
             return;
         }
@@ -986,6 +989,13 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
 
     public void AnimEventReceiver(string message) {
         state.AnimEventReceiver(message);
+        if (message == "BeginIgnoreDamage") {
+            isIgnoringDamage = true;
+        }
+
+        if (message == "EndIgnoreDamage") {
+            isIgnoringDamage = false;
+        }
     }
 
     //Mission Methods
