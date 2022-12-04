@@ -612,6 +612,10 @@ public class Character : Living {
                 maxMind += 25;
                 maxStamina += 15;
                 maxBalance += 35;
+                activeMeleeMoves[0] = Resources.Load<BaseMeleeMove>("Knife1");
+                activeMeleeMoves[1] = Resources.Load<BaseMeleeMove>("Knife2");
+                activeMeleeMoves[2] = Resources.Load<BaseMeleeMove>("Knife3");
+                meleeWeapon = Instantiate(Resources.Load<Weapon>("KnifeSO"));
                 specialsToAdd.Add("BolaThrow");
                 name += " the " + Names.RogueNick[Random.Range(0, Names.RogueNick.Length)];
                 break;
