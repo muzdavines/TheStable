@@ -601,6 +601,10 @@ public class Character : Living {
                 maxStamina += 25;
                 maxBalance += 35;
                 specialsToAdd.Add("Assassinate");
+                activeMeleeMoves[0] = Resources.Load<BaseMeleeMove>("DarkKnife1");
+                activeMeleeMoves[1] = Resources.Load<BaseMeleeMove>("DarkKnife2");
+                activeMeleeMoves[2] = Resources.Load<BaseMeleeMove>("DarkKnife3");
+                meleeWeapon = Instantiate(Resources.Load<Weapon>("DarkKnifeSO"));
                 modelName = "SCUnit3";
                 modelNum = 0;
                 break;
