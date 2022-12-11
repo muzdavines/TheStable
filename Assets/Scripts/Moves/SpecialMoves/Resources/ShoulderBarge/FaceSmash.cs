@@ -12,7 +12,7 @@ public class FaceSmash : ActiveSpecialMove {
     }
 
     public override bool Check(StableCombatChar _char) {
-
+        if (!_char.fieldSport) { return false; }
         if (Time.time <= lastFired + 15) { return false; }
         if (_char.isKnockedDown) { return false; }
 

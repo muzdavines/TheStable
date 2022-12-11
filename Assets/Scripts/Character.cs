@@ -652,6 +652,10 @@ public class Character : Living {
                 maxMind += 15;
                 maxStamina += 35;
                 maxBalance += 25;
+                activeMeleeMoves[0] = Resources.Load<BaseMeleeMove>("Club1");
+                activeMeleeMoves[1] = Resources.Load<BaseMeleeMove>("Club2");
+                activeMeleeMoves[2] = Resources.Load<BaseMeleeMove>("Club3");
+                meleeWeapon = Instantiate(Resources.Load<Weapon>("ClubSO"));
                 specialsToAdd.Add("FaceSmash");
                 break;
             case Archetype.Charlatan:
@@ -733,6 +737,7 @@ public class Character : Living {
                 maxStamina += 25;
                 maxBalance += 25;
                 specialsToAdd.Add("SwordFlurry");
+               
                 name += " the " + Names.Warriornick[Random.Range(0, Names.Warriornick.Length)];
                 break;
             case Archetype.Champion:
@@ -741,6 +746,10 @@ public class Character : Living {
                 maxMind += 30;
                 maxStamina += 30;
                 maxBalance += 30;
+                activeMeleeMoves[0] = Resources.Load<BaseMeleeMove>("GreatSword1");
+                activeMeleeMoves[1] = Resources.Load<BaseMeleeMove>("GreatSword2");
+                activeMeleeMoves[2] = Resources.Load<BaseMeleeMove>("GreatSword3");
+                meleeWeapon = Instantiate(Resources.Load<Weapon>("GreatSwordSO"));
                 specialsToAdd.Add("RallyingCry");
 
                 break;

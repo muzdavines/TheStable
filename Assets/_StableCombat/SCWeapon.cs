@@ -21,7 +21,7 @@ public class SCWeapon : MonoBehaviour
         col.isTrigger = true;
     }
     public void Init(StableCombatChar character, Weapon _blueprint) {
-        if (col == null) { col = GetComponent<Collider>(); }
+        if (col == null) { col = GetComponentInChildren<Collider>(); }
         col.enabled = false;
         col.isTrigger = true;
         weaponBlueprint = _blueprint;
