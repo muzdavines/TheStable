@@ -6,6 +6,8 @@ using UnityEngine.AI;
 
 public class StableSceneController : MonoBehaviour {
     public List<Transform> places;
+    public HeroMainController heroController;
+
     void Start() {
         var heroes = Game.instance.playerStable.heroes;
         BaseSpawnChars(heroes, places, 0);
@@ -45,6 +47,10 @@ public class StableSceneController : MonoBehaviour {
     IEnumerator DelaySeated(StableCombatChar _char) {
         yield return new WaitForSeconds(.25f);
         _char.Cinematic();
+    }
+
+    public void HeroClicked(StableCombatChar thisChar) {
+        heroController.OpenPanel(thisChar.myCharacter);
     }
     
 }

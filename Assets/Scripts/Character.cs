@@ -686,6 +686,9 @@ public class Character : Living {
                 maxStamina += 25;
                 maxBalance += 25;
                 specialsToAdd.Add("BallHawk");
+                activeRangedMoves[0] = Resources.Load<Move>("VoidBolt");
+                activeRangedMoves[1] = Resources.Load<Move>("VoidBolt");
+                activeRangedMoves[2] = Resources.Load<Move>("VoidBolt");
                 name += " the " + Names.Wizardnick[Random.Range(0, Names.Wizardnick.Length)];
                 break;
             case Archetype.ExiledWizard:

@@ -13,7 +13,8 @@ public class BallHawk : ActiveSpecialMove {
     }
 
     public override bool Check(StableCombatChar _char) {
-
+        if (!_char.fieldSport) {
+            return false;}
         if (Time.time <= lastFired + 5) { return false; }
         if (_char.isKnockedDown) { return false; }
 

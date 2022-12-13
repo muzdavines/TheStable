@@ -26,7 +26,9 @@ public class SCProjectile : MonoBehaviour
         body = GetComponent<Rigidbody>();
         col.isTrigger = true;
         body.isKinematic = isKinematic;
-        targetChar.coach.CheckDivineIntervention();
+        if (targetChar.fieldSport) {
+            targetChar.coach.CheckDivineIntervention();
+        }
     }
     private void Update() {
         if (!fired) { return; }
