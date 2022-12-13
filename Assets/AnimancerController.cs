@@ -52,6 +52,7 @@ public class AnimancerController : MonoBehaviour {
     public ClipTransition executeVictim;
     public ClipTransition rallyingCry;
     public ClipTransition divineIntervention;
+    public ClipTransition seated;
     
     public List<Move> baseMeleeAttackMoves;
     public List<Move> baseRangedAttackMoves;
@@ -223,6 +224,10 @@ public class AnimancerController : MonoBehaviour {
     public void GetKneecapped() {
         injured = true;
         anim.Play(getKneecapped, .25f, FadeMode.FromStart).Events.OnEnd = () => Knockdown();
+    }
+
+    public void Seated() {
+        anim.Play(seated, .25f, FadeMode.FromStart);
     }
 
     public void JumpCatch() {

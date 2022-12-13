@@ -698,6 +698,10 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
     public void RallyingCry(ActiveSpecialMove specialMove) {
         state.TransitionTo(new SCRallyingCry() { specialMove = specialMove });
     }
+
+    public void Cinematic() {
+        state.TransitionTo(new SCCinematicState(){});
+    }
     
     public bool IsProtected(string s) {
         var protection = GetComponent<SCProtectionBuff>();

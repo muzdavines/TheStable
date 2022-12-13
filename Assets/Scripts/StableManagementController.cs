@@ -27,7 +27,7 @@ public class StableManagementController : MonoBehaviour, UIElement
             Game.instance.managementScreenToLoadOnStartup = "";
             return;
         }
-        GameObject.Find("HomeButton").GetComponent<Button>().onClick.Invoke();
+        GameObject.Find("BlankButton").GetComponent<Button>().onClick.Invoke();
        
     }
 
