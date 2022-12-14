@@ -705,6 +705,9 @@ public class Character : Living {
                 maxMind += 35;
                 maxStamina += 15;
                 maxBalance += 25;
+                activeRangedMoves[0] = Resources.Load<Move>("BoltOfDivinity");
+                activeRangedMoves[1] = Resources.Load<Move>("BoltOfDivinity");
+                activeRangedMoves[2] = Resources.Load<Move>("BoltOfDivinity");
                 specialsToAdd.Add("BallOfDevotion");
                 break;
             case Archetype.ImperialWizard:
@@ -743,6 +746,10 @@ public class Character : Living {
                 maxMind += 25;
                 maxStamina += 25;
                 maxBalance += 25;
+                activeMeleeMoves[0] = Resources.Load<BaseMeleeMove>("AdvancedSword1");
+                activeMeleeMoves[1] = Resources.Load<BaseMeleeMove>("AdvancedSword2");
+                activeMeleeMoves[2] = Resources.Load<BaseMeleeMove>("AdvancedSword3");
+                meleeWeapon = Instantiate(Resources.Load<Weapon>("AdvancedSwordSO"));
                 specialsToAdd.Add("SwordFlurry");
                
                 name += " the " + Names.Warriornick[Random.Range(0, Names.Warriornick.Length)];

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: c696c0e34ef822e4881ae726eff273af
+guid: 0598ee1864b68b340a98d42c9331df45
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable:
@@ -455,7 +455,7 @@ ModelImporter:
     second: root
   - first:
       74: 7400000
-    second: Protector_Attack11_Root
+    second: Protector_Attack04_Root
   - first:
       95: 9500000
     second: //RootNode
@@ -463,8 +463,8 @@ ModelImporter:
       41386430: 2186277476908879412
     second: ImportLogs
   - first:
-      74: -786077485838759275
-    second: AdvancedSword1
+      74: 1827226128182048838
+    second: AdvancedSword2
   externalObjects: {}
   materials:
     materialImportMode: 1
@@ -497,11 +497,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Protector_Attack11_Root
+      name: Protector_Attack04_Root
       takeName: Take 001
       internalID: 0
       firstFrame: 0
-      lastFrame: 200
+      lastFrame: 240
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -654,13 +654,13 @@ ModelImporter:
       maskSource: {fileID: 31900000, guid: aea0d102b57ed1140b0616a6b146e6a5, type: 2}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: AdvancedSword1
+      name: AdvancedSword2
       takeName: Take 001
       internalID: 0
       firstFrame: 0
-      lastFrame: 130
+      lastFrame: 99
       wrapMode: 0
-      orientationOffsetY: -38
+      orientationOffsetY: -53.3
       level: 0
       cycleOffset: 0
       loop: 0
@@ -678,37 +678,37 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 0.13070382
+      - time: 0.21012744
         functionName: AnimEventReceiver
         data: FaceTarget
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.2760201
+      - time: 0.27064022
         functionName: AnimEventReceiver
         data: BeginIgnoreDamage
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.37912554
+      - time: 0.4073431
         functionName: AnimEventReceiver
         data: BeginScanRH
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.75836545
-        functionName: AnimEventReceiver
+      - time: 0.84329456
+        functionName: NewEvent
         data: EndScanRH
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.9483871
+      - time: 0.9383257
         functionName: AnimEventReceiver
-        data: EndScanRH
+        data: EndIgnoreDamage
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 0
