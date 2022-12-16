@@ -227,7 +227,7 @@ public class Game : MonoBehaviour {
                 negativeBalanceNews = true;
                 news.Add(new NewsItem() { body = "If you start a match with a negative balance, your heroes will not play for you that game. They don't work for free and need to know they will be paid on payday. Your roster will be filled with Amateurs if this happens.", date = Game.instance.gameDate, sender = "The Boss", subject = "Negative Balance" });
             }
-
+            /*
             if (IsPlayerMatchDay()) {
                 foreach (Character c in playerStable.heroes) {
                     if (c.activeInLineup && c.archetype != Character.Archetype.Amateur &&
@@ -242,7 +242,7 @@ public class Game : MonoBehaviour {
                         }
                     }
                 }
-            }
+            }*/
         }
         Helper.UpdateAllUI();
         playerStable.SortHeroes();

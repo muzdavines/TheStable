@@ -22,11 +22,11 @@ public class StableManagementController : MonoBehaviour, UIElement
     void Start()
     {
         //if (!GameObject.FindObjectOfType<Game>()) { SceneManager.LoadScene("NewGameCreation"); return; }
-        if (Game.instance.managementScreenToLoadOnStartup == "league") {
+/*        if (Game.instance.managementScreenToLoadOnStartup == "league") {
             GameObject.Find("LeagueButton").GetComponent<Button>().onClick.Invoke();
             Game.instance.managementScreenToLoadOnStartup = "";
             return;
-        }
+        }*/
         GameObject.Find("BlankButton").GetComponent<Button>().onClick.Invoke();
        
     }

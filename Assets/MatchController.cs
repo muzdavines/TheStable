@@ -92,13 +92,20 @@ public class MatchController : MonoBehaviour
             Color secondaryColor = thisTeam == 0 ? thisGame.activeMatch.home.stable.secondaryColor : thisGame.activeMatch.away.stable.secondaryColor;
             for (int i = 0; i < bothTeams[thisTeam].Count; i++) {
                 Character thisBaseChar = bothTeams[thisTeam][i];
-                if (!thisBaseChar.activeInLineup) { continue; }
+                if (playersStable == thisTeam && Game.instance.playerStable.finance.gold < 0) {
+                    if (thisBaseChar.archetype != Character.Archetype.Amateur && thisBaseChar.archetype != Character.Archetype.Goalkeeper) {
+                        continue;
+                    }
+                }
+                else {
+                    if (!thisBaseChar.activeInLineup) { continue; }
+                }
                 GameObject co = Instantiate<GameObject>(Resources.Load<GameObject>(thisBaseChar.modelName), homeSpawns[0].position, Quaternion.identity);
                 StableCombatChar thisChar = co.GetComponent<StableCombatChar>();
                 thisChar.team = thisTeam;
                 thisChar.fieldSport = true;
                 thisChar.myCharacter = thisBaseChar;
-                thisChar.fieldPosition = thisBaseChar.currentPosition;
+                thisChar.fieldPosition = thisBaseChar.currentPosition > 0 ? thisBaseChar.currentPosition : (Position)(i + 2);
                 thisChar.GetComponent<CharacterRandomizer>()?.Init(thisBaseChar, primaryColor, secondaryColor);
                 thisChar.Init();
             }
