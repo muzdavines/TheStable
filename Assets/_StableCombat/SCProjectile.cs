@@ -6,6 +6,7 @@ using UnityEngine;
 public class SCProjectile : MonoBehaviour
 {
     public GameObject collisionEffect;
+    public SCImpact impactEffect;
     public Transform myTarget;
     public Transform myPositionTarget;
     public StableDamage myDamage;
@@ -56,6 +57,10 @@ public class SCProjectile : MonoBehaviour
 
         if (collisionEffect != null) {
             Destroy(Instantiate<GameObject>(collisionEffect, transform.position, transform.rotation), 5.0f);
+        }
+
+        if (impactEffect != null) {
+            Destroy(Instantiate<SCImpact>(impactEffect, transform.position, transform.rotation).Impact(launcherChar.team).gameObject, 5.0f);
         }
 
 
