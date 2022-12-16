@@ -20,6 +20,8 @@ public class SCProjectile : MonoBehaviour
     public StableCombatChar launcherChar;
     public StableCombatChar targetChar;
     Transform _t;
+    public bool noise;
+
 
     private void Start() {
         _t = transform;
@@ -27,13 +29,27 @@ public class SCProjectile : MonoBehaviour
         body = GetComponent<Rigidbody>();
         col.isTrigger = true;
         body.isKinematic = isKinematic;
+        return;
         if (targetChar.fieldSport) {
             targetChar.coach.CheckDivineIntervention();
         }
     }
     private void Update() {
         if (!fired) { return; }
-        _t.position = Vector3.MoveTowards(_t.position, myTarget.position+new Vector3(0,1,0), speed * Time.deltaTime);
+
+        if (noise) {
+            Vector3 direction = Vector3.MoveTowards(transform.position, myTarget.position, 1f);
+
+            // Add some random noise to the direction
+            direction = direction * Random.Range(0.9f, 1.1f);
+
+            // Move the projectile in the direction of the target
+            transform.Translate(direction * speed * Time.deltaTime);
+        }
+        else {
+            _t.position = Vector3.MoveTowards(_t.position, myTarget.position + new Vector3(0, 1, 0), speed * Time.deltaTime);
+        }
+        
         _t.LookAt(myTarget.position);
     }
 
