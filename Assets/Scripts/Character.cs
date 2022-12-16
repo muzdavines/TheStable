@@ -697,6 +697,9 @@ public class Character : Living {
                 maxMind += 25;
                 maxStamina += 25;
                 maxBalance += 25;
+                activeRangedMoves[0] = Resources.Load<Move>("ShatteredBlast");
+                activeRangedMoves[1] = Resources.Load<Move>("ShatteredBlast");
+                activeRangedMoves[2] = Resources.Load<Move>("ShatteredBlast");
                 specialsToAdd.Add("SummonVoidspawn");
                 break;
             case Archetype.HolyWizard:
@@ -716,6 +719,9 @@ public class Character : Living {
                 maxMind += 35;
                 maxStamina += 15;
                 maxBalance += 25;
+                activeRangedMoves[0] = Resources.Load<Move>("CommandingForce");
+                activeRangedMoves[1] = Resources.Load<Move>("CommandingForce");
+                activeRangedMoves[2] = Resources.Load<Move>("CommandingForce");
                 specialsToAdd.Add("Protection");
                 break;
             case Archetype.VoidWizard:
