@@ -21,6 +21,7 @@ public class SCProjectile : MonoBehaviour
     public StableCombatChar targetChar;
     Transform _t;
     public bool noise;
+    public int numProjectiles = 1;
 
 
     private void Start() {

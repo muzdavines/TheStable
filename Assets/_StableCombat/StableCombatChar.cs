@@ -911,6 +911,18 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
         }
         return false;
     }
+
+    public void TakeHeals(StableDamage heals) {
+        stamina += heals.stamina;
+        mind += heals.mind;
+        balance += heals.balance;
+        health += heals.health;
+        mind = Mathf.Clamp(mind, 0, maxStamina);
+        stamina = Mathf.Clamp(stamina, 0, maxStamina);
+        balance = Mathf.Clamp(balance, 0, maxStamina);
+        health = Mathf.Clamp(health, 0, maxStamina);
+        uiController?.UpdateAll();
+    }
     public void TakeDamage(StableDamage damage, StableCombatChar attacker, bool shouldAnimate = true) {
         if (health <= 0)
             return;
