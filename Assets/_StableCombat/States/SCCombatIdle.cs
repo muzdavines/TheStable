@@ -8,6 +8,7 @@ public class SCCombatIdle : SCCombatStanceState, CanBackStab {
     public override void EnterFrom(StableCombatCharState state) {
         base.EnterFrom(state);
         Debug.Log("#SCCombatStance#Combat Idle Enter "+thisChar.myCharacter.name);
+        thisChar.isIgnoringDamage = false;
         thisChar.anima.Idle();
         thisChar.agent.isStopped = true;
         canGrabBall = false;

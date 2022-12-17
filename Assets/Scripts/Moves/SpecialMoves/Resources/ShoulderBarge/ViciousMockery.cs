@@ -12,7 +12,7 @@ public class ViciousMockery : ActiveSpecialMove {
     }
 
     public override bool Check(StableCombatChar _char) {
-        if (Time.time <= lastFired + 30) {
+        if (!_char.fieldSport || Time.time <= lastFired + 30) {
             return false;
         }
         Ball ball = _char.ball;

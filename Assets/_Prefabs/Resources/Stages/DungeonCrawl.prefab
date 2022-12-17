@@ -231,8 +231,8 @@ MonoBehaviour:
     type: 0
     required: 0
     reward: {fileID: 0}
-    saves: []
     level: 0
+    challengeNum: 5
     mod: 0
   onSuccessSound: {fileID: 0}
   allPurposeTransforms: []
@@ -241,7 +241,9 @@ MonoBehaviour:
   cameraAngle: {x: 5, y: 5, z: 5}
   backgroundMusic: {fileID: 8300000, guid: 467a8d5751f6c40f3955c0ce19c23073, type: 3}
   attributePrereq: 
-  attributePrereqAmount: 0
+  levelReq: 0
+  successText: 
+  failText: 
   currentCharacterToAttempt: {fileID: 0}
   enemies:
   - {fileID: 11400000, guid: 543cedf90a343ba47b792a94376f116d, type: 2}
@@ -252,6 +254,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 543cedf90a343ba47b792a94376f116d, type: 2}
   - {fileID: 11400000, guid: 543cedf90a343ba47b792a94376f116d, type: 2}
   - {fileID: 11400000, guid: 543cedf90a343ba47b792a94376f116d, type: 2}
+  - {fileID: 11400000, guid: 9f6d76e22f4508e40b8a2f6db0adb422, type: 2}
   spawnLoc:
   - {fileID: 3189074148271768715}
   - {fileID: 2255220391995409153}

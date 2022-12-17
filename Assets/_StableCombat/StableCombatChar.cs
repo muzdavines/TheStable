@@ -105,7 +105,7 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
         meleeAttackMoves = myCharacter.activeMeleeMoves;
         rangedAttackMoves = myCharacter.activeRangedMoves;
         agent.speed = myCharacter.runspeed * .4f;
-        agent.radius = .6f;
+        agent.radius = .5f;
         accumulatedCooldown = 4f;
         WeaponSetup();
         debugState = true;
@@ -922,21 +922,30 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
         }
 
         takeDamage.PlayFeedbacks();
-        if (isCanDamageButNotChangeState) {
+        bool recordStats = (attacker != null && attacker.myCharacter != null &&
+                            attacker.myCharacter.thisQuestStats != null);
+            if (isCanDamageButNotChangeState) {
             anima.TakeDamage(false);
         } else if (shouldAnimate && Time.time > lastTakeDamageAnim + 3) {
             lastTakeDamageAnim = Time.time;
             state.TransitionTo(new SCTakeDamage());
         }
         if (stamina <= 0 || balance <= 0 || mind <= 0) {
-            attacker.myCharacter.thisQuestStats.healthDamage += Mathf.Max((int)Mathf.Min(damage.health, health),0);
+            
+            if (recordStats){attacker.myCharacter.thisQuestStats.healthDamage += Mathf.Max((int)Mathf.Min(damage.health, health), 0);}
+            
+
             health -= damage.health;
             
             Debug.Log("TODO: more health damage adjustments needed");
         }
-        attacker.myCharacter.thisQuestStats.staminaDamage += Mathf.Max((int)Mathf.Min(damage.stamina, stamina),0);
-        attacker.myCharacter.thisQuestStats.balanceDamage += Mathf.Max((int)Mathf.Min(damage.balance, balance), 0);
-        attacker.myCharacter.thisQuestStats.mindDamage += Mathf.Max((int)Mathf.Min(damage.mind, mind), 0);
+
+        if (recordStats){
+            attacker.myCharacter.thisQuestStats.staminaDamage += Mathf.Max((int)Mathf.Min(damage.stamina, stamina), 0);
+            attacker.myCharacter.thisQuestStats.balanceDamage += Mathf.Max((int)Mathf.Min(damage.balance, balance), 0);
+            attacker.myCharacter.thisQuestStats.mindDamage += Mathf.Max((int)Mathf.Min(damage.mind, mind), 0);
+        }
+
         stamina -= damage.stamina;
         balance -= damage.balance;
         mind -= damage.mind;
@@ -944,14 +953,16 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
         if (health <= 0) {
             GetDowned();
             if (attacker != null) {
-                attacker.myCharacter.xp += Game.XPCombatDown;
-                attacker.myCharacter.thisQuestStats.kills++;
+                if (recordStats) {
+                    attacker.myCharacter.xp += Game.XPCombatDown;
+                    attacker.myCharacter.thisQuestStats.kills++;
+                }
             }
 
             return;
         }
         if (damage.isKnockdown) {
-            if (attacker != null) {
+            if (attacker != null && recordStats) {
                 attacker.myCharacter.xp += Game.XPTackle;
             }
 

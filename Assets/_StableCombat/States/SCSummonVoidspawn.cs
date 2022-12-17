@@ -29,13 +29,14 @@ public class SCSummonVoidspawn : StableCombatCharState {
                 Character spawnChar = Resources.Load<Character>("Voidspawn");
                 thisSpawn.myCharacter = spawnChar;
                 thisSpawn.team = thisChar.team;
-                thisSpawn.fieldSport = true;
+                thisSpawn.fieldSport = thisChar.fieldSport;
                 thisSpawn.playStyle = PlayStyle.Fight;
                 thisSpawn.fieldPosition = Position.STC;
-                thisSpawn.gameObject.AddComponent<FireGolemFamiliar>();
+                thisSpawn.gameObject.AddComponent<VoidSpawnFamiliar>();
                 thisSpawn.Init();
                 agent.enabled = true;
                 thisSpawn.GetComponent<NavMeshAgent>().ResetPath();
+                thisSpawn.CombatIdle();
             }
         }
     }

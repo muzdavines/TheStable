@@ -5066,7 +5066,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8295961057724379241}
-  - component: {fileID: 1840207803676747476}
   m_Layer: 0
   m_Name: Collision
   m_TagString: Untagged
@@ -5092,41 +5091,6 @@ Transform:
   m_Father: {fileID: 4190943865376977892}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1840207803676747476
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3251348509428375786}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9320f3afef659b64cb7316ce3c0bfbab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  UseCollisionDetect: 1
-  MaxDistnace: -1
-  Mass: 1
-  Speed: 15
-  RandomSpeedOffset: 0
-  AirDrag: 0.1
-  UseGravity: 0
-  ForceMode: 1
-  AddRealtimeForce: {x: 0, y: 0, z: 0}
-  MinSpeed: 0
-  ColliderRadius: 0.05
-  FreezeRotation: 0
-  UseTargetPositionAfterCollision: 0
-  EffectOnCollision: {fileID: 1837398281301428, guid: c6bff702ea33dbd43b35ea3d6db5f838,
-    type: 3}
-  CollisionEffectInWorldSpace: 1
-  LookAtNormal: 1
-  CollisionEffectDestroyAfter: 5
-  DeactivateObjectsAfterCollision:
-  - {fileID: 8027736472258470168}
-  - {fileID: 525041710839559227}
-  HUE: -1
-  collideAfter: 0
 --- !u!1 &4192759496765935269
 GameObject:
   m_ObjectHideFlags: 0
@@ -5310,7 +5274,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6866581037814345184}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.032, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 8295961057724379241}
@@ -10380,6 +10344,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   collisionEffect: {fileID: 5777123818687541195, guid: b24f836e7accf604faeab575b041e0c7,
     type: 3}
+  impactEffect: {fileID: 0}
   myTarget: {fileID: 0}
   myPositionTarget: {fileID: 0}
   myDamage:
@@ -10391,11 +10356,12 @@ MonoBehaviour:
   fireType: 0
   col: {fileID: 0}
   body: {fileID: 0}
-  isKinematic: 0
-  speed: 1
+  isKinematic: 1
+  speed: 15
   fired: 0
   launcherChar: {fileID: 0}
   targetChar: {fileID: 0}
+  noise: 0
 --- !u!1 &9122071258993244123
 GameObject:
   m_ObjectHideFlags: 0

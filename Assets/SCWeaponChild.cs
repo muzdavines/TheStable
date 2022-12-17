@@ -5,6 +5,12 @@ using UnityEngine;
 public class SCWeaponChild : MonoBehaviour
 {
     public SCWeapon parent;
+
+    public void Start() {
+        if (parent == null) {
+            parent = GetComponentInParent<SCWeapon>();
+        }
+    }
     public void OnTriggerEnter(Collider other) {
         parent.OnTriggerEnter(other);
 

@@ -29,7 +29,7 @@ public class SCIdle : StableCombatCharState, ApexState
             thisChar.GKIdle();
             return;
         }
-        if (ball.holder == thisChar) {
+        if (ball?.holder == thisChar) {
             thisChar.IdleWithBall();
             return;
         }
@@ -40,11 +40,11 @@ public class SCIdle : StableCombatCharState, ApexState
             return;
         }
 
-        if (ball.passTarget != null && ball.passTarget == thisChar) {
+        if (ball?.passTarget != null && ball.passTarget == thisChar) {
             thisChar.TryCatchPass();
             return;
         }
-        if (ball.holder == null) {
+        if (ball?.holder == null) {
             if (thisChar.ShouldPursueBall()) {
                 thisChar.PursueBall();
                 return;
@@ -63,7 +63,7 @@ public class SCIdle : StableCombatCharState, ApexState
         }
           
         
-        if (ball.holder.team == thisChar.team) {
+        if (ball?.holder.team == thisChar.team) {
             thisChar.IdleTeammateWithBall();
         } else {
             //enemy must have ball at this point

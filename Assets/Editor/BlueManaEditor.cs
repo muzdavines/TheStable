@@ -32,21 +32,22 @@ public class BlueManaEditor : EditorWindow
 
     private void Create() {
         Rigidbody body = target.GetComponent<Rigidbody>();
-        body ??= target.AddComponent<Rigidbody>();
+        body = body != null ? body : target.AddComponent<Rigidbody>();
+        
         body.mass = 60;
         body.isKinematic = true;
         var agent = target.GetComponent<NavMeshAgent>();
-        agent ??= target.AddComponent<NavMeshAgent>();
+        agent = agent != null ? agent : target.AddComponent<NavMeshAgent>();
         agent.radius = .3f;
         var capsule = target.GetComponent<CapsuleCollider>();
-        capsule ??= target.AddComponent<CapsuleCollider>();
+        capsule = capsule != null ? capsule : target.AddComponent<CapsuleCollider>();
         capsule.radius = .3f;
         capsule.height = 2f;
         capsule.center = new Vector3(0,1f,0);
         MovementAnimationController animControl = target.GetComponent<MovementAnimationController>();
-        animControl ??= target.AddComponent<MovementAnimationController>();
+        animControl = animControl != null ? animControl : target.AddComponent<MovementAnimationController>();
         var thisChar = target.GetComponent<StableCombatChar>();
-        thisChar ??= target.AddComponent<StableCombatChar>();
+        thisChar = thisChar != null ? thisChar : target.AddComponent<StableCombatChar>();
         thisChar.distToTrackBall = 90;
         thisChar.distToTrackEnemy = 20;
         thisChar.distToTrackBallCarrier = 2;
@@ -64,12 +65,12 @@ public class BlueManaEditor : EditorWindow
         thisChar.RL = RL;
         thisChar.LL = LL;
         var anim = target.GetComponent<AnimancerController>();
-        anim ??= target.AddComponent<AnimancerController>();
+        anim = anim != null ? anim : target.AddComponent<AnimancerController>();
         anim.animSet = Resources.Load<AnimancerAnimSet>("DefaultAnimSet");
         anim.dodgeTackle = new ClipTransition[5];
         anim.skills = new ClipTransition[1];
         var animc = target.GetComponent<AnimancerComponent>();
-        animc ??= target.AddComponent<AnimancerComponent>();
+        animc = animc != null ? animc : target.AddComponent<AnimancerComponent>();
         anim.anim = animc;
         animc.Animator = target.GetComponent<Animator>();
         target.tag = "Character";
