@@ -1199,6 +1199,23 @@ public static class StableCombatCharHelper {
         }
         return null;
     }
+    public static StableCombatChar FindTeammateWithinRange(this StableCombatChar thisChar, float range, int teamNum) {
+        
+        var chars = GameObject.FindObjectsOfType<StableCombatChar>();
+
+        foreach (var scc in chars) {
+            if (thisChar.team != scc.team) {
+                continue;
+            }
+            if (scc.isKnockedDown) {
+                continue;
+            }
+            if (thisChar.Distance(scc) <= range) {
+                return scc;
+            }
+        }
+        return null;
+    }
 }
 
 public interface CannotInterrupt {

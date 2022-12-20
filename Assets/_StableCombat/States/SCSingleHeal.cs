@@ -2,8 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SCSingleHeal : StableCombatCharState {
-
+public class SCSingleHeal : StableCombatCharState, CannotSpecial  {
+    public StableCombatChar target;
     public override void EnterFrom(StableCombatCharState state) {
         base.EnterFrom(state);
 
