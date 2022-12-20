@@ -43,6 +43,7 @@ public class MissionHeroCellView : EnhancedScrollerCellView {
     }
     public void OnClick() {
         if (tactics) {
+            return;
             if (Game.instance.playerStable.finance.gold < 0) {
                 return;
             }

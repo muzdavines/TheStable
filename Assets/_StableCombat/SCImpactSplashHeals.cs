@@ -21,3 +21,4 @@ public class SCImpactSplashHeals : SCImpact {
 
 
 }
+//  private string API_KEY = "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";

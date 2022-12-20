@@ -25,7 +25,7 @@ public class BlueManaMouseEvents : MonoBehaviour {
         currentHover = null;
         hover.Close();
     }
-
+    
     public void OnMouseDown() {
         print("MouseClick");
         if (!blank.activeInHierarchy) {
