@@ -46,7 +46,7 @@ public class TeamTacticsController : MonoBehaviour, UIElement
     }
     public void ResetPositions() {
         foreach (TacticsFieldPositionController t in positions) {
-            t.GetComponentInChildren<TextMeshProUGUI>().text = "";
+            t.Reset();
         }
     }
     public void Update() {
@@ -69,7 +69,11 @@ public class TeamTacticsController : MonoBehaviour, UIElement
         ResetPositions();
         foreach (Character c in Game.instance.playerStable.heroes) {
             if (c.activeInLineup) {
-                ChangePosition(c.currentPosition, c);
+                foreach (var p in positions) {
+                    if (p.pos == c.currentPosition) {
+                        p.ManualSet(c);
+                    }
+                }
             }
         }
     }

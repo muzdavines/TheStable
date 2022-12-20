@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SingleHeal : ActiveSpecialMove {
+public class SingleHeal : ActiveSpecialMove, HealingMove {
     float lastFired;
     StableCombatChar target;
     public override void OnActivate(StableCombatChar _char) {

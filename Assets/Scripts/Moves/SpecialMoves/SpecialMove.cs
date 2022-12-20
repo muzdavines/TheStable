@@ -12,3 +12,7 @@ public abstract class SpecialMove : Move
 
 
 }
+
+public interface HealingMove {
+
+}
