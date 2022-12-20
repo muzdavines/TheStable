@@ -4,7 +4,7 @@ using System.Linq;
 using UnityEngine;
 
 public class Backstab : ActiveSpecialMove {
-    float lastFired;
+    private float lastFired = -45;
     public override void OnActivate(StableCombatChar _char) {
         base.OnActivate(_char);
         lastFired = Time.time;
@@ -12,19 +12,19 @@ public class Backstab : ActiveSpecialMove {
     }
 
     public override bool Check(StableCombatChar _char) {
-        //Debug.Log("#Backstab#Checking " + _char.myCharacter.name);
+        Debug.Log("#Backstab#Checking " + _char.myCharacter.name);
         if (Time.time <= lastFired + 45) {
-          //  Debug.Log("#Backstab#CoolingDown");
+           Debug.Log("#Backstab#CoolingDown");
             return false;
         }
-
+        Debug.Log("#Backstab#Not CoolingDown");
         if (_char.ball != null) {
             if (_char.ball.passTarget == _char) {
                 return false;
             }
         }
         if (!_char.state.GetType().GetInterfaces().Contains(typeof(CanBackStab))) {
-            //Debug.Log("#Backstab#Can't Backstab State");
+            Debug.Log("#Backstab#Can't Backstab State");
             return false;
         }
         var checkList = _char.FindAllEnemiesWithinRange(500);
@@ -43,8 +43,15 @@ public class Backstab : ActiveSpecialMove {
             target = _char.FindEnemyWithinRange(7);
         }
         if (target != null) {
-            if (!_char.AcquireTarget(target)) { return false; }
-        } else { return false; }
+            if (!_char.AcquireTarget(target)) {
+                Debug.Log("#Backstab#Can't Aquire Target " + target.name);
+                return false;
+            }
+        }
+        else {
+            Debug.Log("#Backstab#Couldn't find valid target");
+            return false;
+        }
         Debug.Log("#Backstab#Activating "+_char.myCharacter.name);
         OnActivate(_char);
         return true;
