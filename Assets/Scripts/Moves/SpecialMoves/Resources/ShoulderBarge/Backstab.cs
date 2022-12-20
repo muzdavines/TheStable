@@ -27,7 +27,21 @@ public class Backstab : ActiveSpecialMove {
             //Debug.Log("#Backstab#Can't Backstab State");
             return false;
         }
-        var target = _char.FindEnemyWithinRange(7);
+        var checkList = _char.FindAllEnemiesWithinRange(500);
+        StableCombatChar target = null;
+        foreach (var c in checkList)
+        {
+            if (c.IsHealer())
+            {
+                Debug.Log("#Backstab#Found Healer");
+               target = c;
+                break;
+            }
+        }
+        if (target == null)
+        {
+            target = _char.FindEnemyWithinRange(7);
+        }
         if (target != null) {
             if (!_char.AcquireTarget(target)) { return false; }
         } else { return false; }

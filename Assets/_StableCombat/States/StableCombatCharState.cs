@@ -123,7 +123,7 @@ public class StableCombatCharState {
 
     public virtual void Update() {
         if (Time.frameCount % 10 == 0) {
-            if (Time.timeSinceLevelLoad < 20) {
+            if (Time.timeSinceLevelLoad < 10) {
                 return;
             }
             if (thisChar.isKnockedDown || thisChar.isCannotSpecial) { return; }

@@ -84,7 +84,8 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
     public bool isCannotTarget { get { return state.GetType().GetInterfaces().Contains(typeof(CannotTarget)); } }
     public bool isCannotSpecial { get { return state.GetType().GetInterfaces().Contains(typeof(CannotSpecial)); } } 
     public bool isCanDamageButNotChangeState { get { return state.GetType().GetInterfaces().Contains(typeof(CanDamageButNotChangeState)); } }
-    public bool isShouldHoldBall { get { return state.GetType().GetInterfaces().Contains(typeof(ShouldHoldBall)); } }    //Sport
+    public bool isShouldHoldBall { get { return state.GetType().GetInterfaces().Contains(typeof(ShouldHoldBall)); } }
+    //Sport
 
     //Sport
 
@@ -1181,6 +1182,16 @@ public static class StableCombatCharHelper {
                 archetype == Character.Archetype.HolyWizard || archetype == Character.Archetype.ExiledWizard ||
                 archetype == Character.Archetype.VoidWizard);
     }
+    public static bool IsHealer(this StableCombatChar thisChar) {
+        foreach (var m in thisChar.myCharacter.activeSpecialMoves)
+        {
+            if (m.GetType().GetInterfaces().Contains(typeof(HealingMove)))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
     public static StableCombatChar FindEnemyWithinRange(this StableCombatChar thisChar, float range) {
         List<StableCombatChar> enemies;
         if (!thisChar.fieldSport) {
@@ -1198,6 +1209,31 @@ public static class StableCombatCharHelper {
             }
         }
         return null;
+    }
+    public static List<StableCombatChar> FindAllEnemiesWithinRange(this StableCombatChar thisChar, float range)
+    {
+        List<StableCombatChar> enemies;
+        List<StableCombatChar> returnList = new List<StableCombatChar>();
+        if (!thisChar.fieldSport)
+        {
+            enemies = GameObject.FindObjectOfType<CombatController>().enemies;
+        }
+        else
+        {
+            enemies = thisChar.coach.otherTeamList;
+        }
+        foreach (var scc in enemies)
+        {
+            if (scc.isKnockedDown)
+            {
+                continue;
+            }
+            if (thisChar.Distance(scc) <= range)
+            {
+                returnList.Add(scc);
+            }
+        }
+        return returnList;
     }
     public static StableCombatChar FindTeammateWithinRange(this StableCombatChar thisChar, float range, int teamNum) {
         
