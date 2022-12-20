@@ -67,10 +67,10 @@ public class AnimancerAnimSet : ScriptableObject
         for (int i = 0; i < dodgeTackle.Length; i++) {
             anim.dodgeTackle[i].Clip = dodgeTackle[i];
         }
-        for (int x = 0; x < skills.Length; x++) {
+        /*for (int x = 0; x < skills.Length; x++) {
             anim.skills[x].Clip = skills[x];
             anim.skills[x].Speed = 1;
-        }
+        }*/
         anim.oneTimer.Clip = oneTimer;
         anim.goalScored.Clip = goalScored;
         anim.takeDamage.Clip = takeDamage;
