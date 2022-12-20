@@ -17,6 +17,10 @@ public class SingleHeal : ActiveSpecialMove, HealingMove {
         var chars = GameObject.FindObjectsOfType<StableCombatChar>();
 
         foreach (var scc in chars) {
+            if(scc == _char)
+            {
+                continue;
+            }
             if (_char.team != scc.team) {
                 continue;
             }

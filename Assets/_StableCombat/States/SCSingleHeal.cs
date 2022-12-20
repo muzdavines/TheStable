@@ -36,7 +36,7 @@ public class SCSingleHeal : StableCombatCharState, CannotSpecial  {
         if (message == "ActivateHeal")
         {
             healDelivered = true;
-            target.TakeHeals(new StableDamage() { balance = 10, mind = 10, stamina = 10}) ;
+            target.TakeHeals(new StableDamage() { balance = 5, mind = 5, stamina = 5}) ;
         }
     }
 
