@@ -53,6 +53,7 @@ public class AnimancerController : MonoBehaviour {
     public ClipTransition rallyingCry;
     public ClipTransition divineIntervention;
     public ClipTransition seated;
+    public ClipTransition singleHeal;
     
     public List<Move> baseMeleeAttackMoves;
     public List<Move> baseRangedAttackMoves;
@@ -224,6 +225,9 @@ public class AnimancerController : MonoBehaviour {
     public void GetKneecapped() {
         injured = true;
         anim.Play(getKneecapped, .25f, FadeMode.FromStart).Events.OnEnd = () => Knockdown();
+    }
+    public void SingleHeal() {
+        anim.Play(singleHeal, .25f, FadeMode.FromStart).Events.OnEnd = () => thisChar.Idle();
     }
 
     public void Seated() {

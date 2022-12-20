@@ -49,6 +49,7 @@ public class AnimancerAnimSet : ScriptableObject
     public AnimationClip executeVictim;
     public AnimationClip rallyingCry;
     public AnimationClip seated;
+    public AnimationClip singleHeal;
     public void Init(AnimancerController anim) {
         Debug.Log("Initialize Animset");
         anim.shootBall.Clip = shootBall;
@@ -100,6 +101,7 @@ public class AnimancerAnimSet : ScriptableObject
         anim.soulSteal.Clip = soulSteal;
         anim.divineIntervention.Clip = divineIntervention;
         anim.seated.Clip = seated;
+        anim.singleHeal.Clip = singleHeal;
         return;
         anim.bullRush.Clip = bullRush;
        
