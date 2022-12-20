@@ -40,6 +40,7 @@ public class BlueManaDragAndDrop : MonoBehaviour, IDragHandler, IEndDragHandler 
                 }
                 print(result.gameObject.name + "TRUE");
                 isValidDrop = true;
+                result.gameObject.GetComponent<IDropHandler>().OnDrop(eventData);
                 break;
             }
         }

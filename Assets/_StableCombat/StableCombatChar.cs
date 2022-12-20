@@ -641,6 +641,9 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
         state.TransitionTo(new SCBolaThrow() { target = target });
     }
 
+    public void SingleHeal(StableCombatChar target) {
+        state.TransitionTo(new SCSingleHeal() {target = target});
+    }
     public void ViciousMockery(StableCombatChar target) {
         state.TransitionTo(new SCViciousMockery() { target = target });
     }

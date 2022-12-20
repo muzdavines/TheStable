@@ -25,6 +25,7 @@ public class BolaThrow : ActiveSpecialMove {
             OnActivate(_char);
         } else {
             Debug.Log("#BolaThrow#No Target Found");
+            return false;
         }
         return true;
     }
