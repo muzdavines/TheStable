@@ -17,13 +17,17 @@ public class BlueManaMouseEvents : MonoBehaviour {
         print("MouseEnter");
         StableCombatChar thisChar = GetComponent<StableCombatChar>();
         currentHover = thisChar;
-        hover.Display(thisChar.myCharacter);
+        if (hover) {
+            hover.Display(thisChar.myCharacter);
+        }
     }
 
     public void OnMouseExit() {
         print("MouseExit");
         currentHover = null;
-        hover.Close();
+        if (hover) {
+            hover.Close();
+        }
     }
     
     public void OnMouseDown() {

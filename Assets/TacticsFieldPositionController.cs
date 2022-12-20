@@ -18,10 +18,25 @@ public class TacticsFieldPositionController : MonoBehaviour, IDropHandler {
         print("Valid");
         print("Dropped By: " + eventData.selectedObject.name);
         var c = eventData.selectedObject.GetComponent<MissionHeroCellView>().thisChar;
+        if (!currentHero && Game.instance.playerStable.NumberHeroesInLineup() >= 6) {
+            activeHeroesScroller.OnEnable();
+            return;
+        }
         Set(c);
+
+    }
+
+    public void OnClick() {
+        if (currentHero) {
+            currentHero.activeInLineup = false;
+            currentHero.currentPosition = Position.NA;
+            heroName.text = "";
+        }
+        activeHeroesScroller.OnEnable();
     }
 
     void Set(Character c) {
+        
         if (currentHero) {
             currentHero.activeInLineup = false;
             currentHero.currentPosition = Position.NA;

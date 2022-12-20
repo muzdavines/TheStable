@@ -235,9 +235,14 @@ public static class BallHelper {
         return Vector3.Distance(ball.transform.position, other.position);
     }
     public static float Distance (this Ball ball, StableCombatChar other) {
+        if (other == null) {
+            return Mathf.Infinity;}
         return ball.Distance(other.transform);
     }
     public static bool PickupBall(this Ball ball, StableCombatChar picker) {
+        if (picker == null) {
+            return false;
+        }
         return ball.PickupBall(picker);
     }
 }

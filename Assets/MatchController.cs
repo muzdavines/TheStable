@@ -30,7 +30,7 @@ public class MatchController : MonoBehaviour
     public PlayableDirector outroDirector;
     public HeroUIController heroUIController;
     public Transform oneTimerCam;
-   
+    public GameObject continuePanel;
     public TextMeshProUGUI announcer;
     public List<AnnouncerLine> announcerLines;
     public class AnnouncerLine {
@@ -43,7 +43,7 @@ public class MatchController : MonoBehaviour
         ball.transform.position = new Vector3(0,1,0);
         announcerLines = new List<AnnouncerLine>();
         AddAnnouncerLine("Welcome to the Match!");
-        
+        continuePanel.SetActive(false);
         if (debug) {
             DebugInit();
         } else { Init(); }
@@ -143,6 +143,16 @@ public class MatchController : MonoBehaviour
         DisplayResults();
     }
 
+    public void ContinueMatch() {
+        SpawnPlayers();
+        awayCoach.Init();
+        homeCoach.Init();
+        if (match.home.stable == Game.instance.playerStable) { homeCoach.isPlayer = true; } else { awayCoach.isPlayer = true; }
+        UpdateScoreboard();
+        UpdatePlayerUI();
+        Kickoff();
+    }
+
     
     public void ZoomCam(StableCombatChar thisChar) {
         if (oneTimerCam == null) {
@@ -198,8 +208,18 @@ public class MatchController : MonoBehaviour
         if (homeScore >= 3 || awayScore >= 3) {
             gameOver = true;
             StartCoroutine(DelayGameOver());
-            
-        } else { StartCoroutine(DelayStart()); }
+
+        }
+        else {
+            continuePanel.SetActive(true);
+            var allPlayers = FindObjectsOfType<StableCombatChar>();
+            for (int i = 0; i < allPlayers.Length; i++) {
+                allPlayers[i].transform.position = new Vector3(1000, 1000, 1000);
+                Destroy(allPlayers[i].gameObject);
+            }
+
+        }
+
     }
     void UpdateScoreboard() {
         scoreboard.text = match.home.stable.stableName+": " + homeScore + "  "+ match.away.stable.stableName + ": " + awayScore;
