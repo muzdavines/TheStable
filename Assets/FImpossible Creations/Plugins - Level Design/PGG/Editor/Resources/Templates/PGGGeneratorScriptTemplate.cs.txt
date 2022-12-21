@@ -1,0 +1,113 @@
+using FIMSpace.Generating.Checker;
+using FIMSpace.Generating.Planning;
+using System.Collections.Generic;
+using UnityEngine;
+
+namespace FIMSpace.Generating
+{
+    public class #SCRIPTNAME# : PGGGeneratorBase
+    {
+        public int YourVariable;
+        public FieldSetup YourNeededPreset;
+
+        private CheckerField exampleChecker;
+
+        public override void Prepare()
+        {
+            base.Prepare(); // Randomizing seed
+
+            // Your grid cells prepare code here ...
+
+
+            // Example --------------------------------------------------------
+
+            exampleChecker = new CheckerField(); // CheckerField is framework helping preparing grid, setting up cells, creating paths, snapping cells one to another etc.
+
+            // Most basic example of generating YourVariable x YourVariable square (1x1, 2x2, 4x4 etc.)
+            
+            if (YourVariable < 1) YourVariable = 1; // Minimum 1x1 square
+            exampleChecker.SetSize(YourVariable, YourVariable, true);
+
+            // Instead of SetSize you can also use exampleChecker.Add(position) in for() loops
+
+            // Exmaple End --------------------------------------------------------
+
+        }
+
+        public override void GenerateObjects()
+        {
+            if ( YourNeededPreset == null) // If we didn't assign FieldSetup we can't generate anything
+            {
+                Debug.Log("Can't generate objects without FieldSetup!");
+                return; 
+            }
+
+            Prepare(); // Prepare grids first
+            ClearGenerated(); // Cleaning previous generated objects for re-generating
+
+
+            // Your generating code here ...
+
+
+            // Example Using prepared CheckerField: ----------------------------
+
+            GridPlanGeneratingHelper exampleGridHelper = new GridPlanGeneratingHelper(null);
+            
+            exampleGridHelper.SimplierAssign = YourNeededPreset; // SimplierAssign is all we need here, check other components to see more complex setups
+            exampleChecker.InjectToGrid(exampleGridHelper.grid); // Injecting cells done in Preapre() method
+
+            Generated.Add(exampleGridHelper.GenerateOnGrid(transform)); // Instantiating
+            
+            // Generated is a list but in most cases you will use only one element, let's talk about it as single object for simplier explanation
+            // Generated[0] is FieldGenerationInfo which contains list of instantiated game objects by the FieldSetup, also info about container object in which are are putted instantiated objects and other generated objects like trigger colliders, reflection probes etc. if choosed to be generated
+            // This all info can be accessed after generating for gameplay-wise usage
+
+            // Exmaple End --------------------------------------------------------
+
+
+
+            base.GenerateObjects(); // Triggering event if assigned
+        }
+
+
+        protected override void DrawGizmos()
+        {
+            if (exampleChecker is null) return; // If we didn't prepare anything yet, then don't draw anything
+
+            // There you can easily draw preview of what was done in Preapre() method
+            Gizmos.color = new Color(0.2f, 1f, 0.2f, 0.7f);
+            
+            float size = 2f;
+            if (YourNeededPreset) size = YourNeededPreset.GetCellUnitSize().x; // We want to draw grid with size of FieldSetup's cells size
+            
+            exampleChecker.DrawGizmos(size);
+        }
+
+    }
+
+
+    #region Editor Inspector Window
+
+#if UNITY_EDITOR
+    [UnityEditor.CanEditMultipleObjects]
+    [UnityEditor.CustomEditor(typeof(#SCRIPTNAME#))]
+    public class #SCRIPTNAME#Editor : PGGGeneratorBaseEditor
+    {
+        protected override void DrawGUIBeforeDefaultInspector()
+        {
+            GUILayout.Space(3);
+            base.DrawGUIBeforeDefaultInspector();
+        }
+
+        protected override void DrawGUIFooter()
+        {
+            GUILayout.Space(7);
+            DrawGeneratingButtons();
+            base.DrawGUIFooter();
+        }
+    }
+#endif
+
+    #endregion
+
+}

@@ -1,0 +1,55 @@
+using UnityEngine;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
+
+namespace FIMSpace.Generating.Rules.Custom
+{
+    public class #SCRIPTNAME# : SpawnRuleBase, ISpawnProcedureType
+    {
+        // Base parameters implementation
+        public override string TitleName() { return "#SCRIPTNAME#"; }
+        public override string Tooltip() { return "Custom spawn rule"; }
+
+        // Define what your script will do
+        public EProcedureType Type { get { return EProcedureType.Rule; } }
+
+
+        public int YourVariable = 0;
+
+
+        #region There you can do custom modifications for inspector view
+#if UNITY_EDITOR
+        public override void NodeBody(SerializedObject so)
+        {
+            // GUIIgnore.Clear(); GUIIgnore.Add("Tag"); // Custom ignores drawing properties
+            base.NodeBody(so);
+        }
+#endif
+        #endregion
+
+
+
+        // Triggered when checking if this cell spawn is allowed, you confirm or break spawning with 'CellAllow' variable
+        public override void CheckRuleOn(FieldModification mod, ref SpawnData spawn, FieldSetup preset, FieldCell cell, FGenGraph<FieldCell, FGenPoint> grid, Vector3? restrictDirection = null)
+        {
+            base.CheckRuleOn(mod, ref spawn, preset, cell, grid, restrictDirection); // Clearing some temporary variables
+            // In most cases you will use just this method ignoring two ones below
+        }
+
+        
+        public override void CellInfluence(FieldSetup preset, FieldModification mod, FieldCell cell, ref SpawnData spawn, FGenGraph<FieldCell, FGenPoint> grid, Vector3? restrictDirection = null)
+        {
+            // After running all rules, if nothing broke logics then this method is executed 
+            // Good place for running some more complex logics after doing main requirements check on all rules
+        }
+
+
+        public override void OnConditionsMetAction(FieldModification mod, ref SpawnData thisSpawn, FieldSetup preset, FieldCell cell, FGenGraph<FieldCell, FGenPoint> grid)
+        {
+            // After running all rules on all modificators, correct for removing / adding spawns 
+            // Must be Type = OnConditionsMet or Coded
+        }
+
+    }
+}

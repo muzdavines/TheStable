@@ -1,0 +1,58 @@
+using FIMSpace.Graph;
+using UnityEngine;
+
+// !!!!! NAMESPACE IS DEFINING PATH TO THE NODE IN GRAP NODE CREATION MENU
+namespace FIMSpace.Generating.Planning.PlannerNodes.CustomNodes
+{
+
+    public class #SCRIPTNAME# : PlannerRuleBase
+    {
+        public override string GetDisplayName(float maxWidth = 120) { return "#SCRIPTNAME#"; }
+        public override string GetNodeTooltipDescription { get { return "Your custom tooltip which will appear after entering on the node header"; } }
+        public override Color GetNodeColor() { return new Color(0.2f, 0.72f, 0.9f, 0.9f); }
+        public override Vector2 NodeSize { get { return new Vector2(230, 124); } }
+
+        // Basic exmaple ports
+        [Port(EPortPinType.Input, EPortNameDisplay.HideName, EPortValueDisplay.Default, 1)] public PGGVector3Port Position;
+        [Port(EPortPinType.Input, EPortNameDisplay.HideName, EPortValueDisplay.Default, 1)] public PGGVector3Port Rotation;
+
+        // You can define variables same way as in MonoBehaviours
+        public bool MultiplyPosByCellSize = false;
+
+
+        // HERE IN THE "EXECUTE()" PUT CODE FOR EXECUTION NODES (TOP AND BOTTOM NODE CONNECTORS)
+        public override void Execute(PlanGenerationPrint print, PlannerResult newResult)
+        {
+            // Refresh ports value to read
+            Position.TriggerReadPort();
+            Rotation.TriggerReadPort();
+
+            FieldPlanner planner = CurrentExecutingPlanner; // Getting current planner which is executing this node
+
+            Vector3 targetPos = Position.GetInputValue; // Read connected node value or value manually set in node
+            Vector3 targetRot = Rotation.GetInputValue; // Read connected node value or value manually set in node
+
+            // Multiply position value by used field planner single cell size (FieldSetup)
+            targetPos = planner.LatestChecker.ScaleV3(targetPos);
+
+            // Example move and rotate executed planner shape
+            planner.LatestChecker.RootPosition = targetPos;
+            planner.LatestChecker.RootRotation = Quaternion.Euler(targetRot);
+
+            if (Debugging)
+            {
+                DebuggingInfo = "Setting position to " + targetPos + " and rotation to " + targetRot;
+                print._debugLatestExecuted = planner.LatestResult.Checker;
+            }
+        }
+
+
+        // HERE PUT CODE FOR NODES WHICH ARE NOT EXECUTED BUT ONLY ARE 
+        // GIVING ACCESS TO SOME VARIABLES WITH OUTPUT NODE PORTS
+        // EXECUTE() IS NOT NEEDED WHEN YOU'RE NOT USING TOP/BOTTOM CONNECTORS
+        public override void OnStartReadingNode()
+        {
+        }
+
+    }
+}
