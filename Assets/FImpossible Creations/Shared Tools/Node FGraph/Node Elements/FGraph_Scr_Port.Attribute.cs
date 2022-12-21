@@ -3,7 +3,7 @@
 namespace FIMSpace.Graph
 {
     [AttributeUsage(AttributeTargets.Field, AllowMultiple = true)]
-    public class PortAttribute : Attribute
+    public class PortAttribute : System.Attribute
     {
         public EPortPinType PinType = EPortPinType.Input;
         public EPortNameDisplay NameDisplay = EPortNameDisplay.Default;
