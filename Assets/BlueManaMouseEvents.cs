@@ -4,25 +4,33 @@ using UnityEngine;
 
 public class BlueManaMouseEvents : MonoBehaviour {
     private StableCombatChar currentHover;
-    private HeroHoverPopupController hover;
+    public  HeroHoverPopupController hover;
     private GameObject blank;
-    void Start() {
+    public virtual void Start() {
         hover = FindObjectOfType<HeroHoverPopupController>();
         blank = GameObject.Find("Blank");
     }
-    public void OnMouseEnter() {
+    public virtual void OnMouseEnter() {
         if (!blank.activeInHierarchy) {
             return;
         }
         print("MouseEnter");
         StableCombatChar thisChar = GetComponent<StableCombatChar>();
+        Character toDisplay;
+        if (thisChar == null) {
+            return;
+        }
+        toDisplay = thisChar.myCharacter;
         currentHover = thisChar;
         if (hover) {
-            hover.Display(thisChar.myCharacter);
+            hover.Display(toDisplay);
         }
     }
 
-    public void OnMouseExit() {
+    public virtual void OnMouseExit() {
+        if (!blank.activeInHierarchy) {
+            return;
+        }
         print("MouseExit");
         currentHover = null;
         if (hover) {
@@ -30,7 +38,7 @@ public class BlueManaMouseEvents : MonoBehaviour {
         }
     }
     
-    public void OnMouseDown() {
+    public virtual void OnMouseDown() {
         print("MouseClick");
         if (!blank.activeInHierarchy) {
             return;}

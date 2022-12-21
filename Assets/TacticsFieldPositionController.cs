@@ -8,16 +8,17 @@ public class TacticsFieldPositionController : MonoBehaviour, IDropHandler {
     public Position pos;
     public Character currentHero;
     public MissionHeroesScrollerController activeHeroesScroller;
-    public TextMeshProUGUI heroName;
+    public TextMeshProUGUI heroName, heroType;
 
     public void Awake() {
-        heroName = GetComponentInChildren<TextMeshProUGUI>();
+        heroName = transform.Find("Name").GetComponent<TextMeshProUGUI>();
         activeHeroesScroller = FindObjectOfType<MissionHeroesScrollerController>();
     }
     public void OnDrop(PointerEventData eventData) {
         print("Valid");
         print("Dropped By: " + eventData.selectedObject.name);
         var c = eventData.selectedObject.GetComponent<MissionHeroCellView>().thisChar;
+        print(Game.instance.playerStable.NumberHeroesInLineup());
         if (!currentHero && Game.instance.playerStable.NumberHeroesInLineup() >= 6) {
             activeHeroesScroller.OnEnable();
             return;
@@ -31,6 +32,8 @@ public class TacticsFieldPositionController : MonoBehaviour, IDropHandler {
             currentHero.activeInLineup = false;
             currentHero.currentPosition = Position.NA;
             heroName.text = "";
+            heroType.text = "";
+            currentHero = null;
         }
         activeHeroesScroller.OnEnable();
     }
@@ -46,6 +49,7 @@ public class TacticsFieldPositionController : MonoBehaviour, IDropHandler {
         currentHero = c;
         activeHeroesScroller.OnEnable();
         heroName.text = c.name;
+        heroType.text = c.archetype.ToString();
     }
 
     public void ManualSet(Character c) {
@@ -54,5 +58,6 @@ public class TacticsFieldPositionController : MonoBehaviour, IDropHandler {
     public void Reset() {
         currentHero = null;
         heroName.text = "";
+        heroType.text = "";
     }
 }

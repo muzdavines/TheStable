@@ -9,6 +9,8 @@ public class TeamTacticsController : MonoBehaviour, UIElement
     public MissionHeroesScrollerController[] scrollers;
 
     public void ChangePosition(Position pos, Character character) {
+        print("CHANGEPOSITION CALLED");
+        return;
         if (pos == Position.GK && character.archetype != Character.Archetype.Goalkeeper) { return; }
 
         if (character.archetype == Character.Archetype.Goalkeeper && pos != Position.GK) { return; }
