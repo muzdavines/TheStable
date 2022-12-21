@@ -1,0 +1,5066 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-2003270990364727927
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 799840801f4eebf4ca34f378f1c528f8, type: 3}
+  m_Name: Input
+  m_EditorClassIdentifier: 
+  outputPorts:
+  - id: 0
+  - id: 1
+  - id: 2
+  - id: 3
+  - id: 4
+  - id: 5
+  inputPorts: []
+  IndividualID: -2147483645
+  NameID: 
+  wasCreated: 1
+  OutputConnections: []
+  InputConnections: []
+  NodePosition: {x: 867.4244, y: 465.08386}
+  NodeDrawOffset: {x: 0, y: 0}
+  _EditorFoldout: 0
+  ParentPlanner: {fileID: 0}
+  ParentNodesContainer: {fileID: 0}
+  Enabled: 1
+  _editor_drawRule: 1
+  InputName: Instruction A ID
+  InputType: 0
+  IntInput:
+    ParentNodeID: -2147483645
+    PortID: 0
+    ParentNode: {fileID: -2003270990364727927}
+    _E_LatestCorrectPortRect:
+      serializedVersion: 2
+      x: 1009.4244
+      y: 502.08386
+      width: 27
+      height: 27
+    PortType: 1
+    NameDisplayMode: 1
+    ValueDisplayMode: 3
+    SlotMode: 0
+    DisplayName: Int Input
+    OverwriteName: 
+    _HelperFunctionsID: -1
+    IsSendingSignals: 0
+    portConnections:
+    - ConnectedNodeID: -2147483642
+      ConnectedNodePortID: 1
+      NodeReference: {fileID: 8982230842163334613}
+      isInput: 1
+    initValueSet: 1
+    initialized: 0
+    Value: 0
+  BoolInput:
+    ParentNodeID: -2147483645
+    PortID: 1
+    ParentNode: {fileID: -2003270990364727927}
+    _E_LatestCorrectPortRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    PortType: 1
+    NameDisplayMode: 1
+    ValueDisplayMode: 0
+    SlotMode: 0
+    DisplayName: Port
+    OverwriteName: 
+    _HelperFunctionsID: -1
+    IsSendingSignals: 0
+    portConnections: []
+    initValueSet: 1
+    initialized: 0
+    Value: 0
+  FloatInput:
+    ParentNodeID: -2147483645
+    PortID: 2
+    ParentNode: {fileID: -2003270990364727927}
+    _E_LatestCorrectPortRect:
+      serializedVersion: 2
+      x: 977.4244
+      y: 502.08386
+      width: 27
+      height: 27
+    PortType: 1
+    NameDisplayMode: 1
+    ValueDisplayMode: 3
+    SlotMode: 0
+    DisplayName: Float Input
+    OverwriteName: 
+    _HelperFunctionsID: -1
+    IsSendingSignals: 0
+    portConnections: []
+    initValueSet: 1
+    initialized: 0
+    Value: 0
+  Vector3Input:
+    ParentNodeID: -2147483645
+    PortID: 3
+    ParentNode: {fileID: -2003270990364727927}
+    _E_LatestCorrectPortRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    PortType: 1
+    NameDisplayMode: 1
+    ValueDisplayMode: 0
+    SlotMode: 0
+    DisplayName: Port
+    OverwriteName: 
+    _HelperFunctionsID: -1
+    IsSendingSignals: 0
+    portConnections: []
+    initValueSet: 1
+    initialized: 0
+    Value: {x: 0, y: 0, z: 0}
+  StringInput:
+    ParentNodeID: -2147483645
+    PortID: 4
+    ParentNode: {fileID: -2003270990364727927}
+    _E_LatestCorrectPortRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    PortType: 1
+    NameDisplayMode: 1
+    ValueDisplayMode: 0
+    SlotMode: 0
+    DisplayName: Port
+    OverwriteName: 
+    _HelperFunctionsID: -1
+    IsSendingSignals: 0
+    portConnections: []
+    initValueSet: 1
+    initialized: 0
+    StringVal: 
+  CellInput:
+    ParentNodeID: -2147483645
+    PortID: 5
+    ParentNode: {fileID: -2003270990364727927}
+    _E_LatestCorrectPortRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    PortType: 1
+    NameDisplayMode: 1
+    ValueDisplayMode: 0
+    SlotMode: 0
+    DisplayName: Port
+    OverwriteName: 
+    _HelperFunctionsID: -1
+    IsSendingSignals: 0
+    portConnections: []
+    initValueSet: 1
+    initialized: 0
+  references:
+    version: 1
+    00000000:
+      type: {class: IntPort, ns: FIMSpace.Graph, asm: AD_Fimp.NodeGraph}
+      data:
+        ParentNodeID: -2147483645
+        PortID: 0
+        ParentNode: {fileID: -2003270990364727927}
+        _E_LatestCorrectPortRect:
+          serializedVersion: 2
+          x: 1009.4244
+          y: 502.08386
+          width: 27
+          height: 27
+        PortType: 1
+        NameDisplayMode: 1
+        ValueDisplayMode: 3
+        SlotMode: 0
+        DisplayName: Int Input
+        OverwriteName: 
+        _HelperFunctionsID: -1
+        IsSendingSignals: 0
+        portConnections:
+        - ConnectedNodeID: -2147483642
+          ConnectedNodePortID: 1
+          NodeReference: {fileID: 8982230842163334613}
+          isInput: 1
+        initValueSet: 1
+        initialized: 0
+        Value: 0
+    00000001:
+      type: {class: BoolPort, ns: FIMSpace.Graph, asm: AD_Fimp.NodeGraph}
+      data:
+        ParentNodeID: -2147483645
+        PortID: 1
+        ParentNode: {fileID: -2003270990364727927}
+        _E_LatestCorrectPortRect:
+          serializedVersion: 2
+          x: 0
+          y: 0
+          width: 0
+          height: 0
+        PortType: 1
+        NameDisplayMode: 1
+        ValueDisplayMode: 0
+        SlotMode: 0
+        DisplayName: Port
+        OverwriteName: 
+        _HelperFunctionsID: -1
+        IsSendingSignals: 0
+        portConnections: []
+        initValueSet: 1
+        initialized: 0
+        Value: 0
+    00000002:
+      type: {class: FloatPort, ns: FIMSpace.Graph, asm: AD_Fimp.NodeGraph}
+      data:
+        ParentNodeID: -2147483645
+        PortID: 2
+        ParentNode: {fileID: -2003270990364727927}
+        _E_LatestCorrectPortRect:
+          serializedVersion: 2
+          x: 977.4244
+          y: 502.08386
+          width: 27
+          height: 27
+        PortType: 1
+        NameDisplayMode: 1
+        ValueDisplayMode: 3
+        SlotMode: 0
+        DisplayName: Float Input
+        OverwriteName: 
+        _HelperFunctionsID: -1
+        IsSendingSignals: 0
+        portConnections: []
+        initValueSet: 1
+        initialized: 0
+        Value: 0
+    00000003:
+      type: {class: PGGVector3Port, ns: FIMSpace.Graph, asm: AD_FimpPGG}
+      data:
+        ParentNodeID: -2147483645
+        PortID: 3
+        ParentNode: {fileID: -2003270990364727927}
+        _E_LatestCorrectPortRect:
+          serializedVersion: 2
+          x: 0
+          y: 0
+          width: 0
+          height: 0
+        PortType: 1
+        NameDisplayMode: 1
+        ValueDisplayMode: 0
+        SlotMode: 0
+        DisplayName: Port
+        OverwriteName: 
+        _HelperFunctionsID: -1
+        IsSendingSignals: 0
+        portConnections: []
+        initValueSet: 1
+        initialized: 0
+        Value: {x: 0, y: 0, z: 0}
+    00000004:
+      type: {class: PGGStringPort, ns: FIMSpace.Graph, asm: AD_FimpPGG}
+      data:
+        ParentNodeID: -2147483645
+        PortID: 4
+        ParentNode: {fileID: -2003270990364727927}
+        _E_LatestCorrectPortRect:
+          serializedVersion: 2
+          x: 0
+          y: 0
+          width: 0
+          height: 0
+        PortType: 1
+        NameDisplayMode: 1
+        ValueDisplayMode: 0
+        SlotMode: 0
+        DisplayName: Port
+        OverwriteName: 
+        _HelperFunctionsID: -1
+        IsSendingSignals: 0
+        portConnections: []
+        initValueSet: 1
+        initialized: 0
+        StringVal: 
+    00000005:
+      type: {class: PGGCellPort, ns: FIMSpace.Graph, asm: AD_FimpPGG}
+      data:
+        ParentNodeID: -2147483645
+        PortID: 5
+        ParentNode: {fileID: -2003270990364727927}
+        _E_LatestCorrectPortRect:
+          serializedVersion: 2
+          x: 0
+          y: 0
+          width: 0
+          height: 0
+        PortType: 1
+        NameDisplayMode: 1
+        ValueDisplayMode: 0
+        SlotMode: 0
+        DisplayName: Port
+        OverwriteName: 
+        _HelperFunctionsID: -1
+        IsSendingSignals: 0
+        portConnections: []
+        initValueSet: 1
+        initialized: 0
+--- !u!114 &-1437672458485055700
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 799840801f4eebf4ca34f378f1c528f8, type: 3}
+  m_Name: Input
+  m_EditorClassIdentifier: 
+  outputPorts:
+  - id: 0
+  - id: 1
+  - id: 2
+  - id: 3
+  - id: 4
+  - id: 5
+  inputPorts: []
+  IndividualID: -2147483646
+  NameID: 
+  wasCreated: 1
+  OutputConnections: []
+  InputConnections: []
+  NodePosition: {x: 561.0472, y: 667.2575}
+  NodeDrawOffset: {x: 0, y: 0}
+  _EditorFoldout: 0
+  ParentPlanner: {fileID: 0}
+  ParentNodesContainer: {fileID: 0}
+  Enabled: 1
+  _editor_drawRule: 1
+  InputName: Cell B
+  InputType: 5
+  IntInput:
+    ParentNodeID: -2147483646
+    PortID: 0
+    ParentNode: {fileID: -1437672458485055700}
+    _E_LatestCorrectPortRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    PortType: 1
+    NameDisplayMode: 1
+    ValueDisplayMode: 0
+    SlotMode: 0
+    DisplayName: Port
+    OverwriteName: 
+    _HelperFunctionsID: -1
+    IsSendingSignals: 0
+    portConnections: []
+    initValueSet: 1
+    initialized: 0
+    Value: 0
+  BoolInput:
+    ParentNodeID: -2147483646
+    PortID: 1
+    ParentNode: {fileID: -1437672458485055700}
+    _E_LatestCorrectPortRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    PortType: 1
+    NameDisplayMode: 1
+    ValueDisplayMode: 0
+    SlotMode: 0
+    DisplayName: Port
+    OverwriteName: 
+    _HelperFunctionsID: -1
+    IsSendingSignals: 0
+    portConnections: []
+    initValueSet: 1
+    initialized: 0
+    Value: 0
+  FloatInput:
+    ParentNodeID: -2147483646
+    PortID: 2
+    ParentNode: {fileID: -1437672458485055700}
+    _E_LatestCorrectPortRect:
+      serializedVersion: 2
+      x: 671.0472
+      y: 704.2575
+      width: 27
+      height: 27
+    PortType: 1
+    NameDisplayMode: 1
+    ValueDisplayMode: 3
+    SlotMode: 0
+    DisplayName: Float Input
+    OverwriteName: 
+    _HelperFunctionsID: -1
+    IsSendingSignals: 0
+    portConnections: []
+    initValueSet: 1
+    initialized: 0
+    Value: 0
+  Vector3Input:
+    ParentNodeID: -2147483646
+    PortID: 3
+    ParentNode: {fileID: -1437672458485055700}
+    _E_LatestCorrectPortRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    PortType: 1
+    NameDisplayMode: 1
+    ValueDisplayMode: 0
+    SlotMode: 0
+    DisplayName: Port
+    OverwriteName: 
+    _HelperFunctionsID: -1
+    IsSendingSignals: 0
+    portConnections: []
+    initValueSet: 1
+    initialized: 0
+    Value: {x: 0, y: 0, z: 0}
+  StringInput:
+    ParentNodeID: -2147483646
+    PortID: 4
+    ParentNode: {fileID: -1437672458485055700}
+    _E_LatestCorrectPortRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    PortType: 1
+    NameDisplayMode: 1
+    ValueDisplayMode: 0
+    SlotMode: 0
+    DisplayName: Port
+    OverwriteName: 
+    _HelperFunctionsID: -1
+    IsSendingSignals: 0
+    portConnections: []
+    initValueSet: 1
+    initialized: 0
+    StringVal: 
+  CellInput:
+    ParentNodeID: -2147483646
+    PortID: 5
+    ParentNode: {fileID: -1437672458485055700}
+    _E_LatestCorrectPortRect:
+      serializedVersion: 2
+      x: 671.0472
+      y: 704.2575
+      width: 27
+      height: 27
+    PortType: 1
+    NameDisplayMode: 1
+    ValueDisplayMode: 3
+    SlotMode: 0
+    DisplayName: Cell Input
+    OverwriteName: 
+    _HelperFunctionsID: -1
+    IsSendingSignals: 0
+    portConnections:
+    - ConnectedNodeID: -2147483643
+      ConnectedNodePortID: 1
+      NodeReference: {fileID: 4685608620216651025}
+      isInput: 1
+    - ConnectedNodeID: -2147483641
+      ConnectedNodePortID: 0
+      NodeReference: {fileID: 7976036947992935004}
+      isInput: 1
+    initValueSet: 1
+    initialized: 0
+  references:
+    version: 1
+    00000000:
+      type: {class: IntPort, ns: FIMSpace.Graph, asm: AD_Fimp.NodeGraph}
+      data:
+        ParentNodeID: -2147483646
+        PortID: 0
+        ParentNode: {fileID: -1437672458485055700}
+        _E_LatestCorrectPortRect:
+          serializedVersion: 2
+          x: 0
+          y: 0
+          width: 0
+          height: 0
+        PortType: 1
+        NameDisplayMode: 1
+        ValueDisplayMode: 0
+        SlotMode: 0
+        DisplayName: Port
+        OverwriteName: 
+        _HelperFunctionsID: -1
+        IsSendingSignals: 0
+        portConnections: []
+        initValueSet: 1
+        initialized: 0
+        Value: 0
+    00000001:
+      type: {class: BoolPort, ns: FIMSpace.Graph, asm: AD_Fimp.NodeGraph}
+      data:
+        ParentNodeID: -2147483646
+        PortID: 1
+        ParentNode: {fileID: -1437672458485055700}
+        _E_LatestCorrectPortRect:
+          serializedVersion: 2
+          x: 0
+          y: 0
+          width: 0
+          height: 0
+        PortType: 1
+        NameDisplayMode: 1
+        ValueDisplayMode: 0
+        SlotMode: 0
+        DisplayName: Port
+        OverwriteName: 
+        _HelperFunctionsID: -1
+        IsSendingSignals: 0
+        portConnections: []
+        initValueSet: 1
+        initialized: 0
+        Value: 0
+    00000002:
+      type: {class: FloatPort, ns: FIMSpace.Graph, asm: AD_Fimp.NodeGraph}
+      data:
+        ParentNodeID: -2147483646
+        PortID: 2
+        ParentNode: {fileID: -1437672458485055700}
+        _E_LatestCorrectPortRect:
+          serializedVersion: 2
+          x: 671.0472
+          y: 704.2575
+          width: 27
+          height: 27
+        PortType: 1
+        NameDisplayMode: 1
+        ValueDisplayMode: 3
+        SlotMode: 0
+        DisplayName: Float Input
+        OverwriteName: 
+        _HelperFunctionsID: -1
+        IsSendingSignals: 0
+        portConnections: []
+        initValueSet: 1
+        initialized: 0
+        Value: 0
+    00000003:
+      type: {class: PGGVector3Port, ns: FIMSpace.Graph, asm: AD_FimpPGG}
+      data:
+        ParentNodeID: -2147483646
+        PortID: 3
+        ParentNode: {fileID: -1437672458485055700}
+        _E_LatestCorrectPortRect:
+          serializedVersion: 2
+          x: 0
+          y: 0
+          width: 0
+          height: 0
+        PortType: 1
+        NameDisplayMode: 1
+        ValueDisplayMode: 0
+        SlotMode: 0
+        DisplayName: Port
+        OverwriteName: 
+        _HelperFunctionsID: -1
+        IsSendingSignals: 0
+        portConnections: []
+        initValueSet: 1
+        initialized: 0
+        Value: {x: 0, y: 0, z: 0}
+    00000004:
+      type: {class: PGGStringPort, ns: FIMSpace.Graph, asm: AD_FimpPGG}
+      data:
+        ParentNodeID: -2147483646
+        PortID: 4
+        ParentNode: {fileID: -1437672458485055700}
+        _E_LatestCorrectPortRect:
+          serializedVersion: 2
+          x: 0
+          y: 0
+          width: 0
+          height: 0
+        PortType: 1
+        NameDisplayMode: 1
+        ValueDisplayMode: 0
+        SlotMode: 0
+        DisplayName: Port
+        OverwriteName: 
+        _HelperFunctionsID: -1
+        IsSendingSignals: 0
+        portConnections: []
+        initValueSet: 1
+        initialized: 0
+        StringVal: 
+    00000005:
+      type: {class: PGGCellPort, ns: FIMSpace.Graph, asm: AD_FimpPGG}
+      data:
+        ParentNodeID: -2147483646
+        PortID: 5
+        ParentNode: {fileID: -1437672458485055700}
+        _E_LatestCorrectPortRect:
+          serializedVersion: 2
+          x: 671.0472
+          y: 704.2575
+          width: 27
+          height: 27
+        PortType: 1
+        NameDisplayMode: 1
+        ValueDisplayMode: 3
+        SlotMode: 0
+        DisplayName: Cell Input
+        OverwriteName: 
+        _HelperFunctionsID: -1
+        IsSendingSignals: 0
+        portConnections:
+        - ConnectedNodeID: -2147483643
+          ConnectedNodePortID: 1
+          NodeReference: {fileID: 4685608620216651025}
+          isInput: 1
+        - ConnectedNodeID: -2147483641
+          ConnectedNodePortID: 0
+          NodeReference: {fileID: 7976036947992935004}
+          isInput: 1
+        initValueSet: 1
+        initialized: 0
+--- !u!114 &-187986687561197988
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 799840801f4eebf4ca34f378f1c528f8, type: 3}
+  m_Name: Input
+  m_EditorClassIdentifier: 
+  outputPorts:
+  - id: 0
+  - id: 1
+  - id: 2
+  - id: 3
+  - id: 4
+  - id: 5
+  inputPorts: []
+  IndividualID: -2147483647
+  NameID: 
+  wasCreated: 1
+  OutputConnections: []
+  InputConnections: []
+  NodePosition: {x: 560.0747, y: 415.29758}
+  NodeDrawOffset: {x: 0, y: 0}
+  _EditorFoldout: 0
+  ParentPlanner: {fileID: 0}
+  ParentNodesContainer: {fileID: 0}
+  Enabled: 1
+  _editor_drawRule: 1
+  InputName: Cell A
+  InputType: 5
+  IntInput:
+    ParentNodeID: -2147483647
+    PortID: 0
+    ParentNode: {fileID: -187986687561197988}
+    _E_LatestCorrectPortRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    PortType: 1
+    NameDisplayMode: 1
+    ValueDisplayMode: 0
+    SlotMode: 0
+    DisplayName: Port
+    OverwriteName: 
+    _HelperFunctionsID: -1
+    IsSendingSignals: 0
+    portConnections: []
+    initValueSet: 1
+    initialized: 0
+    Value: 0
+  BoolInput:
+    ParentNodeID: -2147483647
+    PortID: 1
+    ParentNode: {fileID: -187986687561197988}
+    _E_LatestCorrectPortRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    PortType: 1
+    NameDisplayMode: 1
+    ValueDisplayMode: 0
+    SlotMode: 0
+    DisplayName: Port
+    OverwriteName: 
+    _HelperFunctionsID: -1
+    IsSendingSignals: 0
+    portConnections: []
+    initValueSet: 1
+    initialized: 0
+    Value: 0
+  FloatInput:
+    ParentNodeID: -2147483647
+    PortID: 2
+    ParentNode: {fileID: -187986687561197988}
+    _E_LatestCorrectPortRect:
+      serializedVersion: 2
+      x: 670.0747
+      y: 452.29758
+      width: 27
+      height: 27
+    PortType: 1
+    NameDisplayMode: 1
+    ValueDisplayMode: 3
+    SlotMode: 0
+    DisplayName: Float Input
+    OverwriteName: 
+    _HelperFunctionsID: -1
+    IsSendingSignals: 0
+    portConnections: []
+    initValueSet: 1
+    initialized: 0
+    Value: 0
+  Vector3Input:
+    ParentNodeID: -2147483647
+    PortID: 3
+    ParentNode: {fileID: -187986687561197988}
+    _E_LatestCorrectPortRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    PortType: 1
+    NameDisplayMode: 1
+    ValueDisplayMode: 0
+    SlotMode: 0
+    DisplayName: Port
+    OverwriteName: 
+    _HelperFunctionsID: -1
+    IsSendingSignals: 0
+    portConnections: []
+    initValueSet: 1
+    initialized: 0
+    Value: {x: 0, y: 0, z: 0}
+  StringInput:
+    ParentNodeID: -2147483647
+    PortID: 4
+    ParentNode: {fileID: -187986687561197988}
+    _E_LatestCorrectPortRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    PortType: 1
+    NameDisplayMode: 1
+    ValueDisplayMode: 0
+    SlotMode: 0
+    DisplayName: Port
+    OverwriteName: 
+    _HelperFunctionsID: -1
+    IsSendingSignals: 0
+    portConnections: []
+    initValueSet: 1
+    initialized: 0
+    StringVal: 
+  CellInput:
+    ParentNodeID: -2147483647
+    PortID: 5
+    ParentNode: {fileID: -187986687561197988}
+    _E_LatestCorrectPortRect:
+      serializedVersion: 2
+      x: 670.0747
+      y: 452.29758
+      width: 27
+      height: 27
+    PortType: 1
+    NameDisplayMode: 1
+    ValueDisplayMode: 3
+    SlotMode: 0
+    DisplayName: Cell Input
+    OverwriteName: 
+    _HelperFunctionsID: -1
+    IsSendingSignals: 0
+    portConnections:
+    - ConnectedNodeID: -2147483643
+      ConnectedNodePortID: 0
+      NodeReference: {fileID: 4685608620216651025}
+      isInput: 1
+    - ConnectedNodeID: -2147483642
+      ConnectedNodePortID: 0
+      NodeReference: {fileID: 8982230842163334613}
+      isInput: 1
+    initValueSet: 1
+    initialized: 0
+  references:
+    version: 1
+    00000000:
+      type: {class: IntPort, ns: FIMSpace.Graph, asm: AD_Fimp.NodeGraph}
+      data:
+        ParentNodeID: -2147483647
+        PortID: 0
+        ParentNode: {fileID: -187986687561197988}
+        _E_LatestCorrectPortRect:
+          serializedVersion: 2
+          x: 0
+          y: 0
+          width: 0
+          height: 0
+        PortType: 1
+        NameDisplayMode: 1
+        ValueDisplayMode: 0
+        SlotMode: 0
+        DisplayName: Port
+        OverwriteName: 
+        _HelperFunctionsID: -1
+        IsSendingSignals: 0
+        portConnections: []
+        initValueSet: 1
+        initialized: 0
+        Value: 0
+    00000001:
+      type: {class: BoolPort, ns: FIMSpace.Graph, asm: AD_Fimp.NodeGraph}
+      data:
+        ParentNodeID: -2147483647
+        PortID: 1
+        ParentNode: {fileID: -187986687561197988}
+        _E_LatestCorrectPortRect:
+          serializedVersion: 2
+          x: 0
+          y: 0
+          width: 0
+          height: 0
+        PortType: 1
+        NameDisplayMode: 1
+        ValueDisplayMode: 0
+        SlotMode: 0
+        DisplayName: Port
+        OverwriteName: 
+        _HelperFunctionsID: -1
+        IsSendingSignals: 0
+        portConnections: []
+        initValueSet: 1
+        initialized: 0
+        Value: 0
+    00000002:
+      type: {class: FloatPort, ns: FIMSpace.Graph, asm: AD_Fimp.NodeGraph}
+      data:
+        ParentNodeID: -2147483647
+        PortID: 2
+        ParentNode: {fileID: -187986687561197988}
+        _E_LatestCorrectPortRect:
+          serializedVersion: 2
+          x: 670.0747
+          y: 452.29758
+          width: 27
+          height: 27
+        PortType: 1
+        NameDisplayMode: 1
+        ValueDisplayMode: 3
+        SlotMode: 0
+        DisplayName: Float Input
+        OverwriteName: 
+        _HelperFunctionsID: -1
+        IsSendingSignals: 0
+        portConnections: []
+        initValueSet: 1
+        initialized: 0
+        Value: 0
+    00000003:
+      type: {class: PGGVector3Port, ns: FIMSpace.Graph, asm: AD_FimpPGG}
+      data:
+        ParentNodeID: -2147483647
+        PortID: 3
+        ParentNode: {fileID: -187986687561197988}
+        _E_LatestCorrectPortRect:
+          serializedVersion: 2
+          x: 0
+          y: 0
+          width: 0
+          height: 0
+        PortType: 1
+        NameDisplayMode: 1
+        ValueDisplayMode: 0
+        SlotMode: 0
+        DisplayName: Port
+        OverwriteName: 
+        _HelperFunctionsID: -1
+        IsSendingSignals: 0
+        portConnections: []
+        initValueSet: 1
+        initialized: 0
+        Value: {x: 0, y: 0, z: 0}
+    00000004:
+      type: {class: PGGStringPort, ns: FIMSpace.Graph, asm: AD_FimpPGG}
+      data:
+        ParentNodeID: -2147483647
+        PortID: 4
+        ParentNode: {fileID: -187986687561197988}
+        _E_LatestCorrectPortRect:
+          serializedVersion: 2
+          x: 0
+          y: 0
+          width: 0
+          height: 0
+        PortType: 1
+        NameDisplayMode: 1
+        ValueDisplayMode: 0
+        SlotMode: 0
+        DisplayName: Port
+        OverwriteName: 
+        _HelperFunctionsID: -1
+        IsSendingSignals: 0
+        portConnections: []
+        initValueSet: 1
+        initialized: 0
+        StringVal: 
+    00000005:
+      type: {class: PGGCellPort, ns: FIMSpace.Graph, asm: AD_FimpPGG}
+      data:
+        ParentNodeID: -2147483647
+        PortID: 5
+        ParentNode: {fileID: -187986687561197988}
+        _E_LatestCorrectPortRect:
+          serializedVersion: 2
+          x: 670.0747
+          y: 452.29758
+          width: 27
+          height: 27
+        PortType: 1
+        NameDisplayMode: 1
+        ValueDisplayMode: 3
+        SlotMode: 0
+        DisplayName: Cell Input
+        OverwriteName: 
+        _HelperFunctionsID: -1
+        IsSendingSignals: 0
+        portConnections:
+        - ConnectedNodeID: -2147483643
+          ConnectedNodePortID: 0
+          NodeReference: {fileID: 4685608620216651025}
+          isInput: 1
+        - ConnectedNodeID: -2147483642
+          ConnectedNodePortID: 0
+          NodeReference: {fileID: 8982230842163334613}
+          isInput: 1
+        initValueSet: 1
+        initialized: 0
+--- !u!114 &-164793714824103854
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76bfbaa69afa7b344adbc86353cb7d09, type: 3}
+  m_Name: Invert Value
+  m_EditorClassIdentifier: 
+  outputPorts:
+  - id: 0
+  inputPorts:
+  - id: 1
+  IndividualID: -2147483640
+  NameID: 
+  wasCreated: 1
+  OutputConnections: []
+  InputConnections: []
+  NodePosition: {x: 1053.061, y: 771.9275}
+  NodeDrawOffset: {x: 0, y: 0}
+  _EditorFoldout: 0
+  ParentPlanner: {fileID: 0}
+  ParentNodesContainer: {fileID: 0}
+  Enabled: 1
+  _editor_drawRule: 1
+  In:
+    ParentNodeID: -2147483640
+    PortID: 0
+    ParentNode: {fileID: -164793714824103854}
+    _E_LatestCorrectPortRect:
+      serializedVersion: 2
+      x: 1079.061
+      y: 807.9275
+      width: 27
+      height: 27
+    PortType: 0
+    NameDisplayMode: 0
+    ValueDisplayMode: 3
+    SlotMode: 0
+    DisplayName: In
+    OverwriteName: 
+    _HelperFunctionsID: -1
+    IsSendingSignals: 0
+    portConnections:
+    - ConnectedNodeID: -2147483643
+      ConnectedNodePortID: 0
+      NodeReference: {fileID: 4685608620216651025}
+      isInput: 0
+    initValueSet: 1
+    initialized: 0
+    Variable:
+      Name: None
+      v3Val: {x: 0, y: 0, z: 0}
+      str: 
+      mat: {fileID: 0}
+      gameObj: {fileID: 0}
+      unityObj: {fileID: 0}
+      helper: {x: 0, y: 0, z: 0}
+      additionalHelperRef: {fileID: 0}
+      ValueType: 5
+      helpForFieldCommand: 0
+      displayOnScene: 0
+      allowTransformFollow: 0
+      FloatSwitch: 0
+  Out:
+    ParentNodeID: -2147483640
+    PortID: 0
+    ParentNode: {fileID: -164793714824103854}
+    _E_LatestCorrectPortRect:
+      serializedVersion: 2
+      x: 1139.061
+      y: 807.9275
+      width: 27
+      height: 27
+    PortType: 1
+    NameDisplayMode: 1
+    ValueDisplayMode: 3
+    SlotMode: 0
+    DisplayName: 
+    OverwriteName: 
+    _HelperFunctionsID: -1
+    IsSendingSignals: 0
+    portConnections:
+    - ConnectedNodeID: -2147483641
+      ConnectedNodePortID: 3
+      NodeReference: {fileID: 7976036947992935004}
+      isInput: 1
+    initValueSet: 1
+    initialized: 0
+    Variable:
+      Name: None
+      v3Val: {x: -0, y: -0, z: -0}
+      str: 
+      mat: {fileID: 0}
+      gameObj: {fileID: 0}
+      unityObj: {fileID: 0}
+      helper: {x: 0, y: 0, z: 0}
+      additionalHelperRef: {fileID: 0}
+      ValueType: 5
+      helpForFieldCommand: 0
+      displayOnScene: 0
+      allowTransformFollow: 0
+      FloatSwitch: 0
+  references:
+    version: 1
+    00000000:
+      type: {class: PGGUniversalPort, ns: FIMSpace.Graph, asm: AD_FimpPGG}
+      data:
+        ParentNodeID: -2147483640
+        PortID: 0
+        ParentNode: {fileID: -164793714824103854}
+        _E_LatestCorrectPortRect:
+          serializedVersion: 2
+          x: 1139.061
+          y: 807.9275
+          width: 27
+          height: 27
+        PortType: 1
+        NameDisplayMode: 1
+        ValueDisplayMode: 3
+        SlotMode: 0
+        DisplayName: 
+        OverwriteName: 
+        _HelperFunctionsID: -1
+        IsSendingSignals: 0
+        portConnections:
+        - ConnectedNodeID: -2147483641
+          ConnectedNodePortID: 3
+          NodeReference: {fileID: 7976036947992935004}
+          isInput: 1
+        initValueSet: 1
+        initialized: 0
+        Variable:
+          Name: None
+          v3Val: {x: -0, y: -0, z: -0}
+          str: 
+          mat: {fileID: 0}
+          gameObj: {fileID: 0}
+          unityObj: {fileID: 0}
+          helper: {x: 0, y: 0, z: 0}
+          additionalHelperRef: {fileID: 0}
+          ValueType: 5
+          helpForFieldCommand: 0
+          displayOnScene: 0
+          allowTransformFollow: 0
+          FloatSwitch: 0
+    00000001:
+      type: {class: PGGUniversalPort, ns: FIMSpace.Graph, asm: AD_FimpPGG}
+      data:
+        ParentNodeID: -2147483640
+        PortID: 0
+        ParentNode: {fileID: -164793714824103854}
+        _E_LatestCorrectPortRect:
+          serializedVersion: 2
+          x: 1079.061
+          y: 807.9275
+          width: 27
+          height: 27
+        PortType: 0
+        NameDisplayMode: 0
+        ValueDisplayMode: 3
+        SlotMode: 0
+        DisplayName: In
+        OverwriteName: 
+        _HelperFunctionsID: -1
+        IsSendingSignals: 0
+        portConnections:
+        - ConnectedNodeID: -2147483643
+          ConnectedNodePortID: 0
+          NodeReference: {fileID: 4685608620216651025}
+          isInput: 0
+        initValueSet: 1
+        initialized: 0
+        Variable:
+          Name: None
+          v3Val: {x: 0, y: 0, z: 0}
+          str: 
+          mat: {fileID: 0}
+          gameObj: {fileID: 0}
+          unityObj: {fileID: 0}
+          helper: {x: 0, y: 0, z: 0}
+          additionalHelperRef: {fileID: 0}
+          ValueType: 5
+          helpForFieldCommand: 0
+          displayOnScene: 0
+          allowTransformFollow: 0
+          FloatSwitch: 0
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 864cff2a7086f29419dc89e74e3a71a7, type: 3}
+  m_Name: PF_AddCounterInstructions
+  m_EditorClassIdentifier: 
+  outputPorts: []
+  inputPorts: []
+  IndividualID: -1
+  NameID: 
+  wasCreated: 0
+  OutputConnections: []
+  InputConnections: []
+  NodePosition: {x: 0, y: 0}
+  NodeDrawOffset: {x: 0, y: 0}
+  _EditorFoldout: 0
+  ParentPlanner: {fileID: 0}
+  ParentNodesContainer: {fileID: 0}
+  Enabled: 1
+  _editor_drawRule: 1
+  Port0:
+    Parent: {fileID: 0}
+    DisplayName: 
+    RootPortID: 0
+    RootPortHelpID: 0
+    ViewType: 0
+    PinType: 0
+    p_Int:
+      ParentNodeID: -1
+      PortID: -1
+      ParentNode: {fileID: 0}
+      _E_LatestCorrectPortRect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 0
+        height: 0
+      PortType: 1
+      NameDisplayMode: 0
+      ValueDisplayMode: 0
+      SlotMode: 0
+      DisplayName: Port
+      OverwriteName: 
+      _HelperFunctionsID: -1
+      IsSendingSignals: 0
+      portConnections: []
+      initValueSet: 0
+      initialized: 0
+      Value: 0
+    p_Bool:
+      ParentNodeID: -1
+      PortID: -1
+      ParentNode: {fileID: 0}
+      _E_LatestCorrectPortRect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 0
+        height: 0
+      PortType: 1
+      NameDisplayMode: 0
+      ValueDisplayMode: 0
+      SlotMode: 0
+      DisplayName: Port
+      OverwriteName: 
+      _HelperFunctionsID: -1
+      IsSendingSignals: 0
+      portConnections: []
+      initValueSet: 0
+      initialized: 0
+      Value: 0
+    p_Float:
+      ParentNodeID: -1
+      PortID: -1
+      ParentNode: {fileID: 0}
+      _E_LatestCorrectPortRect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 0
+        height: 0
+      PortType: 1
+      NameDisplayMode: 0
+      ValueDisplayMode: 0
+      SlotMode: 0
+      DisplayName: Port
+      OverwriteName: 
+      _HelperFunctionsID: -1
+      IsSendingSignals: 0
+      portConnections: []
+      initValueSet: 0
+      initialized: 0
+      Value: 0
+    p_Vector3:
+      ParentNodeID: -1
+      PortID: -1
+      ParentNode: {fileID: 0}
+      _E_LatestCorrectPortRect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 0
+        height: 0
+      PortType: 1
+      NameDisplayMode: 0
+      ValueDisplayMode: 0
+      SlotMode: 0
+      DisplayName: Port
+      OverwriteName: 
+      _HelperFunctionsID: -1
+      IsSendingSignals: 0
+      portConnections: []
+      initValueSet: 0
+      initialized: 0
+      Value: {x: 0, y: 0, z: 0}
+    p_Cell:
+      ParentNodeID: -1
+      PortID: -1
+      ParentNode: {fileID: 0}
+      _E_LatestCorrectPortRect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 0
+        height: 0
+      PortType: 1
+      NameDisplayMode: 0
+      ValueDisplayMode: 0
+      SlotMode: 0
+      DisplayName: Port
+      OverwriteName: 
+      _HelperFunctionsID: -1
+      IsSendingSignals: 0
+      portConnections: []
+      initValueSet: 0
+      initialized: 0
+    p_String:
+      ParentNodeID: -1
+      PortID: -1
+      ParentNode: {fileID: 0}
+      _E_LatestCorrectPortRect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 0
+        height: 0
+      PortType: 1
+      NameDisplayMode: 0
+      ValueDisplayMode: 0
+      SlotMode: 0
+      DisplayName: Port
+      OverwriteName: 
+      _HelperFunctionsID: -1
+      IsSendingSignals: 0
+      portConnections: []
+      initValueSet: 0
+      initialized: 0
+      StringVal: 
+  Port1:
+    Parent: {fileID: 0}
+    DisplayName: 
+    RootPortID: 0
+    RootPortHelpID: 0
+    ViewType: 0
+    PinType: 0
+    p_Int:
+      ParentNodeID: -1
+      PortID: -1
+      ParentNode: {fileID: 0}
+      _E_LatestCorrectPortRect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 0
+        height: 0
+      PortType: 1
+      NameDisplayMode: 0
+      ValueDisplayMode: 0
+      SlotMode: 0
+      DisplayName: Port
+      OverwriteName: 
+      _HelperFunctionsID: -1
+      IsSendingSignals: 0
+      portConnections: []
+      initValueSet: 0
+      initialized: 0
+      Value: 0
+    p_Bool:
+      ParentNodeID: -1
+      PortID: -1
+      ParentNode: {fileID: 0}
+      _E_LatestCorrectPortRect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 0
+        height: 0
+      PortType: 1
+      NameDisplayMode: 0
+      ValueDisplayMode: 0
+      SlotMode: 0
+      DisplayName: Port
+      OverwriteName: 
+      _HelperFunctionsID: -1
+      IsSendingSignals: 0
+      portConnections: []
+      initValueSet: 0
+      initialized: 0
+      Value: 0
+    p_Float:
+      ParentNodeID: -1
+      PortID: -1
+      ParentNode: {fileID: 0}
+      _E_LatestCorrectPortRect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 0
+        height: 0
+      PortType: 1
+      NameDisplayMode: 0
+      ValueDisplayMode: 0
+      SlotMode: 0
+      DisplayName: Port
+      OverwriteName: 
+      _HelperFunctionsID: -1
+      IsSendingSignals: 0
+      portConnections: []
+      initValueSet: 0
+      initialized: 0
+      Value: 0
+    p_Vector3:
+      ParentNodeID: -1
+      PortID: -1
+      ParentNode: {fileID: 0}
+      _E_LatestCorrectPortRect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 0
+        height: 0
+      PortType: 1
+      NameDisplayMode: 0
+      ValueDisplayMode: 0
+      SlotMode: 0
+      DisplayName: Port
+      OverwriteName: 
+      _HelperFunctionsID: -1
+      IsSendingSignals: 0
+      portConnections: []
+      initValueSet: 0
+      initialized: 0
+      Value: {x: 0, y: 0, z: 0}
+    p_Cell:
+      ParentNodeID: -1
+      PortID: -1
+      ParentNode: {fileID: 0}
+      _E_LatestCorrectPortRect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 0
+        height: 0
+      PortType: 1
+      NameDisplayMode: 0
+      ValueDisplayMode: 0
+      SlotMode: 0
+      DisplayName: Port
+      OverwriteName: 
+      _HelperFunctionsID: -1
+      IsSendingSignals: 0
+      portConnections: []
+      initValueSet: 0
+      initialized: 0
+    p_String:
+      ParentNodeID: -1
+      PortID: -1
+      ParentNode: {fileID: 0}
+      _E_LatestCorrectPortRect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 0
+        height: 0
+      PortType: 1
+      NameDisplayMode: 0
+      ValueDisplayMode: 0
+      SlotMode: 0
+      DisplayName: Port
+      OverwriteName: 
+      _HelperFunctionsID: -1
+      IsSendingSignals: 0
+      portConnections: []
+      initValueSet: 0
+      initialized: 0
+      StringVal: 
+  Port2:
+    Parent: {fileID: 0}
+    DisplayName: 
+    RootPortID: 0
+    RootPortHelpID: 0
+    ViewType: 0
+    PinType: 0
+    p_Int:
+      ParentNodeID: -1
+      PortID: -1
+      ParentNode: {fileID: 0}
+      _E_LatestCorrectPortRect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 0
+        height: 0
+      PortType: 1
+      NameDisplayMode: 0
+      ValueDisplayMode: 0
+      SlotMode: 0
+      DisplayName: Port
+      OverwriteName: 
+      _HelperFunctionsID: -1
+      IsSendingSignals: 0
+      portConnections: []
+      initValueSet: 0
+      initialized: 0
+      Value: 0
+    p_Bool:
+      ParentNodeID: -1
+      PortID: -1
+      ParentNode: {fileID: 0}
+      _E_LatestCorrectPortRect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 0
+        height: 0
+      PortType: 1
+      NameDisplayMode: 0
+      ValueDisplayMode: 0
+      SlotMode: 0
+      DisplayName: Port
+      OverwriteName: 
+      _HelperFunctionsID: -1
+      IsSendingSignals: 0
+      portConnections: []
+      initValueSet: 0
+      initialized: 0
+      Value: 0
+    p_Float:
+      ParentNodeID: -1
+      PortID: -1
+      ParentNode: {fileID: 0}
+      _E_LatestCorrectPortRect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 0
+        height: 0
+      PortType: 1
+      NameDisplayMode: 0
+      ValueDisplayMode: 0
+      SlotMode: 0
+      DisplayName: Port
+      OverwriteName: 
+      _HelperFunctionsID: -1
+      IsSendingSignals: 0
+      portConnections: []
+      initValueSet: 0
+      initialized: 0
+      Value: 0
+    p_Vector3:
+      ParentNodeID: -1
+      PortID: -1
+      ParentNode: {fileID: 0}
+      _E_LatestCorrectPortRect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 0
+        height: 0
+      PortType: 1
+      NameDisplayMode: 0
+      ValueDisplayMode: 0
+      SlotMode: 0
+      DisplayName: Port
+      OverwriteName: 
+      _HelperFunctionsID: -1
+      IsSendingSignals: 0
+      portConnections: []
+      initValueSet: 0
+      initialized: 0
+      Value: {x: 0, y: 0, z: 0}
+    p_Cell:
+      ParentNodeID: -1
+      PortID: -1
+      ParentNode: {fileID: 0}
+      _E_LatestCorrectPortRect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 0
+        height: 0
+      PortType: 1
+      NameDisplayMode: 0
+      ValueDisplayMode: 0
+      SlotMode: 0
+      DisplayName: Port
+      OverwriteName: 
+      _HelperFunctionsID: -1
+      IsSendingSignals: 0
+      portConnections: []
+      initValueSet: 0
+      initialized: 0
+    p_String:
+      ParentNodeID: -1
+      PortID: -1
+      ParentNode: {fileID: 0}
+      _E_LatestCorrectPortRect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 0
+        height: 0
+      PortType: 1
+      NameDisplayMode: 0
+      ValueDisplayMode: 0
+      SlotMode: 0
+      DisplayName: Port
+      OverwriteName: 
+      _HelperFunctionsID: -1
+      IsSendingSignals: 0
+      portConnections: []
+      initValueSet: 0
+      initialized: 0
+      StringVal: 
+  Port3:
+    Parent: {fileID: 0}
+    DisplayName: 
+    RootPortID: 0
+    RootPortHelpID: 0
+    ViewType: 0
+    PinType: 0
+    p_Int:
+      ParentNodeID: -1
+      PortID: -1
+      ParentNode: {fileID: 0}
+      _E_LatestCorrectPortRect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 0
+        height: 0
+      PortType: 1
+      NameDisplayMode: 0
+      ValueDisplayMode: 0
+      SlotMode: 0
+      DisplayName: Port
+      OverwriteName: 
+      _HelperFunctionsID: -1
+      IsSendingSignals: 0
+      portConnections: []
+      initValueSet: 0
+      initialized: 0
+      Value: 0
+    p_Bool:
+      ParentNodeID: -1
+      PortID: -1
+      ParentNode: {fileID: 0}
+      _E_LatestCorrectPortRect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 0
+        height: 0
+      PortType: 1
+      NameDisplayMode: 0
+      ValueDisplayMode: 0
+      SlotMode: 0
+      DisplayName: Port
+      OverwriteName: 
+      _HelperFunctionsID: -1
+      IsSendingSignals: 0
+      portConnections: []
+      initValueSet: 0
+      initialized: 0
+      Value: 0
+    p_Float:
+      ParentNodeID: -1
+      PortID: -1
+      ParentNode: {fileID: 0}
+      _E_LatestCorrectPortRect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 0
+        height: 0
+      PortType: 1
+      NameDisplayMode: 0
+      ValueDisplayMode: 0
+      SlotMode: 0
+      DisplayName: Port
+      OverwriteName: 
+      _HelperFunctionsID: -1
+      IsSendingSignals: 0
+      portConnections: []
+      initValueSet: 0
+      initialized: 0
+      Value: 0
+    p_Vector3:
+      ParentNodeID: -1
+      PortID: -1
+      ParentNode: {fileID: 0}
+      _E_LatestCorrectPortRect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 0
+        height: 0
+      PortType: 1
+      NameDisplayMode: 0
+      ValueDisplayMode: 0
+      SlotMode: 0
+      DisplayName: Port
+      OverwriteName: 
+      _HelperFunctionsID: -1
+      IsSendingSignals: 0
+      portConnections: []
+      initValueSet: 0
+      initialized: 0
+      Value: {x: 0, y: 0, z: 0}
+    p_Cell:
+      ParentNodeID: -1
+      PortID: -1
+      ParentNode: {fileID: 0}
+      _E_LatestCorrectPortRect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 0
+        height: 0
+      PortType: 1
+      NameDisplayMode: 0
+      ValueDisplayMode: 0
+      SlotMode: 0
+      DisplayName: Port
+      OverwriteName: 
+      _HelperFunctionsID: -1
+      IsSendingSignals: 0
+      portConnections: []
+      initValueSet: 0
+      initialized: 0
+    p_String:
+      ParentNodeID: -1
+      PortID: -1
+      ParentNode: {fileID: 0}
+      _E_LatestCorrectPortRect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 0
+        height: 0
+      PortType: 1
+      NameDisplayMode: 0
+      ValueDisplayMode: 0
+      SlotMode: 0
+      DisplayName: Port
+      OverwriteName: 
+      _HelperFunctionsID: -1
+      IsSendingSignals: 0
+      portConnections: []
+      initValueSet: 0
+      initialized: 0
+      StringVal: 
+  Port4:
+    Parent: {fileID: 0}
+    DisplayName: 
+    RootPortID: 0
+    RootPortHelpID: 0
+    ViewType: 0
+    PinType: 0
+    p_Int:
+      ParentNodeID: -1
+      PortID: -1
+      ParentNode: {fileID: 0}
+      _E_LatestCorrectPortRect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 0
+        height: 0
+      PortType: 1
+      NameDisplayMode: 0
+      ValueDisplayMode: 0
+      SlotMode: 0
+      DisplayName: Port
+      OverwriteName: 
+      _HelperFunctionsID: -1
+      IsSendingSignals: 0
+      portConnections: []
+      initValueSet: 0
+      initialized: 0
+      Value: 0
+    p_Bool:
+      ParentNodeID: -1
+      PortID: -1
+      ParentNode: {fileID: 0}
+      _E_LatestCorrectPortRect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 0
+        height: 0
+      PortType: 1
+      NameDisplayMode: 0
+      ValueDisplayMode: 0
+      SlotMode: 0
+      DisplayName: Port
+      OverwriteName: 
+      _HelperFunctionsID: -1
+      IsSendingSignals: 0
+      portConnections: []
+      initValueSet: 0
+      initialized: 0
+      Value: 0
+    p_Float:
+      ParentNodeID: -1
+      PortID: -1
+      ParentNode: {fileID: 0}
+      _E_LatestCorrectPortRect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 0
+        height: 0
+      PortType: 1
+      NameDisplayMode: 0
+      ValueDisplayMode: 0
+      SlotMode: 0
+      DisplayName: Port
+      OverwriteName: 
+      _HelperFunctionsID: -1
+      IsSendingSignals: 0
+      portConnections: []
+      initValueSet: 0
+      initialized: 0
+      Value: 0
+    p_Vector3:
+      ParentNodeID: -1
+      PortID: -1
+      ParentNode: {fileID: 0}
+      _E_LatestCorrectPortRect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 0
+        height: 0
+      PortType: 1
+      NameDisplayMode: 0
+      ValueDisplayMode: 0
+      SlotMode: 0
+      DisplayName: Port
+      OverwriteName: 
+      _HelperFunctionsID: -1
+      IsSendingSignals: 0
+      portConnections: []
+      initValueSet: 0
+      initialized: 0
+      Value: {x: 0, y: 0, z: 0}
+    p_Cell:
+      ParentNodeID: -1
+      PortID: -1
+      ParentNode: {fileID: 0}
+      _E_LatestCorrectPortRect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 0
+        height: 0
+      PortType: 1
+      NameDisplayMode: 0
+      ValueDisplayMode: 0
+      SlotMode: 0
+      DisplayName: Port
+      OverwriteName: 
+      _HelperFunctionsID: -1
+      IsSendingSignals: 0
+      portConnections: []
+      initValueSet: 0
+      initialized: 0
+    p_String:
+      ParentNodeID: -1
+      PortID: -1
+      ParentNode: {fileID: 0}
+      _E_LatestCorrectPortRect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 0
+        height: 0
+      PortType: 1
+      NameDisplayMode: 0
+      ValueDisplayMode: 0
+      SlotMode: 0
+      DisplayName: Port
+      OverwriteName: 
+      _HelperFunctionsID: -1
+      IsSendingSignals: 0
+      portConnections: []
+      initValueSet: 0
+      initialized: 0
+      StringVal: 
+  Port5:
+    Parent: {fileID: 0}
+    DisplayName: 
+    RootPortID: 0
+    RootPortHelpID: 0
+    ViewType: 0
+    PinType: 0
+    p_Int:
+      ParentNodeID: -1
+      PortID: -1
+      ParentNode: {fileID: 0}
+      _E_LatestCorrectPortRect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 0
+        height: 0
+      PortType: 1
+      NameDisplayMode: 0
+      ValueDisplayMode: 0
+      SlotMode: 0
+      DisplayName: Port
+      OverwriteName: 
+      _HelperFunctionsID: -1
+      IsSendingSignals: 0
+      portConnections: []
+      initValueSet: 0
+      initialized: 0
+      Value: 0
+    p_Bool:
+      ParentNodeID: -1
+      PortID: -1
+      ParentNode: {fileID: 0}
+      _E_LatestCorrectPortRect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 0
+        height: 0
+      PortType: 1
+      NameDisplayMode: 0
+      ValueDisplayMode: 0
+      SlotMode: 0
+      DisplayName: Port
+      OverwriteName: 
+      _HelperFunctionsID: -1
+      IsSendingSignals: 0
+      portConnections: []
+      initValueSet: 0
+      initialized: 0
+      Value: 0
+    p_Float:
+      ParentNodeID: -1
+      PortID: -1
+      ParentNode: {fileID: 0}
+      _E_LatestCorrectPortRect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 0
+        height: 0
+      PortType: 1
+      NameDisplayMode: 0
+      ValueDisplayMode: 0
+      SlotMode: 0
+      DisplayName: Port
+      OverwriteName: 
+      _HelperFunctionsID: -1
+      IsSendingSignals: 0
+      portConnections: []
+      initValueSet: 0
+      initialized: 0
+      Value: 0
+    p_Vector3:
+      ParentNodeID: -1
+      PortID: -1
+      ParentNode: {fileID: 0}
+      _E_LatestCorrectPortRect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 0
+        height: 0
+      PortType: 1
+      NameDisplayMode: 0
+      ValueDisplayMode: 0
+      SlotMode: 0
+      DisplayName: Port
+      OverwriteName: 
+      _HelperFunctionsID: -1
+      IsSendingSignals: 0
+      portConnections: []
+      initValueSet: 0
+      initialized: 0
+      Value: {x: 0, y: 0, z: 0}
+    p_Cell:
+      ParentNodeID: -1
+      PortID: -1
+      ParentNode: {fileID: 0}
+      _E_LatestCorrectPortRect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 0
+        height: 0
+      PortType: 1
+      NameDisplayMode: 0
+      ValueDisplayMode: 0
+      SlotMode: 0
+      DisplayName: Port
+      OverwriteName: 
+      _HelperFunctionsID: -1
+      IsSendingSignals: 0
+      portConnections: []
+      initValueSet: 0
+      initialized: 0
+    p_String:
+      ParentNodeID: -1
+      PortID: -1
+      ParentNode: {fileID: 0}
+      _E_LatestCorrectPortRect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 0
+        height: 0
+      PortType: 1
+      NameDisplayMode: 0
+      ValueDisplayMode: 0
+      SlotMode: 0
+      DisplayName: Port
+      OverwriteName: 
+      _HelperFunctionsID: -1
+      IsSendingSignals: 0
+      portConnections: []
+      initValueSet: 0
+      initialized: 0
+      StringVal: 
+  Port6:
+    Parent: {fileID: 0}
+    DisplayName: 
+    RootPortID: 0
+    RootPortHelpID: 0
+    ViewType: 0
+    PinType: 0
+    p_Int:
+      ParentNodeID: -1
+      PortID: -1
+      ParentNode: {fileID: 0}
+      _E_LatestCorrectPortRect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 0
+        height: 0
+      PortType: 1
+      NameDisplayMode: 0
+      ValueDisplayMode: 0
+      SlotMode: 0
+      DisplayName: Port
+      OverwriteName: 
+      _HelperFunctionsID: -1
+      IsSendingSignals: 0
+      portConnections: []
+      initValueSet: 0
+      initialized: 0
+      Value: 0
+    p_Bool:
+      ParentNodeID: -1
+      PortID: -1
+      ParentNode: {fileID: 0}
+      _E_LatestCorrectPortRect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 0
+        height: 0
+      PortType: 1
+      NameDisplayMode: 0
+      ValueDisplayMode: 0
+      SlotMode: 0
+      DisplayName: Port
+      OverwriteName: 
+      _HelperFunctionsID: -1
+      IsSendingSignals: 0
+      portConnections: []
+      initValueSet: 0
+      initialized: 0
+      Value: 0
+    p_Float:
+      ParentNodeID: -1
+      PortID: -1
+      ParentNode: {fileID: 0}
+      _E_LatestCorrectPortRect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 0
+        height: 0
+      PortType: 1
+      NameDisplayMode: 0
+      ValueDisplayMode: 0
+      SlotMode: 0
+      DisplayName: Port
+      OverwriteName: 
+      _HelperFunctionsID: -1
+      IsSendingSignals: 0
+      portConnections: []
+      initValueSet: 0
+      initialized: 0
+      Value: 0
+    p_Vector3:
+      ParentNodeID: -1
+      PortID: -1
+      ParentNode: {fileID: 0}
+      _E_LatestCorrectPortRect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 0
+        height: 0
+      PortType: 1
+      NameDisplayMode: 0
+      ValueDisplayMode: 0
+      SlotMode: 0
+      DisplayName: Port
+      OverwriteName: 
+      _HelperFunctionsID: -1
+      IsSendingSignals: 0
+      portConnections: []
+      initValueSet: 0
+      initialized: 0
+      Value: {x: 0, y: 0, z: 0}
+    p_Cell:
+      ParentNodeID: -1
+      PortID: -1
+      ParentNode: {fileID: 0}
+      _E_LatestCorrectPortRect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 0
+        height: 0
+      PortType: 1
+      NameDisplayMode: 0
+      ValueDisplayMode: 0
+      SlotMode: 0
+      DisplayName: Port
+      OverwriteName: 
+      _HelperFunctionsID: -1
+      IsSendingSignals: 0
+      portConnections: []
+      initValueSet: 0
+      initialized: 0
+    p_String:
+      ParentNodeID: -1
+      PortID: -1
+      ParentNode: {fileID: 0}
+      _E_LatestCorrectPortRect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 0
+        height: 0
+      PortType: 1
+      NameDisplayMode: 0
+      ValueDisplayMode: 0
+      SlotMode: 0
+      DisplayName: Port
+      OverwriteName: 
+      _HelperFunctionsID: -1
+      IsSendingSignals: 0
+      portConnections: []
+      initValueSet: 0
+      initialized: 0
+      StringVal: 
+  Port7:
+    Parent: {fileID: 0}
+    DisplayName: 
+    RootPortID: 0
+    RootPortHelpID: 0
+    ViewType: 0
+    PinType: 0
+    p_Int:
+      ParentNodeID: -1
+      PortID: -1
+      ParentNode: {fileID: 0}
+      _E_LatestCorrectPortRect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 0
+        height: 0
+      PortType: 1
+      NameDisplayMode: 0
+      ValueDisplayMode: 0
+      SlotMode: 0
+      DisplayName: Port
+      OverwriteName: 
+      _HelperFunctionsID: -1
+      IsSendingSignals: 0
+      portConnections: []
+      initValueSet: 0
+      initialized: 0
+      Value: 0
+    p_Bool:
+      ParentNodeID: -1
+      PortID: -1
+      ParentNode: {fileID: 0}
+      _E_LatestCorrectPortRect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 0
+        height: 0
+      PortType: 1
+      NameDisplayMode: 0
+      ValueDisplayMode: 0
+      SlotMode: 0
+      DisplayName: Port
+      OverwriteName: 
+      _HelperFunctionsID: -1
+      IsSendingSignals: 0
+      portConnections: []
+      initValueSet: 0
+      initialized: 0
+      Value: 0
+    p_Float:
+      ParentNodeID: -1
+      PortID: -1
+      ParentNode: {fileID: 0}
+      _E_LatestCorrectPortRect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 0
+        height: 0
+      PortType: 1
+      NameDisplayMode: 0
+      ValueDisplayMode: 0
+      SlotMode: 0
+      DisplayName: Port
+      OverwriteName: 
+      _HelperFunctionsID: -1
+      IsSendingSignals: 0
+      portConnections: []
+      initValueSet: 0
+      initialized: 0
+      Value: 0
+    p_Vector3:
+      ParentNodeID: -1
+      PortID: -1
+      ParentNode: {fileID: 0}
+      _E_LatestCorrectPortRect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 0
+        height: 0
+      PortType: 1
+      NameDisplayMode: 0
+      ValueDisplayMode: 0
+      SlotMode: 0
+      DisplayName: Port
+      OverwriteName: 
+      _HelperFunctionsID: -1
+      IsSendingSignals: 0
+      portConnections: []
+      initValueSet: 0
+      initialized: 0
+      Value: {x: 0, y: 0, z: 0}
+    p_Cell:
+      ParentNodeID: -1
+      PortID: -1
+      ParentNode: {fileID: 0}
+      _E_LatestCorrectPortRect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 0
+        height: 0
+      PortType: 1
+      NameDisplayMode: 0
+      ValueDisplayMode: 0
+      SlotMode: 0
+      DisplayName: Port
+      OverwriteName: 
+      _HelperFunctionsID: -1
+      IsSendingSignals: 0
+      portConnections: []
+      initValueSet: 0
+      initialized: 0
+    p_String:
+      ParentNodeID: -1
+      PortID: -1
+      ParentNode: {fileID: 0}
+      _E_LatestCorrectPortRect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 0
+        height: 0
+      PortType: 1
+      NameDisplayMode: 0
+      ValueDisplayMode: 0
+      SlotMode: 0
+      DisplayName: Port
+      OverwriteName: 
+      _HelperFunctionsID: -1
+      IsSendingSignals: 0
+      portConnections: []
+      initValueSet: 0
+      initialized: 0
+      StringVal: 
+  Port8:
+    Parent: {fileID: 0}
+    DisplayName: 
+    RootPortID: 0
+    RootPortHelpID: 0
+    ViewType: 0
+    PinType: 0
+    p_Int:
+      ParentNodeID: -1
+      PortID: -1
+      ParentNode: {fileID: 0}
+      _E_LatestCorrectPortRect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 0
+        height: 0
+      PortType: 1
+      NameDisplayMode: 0
+      ValueDisplayMode: 0
+      SlotMode: 0
+      DisplayName: Port
+      OverwriteName: 
+      _HelperFunctionsID: -1
+      IsSendingSignals: 0
+      portConnections: []
+      initValueSet: 0
+      initialized: 0
+      Value: 0
+    p_Bool:
+      ParentNodeID: -1
+      PortID: -1
+      ParentNode: {fileID: 0}
+      _E_LatestCorrectPortRect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 0
+        height: 0
+      PortType: 1
+      NameDisplayMode: 0
+      ValueDisplayMode: 0
+      SlotMode: 0
+      DisplayName: Port
+      OverwriteName: 
+      _HelperFunctionsID: -1
+      IsSendingSignals: 0
+      portConnections: []
+      initValueSet: 0
+      initialized: 0
+      Value: 0
+    p_Float:
+      ParentNodeID: -1
+      PortID: -1
+      ParentNode: {fileID: 0}
+      _E_LatestCorrectPortRect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 0
+        height: 0
+      PortType: 1
+      NameDisplayMode: 0
+      ValueDisplayMode: 0
+      SlotMode: 0
+      DisplayName: Port
+      OverwriteName: 
+      _HelperFunctionsID: -1
+      IsSendingSignals: 0
+      portConnections: []
+      initValueSet: 0
+      initialized: 0
+      Value: 0
+    p_Vector3:
+      ParentNodeID: -1
+      PortID: -1
+      ParentNode: {fileID: 0}
+      _E_LatestCorrectPortRect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 0
+        height: 0
+      PortType: 1
+      NameDisplayMode: 0
+      ValueDisplayMode: 0
+      SlotMode: 0
+      DisplayName: Port
+      OverwriteName: 
+      _HelperFunctionsID: -1
+      IsSendingSignals: 0
+      portConnections: []
+      initValueSet: 0
+      initialized: 0
+      Value: {x: 0, y: 0, z: 0}
+    p_Cell:
+      ParentNodeID: -1
+      PortID: -1
+      ParentNode: {fileID: 0}
+      _E_LatestCorrectPortRect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 0
+        height: 0
+      PortType: 1
+      NameDisplayMode: 0
+      ValueDisplayMode: 0
+      SlotMode: 0
+      DisplayName: Port
+      OverwriteName: 
+      _HelperFunctionsID: -1
+      IsSendingSignals: 0
+      portConnections: []
+      initValueSet: 0
+      initialized: 0
+    p_String:
+      ParentNodeID: -1
+      PortID: -1
+      ParentNode: {fileID: 0}
+      _E_LatestCorrectPortRect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 0
+        height: 0
+      PortType: 1
+      NameDisplayMode: 0
+      ValueDisplayMode: 0
+      SlotMode: 0
+      DisplayName: Port
+      OverwriteName: 
+      _HelperFunctionsID: -1
+      IsSendingSignals: 0
+      portConnections: []
+      initValueSet: 0
+      initialized: 0
+      StringVal: 
+  Port9:
+    Parent: {fileID: 0}
+    DisplayName: 
+    RootPortID: 0
+    RootPortHelpID: 0
+    ViewType: 0
+    PinType: 0
+    p_Int:
+      ParentNodeID: -1
+      PortID: -1
+      ParentNode: {fileID: 0}
+      _E_LatestCorrectPortRect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 0
+        height: 0
+      PortType: 1
+      NameDisplayMode: 0
+      ValueDisplayMode: 0
+      SlotMode: 0
+      DisplayName: Port
+      OverwriteName: 
+      _HelperFunctionsID: -1
+      IsSendingSignals: 0
+      portConnections: []
+      initValueSet: 0
+      initialized: 0
+      Value: 0
+    p_Bool:
+      ParentNodeID: -1
+      PortID: -1
+      ParentNode: {fileID: 0}
+      _E_LatestCorrectPortRect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 0
+        height: 0
+      PortType: 1
+      NameDisplayMode: 0
+      ValueDisplayMode: 0
+      SlotMode: 0
+      DisplayName: Port
+      OverwriteName: 
+      _HelperFunctionsID: -1
+      IsSendingSignals: 0
+      portConnections: []
+      initValueSet: 0
+      initialized: 0
+      Value: 0
+    p_Float:
+      ParentNodeID: -1
+      PortID: -1
+      ParentNode: {fileID: 0}
+      _E_LatestCorrectPortRect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 0
+        height: 0
+      PortType: 1
+      NameDisplayMode: 0
+      ValueDisplayMode: 0
+      SlotMode: 0
+      DisplayName: Port
+      OverwriteName: 
+      _HelperFunctionsID: -1
+      IsSendingSignals: 0
+      portConnections: []
+      initValueSet: 0
+      initialized: 0
+      Value: 0
+    p_Vector3:
+      ParentNodeID: -1
+      PortID: -1
+      ParentNode: {fileID: 0}
+      _E_LatestCorrectPortRect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 0
+        height: 0
+      PortType: 1
+      NameDisplayMode: 0
+      ValueDisplayMode: 0
+      SlotMode: 0
+      DisplayName: Port
+      OverwriteName: 
+      _HelperFunctionsID: -1
+      IsSendingSignals: 0
+      portConnections: []
+      initValueSet: 0
+      initialized: 0
+      Value: {x: 0, y: 0, z: 0}
+    p_Cell:
+      ParentNodeID: -1
+      PortID: -1
+      ParentNode: {fileID: 0}
+      _E_LatestCorrectPortRect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 0
+        height: 0
+      PortType: 1
+      NameDisplayMode: 0
+      ValueDisplayMode: 0
+      SlotMode: 0
+      DisplayName: Port
+      OverwriteName: 
+      _HelperFunctionsID: -1
+      IsSendingSignals: 0
+      portConnections: []
+      initValueSet: 0
+      initialized: 0
+    p_String:
+      ParentNodeID: -1
+      PortID: -1
+      ParentNode: {fileID: 0}
+      _E_LatestCorrectPortRect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 0
+        height: 0
+      PortType: 1
+      NameDisplayMode: 0
+      ValueDisplayMode: 0
+      SlotMode: 0
+      DisplayName: Port
+      OverwriteName: 
+      _HelperFunctionsID: -1
+      IsSendingSignals: 0
+      portConnections: []
+      initValueSet: 0
+      initialized: 0
+      StringVal: 
+  DisplayPorts: 0
+  DisplayName: Add Counter Cell Instructions
+  DefaultFunctionsDirectory: {fileID: 102900000, guid: d7537c692f54e274e8b9f00a508a2eb5,
+    type: 3}
+  _customPath: Cells/Custom
+  _customTooltip: 
+  ScaleAdjustOffset: {x: 0, y: 0}
+  NodeColor: {r: 0.6251798, g: 0.9019608, b: 0.29803923, a: 1}
+  ProjectFileParent: {fileID: 0}
+  StartNode: {fileID: 0}
+  Rules:
+  - {fileID: -187986687561197988}
+  - {fileID: -1437672458485055700}
+  - {fileID: -2003270990364727927}
+  - {fileID: 3114657213928473170}
+  - {fileID: 4685608620216651025}
+  - {fileID: 8982230842163334613}
+  - {fileID: 7976036947992935004}
+  - {fileID: -164793714824103854}
+  - {fileID: 5072442775883540328}
+  Variables: []
+  Tex_Net: {fileID: 2800000, guid: c291ae28494aa9c468c136bec5345d74, type: 3}
+  references:
+    version: 1
+--- !u!114 &3114657213928473170
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 799840801f4eebf4ca34f378f1c528f8, type: 3}
+  m_Name: Input
+  m_EditorClassIdentifier: 
+  outputPorts:
+  - id: 0
+  - id: 1
+  - id: 2
+  - id: 3
+  - id: 4
+  - id: 5
+  inputPorts: []
+  IndividualID: -2147483644
+  NameID: 
+  wasCreated: 1
+  OutputConnections: []
+  InputConnections: []
+  NodePosition: {x: 1043.1029, y: 677.60596}
+  NodeDrawOffset: {x: 0, y: 0}
+  _EditorFoldout: 0
+  ParentPlanner: {fileID: 0}
+  ParentNodesContainer: {fileID: 0}
+  Enabled: 1
+  _editor_drawRule: 1
+  InputName: Instruction B ID
+  InputType: 0
+  IntInput:
+    ParentNodeID: -2147483644
+    PortID: 0
+    ParentNode: {fileID: 3114657213928473170}
+    _E_LatestCorrectPortRect:
+      serializedVersion: 2
+      x: 1185.1029
+      y: 714.60596
+      width: 27
+      height: 27
+    PortType: 1
+    NameDisplayMode: 1
+    ValueDisplayMode: 3
+    SlotMode: 0
+    DisplayName: Int Input
+    OverwriteName: 
+    _HelperFunctionsID: -1
+    IsSendingSignals: 0
+    portConnections:
+    - ConnectedNodeID: -2147483641
+      ConnectedNodePortID: 1
+      NodeReference: {fileID: 7976036947992935004}
+      isInput: 1
+    initValueSet: 1
+    initialized: 0
+    Value: 0
+  BoolInput:
+    ParentNodeID: -2147483644
+    PortID: 1
+    ParentNode: {fileID: 3114657213928473170}
+    _E_LatestCorrectPortRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    PortType: 1
+    NameDisplayMode: 1
+    ValueDisplayMode: 0
+    SlotMode: 0
+    DisplayName: Port
+    OverwriteName: 
+    _HelperFunctionsID: -1
+    IsSendingSignals: 0
+    portConnections: []
+    initValueSet: 1
+    initialized: 0
+    Value: 0
+  FloatInput:
+    ParentNodeID: -2147483644
+    PortID: 2
+    ParentNode: {fileID: 3114657213928473170}
+    _E_LatestCorrectPortRect:
+      serializedVersion: 2
+      x: 1153.1029
+      y: 714.60596
+      width: 27
+      height: 27
+    PortType: 1
+    NameDisplayMode: 1
+    ValueDisplayMode: 3
+    SlotMode: 0
+    DisplayName: Float Input
+    OverwriteName: 
+    _HelperFunctionsID: -1
+    IsSendingSignals: 0
+    portConnections: []
+    initValueSet: 1
+    initialized: 0
+    Value: 0
+  Vector3Input:
+    ParentNodeID: -2147483644
+    PortID: 3
+    ParentNode: {fileID: 3114657213928473170}
+    _E_LatestCorrectPortRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    PortType: 1
+    NameDisplayMode: 1
+    ValueDisplayMode: 0
+    SlotMode: 0
+    DisplayName: Port
+    OverwriteName: 
+    _HelperFunctionsID: -1
+    IsSendingSignals: 0
+    portConnections: []
+    initValueSet: 1
+    initialized: 0
+    Value: {x: 0, y: 0, z: 0}
+  StringInput:
+    ParentNodeID: -2147483644
+    PortID: 4
+    ParentNode: {fileID: 3114657213928473170}
+    _E_LatestCorrectPortRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    PortType: 1
+    NameDisplayMode: 1
+    ValueDisplayMode: 0
+    SlotMode: 0
+    DisplayName: Port
+    OverwriteName: 
+    _HelperFunctionsID: -1
+    IsSendingSignals: 0
+    portConnections: []
+    initValueSet: 1
+    initialized: 0
+    StringVal: 
+  CellInput:
+    ParentNodeID: -2147483644
+    PortID: 5
+    ParentNode: {fileID: 3114657213928473170}
+    _E_LatestCorrectPortRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    PortType: 1
+    NameDisplayMode: 1
+    ValueDisplayMode: 0
+    SlotMode: 0
+    DisplayName: Port
+    OverwriteName: 
+    _HelperFunctionsID: -1
+    IsSendingSignals: 0
+    portConnections: []
+    initValueSet: 1
+    initialized: 0
+  references:
+    version: 1
+    00000000:
+      type: {class: IntPort, ns: FIMSpace.Graph, asm: AD_Fimp.NodeGraph}
+      data:
+        ParentNodeID: -2147483644
+        PortID: 0
+        ParentNode: {fileID: 3114657213928473170}
+        _E_LatestCorrectPortRect:
+          serializedVersion: 2
+          x: 1185.1029
+          y: 714.60596
+          width: 27
+          height: 27
+        PortType: 1
+        NameDisplayMode: 1
+        ValueDisplayMode: 3
+        SlotMode: 0
+        DisplayName: Int Input
+        OverwriteName: 
+        _HelperFunctionsID: -1
+        IsSendingSignals: 0
+        portConnections:
+        - ConnectedNodeID: -2147483641
+          ConnectedNodePortID: 1
+          NodeReference: {fileID: 7976036947992935004}
+          isInput: 1
+        initValueSet: 1
+        initialized: 0
+        Value: 0
+    00000001:
+      type: {class: BoolPort, ns: FIMSpace.Graph, asm: AD_Fimp.NodeGraph}
+      data:
+        ParentNodeID: -2147483644
+        PortID: 1
+        ParentNode: {fileID: 3114657213928473170}
+        _E_LatestCorrectPortRect:
+          serializedVersion: 2
+          x: 0
+          y: 0
+          width: 0
+          height: 0
+        PortType: 1
+        NameDisplayMode: 1
+        ValueDisplayMode: 0
+        SlotMode: 0
+        DisplayName: Port
+        OverwriteName: 
+        _HelperFunctionsID: -1
+        IsSendingSignals: 0
+        portConnections: []
+        initValueSet: 1
+        initialized: 0
+        Value: 0
+    00000002:
+      type: {class: FloatPort, ns: FIMSpace.Graph, asm: AD_Fimp.NodeGraph}
+      data:
+        ParentNodeID: -2147483644
+        PortID: 2
+        ParentNode: {fileID: 3114657213928473170}
+        _E_LatestCorrectPortRect:
+          serializedVersion: 2
+          x: 1153.1029
+          y: 714.60596
+          width: 27
+          height: 27
+        PortType: 1
+        NameDisplayMode: 1
+        ValueDisplayMode: 3
+        SlotMode: 0
+        DisplayName: Float Input
+        OverwriteName: 
+        _HelperFunctionsID: -1
+        IsSendingSignals: 0
+        portConnections: []
+        initValueSet: 1
+        initialized: 0
+        Value: 0
+    00000003:
+      type: {class: PGGVector3Port, ns: FIMSpace.Graph, asm: AD_FimpPGG}
+      data:
+        ParentNodeID: -2147483644
+        PortID: 3
+        ParentNode: {fileID: 3114657213928473170}
+        _E_LatestCorrectPortRect:
+          serializedVersion: 2
+          x: 0
+          y: 0
+          width: 0
+          height: 0
+        PortType: 1
+        NameDisplayMode: 1
+        ValueDisplayMode: 0
+        SlotMode: 0
+        DisplayName: Port
+        OverwriteName: 
+        _HelperFunctionsID: -1
+        IsSendingSignals: 0
+        portConnections: []
+        initValueSet: 1
+        initialized: 0
+        Value: {x: 0, y: 0, z: 0}
+    00000004:
+      type: {class: PGGStringPort, ns: FIMSpace.Graph, asm: AD_FimpPGG}
+      data:
+        ParentNodeID: -2147483644
+        PortID: 4
+        ParentNode: {fileID: 3114657213928473170}
+        _E_LatestCorrectPortRect:
+          serializedVersion: 2
+          x: 0
+          y: 0
+          width: 0
+          height: 0
+        PortType: 1
+        NameDisplayMode: 1
+        ValueDisplayMode: 0
+        SlotMode: 0
+        DisplayName: Port
+        OverwriteName: 
+        _HelperFunctionsID: -1
+        IsSendingSignals: 0
+        portConnections: []
+        initValueSet: 1
+        initialized: 0
+        StringVal: 
+    00000005:
+      type: {class: PGGCellPort, ns: FIMSpace.Graph, asm: AD_FimpPGG}
+      data:
+        ParentNodeID: -2147483644
+        PortID: 5
+        ParentNode: {fileID: 3114657213928473170}
+        _E_LatestCorrectPortRect:
+          serializedVersion: 2
+          x: 0
+          y: 0
+          width: 0
+          height: 0
+        PortType: 1
+        NameDisplayMode: 1
+        ValueDisplayMode: 0
+        SlotMode: 0
+        DisplayName: Port
+        OverwriteName: 
+        _HelperFunctionsID: -1
+        IsSendingSignals: 0
+        portConnections: []
+        initValueSet: 1
+        initialized: 0
+--- !u!114 &4685608620216651025
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 864cff2a7086f29419dc89e74e3a71a7, type: 3}
+  m_Name: Cell Direction Towards (f)
+  m_EditorClassIdentifier: 
+  outputPorts:
+  - id: 0
+  inputPorts:
+  - id: 1
+  - id: 2
+  IndividualID: -2147483643
+  NameID: 
+  wasCreated: 1
+  OutputConnections: []
+  InputConnections: []
+  NodePosition: {x: 733.0054, y: 538.9498}
+  NodeDrawOffset: {x: 0, y: 0}
+  _EditorFoldout: 0
+  ParentPlanner: {fileID: 0}
+  ParentNodesContainer: {fileID: 0}
+  Enabled: 1
+  _editor_drawRule: 1
+  Port0:
+    Parent: {fileID: 2447593854290177853, guid: 17051314497f6ea4c92bc7122b32d275,
+      type: 2}
+    DisplayName: A
+    RootPortID: -2147483647
+    RootPortHelpID: -1
+    ViewType: 5
+    PinType: 0
+    p_Int:
+      ParentNodeID: -1
+      PortID: -1
+      ParentNode: {fileID: 0}
+      _E_LatestCorrectPortRect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 0
+        height: 0
+      PortType: 1
+      NameDisplayMode: 0
+      ValueDisplayMode: 0
+      SlotMode: 0
+      DisplayName: Port
+      OverwriteName: 
+      _HelperFunctionsID: -1
+      IsSendingSignals: 0
+      portConnections: []
+      initValueSet: 0
+      initialized: 0
+      Value: 0
+    p_Bool:
+      ParentNodeID: -1
+      PortID: -1
+      ParentNode: {fileID: 0}
+      _E_LatestCorrectPortRect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 0
+        height: 0
+      PortType: 1
+      NameDisplayMode: 0
+      ValueDisplayMode: 0
+      SlotMode: 0
+      DisplayName: Port
+      OverwriteName: 
+      _HelperFunctionsID: -1
+      IsSendingSignals: 0
+      portConnections: []
+      initValueSet: 0
+      initialized: 0
+      Value: 0
+    p_Float:
+      ParentNodeID: -1
+      PortID: -1
+      ParentNode: {fileID: 0}
+      _E_LatestCorrectPortRect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 0
+        height: 0
+      PortType: 1
+      NameDisplayMode: 0
+      ValueDisplayMode: 0
+      SlotMode: 0
+      DisplayName: Port
+      OverwriteName: 
+      _HelperFunctionsID: -1
+      IsSendingSignals: 0
+      portConnections: []
+      initValueSet: 0
+      initialized: 0
+      Value: 0
+    p_Vector3:
+      ParentNodeID: -1
+      PortID: -1
+      ParentNode: {fileID: 0}
+      _E_LatestCorrectPortRect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 0
+        height: 0
+      PortType: 1
+      NameDisplayMode: 0
+      ValueDisplayMode: 0
+      SlotMode: 0
+      DisplayName: Port
+      OverwriteName: 
+      _HelperFunctionsID: -1
+      IsSendingSignals: 0
+      portConnections: []
+      initValueSet: 0
+      initialized: 0
+      Value: {x: 0, y: 0, z: 0}
+    p_Cell:
+      ParentNodeID: -2147483643
+      PortID: -1
+      ParentNode: {fileID: 4685608620216651025}
+      _E_LatestCorrectPortRect:
+        serializedVersion: 2
+        x: 756.0054
+        y: 574.9498
+        width: 27
+        height: 27
+      PortType: 0
+      NameDisplayMode: 0
+      ValueDisplayMode: 0
+      SlotMode: 0
+      DisplayName: A
+      OverwriteName: 
+      _HelperFunctionsID: -2147483647
+      IsSendingSignals: 0
+      portConnections:
+      - ConnectedNodeID: -2147483647
+        ConnectedNodePortID: 5
+        NodeReference: {fileID: -187986687561197988}
+        isInput: 0
+      initValueSet: 0
+      initialized: 0
+    p_String:
+      ParentNodeID: -1
+      PortID: -1
+      ParentNode: {fileID: 0}
+      _E_LatestCorrectPortRect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 0
+        height: 0
+      PortType: 1
+      NameDisplayMode: 0
+      ValueDisplayMode: 0
+      SlotMode: 0
+      DisplayName: Port
+      OverwriteName: 
+      _HelperFunctionsID: -1
+      IsSendingSignals: 0
+      portConnections: []
+      initValueSet: 0
+      initialized: 0
+      StringVal: 
+  Port1:
+    Parent: {fileID: 6822051087718826090, guid: 17051314497f6ea4c92bc7122b32d275,
+      type: 2}
+    DisplayName: B
+    RootPortID: -2147483646
+    RootPortHelpID: -1
+    ViewType: 5
+    PinType: 0
+    p_Int:
+      ParentNodeID: -1
+      PortID: -1
+      ParentNode: {fileID: 0}
+      _E_LatestCorrectPortRect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 0
+        height: 0
+      PortType: 1
+      NameDisplayMode: 0
+      ValueDisplayMode: 0
+      SlotMode: 0
+      DisplayName: Port
+      OverwriteName: 
+      _HelperFunctionsID: -1
+      IsSendingSignals: 0
+      portConnections: []
+      initValueSet: 0
+      initialized: 0
+      Value: 0
+    p_Bool:
+      ParentNodeID: -1
+      PortID: -1
+      ParentNode: {fileID: 0}
+      _E_LatestCorrectPortRect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 0
+        height: 0
+      PortType: 1
+      NameDisplayMode: 0
+      ValueDisplayMode: 0
+      SlotMode: 0
+      DisplayName: Port
+      OverwriteName: 
+      _HelperFunctionsID: -1
+      IsSendingSignals: 0
+      portConnections: []
+      initValueSet: 0
+      initialized: 0
+      Value: 0
+    p_Float:
+      ParentNodeID: -1
+      PortID: -1
+      ParentNode: {fileID: 0}
+      _E_LatestCorrectPortRect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 0
+        height: 0
+      PortType: 1
+      NameDisplayMode: 0
+      ValueDisplayMode: 0
+      SlotMode: 0
+      DisplayName: Port
+      OverwriteName: 
+      _HelperFunctionsID: -1
+      IsSendingSignals: 0
+      portConnections: []
+      initValueSet: 0
+      initialized: 0
+      Value: 0
+    p_Vector3:
+      ParentNodeID: -1
+      PortID: -1
+      ParentNode: {fileID: 0}
+      _E_LatestCorrectPortRect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 0
+        height: 0
+      PortType: 1
+      NameDisplayMode: 0
+      ValueDisplayMode: 0
+      SlotMode: 0
+      DisplayName: Port
+      OverwriteName: 
+      _HelperFunctionsID: -1
+      IsSendingSignals: 0
+      portConnections: []
+      initValueSet: 0
+      initialized: 0
+      Value: {x: 0, y: 0, z: 0}
+    p_Cell:
+      ParentNodeID: -2147483643
+      PortID: -1
+      ParentNode: {fileID: 4685608620216651025}
+      _E_LatestCorrectPortRect:
+        serializedVersion: 2
+        x: 756.0054
+        y: 594.9498
+        width: 27
+        height: 27
+      PortType: 0
+      NameDisplayMode: 0
+      ValueDisplayMode: 0
+      SlotMode: 0
+      DisplayName: B
+      OverwriteName: 
+      _HelperFunctionsID: -2147483646
+      IsSendingSignals: 0
+      portConnections:
+      - ConnectedNodeID: -2147483646
+        ConnectedNodePortID: 5
+        NodeReference: {fileID: -1437672458485055700}
+        isInput: 0
+      initValueSet: 0
+      initialized: 0
+    p_String:
+      ParentNodeID: -1
+      PortID: -1
+      ParentNode: {fileID: 0}
+      _E_LatestCorrectPortRect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 0
+        height: 0
+      PortType: 1
+      NameDisplayMode: 0
+      ValueDisplayMode: 0
+      SlotMode: 0
+      DisplayName: Port
+      OverwriteName: 
+      _HelperFunctionsID: -1
+      IsSendingSignals: 0
+      portConnections: []
+      initValueSet: 0
+      initialized: 0
+      StringVal: 
+  Port2:
+    Parent: {fileID: 763617633887041369, guid: 17051314497f6ea4c92bc7122b32d275, type: 2}
+    DisplayName: Output
+    RootPortID: -2147483641
+    RootPortHelpID: -1
+    ViewType: 3
+    PinType: 1
+    p_Int:
+      ParentNodeID: -1
+      PortID: -1
+      ParentNode: {fileID: 0}
+      _E_LatestCorrectPortRect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 0
+        height: 0
+      PortType: 1
+      NameDisplayMode: 0
+      ValueDisplayMode: 0
+      SlotMode: 0
+      DisplayName: Port
+      OverwriteName: 
+      _HelperFunctionsID: -1
+      IsSendingSignals: 0
+      portConnections: []
+      initValueSet: 0
+      initialized: 0
+      Value: 0
+    p_Bool:
+      ParentNodeID: -1
+      PortID: -1
+      ParentNode: {fileID: 0}
+      _E_LatestCorrectPortRect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 0
+        height: 0
+      PortType: 1
+      NameDisplayMode: 0
+      ValueDisplayMode: 0
+      SlotMode: 0
+      DisplayName: Port
+      OverwriteName: 
+      _HelperFunctionsID: -1
+      IsSendingSignals: 0
+      portConnections: []
+      initValueSet: 0
+      initialized: 0
+      Value: 0
+    p_Float:
+      ParentNodeID: -1
+      PortID: -1
+      ParentNode: {fileID: 0}
+      _E_LatestCorrectPortRect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 0
+        height: 0
+      PortType: 1
+      NameDisplayMode: 0
+      ValueDisplayMode: 0
+      SlotMode: 0
+      DisplayName: Port
+      OverwriteName: 
+      _HelperFunctionsID: -1
+      IsSendingSignals: 0
+      portConnections: []
+      initValueSet: 0
+      initialized: 0
+      Value: 0
+    p_Vector3:
+      ParentNodeID: -2147483643
+      PortID: -1
+      ParentNode: {fileID: 4685608620216651025}
+      _E_LatestCorrectPortRect:
+        serializedVersion: 2
+        x: 893.0054
+        y: 615.9498
+        width: 27
+        height: 27
+      PortType: 1
+      NameDisplayMode: 0
+      ValueDisplayMode: 2
+      SlotMode: 0
+      DisplayName: Output
+      OverwriteName: 
+      _HelperFunctionsID: -2147483641
+      IsSendingSignals: 0
+      portConnections:
+      - ConnectedNodeID: -2147483642
+        ConnectedNodePortID: 3
+        NodeReference: {fileID: 8982230842163334613}
+        isInput: 1
+      - ConnectedNodeID: -2147483640
+        ConnectedNodePortID: 0
+        NodeReference: {fileID: -164793714824103854}
+        isInput: 1
+      initValueSet: 0
+      initialized: 0
+      Value: {x: 0, y: 0, z: 0}
+    p_Cell:
+      ParentNodeID: -1
+      PortID: -1
+      ParentNode: {fileID: 0}
+      _E_LatestCorrectPortRect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 0
+        height: 0
+      PortType: 1
+      NameDisplayMode: 0
+      ValueDisplayMode: 0
+      SlotMode: 0
+      DisplayName: Port
+      OverwriteName: 
+      _HelperFunctionsID: -1
+      IsSendingSignals: 0
+      portConnections: []
+      initValueSet: 0
+      initialized: 0
+    p_String:
+      ParentNodeID: -1
+      PortID: -1
+      ParentNode: {fileID: 0}
+      _E_LatestCorrectPortRect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 0
+        height: 0
+      PortType: 1
+      NameDisplayMode: 0
+      ValueDisplayMode: 0
+      SlotMode: 0
+      DisplayName: Port
+      OverwriteName: 
+      _HelperFunctionsID: -1
+      IsSendingSignals: 0
+      portConnections: []
+      initValueSet: 0
+      initialized: 0
+      StringVal: 
+  Port3:
+    Parent: {fileID: 2447593854290177853, guid: 17051314497f6ea4c92bc7122b32d275,
+      type: 2}
+    DisplayName: A
+    RootPortID: -2147483647
+    RootPortHelpID: -1
+    ViewType: 5
+    PinType: 0
+    p_Int:
+      ParentNodeID: -1
+      PortID: -1
+      ParentNode: {fileID: 0}
+      _E_LatestCorrectPortRect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 0
+        height: 0
+      PortType: 1
+      NameDisplayMode: 0
+      ValueDisplayMode: 0
+      SlotMode: 0
+      DisplayName: Port
+      OverwriteName: 
+      _HelperFunctionsID: -1
+      IsSendingSignals: 0
+      portConnections: []
+      initValueSet: 0
+      initialized: 0
+      Value: 0
+    p_Bool:
+      ParentNodeID: -1
+      PortID: -1
+      ParentNode: {fileID: 0}
+      _E_LatestCorrectPortRect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 0
+        height: 0
+      PortType: 1
+      NameDisplayMode: 0
+      ValueDisplayMode: 0
+      SlotMode: 0
+      DisplayName: Port
+      OverwriteName: 
+      _HelperFunctionsID: -1
+      IsSendingSignals: 0
+      portConnections: []
+      initValueSet: 0
+      initialized: 0
+      Value: 0
+    p_Float:
+      ParentNodeID: -1
+      PortID: -1
+      ParentNode: {fileID: 0}
+      _E_LatestCorrectPortRect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 0
+        height: 0
+      PortType: 1
+      NameDisplayMode: 0
+      ValueDisplayMode: 0
+      SlotMode: 0
+      DisplayName: Port
+      OverwriteName: 
+      _HelperFunctionsID: -1
+      IsSendingSignals: 0
+      portConnections: []
+      initValueSet: 0
+      initialized: 0
+      Value: 0
+    p_Vector3:
+      ParentNodeID: -1
+      PortID: -1
+      ParentNode: {fileID: 0}
+      _E_LatestCorrectPortRect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 0
+        height: 0
+      PortType: 1
+      NameDisplayMode: 0
+      ValueDisplayMode: 0
+      SlotMode: 0
+      DisplayName: Port
+      OverwriteName: 
+      _HelperFunctionsID: -1
+      IsSendingSignals: 0
+      portConnections: []
+      initValueSet: 0
+      initialized: 0
+      Value: {x: 0, y: 0, z: 0}
+    p_Cell:
+      ParentNodeID: -1
+      PortID: -1
+      ParentNode: {fileID: 4685608620216651025}
+      _E_LatestCorrectPortRect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 0
+        height: 0
+      PortType: 0
+      NameDisplayMode: 0
+      ValueDisplayMode: 0
+      SlotMode: 0
+      DisplayName: A
+      OverwriteName: 
+      _HelperFunctionsID: -2147483647
+      IsSendingSignals: 0
+      portConnections: []
+      initValueSet: 0
+      initialized: 0
+    p_String:
+      ParentNodeID: -1
+      PortID: -1
+      ParentNode: {fileID: 0}
+      _E_LatestCorrectPortRect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 0
+        height: 0
+      PortType: 1
+      NameDisplayMode: 0
+      ValueDisplayMode: 0
+      SlotMode: 0
+      DisplayName: Port
+      OverwriteName: 
+      _HelperFunctionsID: -1
+      IsSendingSignals: 0
+      portConnections: []
+      initValueSet: 0
+      initialized: 0
+      StringVal: 
+  Port4:
+    Parent: {fileID: 6822051087718826090, guid: 17051314497f6ea4c92bc7122b32d275,
+      type: 2}
+    DisplayName: B
+    RootPortID: -2147483646
+    RootPortHelpID: -1
+    ViewType: 5
+    PinType: 0
+    p_Int:
+      ParentNodeID: -1
+      PortID: -1
+      ParentNode: {fileID: 0}
+      _E_LatestCorrectPortRect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 0
+        height: 0
+      PortType: 1
+      NameDisplayMode: 0
+      ValueDisplayMode: 0
+      SlotMode: 0
+      DisplayName: Port
+      OverwriteName: 
+      _HelperFunctionsID: -1
+      IsSendingSignals: 0
+      portConnections: []
+      initValueSet: 0
+      initialized: 0
+      Value: 0
+    p_Bool:
+      ParentNodeID: -1
+      PortID: -1
+      ParentNode: {fileID: 0}
+      _E_LatestCorrectPortRect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 0
+        height: 0
+      PortType: 1
+      NameDisplayMode: 0
+      ValueDisplayMode: 0
+      SlotMode: 0
+      DisplayName: Port
+      OverwriteName: 
+      _HelperFunctionsID: -1
+      IsSendingSignals: 0
+      portConnections: []
+      initValueSet: 0
+      initialized: 0
+      Value: 0
+    p_Float:
+      ParentNodeID: -1
+      PortID: -1
+      ParentNode: {fileID: 0}
+      _E_LatestCorrectPortRect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 0
+        height: 0
+      PortType: 1
+      NameDisplayMode: 0
+      ValueDisplayMode: 0
+      SlotMode: 0
+      DisplayName: Port
+      OverwriteName: 
+      _HelperFunctionsID: -1
+      IsSendingSignals: 0
+      portConnections: []
+      initValueSet: 0
+      initialized: 0
+      Value: 0
+    p_Vector3:
+      ParentNodeID: -1
+      PortID: -1
+      ParentNode: {fileID: 0}
+      _E_LatestCorrectPortRect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 0
+        height: 0
+      PortType: 1
+      NameDisplayMode: 0
+      ValueDisplayMode: 0
+      SlotMode: 0
+      DisplayName: Port
+      OverwriteName: 
+      _HelperFunctionsID: -1
+      IsSendingSignals: 0
+      portConnections: []
+      initValueSet: 0
+      initialized: 0
+      Value: {x: 0, y: 0, z: 0}
+    p_Cell:
+      ParentNodeID: -1
+      PortID: -1
+      ParentNode: {fileID: 4685608620216651025}
+      _E_LatestCorrectPortRect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 0
+        height: 0
+      PortType: 0
+      NameDisplayMode: 0
+      ValueDisplayMode: 0
+      SlotMode: 0
+      DisplayName: B
+      OverwriteName: 
+      _HelperFunctionsID: -2147483646
+      IsSendingSignals: 0
+      portConnections: []
+      initValueSet: 0
+      initialized: 0
+    p_String:
+      ParentNodeID: -1
+      PortID: -1
+      ParentNode: {fileID: 0}
+      _E_LatestCorrectPortRect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 0
+        height: 0
+      PortType: 1
+      NameDisplayMode: 0
+      ValueDisplayMode: 0
+      SlotMode: 0
+      DisplayName: Port
+      OverwriteName: 
+      _HelperFunctionsID: -1
+      IsSendingSignals: 0
+      portConnections: []
+      initValueSet: 0
+      initialized: 0
+      StringVal: 
+  Port5:
+    Parent: {fileID: 763617633887041369, guid: 17051314497f6ea4c92bc7122b32d275, type: 2}
+    DisplayName: Output
+    RootPortID: -2147483641
+    RootPortHelpID: -1
+    ViewType: 3
+    PinType: 1
+    p_Int:
+      ParentNodeID: -1
+      PortID: -1
+      ParentNode: {fileID: 0}
+      _E_LatestCorrectPortRect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 0
+        height: 0
+      PortType: 1
+      NameDisplayMode: 0
+      ValueDisplayMode: 0
+      SlotMode: 0
+      DisplayName: Port
+      OverwriteName: 
+      _HelperFunctionsID: -1
+      IsSendingSignals: 0
+      portConnections: []
+      initValueSet: 0
+      initialized: 0
+      Value: 0
+    p_Bool:
+      ParentNodeID: -1
+      PortID: -1
+      ParentNode: {fileID: 0}
+      _E_LatestCorrectPortRect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 0
+        height: 0
+      PortType: 1
+      NameDisplayMode: 0
+      ValueDisplayMode: 0
+      SlotMode: 0
+      DisplayName: Port
+      OverwriteName: 
+      _HelperFunctionsID: -1
+      IsSendingSignals: 0
+      portConnections: []
+      initValueSet: 0
+      initialized: 0
+      Value: 0
+    p_Float:
+      ParentNodeID: -1
+      PortID: -1
+      ParentNode: {fileID: 0}
+      _E_LatestCorrectPortRect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 0
+        height: 0
+      PortType: 1
+      NameDisplayMode: 0
+      ValueDisplayMode: 0
+      SlotMode: 0
+      DisplayName: Port
+      OverwriteName: 
+      _HelperFunctionsID: -1
+      IsSendingSignals: 0
+      portConnections: []
+      initValueSet: 0
+      initialized: 0
+      Value: 0
+    p_Vector3:
+      ParentNodeID: -1
+      PortID: -1
+      ParentNode: {fileID: 4685608620216651025}
+      _E_LatestCorrectPortRect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 0
+        height: 0
+      PortType: 1
+      NameDisplayMode: 0
+      ValueDisplayMode: 2
+      SlotMode: 0
+      DisplayName: Output
+      OverwriteName: 
+      _HelperFunctionsID: -2147483641
+      IsSendingSignals: 0
+      portConnections: []
+      initValueSet: 0
+      initialized: 0
+      Value: {x: 0, y: 0, z: 0}
+    p_Cell:
+      ParentNodeID: -1
+      PortID: -1
+      ParentNode: {fileID: 0}
+      _E_LatestCorrectPortRect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 0
+        height: 0
+      PortType: 1
+      NameDisplayMode: 0
+      ValueDisplayMode: 0
+      SlotMode: 0
+      DisplayName: Port
+      OverwriteName: 
+      _HelperFunctionsID: -1
+      IsSendingSignals: 0
+      portConnections: []
+      initValueSet: 0
+      initialized: 0
+    p_String:
+      ParentNodeID: -1
+      PortID: -1
+      ParentNode: {fileID: 0}
+      _E_LatestCorrectPortRect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 0
+        height: 0
+      PortType: 1
+      NameDisplayMode: 0
+      ValueDisplayMode: 0
+      SlotMode: 0
+      DisplayName: Port
+      OverwriteName: 
+      _HelperFunctionsID: -1
+      IsSendingSignals: 0
+      portConnections: []
+      initValueSet: 0
+      initialized: 0
+      StringVal: 
+  Port6:
+    Parent: {fileID: 0}
+    DisplayName: 
+    RootPortID: 0
+    RootPortHelpID: 0
+    ViewType: 0
+    PinType: 0
+    p_Int:
+      ParentNodeID: -1
+      PortID: -1
+      ParentNode: {fileID: 0}
+      _E_LatestCorrectPortRect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 0
+        height: 0
+      PortType: 1
+      NameDisplayMode: 0
+      ValueDisplayMode: 0
+      SlotMode: 0
+      DisplayName: Port
+      OverwriteName: 
+      _HelperFunctionsID: -1
+      IsSendingSignals: 0
+      portConnections: []
+      initValueSet: 0
+      initialized: 0
+      Value: 0
+    p_Bool:
+      ParentNodeID: -1
+      PortID: -1
+      ParentNode: {fileID: 0}
+      _E_LatestCorrectPortRect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 0
+        height: 0
+      PortType: 1
+      NameDisplayMode: 0
+      ValueDisplayMode: 0
+      SlotMode: 0
+      DisplayName: Port
+      OverwriteName: 
+      _HelperFunctionsID: -1
+      IsSendingSignals: 0
+      portConnections: []
+      initValueSet: 0
+      initialized: 0
+      Value: 0
+    p_Float:
+      ParentNodeID: -1
+      PortID: -1
+      ParentNode: {fileID: 0}
+      _E_LatestCorrectPortRect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 0
+        height: 0
+      PortType: 1
+      NameDisplayMode: 0
+      ValueDisplayMode: 0
+      SlotMode: 0
+      DisplayName: Port
+      OverwriteName: 
+      _HelperFunctionsID: -1
+      IsSendingSignals: 0
+      portConnections: []
+      initValueSet: 0
+      initialized: 0
+      Value: 0
+    p_Vector3:
+      ParentNodeID: -1
+      PortID: -1
+      ParentNode: {fileID: 0}
+      _E_LatestCorrectPortRect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 0
+        height: 0
+      PortType: 1
+      NameDisplayMode: 0
+      ValueDisplayMode: 0
+      SlotMode: 0
+      DisplayName: Port
+      OverwriteName: 
+      _HelperFunctionsID: -1
+      IsSendingSignals: 0
+      portConnections: []
+      initValueSet: 0
+      initialized: 0
+      Value: {x: 0, y: 0, z: 0}
+    p_Cell:
+      ParentNodeID: -1
+      PortID: -1
+      ParentNode: {fileID: 0}
+      _E_LatestCorrectPortRect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 0
+        height: 0
+      PortType: 1
+      NameDisplayMode: 0
+      ValueDisplayMode: 0
+      SlotMode: 0
+      DisplayName: Port
+      OverwriteName: 
+      _HelperFunctionsID: -1
+      IsSendingSignals: 0
+      portConnections: []
+      initValueSet: 0
+      initialized: 0
+    p_String:
+      ParentNodeID: -1
+      PortID: -1
+      ParentNode: {fileID: 0}
+      _E_LatestCorrectPortRect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 0
+        height: 0
+      PortType: 1
+      NameDisplayMode: 0
+      ValueDisplayMode: 0
+      SlotMode: 0
+      DisplayName: Port
+      OverwriteName: 
+      _HelperFunctionsID: -1
+      IsSendingSignals: 0
+      portConnections: []
+      initValueSet: 0
+      initialized: 0
+      StringVal: 
+  Port7:
+    Parent: {fileID: 0}
+    DisplayName: 
+    RootPortID: 0
+    RootPortHelpID: 0
+    ViewType: 0
+    PinType: 0
+    p_Int:
+      ParentNodeID: -1
+      PortID: -1
+      ParentNode: {fileID: 0}
+      _E_LatestCorrectPortRect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 0
+        height: 0
+      PortType: 1
+      NameDisplayMode: 0
+      ValueDisplayMode: 0
+      SlotMode: 0
+      DisplayName: Port
+      OverwriteName: 
+      _HelperFunctionsID: -1
+      IsSendingSignals: 0
+      portConnections: []
+      initValueSet: 0
+      initialized: 0
+      Value: 0
+    p_Bool:
+      ParentNodeID: -1
+      PortID: -1
+      ParentNode: {fileID: 0}
+      _E_LatestCorrectPortRect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 0
+        height: 0
+      PortType: 1
+      NameDisplayMode: 0
+      ValueDisplayMode: 0
+      SlotMode: 0
+      DisplayName: Port
+      OverwriteName: 
+      _HelperFunctionsID: -1
+      IsSendingSignals: 0
+      portConnections: []
+      initValueSet: 0
+      initialized: 0
+      Value: 0
+    p_Float:
+      ParentNodeID: -1
+      PortID: -1
+      ParentNode: {fileID: 0}
+      _E_LatestCorrectPortRect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 0
+        height: 0
+      PortType: 1
+      NameDisplayMode: 0
+      ValueDisplayMode: 0
+      SlotMode: 0
+      DisplayName: Port
+      OverwriteName: 
+      _HelperFunctionsID: -1
+      IsSendingSignals: 0
+      portConnections: []
+      initValueSet: 0
+      initialized: 0
+      Value: 0
+    p_Vector3:
+      ParentNodeID: -1
+      PortID: -1
+      ParentNode: {fileID: 0}
+      _E_LatestCorrectPortRect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 0
+        height: 0
+      PortType: 1
+      NameDisplayMode: 0
+      ValueDisplayMode: 0
+      SlotMode: 0
+      DisplayName: Port
+      OverwriteName: 
+      _HelperFunctionsID: -1
+      IsSendingSignals: 0
+      portConnections: []
+      initValueSet: 0
+      initialized: 0
+      Value: {x: 0, y: 0, z: 0}
+    p_Cell:
+      ParentNodeID: -1
+      PortID: -1
+      ParentNode: {fileID: 0}
+      _E_LatestCorrectPortRect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 0
+        height: 0
+      PortType: 1
+      NameDisplayMode: 0
+      ValueDisplayMode: 0
+      SlotMode: 0
+      DisplayName: Port
+      OverwriteName: 
+      _HelperFunctionsID: -1
+      IsSendingSignals: 0
+      portConnections: []
+      initValueSet: 0
+      initialized: 0
+    p_String:
+      ParentNodeID: -1
+      PortID: -1
+      ParentNode: {fileID: 0}
+      _E_LatestCorrectPortRect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 0
+        height: 0
+      PortType: 1
+      NameDisplayMode: 0
+      ValueDisplayMode: 0
+      SlotMode: 0
+      DisplayName: Port
+      OverwriteName: 
+      _HelperFunctionsID: -1
+      IsSendingSignals: 0
+      portConnections: []
+      initValueSet: 0
+      initialized: 0
+      StringVal: 
+  Port8:
+    Parent: {fileID: 0}
+    DisplayName: 
+    RootPortID: 0
+    RootPortHelpID: 0
+    ViewType: 0
+    PinType: 0
+    p_Int:
+      ParentNodeID: -1
+      PortID: -1
+      ParentNode: {fileID: 0}
+      _E_LatestCorrectPortRect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 0
+        height: 0
+      PortType: 1
+      NameDisplayMode: 0
+      ValueDisplayMode: 0
+      SlotMode: 0
+      DisplayName: Port
+      OverwriteName: 
+      _HelperFunctionsID: -1
+      IsSendingSignals: 0
+      portConnections: []
+      initValueSet: 0
+      initialized: 0
+      Value: 0
+    p_Bool:
+      ParentNodeID: -1
+      PortID: -1
+      ParentNode: {fileID: 0}
+      _E_LatestCorrectPortRect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 0
+        height: 0
+      PortType: 1
+      NameDisplayMode: 0
+      ValueDisplayMode: 0
+      SlotMode: 0
+      DisplayName: Port
+      OverwriteName: 
+      _HelperFunctionsID: -1
+      IsSendingSignals: 0
+      portConnections: []
+      initValueSet: 0
+      initialized: 0
+      Value: 0
+    p_Float:
+      ParentNodeID: -1
+      PortID: -1
+      ParentNode: {fileID: 0}
+      _E_LatestCorrectPortRect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 0
+        height: 0
+      PortType: 1
+      NameDisplayMode: 0
+      ValueDisplayMode: 0
+      SlotMode: 0
+      DisplayName: Port
+      OverwriteName: 
+      _HelperFunctionsID: -1
+      IsSendingSignals: 0
+      portConnections: []
+      initValueSet: 0
+      initialized: 0
+      Value: 0
+    p_Vector3:
+      ParentNodeID: -1
+      PortID: -1
+      ParentNode: {fileID: 0}
+      _E_LatestCorrectPortRect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 0
+        height: 0
+      PortType: 1
+      NameDisplayMode: 0
+      ValueDisplayMode: 0
+      SlotMode: 0
+      DisplayName: Port
+      OverwriteName: 
+      _HelperFunctionsID: -1
+      IsSendingSignals: 0
+      portConnections: []
+      initValueSet: 0
+      initialized: 0
+      Value: {x: 0, y: 0, z: 0}
+    p_Cell:
+      ParentNodeID: -1
+      PortID: -1
+      ParentNode: {fileID: 0}
+      _E_LatestCorrectPortRect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 0
+        height: 0
+      PortType: 1
+      NameDisplayMode: 0
+      ValueDisplayMode: 0
+      SlotMode: 0
+      DisplayName: Port
+      OverwriteName: 
+      _HelperFunctionsID: -1
+      IsSendingSignals: 0
+      portConnections: []
+      initValueSet: 0
+      initialized: 0
+    p_String:
+      ParentNodeID: -1
+      PortID: -1
+      ParentNode: {fileID: 0}
+      _E_LatestCorrectPortRect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 0
+        height: 0
+      PortType: 1
+      NameDisplayMode: 0
+      ValueDisplayMode: 0
+      SlotMode: 0
+      DisplayName: Port
+      OverwriteName: 
+      _HelperFunctionsID: -1
+      IsSendingSignals: 0
+      portConnections: []
+      initValueSet: 0
+      initialized: 0
+      StringVal: 
+  Port9:
+    Parent: {fileID: 0}
+    DisplayName: 
+    RootPortID: 0
+    RootPortHelpID: 0
+    ViewType: 0
+    PinType: 0
+    p_Int:
+      ParentNodeID: -1
+      PortID: -1
+      ParentNode: {fileID: 0}
+      _E_LatestCorrectPortRect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 0
+        height: 0
+      PortType: 1
+      NameDisplayMode: 0
+      ValueDisplayMode: 0
+      SlotMode: 0
+      DisplayName: Port
+      OverwriteName: 
+      _HelperFunctionsID: -1
+      IsSendingSignals: 0
+      portConnections: []
+      initValueSet: 0
+      initialized: 0
+      Value: 0
+    p_Bool:
+      ParentNodeID: -1
+      PortID: -1
+      ParentNode: {fileID: 0}
+      _E_LatestCorrectPortRect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 0
+        height: 0
+      PortType: 1
+      NameDisplayMode: 0
+      ValueDisplayMode: 0
+      SlotMode: 0
+      DisplayName: Port
+      OverwriteName: 
+      _HelperFunctionsID: -1
+      IsSendingSignals: 0
+      portConnections: []
+      initValueSet: 0
+      initialized: 0
+      Value: 0
+    p_Float:
+      ParentNodeID: -1
+      PortID: -1
+      ParentNode: {fileID: 0}
+      _E_LatestCorrectPortRect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 0
+        height: 0
+      PortType: 1
+      NameDisplayMode: 0
+      ValueDisplayMode: 0
+      SlotMode: 0
+      DisplayName: Port
+      OverwriteName: 
+      _HelperFunctionsID: -1
+      IsSendingSignals: 0
+      portConnections: []
+      initValueSet: 0
+      initialized: 0
+      Value: 0
+    p_Vector3:
+      ParentNodeID: -1
+      PortID: -1
+      ParentNode: {fileID: 0}
+      _E_LatestCorrectPortRect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 0
+        height: 0
+      PortType: 1
+      NameDisplayMode: 0
+      ValueDisplayMode: 0
+      SlotMode: 0
+      DisplayName: Port
+      OverwriteName: 
+      _HelperFunctionsID: -1
+      IsSendingSignals: 0
+      portConnections: []
+      initValueSet: 0
+      initialized: 0
+      Value: {x: 0, y: 0, z: 0}
+    p_Cell:
+      ParentNodeID: -1
+      PortID: -1
+      ParentNode: {fileID: 0}
+      _E_LatestCorrectPortRect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 0
+        height: 0
+      PortType: 1
+      NameDisplayMode: 0
+      ValueDisplayMode: 0
+      SlotMode: 0
+      DisplayName: Port
+      OverwriteName: 
+      _HelperFunctionsID: -1
+      IsSendingSignals: 0
+      portConnections: []
+      initValueSet: 0
+      initialized: 0
+    p_String:
+      ParentNodeID: -1
+      PortID: -1
+      ParentNode: {fileID: 0}
+      _E_LatestCorrectPortRect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 0
+        height: 0
+      PortType: 1
+      NameDisplayMode: 0
+      ValueDisplayMode: 0
+      SlotMode: 0
+      DisplayName: Port
+      OverwriteName: 
+      _HelperFunctionsID: -1
+      IsSendingSignals: 0
+      portConnections: []
+      initValueSet: 0
+      initialized: 0
+      StringVal: 
+  DisplayPorts: 3
+  DisplayName: Cell Direction Towards
+  DefaultFunctionsDirectory: {fileID: 102900000, guid: d7537c692f54e274e8b9f00a508a2eb5,
+    type: 3}
+  _customPath: Cells/Custom
+  _customTooltip: 
+  ScaleAdjustOffset: {x: 0, y: 0}
+  NodeColor: {r: 0.29803923, g: 0.9019608, b: 0.43295467, a: 1}
+  ProjectFileParent: {fileID: 11400000, guid: 17051314497f6ea4c92bc7122b32d275, type: 2}
+  StartNode: {fileID: 0}
+  Rules:
+  - {fileID: 2447593854290177853, guid: 17051314497f6ea4c92bc7122b32d275, type: 2}
+  - {fileID: 6822051087718826090, guid: 17051314497f6ea4c92bc7122b32d275, type: 2}
+  - {fileID: -6490786501130168470, guid: 17051314497f6ea4c92bc7122b32d275, type: 2}
+  - {fileID: 4534159689896351322, guid: 17051314497f6ea4c92bc7122b32d275, type: 2}
+  - {fileID: 8718985154797682481, guid: 17051314497f6ea4c92bc7122b32d275, type: 2}
+  - {fileID: -7941605765383065252, guid: 17051314497f6ea4c92bc7122b32d275, type: 2}
+  - {fileID: 763617633887041369, guid: 17051314497f6ea4c92bc7122b32d275, type: 2}
+  - {fileID: 4740736384280201961, guid: 17051314497f6ea4c92bc7122b32d275, type: 2}
+  Variables: []
+  Tex_Net: {fileID: 2800000, guid: c291ae28494aa9c468c136bec5345d74, type: 3}
+  references:
+    version: 1
+    00000000:
+      type: {class: PGGVector3Port, ns: FIMSpace.Graph, asm: AD_FimpPGG}
+      data:
+        ParentNodeID: -2147483643
+        PortID: -1
+        ParentNode: {fileID: 4685608620216651025}
+        _E_LatestCorrectPortRect:
+          serializedVersion: 2
+          x: 893.0054
+          y: 615.9498
+          width: 27
+          height: 27
+        PortType: 1
+        NameDisplayMode: 0
+        ValueDisplayMode: 2
+        SlotMode: 0
+        DisplayName: Output
+        OverwriteName: 
+        _HelperFunctionsID: -2147483641
+        IsSendingSignals: 0
+        portConnections:
+        - ConnectedNodeID: -2147483642
+          ConnectedNodePortID: 3
+          NodeReference: {fileID: 8982230842163334613}
+          isInput: 1
+        - ConnectedNodeID: -2147483640
+          ConnectedNodePortID: 0
+          NodeReference: {fileID: -164793714824103854}
+          isInput: 1
+        initValueSet: 0
+        initialized: 0
+        Value: {x: 0, y: 0, z: 0}
+    00000001:
+      type: {class: PGGCellPort, ns: FIMSpace.Graph, asm: AD_FimpPGG}
+      data:
+        ParentNodeID: -2147483643
+        PortID: -1
+        ParentNode: {fileID: 4685608620216651025}
+        _E_LatestCorrectPortRect:
+          serializedVersion: 2
+          x: 756.0054
+          y: 574.9498
+          width: 27
+          height: 27
+        PortType: 0
+        NameDisplayMode: 0
+        ValueDisplayMode: 0
+        SlotMode: 0
+        DisplayName: A
+        OverwriteName: 
+        _HelperFunctionsID: -2147483647
+        IsSendingSignals: 0
+        portConnections:
+        - ConnectedNodeID: -2147483647
+          ConnectedNodePortID: 5
+          NodeReference: {fileID: -187986687561197988}
+          isInput: 0
+        initValueSet: 0
+        initialized: 0
+    00000002:
+      type: {class: PGGCellPort, ns: FIMSpace.Graph, asm: AD_FimpPGG}
+      data:
+        ParentNodeID: -2147483643
+        PortID: -1
+        ParentNode: {fileID: 4685608620216651025}
+        _E_LatestCorrectPortRect:
+          serializedVersion: 2
+          x: 756.0054
+          y: 594.9498
+          width: 27
+          height: 27
+        PortType: 0
+        NameDisplayMode: 0
+        ValueDisplayMode: 0
+        SlotMode: 0
+        DisplayName: B
+        OverwriteName: 
+        _HelperFunctionsID: -2147483646
+        IsSendingSignals: 0
+        portConnections:
+        - ConnectedNodeID: -2147483646
+          ConnectedNodePortID: 5
+          NodeReference: {fileID: -1437672458485055700}
+          isInput: 0
+        initValueSet: 0
+        initialized: 0
+--- !u!114 &5072442775883540328
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42d3514c4697cf541b2d647b9793695a, type: 3}
+  m_Name: Procedures Start
+  m_EditorClassIdentifier: 
+  outputPorts: []
+  inputPorts: []
+  IndividualID: -2147483639
+  NameID: 
+  wasCreated: 1
+  OutputConnections:
+  - ConnectionFromID: -2147483639
+    ConnectionToID: -2147483642
+    ConnectionFrom_AlternativeID: -1
+    ConnectionTo_AlternativeID: -1
+  - ConnectionFromID: -2147483639
+    ConnectionToID: -2147483641
+    ConnectionFrom_AlternativeID: -1
+    ConnectionTo_AlternativeID: -1
+  InputConnections: []
+  NodePosition: {x: 1255.4137, y: 315.64346}
+  NodeDrawOffset: {x: 0, y: 0}
+  _EditorFoldout: 0
+  ParentPlanner: {fileID: 0}
+  ParentNodesContainer: {fileID: 0}
+  Enabled: 1
+  _editor_drawRule: 1
+  references:
+    version: 1
+--- !u!114 &7976036947992935004
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49a5d501084669d4f80d5da809b9fa01, type: 3}
+  m_Name: Add Cell Instruction
+  m_EditorClassIdentifier: 
+  outputPorts: []
+  inputPorts:
+  - id: 0
+  - id: 1
+  - id: 2
+  - id: 3
+  - id: 4
+  IndividualID: -2147483641
+  NameID: 
+  wasCreated: 1
+  OutputConnections: []
+  InputConnections:
+  - ConnectionFromID: -2147483639
+    ConnectionToID: -2147483641
+    ConnectionFrom_AlternativeID: -1
+    ConnectionTo_AlternativeID: -1
+  NodePosition: {x: 1393.3282, y: 583.40045}
+  NodeDrawOffset: {x: 0, y: 0}
+  _EditorFoldout: 0
+  ParentPlanner: {fileID: 0}
+  ParentNodesContainer: {fileID: 0}
+  Enabled: 1
+  _editor_drawRule: 1
+  Cell:
+    ParentNodeID: -2147483641
+    PortID: 0
+    ParentNode: {fileID: 7976036947992935004}
+    _E_LatestCorrectPortRect:
+      serializedVersion: 2
+      x: 1416.3282
+      y: 619.40045
+      width: 27
+      height: 27
+    PortType: 0
+    NameDisplayMode: 0
+    ValueDisplayMode: 0
+    SlotMode: 0
+    DisplayName: Cell
+    OverwriteName: 
+    _HelperFunctionsID: -1
+    IsSendingSignals: 0
+    portConnections:
+    - ConnectedNodeID: -2147483646
+      ConnectedNodePortID: 5
+      NodeReference: {fileID: -1437672458485055700}
+      isInput: 0
+    initValueSet: 1
+    initialized: 0
+  Operation: 0
+  ID:
+    ParentNodeID: -2147483641
+    PortID: 1
+    ParentNode: {fileID: 7976036947992935004}
+    _E_LatestCorrectPortRect:
+      serializedVersion: 2
+      x: 1416.3282
+      y: 639.40045
+      width: 27
+      height: 27
+    PortType: 0
+    NameDisplayMode: 0
+    ValueDisplayMode: 0
+    SlotMode: 0
+    DisplayName: ID
+    OverwriteName: 
+    _HelperFunctionsID: -1
+    IsSendingSignals: 0
+    portConnections:
+    - ConnectedNodeID: -2147483644
+      ConnectedNodePortID: 0
+      NodeReference: {fileID: 3114657213928473170}
+      isInput: 0
+    initValueSet: 1
+    initialized: 0
+    Value: 0
+  UseDirection: 1
+  DataString:
+    ParentNodeID: -2147483641
+    PortID: 2
+    ParentNode: {fileID: 7976036947992935004}
+    _E_LatestCorrectPortRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    PortType: 0
+    NameDisplayMode: 0
+    ValueDisplayMode: 0
+    SlotMode: 0
+    DisplayName: Port
+    OverwriteName: 
+    _HelperFunctionsID: -1
+    IsSendingSignals: 0
+    portConnections: []
+    initValueSet: 1
+    initialized: 0
+    StringVal: 
+  Dir:
+    ParentNodeID: -2147483641
+    PortID: 3
+    ParentNode: {fileID: 7976036947992935004}
+    _E_LatestCorrectPortRect:
+      serializedVersion: 2
+      x: 1416.3282
+      y: 659.40045
+      width: 27
+      height: 27
+    PortType: 0
+    NameDisplayMode: 0
+    ValueDisplayMode: 0
+    SlotMode: 0
+    DisplayName: Dir
+    OverwriteName: 
+    _HelperFunctionsID: -1
+    IsSendingSignals: 0
+    portConnections:
+    - ConnectedNodeID: -2147483640
+      ConnectedNodePortID: 0
+      NodeReference: {fileID: -164793714824103854}
+      isInput: 0
+    initValueSet: 1
+    initialized: 0
+    Value: {x: 0, y: 0, z: 0}
+  Tags:
+    ParentNodeID: -2147483641
+    PortID: 4
+    ParentNode: {fileID: 7976036947992935004}
+    _E_LatestCorrectPortRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    PortType: 0
+    NameDisplayMode: 0
+    ValueDisplayMode: 0
+    SlotMode: 0
+    DisplayName: Port
+    OverwriteName: 
+    _HelperFunctionsID: -1
+    IsSendingSignals: 0
+    portConnections: []
+    initValueSet: 1
+    initialized: 0
+    StringVal: 
+  references:
+    version: 1
+    00000000:
+      type: {class: PGGCellPort, ns: FIMSpace.Graph, asm: AD_FimpPGG}
+      data:
+        ParentNodeID: -2147483641
+        PortID: 0
+        ParentNode: {fileID: 7976036947992935004}
+        _E_LatestCorrectPortRect:
+          serializedVersion: 2
+          x: 1416.3282
+          y: 619.40045
+          width: 27
+          height: 27
+        PortType: 0
+        NameDisplayMode: 0
+        ValueDisplayMode: 0
+        SlotMode: 0
+        DisplayName: Cell
+        OverwriteName: 
+        _HelperFunctionsID: -1
+        IsSendingSignals: 0
+        portConnections:
+        - ConnectedNodeID: -2147483646
+          ConnectedNodePortID: 5
+          NodeReference: {fileID: -1437672458485055700}
+          isInput: 0
+        initValueSet: 1
+        initialized: 0
+    00000001:
+      type: {class: IntPort, ns: FIMSpace.Graph, asm: AD_Fimp.NodeGraph}
+      data:
+        ParentNodeID: -2147483641
+        PortID: 1
+        ParentNode: {fileID: 7976036947992935004}
+        _E_LatestCorrectPortRect:
+          serializedVersion: 2
+          x: 1416.3282
+          y: 639.40045
+          width: 27
+          height: 27
+        PortType: 0
+        NameDisplayMode: 0
+        ValueDisplayMode: 0
+        SlotMode: 0
+        DisplayName: ID
+        OverwriteName: 
+        _HelperFunctionsID: -1
+        IsSendingSignals: 0
+        portConnections:
+        - ConnectedNodeID: -2147483644
+          ConnectedNodePortID: 0
+          NodeReference: {fileID: 3114657213928473170}
+          isInput: 0
+        initValueSet: 1
+        initialized: 0
+        Value: 0
+    00000002:
+      type: {class: PGGStringPort, ns: FIMSpace.Graph, asm: AD_FimpPGG}
+      data:
+        ParentNodeID: -2147483641
+        PortID: 2
+        ParentNode: {fileID: 7976036947992935004}
+        _E_LatestCorrectPortRect:
+          serializedVersion: 2
+          x: 0
+          y: 0
+          width: 0
+          height: 0
+        PortType: 0
+        NameDisplayMode: 0
+        ValueDisplayMode: 0
+        SlotMode: 0
+        DisplayName: Port
+        OverwriteName: 
+        _HelperFunctionsID: -1
+        IsSendingSignals: 0
+        portConnections: []
+        initValueSet: 1
+        initialized: 0
+        StringVal: 
+    00000003:
+      type: {class: PGGVector3Port, ns: FIMSpace.Graph, asm: AD_FimpPGG}
+      data:
+        ParentNodeID: -2147483641
+        PortID: 3
+        ParentNode: {fileID: 7976036947992935004}
+        _E_LatestCorrectPortRect:
+          serializedVersion: 2
+          x: 1416.3282
+          y: 659.40045
+          width: 27
+          height: 27
+        PortType: 0
+        NameDisplayMode: 0
+        ValueDisplayMode: 0
+        SlotMode: 0
+        DisplayName: Dir
+        OverwriteName: 
+        _HelperFunctionsID: -1
+        IsSendingSignals: 0
+        portConnections:
+        - ConnectedNodeID: -2147483640
+          ConnectedNodePortID: 0
+          NodeReference: {fileID: -164793714824103854}
+          isInput: 0
+        initValueSet: 1
+        initialized: 0
+        Value: {x: 0, y: 0, z: 0}
+    00000004:
+      type: {class: PGGStringPort, ns: FIMSpace.Graph, asm: AD_FimpPGG}
+      data:
+        ParentNodeID: -2147483641
+        PortID: 4
+        ParentNode: {fileID: 7976036947992935004}
+        _E_LatestCorrectPortRect:
+          serializedVersion: 2
+          x: 0
+          y: 0
+          width: 0
+          height: 0
+        PortType: 0
+        NameDisplayMode: 0
+        ValueDisplayMode: 0
+        SlotMode: 0
+        DisplayName: Port
+        OverwriteName: 
+        _HelperFunctionsID: -1
+        IsSendingSignals: 0
+        portConnections: []
+        initValueSet: 1
+        initialized: 0
+        StringVal: 
+--- !u!114 &8982230842163334613
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 49a5d501084669d4f80d5da809b9fa01, type: 3}
+  m_Name: Add Cell Instruction
+  m_EditorClassIdentifier: 
+  outputPorts: []
+  inputPorts:
+  - id: 0
+  - id: 1
+  - id: 2
+  - id: 3
+  - id: 4
+  IndividualID: -2147483642
+  NameID: 
+  wasCreated: 1
+  OutputConnections: []
+  InputConnections:
+  - ConnectionFromID: -2147483639
+    ConnectionToID: -2147483642
+    ConnectionFrom_AlternativeID: -1
+    ConnectionTo_AlternativeID: -1
+  NodePosition: {x: 1161.4609, y: 414.73364}
+  NodeDrawOffset: {x: 0, y: 0}
+  _EditorFoldout: 0
+  ParentPlanner: {fileID: 0}
+  ParentNodesContainer: {fileID: 0}
+  Enabled: 1
+  _editor_drawRule: 1
+  Cell:
+    ParentNodeID: -2147483642
+    PortID: 0
+    ParentNode: {fileID: 8982230842163334613}
+    _E_LatestCorrectPortRect:
+      serializedVersion: 2
+      x: 1184.4609
+      y: 450.73364
+      width: 27
+      height: 27
+    PortType: 0
+    NameDisplayMode: 0
+    ValueDisplayMode: 0
+    SlotMode: 0
+    DisplayName: Cell
+    OverwriteName: 
+    _HelperFunctionsID: -1
+    IsSendingSignals: 0
+    portConnections:
+    - ConnectedNodeID: -2147483647
+      ConnectedNodePortID: 5
+      NodeReference: {fileID: -187986687561197988}
+      isInput: 0
+    initValueSet: 1
+    initialized: 0
+  Operation: 0
+  ID:
+    ParentNodeID: -2147483642
+    PortID: 1
+    ParentNode: {fileID: 8982230842163334613}
+    _E_LatestCorrectPortRect:
+      serializedVersion: 2
+      x: 1184.4609
+      y: 470.73364
+      width: 27
+      height: 27
+    PortType: 0
+    NameDisplayMode: 0
+    ValueDisplayMode: 0
+    SlotMode: 0
+    DisplayName: ID
+    OverwriteName: 
+    _HelperFunctionsID: -1
+    IsSendingSignals: 0
+    portConnections:
+    - ConnectedNodeID: -2147483645
+      ConnectedNodePortID: 0
+      NodeReference: {fileID: -2003270990364727927}
+      isInput: 0
+    initValueSet: 1
+    initialized: 0
+    Value: 0
+  UseDirection: 1
+  DataString:
+    ParentNodeID: -2147483642
+    PortID: 2
+    ParentNode: {fileID: 8982230842163334613}
+    _E_LatestCorrectPortRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    PortType: 0
+    NameDisplayMode: 0
+    ValueDisplayMode: 0
+    SlotMode: 0
+    DisplayName: Port
+    OverwriteName: 
+    _HelperFunctionsID: -1
+    IsSendingSignals: 0
+    portConnections: []
+    initValueSet: 1
+    initialized: 0
+    StringVal: 
+  Dir:
+    ParentNodeID: -2147483642
+    PortID: 3
+    ParentNode: {fileID: 8982230842163334613}
+    _E_LatestCorrectPortRect:
+      serializedVersion: 2
+      x: 1184.4609
+      y: 490.73364
+      width: 27
+      height: 27
+    PortType: 0
+    NameDisplayMode: 0
+    ValueDisplayMode: 0
+    SlotMode: 0
+    DisplayName: Dir
+    OverwriteName: 
+    _HelperFunctionsID: -1
+    IsSendingSignals: 0
+    portConnections:
+    - ConnectedNodeID: -2147483643
+      ConnectedNodePortID: 0
+      NodeReference: {fileID: 4685608620216651025}
+      isInput: 0
+    initValueSet: 1
+    initialized: 0
+    Value: {x: 0, y: 0, z: 0}
+  Tags:
+    ParentNodeID: -2147483642
+    PortID: 4
+    ParentNode: {fileID: 8982230842163334613}
+    _E_LatestCorrectPortRect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    PortType: 0
+    NameDisplayMode: 0
+    ValueDisplayMode: 0
+    SlotMode: 0
+    DisplayName: Port
+    OverwriteName: 
+    _HelperFunctionsID: -1
+    IsSendingSignals: 0
+    portConnections: []
+    initValueSet: 1
+    initialized: 0
+    StringVal: 
+  references:
+    version: 1
+    00000000:
+      type: {class: PGGCellPort, ns: FIMSpace.Graph, asm: AD_FimpPGG}
+      data:
+        ParentNodeID: -2147483642
+        PortID: 0
+        ParentNode: {fileID: 8982230842163334613}
+        _E_LatestCorrectPortRect:
+          serializedVersion: 2
+          x: 1184.4609
+          y: 450.73364
+          width: 27
+          height: 27
+        PortType: 0
+        NameDisplayMode: 0
+        ValueDisplayMode: 0
+        SlotMode: 0
+        DisplayName: Cell
+        OverwriteName: 
+        _HelperFunctionsID: -1
+        IsSendingSignals: 0
+        portConnections:
+        - ConnectedNodeID: -2147483647
+          ConnectedNodePortID: 5
+          NodeReference: {fileID: -187986687561197988}
+          isInput: 0
+        initValueSet: 1
+        initialized: 0
+    00000001:
+      type: {class: IntPort, ns: FIMSpace.Graph, asm: AD_Fimp.NodeGraph}
+      data:
+        ParentNodeID: -2147483642
+        PortID: 1
+        ParentNode: {fileID: 8982230842163334613}
+        _E_LatestCorrectPortRect:
+          serializedVersion: 2
+          x: 1184.4609
+          y: 470.73364
+          width: 27
+          height: 27
+        PortType: 0
+        NameDisplayMode: 0
+        ValueDisplayMode: 0
+        SlotMode: 0
+        DisplayName: ID
+        OverwriteName: 
+        _HelperFunctionsID: -1
+        IsSendingSignals: 0
+        portConnections:
+        - ConnectedNodeID: -2147483645
+          ConnectedNodePortID: 0
+          NodeReference: {fileID: -2003270990364727927}
+          isInput: 0
+        initValueSet: 1
+        initialized: 0
+        Value: 0
+    00000002:
+      type: {class: PGGStringPort, ns: FIMSpace.Graph, asm: AD_FimpPGG}
+      data:
+        ParentNodeID: -2147483642
+        PortID: 2
+        ParentNode: {fileID: 8982230842163334613}
+        _E_LatestCorrectPortRect:
+          serializedVersion: 2
+          x: 0
+          y: 0
+          width: 0
+          height: 0
+        PortType: 0
+        NameDisplayMode: 0
+        ValueDisplayMode: 0
+        SlotMode: 0
+        DisplayName: Port
+        OverwriteName: 
+        _HelperFunctionsID: -1
+        IsSendingSignals: 0
+        portConnections: []
+        initValueSet: 1
+        initialized: 0
+        StringVal: 
+    00000003:
+      type: {class: PGGVector3Port, ns: FIMSpace.Graph, asm: AD_FimpPGG}
+      data:
+        ParentNodeID: -2147483642
+        PortID: 3
+        ParentNode: {fileID: 8982230842163334613}
+        _E_LatestCorrectPortRect:
+          serializedVersion: 2
+          x: 1184.4609
+          y: 490.73364
+          width: 27
+          height: 27
+        PortType: 0
+        NameDisplayMode: 0
+        ValueDisplayMode: 0
+        SlotMode: 0
+        DisplayName: Dir
+        OverwriteName: 
+        _HelperFunctionsID: -1
+        IsSendingSignals: 0
+        portConnections:
+        - ConnectedNodeID: -2147483643
+          ConnectedNodePortID: 0
+          NodeReference: {fileID: 4685608620216651025}
+          isInput: 0
+        initValueSet: 1
+        initialized: 0
+        Value: {x: 0, y: 0, z: 0}
+    00000004:
+      type: {class: PGGStringPort, ns: FIMSpace.Graph, asm: AD_FimpPGG}
+      data:
+        ParentNodeID: -2147483642
+        PortID: 4
+        ParentNode: {fileID: 8982230842163334613}
+        _E_LatestCorrectPortRect:
+          serializedVersion: 2
+          x: 0
+          y: 0
+          width: 0
+          height: 0
+        PortType: 0
+        NameDisplayMode: 0
+        ValueDisplayMode: 0
+        SlotMode: 0
+        DisplayName: Port
+        OverwriteName: 
+        _HelperFunctionsID: -1
+        IsSendingSignals: 0
+        portConnections: []
+        initValueSet: 1
+        initialized: 0
+        StringVal: 
