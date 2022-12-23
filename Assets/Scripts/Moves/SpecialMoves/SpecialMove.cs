@@ -9,7 +9,9 @@ public abstract class SpecialMove : Move
     public bool sportMove = false;
     public abstract bool Check(StableCombatChar _char);
     public abstract void OnActivate(StableCombatChar _char);
-
+    public string MyName() {
+        return this.GetType().ToString();
+    }
 
 }
 

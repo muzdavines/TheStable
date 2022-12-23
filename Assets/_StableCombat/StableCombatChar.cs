@@ -680,6 +680,14 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
         state.TransitionTo(new SCBullRush());
     }
 
+    public void ShadowStrike(StableCombatChar target) {
+        state.TransitionTo(new SCShadowStrike(){target = target});
+    }
+
+    public void ShadowStrikeVictim() {
+        state.TransitionTo(new SCShadowStrikeVictim());
+    }
+
     public void DivineIntervention() {
         state.TransitionTo(new SCDivineIntervention());
     }

@@ -601,6 +601,11 @@ public class Character : Living {
                 maxStamina += 25;
                 maxBalance += 35;
                 specialsToAdd.Add("Assassinate");
+                specialsToAdd.Add("ShadowStrike");
+                SpecialMove itemToRemove = activeSpecialMoves.Find(i => i.MyName() == "Backstab");
+                if (itemToRemove != null) {
+                    activeSpecialMoves.Remove(itemToRemove);
+                }
                 activeMeleeMoves[0] = Resources.Load<BaseMeleeMove>("DarkKnife1");
                 activeMeleeMoves[1] = Resources.Load<BaseMeleeMove>("DarkKnife2");
                 activeMeleeMoves[2] = Resources.Load<BaseMeleeMove>("DarkKnife3");

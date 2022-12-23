@@ -33,6 +33,7 @@ public class MatchController : MonoBehaviour
     public GameObject continuePanel;
     public TextMeshProUGUI announcer;
     public List<AnnouncerLine> announcerLines;
+    public Button kickoffButton;
     public class AnnouncerLine {
         public string line;
         public float endTime;
@@ -218,8 +219,26 @@ public class MatchController : MonoBehaviour
                 Destroy(allPlayers[i].gameObject);
             }
 
+            StartCoroutine(DelayContinueKickoff());
         }
 
+    }
+
+    public void CancelDelayContinueKickoff() {
+        StopAllCoroutines();
+        continueCountdown.gameObject.SetActive(false);
+    }
+
+    public Image continueCountdown;
+    IEnumerator DelayContinueKickoff() {
+        continueCountdown.gameObject.SetActive(true);
+        float countdown = 5.0f;
+        while (countdown >= 0.0f) {
+            continueCountdown.fillAmount = countdown / 5.0f;
+            countdown -= Time.deltaTime;
+            yield return null;
+        }
+        kickoffButton.onClick.Invoke();
     }
     void UpdateScoreboard() {
         scoreboard.text = match.home.stable.stableName+": " + homeScore + "  "+ match.away.stable.stableName + ": " + awayScore;

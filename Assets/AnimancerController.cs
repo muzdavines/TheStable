@@ -54,7 +54,9 @@ public class AnimancerController : MonoBehaviour {
     public ClipTransition divineIntervention;
     public ClipTransition seated;
     public ClipTransition singleHeal;
-    
+    public ClipTransition shadowStrike;
+    public ClipTransition shadowStrikeVictim;
+
     public List<Move> baseMeleeAttackMoves;
     public List<Move> baseRangedAttackMoves;
     
@@ -247,6 +249,14 @@ public class AnimancerController : MonoBehaviour {
             return;
         }
         anim.Play(swordFlurry[index++], .25f, FadeMode.FromStart).Events.OnEnd = () => SwordFlurry(index);
+    }
+
+    public void ShadowStrike() {
+        anim.Play(shadowStrike, .25f, FadeMode.FromStart).Events.OnEnd = () => thisChar.Idle();
+    }
+
+    public void ShadowStrikeVictim() {
+        anim.Play(shadowStrikeVictim, .25f, FadeMode.FromStart).Events.OnEnd = () => thisChar.Idle();
     }
     public void Execute() {
         anim.Play(execute, .25f, FadeMode.FromStart).Events.OnEnd = () => thisChar.Idle();

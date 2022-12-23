@@ -15,4 +15,6 @@ public class ActiveSpecialMove : SpecialMove {
         return false;
     }
 
+   
+
 }
