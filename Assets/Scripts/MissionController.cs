@@ -7,8 +7,7 @@ using UnityEngine.AI;
 using NavMeshBuilder = UnityEngine.AI.NavMeshBuilder;
 using UnityEngine.SceneManagement;
 using com.ootii.Cameras;
-
-
+using FIMSpace.Generating;
 using PsychoticLab;
 
 public class MissionController : MonoBehaviour
@@ -33,11 +32,17 @@ public class MissionController : MonoBehaviour
     public BuzzPanelController buzz;
     public HeroUIController heroUI;
     public HeroUIController enemyUI;
+    public GameObject easyDungeon;
     
     // Start is called before the first frame update
     void Start()
     {
-        if (FindObjectOfType<Game>()==null) { return; }
+        if (FindObjectOfType<Game>() == null) {
+            if (contract == null) {
+                return;
+            }
+        }
+
         print("Start Init");
         Init();
     }
@@ -47,16 +52,21 @@ public class MissionController : MonoBehaviour
         initialized = true;
         stageCompleteFired = false;
         print("Init");
-        
-        contract = Game.instance.playerStable.activeContract;
+        if (contract == null) {
+            contract = Game.instance.playerStable.activeContract;
+        }
+
         combatController = GetComponent<CombatController>();
         heroes = new List<Character>();
-        foreach (Character c in Game.instance.playerStable.heroes) {
-            if (c.activeForNextMission) {
-                c.returnDate = Game.instance.gameDate.Add(7);
-                heroes.Add(c);
+        if (FindObjectOfType<Game>() != null) {
+            foreach (Character c in Game.instance.playerStable.heroes) {
+                if (c.activeForNextMission) {
+                    c.returnDate = Game.instance.gameDate.Add(7);
+                    heroes.Add(c);
+                }
             }
         }
+
         CreateNextStage();
         GameObject go = new GameObject();
         go.name = "FinalDetails";
@@ -88,10 +98,13 @@ public class MissionController : MonoBehaviour
             return;
         }
         if (currentStage != null) { Destroy(currentStage); }
-        GameObject stageToLoad = Resources.Load<GameObject>("Stages/" + contract.stages[stageNum].loadName);
-        currentStage = Instantiate<GameObject>(stageToLoad);
-        currentStage.transform.position = Vector3.zero;
-        currentStage.GetComponent<NavMeshSurface>().BuildNavMesh();
+        //GameObject stageToLoad = Resources.Load<GameObject>("Stages/" + contract.stages[stageNum].loadName);
+        // currentStage = Instantiate<GameObject>(stageToLoad);
+        easyDungeon.SetActive(true);
+        easyDungeon.GetComponent<BuildPlannerExecutor>().Generate();
+        StartCoroutine(DelayNavMesh(easyDungeon));
+        //currentStage.transform.position = Vector3.zero;
+
         var poiArray = currentStage.GetComponentsInChildren<MissionPOI>();
         pois = poiArray.ToList();
         foreach (MissionPOI poi in pois) {
@@ -118,6 +131,11 @@ public class MissionController : MonoBehaviour
 
         //move heroes to spawn locations
 
+    }
+
+    IEnumerator DelayNavMesh(GameObject easyDungeon) {
+        yield return new WaitForSeconds(5.0f);
+        easyDungeon.GetComponent<NavMeshSurface>().BuildNavMesh();
     }
     /* public void CreateNextStage() {
          stageNum++;

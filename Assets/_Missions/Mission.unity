@@ -5816,6 +5816,29 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 553479422}
   m_CullTransparentMesh: 0
+--- !u!114 &557707115
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b11aa65450895324a9fe17af1094f4da, type: 3}
+  m_Name: (Clone)
+  m_EditorClassIdentifier: 
+  _editorForceChanged: 0
+  Width:
+    Min: 3
+    Max: 6
+  Depth:
+    Min: 3
+    Max: 6
+  YLevels:
+    Min: 1
+    Max: 1
+  OriginInCenter: 0
 --- !u!1 &561947514
 GameObject:
   m_ObjectHideFlags: 0
@@ -6698,7 +6721,7 @@ MonoBehaviour:
   update: {fileID: 1340374173}
   pois: []
   stageNum: -1
-  contract: {fileID: 0}
+  contract: {fileID: 11400000, guid: 608316a3a695f894b922d218d8c755f5, type: 2}
   heroes: []
   currentEnemies: []
   allChars: []
@@ -6714,6 +6737,7 @@ MonoBehaviour:
   buzz: {fileID: 1382157445}
   heroUI: {fileID: 93110619}
   enemyUI: {fileID: 1763678286}
+  easyDungeon: {fileID: 1216138318148973202}
 --- !u!4 &638961168
 Transform:
   m_ObjectHideFlags: 0
@@ -7244,6 +7268,23 @@ MonoBehaviour:
     max: 0
     threshold: 0
   speed: 1
+--- !u!114 &695896953
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0c79c7a2539c4104cb6be2cba7f34193, type: 3}
+  m_Name: (Clone)
+  m_EditorClassIdentifier: 
+  _editorForceChanged: 0
+  Width: 5
+  YLevels: 1
+  Depth: 4
+  OriginInCenter: 0
 --- !u!1 &734228324
 GameObject:
   m_ObjectHideFlags: 0
@@ -19361,6 +19402,30 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1815425126}
   m_CullTransparentMesh: 1
+--- !u!114 &1815684602
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4c51f20aee773364b8d51fa23d9e5be3, type: 3}
+  m_Name: (Clone)
+  m_EditorClassIdentifier: 
+  _editorForceChanged: 0
+  BranchLength:
+    Min: 4
+    Max: 7
+  TargetBranches:
+    Min: 4
+    Max: 5
+  BranchThickness:
+    Min: 1
+    Max: 1
+  SeparationFactor: 9
+  AvoidOverlaps: 1
 --- !u!1 &1827501406
 GameObject:
   m_ObjectHideFlags: 0
@@ -21240,6 +21305,644 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6bb7015eaa5842f4a93c8a1e86c4c20c, type: 3}
+--- !u!4 &1216138318148973200
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1216138318148973202}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 193.5, y: 238.64558, z: -391.8}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 21
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1216138318148973201
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1216138318148973202}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0cf09ae0e4269ee47ad7dc215a34444a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BuildPlannerPreset: {fileID: 11400000, guid: e30e6d1ad035b7d4295f9ba42cdf76c1, type: 2}
+  _plannerPrepare:
+    PlannerVariablesOverrides: []
+    FieldSetupCompositions:
+    - UseComposition: 1
+      Owner: {fileID: 1216138318148973201}
+      OverrideEnabled: 1
+      Prepared: 1
+      Setup: {fileID: 11400000, guid: 5637d6c712166e84e9037f98a57760ea, type: 2}
+      GenType: 1
+      JustModPack: {fileID: 0}
+      JustMod: {fileID: 0}
+      OtherPlanner: {fileID: 0}
+      subSetup: {fileID: 0}
+      FieldSetupVariablesOverrides:
+      - Name: Spawn Propability Multiplier
+        v3Val: {x: 1, y: 0, z: 0}
+        str: 
+        mat: {fileID: 0}
+        gameObj: {fileID: 0}
+        unityObj: {fileID: 0}
+        helper: {x: 0, y: 5, z: 0}
+        additionalHelperRef: {fileID: 0}
+        ValueType: 1
+        helpForFieldCommand: 0
+        displayOnScene: 0
+        allowTransformFollow: 0
+        FloatSwitch: 0
+      - Name: Spawn Count Multiplier
+        v3Val: {x: 1, y: 0, z: 0}
+        str: 
+        mat: {fileID: 0}
+        gameObj: {fileID: 0}
+        unityObj: {fileID: 0}
+        helper: {x: 0, y: 5, z: 0}
+        additionalHelperRef: {fileID: 0}
+        ValueType: 1
+        helpForFieldCommand: 0
+        displayOnScene: 0
+        allowTransformFollow: 0
+        FloatSwitch: 0
+      FieldPackagesOverrides:
+      - ParentPack: {fileID: -5339756763695819855, guid: 5637d6c712166e84e9037f98a57760ea,
+          type: 2}
+        SetEnabled: 1
+        PackVariablesOverrides: []
+        PackModsOverrides:
+        - ParentMod: {fileID: -2639777238333094023, guid: 8be494d2c88bc8c48b00ecbb8f8b0b47,
+            type: 2}
+          SetEnabled: 1
+          OverridePrefabs:
+          - Prefab: {fileID: 0}
+            MainCollider: {fileID: 0}
+            subID: 0
+            _refMesh: {fileID: 0}
+            _refCol: {fileID: 0}
+          - Prefab: {fileID: 0}
+            MainCollider: {fileID: 0}
+            subID: 0
+            _refMesh: {fileID: 0}
+            _refCol: {fileID: 0}
+          - Prefab: {fileID: 0}
+            MainCollider: {fileID: 0}
+            subID: 0
+            _refMesh: {fileID: 0}
+            _refCol: {fileID: 0}
+          OverrideStampSet: {fileID: 0}
+          OverrideMultiSet: {fileID: 0}
+        - ParentMod: {fileID: -8089660492704003672, guid: 5637d6c712166e84e9037f98a57760ea,
+            type: 2}
+          SetEnabled: 1
+          OverridePrefabs:
+          - Prefab: {fileID: 0}
+            MainCollider: {fileID: 0}
+            subID: 0
+            _refMesh: {fileID: 0}
+            _refCol: {fileID: 0}
+          - Prefab: {fileID: 0}
+            MainCollider: {fileID: 0}
+            subID: 0
+            _refMesh: {fileID: 0}
+            _refCol: {fileID: 0}
+          - Prefab: {fileID: 0}
+            MainCollider: {fileID: 0}
+            subID: 0
+            _refMesh: {fileID: 0}
+            _refCol: {fileID: 0}
+          - Prefab: {fileID: 0}
+            MainCollider: {fileID: 0}
+            subID: 0
+            _refMesh: {fileID: 0}
+            _refCol: {fileID: 0}
+          - Prefab: {fileID: 0}
+            MainCollider: {fileID: 0}
+            subID: 0
+            _refMesh: {fileID: 0}
+            _refCol: {fileID: 0}
+          OverrideStampSet: {fileID: 0}
+          OverrideMultiSet: {fileID: 0}
+        - ParentMod: {fileID: -8650256059610480090, guid: 5637d6c712166e84e9037f98a57760ea,
+            type: 2}
+          SetEnabled: 1
+          OverridePrefabs:
+          - Prefab: {fileID: 0}
+            MainCollider: {fileID: 0}
+            subID: 0
+            _refMesh: {fileID: 0}
+            _refCol: {fileID: 0}
+          OverrideStampSet: {fileID: 0}
+          OverrideMultiSet: {fileID: 0}
+      UtilityModsOverrides:
+      - ParentMod: {fileID: 3791278055261613367, guid: 5637d6c712166e84e9037f98a57760ea,
+          type: 2}
+        SetEnabled: 1
+        OverridePrefabs:
+        - Prefab: {fileID: 0}
+          MainCollider: {fileID: 0}
+          subID: 0
+          _refMesh: {fileID: 0}
+          _refCol: {fileID: 0}
+        OverrideStampSet: {fileID: 0}
+        OverrideMultiSet: {fileID: 0}
+      - ParentMod: {fileID: 4890751667589044680, guid: 5637d6c712166e84e9037f98a57760ea,
+          type: 2}
+        SetEnabled: 1
+        OverridePrefabs: []
+        OverrideStampSet: {fileID: 0}
+        OverrideMultiSet: {fileID: 0}
+      - ParentMod: {fileID: -696351601182156162, guid: 5637d6c712166e84e9037f98a57760ea,
+          type: 2}
+        SetEnabled: 1
+        OverridePrefabs:
+        - Prefab: {fileID: 0}
+          MainCollider: {fileID: 0}
+          subID: 0
+          _refMesh: {fileID: 0}
+          _refCol: {fileID: 0}
+        OverrideStampSet: {fileID: 0}
+        OverrideMultiSet: {fileID: 0}
+      OverrideCellSize: 0
+      OverridingCellSize: {x: 5, y: 5, z: 5}
+      ParentFieldPlanner: {fileID: -338822069954807196, guid: e30e6d1ad035b7d4295f9ba42cdf76c1,
+        type: 2}
+      PlannerVariablesOverrides:
+      - Name: Doorway Command
+        v3Val: {x: 0, y: 0, z: 0}
+        str: 
+        mat: {fileID: 0}
+        gameObj: {fileID: 0}
+        unityObj: {fileID: 0}
+        helper: {x: 0, y: 0, z: 0}
+        additionalHelperRef: {fileID: 0}
+        ValueType: 1
+        helpForFieldCommand: 1
+        displayOnScene: 0
+        allowTransformFollow: 0
+        FloatSwitch: 1
+      InitShapes:
+      - {fileID: 1815684602}
+      Instances: 1
+    - UseComposition: 1
+      Owner: {fileID: 1216138318148973201}
+      OverrideEnabled: 1
+      Prepared: 1
+      Setup: {fileID: 11400000, guid: 5637d6c712166e84e9037f98a57760ea, type: 2}
+      GenType: 1
+      JustModPack: {fileID: 0}
+      JustMod: {fileID: 0}
+      OtherPlanner: {fileID: 0}
+      subSetup: {fileID: 0}
+      FieldSetupVariablesOverrides:
+      - Name: Spawn Propability Multiplier
+        v3Val: {x: 1, y: 0, z: 0}
+        str: 
+        mat: {fileID: 0}
+        gameObj: {fileID: 0}
+        unityObj: {fileID: 0}
+        helper: {x: 0, y: 5, z: 0}
+        additionalHelperRef: {fileID: 0}
+        ValueType: 1
+        helpForFieldCommand: 0
+        displayOnScene: 0
+        allowTransformFollow: 0
+        FloatSwitch: 0
+      - Name: Spawn Count Multiplier
+        v3Val: {x: 1, y: 0, z: 0}
+        str: 
+        mat: {fileID: 0}
+        gameObj: {fileID: 0}
+        unityObj: {fileID: 0}
+        helper: {x: 0, y: 5, z: 0}
+        additionalHelperRef: {fileID: 0}
+        ValueType: 1
+        helpForFieldCommand: 0
+        displayOnScene: 0
+        allowTransformFollow: 0
+        FloatSwitch: 0
+      FieldPackagesOverrides:
+      - ParentPack: {fileID: -5339756763695819855, guid: 5637d6c712166e84e9037f98a57760ea,
+          type: 2}
+        SetEnabled: 1
+        PackVariablesOverrides: []
+        PackModsOverrides:
+        - ParentMod: {fileID: -2639777238333094023, guid: 8be494d2c88bc8c48b00ecbb8f8b0b47,
+            type: 2}
+          SetEnabled: 1
+          OverridePrefabs:
+          - Prefab: {fileID: 0}
+            MainCollider: {fileID: 0}
+            subID: 0
+            _refMesh: {fileID: 0}
+            _refCol: {fileID: 0}
+          - Prefab: {fileID: 0}
+            MainCollider: {fileID: 0}
+            subID: 0
+            _refMesh: {fileID: 0}
+            _refCol: {fileID: 0}
+          - Prefab: {fileID: 0}
+            MainCollider: {fileID: 0}
+            subID: 0
+            _refMesh: {fileID: 0}
+            _refCol: {fileID: 0}
+          OverrideStampSet: {fileID: 0}
+          OverrideMultiSet: {fileID: 0}
+        - ParentMod: {fileID: -8089660492704003672, guid: 5637d6c712166e84e9037f98a57760ea,
+            type: 2}
+          SetEnabled: 1
+          OverridePrefabs:
+          - Prefab: {fileID: 0}
+            MainCollider: {fileID: 0}
+            subID: 0
+            _refMesh: {fileID: 0}
+            _refCol: {fileID: 0}
+          - Prefab: {fileID: 0}
+            MainCollider: {fileID: 0}
+            subID: 0
+            _refMesh: {fileID: 0}
+            _refCol: {fileID: 0}
+          - Prefab: {fileID: 0}
+            MainCollider: {fileID: 0}
+            subID: 0
+            _refMesh: {fileID: 0}
+            _refCol: {fileID: 0}
+          - Prefab: {fileID: 0}
+            MainCollider: {fileID: 0}
+            subID: 0
+            _refMesh: {fileID: 0}
+            _refCol: {fileID: 0}
+          - Prefab: {fileID: 0}
+            MainCollider: {fileID: 0}
+            subID: 0
+            _refMesh: {fileID: 0}
+            _refCol: {fileID: 0}
+          OverrideStampSet: {fileID: 0}
+          OverrideMultiSet: {fileID: 0}
+        - ParentMod: {fileID: -8650256059610480090, guid: 5637d6c712166e84e9037f98a57760ea,
+            type: 2}
+          SetEnabled: 1
+          OverridePrefabs:
+          - Prefab: {fileID: 0}
+            MainCollider: {fileID: 0}
+            subID: 0
+            _refMesh: {fileID: 0}
+            _refCol: {fileID: 0}
+          OverrideStampSet: {fileID: 0}
+          OverrideMultiSet: {fileID: 0}
+      UtilityModsOverrides:
+      - ParentMod: {fileID: 3791278055261613367, guid: 5637d6c712166e84e9037f98a57760ea,
+          type: 2}
+        SetEnabled: 1
+        OverridePrefabs:
+        - Prefab: {fileID: 0}
+          MainCollider: {fileID: 0}
+          subID: 0
+          _refMesh: {fileID: 0}
+          _refCol: {fileID: 0}
+        OverrideStampSet: {fileID: 0}
+        OverrideMultiSet: {fileID: 0}
+      - ParentMod: {fileID: 4890751667589044680, guid: 5637d6c712166e84e9037f98a57760ea,
+          type: 2}
+        SetEnabled: 1
+        OverridePrefabs: []
+        OverrideStampSet: {fileID: 0}
+        OverrideMultiSet: {fileID: 0}
+      - ParentMod: {fileID: -696351601182156162, guid: 5637d6c712166e84e9037f98a57760ea,
+          type: 2}
+        SetEnabled: 1
+        OverridePrefabs:
+        - Prefab: {fileID: 0}
+          MainCollider: {fileID: 0}
+          subID: 0
+          _refMesh: {fileID: 0}
+          _refCol: {fileID: 0}
+        OverrideStampSet: {fileID: 0}
+        OverrideMultiSet: {fileID: 0}
+      OverrideCellSize: 0
+      OverridingCellSize: {x: 5, y: 5, z: 5}
+      ParentFieldPlanner: {fileID: 8322174990077688674, guid: e30e6d1ad035b7d4295f9ba42cdf76c1,
+        type: 2}
+      PlannerVariablesOverrides:
+      - Name: Spawn
+        v3Val: {x: 2, y: 0, z: 0}
+        str: 
+        mat: {fileID: 0}
+        gameObj: {fileID: 0}
+        unityObj: {fileID: 0}
+        helper: {x: 0, y: 0, z: 0}
+        additionalHelperRef: {fileID: 0}
+        ValueType: 1
+        helpForFieldCommand: 1
+        displayOnScene: 0
+        allowTransformFollow: 0
+        FloatSwitch: 1
+      InitShapes:
+      - {fileID: 557707115}
+      Instances: 4
+    - UseComposition: 1
+      Owner: {fileID: 1216138318148973201}
+      OverrideEnabled: 1
+      Prepared: 1
+      Setup: {fileID: 11400000, guid: 5ea9d4d94ab8c34468ab16043405f4a1, type: 2}
+      GenType: 1
+      JustModPack: {fileID: 0}
+      JustMod: {fileID: 0}
+      OtherPlanner: {fileID: 0}
+      subSetup: {fileID: 0}
+      FieldSetupVariablesOverrides:
+      - Name: Spawn Propability Multiplier
+        v3Val: {x: 1, y: 0, z: 0}
+        str: 
+        mat: {fileID: 0}
+        gameObj: {fileID: 0}
+        unityObj: {fileID: 0}
+        helper: {x: 0, y: 5, z: 0}
+        additionalHelperRef: {fileID: 0}
+        ValueType: 1
+        helpForFieldCommand: 0
+        displayOnScene: 0
+        allowTransformFollow: 0
+        FloatSwitch: 0
+      - Name: Spawn Count Multiplier
+        v3Val: {x: 1, y: 0, z: 0}
+        str: 
+        mat: {fileID: 0}
+        gameObj: {fileID: 0}
+        unityObj: {fileID: 0}
+        helper: {x: 0, y: 5, z: 0}
+        additionalHelperRef: {fileID: 0}
+        ValueType: 1
+        helpForFieldCommand: 0
+        displayOnScene: 0
+        allowTransformFollow: 0
+        FloatSwitch: 0
+      FieldPackagesOverrides:
+      - ParentPack: {fileID: -5339756763695819855, guid: 5ea9d4d94ab8c34468ab16043405f4a1,
+          type: 2}
+        SetEnabled: 1
+        PackVariablesOverrides: []
+        PackModsOverrides:
+        - ParentMod: {fileID: -2639777238333094023, guid: 8be494d2c88bc8c48b00ecbb8f8b0b47,
+            type: 2}
+          SetEnabled: 1
+          OverridePrefabs:
+          - Prefab: {fileID: 0}
+            MainCollider: {fileID: 0}
+            subID: 0
+            _refMesh: {fileID: 0}
+            _refCol: {fileID: 0}
+          - Prefab: {fileID: 0}
+            MainCollider: {fileID: 0}
+            subID: 0
+            _refMesh: {fileID: 0}
+            _refCol: {fileID: 0}
+          - Prefab: {fileID: 0}
+            MainCollider: {fileID: 0}
+            subID: 0
+            _refMesh: {fileID: 0}
+            _refCol: {fileID: 0}
+          OverrideStampSet: {fileID: 0}
+          OverrideMultiSet: {fileID: 0}
+        - ParentMod: {fileID: -8089660492704003672, guid: 5ea9d4d94ab8c34468ab16043405f4a1,
+            type: 2}
+          SetEnabled: 1
+          OverridePrefabs:
+          - Prefab: {fileID: 0}
+            MainCollider: {fileID: 0}
+            subID: 0
+            _refMesh: {fileID: 0}
+            _refCol: {fileID: 0}
+          - Prefab: {fileID: 0}
+            MainCollider: {fileID: 0}
+            subID: 0
+            _refMesh: {fileID: 0}
+            _refCol: {fileID: 0}
+          - Prefab: {fileID: 0}
+            MainCollider: {fileID: 0}
+            subID: 0
+            _refMesh: {fileID: 0}
+            _refCol: {fileID: 0}
+          - Prefab: {fileID: 0}
+            MainCollider: {fileID: 0}
+            subID: 0
+            _refMesh: {fileID: 0}
+            _refCol: {fileID: 0}
+          - Prefab: {fileID: 0}
+            MainCollider: {fileID: 0}
+            subID: 0
+            _refMesh: {fileID: 0}
+            _refCol: {fileID: 0}
+          OverrideStampSet: {fileID: 0}
+          OverrideMultiSet: {fileID: 0}
+        - ParentMod: {fileID: -8650256059610480090, guid: 5ea9d4d94ab8c34468ab16043405f4a1,
+            type: 2}
+          SetEnabled: 1
+          OverridePrefabs:
+          - Prefab: {fileID: 0}
+            MainCollider: {fileID: 0}
+            subID: 0
+            _refMesh: {fileID: 0}
+            _refCol: {fileID: 0}
+          OverrideStampSet: {fileID: 0}
+          OverrideMultiSet: {fileID: 0}
+        - ParentMod: {fileID: -4572721777976545696, guid: 5ea9d4d94ab8c34468ab16043405f4a1,
+            type: 2}
+          SetEnabled: 1
+          OverridePrefabs:
+          - Prefab: {fileID: 0}
+            MainCollider: {fileID: 0}
+            subID: 0
+            _refMesh: {fileID: 0}
+            _refCol: {fileID: 0}
+          OverrideStampSet: {fileID: 0}
+          OverrideMultiSet: {fileID: 0}
+      UtilityModsOverrides:
+      - ParentMod: {fileID: 3791278055261613367, guid: 5ea9d4d94ab8c34468ab16043405f4a1,
+          type: 2}
+        SetEnabled: 1
+        OverridePrefabs:
+        - Prefab: {fileID: 0}
+          MainCollider: {fileID: 0}
+          subID: 0
+          _refMesh: {fileID: 0}
+          _refCol: {fileID: 0}
+        OverrideStampSet: {fileID: 0}
+        OverrideMultiSet: {fileID: 0}
+      - ParentMod: {fileID: 4890751667589044680, guid: 5ea9d4d94ab8c34468ab16043405f4a1,
+          type: 2}
+        SetEnabled: 1
+        OverridePrefabs: []
+        OverrideStampSet: {fileID: 0}
+        OverrideMultiSet: {fileID: 0}
+      OverrideCellSize: 0
+      OverridingCellSize: {x: 5, y: 5, z: 5}
+      ParentFieldPlanner: {fileID: -3540413822653774375, guid: e30e6d1ad035b7d4295f9ba42cdf76c1,
+        type: 2}
+      PlannerVariablesOverrides: []
+      InitShapes:
+      - {fileID: 695896953}
+      Instances: 1
+    UseDuplicatesOverrides: 000000
+    DuplicatesOverrides:
+    - DuplicatesCompositions: []
+      DuplicatesShapes: []
+    - DuplicatesCompositions:
+      - UseComposition: 0
+        Owner: {fileID: 0}
+        OverrideEnabled: 1
+        Prepared: 0
+        Setup: {fileID: 0}
+        GenType: 1
+        JustModPack: {fileID: 0}
+        JustMod: {fileID: 0}
+        OtherPlanner: {fileID: 0}
+        subSetup: {fileID: 0}
+        FieldSetupVariablesOverrides: []
+        FieldPackagesOverrides: []
+        UtilityModsOverrides: []
+        OverrideCellSize: 0
+        OverridingCellSize: {x: 1, y: 1, z: 1}
+        ParentFieldPlanner: {fileID: 0}
+        PlannerVariablesOverrides: []
+        InitShapes: []
+        Instances: 1
+      - UseComposition: 0
+        Owner: {fileID: 0}
+        OverrideEnabled: 1
+        Prepared: 0
+        Setup: {fileID: 0}
+        GenType: 1
+        JustModPack: {fileID: 0}
+        JustMod: {fileID: 0}
+        OtherPlanner: {fileID: 0}
+        subSetup: {fileID: 0}
+        FieldSetupVariablesOverrides: []
+        FieldPackagesOverrides: []
+        UtilityModsOverrides: []
+        OverrideCellSize: 0
+        OverridingCellSize: {x: 1, y: 1, z: 1}
+        ParentFieldPlanner: {fileID: 0}
+        PlannerVariablesOverrides: []
+        InitShapes: []
+        Instances: 1
+      - UseComposition: 0
+        Owner: {fileID: 0}
+        OverrideEnabled: 1
+        Prepared: 0
+        Setup: {fileID: 0}
+        GenType: 1
+        JustModPack: {fileID: 0}
+        JustMod: {fileID: 0}
+        OtherPlanner: {fileID: 0}
+        subSetup: {fileID: 0}
+        FieldSetupVariablesOverrides: []
+        FieldPackagesOverrides: []
+        UtilityModsOverrides: []
+        OverrideCellSize: 0
+        OverridingCellSize: {x: 1, y: 1, z: 1}
+        ParentFieldPlanner: {fileID: 0}
+        PlannerVariablesOverrides: []
+        InitShapes: []
+        Instances: 1
+      DuplicatesShapes:
+      - {fileID: 0}
+      - {fileID: 0}
+      - {fileID: 0}
+    - DuplicatesCompositions: []
+      DuplicatesShapes: []
+  _generated:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  Async: 0
+  FlexibleGen: 0
+  Seed: 1628
+  RandomSeed: 1
+  GenerateOnStart: 0
+  RunAfterGenerating:
+    m_PersistentCalls:
+      m_Calls: []
+  _plannerDraftsDirectory: {fileID: 102900000, guid: 0cf7a9679140ae84aa29385d0e1d7373,
+    type: 3}
+  _Editor_SelectedSetup: 2
+  _Editor_PreviewingShape: 0
+  _Editor_drawInitShape: 1
+  _Editor_drawMainVariables: 1
+  _Editor_displaySetup: 1
+  _Editor_topInfoClicked: 0
+  generatedGenerators:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  generatedPainters:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  generatedFlexiblePainters: []
+--- !u!1 &1216138318148973202
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1216138318148973200}
+  - component: {fileID: 1216138318148973201}
+  - component: {fileID: 1216138318148973203}
+  m_Layer: 0
+  m_Name: EasyDungeon
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!114 &1216138318148973203
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1216138318148973202}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a5ac11cc976e418e8d13136b07e1f52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AgentTypeID: 0
+  m_CollectObjects: 0
+  m_Size: {x: 10, y: 10, z: 10}
+  m_Center: {x: 0, y: 2, z: 0}
+  m_LayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_UseGeometry: 1
+  m_DefaultArea: 0
+  m_IgnoreNavMeshAgent: 1
+  m_IgnoreNavMeshObstacle: 1
+  m_OverrideTileSize: 0
+  m_TileSize: 256
+  m_OverrideVoxelSize: 0
+  m_VoxelSize: 0.06666667
+  m_BuildHeightMesh: 0
+  m_NavMeshData: {fileID: 0}
 --- !u!1001 &1957625342343526697
 PrefabInstance:
   m_ObjectHideFlags: 0
