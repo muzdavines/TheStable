@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.AI;
@@ -79,28 +80,27 @@ public class MissionController : MonoBehaviour
         yield return new WaitForSeconds(8.0f);
         CreateNextStage();
     }
-
     public void CreateNextStage() {
         stageNum++;
         buzz.Reset();
-        if (stageNum >= contract.stages.Count)
-        {
+        if (stageNum >= contract.stages.Count) {
             MissionComplete();
             return;
         }
-        if (currentStage != null) { Destroy(currentStage);}
+        if (currentStage != null) { Destroy(currentStage); }
         GameObject stageToLoad = Resources.Load<GameObject>("Stages/" + contract.stages[stageNum].loadName);
         currentStage = Instantiate<GameObject>(stageToLoad);
         currentStage.transform.position = Vector3.zero;
-        //currentStage.GetComponent<NavMeshSurface>().BuildNavMesh();
-        pois = currentStage.GetComponentInChildren<POIController>().pois;
+        currentStage.GetComponent<NavMeshSurface>().BuildNavMesh();
+        var poiArray = currentStage.GetComponentsInChildren<MissionPOI>();
+        pois = poiArray.ToList();
         foreach (MissionPOI poi in pois) {
             poi.gameObject.SetActive(false);
         }
         pois[0].gameObject.SetActive(true);
         Camera cam = Camera.main;
         SpawnLocController spawns = currentStage.GetComponentInChildren<SpawnLocController>();
-        cam.transform.position = spawns.spawnLocs[0].transform.position + new Vector3(5,15,5);
+        cam.transform.position = spawns.spawnLocs[0].transform.position + new Vector3(5, 15, 5);
         cam.transform.LookAt(spawns.spawnLocs[0].position);
         stageCompleteFired = false;
         if (stageNum <= 0) {
@@ -115,10 +115,49 @@ public class MissionController : MonoBehaviour
             }
         }
         Helper.UIUpdate(null);
-        
+
         //move heroes to spawn locations
 
     }
+    /* public void CreateNextStage() {
+         stageNum++;
+         buzz.Reset();
+         if (stageNum >= contract.stages.Count)
+         {
+             MissionComplete();
+             return;
+         }
+         if (currentStage != null) { Destroy(currentStage);}
+         GameObject stageToLoad = Resources.Load<GameObject>("Stages/" + contract.stages[stageNum].loadName);
+         currentStage = Instantiate<GameObject>(stageToLoad);
+         currentStage.transform.position = Vector3.zero;
+         //currentStage.GetComponent<NavMeshSurface>().BuildNavMesh();
+         pois = currentStage.GetComponentInChildren<POIController>().pois;
+         foreach (MissionPOI poi in pois) {
+             poi.gameObject.SetActive(false);
+         }
+         pois[0].gameObject.SetActive(true);
+         Camera cam = Camera.main;
+         SpawnLocController spawns = currentStage.GetComponentInChildren<SpawnLocController>();
+         cam.transform.position = spawns.spawnLocs[0].transform.position + new Vector3(5,15,5);
+         cam.transform.LookAt(spawns.spawnLocs[0].position);
+         stageCompleteFired = false;
+         if (stageNum <= 0) {
+             StartCoroutine(DelaySpawnChars());
+         }
+         else {
+             foreach (StableCombatChar c in allChars) {
+                 if (c.myCharacter.incapacitated) { continue; }
+                 c.GetComponent<NavMeshAgent>().enabled = false;
+                 c.transform.position = currentStage.GetComponentInChildren<SpawnLocController>().spawnLocs[Random.Range(0, 4)].position;
+                 c.GetComponent<NavMeshAgent>().enabled = true;
+             }
+         }
+         Helper.UIUpdate(null);
+
+         //move heroes to spawn locations
+
+     }*/
     void DamageDetails() {
         MissionFinalDetails details = FindObjectOfType<MissionFinalDetails>();
         details.damageDetails = new List<MissionFinalDetails.DamageDetails>();
