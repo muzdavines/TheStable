@@ -39,7 +39,7 @@ public class PostMissionController : MonoBehaviour
 
         print("#TODO#Add Narrative and Mission to player history log");
         Destroy(d.gameObject);
-        Game.instance.playerStable.ProcessDeadHeroes();
+       
         Game.instance.playerStable.SetAllHeroesInactive();
         Game.instance.playerStable.contracts.Remove(Game.instance.playerStable.activeContract);
         Game.instance.playerStable.activeContract = null;

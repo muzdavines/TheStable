@@ -146,5 +146,38 @@ public static class Names {
 "Master",
 "Great",
 "Ultimate" };
+    public static string[] Ninjanick = {
+        "Shadow",
+        "Silent Killer",
+        "Phantom",
+        "Ghost",
+        "Nightstalker",
+        "Invisible Man",
+        "Whisper",
+        "Stealthy One",
+        "Undetectable",
+        "Evasive",
+        "Sneaky",
+        "Covert",
+        "Furtive",
+        "Unseen",
+        "Elusive",
+        "Devious",
+        "Intangible",
+        "Mysterious",
+        "Secretive",
+        "Unnoticeable",
+        "Sly",
+        "Cunning",
+        "Slippery",
+        "Artful",
+        "Stealthy Assassin",
+        "Unseen Predator",
+        "Silent Assassin",
+        "Covert Killer",
+        "Invisible Warrior",
+        "Phantom Fighter"
+    };
+
 
 }

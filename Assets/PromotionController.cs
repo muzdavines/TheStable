@@ -18,10 +18,16 @@ public class PromotionController : MonoBehaviour
     public void Init(Character _activeChar) {
         activeChar = _activeChar;
         activeIndex = firstButton.isOn ? 0 : 1;
-        for (int i = 0; i < 2; i++) {
+        if (activeChar.mod.promoteOptions.Length == 1) {
+            OnFirstClicked(true);
+        }
+        headers[0].transform.parent.gameObject.SetActive(false);
+        headers[1].transform.parent.gameObject.SetActive(false);
+        for (int i = 0; i < activeChar.mod.promoteOptions.Length; i++) {
             UpgradeModifier.Promote p = activeChar.mod.promoteOptions[i];
             headers[i].text = p.promoteButtonLabel;
             descriptions[i].text = p.promoteDescription;
+            headers[i].transform.parent.gameObject.SetActive(true);
         }
         
         mainText.text = activeChar.mod.promoteMainText;

@@ -25,7 +25,7 @@ public class StageTester : MonoBehaviour
         player.warlord.InitWarlord(StableMasterType.Warrior);
         if (heroes.Count == 0) {
             for (int i = 0; i < 4; i++) {
-                Character c = new Character() { name = Names.Warrior[Random.Range(0, Names.Warrior.Length)], age = 18, health = 3, modelName = "CharRogue", activeForNextMission = true };
+                Character c = new Character() { name = Names.Warrior[Random.Range(0, Names.Warrior.Length)], age = 18, modelName = "CharRogue", activeForNextMission = true };
                 Weapon w = new Weapon() { condition = 100, damage = 10, itemName = "Long Sword" };
                 Armor a = new Armor() { condition = 100, defense = 10, health = 0, itemName = "Chain Mail" };
                 c.meleeWeapon = w;

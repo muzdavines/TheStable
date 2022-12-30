@@ -15,6 +15,10 @@ public enum CharacterAttribute { shooting, passing, tackling, carrying, all}
 [CreateAssetMenu]
 [System.Serializable]
 public class Character : Living {
+    public string nickname;
+    public string MyName {
+        get { return name + " " + nickname; }
+    }
     //Physical Attributes
     public int strength = 5;
     public int agility = 5;
@@ -34,8 +38,6 @@ public class Character : Living {
     public int magic = 10;
     public int xp = 0;
 
-    public int health; //dots - 0 = death
-
     //need some enums for armor type so we can have bonuses and penalties - dodge penalty for plate, etc.
     public CombatFocus combatFocus;
 
@@ -44,7 +46,8 @@ public class Character : Living {
     public int maxBalance = 5;
     public int maxMind = 5;
     public int maxHealth = 1; //health defined above
-
+    public int careerKnockouts; //how many times has this character been knockedout?
+    public int knockoutsToProcess;
     public List<Move> knownMoves = new List<Move>();
     public List<MoveSave> knownMovesSave = new List<MoveSave>();
     public List<Move> activeMeleeMoves = new List<Move>();
@@ -440,7 +443,7 @@ public class Character : Living {
         runspeed += Random.Range(-3, 4);
     }
 
-    public enum Archetype { Striker, Winger, Midfielder, Defender, Goalkeeper, Warrior, Rogue, Wizard, Swashbuckler, Assassin, Thief, Thug, Enforcer, Charlatan, DarkWizard, LightWizard, ImperialWizard, VoidWizard, ExiledWizard, HolyWizard, Soldier, Mercenary, DarkKnight, Paladin, Champion, Marauder, Amateur }
+    public enum Archetype { Striker, Winger, Midfielder, Defender, Goalkeeper, Warrior, Rogue, Wizard, Swashbuckler, Assassin, Thief, Thug, Enforcer, Charlatan, DarkWizard, LightWizard, ImperialWizard, VoidWizard, ExiledWizard, HolyWizard, Soldier, Mercenary, DarkKnight, Paladin, Champion, Marauder, Amateur, Ninja }
     public Archetype archetype;
     public UpgradeModifier mod;
     public void Awake() {
@@ -592,6 +595,21 @@ public class Character : Living {
     public void Promote(Archetype newArchetype) {
         List<string> specialsToAdd = new List<string>();
         switch (newArchetype) {
+            case Archetype.Ninja:
+                specialsToAdd.Add("ShadowStrike");
+                SpecialMove itemToRemove = activeSpecialMoves.Find(i => i.MyName() == "Backstab");
+                if (itemToRemove != null) {
+                    activeSpecialMoves.Remove(itemToRemove);
+                }
+                shooting += 15;
+                tackling += 15;
+                runspeed += 2;
+                maxHealth += 1;
+                maxMind += 50;
+                maxStamina += 50;
+                maxBalance += 100;
+                nickname += " the " + Names.Ninjanick[Random.Range(0, Names.Ninjanick.Length)];
+                break;
             case Archetype.Assassin:
                 shooting += 10;
                 tackling -= 10;
@@ -601,11 +619,7 @@ public class Character : Living {
                 maxStamina += 25;
                 maxBalance += 35;
                 specialsToAdd.Add("Assassinate");
-                specialsToAdd.Add("ShadowStrike");
-                SpecialMove itemToRemove = activeSpecialMoves.Find(i => i.MyName() == "Backstab");
-                if (itemToRemove != null) {
-                    activeSpecialMoves.Remove(itemToRemove);
-                }
+                
                 activeMeleeMoves[0] = Resources.Load<BaseMeleeMove>("DarkKnife1");
                 activeMeleeMoves[1] = Resources.Load<BaseMeleeMove>("DarkKnife2");
                 activeMeleeMoves[2] = Resources.Load<BaseMeleeMove>("DarkKnife3");
@@ -626,7 +640,7 @@ public class Character : Living {
                 activeMeleeMoves[2] = Resources.Load<BaseMeleeMove>("Knife3");
                 meleeWeapon = Instantiate(Resources.Load<Weapon>("KnifeSO"));
                 specialsToAdd.Add("BolaThrow");
-                name += " the " + Names.RogueNick[Random.Range(0, Names.RogueNick.Length)];
+                nickname += " the " + Names.RogueNick[Random.Range(0, Names.RogueNick.Length)];
                 break;
             case Archetype.Thug:
                 shooting -= 10;
@@ -641,7 +655,7 @@ public class Character : Living {
                 meleeWeapon = Instantiate(Resources.Load<Weapon>("SpikedBatSO"));
 
                 specialsToAdd.Add("Kneecapper");
-                name += " the " + Names.RogueNick[Random.Range(0, Names.RogueNick.Length)];
+                nickname += " the " + Names.RogueNick[Random.Range(0, Names.RogueNick.Length)];
                 break;
             case Archetype.Swashbuckler:
                 shooting -= 10;
@@ -682,7 +696,7 @@ public class Character : Living {
                 maxStamina += 15;
                 maxBalance += 25;
                 specialsToAdd.Add("BallOfPower");
-                name += " the " + Names.Wizardnick[Random.Range(0, Names.Wizardnick.Length)];
+                nickname += " the " + Names.Wizardnick[Random.Range(0, Names.Wizardnick.Length)];
                 break;
             case Archetype.DarkWizard:
                 passing -= 10;
@@ -694,7 +708,7 @@ public class Character : Living {
                 activeRangedMoves[0] = Resources.Load<Move>("VoidBolt");
                 activeRangedMoves[1] = Resources.Load<Move>("VoidBolt");
                 activeRangedMoves[2] = Resources.Load<Move>("VoidBolt");
-                name += " the " + Names.Wizardnick[Random.Range(0, Names.Wizardnick.Length)];
+                nickname += " the " + Names.Wizardnick[Random.Range(0, Names.Wizardnick.Length)];
                 break;
             case Archetype.ExiledWizard:
                 passing -= 10;
@@ -749,7 +763,7 @@ public class Character : Living {
                 activeMeleeMoves[2] = Resources.Load<BaseMeleeMove>("Halberd3");
                 meleeWeapon = Instantiate(Resources.Load<Weapon>("HalberdSO"));
 
-                name += " the " + Names.Warriornick[Random.Range(0, Names.Warriornick.Length)];
+                nickname += " the " + Names.Warriornick[Random.Range(0, Names.Warriornick.Length)];
                 break;
             case Archetype.Soldier:
                 tackling += 10;
@@ -762,8 +776,8 @@ public class Character : Living {
                 activeMeleeMoves[2] = Resources.Load<BaseMeleeMove>("AdvancedSword3");
                 meleeWeapon = Instantiate(Resources.Load<Weapon>("AdvancedSwordSO"));
                 specialsToAdd.Add("SwordFlurry");
-               
-                name += " the " + Names.Warriornick[Random.Range(0, Names.Warriornick.Length)];
+
+                nickname += " the " + Names.Warriornick[Random.Range(0, Names.Warriornick.Length)];
                 break;
             case Archetype.Champion:
                 tackling += 10;

@@ -244,6 +244,9 @@ public class Game : MonoBehaviour {
                 }
             }*/
         }
+
+        playerStable.ProcessKnockouts();
+        playerStable.ProcessDeadHeroes();
         Helper.UpdateAllUI();
         playerStable.SortHeroes();
     }

@@ -66,6 +66,7 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
     public HeroFrame uiController;
     //Combat Attributes
     public float health, stamina, balance, mind, maxHealth, maxStamina, maxBalance, maxMind;
+    public int knockoutsThisMission; //count the number of times 
     [System.Serializable]
     public class Mod {
         public float timeEnd;
@@ -680,8 +681,8 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
         state.TransitionTo(new SCBullRush());
     }
 
-    public void ShadowStrike(StableCombatChar target) {
-        state.TransitionTo(new SCShadowStrike(){target = target});
+    public void ShadowStrike(StableCombatChar target, ShadowStrike shadowStrike) {
+        state.TransitionTo(new SCShadowStrike(){target = target, myShadowStrike = shadowStrike});
     }
 
     public void ShadowStrikeVictim() {
@@ -976,6 +977,7 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
         uiController?.UpdateAll();
         if (health <= 0) {
             GetDowned();
+            myCharacter.knockoutsToProcess++;
             if (attacker != null) {
                 if (recordStats) {
                     attacker.myCharacter.xp += Game.XPCombatDown;

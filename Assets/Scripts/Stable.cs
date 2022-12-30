@@ -58,20 +58,47 @@ public class Stable
         }
     }
 
+    public void ProcessKnockouts() {
+        foreach (Character c in heroes) {
+            for (int i = 0; i < c.knockoutsToProcess; i++) {
+                float ageThreshold = 25;
+                float agePenalty = .01f;
+                float knockoutThreshold = 0;
+                float knockoutPenalty = .02f;
+                float pct = Mathf.Clamp(c.age - ageThreshold, 0, Mathf.Infinity) * agePenalty +
+                            Mathf.Clamp(c.careerKnockouts - knockoutThreshold, 0, Mathf.Infinity) * knockoutPenalty;
+                float roll = Random.Range(0f, 1f);
+                Debug.Log("#Knockout#" + c.name + " " + pct + " " + roll);
+                if (roll < pct) {
+                    Debug.Log("#Knockout#Failed Roll " + c.name);
+                    c.maxHealth--;
+                }
+                else {
+                    Debug.Log("#Knockout#Succeed Roll " + c.name);
+                }
+                c.careerKnockouts++;
+            }
+            c.knockoutsToProcess = 0;
+        }
+    }
     public void SortHeroes() {
         heroes.Sort((x, y) => (x.archetype).CompareTo(y.archetype));
     }
 
     bool IsDead(Character c) {
-        if (c.health <= 0) {
-            Debug.Log("Dead: " + c.name + " But ignoring permadeath.");
-            c.health = 4;
-            return false;
+        if (c.maxHealth <= 0) {
+            Debug.Log("Dead: " + c.name + " Removing.");
             return true;
         } else { return false; }
     }
     public void ProcessDeadHeroes() {
         Debug.Log("Add something here to account for dead heroes in the narrative. Maybe do a funeral for a legend or something.");
+        foreach (var c in heroes) {
+            if (c.maxHealth <= 0) {
+                Game.instance.news.Add(new NewsItem() { body = c.name + " has suffered a career ending injury. This occurs when a hero suffers too many knockouts in missions or playing Flonkball. Each time a hero is downed, there is an increasingly likely chance they will suffer this kind of injury.", date = Game.instance.gameDate, sender = "The Boss", subject = "A Hero Has Retired" });
+            }
+        }
+        
         heroes.RemoveAll(IsDead);
     }
 

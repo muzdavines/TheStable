@@ -4,12 +4,12 @@ using System.Linq;
 using UnityEngine;
 
 public class ShadowStrike : ActiveSpecialMove {
-    private float lastFired = -45;
+    public float lastFired = -45;
     private StableCombatChar target;
     public override void OnActivate(StableCombatChar _char) {
         base.OnActivate(_char);
         lastFired = Time.time;
-        _char.ShadowStrike(target);
+        _char.ShadowStrike(target, this);
     }
 
     public override bool Check(StableCombatChar _char) {
