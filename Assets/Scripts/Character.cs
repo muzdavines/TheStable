@@ -597,6 +597,10 @@ public class Character : Living {
         switch (newArchetype) {
             case Archetype.Ninja:
                 specialsToAdd.Add("ShadowStrike");
+                activeMeleeMoves[0] = Resources.Load<BaseMeleeMove>("Katana1");
+                activeMeleeMoves[1] = Resources.Load<BaseMeleeMove>("Katana2");
+                activeMeleeMoves[2] = Resources.Load<BaseMeleeMove>("Katana3");
+                meleeWeapon = Instantiate(Resources.Load<Weapon>("KatanaSO"));
                 SpecialMove itemToRemove = activeSpecialMoves.Find(i => i.MyName() == "Backstab");
                 if (itemToRemove != null) {
                     activeSpecialMoves.Remove(itemToRemove);
