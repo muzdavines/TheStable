@@ -37,12 +37,10 @@ public class MissionController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (FindObjectOfType<Game>() == null) {
-            if (contract == null) {
-                return;
-            }
+        if (FindObjectOfType<Game>() == null && contract == null) {
+            return;
         }
-
+        contract = null;
         print("Start Init");
         Init();
     }
@@ -57,8 +55,9 @@ public class MissionController : MonoBehaviour
         }
 
         combatController = GetComponent<CombatController>();
-        heroes = new List<Character>();
+        
         if (FindObjectOfType<Game>() != null) {
+            heroes = new List<Character>();
             foreach (Character c in Game.instance.playerStable.heroes) {
                 if (c.activeForNextMission) {
                     c.returnDate = Game.instance.gameDate.Add(7);
@@ -98,14 +97,55 @@ public class MissionController : MonoBehaviour
             return;
         }
         if (currentStage != null) { Destroy(currentStage); }
-        //GameObject stageToLoad = Resources.Load<GameObject>("Stages/" + contract.stages[stageNum].loadName);
-        // currentStage = Instantiate<GameObject>(stageToLoad);
-        easyDungeon.SetActive(true);
-        easyDungeon.GetComponent<BuildPlannerExecutor>().Generate();
-        StartCoroutine(DelayNavMesh(easyDungeon));
+
+        if (contract.stages[stageNum].loadName != "EasyDungeon") {
+            GameObject stageToLoad = Resources.Load<GameObject>("Stages/" + contract.stages[stageNum].loadName);
+            currentStage = Instantiate<GameObject>(stageToLoad);
+            
+            currentStage.transform.position = Vector3.zero;
+            //currentStage.GetComponent<NavMeshSurface>().BuildNavMesh();
+            pois = currentStage.GetComponentInChildren<POIController>().pois;
+            foreach (MissionPOI poi in pois) {
+                poi.gameObject.SetActive(false);
+            }
+            pois[0].gameObject.SetActive(true);
+            Camera cam = Camera.main;
+            SpawnLocController spawns = currentStage.GetComponentInChildren<SpawnLocController>();
+            cam.transform.position = spawns.spawnLocs[0].transform.position + new Vector3(5, 15, 5);
+            cam.transform.LookAt(spawns.spawnLocs[0].position);
+            stageCompleteFired = false;
+            if (stageNum <= 0) {
+                StartCoroutine(DelaySpawnChars());
+            }
+            else {
+                foreach (StableCombatChar c in allChars) {
+                    if (c.myCharacter.incapacitated) { continue; }
+                    c.GetComponent<NavMeshAgent>().enabled = false;
+                    c.transform.position = currentStage.GetComponentInChildren<SpawnLocController>().spawnLocs[Random.Range(0, 4)].position;
+                    c.GetComponent<NavMeshAgent>().enabled = true;
+                }
+            }
+            Helper.UIUpdate(null);
+        }
+        else {
+
+            currentStage = easyDungeon;
+            easyDungeon.SetActive(true);
+            easyDungeon.GetComponent<BuildPlannerExecutor>().Generate();
+            StartCoroutine(DelayNavMesh(easyDungeon));
+        }
+
+        
         //currentStage.transform.position = Vector3.zero;
 
-        var poiArray = currentStage.GetComponentsInChildren<MissionPOI>();
+    }
+
+    IEnumerator DelayNavMesh(GameObject easyDungeon) {
+        yield return new WaitForSeconds(3.0f);
+        easyDungeon.GetComponent<NavMeshSurface>().BuildNavMesh();
+
+        var poiArray = FindObjectsOfType<MissionPOI>();
+        print(poiArray.Length + " POIS");
         pois = poiArray.ToList();
         foreach (MissionPOI poi in pois) {
             poi.gameObject.SetActive(false);
@@ -123,19 +163,12 @@ public class MissionController : MonoBehaviour
             foreach (StableCombatChar c in allChars) {
                 if (c.myCharacter.incapacitated) { continue; }
                 c.GetComponent<NavMeshAgent>().enabled = false;
-                c.transform.position = currentStage.GetComponentInChildren<SpawnLocController>().spawnLocs[Random.Range(0, 4)].position;
+                c.transform.position = spawns.spawnLocs[Random.Range(0, 4)].position;
                 c.GetComponent<NavMeshAgent>().enabled = true;
             }
         }
         Helper.UIUpdate(null);
-
         //move heroes to spawn locations
-
-    }
-
-    IEnumerator DelayNavMesh(GameObject easyDungeon) {
-        yield return new WaitForSeconds(5.0f);
-        easyDungeon.GetComponent<NavMeshSurface>().BuildNavMesh();
     }
     /* public void CreateNextStage() {
          stageNum++;
@@ -244,8 +277,9 @@ public class MissionController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
+    void Update() {
+        if (Time.timeSinceLevelLoad < 15) {
+            return;}
         if (!stageCompleteFired)
         {
             if (pois.Count == 0)
@@ -335,6 +369,10 @@ public class MissionController : MonoBehaviour
         if (pois.Count == 0) {
             print("NO MORE STEPS");
             return null;
+        }
+
+        if (pois.Count == 1) {
+            pois[0].isFinalForMission = true;
         }
         pois[0].gameObject.SetActive(true);
         com.ootii.Cameras.CameraController _cam = FindObjectOfType<com.ootii.Cameras.CameraController>();
