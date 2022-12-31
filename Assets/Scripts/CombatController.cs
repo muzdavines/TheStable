@@ -15,6 +15,7 @@ public class CombatController : MonoBehaviour
     public HeroUIController enemyUI;
     public void Init(List<StableCombatChar> _heroes, List<StableCombatChar> _enemies) {
         combatActive = true;
+        combatEnded = false;
         heroes = _heroes;
         enemies = _enemies;
         print("Set Teams in CombatController");
