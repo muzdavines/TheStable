@@ -149,6 +149,7 @@ public class MissionController : MonoBehaviour
         pois = poiArray.ToList();
         foreach (MissionPOI poi in pois) {
             poi.gameObject.SetActive(false);
+            (poi as MissionPOICombat).PopulateEnemies(1);
         }
         pois[0].gameObject.SetActive(true);
         Camera cam = Camera.main;

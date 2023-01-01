@@ -19,6 +19,10 @@ public class Character : Living {
     public string MyName {
         get { return name + " " + nickname; }
     }
+
+    public int challengeRating {
+        get { return (int)((maxBalance + maxStamina + maxMind) / 3); }
+    }
     //Physical Attributes
     public int strength = 5;
     public int agility = 5;
