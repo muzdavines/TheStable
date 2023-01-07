@@ -197,6 +197,7 @@ public class Game : MonoBehaviour {
         playerStable.ExpireContracts();
         ExpireMarketContracts();
         ProcessTraining();
+        CheckPlayerHealth();
         if (gameDate.dayOfWeek == 0) {
             //money stuff
             Finance f = playerStable.finance;
@@ -209,7 +210,7 @@ public class Game : MonoBehaviour {
                 c.contract.weeksLeft--;
             }
         }
-
+       
         //Process Relationship stuff
         //Process Hero Quests
         //Process Correspondence/Diplomacy
@@ -250,7 +251,16 @@ public class Game : MonoBehaviour {
         Helper.UpdateAllUI();
         playerStable.SortHeroes();
     }
-
+    public void CheckPlayerHealth()
+    {
+        foreach (Character c in playerStable.heroes)
+        {
+            if (c.activeInLineup == true && c.currentPosition == Position.NA)
+            {
+                c.activeInLineup = false;
+            }
+        }
+    }
     public void UpdateContractMarket() {
         if (missionContractList != null) {
             foreach (MissionContract m in missionContractList.GetContracts()) {
