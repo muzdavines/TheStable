@@ -114,6 +114,7 @@ public class MissionController : MonoBehaviour
             cam.transform.position = spawns.spawnLocs[0].transform.position + new Vector3(5, 15, 5);
             cam.transform.LookAt(spawns.spawnLocs[0].position);
             stageCompleteFired = false;
+           // SortTransforms(pois, currentStage.GetComponentInChildren<SpawnLocController>().transform.position);
             if (stageNum <= 0) {
                 StartCoroutine(DelaySpawnChars());
             }
@@ -125,6 +126,7 @@ public class MissionController : MonoBehaviour
                     c.GetComponent<NavMeshAgent>().enabled = true;
                 }
             }
+            
             Helper.UIUpdate(null);
         }
         else {
@@ -134,7 +136,7 @@ public class MissionController : MonoBehaviour
             easyDungeon.GetComponent<BuildPlannerExecutor>().Generate();
             StartCoroutine(DelayNavMesh(easyDungeon));
         }
-
+        
         
         //currentStage.transform.position = Vector3.zero;
 
@@ -157,6 +159,7 @@ public class MissionController : MonoBehaviour
         cam.transform.position = spawns.spawnLocs[0].transform.position + new Vector3(5, 15, 5);
         cam.transform.LookAt(spawns.spawnLocs[0].position);
         stageCompleteFired = false;
+        SortTransforms(pois, currentStage.GetComponentInChildren<SpawnLocController>().transform.position);
         if (stageNum <= 0) {
             StartCoroutine(DelaySpawnChars());
         }
@@ -409,7 +412,15 @@ public class MissionController : MonoBehaviour
             }
         }
     }
-   /*TODO: Hierarchy system of required steps so if things go sideways,
-    * once all characters are idle they can return to the actual mission
-    */
+
+    void SortTransforms(List<MissionPOI> transforms, Vector3 referencePosition) {
+        transforms.Sort((t1, t2) => {
+            float distance1 = Vector3.Distance(t1.transform.position, referencePosition);
+            float distance2 = Vector3.Distance(t2.transform.position, referencePosition);
+            return distance1.CompareTo(distance2);
+        });
+    }
+    /*TODO: Hierarchy system of required steps so if things go sideways,
+     * once all characters are idle they can return to the actual mission
+     */
 }
