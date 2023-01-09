@@ -20,17 +20,18 @@ public class MissionPOI : MonoBehaviour
     public string attributePrereq;
     public int levelReq;
     public string successText, failText;
+  
     void Start()
     {
         control = GameObject.FindObjectOfType<MissionController>();
         col = GetComponent<Collider>();
-        
+       
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+       
     }
 
     public void OnTriggerEnter(Collider other) {

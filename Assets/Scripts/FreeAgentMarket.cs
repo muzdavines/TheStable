@@ -34,7 +34,11 @@ public class FreeAgentMarket
             thisHero.GenerateCharacter((Character.Archetype)(Random.Range(5, 8)), 1);
             
             thisHero.ModifyCharacter();
-            thisHero.contract = new EmploymentContract() { signingBonus = Random.Range(500, 2000), weeklySalary = Random.Range(50, 150), weeksLeft = 48 };
+            var ec = new EmploymentContract();
+            ec.signingBonus = (int)(thisHero.MyValue() * Random.Range(0.6f, 1.4f));
+            ec.weeklySalary = (int)(thisHero.MyWeeklySalary() * Random.Range(0.6f, 1.4f));
+            ec.weeksLeft = 48;
+            thisHero.contract = ec;
             market.Add(thisHero);
         }
     }

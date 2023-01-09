@@ -349,6 +349,16 @@ public static class Helper {
         return newDate;
     }
 
+    public static int MyValue(this Character c) {
+        return (int)(c.runspeed * 50 + c.shooting * 4 + c.passing * 3 + c.tackling * 4 + c.carrying * 3 +
+                     c.maxHealth * 100 + c.maxStamina * 5 + c.maxBalance * 5 + c.maxMind * 5);
+    }
+
+    public static int MyWeeklySalary(this Character c) {
+        return (int)(c.runspeed * 4 + c.shooting * .2 + c.passing * .2 + c.tackling * .2 + c.carrying * .2 +
+                     c.maxHealth * 5 + c.maxStamina * .4 + c.maxBalance * .4 + c.maxMind * .4);
+    }
+
     public static bool IsAvailable(this Character c) {
         return !c.returnDate.IsOnOrAfter(Game.instance.gameDate, false);
     }

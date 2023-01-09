@@ -40,6 +40,8 @@ public class MissionController : MonoBehaviour
         if (FindObjectOfType<Game>() == null && contract == null) {
             return;
         }
+
+        timeout = Mathf.Infinity;
         contract = null;
         print("Start Init");
         Init();
@@ -91,6 +93,7 @@ public class MissionController : MonoBehaviour
     }
     public void CreateNextStage() {
         stageNum++;
+        timeout = Mathf.Infinity;
         buzz.Reset();
         if (stageNum >= contract.stages.Count) {
             MissionComplete();
@@ -154,6 +157,7 @@ public class MissionController : MonoBehaviour
             (poi as MissionPOICombat).PopulateEnemies(1);
         }
         pois[0].gameObject.SetActive(true);
+        
         Camera cam = Camera.main;
         SpawnLocController spawns = currentStage.GetComponentInChildren<SpawnLocController>();
         cam.transform.position = spawns.spawnLocs[0].transform.position + new Vector3(5, 15, 5);
@@ -242,7 +246,6 @@ public class MissionController : MonoBehaviour
     }
     public List<StableCombatChar> SpawnChars() {
         return SpawnChars(heroes, currentStage.GetComponentInChildren<SpawnLocController>().spawnLocs);
-       
     }
 
     public List<StableCombatChar> SpawnChars(List<Character> chars, List<Transform> spawns, int team = 0) {
@@ -280,10 +283,24 @@ public class MissionController : MonoBehaviour
         
     }
 
+   private float timeout;
+   public void CheckTimeoutPOI() {
+       if (Time.time > timeout) {
+           timeout = Mathf.Infinity;
+           foreach (var h in allChars) {
+               if (h.team == 0) {
+                   h.agent.enabled = false;
+                   h.transform.position = pois[0].col.transform.position;
+                   h.agent.enabled = true;
+               } 
+           }
+        } 
+   }
     // Update is called once per frame
     void Update() {
         if (Time.timeSinceLevelLoad < 15) {
             return;}
+        CheckTimeoutPOI();
         if (!stageCompleteFired)
         {
             if (pois.Count == 0)
@@ -296,6 +313,7 @@ public class MissionController : MonoBehaviour
     MissionPOICombat poiCombat;
     public void BeginCombat(List<Character> enemies, List<Transform> enemySpawnLoc, MissionPOICombat _poiCombat) {
         Debug.Log("#Combat#Combat Begin");
+        timeout = Mathf.Infinity;
         currentEnemies = new List<Character>();
         foreach (Character e in enemies) {
             currentEnemies.Add(Instantiate<Character>(e).Init());
@@ -332,6 +350,7 @@ public class MissionController : MonoBehaviour
     public void POITriggered(MissionPOI poi, Collider character) {
         //make character walk to target of POI
         //need to control which stage of the mission step we are at
+        timeout = Mathf.Infinity;
         missionActive = true;
         StableCombatChar thisChar = character.GetComponent<StableCombatChar>();
         thisChar.MissionMoveTo(poi.targetPos);
@@ -365,11 +384,13 @@ public class MissionController : MonoBehaviour
             return;
         }
         if (combatController.combatActive) { return; }
+        
         foreach (StableCombatChar c in allChars) {
             c.FindNextStep();
         }
     }
     public Transform GetNextPOI() {
+        timeout = Time.time + 20;
         if (pois.Count == 0) {
             print("NO MORE STEPS");
             return null;
