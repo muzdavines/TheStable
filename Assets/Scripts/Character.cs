@@ -847,6 +847,13 @@ public class Character : Living {
         archetype = newArchetype;
         mod = Resources.Load<UpgradeModifier>(archetype + "Upgrade");
         //myGearSet = Resources.Load<CharacterGearSet>("GearSets/" + archetype.ToString());
+        shooting = (int)Mathf.Clamp(shooting, 5, Mathf.Infinity);
+        passing = (int)Mathf.Clamp(passing, 5, Mathf.Infinity);
+        tackling = (int)Mathf.Clamp(tackling, 5, Mathf.Infinity);
+        carrying = (int)Mathf.Clamp(carrying, 5, Mathf.Infinity);
+        maxMind = (int)Mathf.Clamp(maxMind, 5, Mathf.Infinity);
+        maxStamina = (int)Mathf.Clamp(maxStamina, 5, Mathf.Infinity);
+        maxBalance = (int)Mathf.Clamp(maxBalance, 5, Mathf.Infinity);
     }
 }
 [System.Serializable]
