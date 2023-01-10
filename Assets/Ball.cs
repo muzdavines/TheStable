@@ -30,7 +30,7 @@ public class Ball : MonoBehaviour
             print("#TODO#Lerp towards target");
         }
         if (Time.frameCount % 60 == 0) {
-            if (transform.position.y <= -1 || transform.position.x<11.8f || transform.position.x > 65 || transform.position.z < 4 || transform.position.z > 92) {
+            if (transform.position.y <= -1 || transform.position.x<8.8f || transform.position.x > 49f || transform.position.z < 2.95f || transform.position.z > 69) {
                 body.velocity = Vector3.zero;
                 transform.position = new Vector3(32, 10, 37);
             }

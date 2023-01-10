@@ -463,7 +463,11 @@ public class StableCombatChar : MonoBehaviour, StableCombatCharStateOwner
         shotAccuracy.PlayFeedbacks();
     }
     public void DisplaySpecialAbilityFeedback(string ability) {
-        specialAbil.GetComponent<MMFeedbackFloatingText>().Value = ability;
+        var feed = specialAbil.GetComponent<MMFeedbackFloatingText>();
+        if (feed == null) {
+            return;
+        }
+        feed.Value = ability;
         specialAbil.PlayFeedbacks();
     }
     public void PursueBallCarrier() {

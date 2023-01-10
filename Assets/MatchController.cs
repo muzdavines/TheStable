@@ -44,7 +44,10 @@ public class MatchController : MonoBehaviour
         ball.transform.position = new Vector3(0,1,0);
         announcerLines = new List<AnnouncerLine>();
         AddAnnouncerLine("Welcome to the Match!");
-        continuePanel.SetActive(false);
+        if (continuePanel != null) {
+            continuePanel.SetActive(false);
+        }
+
         if (debug) {
             DebugInit();
         } else { Init(); }
@@ -80,6 +83,10 @@ public class MatchController : MonoBehaviour
 
     public void UpdatePlayerUI() {
         heroUIController = FindObjectOfType<HeroUIController>();
+        if (heroUIController == null) {
+            return;
+
+        }
         heroUIController.Init(homeCoach.isPlayer ? homeCoach : awayCoach);
     }
     public void SpawnPlayers() {
@@ -212,7 +219,10 @@ public class MatchController : MonoBehaviour
 
         }
         else {
-            continuePanel.SetActive(true);
+            if (continuePanel != null) {
+                continuePanel.SetActive(true);
+            }
+
             var allPlayers = FindObjectsOfType<StableCombatChar>();
             for (int i = 0; i < allPlayers.Length; i++) {
                 allPlayers[i].transform.position = new Vector3(1000, 1000, 1000);
@@ -231,6 +241,10 @@ public class MatchController : MonoBehaviour
 
     public Image continueCountdown;
     IEnumerator DelayContinueKickoff() {
+        if (continueCountdown == null) {
+            kickoffButton.onClick.Invoke();
+            yield break;
+        }
         continueCountdown.gameObject.SetActive(true);
         float countdown = 5.0f;
         while (countdown >= 0.0f) {

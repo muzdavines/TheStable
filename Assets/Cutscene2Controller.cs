@@ -19,7 +19,7 @@ public class Cutscene2Controller : MonoBehaviour
         director.Resume();
     }
     public void Update() {
-        if (Input.anyKeyDown){
+        if (Input.anyKeyDown || Input.GetMouseButtonDown(0) || Input.GetMouseButtonDown(1)){
             StartDirector();
         }
     }
