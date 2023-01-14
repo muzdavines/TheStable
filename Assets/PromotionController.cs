@@ -26,12 +26,12 @@ public class PromotionController : MonoBehaviour
         for (int i = 0; i < activeChar.mod.promoteOptions.Length; i++) {
             UpgradeModifier.Promote p = activeChar.mod.promoteOptions[i];
             headers[i].text = p.promoteButtonLabel;
-            descriptions[i].text = p.promoteDescription;
+            descriptions[i].text = p.selectionText.NewLine();
             headers[i].transform.parent.gameObject.SetActive(true);
         }
         
         mainText.text = activeChar.mod.promoteMainText;
-        selectionText.text = activeChar.mod.promoteOptions[activeIndex].selectionText.NewLine();
+        selectionText.text = activeChar.mod.promoteOptions[activeIndex].promoteDescription;
         buttonLabel.text = "Promote to " + activeChar.mod.promoteOptions[activeIndex].promoteArchetype.ToString();
         
     }
@@ -43,7 +43,7 @@ public class PromotionController : MonoBehaviour
     
     public void OnClick(int index) {
         activeIndex = index;
-        selectionText.text = activeChar.mod.promoteOptions[activeIndex].selectionText.NewLine();
+        selectionText.text = activeChar.mod.promoteOptions[activeIndex].promoteDescription;
         buttonLabel.text = "Promote to " + activeChar.mod.promoteOptions[activeIndex].promoteArchetype.ToString();
     }
 

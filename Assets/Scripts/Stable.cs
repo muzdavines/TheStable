@@ -18,6 +18,7 @@ public class Stable
     public int[] favor; //how does each faction like them? map faction id to const enum
     [SerializeField] public Warlord warlord;
     public List<Character> heroes = new List<Character>();
+    public List<string> heroSaves = new List<string>();
     public List<Character> coaches = new List<Character>();
     public List<StableBuilding> buildings = new List<StableBuilding>();
     public List<MissionContract> contracts = new List<MissionContract>();

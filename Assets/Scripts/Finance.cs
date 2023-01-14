@@ -53,6 +53,9 @@ public class Finance {
     }
 
     public void AddExpense (int amount, LedgerAccount expenseAccount, string desc = "", string tag = "") {
+        if (desc == "") {
+            Debug.LogError("ERROR NO DESCRIPTION");
+        }
         Finance.Ledger.LedgerEntry entry1 = new Finance.Ledger.LedgerEntry() { amount = amount, account = LedgerAccount.Gold, entryClass = LedgerEntryClass.Asset, type = LedgerEntryType.Credit, description = desc };
         Finance.Ledger.LedgerEntry entry2 = new Finance.Ledger.LedgerEntry() { amount = amount, account = expenseAccount, entryClass = LedgerEntryClass.Expense, type = LedgerEntryType.Debit, description = desc };
         List<Finance.Ledger.LedgerEntry> ledgerEntries = new List<Finance.Ledger.LedgerEntry> {
@@ -62,6 +65,9 @@ public class Finance {
         AddTransaction(ledgerEntries);
     }
     public void AddRevenue(int amount, string desc = "", string tag = "") {
+        if (desc == "") {
+            Debug.LogError("ERROR NO DESCRIPTION");
+        }
         Finance.Ledger.LedgerEntry entry1 = new Finance.Ledger.LedgerEntry() { amount = amount, account = LedgerAccount.Gold, entryClass = LedgerEntryClass.Asset, type = LedgerEntryType.Debit, description = desc};
         Finance.Ledger.LedgerEntry entry2 = new Finance.Ledger.LedgerEntry() { amount = amount, account = LedgerAccount.Revenue, entryClass = LedgerEntryClass.Revenue, type = LedgerEntryType.Credit, description = desc };
         List<Finance.Ledger.LedgerEntry> ledgerEntries = new List<Finance.Ledger.LedgerEntry> {
@@ -86,6 +92,22 @@ public class Finance {
             e.reconciled = true;
             e.date = Game.instance.gameDate;
             ledger.Add(e);
+            if (!accounts.ContainsKey(e.account)) {
+                accounts[e.account] = 0;
+            }
+            accounts[e.account] += (e.amount * e.Modifier());
+        }
+    }
+
+    public void FullReconciliation() {
+        foreach (var l in ledger) {
+            l.reconciled = false;
+        }
+
+        accounts = new Dictionary<LedgerAccount, int>();
+        foreach (Ledger.LedgerEntry e in ledger) {
+            e.reconciled = true;
+            e.date = Game.instance.gameDate;
             if (!accounts.ContainsKey(e.account)) {
                 accounts[e.account] = 0;
             }

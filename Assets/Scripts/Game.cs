@@ -206,7 +206,7 @@ public class Game : MonoBehaviour {
             if (gameDate.day == 1 && gameDate.month == 1 && gameDate.year == 1000) { return; }
             f.ProcessBusinesses();
             foreach (Character c in playerStable.heroes) {
-                f.AddExpense(c.contract.weeklySalary, LedgerAccount.Personnel);
+                f.AddExpense(c.contract.weeklySalary, LedgerAccount.Personnel, "Salary for "+c.MyName);
                 c.contract.weeksLeft--;
             }
         }
@@ -263,6 +263,7 @@ public class Game : MonoBehaviour {
     }
     public void UpdateContractMarket() {
         if (missionContractList != null) {
+            contractMarket.RemoveAll(x => x == null);
             foreach (MissionContract m in missionContractList.GetContracts()) {
                 if (contractMarket.Any(i=>i.ID == m.ID))
                     { print("contract contained");  continue; }
@@ -394,6 +395,8 @@ public static class Helper {
     }
 
         public static bool IsExpired(MissionContract c) {
+            if (c == null) {
+                return true;}
         return Game.instance.gameDate.IsOnOrAfter(c.executionDate, false);
     }
 

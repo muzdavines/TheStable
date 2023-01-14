@@ -596,9 +596,195 @@ public class Character : Living {
         return s;
     }
 
-    public void Promote(Archetype newArchetype) {
+    public void LoadArchetype(Archetype loadArchetype) {
+        switch (loadArchetype) {
+           case Archetype.Goalkeeper:
+                // Do something for Goalkeeper archetype
+                break;
+            case Archetype.Warrior:
+               Promote(Archetype.Warrior, true);
+                break;
+            case Archetype.Rogue:
+                Promote(Archetype.Rogue, true);
+                break;
+            case Archetype.Wizard:
+                Promote(Archetype.Wizard, true);
+                break;
+            case Archetype.Swashbuckler:
+                Promote(Archetype.Rogue, true);
+                Promote(Archetype.Thief, true);
+                Promote(Archetype.Swashbuckler, true);
+                break;
+            case Archetype.Assassin:
+                Promote(Archetype.Rogue, true);
+                Promote(Archetype.Thug, true);
+                Promote(Archetype.Assassin, true);
+                break;
+            case Archetype.Thief:
+                Promote(Archetype.Rogue, true);
+                Promote(Archetype.Thief, true);
+                break;
+            case Archetype.Thug:
+                Promote(Archetype.Rogue, true);
+                Promote(Archetype.Thug, true);
+                break;
+            case Archetype.Enforcer:
+                Promote(Archetype.Rogue, true);
+                Promote(Archetype.Thug, true);
+                Promote(Archetype.Enforcer, true);
+                break;
+            case Archetype.Charlatan:
+                Promote(Archetype.Rogue, true);
+                Promote(Archetype.Thief, true);
+                Promote(Archetype.Charlatan, true);
+                break;
+            case Archetype.DarkWizard:
+                Promote(Archetype.Wizard, true);
+                Promote(Archetype.DarkWizard, true);
+                break;
+            case Archetype.LightWizard:
+                Promote(Archetype.Wizard, true);
+                Promote(Archetype.LightWizard, true);
+                break;
+            case Archetype.ImperialWizard:
+                Promote(Archetype.Wizard, true);
+                Promote(Archetype.DarkWizard, true);
+                Promote(Archetype.ImperialWizard, true);
+               
+                break;
+            case Archetype.VoidWizard:
+                Promote(Archetype.Wizard, true);
+                Promote(Archetype.DarkWizard, true);
+                Promote(Archetype.VoidWizard, true);
+                break;
+            case Archetype.ExiledWizard:
+                Promote(Archetype.Wizard, true);
+                Promote(Archetype.LightWizard, true);
+                Promote(Archetype.ExiledWizard, true);
+                break;
+            case Archetype.HolyWizard:
+                Promote(Archetype.Wizard, true);
+                Promote(Archetype.LightWizard, true);
+                Promote(Archetype.HolyWizard, true);
+                break;
+            case Archetype.Soldier:
+                Promote(Archetype.Warrior, true);
+                Promote(Archetype.Soldier, true);
+                
+                break;
+            case Archetype.Mercenary:
+                Promote(Archetype.Warrior, true);
+                Promote(Archetype.Mercenary, true);
+                
+                break;
+            case Archetype.DarkKnight:
+                Promote(Archetype.Warrior, true);
+                Promote(Archetype.Soldier, true);
+                Promote(Archetype.DarkKnight, true);
+                break;
+            case Archetype.Paladin:
+                Promote(Archetype.Warrior, true);
+                Promote(Archetype.Soldier, true);
+                Promote(Archetype.Paladin, true);
+                break;
+            case Archetype.Champion:
+                Promote(Archetype.Warrior, true);
+                Promote(Archetype.Mercenary, true);
+                Promote(Archetype.Champion, true);
+                break;
+            case Archetype.Marauder:
+                Promote(Archetype.Warrior, true);
+                Promote(Archetype.Mercenary, true);
+                Promote(Archetype.Marauder, true);
+                break;
+            case Archetype.Amateur:
+                Promote(Archetype.Amateur, true);
+                break;
+            case Archetype.Ninja:
+                Promote(Archetype.Rogue, true);
+                Promote(Archetype.Thug, true);
+                Promote(Archetype.Assassin, true);
+                Promote(Archetype.Ninja, true);
+                break;
+        }
+        mod = Resources.Load<UpgradeModifier>(archetype + "Upgrade");
+        returnDate = new Game.GameDate();
+        
+        if (currentTraining == null) { currentTraining = new Training(); }
+        activeSpecialMoves = new List<SpecialMove>();
+        foreach (string specialMove in startingSpecialMoves) {
+            Type myType = Type.GetType(specialMove);
+            Debug.Log("#CharInit#Special: " + specialMove);
+            SpecialMove myObj = (SpecialMove)Activator.CreateInstance(myType);
+            activeSpecialMoves.Add(myObj);
+        }
+        activeTraits = new List<Trait>();
+        foreach (Trait t in startingTraits) {
+            Trait tempTrait = Instantiate(t);
+            t.level = 1;
+            activeTraits.Add(tempTrait);
+        }
+        
+       
+    }
+    public void Promote(Archetype newArchetype, bool isLoad = false) {
         List<string> specialsToAdd = new List<string>();
         switch (newArchetype) {
+            case Archetype.Amateur:
+                var leftjab = Resources.Load<Move>("LeftJab");
+                var rightjab = Resources.Load<Move>("RightJab");
+                knownMoves = new List<Move>();
+                knownMoves.Add(leftjab);
+                knownMoves.Add(rightjab);
+                activeMeleeMoves = new List<Move>();
+                activeMeleeMoves.Add(leftjab);
+                activeMeleeMoves.Add(leftjab);
+                activeMeleeMoves.Add(rightjab);
+                meleeWeapon = Instantiate(Resources.Load<Weapon>("FistsSO"));
+                break;
+            case Archetype.Wizard:
+                startingSpecialMoves.Add("FlameCircle");
+                startingSpecialMoves.Add("SummonFireGolem");
+                startingSpecialMoves.Add("DeepBall");
+                startingRangedWeapon = "MageGlovesSO";
+                rangedWeapon = Instantiate(Resources.Load<Weapon>("MageGlovesSO"));
+                knownMoves.Add(Resources.Load<Move>("Fireball"));
+                for (int i = 0; i < 3; i++) {
+                    activeRangedMoves.Add(Resources.Load<Move>("Fireball"));
+                }
+                break;
+            case Archetype.Warrior:
+                startingSpecialMoves = new List<string>();
+                startingSpecialMoves.Add("ShoulderBarge");
+                startingSpecialMoves.Add("PowerSlam");
+                startingSpecialMoves.Add("ClosingSpeed");
+                startingMeleeWeapon = "LongswordSO";
+                meleeWeapon = Instantiate(Resources.Load<Weapon>("LongswordSO"));
+                knownMoves = new List<Move>();
+                knownMoves.Add(Resources.Load<Move>("Sword Hit Left"));
+                knownMoves.Add(Resources.Load<Move>("Sword Hit Right"));
+                knownMoves.Add(Resources.Load<Move>("SwordOverheadHack"));
+                activeMeleeMoves = new List<Move>();
+                activeMeleeMoves.Add(Resources.Load<Move>("Sword Hit Left"));
+                activeMeleeMoves.Add(Resources.Load<Move>("Sword Hit Right"));
+                activeMeleeMoves.Add(Resources.Load<Move>("SwordOverheadHack"));
+                break;
+            case Archetype.Rogue:
+                startingSpecialMoves = new List<string>();
+                startingSpecialMoves.Add("Backstab");
+                startingSpecialMoves.Add("Flechettes");
+                knownMoves = new List<Move>();
+                knownMoves.Add(Resources.Load<Move>("DaggerLeft"));
+                knownMoves.Add(Resources.Load<Move>("DaggerRight"));
+                knownMoves.Add(Resources.Load<Move>("DaggerDualThrust"));
+                activeMeleeMoves = new List<Move>();
+                activeMeleeMoves.Add(Resources.Load<Move>("DaggerLeft"));
+                activeMeleeMoves.Add(Resources.Load<Move>("DaggerRight"));
+                activeMeleeMoves.Add(Resources.Load<Move>("DaggerDualThrust"));
+                startingMeleeWeapon = "DaggerSO";
+                meleeWeapon = Instantiate(Resources.Load<Weapon>("DaggerSO"));
+                knownMoves.Add(Resources.Load<Move>("OneTimerKick"));
+                break;
             case Archetype.Ninja:
                 specialsToAdd.Add("ShadowStrike");
                 activeMeleeMoves[0] = Resources.Load<BaseMeleeMove>("Katana1");
@@ -609,23 +795,30 @@ public class Character : Living {
                 if (itemToRemove != null) {
                     activeSpecialMoves.Remove(itemToRemove);
                 }
-                shooting += 15;
-                tackling += 15;
-                runspeed += 2;
-                maxHealth += 1;
-                maxMind += 50;
-                maxStamina += 50;
-                maxBalance += 100;
-                nickname += " the " + Names.Ninjanick[Random.Range(0, Names.Ninjanick.Length)];
+
+                if (!isLoad) {
+                    shooting += 15;
+                    tackling += 15;
+                    runspeed += 2;
+                    maxHealth += 1;
+                    maxMind += 50;
+                    maxStamina += 50;
+                    maxBalance += 100;
+                    nickname += " the " + Names.Ninjanick[Random.Range(0, Names.Ninjanick.Length)];
+                }
+
                 break;
             case Archetype.Assassin:
-                shooting += 10;
-                tackling -= 10;
-                runspeed += 1;
-                maxHealth += 1;
-                maxMind += 35;
-                maxStamina += 25;
-                maxBalance += 35;
+                if (!isLoad) {
+                    shooting += 10;
+                    tackling -= 10;
+                    runspeed += 1;
+                    maxHealth += 1;
+                    maxMind += 35;
+                    maxStamina += 25;
+                    maxBalance += 35;
+                }
+
                 specialsToAdd.Add("Assassinate");
                 
                 activeMeleeMoves[0] = Resources.Load<BaseMeleeMove>("DarkKnife1");
@@ -637,40 +830,51 @@ public class Character : Living {
                 break;
             case Archetype.Thief:
                 modelNum = 0;
-                shooting += 10;
-                tackling -= 10;
-                runspeed += 1;
-                maxMind += 25;
-                maxStamina += 15;
-                maxBalance += 35;
+                if (!isLoad) {
+                    shooting += 10;
+                    tackling -= 10;
+                    runspeed += 1;
+                    maxMind += 25;
+                    maxStamina += 15;
+                    maxBalance += 35;
+                    nickname += " the " + Names.RogueNick[Random.Range(0, Names.RogueNick.Length)];
+                }
+
                 activeMeleeMoves[0] = Resources.Load<BaseMeleeMove>("Knife1");
                 activeMeleeMoves[1] = Resources.Load<BaseMeleeMove>("Knife2");
                 activeMeleeMoves[2] = Resources.Load<BaseMeleeMove>("Knife3");
                 meleeWeapon = Instantiate(Resources.Load<Weapon>("KnifeSO"));
                 specialsToAdd.Add("BolaThrow");
-                nickname += " the " + Names.RogueNick[Random.Range(0, Names.RogueNick.Length)];
+                
                 break;
             case Archetype.Thug:
-                shooting -= 10;
-                tackling += 10;
-                runspeed -= 1;
-                maxMind += 15;
-                maxStamina += 35;
-                maxBalance += 25;
+                if (!isLoad) {
+                    shooting -= 10;
+                    tackling += 10;
+                    runspeed -= 1;
+                    maxMind += 15;
+                    maxStamina += 35;
+                    maxBalance += 25;
+                    nickname += " the " + Names.RogueNick[Random.Range(0, Names.RogueNick.Length)];
+                }
+
                 activeMeleeMoves[0] = Resources.Load<BaseMeleeMove>("SpikedBat1");
                 activeMeleeMoves[1] = Resources.Load<BaseMeleeMove>("SpikedBat2");
                 activeMeleeMoves[2] = Resources.Load<BaseMeleeMove>("SpikedBat3");
                 meleeWeapon = Instantiate(Resources.Load<Weapon>("SpikedBatSO"));
 
                 specialsToAdd.Add("Kneecapper");
-                nickname += " the " + Names.RogueNick[Random.Range(0, Names.RogueNick.Length)];
+                
                 break;
             case Archetype.Swashbuckler:
-                shooting -= 10;
-                tackling += 10;
-                maxMind += 25;
-                maxStamina += 35;
-                maxBalance += 35;
+                if (!isLoad) {
+                    shooting -= 10;
+                    tackling += 10;
+                    maxMind += 25;
+                    maxStamina += 35;
+                    maxBalance += 35;
+                }
+
                 activeMeleeMoves[0] = Resources.Load<BaseMeleeMove>("Rapier1");
                 activeMeleeMoves[1] = Resources.Load<BaseMeleeMove>("Rapier2");
                 activeMeleeMoves[2] = Resources.Load<BaseMeleeMove>("Rapier3");
@@ -678,11 +882,14 @@ public class Character : Living {
                 specialsToAdd.Add("UncannyDodge");
                 break;
             case Archetype.Enforcer:
-                shooting -= 10;
-                tackling += 10;
-                maxMind += 15;
-                maxStamina += 35;
-                maxBalance += 25;
+                if (!isLoad) {
+                    shooting -= 10;
+                    tackling += 10;
+                    maxMind += 15;
+                    maxStamina += 35;
+                    maxBalance += 25;
+                }
+
                 activeMeleeMoves[0] = Resources.Load<BaseMeleeMove>("Club1");
                 activeMeleeMoves[1] = Resources.Load<BaseMeleeMove>("Club2");
                 activeMeleeMoves[2] = Resources.Load<BaseMeleeMove>("Club3");
@@ -690,109 +897,143 @@ public class Character : Living {
                 specialsToAdd.Add("FaceSmash");
                 break;
             case Archetype.Charlatan:
-                shooting += 10;
-                tackling -= 10;
-                maxMind += 35;
-                maxStamina += 15;
-                maxBalance += 25;
+                if (!isLoad) {
+                    shooting += 10;
+                    tackling -= 10;
+                    maxMind += 35;
+                    maxStamina += 15;
+                    maxBalance += 25;
+                }
+
                 specialsToAdd.Add("ViciousMockery");
                 break;
             case Archetype.LightWizard:
-                passing += 10;
-                tackling -= 10;
-                maxMind += 35;
-                maxStamina += 15;
-                maxBalance += 25;
+                if (!isLoad) {
+                    passing += 10;
+                    tackling -= 10;
+                    maxMind += 35;
+                    maxStamina += 15;
+                    maxBalance += 25;
+                    nickname += " the " + Names.Wizardnick[Random.Range(0, Names.Wizardnick.Length)];
+                }
+
                 specialsToAdd.Add("BallOfPower");
-                nickname += " the " + Names.Wizardnick[Random.Range(0, Names.Wizardnick.Length)];
+                
                 break;
             case Archetype.DarkWizard:
-                passing -= 10;
-                tackling += 10;
-                maxMind += 25;
-                maxStamina += 25;
-                maxBalance += 25;
+                if (!isLoad) {
+                    passing -= 10;
+                    tackling += 10;
+                    maxMind += 25;
+                    maxStamina += 25;
+                    maxBalance += 25;
+                    nickname += " the " + Names.Wizardnick[Random.Range(0, Names.Wizardnick.Length)];
+                }
+
                 specialsToAdd.Add("BallHawk");
                 activeRangedMoves[0] = Resources.Load<Move>("VoidBolt");
                 activeRangedMoves[1] = Resources.Load<Move>("VoidBolt");
                 activeRangedMoves[2] = Resources.Load<Move>("VoidBolt");
-                nickname += " the " + Names.Wizardnick[Random.Range(0, Names.Wizardnick.Length)];
+              
                 break;
             case Archetype.ExiledWizard:
-                passing -= 10;
-                tackling += 10;
-                maxMind += 25;
-                maxStamina += 25;
-                maxBalance += 25;
+                if (!isLoad) {
+                    passing -= 10;
+                    tackling += 10;
+                    maxMind += 25;
+                    maxStamina += 25;
+                    maxBalance += 25;
+                }
+
                 activeRangedMoves[0] = Resources.Load<Move>("ShatteredBlast");
                 activeRangedMoves[1] = Resources.Load<Move>("ShatteredBlast");
                 activeRangedMoves[2] = Resources.Load<Move>("ShatteredBlast");
                 specialsToAdd.Add("SummonVoidspawn");
                 break;
             case Archetype.HolyWizard:
-                passing += 10;
-                tackling -= 10;
-                maxMind += 35;
-                maxStamina += 15;
-                maxBalance += 25;
+                if (!isLoad) {
+                    passing += 10;
+                    tackling -= 10;
+                    maxMind += 35;
+                    maxStamina += 15;
+                    maxBalance += 25;
+                }
+
                 activeRangedMoves[0] = Resources.Load<Move>("BoltOfDivinity");
                 activeRangedMoves[1] = Resources.Load<Move>("BoltOfDivinity");
                 activeRangedMoves[2] = Resources.Load<Move>("BoltOfDivinity");
                 specialsToAdd.Add("BallOfDevotion");
                 break;
             case Archetype.ImperialWizard:
-                passing += 10;
-                tackling -= 10;
-                maxMind += 35;
-                maxStamina += 15;
-                maxBalance += 25;
+                if (!isLoad) {
+                    passing += 10;
+                    tackling -= 10;
+                    maxMind += 35;
+                    maxStamina += 15;
+                    maxBalance += 25;
+                }
+
                 activeRangedMoves[0] = Resources.Load<Move>("CommandingForce");
                 activeRangedMoves[1] = Resources.Load<Move>("CommandingForce");
                 activeRangedMoves[2] = Resources.Load<Move>("CommandingForce");
                 specialsToAdd.Add("Protection");
                 break;
             case Archetype.VoidWizard:
-                passing -= 10;
-                tackling += 10;
-                maxMind += 25;
-                maxStamina += 25;
-                maxBalance += 25;
+                if (!isLoad) {
+                    passing -= 10;
+                    tackling += 10;
+                    maxMind += 25;
+                    maxStamina += 25;
+                    maxBalance += 25;
+                }
+
                 specialsToAdd.Add("TeleportTeammate");
                 break;
             case Archetype.Mercenary:
-                tackling -= 10;
-                carrying += 10;
-                maxMind += 10;
-                maxStamina += 30;
-                maxBalance += 20;
+                if (!isLoad) {
+                    tackling -= 10;
+                    carrying += 10;
+                    maxMind += 10;
+                    maxStamina += 30;
+                    maxBalance += 20;
+                    nickname += " the " + Names.Warriornick[Random.Range(0, Names.Warriornick.Length)];
+                }
+
                 specialsToAdd.Add("BullRush");
                 activeMeleeMoves[0] = Resources.Load<BaseMeleeMove>("Halberd1");
                 activeMeleeMoves[1] = Resources.Load<BaseMeleeMove>("Halberd2");
                 activeMeleeMoves[2] = Resources.Load<BaseMeleeMove>("Halberd3");
                 meleeWeapon = Instantiate(Resources.Load<Weapon>("HalberdSO"));
 
-                nickname += " the " + Names.Warriornick[Random.Range(0, Names.Warriornick.Length)];
+                
                 break;
             case Archetype.Soldier:
-                tackling += 10;
-                carrying -= 10;
-                maxMind += 25;
-                maxStamina += 25;
-                maxBalance += 25;
+                if (!isLoad) {
+                    tackling += 10;
+                    carrying -= 10;
+                    maxMind += 25;
+                    maxStamina += 25;
+                    maxBalance += 25;
+                    nickname += " the " + Names.Warriornick[Random.Range(0, Names.Warriornick.Length)];
+                }
+
                 activeMeleeMoves[0] = Resources.Load<BaseMeleeMove>("AdvancedSword1");
                 activeMeleeMoves[1] = Resources.Load<BaseMeleeMove>("AdvancedSword2");
                 activeMeleeMoves[2] = Resources.Load<BaseMeleeMove>("AdvancedSword3");
                 meleeWeapon = Instantiate(Resources.Load<Weapon>("AdvancedSwordSO"));
                 specialsToAdd.Add("SwordFlurry");
 
-                nickname += " the " + Names.Warriornick[Random.Range(0, Names.Warriornick.Length)];
+               
                 break;
             case Archetype.Champion:
-                tackling += 10;
-                carrying -= 10;
-                maxMind += 30;
-                maxStamina += 30;
-                maxBalance += 30;
+                if (!isLoad) {
+                    tackling += 10;
+                    carrying -= 10;
+                    maxMind += 30;
+                    maxStamina += 30;
+                    maxBalance += 30;
+                }
+
                 activeMeleeMoves[0] = Resources.Load<BaseMeleeMove>("GreatSword1");
                 activeMeleeMoves[1] = Resources.Load<BaseMeleeMove>("GreatSword2");
                 activeMeleeMoves[2] = Resources.Load<BaseMeleeMove>("GreatSword3");
@@ -801,11 +1042,14 @@ public class Character : Living {
 
                 break;
             case Archetype.DarkKnight:
-                tackling -= 10;
-                carrying += 10;
-                maxMind += 40;
-                maxStamina += 20;
-                maxBalance += 20;
+                if (!isLoad) {
+                    tackling -= 10;
+                    carrying += 10;
+                    maxMind += 40;
+                    maxStamina += 20;
+                    maxBalance += 20;
+                }
+
                 activeMeleeMoves[0] = Resources.Load<BaseMeleeMove>("DarkHammer1");
                 activeMeleeMoves[1] = Resources.Load<BaseMeleeMove>("DarkHammer2");
                 activeMeleeMoves[2] = Resources.Load<BaseMeleeMove>("DarkHammer3");
@@ -813,11 +1057,14 @@ public class Character : Living {
                 specialsToAdd.Add("SoulSteal");
                 break;
             case Archetype.Marauder:
-                tackling -= 10;
-                carrying += 10;
-                maxMind += 15;
-                maxStamina += 35;
-                maxBalance += 20;
+                if (!isLoad) {
+                    tackling -= 10;
+                    carrying += 10;
+                    maxMind += 15;
+                    maxStamina += 35;
+                    maxBalance += 20;
+                }
+
                 activeMeleeMoves[0] = Resources.Load<BaseMeleeMove>("Starspear1");
                 activeMeleeMoves[1] = Resources.Load<BaseMeleeMove>("Starspear2");
                 activeMeleeMoves[2] = Resources.Load<BaseMeleeMove>("Starspear3");
@@ -825,11 +1072,14 @@ public class Character : Living {
                 specialsToAdd.Add("Execute");
                 break;
             case Archetype.Paladin:
-                tackling += 10;
-                carrying -= 10;
-                maxMind += 25;
-                maxStamina += 25;
-                maxBalance += 25;
+                if (!isLoad) {
+                    tackling += 10;
+                    carrying -= 10;
+                    maxMind += 25;
+                    maxStamina += 25;
+                    maxBalance += 25;
+                }
+
                 activeMeleeMoves[0] = Resources.Load<BaseMeleeMove>("HolyMace1");
                 activeMeleeMoves[1] = Resources.Load<BaseMeleeMove>("HolyMace2");
                 activeMeleeMoves[2] = Resources.Load<BaseMeleeMove>("HolyMace3");
@@ -883,4 +1133,25 @@ public class SportStats {
         tackles += adds.tackles;
         kos += adds.kos;
     }
+}
+
+[System.Serializable]
+public class CharacterSave {
+    public int strength = 5;
+    public int agility = 5;
+
+    public int dexterity = 5;
+
+    public int carrying = 5;
+
+    public int tackling = 5;
+
+    public int runspeed = 5;
+    public int shooting = 5;
+    public int passing = 5;
+    public int catching = 5;
+    public int melee = 10;
+    public int ranged = 10;
+    public int magic = 10;
+    public int xp = 0;
 }

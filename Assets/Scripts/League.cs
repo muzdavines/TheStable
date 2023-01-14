@@ -50,7 +50,7 @@ public class League {
 
         schedule = new List<Match>();
         for (int i = 1; i <= 12; i++) {
-            schedule.Add(new Match() { home = teams[0], away = teams[UnityEngine.Random.Range(1, teams.Count - 1)], date = new Game.GameDate() { day = 5, month = i, year = year } });
+           // schedule.Add(new Match() { home = teams[0], away = teams[UnityEngine.Random.Range(1, teams.Count - 1)], date = new Game.GameDate() { day = 5, month = i, year = year } });
         }
         CreateSchedule(year);
     }
@@ -70,6 +70,7 @@ public class League {
         int halfsize = teams.Count / 2;
         Game.GameDate matchDay = new Game.GameDate() { year = year, day = 5, month = 1 };
         for (int zz = 0; zz < 2; zz++) {
+            matchDay.month = zz == 0 ? 1 : 5;
             for (int day = 0; day < numDays * 2; day++) {
                 if (day % 2 == 0) {
                     results += String.Format("\n\nDay {0}\n", (day + 1));
