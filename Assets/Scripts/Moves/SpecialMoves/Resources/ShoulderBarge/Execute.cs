@@ -11,7 +11,13 @@ public class Execute : ActiveSpecialMove {
         lastFired = Time.time;
         _char.Execute(victim);
     }
+    public override string GetName() {
+        return "Execute";
+    }
 
+    public override string GetDescription() {
+        return "Capitalizes on an enemy that has been weakened. The hero will execute an enemy that has less than 50% of their stamina, balance, and mind.";
+    }
     public override bool Check(StableCombatChar _char) {
         if (Time.time <= lastFired + 20 || _char.coach == null) {
             return false;

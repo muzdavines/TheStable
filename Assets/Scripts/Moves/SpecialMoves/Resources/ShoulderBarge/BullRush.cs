@@ -10,6 +10,14 @@ public class BullRush : ActiveSpecialMove {
         _char.BullRush();
     }
 
+    public override string GetName() {
+        return "Bull Rush";
+    }
+
+    public override string GetDescription() {
+        return "Boosts speed while carrying the ball, making the hero unable to be tackled while making a run towards the goal";
+    }
+
     public override bool Check(StableCombatChar _char) {
         if (Time.time <= lastFired + 15) { return false; }
         if (_char.isKnockedDown) { return false; }

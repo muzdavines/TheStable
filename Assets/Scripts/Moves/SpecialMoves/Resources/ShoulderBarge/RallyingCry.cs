@@ -12,6 +12,13 @@ public class RallyingCry : ActiveSpecialMove {
         Debug.Log("#Execute#Activate Execute");
         _char.RallyingCry(this);
     }
+    public override string GetName() {
+        return "Rallying Cry";
+    }
+
+    public override string GetDescription() {
+        return "After a goal against the hero's team, if the team is losing, the Hero inspires his teammates, raising all of their attributes by 50%";
+    }
 
     public override bool Check(StableCombatChar _char) {
         return false;

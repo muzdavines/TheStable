@@ -16,7 +16,7 @@ public class ShoulderBarge : ActiveSpecialMove
     }
 
     public override string GetDescription() {
-        return "Boosts speed while carrying the ball, making the hero unable to be tackled while making a run towards the goal";
+        return "Runs through an enemy and knocks down any other enemies in range.";
     }
 
     public override bool Check(StableCombatChar _char) {
