@@ -91,6 +91,10 @@ public class MissionController : MonoBehaviour
         yield return new WaitForSeconds(8.0f);
         CreateNextStage();
     }
+
+    public void Abandon() {
+        MissionFailed();
+    }
     public void CreateNextStage() {
         stageNum++;
         timeout = Mathf.Infinity;

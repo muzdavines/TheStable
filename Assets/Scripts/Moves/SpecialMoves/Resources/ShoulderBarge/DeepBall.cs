@@ -10,6 +10,13 @@ public class DeepBall : ActiveSpecialMove {
         lastFired = Time.time;
         _char.DeepBall(passTarget);
     }
+    public override string GetName() {
+        return "Deep Ball";
+    }
+
+    public override string GetDescription() {
+        return "The Wizard is an expert at passing the ball deep to offensive players. While in his own end of the field, the Wizard can deliver a deep pass to a teammate near the goal.";
+    }
 
     public override bool Check(StableCombatChar _char) {
         if (Time.time <= lastFired + 15) { return false; }

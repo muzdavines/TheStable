@@ -491,8 +491,8 @@ SphereCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 1
-  m_Center: {x: -1.1, y: 0, z: -0.55}
+  m_Radius: 1.91
+  m_Center: {x: 0, y: 0.64, z: 0}
 --- !u!114 &244941703
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2331,8 +2331,8 @@ MonoBehaviour:
     type: 21
     required: 0
     reward: {fileID: 0}
-    saves: []
     level: 0
+    challengeNum: 5
     mod: 0
   onSuccessSound: {fileID: 8300000, guid: 0049b46cd7452f9489be281d8db8a71c, type: 3}
   allPurposeTransforms:
@@ -2343,6 +2343,10 @@ MonoBehaviour:
   isFinalForMission: 0
   cameraAngle: {x: 5, y: 9, z: 5}
   backgroundMusic: {fileID: 8300000, guid: c083a287ddc514fbd8f23a2080d4ba50, type: 3}
+  attributePrereq: 
+  levelReq: 0
+  successText: 
+  failText: 
   currentCharacterToAttempt: {fileID: 0}
 --- !u!65 &1084723815
 BoxCollider:
@@ -2369,6 +2373,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f571a4ac824101c408eca7384d25d50f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  affectedPOI: []
+  affecttedPOIMod: 0
 --- !u!1 &1087403985
 GameObject:
   m_ObjectHideFlags: 0
@@ -3351,7 +3357,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1583769201
 Transform:
   m_ObjectHideFlags: 0
@@ -3389,8 +3395,8 @@ MonoBehaviour:
     type: 18
     required: 0
     reward: {fileID: 0}
-    saves: []
     level: 0
+    challengeNum: 5
     mod: 0
   onSuccessSound: {fileID: 8300000, guid: 0049b46cd7452f9489be281d8db8a71c, type: 3}
   allPurposeTransforms:
@@ -3402,6 +3408,10 @@ MonoBehaviour:
   isFinalForMission: 0
   cameraAngle: {x: 5, y: 9, z: 5}
   backgroundMusic: {fileID: 8300000, guid: c083a287ddc514fbd8f23a2080d4ba50, type: 3}
+  attributePrereq: 
+  levelReq: 0
+  successText: 
+  failText: 
   currentCharacterToAttempt: {fileID: 0}
 --- !u!65 &1583769203
 BoxCollider:
@@ -3414,8 +3424,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: -0.65, y: 0, z: 0}
+  m_Size: {x: 1.94, y: 2.8, z: 2.23}
+  m_Center: {x: -0.65, y: 0.66, z: 0}
 --- !u!114 &8653098142359049008
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3428,6 +3438,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a415c98107f90c498157e19f255fc3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  affectedPOI: []
+  affecttedPOIMod: 0
   goToDestroy: {fileID: 8734235451211555389}
 --- !u!114 &8835187051308438654
 MonoBehaviour:
@@ -3441,6 +3453,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2694c3c781f323b4c8d0594bc5685faa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  affectedPOI: []
+  affecttedPOIMod: 0
   goToDestroy: {fileID: 0}
 --- !u!1 &1587169499
 GameObject:
@@ -4563,7 +4577,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pois:
-  - {fileID: 1583769204}
   - {fileID: 4144879201592415589}
   - {fileID: 1084723816}
 --- !u!114 &2100205576
@@ -5062,7 +5075,7 @@ MonoBehaviour:
   m_OverrideTileSize: 0
   m_TileSize: 256
   m_OverrideVoxelSize: 0
-  m_VoxelSize: 0.16666667
+  m_VoxelSize: 0.06666667
   m_BuildHeightMesh: 0
   m_NavMeshData: {fileID: 0}
 --- !u!114 &2457737030196842648
@@ -5272,8 +5285,8 @@ MonoBehaviour:
     type: 0
     required: 0
     reward: {fileID: 0}
-    saves: []
     level: 0
+    challengeNum: 5
     mod: 0
   onSuccessSound: {fileID: 0}
   allPurposeTransforms: []
@@ -5281,6 +5294,10 @@ MonoBehaviour:
   isFinalForMission: 0
   cameraAngle: {x: 5, y: 5, z: 5}
   backgroundMusic: {fileID: 8300000, guid: 467a8d5751f6c40f3955c0ce19c23073, type: 3}
+  attributePrereq: 
+  levelReq: 0
+  successText: 
+  failText: 
   currentCharacterToAttempt: {fileID: 0}
   enemies:
   - {fileID: 11400000, guid: 3482a195e93479b4386a5d9926e1ae29, type: 2}
@@ -5305,6 +5322,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3571a688bf079194492671a7aa2ebf6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  affectedPOI: []
+  affecttedPOIMod: 0
 --- !u!1 &7740630874883703798
 GameObject:
   m_ObjectHideFlags: 0

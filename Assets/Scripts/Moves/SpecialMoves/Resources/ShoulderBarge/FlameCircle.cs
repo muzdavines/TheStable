@@ -9,6 +9,13 @@ public class FlameCircle : ActiveSpecialMove {
         lastFired = Time.time;
         _char.FlameCircle();
     }
+    public override string GetName() {
+        return "Flame Circle";
+    }
+
+    public override string GetDescription() {
+        return "Casts a circle of fire around the hero, damaging all enemies within its range while the circle is active.";
+    }
 
     public override bool Check(StableCombatChar _char) {
         if (Time.time <= lastFired + 15 || _char.myAttackTarget == null || _char.Distance(_char.myAttackTarget) > 5) {

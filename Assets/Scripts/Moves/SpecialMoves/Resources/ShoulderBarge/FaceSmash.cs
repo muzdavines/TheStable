@@ -10,7 +10,13 @@ public class FaceSmash : ActiveSpecialMove {
         lastFired = Time.time;
         _char.FaceSmash(enemy);
     }
+    public override string GetName() {
+        return "Face Smash";
+    }
 
+    public override string GetDescription() {
+        return "While running with the ball, smashes a would-be tackler in the face with the ball, knocking them down and continuing on towards the goal.";
+    }
     public override bool Check(StableCombatChar _char) {
         if (!_char.fieldSport) { return false; }
         if (Time.time <= lastFired + 15) { return false; }

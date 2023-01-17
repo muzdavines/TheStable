@@ -30,7 +30,11 @@ public class NewGameCreationController : MonoBehaviour
     {
         CreateNewGame(warlord);
     }
-    public void CreateNewGame(string sceneToLoad = "CutScene1") {
+
+    public void CreateNewGameButton(string sceneToLoad) {
+        CreateNewGame(sceneToLoad);
+    }
+    public void CreateNewGame(string sceneToLoad = "CutScene1", bool load = false) {
 
         DontDestroyOnLoad(gameObject);
         SceneManager.LoadScene(sceneToLoad);
@@ -71,7 +75,10 @@ public class NewGameCreationController : MonoBehaviour
             Game.instance.tutorialStageFinished = 99;
         }
         Game.instance.Init();
-        
+        if (load) {
+            BlueManaSaveLoad save = new BlueManaSaveLoad();
+            save.Load();
+        }
         Destroy(gameObject);
     }
     public void ChangeStablemasterType(string s) {
@@ -81,6 +88,10 @@ public class NewGameCreationController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Z)) {
             CreateNewGame("StableManagement");
         }
+    }
+
+    public void LoadGame() {
+        CreateNewGame("StableManagement", true);
     }
 
 }

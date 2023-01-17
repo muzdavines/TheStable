@@ -9,7 +9,13 @@ public class PowerSlam : ActiveSpecialMove {
         lastFired = Time.time;
         _char.PowerSlam();
     }
+    public override string GetName() {
+        return "Power Slam";
+    }
 
+    public override string GetDescription() {
+        return "Slams the ground, producing a shockwave that knocks down all enemies in range.";
+    }
     public override bool Check(StableCombatChar _char) {
         //if (_char.playStyle != PlayStyle.Fight) { return false; }
         if (_char.myAttackTarget == null) { return false; }

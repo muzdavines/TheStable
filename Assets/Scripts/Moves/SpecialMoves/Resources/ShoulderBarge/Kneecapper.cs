@@ -10,6 +10,14 @@ public class Kneecapper : ActiveSpecialMove {
         _char.Kneecap();
     }
 
+    public override string GetName() {
+        return "Kneecapper";
+    }
+
+    public override string GetDescription() {
+        return "Delivers a devastating blow to an opponent's knee, knocking them down and injuring them for a time. The affected enemy suffers from reduced movement while injured.";
+    }
+
     public override bool Check(StableCombatChar _char) {
         if (Time.time <= lastFired + 15) { return false; }
         if (_char.isKnockedDown) { return false; }

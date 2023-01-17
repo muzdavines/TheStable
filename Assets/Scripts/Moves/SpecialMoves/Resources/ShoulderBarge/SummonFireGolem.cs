@@ -9,6 +9,13 @@ public class SummonFireGolem : ActiveSpecialMove {
         lastFired = Time.time;
         _char.SummonFireGolem();
     }
+    public override string GetName() {
+        return "Summon Fire Golem";
+    }
+
+    public override string GetDescription() {
+        return "Summons a Fire Golem that will fight on behalf of the Hero.";
+    }
 
     public override bool Check(StableCombatChar _char) {
         if (_char.ball?.holder == null || _char.ball.holder.team == _char.team) { return false; }

@@ -5,12 +5,18 @@ using UnityEngine;
 
 public class Backstab : ActiveSpecialMove {
     private float lastFired = -45;
+
     public override void OnActivate(StableCombatChar _char) {
         base.OnActivate(_char);
         lastFired = Time.time;
         _char.Backstab();
     }
 
+    public override string GetDescription() {
+        return "Flash behind an enemy and deliver a devastating attack, knocking them down in the process.";
+    }
+
+   
     public override bool Check(StableCombatChar _char) {
         Debug.Log("#Backstab#Checking " + _char.myCharacter.name);
         if (Time.time <= lastFired + 45) {

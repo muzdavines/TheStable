@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using com.ootii.Geometry;
+using TMPro;
 using UnityEngine;
 
 public class BlueManaSaveLoad : MonoBehaviour {
@@ -9,14 +10,15 @@ public class BlueManaSaveLoad : MonoBehaviour {
     public string playerStable;
     public string otherStables;
     public string loadData;
-
-    void Save() {
-        
+    public TextMeshProUGUI status;
+    public void Save() {
+        Game.instance.playerStable.heroSaves = new List<string>();
         for (int i = 0; i < Game.instance.playerStable.heroes.Count; i++) {
             Game.instance.playerStable.heroSaves.Add(JsonUtility.ToJson(Game.instance.playerStable.heroes[i]));
         }
 
         foreach (var o in Game.instance.otherStables) {
+            o.heroSaves = new List<string>();
             for (int i = 0; i < o.heroes.Count; i++) {
                 o.heroSaves.Add(JsonUtility.ToJson(o.heroes[i]));
             }
@@ -27,10 +29,14 @@ public class BlueManaSaveLoad : MonoBehaviour {
         //reset contract market
         game = JsonUtility.ToJson(Game.instance);
         WriteStringToFile("SaveGame.txt",game);
-
+        status.text = "Game Saved.";
     }
 
-    void Load() {
+    public void OnEnable() {
+        status.text = "";
+    }
+
+    public void Load() {
         loadData = ReadStringFromFile("SaveGame.txt");
         JsonUtility.FromJsonOverwrite(loadData, Game.instance);
         Game.instance.playerStable.heroes = new List<Character>();
@@ -62,6 +68,24 @@ public class BlueManaSaveLoad : MonoBehaviour {
         Game.instance.freeAgentMarket.UpdateMarket();
         Game.instance.UpdateContractMarket();
         Helper.UpdateAllUI();
+        status.text = "Game Loaded.";
+    }
+
+    public void Resolution(string res) {
+        switch (res) {
+            case "900":
+                Screen.SetResolution(1440,900, FullScreenMode.FullScreenWindow);
+                break;
+            case "1080":
+                Screen.SetResolution(1920,1080, FullScreenMode.FullScreenWindow);
+                break;
+            case "1440":
+                Screen.SetResolution(2560,1440, FullScreenMode.FullScreenWindow);
+                break;
+            case "2160":
+                Screen.SetResolution(3840,2160, FullScreenMode.FullScreenWindow);
+                break;
+        }
     }
 
     public void WriteStringToFile(string filePath, string content) {

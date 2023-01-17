@@ -11,6 +11,14 @@ public class Assassinate : ActiveSpecialMove {
         _char.Assassinate();
     }
 
+    public override string GetName() {
+        return "Assassinate";
+    }
+
+    public override string GetDescription() {
+        return "Fires a long range shot from a hidden hand crossbow with deadly accuracy. All but the most stalwart opponents will be killed instantly.";
+    }
+
     public override bool Check(StableCombatChar _char) {
 
         if (Time.time <= lastFired + 20) { return false; }

@@ -11,6 +11,7 @@ public class SCShadowStrike : SCCombatStanceState, CannotInterrupt, CannotTarget
             thisChar.Idle();
             return;
         }
+        thisChar.RHMWeapon.GetComponent<SCKatanaController>().Normal();
         thisChar.ReleaseAttackers();
         canGrabBall = false;
         timeOut = Time.time + 8f;
@@ -57,8 +58,17 @@ public class SCShadowStrike : SCCombatStanceState, CannotInterrupt, CannotTarget
         if (message == "FaceTarget") {
             thisChar.transform.LookAt(thisChar.myAttackTarget.transform);
         }
+
+        if (message == "ShadowStrikeReverseSword") {
+            thisChar.RHMWeapon.GetComponent<SCKatanaController>().Reverse();
+        }
+        if (message == "ShadowStrikeNormalSword") {
+            thisChar.RHMWeapon.GetComponent<SCKatanaController>().Normal();
+        }
+
     }
-   
+
+
     public override void WillExit() {
         base.WillExit();
         

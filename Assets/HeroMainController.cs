@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class HeroMainController : MonoBehaviour
 {
     public Character activeChar;
     public TextMeshProUGUI heroName, heroType, games, goals, assists, tackles, kos, shooting, passing, tackling, carrying, melee, ranged, magic, speed, dex, agi, str;
     public TextMeshProUGUI knownMoves;
+    public Text maxHealth, maxStamina, maxBalance, maxMind;
     public StableManagementController controller;
     public GameObject panel;
     public GameObject movePanelMelee, movePanelRanged, weaponPanel, trainingPanel;
@@ -49,13 +51,21 @@ public class HeroMainController : MonoBehaviour
         dex.text = activeChar.dexterity.ToString();
         agi.text = activeChar.agility.ToString();
         str.text = activeChar.strength.ToString();
+        maxHealth.text = activeChar.maxHealth.ToString();
+        maxStamina.text = activeChar.maxStamina.ToString();
+        maxBalance.text = activeChar.maxBalance.ToString();
+        maxMind.text = activeChar.maxMind.ToString();
         trainingButton.SetActive(true);
         if (activeChar.archetype == Character.Archetype.Amateur) {
             trainingButton.SetActive(false);
         }
         string moveString = "";
-        foreach (Move m in activeChar.knownMoves) {
-            moveString += m.name + "\n";
+        foreach (Move m in activeChar.activeMeleeMoves) {
+            //moveString += m.name.Title() + ": " + m.GetDescription() + "\n\n";
+        }
+
+        foreach (SpecialMove d in activeChar.activeSpecialMoves) {
+            moveString += d.GetName() + ": "+d.GetDescription() + "\n\n";
         }
         knownMoves.text = moveString;
     }

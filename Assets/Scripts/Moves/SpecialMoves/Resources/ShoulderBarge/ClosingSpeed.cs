@@ -9,6 +9,13 @@ public class ClosingSpeed : ActiveSpecialMove {
         lastFired = Time.time;
         _char.ClosingSpeed();
     }
+    public override string GetName() {
+        return "Closing Speed";
+    }
+
+    public override string GetDescription() {
+        return "Boosts speed while chasing a ball carrier, delivering a critical tackle if the hero gets in range.";
+    }
 
     public override bool Check(StableCombatChar _char) {
         if (Time.time <= lastFired + 15) { return false; }

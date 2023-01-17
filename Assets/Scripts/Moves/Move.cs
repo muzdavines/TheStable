@@ -29,6 +29,13 @@ public class Move : ScriptableObject
 
     }
 
+    public virtual string GetDescription() {
+        return description;
+    }
+
+    public virtual string GetName() {
+        return GetType().ToString().Title();
+    }
     public List<string> modifiers = new List<string>();
     public void Update() {
 

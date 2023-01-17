@@ -13,7 +13,7 @@ public class MissionHeroesScrollerController : MonoBehaviour, IEnhancedScrollerD
         return _data.Count;
     }
     public float GetCellViewSize(EnhancedScroller scroller, int dataIndex) {
-        return 100f;
+        return 120f;
     }
     public EnhancedScrollerCellView GetCellView(EnhancedScroller scroller, int
     dataIndex, int cellIndex) {
