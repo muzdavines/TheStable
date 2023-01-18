@@ -11,6 +11,14 @@ public class TeleportTeammate : ActiveSpecialMove {
         _char.TeleportTeammate();
     }
 
+    public override string GetName() {
+        return "Teleport Teammate";
+    }
+
+    public override string GetDescription() {
+        return "Teleports a teammate ball carrier to a spot near the opposing goal";
+    }
+
     public override bool Check(StableCombatChar _char) {
         if (Time.time < lastFired + 20) {
             return false;

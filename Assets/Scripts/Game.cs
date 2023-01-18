@@ -97,7 +97,7 @@ public class Game : MonoBehaviour {
 
 
     bool negativeBalanceNews;
-    
+    public bool firstRunComplete = false;
     public void Init() {
         freeAgentMarket.UpdateMarket();
         InitOtherStables();

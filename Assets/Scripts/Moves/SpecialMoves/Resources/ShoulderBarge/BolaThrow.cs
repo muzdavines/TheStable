@@ -10,6 +10,13 @@ public class BolaThrow : ActiveSpecialMove {
         lastFired = Time.time;
         _char.BolaThrow(target);
     }
+    public override string GetName() {
+        return "Bola Throw";
+    }
+
+    public override string GetDescription() {
+        return "Aids a teammate ball carrier by throwing a bola at a would-be tackler, knocking them down and allowing the teammate to run towards the net.";
+    }
 
     public override bool Check(StableCombatChar _char) {
         if (Time.time <= lastFired + 10) { return false; }

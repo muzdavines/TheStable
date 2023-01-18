@@ -11,6 +11,13 @@ public class BallHawk : ActiveSpecialMove {
         lastFired = Time.time;
         _char.BallHawk();
     }
+    public override string GetName() {
+        return "Ball Hawk";
+    }
+
+    public override string GetDescription() {
+        return "Any balls passed to opponents near the Wizard are chased down and intercepted. 5s cooldown.";
+    }
 
     public override bool Check(StableCombatChar _char) {
         if (!_char.fieldSport) {

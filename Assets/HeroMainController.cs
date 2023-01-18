@@ -9,7 +9,7 @@ public class HeroMainController : MonoBehaviour
     public Character activeChar;
     public TextMeshProUGUI heroName, heroType, games, goals, assists, tackles, kos, shooting, passing, tackling, carrying, melee, ranged, magic, speed, dex, agi, str;
     public TextMeshProUGUI knownMoves;
-    public Text maxHealth, maxStamina, maxBalance, maxMind;
+    public Text maxHealth, maxStamina, maxBalance, maxMind, heroArchetype;
     public StableManagementController controller;
     public GameObject panel;
     public GameObject movePanelMelee, movePanelRanged, weaponPanel, trainingPanel;
@@ -55,6 +55,7 @@ public class HeroMainController : MonoBehaviour
         maxStamina.text = activeChar.maxStamina.ToString();
         maxBalance.text = activeChar.maxBalance.ToString();
         maxMind.text = activeChar.maxMind.ToString();
+        heroArchetype.text = activeChar.archetype.ToString().Title();
         trainingButton.SetActive(true);
         if (activeChar.archetype == Character.Archetype.Amateur) {
             trainingButton.SetActive(false);

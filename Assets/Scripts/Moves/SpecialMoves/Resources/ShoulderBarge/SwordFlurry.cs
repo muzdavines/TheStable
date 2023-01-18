@@ -11,6 +11,16 @@ public class SwordFlurry : ActiveSpecialMove {
         _char.SwordFlurry(target);
     }
 
+    public override string GetName() {
+        return "Sword Flurry";
+    }
+
+    public override string GetDescription() {
+        return
+            "Challenges a nearby foe to a duel, pulling them into combat. Once in range, the Soldier unleashes a flurry of sword strikes, dealing massive damage to the enemy.";
+    }
+
+
     public override bool Check(StableCombatChar _char) {
         if (!_char.fieldSport || Time.time < lastFired + 20) {
             return false;

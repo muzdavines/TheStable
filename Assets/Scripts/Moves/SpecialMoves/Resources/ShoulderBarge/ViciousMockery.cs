@@ -11,6 +11,14 @@ public class ViciousMockery : ActiveSpecialMove {
         _char.ViciousMockery(_char.ball.holder);
     }
 
+    public override string GetName() {
+        return "Vicious Mockery";
+    }
+
+    public override string GetDescription() {
+        return "Unleashes a powerful stream of insults and taunts at a target ball carrier, reducing his stats for a time.";
+    }
+
     public override bool Check(StableCombatChar _char) {
         if (!_char.fieldSport || Time.time <= lastFired + 30) {
             return false;

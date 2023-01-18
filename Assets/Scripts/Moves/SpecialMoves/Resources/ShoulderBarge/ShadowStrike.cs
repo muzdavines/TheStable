@@ -12,6 +12,14 @@ public class ShadowStrike : ActiveSpecialMove {
         _char.ShadowStrike(target, this);
     }
 
+    public override string GetName() {
+        return "Shadow Strike";
+    }
+
+    public override string GetDescription() {
+        return "Replaces Backstab. The Ninja seeks out off-balance targets (less than 50 total) and flashes behind them, delivering a flurry of devastating slices. If the Shadow Strike is fatal, the cooldown resets immediately.";
+    }
+
     public override bool Check(StableCombatChar _char) {
         Debug.Log("#ShadowStrike#Checking " + _char.myCharacter.name);
         if (Time.time <= lastFired + 10) {

@@ -11,6 +11,14 @@ public class BallOfDevotion : ActiveSpecialMove {
         _char.BallOfDevotion();
     }
 
+    public override string GetName() {
+        return "Ball of Devotion";
+    }
+
+    public override string GetDescription() {
+        return "Imbues the ball with Power attuned to the Wizard's team. If an enemy is the next player to pick up the ball, the ball emits an explosion that deals 50 Mind damage and knocks the holder down.";
+    }
+
     public override bool Check(StableCombatChar _char) {
         if (Time.time < lastFired + 10) {
             return false;

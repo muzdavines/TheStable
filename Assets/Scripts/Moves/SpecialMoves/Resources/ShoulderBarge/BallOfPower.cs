@@ -10,6 +10,13 @@ public class BallOfPower : ActiveSpecialMove {
         lastFired = Time.time;
         _char.BallOfPower();
     }
+    public override string GetName() {
+        return "Ball of Power";
+    }
+
+    public override string GetDescription() {
+        return "Imbues the ball with Holy Power. If the Wizard passes an imbued ball to a teammate, upon reception the teammate has increased stats (+50%) for 7s.";
+    }
 
     public override bool Check(StableCombatChar _char) {
         if (Time.time < lastFired + 10) {

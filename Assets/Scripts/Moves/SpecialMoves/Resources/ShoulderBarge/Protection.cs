@@ -10,6 +10,13 @@ public override void OnActivate(StableCombatChar _char) {
     lastFired = Time.time;
     _char.Protection();
 }
+public override string GetName() {
+    return "Protection";
+}
+
+public override string GetDescription() {
+    return "Casts a protective shield around a teammate ball carrier, making them immune to damage, knockdowns, or tackles for 10s";
+}
 
 public override bool Check(StableCombatChar _char) {
     if (Time.time < lastFired + 20) {

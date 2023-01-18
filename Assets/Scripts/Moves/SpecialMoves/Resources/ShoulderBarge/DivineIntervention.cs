@@ -10,6 +10,14 @@ public class DivineIntervention : ActiveSpecialMove {
         lastFired = Time.time;
         _char.DivineIntervention();
     }
+    public override string GetName() {
+        return "Divine Intervention";
+    }
+
+    public override string GetDescription() {
+        return
+            "Protects team from incoming projectiles, reflecting those projectiles back at the source when possible.";
+    }
 
     public override bool Check(StableCombatChar _char) {
 
