@@ -74,16 +74,27 @@ public class BlueManaSaveLoad : MonoBehaviour {
     public void Resolution(string res) {
         switch (res) {
             case "900":
-                Screen.SetResolution(1440,900, FullScreenMode.FullScreenWindow);
+                Screen.SetResolution(1440,900, Screen.fullScreenMode);
                 break;
             case "1080":
-                Screen.SetResolution(1920,1080, FullScreenMode.FullScreenWindow);
+                Screen.SetResolution(1920,1080, Screen.fullScreenMode);
                 break;
             case "1440":
-                Screen.SetResolution(2560,1440, FullScreenMode.FullScreenWindow);
+                Screen.SetResolution(2560,1440, Screen.fullScreenMode);
                 break;
             case "2160":
-                Screen.SetResolution(3840,2160, FullScreenMode.FullScreenWindow);
+                Screen.SetResolution(3840,2160, Screen.fullScreenMode);
+                break;
+        }
+    }
+
+    public void ScreenMode(string mode) {
+        switch (mode) {
+            case "Fullscreen":
+                Screen.SetResolution(Screen.width, Screen.height, FullScreenMode.FullScreenWindow);
+                break;
+            case "Windowed":
+                Screen.SetResolution(Screen.width, Screen.height, FullScreenMode.Windowed);
                 break;
         }
     }
